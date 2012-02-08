@@ -17,9 +17,12 @@ alias privatize='chmod 600'
 alias c='clear'
 alias ..='cd ..'
 alias irssi='irssi -c im.bitlbee.org'
-alias cowsay='cowsay | lolcat'
-alias cowthink='cowthink | lolcat'
+alias cowsay='cowsay -b -W 90' 
+alias cowthink='cowthink -b -W 90'
+alias cowsayl='cowsay | lolcat'
+alias cowthinkl='cowthink | lolcat'
 alias calendar='calendar | lolcat'
+alias information='bat -a; cal -a -s 50; fortune | cowsay -f vader-koala | lolcat -a -s 70; calendar -a -s 70'
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -46,6 +49,3 @@ source $ZSH/oh-my-zsh.sh
 export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:.:/usr/local/MATLAB/R2011a/bin
 umask 77
 bat
-cal
-fortune | cowthink
-calendar
