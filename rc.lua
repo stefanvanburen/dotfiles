@@ -51,9 +51,20 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "Browser", "Terminal", "Vim", "Email", "Clementine", "IM", "Work", "Work", "Work" }, s, layouts[1])
+    tags[s] = awful.tag({ "BROWSER", "TERMINAL", "VIM", "EMAIL", "CLEMENTINE", "IRC", "WORK", "WORK", "WORK" }, s, layouts[1])
 end
 -- }}}
+-- Autorun at beginning
+autorun = true
+autorunApps = 
+{
+  "dropbox start",
+}
+if autorun then
+  for app = 1, #autorunApps do
+    awful.util.spawn(autorunApps[app])
+  end
+end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu

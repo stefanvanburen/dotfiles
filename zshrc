@@ -14,6 +14,12 @@ alias bat="acpi -b | lolcat"
 alias cal="cal | lolcat"
 alias list='ls -laog1'
 alias privatize='chmod 600'
+alias c='clear'
+alias ..='cd ..'
+alias irssi='irssi -c im.bitlbee.org'
+alias cowsay='cowsay | lolcat'
+alias cowthink='cowthink | lolcat'
+alias calendar='calendar | lolcat'
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -37,5 +43,9 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:.:/usr/local/MATLAB/R2011a/bin
+export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:.:/usr/local/MATLAB/R2011a/bin
 umask 77
+bat
+cal
+fortune | cowthink
+calendar
