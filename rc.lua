@@ -59,6 +59,7 @@ autorun = true
 autorunApps = 
 {
   "dropbox start",
+  "xscreensaver -no-splash",
 }
 if autorun then
   for app = 1, #autorunApps do
