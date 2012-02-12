@@ -20,6 +20,7 @@ beautiful.init("/home/thinkbot/.config/awesome/default/theme.lua")
 terminal = "x-terminal-emulator --hide-menubar"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
+browser = "chromium-browse"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.

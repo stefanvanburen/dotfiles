@@ -23,6 +23,7 @@ alias cowsayl='cowsay | lolcat'
 alias cowthinkl='cowthink | lolcat'
 alias calendar='calendar | lolcat'
 alias information='bat -a; cal -a -s 50; fortune | cowsay -f vader-koala | lolcat -a -s 70; calendar -a -s 70'
+alias sl='ls'
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
