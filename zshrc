@@ -5,6 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+# smt for git, funky for non-git
 ZSH_THEME="funky"
 
 # Example aliases
@@ -24,6 +25,8 @@ alias cowthinkl='cowthink | lolcat'
 alias calendar='calendar | lolcat'
 alias information='bat -a; cal -a -s 50; fortune | cowsay -f vader-koala | lolcat -a -s 70; calendar -a -s 70'
 alias sl='ls'
+alias sus='sudo pm-suspend'
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 

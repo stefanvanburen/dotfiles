@@ -17,7 +17,7 @@ require("volume")
 beautiful.init("/home/thinkbot/.config/awesome/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator --hide-menubar"
+terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 browser = "chromium-browse"
@@ -29,6 +29,19 @@ browser = "chromium-browse"
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
+-- seed random numbers
+math.randomseed( os.time())
+for i=1,1000 do tmp=math.random(0,1000) end
+x = 0
+mytimer = timer { timeout = x }
+mytimer:add_signal("timeout", function()
+  os.execute("awsetbg -F -r ~/pictures/backgrounds")
+  mytimer:stop()
+  x = math.random(60, 120)
+  mytimer.timeout = x
+  mytimer:start()
+end)
+mytimer:start()
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 { 
