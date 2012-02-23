@@ -22,5 +22,5 @@ set cursorline                      " Highlight the cursor line
 set linespace=0                     " No space between lines in Vim
 set nostartofline                   " No moving to the start of the line when scrolling
 let mapleader = ","                 " Use ',' as leader
-:map <Leader>w <C-w>w  
+:map <Leader>w <C-w>w 
 nnoremap ; :
