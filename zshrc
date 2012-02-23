@@ -15,6 +15,7 @@ alias bat="acpi -b | lolcat"
 alias cal="cal | lolcat"
 alias list='ls -laog1'
 alias privatize='chmod 600'
+alias publicize='chmod 777'
 alias c='clear'
 alias ..='cd ..'
 alias irc='irssi -c im.bitlbee.org'
