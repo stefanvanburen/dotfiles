@@ -1,5 +1,6 @@
 "mrtwiddletoes .vimrc
 syntax on                           " Syntax highlighting please
+set nocompatible                    " Vim.
 set autoindent                      " Autoindent my things
 set smartindent                     " Indent my things smartly
 set nowrap                          " No wrapping
@@ -14,7 +15,9 @@ set ch=2                            " Bigger command-line height
 set showmatch                       " Show matching brackets
 set ignorecase                      " Ignore case when searching
 set smartcase                       " Once again, ignore case while searching
-set visualbell                      " No bell sound plox
+set visualbell                      " No bell sound
+set incsearch
+set hlsearch
 hi CursorColumn ctermbg=lightgreen
 set cursorcolumn                    " Highlight the cursor column, in light green,
                                     " as opposed to the disgusting white that it originally is set to
