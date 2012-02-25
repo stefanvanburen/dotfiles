@@ -4,9 +4,9 @@ filetype plugin on
 filetype indent on
 set nocompatible                    " Vim.
 set autoindent                      " Autoindent my things
-set autoread
-set autowrite
-set showcmd
+set autoread                        " Read changes in files during editing
+set autowriteall                    " Make sure I'm saving things
+set showmatch                       " Show matching brackets, parentheses, etc.
 set smartindent                     " Indent my things smartly
 set nowrap                          " No wrapping
 set softtabstop=2                   " Number of columsn a tab moves in insert mode
@@ -21,8 +21,8 @@ set showmatch                       " Show matching brackets
 set ignorecase                      " Ignore case when searching
 set smartcase                       " Once again, ignore case while searching
 set visualbell                      " No bell sound
-set incsearch
-set hlsearch
+set incsearch                       " Keep searching as I type
+set hlsearch                        " Highlight my searches
 hi CursorColumn ctermbg=lightgreen
 set cursorcolumn                    " Highlight the cursor column, in light green,
                                     " as opposed to the disgusting white that it originally is set to
@@ -30,9 +30,6 @@ set cursorline                      " Highlight the cursor line
 set linespace=0                     " No space between lines in Vim
 set nostartofline                   " No moving to the start of the line when scrolling
 let mapleader = ","                 " Use ',' as leader
-:map <Leader>w <C-w>w 
+:map <Leader>w <C-w>w               
 nnoremap ; :
 nnoremap <C-q> :wqall<CR>
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
