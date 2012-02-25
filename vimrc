@@ -1,7 +1,12 @@
 "mrtwiddletoes .vimrc
 syntax on                           " Syntax highlighting please
+filetype plugin on
+filetype indent on
 set nocompatible                    " Vim.
 set autoindent                      " Autoindent my things
+set autoread
+set autowrite
+set showcmd
 set smartindent                     " Indent my things smartly
 set nowrap                          " No wrapping
 set softtabstop=2                   " Number of columsn a tab moves in insert mode
@@ -27,3 +32,7 @@ set nostartofline                   " No moving to the start of the line when sc
 let mapleader = ","                 " Use ',' as leader
 :map <Leader>w <C-w>w 
 nnoremap ; :
+nnoremap <C-q> :wqall<CR>
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
