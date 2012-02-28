@@ -27,6 +27,7 @@ alias calendar='calendar | lolcat'
 alias information='bat -a; cal -a -s 50; fortune | cowsay -f vader-koala | lolcat -a -s 70; calendar -a -s 70'
 alias sl='ls'
 alias sus='sudo pm-suspend'
+alias v='vim'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

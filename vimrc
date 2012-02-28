@@ -1,4 +1,5 @@
 "mrtwiddletoes .vimrc
+
 syntax on                           " Syntax highlighting please
 filetype plugin on
 filetype indent on
@@ -30,6 +31,20 @@ set cursorline                      " Highlight the cursor line
 set linespace=0                     " No space between lines in Vim
 set nostartofline                   " No moving to the start of the line when scrolling
 let mapleader = ","                 " Use ',' as leader
-:map <Leader>w <C-w>w               
+
+" Mappings!--------------------------------------------------------------------
+
 nnoremap ; :
 nnoremap <C-q> :wqall<CR>
+nnoremap / /\v
+cnoremap %s/ %s/\v
+map <Leader>v :e ~/.vimrc<CR>
+map <Leader>z :e ~/.zshrc<CR>
+map <Leader>x :so ~/.vimrc<CR>
+map <Leader>f <C-w>w
+map <Leader>w :w<CR>
+map <Leader>q :wq<CR>
+map <f9> :!javac %<CR>
+map <f10> :!gcc %<CR>
+map <f11> :!python %<CR>
+map <f12> :!clisp %<CR>
