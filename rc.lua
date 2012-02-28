@@ -65,7 +65,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "BROWSER", "TERMINAL", "VIM", "EMAIL", "CLEMENTINE", "IRC", "WORK", "WORK", "WORK" }, s, layouts[1])
+    tags[s] = awful.tag({ "TERMINAL", "VIM", "WORK", "WORK", "WORK", "BROWSER", "IRC", "MUSIC", "EMAIL" }, s, layouts[1])
 end
 -- }}}
 -- Autorun at beginning
@@ -201,6 +201,10 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    awful.key({ modkey,           }, "j",  awful.tag.viewnext           ),
+    awful.key({ modkey,           }, "k",  awful.tag.viewprev           ),
+    awful.key({ modkey,           }, "l",  awful.tag.viewnext           ),
+    awful.key({ modkey,           }, "h",  awful.tag.viewprev           ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
     awful.key({}, "XF86AudioRaiseVolume", function () 
         awful.util.spawn("amixer set Master 9%+") end),

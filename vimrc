@@ -1,4 +1,5 @@
-"mrtwiddletoes .vimrc
+" mrtwiddletoes .vimrc
+" Much thanks to vimbits.com for many of these commands 
 
 syntax on                           " Syntax highlighting please
 filetype plugin on
@@ -10,8 +11,6 @@ set autowriteall                    " Make sure I'm saving things
 set showmatch                       " Show matching brackets, parentheses, etc.
 set smartindent                     " Indent my things smartly
 set nowrap                          " No wrapping
-set softtabstop=2                   " Number of columsn a tab moves in insert mode
-set shiftwidth=2                    " How many columns are indented with >> and << commands
 set tabstop=4                       " How many columns a tab counts for
 set expandtab                       " Converts tabs to spaces
 set nosmarttab                      " Don't you get smart with me about those tabs
@@ -30,6 +29,7 @@ set cursorcolumn                    " Highlight the cursor column, in light gree
 set cursorline                      " Highlight the cursor line
 set linespace=0                     " No space between lines in Vim
 set nostartofline                   " No moving to the start of the line when scrolling
+set title                           " Title of terminal = file being edited
 let mapleader = ","                 " Use ',' as leader
 
 " Mappings!--------------------------------------------------------------------
@@ -37,13 +37,18 @@ let mapleader = ","                 " Use ',' as leader
 nnoremap ; :
 nnoremap <C-q> :wqall<CR>
 nnoremap / /\v
+nnoremap p p'[v']=
 cnoremap %s/ %s/\v
-map <Leader>v :e ~/.vimrc<CR>
+inoremap jk <Esc>
+inoremap kj <Esc>
+map <Leader>v :vsplit ~/.vimrc<CR><C-w>_
 map <Leader>z :e ~/.zshrc<CR>
 map <Leader>x :so ~/.vimrc<CR>
 map <Leader>f <C-w>w
 map <Leader>w :w<CR>
 map <Leader>q :wq<CR>
+map <Leader>d :vsplit<CR>
+map <Leader>s :split<CR>
 map <f9> :!javac %<CR>
 map <f10> :!gcc %<CR>
 map <f11> :!python %<CR>

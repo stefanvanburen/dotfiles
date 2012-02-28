@@ -28,6 +28,8 @@ alias information='bat -a; cal -a -s 50; fortune | cowsay -f vader-koala | lolca
 alias sl='ls'
 alias sus='sudo pm-suspend'
 alias v='vim'
+alias zshrc='vim ~/.zshrc'
+alias vimrc='vim ~/.vimrc'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
