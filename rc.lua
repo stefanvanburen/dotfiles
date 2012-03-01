@@ -65,7 +65,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "TERMINAL", "VIM", "WORK", "WORK", "WORK", "BROWSER", "IRC", "MUSIC", "EMAIL" }, s, layouts[1])
+    tags[s] = awful.tag({ "TERMINAL", "VIM", "BROWSER", "WORK", "WORK", "WORK", "IRC", "MUSIC", "EMAIL" }, s, layouts[1])
 end
 -- }}}
 -- Autorun at beginning

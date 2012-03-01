@@ -1,5 +1,4 @@
 " mrtwiddletoes .vimrc
-" Much thanks to vimbits.com for many of these commands 
 
 syntax on                           " Syntax highlighting please
 filetype plugin on
@@ -15,8 +14,8 @@ set tabstop=4                       " How many columns a tab counts for
 set expandtab                       " Converts tabs to spaces
 set nosmarttab                      " Don't you get smart with me about those tabs
 set ruler                           " Line number and column number
-set number                          " Line numbers, because I like repeats
-set ch=2                            " Bigger command-line height
+set relativenumber                   
+set cmdheight=2                     " Bigger command-line height
 set showmatch                       " Show matching brackets
 set ignorecase                      " Ignore case when searching
 set smartcase                       " Once again, ignore case while searching
@@ -27,7 +26,7 @@ hi CursorColumn ctermbg=lightgreen
 set cursorcolumn                    " Highlight the cursor column, in light green,
                                     " as opposed to the disgusting white that it originally is set to
 set cursorline                      " Highlight the cursor line
-set linespace=0                     " No space between lines in Vim
+set linespace=0
 set nostartofline                   " No moving to the start of the line when scrolling
 set title                           " Title of terminal = file being edited
 let mapleader = ","                 " Use ',' as leader
@@ -35,15 +34,13 @@ let mapleader = ","                 " Use ',' as leader
 " Mappings!--------------------------------------------------------------------
 
 nnoremap ; :
-nnoremap <C-q> :wqall<CR>
 nnoremap / /\v
 nnoremap p p'[v']=
 cnoremap %s/ %s/\v
 inoremap jk <Esc>
 inoremap kj <Esc>
 map <Leader>v :vsplit ~/.vimrc<CR><C-w>_
-map <Leader>z :e ~/.zshrc<CR>
-map <Leader>x :so ~/.vimrc<CR>
+map <Leader>z :vsplit ~/.zshrc<CR><C-w>_
 map <Leader>f <C-w>w
 map <Leader>w :w<CR>
 map <Leader>q :wq<CR>
