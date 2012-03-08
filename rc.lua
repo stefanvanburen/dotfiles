@@ -14,7 +14,7 @@ require("volume")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/thinkbot/.config/awesome/default/theme.lua")
+beautiful.init("/home/thinkbot/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
