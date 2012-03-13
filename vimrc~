@@ -10,6 +10,8 @@ set autowriteall                    " Make sure I'm saving things
 set showmatch                       " Show matching brackets, parentheses, etc.
 set smartindent                     " Indent my things smartly
 set nowrap                          " No wrapping
+set tabstop=4                       " How many columns a tab counts for
+set expandtab                       " Converts tabs to spaces
 set nosmarttab                      " Don't you get smart with me about those tabs
 set ruler                           " Line number and column number
 set relativenumber                   
