@@ -30,6 +30,8 @@ alias sus='sudo pm-suspend'
 alias v='vim'
 alias zshrc='vim ~/.zshrc'
 alias vimrc='vim ~/.vimrc'
+alias update='sudo apt-get update'
+alias upgrade='sudo apt-get upgrade'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

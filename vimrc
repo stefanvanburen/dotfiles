@@ -29,6 +29,7 @@ set cursorline                      " Highlight the cursor line
 set linespace=0
 set nostartofline                   " No moving to the start of the line when scrolling
 set title                           " Title of terminal = file being edited
+set hidden                          " Use hidden files
 let mapleader = ","                 " Use ',' as leader
 
 " Mappings!--------------------------------------------------------------------
