@@ -32,6 +32,10 @@ alias zshrc='vim ~/.zshrc'
 alias vimrc='vim ~/.vimrc'
 alias update='sudo apt-get update'
 alias upgrade='sudo apt-get upgrade'
+alias mine='java -Xmx1024M -Xms512M -cp games/minecraft/minecraft.jar net.minecraft.LauncherFrame'
+alias shutdown='sudo shutdown now'
+alias restart='sudo shutdown -r now'
+alias matrix='cmatrix'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
