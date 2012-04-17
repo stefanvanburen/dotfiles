@@ -37,6 +37,8 @@ alias shutdown='sudo shutdown now'
 alias restart='sudo shutdown -r now'
 alias matrix='cmatrix'
 
+EXTENDED_HISTORY="true"
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
