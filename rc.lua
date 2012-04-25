@@ -14,11 +14,11 @@ require("volume")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/thinkbot/.config/awesome/theme.lua")
+beautiful.init("/home/thinkbot/.config/awesome/themes/awesome-solarized/dark/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
-editor = os.getenv("EDITOR") or "editor"
+editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 browser = "chromium-browse"
 
@@ -29,19 +29,21 @@ browser = "chromium-browse"
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
+-- Background command for random backgrounds
+-- Uncomment to use random backgrounds
 -- seed random numbers
-math.randomseed( os.time())
-for i=1,1000 do tmp=math.random(0,1000) end
-x = 0
-mytimer = timer { timeout = x }
-mytimer:add_signal("timeout", function()
-  os.execute("awsetbg -F -r ~/pictures/backgrounds")
-  mytimer:stop()
-  x = math.random(60, 120)
-  mytimer.timeout = x
-  mytimer:start()
-end)
-mytimer:start()
+--math.randomseed( os.time())
+--for i=1,1000 do tmp=math.random(0,1000) end
+--x = 0
+--mytimer = timer { timeout = x }
+--mytimer:add_signal("timeout", function()
+--  os.execute("awsetbg -F -r ~/pictures/backgrounds")
+--  mytimer:stop()
+--  x = math.random(60, 120)
+--  mytimer.timeout = x
+--  mytimer:start()
+--end)
+--mytimer:start()
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 { 
@@ -65,7 +67,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "TERMINAL", "VIM", "BROWSER", "WORK", "WORK", "ECLIPSE", "IRC", "MUSIC", "EMAIL" }, s, layouts[1])
+    tags[s] = awful.tag({ "terminal", "vim", "browser", "code", "code", "code", "irc", "music", "email" }, s, layouts[1])
 end
 -- }}}
 -- Autorun at beginning
@@ -105,7 +107,6 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 mytextclock = awful.widget.textclock({ align = "right" })
 -- Create a systray
 mysystray = widget({ type = "systray" })
-
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
