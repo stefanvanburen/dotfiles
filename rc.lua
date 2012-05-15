@@ -7,20 +7,36 @@ require("beautiful")
 -- Notification library
 require("naughty")
 require("vicious")
--- Load Debian menu entries
-require("debian.menu")
--- Volume stuff
-require("volume")
 
+if awesome.startup_errors then
+	naughty.notify({ preset = naughty.config.presets.critical,
+	title = "Oops, there were errors during startup!",
+	text = awesome.startup_errors })
+end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/thinkbot/.config/awesome/themes/awesome-solarized/dark/theme.lua")
+beautiful.init("/home/thinkbot/.config/awesome/theme.lua")
+
+-- Handle runtime errors after startup
+do
+	local in_error = false
+	awesome.add_signal("debug::error", function (err)
+		-- Make sure we don't go into an endless error loop
+		if in_error then return end
+		in_error = true
+
+		naughty.notify({ preset = naughty.config.presets.critical,
+		title = "Oops, an error happened!",
+		text = err })
+		in_error = false
+	end)
+end
+-- }}}
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
+terminal = "xterm"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
-browser = "chromium-browse"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -29,21 +45,6 @@ browser = "chromium-browse"
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
--- Background command for random backgrounds
--- Uncomment to use random backgrounds
--- seed random numbers
---math.randomseed( os.time())
---for i=1,1000 do tmp=math.random(0,1000) end
---x = 0
---mytimer = timer { timeout = x }
---mytimer:add_signal("timeout", function()
---  os.execute("awsetbg -F -r ~/pictures/backgrounds")
---  mytimer:stop()
---  x = math.random(60, 120)
---  mytimer.timeout = x
---  mytimer:start()
---end)
---mytimer:start()
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 { 
@@ -71,17 +72,17 @@ for s = 1, screen.count() do
 end
 -- }}}
 -- Autorun at beginning
-autorun = true
-autorunApps = 
-{
-  "dropbox start",
-  "xscreensaver -no-splash",
-}
-if autorun then
-  for app = 1, #autorunApps do
-    awful.util.spawn(autorunApps[app])
-  end
-end
+-- autorun = true
+--autorunApps = 
+--{
+--  "dropbox start",
+--  "xscreensaver -no-splash",
+--}
+--if autorun then
+--  for app = 1, #autorunApps do
+--    awful.util.spawn(autorunApps[app])
+--  end
+--end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -93,7 +94,6 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal }
                                   }
                         })

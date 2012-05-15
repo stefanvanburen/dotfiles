@@ -8,43 +8,41 @@ ZSH=$HOME/.oh-my-zsh
 # Edited cypher but it looks bad now
 ZSH_THEME="miloshadzic"
 
-alias ta="task"
-alias te="vim ~/.taskrc"
-alias tw="t update"
+# Various
+alias t="task"
 alias news="newsbeuter"
+alias matrix='ncmatrix -abls -I wlan0 -R blue -T red'
 alias bat="acpi -b"
-alias list='ls -laog1'
-alias privatize='sudo chmod 600'
-alias publicize='sudo chmod 777'
-alias c='clear'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias irc='irssi -c im.bitlbee.org'
-alias cowsay='cowsay -b -W 90' 
-alias cowthink='cowthink -b -W 90'
-alias cowsayl='cowsay | lolcat'
-alias cowthinkl='cowthink | lolcat'
-alias information='bat -a; cal -a -s 50; fortune | cowsay -f vader-koala | lolcat -a -s 70; calendar -a -s 70'
 alias sl='ls'
-alias sus='sudo pm-suspend'
 alias v='vim'
-alias ze='vim ~/.zshrc'
-alias ve='vim ~/.vimrc'
-alias update='sudo apt-get update'
-alias upgrade='sudo apt-get upgrade'
-alias autoclean='sudo apt-get autoclean'
-alias autoremove='sudo apt-get autoremove'
-alias mine='java -Xmx1024M -Xms512M -cp ~/usb/games/minecraft/minecraft.jar net.minecraft.LauncherFrame'
-alias shutdown='sudo shutdown now'
-alias restart='sudo shutdown -r now'
-alias matrix='cmatrix'
-alias cdb='cd -'
 alias df='df -h'
+alias list='ls -laog1'
 alias ll='ls -alGh'
 alias ls='ls -Gh'
 alias du='du -h -d 2'
+alias c='clear'
+alias ..='cd ..'
+
+# Permissions
+alias privatize='sudo chmod 600'
+alias publicize='sudo chmod 777'
+
+# Configuration
+alias ze='vim ~/.zshrc'
+alias ve='vim ~/.vimrc'
+alias te="vim ~/dotfiles/theme.lua"
+alias rc="vim ~/dotfiles/rc.lua"
+alias re="sudo vim /etc/rc.conf"
+alias xe="vim ~/.xinitrc"
+
+# Package manager
+alias update='sudo pacman -Syy'
+alias upgrade='sudo pacman -Syu'
+
+# Hardware
+alias sus='sudo pm-suspend'
+alias shutdown='sudo shutdown now'
+alias restart='sudo shutdown -r now'
 
 # From the oh-my-zsh 'lol' plugin, just to keep aliases in one file
 # LOL!!1
