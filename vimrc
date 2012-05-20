@@ -22,13 +22,14 @@ set smartcase                       " Once again, ignore case while searching
 set visualbell                      " No bell sound
 set incsearch                       " Keep searching as I type
 set hlsearch                        " Highlight my searches
-set cursorcolumn                   " Highlight the cursor column, in light green,
+set cursorcolumn                    " Highlight the cursor column, in light green,
                                     " as opposed to the disgusting white that it originally is set to
-set cursorline                     " Highlight the cursor line
+set cursorline                      " Highlight the cursor line
 set linespace=0
 set nostartofline                   " No moving to the start of the line when scrolling
 set title                           " Title of terminal = file being edited
 let mapleader = ","                 " Use ',' as leader
+set tw=79                           " Set the textwidth to 80 chars
 
 " Mappings!--------------------------------------------------------------------
 

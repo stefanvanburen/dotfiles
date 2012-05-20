@@ -44,37 +44,6 @@ alias sus='sudo pm-suspend'
 alias shutdown='sudo shutdown now'
 alias restart='sudo shutdown -r now'
 
-# From the oh-my-zsh 'lol' plugin, just to keep aliases in one file
-# LOL!!1
-# Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh
-alias wtf='dmesg'
-alias onoz='cat /var/log/errors.log'
-alias rtfm='man'
-alias visible='echo'
-alias invisible='cat'
-alias moar='more'
-alias tldr='less'
-alias alwayz='tail -f'
-alias icanhas='mkdir'
-alias gimmeh='touch'
-alias donotwant='rm'
-alias dowant='cp'
-alias gtfo='mv'
-alias nowai='chmod'
-alias hai='cd'
-alias iz='ls'
-alias plz='pwd'
-alias ihasbucket='df -h'
-alias inur='locate'
-alias iminurbase='finger'
-alias btw='nice'
-alias obtw='nohup'
-alias nomz='ps -aux'
-alias nomnom='killall'
-alias byes='exit'
-alias cya='reboot'
-alias kthxbai='halt'
-
 EXTENDED_HISTORY="true"
 
 # Set to this to use case-sensitive completion
@@ -114,6 +83,6 @@ zstyle ':completion:*:*:task:*:values' list-colors "=(#b) #([^-]#)*=$color[cyan]
 zstyle ':completion:*:*:task:*:commands' list-colors "=(#b) #([^-]#)*=$color[cyan]=$color[yellow]" 
 
 # Customize to your needs...
-export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:.:/usr/local/MATLAB/R2011a/bin
+export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:.:/usr/local/MATLAB/R2011a/bin:/home/thinkbot/.gem/ruby/1.9.1/bin
 XDG_CONFIG_HOME=~/.config
 XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
