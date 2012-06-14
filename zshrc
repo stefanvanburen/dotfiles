@@ -6,7 +6,6 @@ ZSH_THEME="miloshadzic"
 
 # Various
 alias news="newsbeuter"
-alias matrix="ncmatrix -abls -I wlan0 -R blue -T red"
 alias bat="acpi -b"
 alias sl="ls"
 alias v="vim"
@@ -16,6 +15,7 @@ alias ll="ls -alGh"
 alias ls="ls -Gh"
 alias du="du -h -d 2"
 alias ..="cd .."
+alias matrix="cmatrix -bs"
 
 # Permissions
 alias privatize="sudo chmod 600"
@@ -29,6 +29,7 @@ alias rcl="vim ~/dotfiles/rc.lua"
 alias rc="sudo vim /etc/rc.conf"
 alias xinitrc="vim ~/.xinitrc"
 alias taskrc="vim ~/.taskrc"
+alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 
 # Package manager
 alias update="sudo pacman -Syy"
