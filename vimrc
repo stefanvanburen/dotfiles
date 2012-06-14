@@ -3,6 +3,7 @@
 syntax enable                       " Syntax highlighting please
 set background=dark
 colorscheme solarized
+filetype on
 filetype plugin on
 filetype indent on
 set nocompatible                    " Vim.
