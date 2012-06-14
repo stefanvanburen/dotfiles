@@ -26,12 +26,13 @@ alias privatize="sudo chmod 600"
 alias publicize="sudo chmod 777"
 
 # Configuration
-alias ze="vim ~/.zshrc"
-alias ve="vim ~/.vimrc"
-alias te="vim ~/dotfiles/theme.lua"
-alias rc="vim ~/dotfiles/rc.lua"
-alias re="sudo vim /etc/rc.conf"
-alias xe="vim ~/.xinitrc"
+alias zshrc="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"
+alias theme="vim ~/dotfiles/theme.lua"
+alias rcl="vim ~/dotfiles/rc.lua"
+alias rc="sudo vim /etc/rc.conf"
+alias xinitrc="vim ~/.xinitrc"
+alias taskrc="vim ~/.taskrc"
 
 # Package manager
 alias update="sudo pacman -Syy"
@@ -83,5 +84,6 @@ zstyle ':completion:*:*:task:*:commands' list-colors "=(#b) #([^-]#)*=$color[cya
 
 # Customize to your needs...
 export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:.:/usr/local/MATLAB/R2011a/bin:/home/thinkbot/.gem/ruby/1.9.1/bin:/root/.gem/ruby/1.9.1/bin
+
 XDG_CONFIG_HOME=~/.config
 XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
