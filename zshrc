@@ -33,13 +33,14 @@ alias tmuxconf="vim ~/.tmux.conf"
 alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 
 # Package manager
-alias update="sudo pacman -Syy"
-alias upgrade="sudo pacman -Syu"
+alias upd="sudo pacman -Syy"
+alias upg="sudo pacman -Syu"
+alias gupd="gem update"
 
 # Hardware
 alias sus="sudo pm-suspend"
-alias shutdown="sudo shutdown now"
-alias restart="sudo shutdown -r now"
+alias sd="sudo shutdown now"
+alias rs="sudo shutdown -r now"
 
 # Extended history
 EXTENDED_HISTORY="true"
