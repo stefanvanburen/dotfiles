@@ -29,6 +29,7 @@ alias rcl="vim ~/dotfiles/rc.lua"
 alias rc="sudo vim /etc/rc.conf"
 alias xinitrc="vim ~/.xinitrc"
 alias taskrc="vim ~/.taskrc"
+alias tmuxconf="vim ~/.tmux.conf"
 alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 
 # Package manager
