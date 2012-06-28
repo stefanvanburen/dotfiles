@@ -10,7 +10,7 @@ alias bat="acpi -b"
 alias sl="ls"
 alias v="vim"
 alias df="df -h"
-alias list="ls -laog1"
+alias list="ls -alog1"
 alias ll="ls -alGh"
 alias ls="ls -Gh"
 alias du="du -h -d 2"
@@ -33,7 +33,7 @@ alias taskrc="vim ~/.taskrc"
 alias tmuxconf="vim ~/.tmux.conf"
 alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 
-# Package manager
+# Package Manager
 alias upd="sudo pacman -Syy"
 alias upg="sudo pacman -Syu"
 alias gupd="gem update"
@@ -43,7 +43,7 @@ alias sus="sudo pm-suspend"
 alias sd="sudo shutdown now"
 alias rs="sudo shutdown -r now"
 
-# Extended history
+# Extended History
 EXTENDED_HISTORY="true"
 
 # Dots

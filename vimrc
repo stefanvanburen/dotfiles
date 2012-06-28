@@ -4,42 +4,41 @@
 
 syntax enable                       " Syntax highlighting please
 
-set background=dark                 " For colorscheme
 colorscheme solarized               " Solarized!
 
-filetype on                         " 
-filetype plugin on                  " 
-filetype indent on                  " 
+filetype on                         " Pay attention to filetype.
+filetype plugin on                  " Use plugins based on the type of file I'm editing.
+filetype indent on                  " Indent based on the type of file I'm editing.
 
 " Settings!--------------------------
 
-set nocompatible                    " Vim.
-set autoindent                      " Autoindent my things
-set autoread                        " Read changes in files during editing
-set autowriteall                    " Make sure I'm saving things
+set background=dark                 " For colorscheme
+set nocompatible                    " Vim, not vi.
+set autoindent                      " Autoindent stuff.
+set smartindent                     " Indent my things smartly.
+set ignorecase                      " Ignore case when searching.
+set smartcase                       " Once again, ignore case while searching.
+set autoread                        " Read changes in files during editing.
+set autowriteall                    " Make sure I'm saving things.
 set showmatch                       " Show matching brackets, parentheses, etc.
-set smartindent                     " Indent my things smartly
-set nowrap                          " No wrapping
-set nosmarttab                      " Don't you get smart with me about those tabs
-set ruler                           " Line number and column number
-set number                          " Line numbers
-set cmdheight=2                     " Bigger command-line height
-set showmatch                       " Show matching brackets
-set ignorecase                      " Ignore case when searching
-set smartcase                       " Once again, ignore case while searching
-set visualbell                      " No bell sound
-set incsearch                       " Keep searching as I type
-set hlsearch                        " Highlight my searches
-set cursorcolumn                    " Highlight the cursor column
-set cursorline                      " Highlight the cursor line
-set nostartofline                   " No moving to the start of the line when scrolling
-set title                           " Title of terminal = file being edited
-set tw=79                           " Set the textwidth to 80 chars
+set nowrap                          " No wrapping.
+set ruler                           " Show line number and column number.
+set number                          " Show line numbers.
+set cmdheight=2                     " Bigger command-line height.
+set visualbell                      " No bell sound.
+set incsearch                       " Keep searching as I type.
+set hlsearch                        " Highlight my searches.
+set cursorcolumn                    " Highlight the cursor column.
+set cursorline                      " Highlight the cursor line.
+set nostartofline                   " No moving to the start of the line when scrolling.
+set title                           " Title of terminal = file being edited.
+set tw=79                           " Set the textwidth to 80 chars.
 
 let mapleader = ","                 " Use ',' as leader
 
 " Mappings!--------------------------
-" Normal Mode
+
+" Normal Mode:
 nnoremap ; :
 nnoremap / /\v
 nnoremap p p'[v']=
