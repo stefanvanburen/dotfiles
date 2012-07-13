@@ -23,7 +23,7 @@ set autowriteall                    " Make sure I'm saving things.
 set showmatch                       " Show matching brackets, parentheses, etc.
 set nowrap                          " No wrapping.
 set ruler                           " Show line number and column number.
-set number                          " Show line numbers.
+set relativenumber                  " Show line numbers relative to current line.
 set cmdheight=2                     " Bigger command-line height.
 set visualbell                      " No bell sound.
 set incsearch                       " Keep searching as I type.
@@ -32,7 +32,8 @@ set cursorcolumn                    " Highlight the cursor column.
 set cursorline                      " Highlight the cursor line.
 set nostartofline                   " No moving to the start of the line when scrolling.
 set title                           " Title of terminal = file being edited.
-set tw=79                           " Set the textwidth to 80 chars.
+set colorcolumn=85
+set list
 
 let mapleader = ","                 " Use ',' as leader
 
@@ -42,6 +43,11 @@ let mapleader = ","                 " Use ',' as leader
 nnoremap ; :
 nnoremap / /\v
 nnoremap p p'[v']=
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <tab> %
 
 " Command Mode:
 cnoremap %s/ %s/\v
