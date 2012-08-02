@@ -17,6 +17,8 @@ alias du="du -h -d 2"
 alias ..="cd .."
 alias matrix="cmatrix -bs"
 alias wifi="wicd-curses"
+alias l="clear && pwd && ls -FGl"
+alias u="cd .. && l"
 
 # Permissions
 alias privatize="sudo chmod 600"
