@@ -28,8 +28,8 @@ include /usr/share/doc/task/rc/solarized-dark-256.theme
 
 # Personal Modifications
 shell.prompt=>
-dateformat=H.N.m.d.Y
-dateformat.report=H.N.m.d.Y
+dateformat=H.N.d.m.Y
+dateformat.report=H.N.d.m.Y
 calendar.details=full
 shadow.file=$HOME/.task/shadow.txt
 shadow.command=long
