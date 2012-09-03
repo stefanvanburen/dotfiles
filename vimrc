@@ -1,5 +1,11 @@
 " mrtwiddletoes .vimrc
 
+" Pathogen!--------------------------
+call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+let g:Powerline_symbols = 'fancy'
+
 " Basic things!----------------------
 
 syntax enable                       " Syntax highlighting please
@@ -34,6 +40,7 @@ set nostartofline                   " No moving to the start of the line when sc
 set title                           " Title of terminal = file being edited.
 set colorcolumn=85
 set list
+set laststatus=2
 
 let mapleader = ","                 " Use ',' as leader
 
@@ -43,6 +50,7 @@ let mapleader = ","                 " Use ',' as leader
 nnoremap ; :
 nnoremap / /\v
 nnoremap p p'[v']=
+nnoremap Y y$
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
