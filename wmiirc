@@ -19,10 +19,10 @@ noticebar=/rbar/!notice
 export WMII_NORMCOLORS='#859900 #002b36 #ffffff'
 export WMII_FOCUSCOLORS='#dc322f #002b36 #ffffff'
 
-export WMII_FONT='-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
+export WMII_FONT='-misc-proggysquarettsz-medium-r-normal--0-0-0-0-c-0-iso8859-1'
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
-export WMII_TERM="xterm"
+export WMII_TERM="urxvt +sb"
 
 if ! test -d "${WMII_CONFPATH%%:*}"; then
     mkdir "${WMII_CONFPATH%%:*}"
@@ -54,7 +54,7 @@ wmiir write /tagrules <<!
 
 # Status Bar Info
 status() {
-	echo -n 'RAM: ' $(free -m | grep -i /cache | awk '{print $3}') 'MB | Wlan0: ' $(iwconfig wlan0 | awk '/Quality/{print $2}' | sed 's/.*=//' | awk -F"/" '{printf("%.0f%%", $1/$2*100)}') '| Bat:' $(acpi -b | sed -n 's/.*\([0-9][0-9]:[0-9][0-9]\):[0-9][0-9].*/\1/p') '|' $(uptime | sed 's/.*://; s/,//g') '|' $(date)
+	echo -n 'RAM: ' $(free -m | grep -i /cache | awk '{print $3}') 'MB | Wlan0: ' $(iwconfig wlan0 | awk '/Quality/{print $2}' | sed 's/.*=//' | awk -F"/" '{printf("%.0f%%", $1/$2*100)}') '| Bat:' $(acpi -b | sed -n 's/.*\([0-9][0-9]:[0-9][0-9]\):[0-9][0-9].*/\1/p') '|' $(uptime | sed 's/.*://; s/,//g') '|' $(date '+%d.%m.%Y %T %s %j')
 }
 
 local_events() { true;}

@@ -29,8 +29,10 @@ set autowriteall                    " Make sure I'm saving things.
 set showmatch                       " Show matching brackets, parentheses, etc.
 set nowrap                          " No wrapping.
 set ruler                           " Show line number and column number.
+set encoding=utf-8
+set t_Co=256
 set relativenumber                  " Show line numbers relative to current line.
-set cmdheight=2                     " Bigger command-line height.
+" set cmdheight=2                     " Bigger command-line height.
 set visualbell                      " No bell sound.
 set incsearch                       " Keep searching as I type.
 set hlsearch                        " Highlight my searches.
