@@ -1,0 +1,27 @@
+[user]
+    name = Stefan VanBuren
+    email = mrtwiddletoes@gmail.com
+[alias]
+    lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    po = push -u origin
+    pu = pull -u origin
+    st = status -sb
+    switch = !legit switch \"$@\"
+    branches = !legit branches
+    sprout = !legit sprout \"$@\"
+    unpublish = !legit unpublish \"$@\"
+    harvest = !legit harvest \"$@\"
+    sync = !legit sync \"$@\"
+    publish = !legit publish \"$@\"
+    graft = !legit graft \"$@\"
+[core]
+    excludesfile = /home/thinkbot/.gitignore
+[github]
+    user = mrtwiddletoes
+[color]
+    ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    grep = auto

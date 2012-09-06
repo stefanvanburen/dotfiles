@@ -4,7 +4,7 @@
 call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'unicode'
 
 " Basic things!----------------------
 
