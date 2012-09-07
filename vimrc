@@ -32,7 +32,7 @@ set ruler                           " Show line number and column number.
 set encoding=utf-8
 set t_Co=256
 set relativenumber                  " Show line numbers relative to current line.
-" set cmdheight=2                     " Bigger command-line height.
+set cmdheight=2                     " Bigger command-line height.
 set visualbell                      " No bell sound.
 set incsearch                       " Keep searching as I type.
 set hlsearch                        " Highlight my searches.
@@ -67,12 +67,10 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 
 " All Modes:
-map <Leader>v :vsplit ~/.vimrc<CR><C-w>_
-map <Leader>z :vsplit ~/.zshrc<CR><C-w>_
 map <Leader>f <C-w>w
 map <Leader>w :w<CR>
 map <Leader>q :wq<CR>
-map <Leader>d :vsplit<CR>
+map <Leader>v :vsplit<CR>
 map <Leader>s :split<CR>
 map <f9> :!javac %<CR>
 map <f10> :!gcc %<CR>
