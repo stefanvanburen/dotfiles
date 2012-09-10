@@ -40,7 +40,7 @@ set cursorcolumn                    " Highlight the cursor column.
 set cursorline                      " Highlight the cursor line.
 set nostartofline                   " No moving to the start of the line when scrolling.
 set title                           " Title of terminal = file being edited.
-set colorcolumn=85
+set colorcolumn=80
 set list
 set laststatus=2
 

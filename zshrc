@@ -19,20 +19,16 @@ alias matrix="cmatrix -bs"
 alias wifi="wicd-curses"
 alias l="clear && pwd && ls -FGl"
 alias u="cd .. && l"
+alias irc="irssi"
+alias la="ls -a"
 
 # Permissions
 alias privatize="sudo chmod 600"
 alias publicize="sudo chmod 777"
 
 # Configuration
-alias zshrc="vim ~/.zshrc"
-alias vimrc="vim ~/.vimrc"
-alias theme="vim ~/dotfiles/theme.lua"
-alias rcl="vim ~/dotfiles/rc.lua"
-alias rc="sudo vim /etc/rc.conf"
-alias xinitrc="vim ~/.xinitrc"
-alias taskrc="vim ~/.taskrc"
-alias tmuxconf="vim ~/.tmux.conf"
+alias zshrc="vim ~/dotfiles/zshrc"
+alias vimrc="vim ~/dotfiles/vimrc"
 alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 
 # Package Manager
@@ -42,7 +38,7 @@ alias gupd="gem update"
 
 # Hardware
 alias sus="sudo pm-suspend"
-alias sd="sudo shutdown now"
+alias sd="sudo shutdown -h now"
 alias rs="sudo shutdown -r now"
 
 # Extended History
@@ -52,7 +48,7 @@ EXTENDED_HISTORY="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Plugins
-plugins=(git taskwarrior extract)
+plugins=(git extract)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.oh-my-zsh/plugins/git-flow/git-flow.plugin.zsh
@@ -76,3 +72,7 @@ export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/s
 # XDG
 XDG_CONFIG_HOME=~/.config
 XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
+
+if which tmux 2>&1 >/dev/null; then
+    test -z "$TMUX" && (tmux -2 attach || tmux -2 new-session)
+fi
