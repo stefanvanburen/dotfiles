@@ -72,6 +72,8 @@ map <Leader>w :w<CR>
 map <Leader>q :wq<CR>
 map <Leader>v :vsplit<CR>
 map <Leader>s :split<CR>
+map <Leader>l :nohl<CR>
+map <Leader>r :retab<CR>
 map <f9> :!javac %<CR>
 map <f10> :!gcc %<CR>
 map <f11> :!python %<CR>

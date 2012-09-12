@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/etc/X11/xinit'
 let g:netrw_dirhist_2='/home/thinkbot/.fontconfig'
 let g:netrw_dirhist_3='/home/thinkbot/.gem/ruby/1.9.1/gems/lolcat-42.0.99/lib/lolcat'
 let g:netrw_dirhist_4='/home/thinkbot/src/java/MazeMakerJava/src'
+let g:netrw_dirhist_5='/home/thinkbot/.oh-my-zsh/custom/example'

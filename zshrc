@@ -6,21 +6,21 @@ ZSH_THEME="miloshadzic"
 
 # Various
 alias news="newsbeuter"
+alias irc='irssi -c im.bitlbee.org'
+alias matrix="cmatrix -bs"
+alias wifi="wicd-curses"
+alias m="ncmpcpp"
 alias bat="acpi -b"
 alias sl="ls"
 alias v="vim"
-alias df="df -h"
+alias df="df -h --total"
+alias du="du -h -d 2 -c -a"
 alias list="ls -alog1"
 alias ll="ls -alGh"
-alias ls="ls -Gh"
-alias du="du -h -d 2"
-alias ..="cd .."
-alias matrix="cmatrix -bs"
-alias wifi="wicd-curses"
-alias l="clear && pwd && ls -FGl"
-alias u="cd .. && l"
-alias irc="irssi"
 alias la="ls -a"
+alias l="clear && pwd && ls -FGl"
+alias ..="cd .."
+alias u="cd .. && l"
 
 # Permissions
 alias privatize="sudo chmod 600"
@@ -48,10 +48,9 @@ EXTENDED_HISTORY="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Plugins
-plugins=(git extract)
+plugins=(git extract git-flow)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.oh-my-zsh/plugins/git-flow/git-flow.plugin.zsh
 
 # Task Warrior Tab Completion
 fpath=($fpath /usr/local/share/doc/task/scripts/zsh)
@@ -73,6 +72,9 @@ export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/s
 XDG_CONFIG_HOME=~/.config
 XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
 
-if which tmux 2>&1 >/dev/null; then
-    test -z "$TMUX" && (tmux -2 attach || tmux -2 new-session)
-fi
+case $TERM in
+xterm*|rxvt*)
+    if which tmux 2>&1 >/dev/null; then
+        test -z "$TMUX" && (tmux -2 attach || tmux -2 new-session)
+    fi
+esac

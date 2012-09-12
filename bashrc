@@ -78,25 +78,25 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias list='ls -laog1'
-alias privatize='chmod 600'
-alias bat="acpi -b | lolcat"
-alias cal="cal | lolcat"
-alias c='clear'
-alias ..='cd ..'
-alias irc='irssi -c im.bitlbee.org'
-alias cowsay='cowsay -b -W 90' 
-alias cowthink='cowthink -b -W 90'
-alias cowsayl='cowsay | lolcat'
-alias cowthinkl='cowthink | lolcat'
-alias calendar='calendar | lolcat'
-alias information='bat -a; cal -a -s 50; fortune | cowsay -f vader-koala | lolcat -a -s 70; calendar -a -s 70'
+#alias ll='ls -alF'
+#alias la='ls -A'
+#alias l='ls -CF'
+#alias list='ls -laog1'
+#alias privatize='chmod 600'
+#alias bat="acpi -b | lolcat"
+#alias cal="cal | lolcat"
+#alias c='clear'
+#alias ..='cd ..'
+#alias irc='irssi -c im.bitlbee.org'
+#alias cowsay='cowsay -b -W 90' 
+#alias cowthink='cowthink -b -W 90'
+#alias cowsayl='cowsay | lolcat'
+#alias cowthinkl='cowthink | lolcat'
+#alias calendar='calendar | lolcat'
+#alias information='bat -a; cal -a -s 50; fortune | cowsay -f vader-koala | lolcat -a -s 70; calendar -a -s 70'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+#alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
