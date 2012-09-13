@@ -16,6 +16,7 @@
     graft = !legit graft \"$@\"
 [core]
     excludesfile = /home/thinkbot/.gitignore
+    editor = vim
 [github]
     user = mrtwiddletoes
 [color]
