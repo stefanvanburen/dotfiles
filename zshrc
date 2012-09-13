@@ -35,6 +35,8 @@ alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 alias upd="sudo pacman -Syy"
 alias upg="sudo pacman -Syu"
 alias gupd="gem update"
+alias bupd="brew update"
+alias bupg="brew upgrade"
 
 # Hardware
 alias sus="sudo pm-suspend"
@@ -51,6 +53,8 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git extract git-flow)
 
 source $ZSH/oh-my-zsh.sh
+
+. ~/random/z/z.sh
 
 # Task Warrior Tab Completion
 fpath=($fpath /usr/local/share/doc/task/scripts/zsh)
