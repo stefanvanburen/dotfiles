@@ -10,6 +10,7 @@ alias irc='irssi -c im.bitlbee.org'
 alias matrix="cmatrix -bs"
 alias wifi="wicd-curses"
 alias m="ncmpcpp"
+alias h="htop"
 alias bat="acpi -b"
 alias sl="ls"
 alias v="vim"
