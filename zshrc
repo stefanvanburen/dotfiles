@@ -54,7 +54,7 @@ plugins=(git extract git-flow)
 
 source $ZSH/oh-my-zsh.sh
 
-. ~/random/z/z.sh
+. /Users/mrtwiddletoes/src/random/z/z.sh
 
 # Task Warrior Tab Completion
 fpath=($fpath /usr/local/share/doc/task/scripts/zsh)
