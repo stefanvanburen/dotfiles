@@ -1,2 +1,5 @@
 map h gT
 map l gt
+set hc="asdfjkl;"
+set tn
+let mapleader = ","
