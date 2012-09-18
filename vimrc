@@ -63,8 +63,8 @@ nnoremap <tab> %
 cnoremap %s/ %s/\v
 
 " Insert Mode:
-inoremap jk <Esc>
-inoremap kj <Esc>
+"inoremap jk <Esc>
+"inoremap kj <Esc>
 
 " All Modes:
 map <Leader>f <C-w>w
