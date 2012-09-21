@@ -3,3 +3,4 @@ map l gt
 set hc="asdfjkl;"
 set tn
 let mapleader = ","
+set fs
