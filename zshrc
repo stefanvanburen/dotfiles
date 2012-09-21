@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="miloshadzic"
+ZSH_THEME="dieter"
 
 # Various
 alias news="newsbeuter"
@@ -55,7 +55,7 @@ plugins=(git extract git-flow)
 
 source $ZSH/oh-my-zsh.sh
 
-. /Users/mrtwiddletoes/src/random/z/z.sh
+. ~/src/random/z/z.sh
 
 # Task Warrior Tab Completion
 fpath=($fpath /usr/local/share/doc/task/scripts/zsh)
