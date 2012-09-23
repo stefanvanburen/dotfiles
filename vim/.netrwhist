@@ -1,3 +1,15 @@
 let g:netrw_dirhistmax  =10
+<<<<<<< Updated upstream
 let g:netrw_dirhist_cnt =1
 let g:netrw_dirhist_1='/run/dhcpcd/resolv.conf'
+=======
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/etc/X11/xinit'
+let g:netrw_dirhist_2='/home/thinkbot/.fontconfig'
+let g:netrw_dirhist_3='/home/thinkbot/.gem/ruby/1.9.1/gems/lolcat-42.0.99/lib/lolcat'
+let g:netrw_dirhist_4='/home/thinkbot/src/java/MazeMakerJava/src'
+let g:netrw_dirhist_5='/home/thinkbot/.oh-my-zsh/custom/example'
+let g:netrw_dirhist_6='/Users/mrtwiddletoes/.ssh'
+let g:netrw_dirhist_7='/Users/mrtwiddletoes/Dropbox/IFTTT/Facebook'
+let g:netrw_dirhist_8='/Users/mrtwiddletoes/Dropbox/IFTTT/Twitter'
+>>>>>>> Stashed changes

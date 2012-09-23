@@ -3,4 +3,7 @@ map l gt
 set hc="asdfjkl;"
 set tn
 let mapleader = ","
+<<<<<<< Updated upstream
 set fs
+=======
+>>>>>>> Stashed changes
