@@ -53,8 +53,10 @@ COMPLETION_WAITING_DOTS="true"
 # Plugins
 plugins=(git extract git-flow)
 
+# ZSH
 source $ZSH/oh-my-zsh.sh
 
+# Z
 . ~/src/random/z/z.sh
 
 # Task Warrior Tab Completion
