@@ -25,7 +25,7 @@ alias u="cd .. && l"
 alias s="git st"
 
 # Permissions
-alias privatize="sudo chmod 600"
+alias privatize="sudo chmod 700"
 alias publicize="sudo chmod 777"
 
 # Configuration
