@@ -22,7 +22,16 @@ alias la="ls -a"
 alias l="clear && pwd && ls -FGl"
 alias ..="cd .."
 alias u="cd .. && l"
-alias s="git st"
+
+# Suffix Aliases
+alias -s pdf=evince
+alias -s txt=vim
+alias -s doc=libreoffice
+alias -s odf=libreoffice
+
+# Directories
+hash -d src=~/src
+hash -d dotfiles=~/dotfiles
 
 # Permissions
 alias privatize="sudo chmod 700"
@@ -52,13 +61,14 @@ EXTENDED_HISTORY="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Plugins
-plugins=(git extract git-flow)
+if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
+    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode brew osx)
+elif [[ $HOME == "/home/thinkbot" ]]; then
+    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode archlinux)
+fi
 
 # ZSH
 source $ZSH/oh-my-zsh.sh
-
-# Z
-. ~/src/random/z/z.sh
 
 # Task Warrior Tab Completion
 fpath=($fpath /usr/local/share/doc/task/scripts/zsh)
@@ -79,6 +89,8 @@ export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/s
 # XDG
 XDG_CONFIG_HOME=~/.config
 XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
+
+unsetopt correctall
 
 case $TERM in
 xterm*|rxvt*)
