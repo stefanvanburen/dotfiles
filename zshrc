@@ -22,6 +22,7 @@ alias la="ls -a"
 alias l="clear && pwd && ls -FGl"
 alias ..="cd .."
 alias u="cd .. && l"
+alias s="git st"
 
 # Permissions
 alias privatize="sudo chmod 600"
