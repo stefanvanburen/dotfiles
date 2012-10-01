@@ -14,7 +14,7 @@
 data.location=~/.task
 
 # Color theme (uncomment one to use)
-include /usr/share/doc/task/rc/solarized-dark-256.theme
+include /usr/local/share/doc/task/rc/solarized-dark-256.theme
 
 # Personal Modifications
 shell.prompt=>
@@ -28,4 +28,3 @@ default.command=long
 default.priority=L
 search.case.sensitive=no
 editor=vim
-include /usr/share/doc/task/rc/holidays.en-US.rc
