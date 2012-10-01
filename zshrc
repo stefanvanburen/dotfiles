@@ -4,6 +4,13 @@ ZSH=$HOME/.oh-my-zsh
 # Theme
 ZSH_THEME="dieter"
 
+# Plugins
+if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
+    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode brew osx)
+elif [[ $HOME == "/home/thinkbot" ]]; then
+    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode archlinux)
+fi
+
 # ZSH
 source $ZSH/oh-my-zsh.sh
 
@@ -18,7 +25,6 @@ alias list="ls -alog1"
 alias ll="ls -alGh"
 alias la="ls -a"
 alias l="clear && pwd && ls -FGl"
-alias ..="cd .."
 alias u="cd .. && l"
 if [[ $HOME == "/home/thinkbot" ]]; then
     alias du="du -h -d 2 -c -a"
@@ -76,15 +82,8 @@ EXTENDED_HISTORY="true"
 # Dots
 COMPLETION_WAITING_DOTS="true"
 
-# Plugins
-if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
-    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode brew osx)
-elif [[ $HOME == "/home/thinkbot" ]]; then
-    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode archlinux)
-fi
-
 # Path
-export PATH=~/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:.:/usr/local/MATLAB/R2011a/bin:/home/thinkbot/.gem/ruby/1.9.1/bin:/root/.gem/ruby/1.9.1/bin
+export PATH=.:~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.gem/ruby/1.9.1/bin:/root/.gem/ruby/1.9.1/bin
 
 # XDG
 if [[ $HOME == "/home/thinkbot" ]]; then
