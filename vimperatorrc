@@ -3,7 +3,4 @@ map l gt
 set hc="asdfjkl;"
 set tn
 let mapleader = ","
-<<<<<<< Updated upstream
 set fullscreen=true
-=======
->>>>>>> Stashed changes

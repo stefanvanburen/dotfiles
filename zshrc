@@ -19,7 +19,6 @@ alias irc='irssi -c im.bitlbee.org'
 alias matrix="cmatrix -bs"
 alias h="htop"
 alias sl="ls"
-alias v="vim"
 alias df="df -h --total"
 alias list="ls -alog1"
 alias ll="ls -alGh"
@@ -60,13 +59,14 @@ if [[ $HOME == "/home/thinkbot" ]]; then
 fi
 
 # Package Manager
-alias gupd="gem update"
 if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
     alias upd="brew update"
     alias upg="brew upgrade"
+    alias gupd="sudo gem update"
 elif [[ $HOME == "/home/thinkbot" ]]; then
     alias upd="sudo pacman -Syy"
     alias upg="sudo pacman -Syu"
+    alias gupd="gem update"
 fi
 
 # Hardware
