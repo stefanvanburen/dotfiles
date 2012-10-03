@@ -53,6 +53,8 @@ nnoremap ; :
 nnoremap / /\v
 nnoremap p p'[v']=
 nnoremap Y y$
+nnoremap 0 ^
+nnoremap ^ 0
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
