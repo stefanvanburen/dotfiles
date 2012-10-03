@@ -46,6 +46,7 @@ fi
 # Directories
 hash -d src=~/src
 hash -d dot=~/dotfiles
+hash -d dr=~/Dropbox
 
 # Permissions
 alias privatize="sudo chmod 700"
