@@ -1,6 +1,7 @@
 " mrtwiddletoes .vimrc
 
 " Pathogen!--------------------------
+
 call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
@@ -29,8 +30,8 @@ set autowriteall                    " Make sure I'm saving things.
 set showmatch                       " Show matching brackets, parentheses, etc.
 set nowrap                          " No wrapping.
 set ruler                           " Show line number and column number.
-set encoding=utf-8
-set t_Co=256
+set encoding=utf-8                  " Force encoding to be utf-8.
+set t_Co=256                        " 256 color terminal.
 set relativenumber                  " Show line numbers relative to current line.
 set cmdheight=2                     " Bigger command-line height.
 set visualbell                      " No bell sound.
@@ -40,11 +41,39 @@ set cursorcolumn                    " Highlight the cursor column.
 set cursorline                      " Highlight the cursor line.
 set nostartofline                   " No moving to the start of the line when scrolling.
 set title                           " Title of terminal = file being edited.
-set colorcolumn=80
-set list
+set colorcolumn=80                  " Sets a column of color at 80 characters.
+set list                            " 
+set listchars=tab:>-,eol:$,trail:.
 set laststatus=2
+set noswapfile
+set nobackup
 
 let mapleader = ","                 " Use ',' as leader
+highlight ColorColumn ctermbg=4 ctermfg=1
+highlight ExtraWhitespace ctermbg=2 ctermfg=3
+highlight SpellBad ctermbg=4 ctermfg=1
+highlight SpellCap ctermbg=4 ctermfg=1
+highlight SpellLocal ctermbg=4 ctermfg=1
+highlight SpellRare ctermbg=4 ctermfg=1
+highlight CursorColumn ctermbg=16
+highlight CursorLine ctermbg=16
+highlight StatusLine ctermbg=4 ctermfg=1
+highlight StatusLineNC ctermbg=9 ctermfg=12
+highlight IncSearch ctermbg=1 ctermfg=4
+highlight VertSplit ctermbg=1
+highlight MatchParen ctermbg=1 ctermfg=4
+highlight Visual ctermbg=1 ctermfg=4
+
+
+" Functions!-------------------------
+
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
 
 " Mappings!--------------------------
 
@@ -60,23 +89,27 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <tab> %
+nnoremap <f8> :call NumberToggle()<cr>
 
 " Command Mode:
 cnoremap %s/ %s/\v
+cnoremap w!! w !sudo tee % >/dev/null
 
 " Insert Mode:
-"inoremap jk <Esc>
-"inoremap kj <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
+inoremap <esc> <nop>
 
 " All Modes:
-map <Leader>f <C-w>w
-map <Leader>w :w<CR>
-map <Leader>q :wq<CR>
-map <Leader>v :vsplit<CR>
-map <Leader>s :split<CR>
-map <Leader>l :nohl<CR>
-map <Leader>r :retab<CR>
-map <f9> :!javac %<CR>
-map <f10> :!gcc %<CR>
-map <f11> :!python %<CR>
-map <f12> :!clisp %<CR>
+noremap <Leader>f <C-w>w
+noremap <Leader>w :w<CR>
+noremap <Leader>q :wq<CR>
+noremap <Leader>v :vsplit<CR>
+noremap <Leader>s :split<CR>
+noremap <Leader>l :nohl<CR>
+noremap <Leader>r :retab<CR>
+noremap <Leader>e :vsplit $MYVIMRC<CR>
+noremap <f9> :!javac %<CR>
+noremap <f10> :!gcc %<CR>
+noremap <f11> :!python %<CR>
+noremap <f12> :!clisp %<CR>
