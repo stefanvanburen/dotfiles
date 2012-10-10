@@ -5,11 +5,12 @@
 call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-let g:Powerline_symbols = 'unicode'
 
 " Basic things!----------------------
 
 syntax enable                       " Syntax highlighting please
+
+"let g:Powerline_symbols = 'unicode'
 
 colorscheme solarized               " Solarized!
 
@@ -47,14 +48,21 @@ set listchars=tab:>-,eol:$,trail:.
 set laststatus=2
 set noswapfile
 set nobackup
+set wildmenu
+set wildmode=list:longest,full
+set showmode
+set showcmd
+set ttyfast
+set foldenable
+set foldmethod=marker
+set lazyredraw
 
 let mapleader = ","                 " Use ',' as leader
+
+" Highlights!------------------------
+
 highlight ColorColumn ctermbg=4 ctermfg=1
 highlight ExtraWhitespace ctermbg=2 ctermfg=3
-highlight SpellBad ctermbg=4 ctermfg=1
-highlight SpellCap ctermbg=4 ctermfg=1
-highlight SpellLocal ctermbg=4 ctermfg=1
-highlight SpellRare ctermbg=4 ctermfg=1
 highlight CursorColumn ctermbg=16
 highlight CursorLine ctermbg=16
 highlight StatusLine ctermbg=4 ctermfg=1
@@ -63,7 +71,6 @@ highlight IncSearch ctermbg=1 ctermfg=4
 highlight VertSplit ctermbg=1
 highlight MatchParen ctermbg=1 ctermfg=4
 highlight Visual ctermbg=1 ctermfg=4
-
 
 " Functions!-------------------------
 
@@ -106,7 +113,7 @@ noremap <Leader>w :w<CR>
 noremap <Leader>q :wq<CR>
 noremap <Leader>v :vsplit<CR>
 noremap <Leader>s :split<CR>
-noremap <Leader>l :nohl<CR>
+noremap <Leader>/ :nohl<CR>
 noremap <Leader>r :retab<CR>
 noremap <Leader>e :vsplit $MYVIMRC<CR>
 noremap <f9> :!javac %<CR>
