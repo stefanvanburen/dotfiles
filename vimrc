@@ -43,34 +43,34 @@ set cursorline                      " Highlight the cursor line.
 set nostartofline                   " No moving to the start of the line when scrolling.
 set title                           " Title of terminal = file being edited.
 set colorcolumn=80                  " Sets a column of color at 80 characters.
-set list                            " 
-set listchars=tab:>-,eol:$,trail:.
-set laststatus=2
-set noswapfile
-set nobackup
-set wildmenu
-set wildmode=list:longest,full
-set showmode
-set showcmd
-set ttyfast
-set foldenable
-set foldmethod=marker
-set lazyredraw
+set list                            " Displays invisible characters.
+set listchars=tab:>-,eol:$,trail:.  " List of invisible characters to display.
+set laststatus=2                    " Always show the last command.
+set noswapfile                      " Don't use swap files.
+set nobackup                        " No need to backup files. Perfect memory.
+set wildmenu                        " Turn on wildmenu.
+set wildmode=list:longest,full      " Wildmenu options.
+set showmode                        " Show the mode I'm in.
+set showcmd                         " Show the command.
+set ttyfast                         " Assume we're using a tty.
+set foldenable                      " Allow folding.
+set foldmethod=marker               " Use the marker folding method.
+set lazyredraw                      " Don't redraw when using macros.
 
 let mapleader = ","                 " Use ',' as leader
 
 " Highlights!------------------------
 
-highlight ColorColumn ctermbg=4 ctermfg=1
+highlight ColorColumn     ctermbg=4 ctermfg=1
 highlight ExtraWhitespace ctermbg=2 ctermfg=3
-highlight CursorColumn ctermbg=16
-highlight CursorLine ctermbg=16
-highlight StatusLine ctermbg=4 ctermfg=1
-highlight StatusLineNC ctermbg=9 ctermfg=12
-highlight IncSearch ctermbg=1 ctermfg=4
-highlight VertSplit ctermbg=1
-highlight MatchParen ctermbg=1 ctermfg=4
-highlight Visual ctermbg=1 ctermfg=4
+highlight CursorColumn    ctermbg=16
+highlight CursorLine      ctermbg=16
+highlight StatusLine      ctermbg=4 ctermfg=1
+highlight StatusLineNC    ctermbg=9 ctermfg=12
+highlight IncSearch       ctermbg=1 ctermfg=4
+highlight VertSplit       ctermbg=1
+highlight MatchParen      ctermbg=1 ctermfg=4
+highlight Visual          ctermbg=1 ctermfg=4
 
 " Functions!-------------------------
 
