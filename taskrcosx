@@ -17,7 +17,7 @@ data.location=~/.task
 include /usr/local/share/doc/task/rc/solarized-dark-256.theme
 
 # Personal Modifications
-shell.prompt=>
+shell.prompt=> 
 dateformat=H.N.d.m.Y
 dateformat.report=H.N.d.m.Y
 calendar.details=full

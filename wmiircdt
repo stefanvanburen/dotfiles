@@ -19,7 +19,7 @@ noticebar=/rbar/!notice
 export WMII_NORMCOLORS='#859900 #002b36 #ffffff'
 export WMII_FOCUSCOLORS='#dc322f #002b36 #ffffff'
 
-export WMII_FONT='-TTF-proggysquarettsz-medium-r-normal--0-0-0-0-c-0-iso8859-1'
+export WMII_FONT='-windows-proggysquaresz-medium-r-normal--11-80-96-96-c-70-iso8859-1'
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
 export WMII_TERM="urxvt +sb"

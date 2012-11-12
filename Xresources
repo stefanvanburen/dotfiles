@@ -1,5 +1,5 @@
 URxvt.scrollBar: false
-URxvt.font: -misc-proggysquarettsz-medium-r-normal--0-0-0-0-c-0-iso8859-1
+URxvt.font: -windows-proggysquaresz-medium-r-normal--11-80-96-96-c-70-iso8859-1
 
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
