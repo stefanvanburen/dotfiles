@@ -30,4 +30,9 @@ fi
 if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
+while true;
+do
+    awsetbg -r /home/foxer/pictures
+    sleep 5m
+done &
 exec awesome

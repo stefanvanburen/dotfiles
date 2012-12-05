@@ -1,5 +1,6 @@
 URxvt.scrollBar: false
-URxvt.font: -windows-proggysquaresz-medium-r-normal--11-80-96-96-c-70-iso8859-1
+URxvt.font: xft:Essential PragmataPro:style=Regular:size=7
+urxvt*modifier: alt
 
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 

@@ -2,7 +2,8 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="dieter"
+ZSH_THEME="agnoster"
+# old theme: dieter
 
 # Plugins
 if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
@@ -10,7 +11,7 @@ if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
 elif [[ $HOME == "/home/thinkbot" ]]; then
     plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode archlinux)
 elif [[ $HOME == "/home/foxer" ]]; then
-	plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode archlinux)
+    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode archlinux)
 fi
 
 # ZSH
