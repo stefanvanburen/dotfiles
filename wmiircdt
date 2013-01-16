@@ -19,10 +19,10 @@ noticebar=/rbar/!notice
 export WMII_NORMCOLORS='#859900 #002b36 #ffffff'
 export WMII_FOCUSCOLORS='#dc322f #002b36 #ffffff'
 
-export WMII_FONT='-windows-proggysquaresz-medium-r-normal--11-80-96-96-c-70-iso8859-1'
+export WMII_FONT='xft:Essential PragmataPro:style=Regular:size=7'
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
-export WMII_TERM="urxvt +sb"
+export WMII_TERM="urxvt"
 
 if ! test -d "${WMII_CONFPATH%%:*}"; then
     mkdir "${WMII_CONFPATH%%:*}"

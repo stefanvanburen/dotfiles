@@ -10,7 +10,7 @@ call pathogen#helptags()
 
 syntax enable                       " Syntax highlighting please
 
-"let g:Powerline_symbols = 'unicode'
+"let g:Powerline_symbols = 'fancy'
 
 colorscheme solarized               " Solarized!
 

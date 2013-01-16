@@ -2,8 +2,8 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="agnoster"
-# old theme: dieter
+ZSH_THEME="miloshadzic"
+# old theme: dieter, agnoster, pygmalion
 
 # Plugins
 if [[ $HOME == "/Users/mrtwiddletoes" ]]; then

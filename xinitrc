@@ -33,6 +33,6 @@ fi
 while true;
 do
     awsetbg -r /home/foxer/pictures
-    sleep 5m
+    sleep 2m
 done &
-exec awesome
+exec gnome-session
