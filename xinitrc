@@ -32,7 +32,7 @@ if [ -f "$usermodmap" ]; then
 fi
 while true;
 do
-    awsetbg -r /home/foxer/pictures
+    feh --bg-scale -r /home/foxer/pictures
     sleep 2m
 done &
-exec gnome-session
+exec wmii

@@ -1,5 +1,5 @@
 URxvt.scrollBar: false
-URxvt.font: xft:Essential PragmataPro:style=Regular:size=7
+!!URxvt.font: -misc-proggysquarettsz-medium-normal--0-0-0-0-c-0-iso8859-1
 urxvt*modifier: alt
 
 !! drop in Solarized colorscheme for Xresources/Xdefaults
