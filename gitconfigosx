@@ -28,3 +28,5 @@
     branch = auto
     interactive = auto
     grep = auto
+[push]
+    default = simple
