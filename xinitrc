@@ -32,7 +32,10 @@ if [ -f "$usermodmap" ]; then
 fi
 while true;
 do
-    feh --bg-scale -r /home/foxer/pictures
+    feh --bg-scale -r ~/pictures
     sleep 2m
 done &
+setxkbmap -option ctrl:nocaps
+dropboxd&
+mpd
 exec wmii
