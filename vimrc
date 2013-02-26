@@ -120,3 +120,4 @@ noremap <f9> :!javac %<CR>
 noremap <f10> :!gcc %<CR>
 noremap <f11> :!python %<CR>
 noremap <f12> :!clisp %<CR>
+noremap <Leader>n :NerdTreeToggle<CR>

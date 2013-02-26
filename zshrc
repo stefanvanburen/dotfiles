@@ -34,12 +34,14 @@ if [[ $HOME == "/home/thinkbot" ]]; then
     alias bat="acpi -b"
     alias wifi="wicd-curses"
     alias m="ncmpcpp"
+    alias pacman="PACMAN=/usr/bin/pacman; [ -f /usr/bin/pacman-color ] && PACMAN=/usr/bin/pacman-color; $PACMAN $@"
 elif [[ $HOME == "/home/foxer" ]]; then
     alias du="du -h -d 2 -c -a"
     alias news="newsbeuter"
     alias bat="acpi -b"
     alias wifi="wicd-curses"
     alias m="ncmpcpp"
+    alias pacman="PACMAN=/usr/bin/pacman; [ -f /usr/bin/pacman-color ] && PACMAN=/usr/bin/pacman-color; $PACMAN $@"
 elif [[ $HOME == "/Users/mrtwiddletoes" ]]; then
     alias du="du -h -d 2 -c"
 fi
