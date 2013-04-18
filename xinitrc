@@ -30,6 +30,7 @@ fi
 if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
+
 while true;
 do
     cd ~/pictures
