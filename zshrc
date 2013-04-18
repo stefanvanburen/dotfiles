@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="dieter"
+ZSH_THEME="agnoster"
 # old theme: dieter, agnoster, pygmalion, miloshadzic
 
 # Plugins
