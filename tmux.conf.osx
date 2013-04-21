@@ -4,6 +4,7 @@ unbind C-b
 set -g prefix `
 set -g default-terminal screen-256color
 set -g base-index 1
+set -g status-interval 120
 set-window-option -g mode-keys vi
 
 # split windows like vim
@@ -26,4 +27,4 @@ bind > resize-pane -R 3
 bind - resize-pane -D 3
 bind + resize-pane -U 3
 
-source '/usr/share/tmux/powerline.conf'
+source '/Users/mrtwiddletoes/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf'

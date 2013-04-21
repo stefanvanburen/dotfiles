@@ -9,9 +9,9 @@ require("naughty")
 require("vicious")
 
 if awesome.startup_errors then
-	naughty.notify({ preset = naughty.config.presets.critical,
-	title = "Oops, there were errors during startup!",
-	text = awesome.startup_errors })
+    naughty.notify({ preset = naughty.config.presets.critical,
+    title = "Oops, there were errors during startup!",
+    text = awesome.startup_errors })
 end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -19,17 +19,17 @@ beautiful.init("/home/thinkbot/.config/awesome/theme.lua")
 
 -- Handle runtime errors after startup
 do
-	local in_error = false
-	awesome.add_signal("debug::error", function (err)
-		-- Make sure we don't go into an endless error loop
-		if in_error then return end
-		in_error = true
+    local in_error = false
+    awesome.add_signal("debug::error", function (err)
+        -- Make sure we don't go into an endless error loop
+        if in_error then return end
+        in_error = true
 
-		naughty.notify({ preset = naughty.config.presets.critical,
-		title = "Oops, an error happened!",
-		text = err })
-		in_error = false
-	end)
+        naughty.notify({ preset = naughty.config.presets.critical,
+        title = "Oops, an error happened!",
+        text = err })
+        in_error = false
+    end)
 end
 -- }}}
 
@@ -47,7 +47,7 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
-{ 
+{
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,

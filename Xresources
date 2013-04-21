@@ -1,5 +1,5 @@
 URxvt.scrollBar: false
-URxvt.font: xft:DejaVu Sans Mono for Powerline:style=RegularForPowerline
+!!URxvt.font: xft:DejaVu Sans Mono for Powerline:style=RegularForPowerline
 urxvt*modifier: alt
 
 !! drop in Solarized colorscheme for Xresources/Xdefaults

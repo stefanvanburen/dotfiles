@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="agnoster"
+ZSH_THEME="miloshadzic"
 # old theme: dieter, agnoster, pygmalion, miloshadzic
 
 # Plugins
@@ -28,6 +28,8 @@ alias ll="ls -alGh"
 alias la="ls -a"
 alias l="clear && pwd && ls -FGl"
 alias u="cd .. && l"
+alias ae="alias edit"
+alias ar="alias reload"
 if [[ $HOME == "/home/thinkbot" ]]; then
     alias du="du -h -d 2 -c -a"
     alias news="newsbeuter"
@@ -67,11 +69,14 @@ alias publicize="sudo chmod 777"
 
 # Configuration
 alias zshrc="vim ~/dotfiles/zshrc"
-alias vimrc="vim ~/dotfiles/vimrc"
 if [[ $HOME == "/home/thinkbot" ]]; then
     alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
+    alias vimrc="vim ~/dotfiles/vimrc.linux"
 elif [[ $HOME == "/home/foxer" ]]; then
     alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
+    alias vimrc="vim ~/dotfiles/vimrc.linux"
+elif [[ $HOME == "/Users/mrtwiddletoes" ]]; then
+    alias vimrc="vim ~/dotfiles/vimrc.osx"
 fi
 
 # Package Manager
@@ -112,6 +117,12 @@ export PATH=.:~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 if [[ $HOME == "/home/thinkbot" ]]; then
     XDG_CONFIG_HOME=~/.config
     XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
+fi
+
+# Powerline
+if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
+    DEFAULT_USER=mrtwiddletoes
+    . /User/mrtwiddletoes/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
 # No corrections

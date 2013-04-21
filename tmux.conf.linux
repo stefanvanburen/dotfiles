@@ -1,0 +1,27 @@
+# mrtwiddletoes' .tmux.conf
+# Based off the default vim-keys.conf included with tmux
+unbind C-b
+set -g prefix `
+set -g default-terminal screen-256color
+set -g base-index 1
+set-window-option -g mode-keys vi
+
+# split windows like vim
+# vim's definition of a horizontal/vertical split is reversed from tmux's
+unbind %
+bind s split-window -v
+bind v split-window -h
+
+# move around panes with hjkl, as one would in vim after pressing ctrl-w
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# resize panes like vim
+# feel free to change the "1" to however many lines you want to resize by, only
+# one at a time can be slow
+bind < resize-pane -L 3
+bind > resize-pane -R 3
+bind - resize-pane -D 3
+bind + resize-pane -U 3
