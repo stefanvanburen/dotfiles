@@ -1,7 +1,21 @@
 " mrtwiddletoes .vimrc
-" {{{ Pathogen
 
-execute pathogen#infect()
+" {{{ Vundle
+
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdtree'
+
+filetype plugin indent on
 
 " }}}
 
