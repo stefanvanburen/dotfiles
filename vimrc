@@ -29,6 +29,10 @@ filetype on                         " Pay attention to filetype.
 filetype plugin on                  " Use plugins based on the type of file I'm editing.
 filetype indent on                  " Indent based on the type of file I'm editing.
 
+if filereadable("~/.vimrc.local")
+    source ~/.vimrc.local
+endif
+
 " }}}
 
 " {{{ Settings

@@ -119,12 +119,6 @@ if [[ $HOME == "/home/thinkbot" ]]; then
     XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
 fi
 
-# Powerline
-if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
-    DEFAULT_USER=mrtwiddletoes
-    . /Users/mrtwiddletoes/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
-fi
-
 # No corrections
 unsetopt correctall
 
