@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="miloshadzic"
+ZSH_THEME="agnoster"
 # old theme: dieter, agnoster, pygmalion, miloshadzic
 
 # Plugins
@@ -122,7 +122,7 @@ fi
 # Powerline
 if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
     DEFAULT_USER=mrtwiddletoes
-    . /User/mrtwiddletoes/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+    . /Users/mrtwiddletoes/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
 # No corrections
