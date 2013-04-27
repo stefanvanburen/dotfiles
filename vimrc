@@ -40,7 +40,8 @@ endif
 set autoindent                      " Autoindent stuff.
 set autoread                        " Read changes in files during editing.
 set autowriteall                    " Make sure I'm saving things.
-set background=dark                 " For colorscheme
+set background=dark                 " For colorscheme.
+set backspace=eol,indent,start      " Make backspacing work like regular apps.
 set cmdheight=2                     " Bigger command-line height.
 set colorcolumn=80                  " Sets a column of color at 80 characters.
 set cursorcolumn                    " Highlight the cursor column.
