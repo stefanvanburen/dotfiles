@@ -2,7 +2,13 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="agnoster"
+if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
+    ZSH_THEME="agnoster"
+elif [[ $HOME == "/home/thinkbot" ]]; then
+    ZSH_THEME="miloshadzic"
+elif [[ $HOME == "/home/foxer" ]]; then
+    ZSH_THEME="miloshadzic"
+fi
 # old theme: dieter, agnoster, pygmalion, miloshadzic
 
 # Plugins
