@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="miloshadzic"
 
 # Plugins
-plugins=(archlinux battery command-not-found extract fasd gem git github git-extras git-flow pip node npm nyan python ruby taskwarrior vi-mode)
+plugins=(archlinux battery command-not-found extract fasd gem git github git-extras git-flow node npm pip python ruby taskwarrior vi-mode vundle)
 
 # ZSH
 source $ZSH/oh-my-zsh.sh
@@ -48,7 +48,7 @@ alias publicize="sudo chmod 777"
 # Configuration
 alias zshrc="vim ~/dotfiles/zshrc"
 alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
-alias vimrc="vim ~/dotfiles/vimrc.linux"
+alias vimrc="vim ~/dotfiles/vimrc"
 
 # Package Manager
 alias upd="sudo pacman -Syy"

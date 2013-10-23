@@ -31,12 +31,6 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-#while true;
-#do
-#    cd ~/pictures
-#    feh --bg-scale "$(ls | sort -R | head -1)"
-#    sleep 2m
-#done &
 setxkbmap -option ctrl:nocaps
 dropboxd&
 mpd
