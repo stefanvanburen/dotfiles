@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="miloshadzic"
 
 # Plugins
-plugins=(archlinux command-not-found extract fasd gem git github git-extras git-flow pip node npm nyan python ruby taskwarrior vi-mode)
+plugins=(archlinux battery command-not-found extract fasd gem git github git-extras git-flow pip node npm nyan python ruby taskwarrior vi-mode)
 
 # ZSH
 source $ZSH/oh-my-zsh.sh
