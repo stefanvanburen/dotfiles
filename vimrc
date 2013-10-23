@@ -14,6 +14,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
+Bundle 'chriskempson/base16-vim'
 
 filetype plugin indent on
 
@@ -137,6 +138,7 @@ inoremap <esc> <nop>
 noremap <Leader>f <C-w>w
 noremap <Leader>w :w<CR>
 noremap <Leader>q :wq<CR>
+noremap <Leader>a :q<CR>
 noremap <Leader>v :vsplit<CR>
 noremap <Leader>s :split<CR>
 noremap <Leader>/ :nohl<CR>
@@ -146,6 +148,6 @@ noremap <f9> :!javac %<CR>
 noremap <f10> :!gcc %<CR>
 noremap <f11> :!python %<CR>
 noremap <f12> :!clisp %<CR>
-noremap <Leader>n :NerdTreeToggle<CR>
+noremap <Leader>n :NERDTreeToggle<CR>
 
 " }}}

@@ -1,32 +1,16 @@
 # Oh-my-zsh
 ZSH=$HOME/.oh-my-zsh
 
-# Theme
-if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
-    ZSH_THEME="agnoster"
-elif [[ $HOME == "/home/thinkbot" ]]; then
-    ZSH_THEME="miloshadzic"
-elif [[ $HOME == "/home/foxer" ]]; then
-    ZSH_THEME="miloshadzic"
-fi
-# old theme: dieter, agnoster, pygmalion, miloshadzic
+# Theme; old themes: dieter, agnoster, pygmalion, miloshadzic
+ZSH_THEME="miloshadzic"
 
 # Plugins
-if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
-    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode brew osx)
-elif [[ $HOME == "/home/thinkbot" ]]; then
-    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode archlinux)
-elif [[ $HOME == "/home/foxer" ]]; then
-    plugins=(git extract git-flow pip fasd ruby gem github node npm nyan python taskwarrior vi-mode archlinux)
-fi
+plugins=(archlinux command-not-found extract fasd gem git github git-extras git-flow pip node npm nyan python ruby taskwarrior vi-mode)
 
 # ZSH
 source $ZSH/oh-my-zsh.sh
 
-# Various
-alias irc='irssi -c im.bitlbee.org'
-alias matrix="cmatrix -bs"
-alias h="htop"
+# Various Aliases
 alias sl="ls"
 alias df="df -h --total"
 alias list="ls -alog1"
@@ -36,33 +20,21 @@ alias l="clear && pwd && ls -FGl"
 alias u="cd .. && l"
 alias ae="alias edit"
 alias ar="alias reload"
-if [[ $HOME == "/home/thinkbot" ]]; then
-    alias du="du -h -d 2 -c -a"
-    alias news="newsbeuter"
-    alias bat="acpi -b"
-    alias wifi="wicd-curses"
-    alias m="ncmpcpp"
-    alias pacman="PACMAN=/usr/bin/pacman; [ -f /usr/bin/pacman-color ] && PACMAN=/usr/bin/pacman-color; $PACMAN $@"
-elif [[ $HOME == "/home/foxer" ]]; then
-    alias du="du -h -d 2 -c -a"
-    alias news="newsbeuter"
-    alias bat="acpi -b"
-    alias wifi="wicd-curses"
-    alias m="ncmpcpp"
-    alias pacman="PACMAN=/usr/bin/pacman; [ -f /usr/bin/pacman-color ] && PACMAN=/usr/bin/pacman-color; $PACMAN $@"
-elif [[ $HOME == "/Users/mrtwiddletoes" ]]; then
-    alias du="du -h -d 2 -c"
-fi
+alias du="du -h -d 2 -c -a"
+
+# Applications
+alias news="newsbeuter"
+alias bat="acpi -b"
+alias wifi="wicd-curses"
+alias m="ncmpcpp"
+alias irc='irssi'
+alias h="htop"
 
 # Suffix Aliases
 alias -s txt=vim
 alias -s doc=libreoffice
 alias -s odf=libreoffice
-if [[ $HOME == "/home/thinkbot" ]]; then
-    alias -s pdf=evince
-elif [[ $HOME == "/home/foxer" ]]; then
-    alias -s pdf=evince
-fi
+alias -s pdf=evince
 
 # Directories
 hash -d src=~/src
@@ -75,40 +47,18 @@ alias publicize="sudo chmod 777"
 
 # Configuration
 alias zshrc="vim ~/dotfiles/zshrc"
-if [[ $HOME == "/home/thinkbot" ]]; then
-    alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
-    alias vimrc="vim ~/dotfiles/vimrc.linux"
-elif [[ $HOME == "/home/foxer" ]]; then
-    alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
-    alias vimrc="vim ~/dotfiles/vimrc.linux"
-elif [[ $HOME == "/Users/mrtwiddletoes" ]]; then
-    alias vimrc="vim ~/dotfiles/vimrc.osx"
-fi
+alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
+alias vimrc="vim ~/dotfiles/vimrc.linux"
 
 # Package Manager
-if [[ $HOME == "/Users/mrtwiddletoes" ]]; then
-    alias upd="brew update"
-    alias upg="brew upgrade"
-    alias gupd="sudo gem update"
-elif [[ $HOME == "/home/thinkbot" ]]; then
-    alias upd="sudo pacman -Syy"
-    alias upg="sudo pacman -Syu"
-    alias gupd="gem update"
-elif [[ $HOME == "/home/foxer" ]]; then
-    alias upd="sudo pacman -Syy"
-    alias upg="sudo pacman -Syu"
-    alias gupd="gem update"
-fi
+alias upd="sudo pacman -Syy"
+alias upg="sudo pacman -Syu"
+alias gupd="sudo gem update"
 
 # Hardware
-if [[ $HOME == "/home/thinkbot" ]]; then
-    alias sus="sudo pm-suspend"
-    alias sd="sudo shutdown -h now"
-    alias rs="sudo shutdown -r now"
-elif [[ $HOME == "/home/foxer" ]]; then
-    alias sd="sudo shutdown -h now"
-    alias rs="sudo shutdown -r now"
-fi
+alias sus="systemctl suspend"
+alias sd="systemctl poweroff"
+alias rs="systemctl reboot"
 
 # Extended History
 EXTENDED_HISTORY="true"
@@ -120,17 +70,15 @@ COMPLETION_WAITING_DOTS="true"
 export PATH=.:~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.gem/ruby/1.9.1/bin:/root/.gem/ruby/1.9.1/bin
 
 # XDG
-if [[ $HOME == "/home/thinkbot" ]]; then
-    XDG_CONFIG_HOME=~/.config
-    XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
-fi
+XDG_CONFIG_HOME=~/.config
+XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
 
 # No corrections
 unsetopt correctall
 
-# Automatically start tmux if our term is xterm or rxvt
+# Automatically start tmux if our term is rxvt
 case $TERM in
-xterm*|rxvt*)
+rxvt*)
     if which tmux 2>&1 >/dev/null; then
         test -z "$TMUX" && (tmux -2 attach || tmux -2 new-session)
     fi

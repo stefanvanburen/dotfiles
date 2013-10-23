@@ -54,7 +54,7 @@ wmiir write /tagrules <<!
 
 # Status Bar Info
 status() {
-    echo -n 'RAM: ' $(free -m | grep -i /cache | awk '{print $3}') 'MB | Wlan0: ' $(iwconfig wlan0 | awk '/Quality/{print $2}' | sed 's/.*=//' | awk -F"/" '{printf("%.0f%%", $1/$2*100)}') '|' $(uptime | sed 's/.*://; s/,//g') '|' $(date '+%d.%m.%Y | %T | %j')
+    echo -n 'RAM: ' $(free -m | grep -i /cache | awk '{print $3}') 'MB | Wlp3s0: ' $(iwconfig wlp3s0 | awk '/Quality/{print $2}' | sed 's/.*=//' | awk -F"/" '{printf("%.0f%%", $1/$2*100)}') '|' $(uptime | sed 's/.*://; s/,//g') '|' $(date '+%d.%m.%Y | %T | %j')
 }
 
 local_events() { true;}
