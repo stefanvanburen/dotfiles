@@ -32,26 +32,15 @@ alias h="htop"
 
 # Suffix Aliases
 alias -s txt=vim
-alias -s doc=libreoffice
-alias -s odf=libreoffice
 alias -s pdf=evince
-
-# Directories
-hash -d src=~/src
-hash -d dot=~/dotfiles
-hash -d dr=~/Dropbox
-
-# Permissions
-alias privatize="sudo chmod 700"
-alias publicize="sudo chmod 777"
 
 # Configuration
 alias zshrc="vim ~/dotfiles/zshrc"
 alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 alias vimrc="vim ~/dotfiles/vimrc"
+alias dot="vim ~/random/.dot.txt"
 
 # Package Manager
-alias upd="sudo pacman -Syy"
 alias upg="sudo pacman -Syu"
 alias gupd="sudo gem update"
 
@@ -67,7 +56,7 @@ EXTENDED_HISTORY="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Path
-export PATH=.:~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.gem/ruby/1.9.1/bin:/root/.gem/ruby/1.9.1/bin
+export PATH=.:~/src/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.gem/ruby/1.9.1/bin:/root/.gem/ruby/1.9.1/bin
 
 # XDG
 XDG_CONFIG_HOME=~/.config

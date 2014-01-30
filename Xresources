@@ -1,6 +1,10 @@
 URxvt.scrollBar: false
 !!URxvt.font: xft:DejaVu Sans Mono for Powerline:style=RegularForPowerline
 urxvt*modifier: alt
+!! Man page coloring.
+urxvt*colorIT: #859900
+urxvt*colorBD: #6c71c4
+urxvt*colorUL: #cb4b16
 
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
