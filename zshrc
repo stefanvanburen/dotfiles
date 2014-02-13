@@ -2,10 +2,10 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme; old themes: dieter, agnoster, pygmalion, miloshadzic
-ZSH_THEME="miloshadzic"
+ZSH_THEME="agnoster"
 
 # Plugins
-plugins=(archlinux battery command-not-found extract fasd gem git github git-extras git-flow node npm pip python ruby taskwarrior vi-mode vundle)
+plugins=(brew colored-man extract fasd gem git github git-extras git-flow pip python taskwarrior tmux vundle)
 
 # ZSH
 source $ZSH/oh-my-zsh.sh
@@ -23,31 +23,18 @@ alias ar="alias reload"
 alias du="du -h -d 2 -c -a"
 
 # Applications
-alias news="newsbeuter"
-alias bat="acpi -b"
-alias wifi="wicd-curses"
-alias m="ncmpcpp"
 alias irc='irssi'
 alias h="htop"
 
-# Suffix Aliases
-alias -s txt=vim
-alias -s pdf=evince
-
 # Configuration
 alias zshrc="vim ~/dotfiles/zshrc"
-alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 alias vimrc="vim ~/dotfiles/vimrc"
 alias dot="vim ~/random/.dot.txt"
 
 # Package Manager
-alias upg="sudo pacman -Syu"
+alias upd="brew update"
+alias upg="brew upgrade"
 alias gupd="sudo gem update"
-
-# Hardware
-alias sus="systemctl suspend"
-alias sd="systemctl poweroff"
-alias rs="systemctl reboot"
 
 # Extended History
 EXTENDED_HISTORY="true"
@@ -65,10 +52,7 @@ XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
 # No corrections
 unsetopt correctall
 
-# Automatically start tmux if our term is rxvt
-case $TERM in
-rxvt*)
-    if which tmux 2>&1 >/dev/null; then
-        test -z "$TMUX" && (tmux -2 attach || tmux -2 new-session)
-    fi
-esac
+export DYLD_FORCE_FLAT_NAMESPACE=1
+
+# Don't ask me about updating oh-my-zsh
+DISABLE_UPDATE_PROMPT=true
