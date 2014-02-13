@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/mrtwiddletoes/Dropbox/src/java/Life'
-let g:netrw_dirhist_2='/Users/mrtwiddletoes/build/matplotlib'
-let g:netrw_dirhist_3='/Users/mrtwiddletoes/.oh-my-zsh/plugins/lol'
-let g:netrw_dirhist_4='/usr/local/Cellar/mpc/0.22/share'
-let g:netrw_dirhist_5='/home/foxer/.wmii'
-let g:netrw_dirhist_6='/Users/mrtwiddletoes/Dropbox/.task'
-let g:netrw_dirhist_7='/home/foxer/.mpd'
