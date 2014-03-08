@@ -1,4 +1,4 @@
-" mrtwiddletoes .vimrc
+" .vimrc
 
 " {{{ Vundle
 
@@ -15,7 +15,7 @@ Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
-Bundle 'chriskempson/base16-vim'
+Bundle 'spf13/vim-autoclose'
 
 filetype plugin indent on
 
@@ -81,6 +81,7 @@ set wildmenu                        " Turn on wildmenu.
 set wildmode=list:longest,full      " Wildmenu options.
 
 let mapleader = ","                 " Use ',' as leader
+let g:airline_powerline_fonts=1
 
 " }}}
 
