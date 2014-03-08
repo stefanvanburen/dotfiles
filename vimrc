@@ -25,7 +25,7 @@ filetype plugin indent on
 
 syntax enable                       " Syntax highlighting please
 
-colorscheme solarized               " Solarized!
+colorscheme solarized               " Solarized.
 
 filetype on                         " Pay attention to filetype.
 filetype plugin on                  " Use plugins based on the type of file I'm editing.
@@ -73,6 +73,7 @@ set smartindent                     " Indent my things smartly.
 set splitbelow                      " On horizontal split, open the split below.
 set splitright                      " On veritcal split, open the split to the right.
 set t_Co=256                        " 256 color terminal.
+set term=screen-256color            " Behave as though we have screen.
 set title                           " Title of terminal = file being edited.
 set ttyfast                         " Assume we're using a tty.
 set visualbell                      " No bell sound.

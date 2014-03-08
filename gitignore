@@ -27,3 +27,4 @@ Thumbs.db
 *.egg
 *.egg-info
 .project
+.DS_store

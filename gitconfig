@@ -1,26 +1,18 @@
 [user]
     name = Stefan VanBuren
-    email = mrtwiddletoes@gmail.com
+    email = vanburen_stefan@gmail.com
 [credential]
-    helper = cache --timeout=36000
+    helper = osxkeychain
 [alias]
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     po = push -u origin
     pu = pull -u origin
     st = status -sb
-    switch = !legit switch \"$@\"
-    branches = !legit branches
-    sprout = !legit sprout \"$@\"
-    unpublish = !legit unpublish \"$@\"
-    harvest = !legit harvest \"$@\"
-    sync = !legit sync \"$@\"
-    publish = !legit publish \"$@\"
-    graft = !legit graft \"$@\"
 [core]
-    excludesfile = /home/thinkbot/.gitignore
+    excludesfile = ~/.gitignore
     editor = vim
 [github]
-    user = mrtwiddletoes
+    user = svanburen
 [color]
     ui = auto
     diff = auto
