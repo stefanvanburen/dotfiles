@@ -11,11 +11,12 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
-Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'spf13/vim-autoclose'
+Bundle 'bling/vim-airline'
+Bundle 'edkolev/tmuxline.vim'
 
 filetype plugin indent on
 
@@ -23,65 +24,57 @@ filetype plugin indent on
 
 " {{{ Basic things
 
-syntax enable                       " Syntax highlighting please
+syntax enable
 
-colorscheme solarized               " Solarized.
-
-filetype on                         " Pay attention to filetype.
-filetype plugin on                  " Use plugins based on the type of file I'm editing.
-filetype indent on                  " Indent based on the type of file I'm editing.
-
-if filereadable("~/.vimrc.local")
-    source ~/.vimrc.local
-endif
+colorscheme solarized
 
 " }}}
 
 " {{{ Settings
 
-set autoindent                      " Autoindent stuff.
-set autoread                        " Read changes in files during editing.
-set autowriteall                    " Make sure I'm saving things.
-set background=dark                 " For colorscheme.
-set backspace=eol,indent,start      " Make backspacing work like regular apps.
-set cmdheight=2                     " Bigger command-line height.
-set colorcolumn=80                  " Sets a column of color at 80 characters.
-set cursorcolumn                    " Highlight the cursor column.
-set cursorline                      " Highlight the cursor line.
-set encoding=utf-8                  " Force encoding to be utf-8.
-set foldenable                      " Allow folding.
-set foldmethod=marker               " Use the marker folding method.
-set hlsearch                        " Highlight my searches.
-set ignorecase                      " Ignore case when searching.
-set incsearch                       " Keep searching as I type.
-set laststatus=2                    " Always show the last command.
-set lazyredraw                      " Don't redraw when using macros.
-set list                            " Displays invisible characters.
-set listchars=tab:→-,eol:¬,trail:⋅  " List of invisible characters to display.
-set nobackup                        " No need to backup files. Perfect memory.
-set nocompatible                    " Vim, not vi.
-set nostartofline                   " No moving to the start of the line when scrolling.
-set noswapfile                      " Don't use swap files.
-set nowrap                          " No wrapping.
-set relativenumber                  " Show line numbers relative to current line.
-set ruler                           " Show line number and column number.
-set showcmd                         " Show the command.
-set showmatch                       " Show matching brackets, parentheses, etc.
-set showmode                        " Show the mode I'm in.
-set smartcase                       " Once again, ignore case while searching.
-set smartindent                     " Indent my things smartly.
-set splitbelow                      " On horizontal split, open the split below.
-set splitright                      " On veritcal split, open the split to the right.
-set t_Co=256                        " 256 color terminal.
-set term=screen-256color            " Behave as though we have screen.
-set title                           " Title of terminal = file being edited.
-set ttyfast                         " Assume we're using a tty.
-set visualbell                      " No bell sound.
-set wildmenu                        " Turn on wildmenu.
-set wildmode=list:longest,full      " Wildmenu options.
+set autoindent
+set autoread                                " Read changes in files during editing.
+set autowriteall
+set background=dark
+set backspace=eol,indent,start              " Make backspacing work regularly.
+set cmdheight=2
+set colorcolumn=80
+set encoding=utf-8
+set foldenable
+set foldmethod=marker
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2                            " Always show the last command.
+set lazyredraw                              " Don't redraw when using macros.
+set list                                    " Displays invisible characters.
+set listchars=tab:→-,eol:¬,trail:⋅
+set number
+set nobackup
+set nocompatible
+set nostartofline
+set noswapfile
+set nowrap
+set ruler
+set showcmd
+set showmatch
+set showmode
+set smartcase
+set smartindent
+set splitbelow                              " On horizontal split, open the split below.
+set splitright                              " On veritcal split, open the split to the right.
+set t_Co=256
+set term=screen-256color
+set title
+set ttyfast
+set visualbell
+set wildmenu
+set wildmode=list:longest,full
 
-let mapleader = ","                 " Use ',' as leader
+let mapleader=","
+let g:syntastic_python_checkers=['pylint']
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tmuxline#enabled=0
 
 " }}}
 
