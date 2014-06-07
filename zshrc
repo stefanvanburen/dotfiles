@@ -14,6 +14,7 @@ source $ZSH/oh-my-zsh.sh
 alias df="df -h --total"
 alias u="cd .. && l"
 alias du="du -h -d 2 -c -a"
+alias v="vim"
 
 # Applications
 alias irc='irssi'
