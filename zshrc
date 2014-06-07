@@ -23,7 +23,7 @@ alias tmux="tmux -2"
 # Configuration
 alias zshrc="vim ~/dotfiles/zshrc"
 alias vimrc="vim ~/dotfiles/vimrc"
-alias dot="vim ~/random/.dot.txt"
+alias dot="vim ~/random/dot.txt"
 
 # Package Manager
 alias upd="brew update"

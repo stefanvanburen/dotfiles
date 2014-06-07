@@ -2,21 +2,22 @@
 
 " {{{ Vundle
 
+set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdtree'
-Bundle 'spf13/vim-autoclose'
-Bundle 'bling/vim-airline'
-Bundle 'edkolev/tmuxline.vim'
+Plugin 'gmarik/vundle'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'bling/vim-airline'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'tommcdo/vim-exchange'
 
 filetype plugin indent on
 
@@ -49,9 +50,9 @@ set laststatus=2                            " Always show the last command.
 set lazyredraw                              " Don't redraw when using macros.
 set list                                    " Displays invisible characters.
 set listchars=tab:→-,eol:¬,trail:⋅
+set modeline
 set number
 set nobackup
-set nocompatible
 set nostartofline
 set noswapfile
 set nowrap
@@ -111,7 +112,7 @@ endfunc
 nnoremap ; :
 nnoremap / /\v
 nnoremap p p'[v']=
-nnoremap Y y$
+nnoremap Y :normal y$
 nnoremap 0 ^
 nnoremap ^ 0
 nnoremap <C-h> <C-w>h
