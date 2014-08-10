@@ -44,9 +44,6 @@ EXTENDED_HISTORY="true"
 # Dots
 COMPLETION_WAITING_DOTS="true"
 
-# Path
-export PATH=.:~/src/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.gem/ruby/1.9.1/bin:/root/.gem/ruby/1.9.1/bin
-
 # XDG
 XDG_CONFIG_HOME=~/.config
 XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
