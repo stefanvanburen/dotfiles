@@ -10,14 +10,18 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'klen/python-mode'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'bling/vim-airline'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'tommcdo/vim-exchange'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 filetype plugin indent on
 
@@ -38,8 +42,6 @@ set autoread                                " Read changes in files during editi
 set autowriteall
 set background=dark
 set backspace=eol,indent,start              " Make backspacing work regularly.
-set cmdheight=2
-set colorcolumn=80
 set encoding=utf-8
 set foldenable
 set foldmethod=marker
@@ -68,6 +70,7 @@ set t_Co=256
 set term=screen-256color
 set title
 set ttyfast
+set tw=0
 set visualbell
 set wildmenu
 set wildmode=list:longest,full
@@ -76,6 +79,7 @@ let mapleader=","
 let g:syntastic_python_checkers=['pylint']
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tmuxline#enabled=0
+let g:indent_guides_guide_size=1
 
 " }}}
 
@@ -91,18 +95,7 @@ highlight IncSearch       ctermbg=1 ctermfg=4
 highlight VertSplit       ctermbg=1
 highlight MatchParen      ctermbg=1 ctermfg=4
 highlight Visual          ctermbg=1 ctermfg=4
-
-" }}}
-
-" {{{ Functions
-
-function! NumberToggle()
-    if(&relativenumber == 1)
-        set number
-    else
-        set relativenumber
-    endif
-endfunc
+highlight IndentGuidesOdd ctermbg=2
 
 " }}}
 
@@ -120,7 +113,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <tab> %
-nnoremap <f8> :call NumberToggle()<cr>
 
 " Command Mode:
 cnoremap %s/ %s/\v
@@ -134,8 +126,7 @@ inoremap <esc> <nop>
 " All Modes:
 noremap <Leader>f <C-w>w
 noremap <Leader>w :w<CR>
-noremap <Leader>q :wq<CR>
-noremap <Leader>a :q<CR>
+noremap <Leader>q :q<CR>
 noremap <Leader>v :vsplit<CR>
 noremap <Leader>s :split<CR>
 noremap <Leader>/ :nohl<CR>

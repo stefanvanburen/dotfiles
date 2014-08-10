@@ -1,10 +1,3 @@
-# Prezto
-if [[ -s "${ZDOTDIR:-$HOME}/dotfiles/prezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/dotfiles/prezto/init.zsh"
-fi
-
-source ~/.tmuxinator.zsh
-
 # Various Aliases
 alias df="df -h --total"
 alias u="cd .. && l"
@@ -27,7 +20,7 @@ alias upd="brew update"
 alias upg="brew upgrade"
 alias gupd="sudo gem update"
 
-bindkey -v
+# Path
+export PATH=.:~/src/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-export DYLD_FORCE_FLAT_NAMESPACE=1
-export EDITOR='vim'
+bindkey -v

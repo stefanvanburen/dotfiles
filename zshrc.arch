@@ -1,0 +1,57 @@
+# Various Aliases
+alias sl="ls"
+alias df="df -h --total"
+alias list="ls -alog1"
+alias ll="ls -alGh"
+alias la="ls -a"
+alias l="clear && pwd && ls -FGl"
+alias u="cd .. && l"
+alias ae="alias edit"
+alias ar="alias reload"
+alias du="du -h -d 2 -c -a"
+
+# Applications
+alias news="newsbeuter"
+alias bat="acpi -b"
+alias wifi="wicd-curses"
+alias m="ncmpcpp"
+alias irc='irssi'
+alias h="htop"
+alias tmux="TERM=screen-256color-bce tmux"
+
+# Suffix Aliases
+alias -s txt=vim
+alias -s pdf=evince
+
+# Configuration
+alias zshrc="vim ~/dotfiles/zshrc"
+alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
+alias vimrc="vim ~/dotfiles/vimrc"
+alias dot="vim ~/random/.dot.txt"
+
+# Package Manager
+alias upg="sudo pacman -Syu"
+alias gupd="sudo gem update"
+
+# Hardware
+alias sus="systemctl suspend"
+alias sd="systemctl poweroff"
+alias rs="systemctl reboot"
+
+# Extended History
+EXTENDED_HISTORY="true"
+
+# Dots
+COMPLETION_WAITING_DOTS="true"
+
+# Path
+export PATH=.:~/src/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.gem/ruby/1.9.1/bin:/root/.gem/ruby/1.9.1/bin
+
+# XDG
+XDG_CONFIG_HOME=~/.config
+XDG_CONFIG_DIRS=~/.config:$XDG_CONFIG_DIRS
+
+# No corrections
+unsetopt correctall
+
+export DYLD_FORCE_FLAT_NAMESPACE=1

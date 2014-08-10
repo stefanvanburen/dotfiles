@@ -1,0 +1,13 @@
+#!/bin/sh
+rm -f ~/.zshrc
+ln -v ~/dotfiles/zshrc ~/.zshrc
+rm -f ~/.gitignore
+ln -v ~/dotfiles/gitignore ~/.gitignore
+rm -f ~/.vimrc
+ln -v ~/dotfiles/vimrc ~/.vimrc
+rm -f ~/.gemrc
+ln -v ~/dotfiles/gemrc ~/.gemrc
+rm -f ~/.tmux.conf
+ln -v ~/dotfiles/tmux.conf ~/.tmux.conf
+rm -f ~/.gitconfig
+ln -v ~/dotfiles/gitconfig ~/.gitconfig
