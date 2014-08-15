@@ -1,0 +1,6 @@
+# Package Manager
+alias upd="brew update"
+alias upg="brew upgrade"
+
+# Brew stuff
+export DYLD_FORCE_FLAT_NAMESPACE=1
