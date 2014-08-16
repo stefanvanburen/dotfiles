@@ -43,7 +43,7 @@ set autowriteall
 set background=dark
 set backspace=eol,indent,start              " Make backspacing work regularly.
 set encoding=utf-8
-set foldenable
+"set foldenable
 set foldmethod=marker
 set hlsearch
 set ignorecase
