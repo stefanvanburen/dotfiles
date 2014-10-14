@@ -24,9 +24,3 @@ rm .zshenv
 ln -s dotfiles/zshenv .zshenv
 rm .zshrc
 ln -s dotfiles/zshrc .zshrc
-
-# TODO
-if [[ "$OSTYPE" == arch* ]]; then
-  rm .wmiirc
-  ln -s dotfiles/wmiirc .wmiirc
-fi
