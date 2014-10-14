@@ -1,8 +1,6 @@
 [user]
     name = Stefan VanBuren
     email = vanburenstefan@gmail.com
-[credential]
-    helper = osxkeychain
 [alias]
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     po = push -u origin
@@ -22,6 +20,3 @@
     grep = auto
 [push]
     default = simple
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f

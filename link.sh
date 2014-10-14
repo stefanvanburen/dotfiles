@@ -24,3 +24,13 @@ rm .zshenv
 ln -s dotfiles/zshenv .zshenv
 rm .zshrc
 ln -s dotfiles/zshrc .zshrc
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    rm .gitconfig
+    ln -s dotfiles/gitconfig.osx .gitconfig
+fi
+
+if [[ "$OSTYPE" == linux-gnu ]]; then
+    rm .gitconfig
+    ln -s dotfiles/gitconfig.arch .gitconfig
+fi
