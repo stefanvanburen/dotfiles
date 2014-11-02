@@ -11,6 +11,7 @@ Plugin 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'klen/python-mode'
+Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -22,11 +23,11 @@ Plugin 'bling/vim-airline'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'dahu/bisectly'
 
 filetype plugin indent on
 
 " }}}
-
 " {{{ Basic things
 
 syntax enable
@@ -34,7 +35,6 @@ syntax enable
 colorscheme solarized
 
 " }}}
-
 " {{{ Settings
 
 set autoindent
@@ -43,8 +43,11 @@ set autowriteall
 set background=dark
 set backspace=eol,indent,start              " Make backspacing work regularly.
 set encoding=utf-8
-"set foldenable
-set foldmethod=marker
+set expandtab
+set foldenable
+"set foldmethod=indent
+set formatoptions=c,q,r,t
+set history=10000
 set hlsearch
 set ignorecase
 set incsearch
@@ -52,7 +55,9 @@ set laststatus=2                            " Always show the last command.
 set lazyredraw                              " Don't redraw when using macros.
 set list                                    " Displays invisible characters.
 set listchars=tab:→-,eol:¬,trail:⋅
-set modeline
+set magic                                   " For regex
+set mat=2                                   " Number of tenths of a second to blink
+set modelines=1
 set number
 set nobackup
 set nostartofline
@@ -62,8 +67,10 @@ set ruler
 set showcmd
 set showmatch
 set showmode
+set showtabline=2                           " Always show tabs in vim
 set smartcase
 set smartindent
+set scrolljump=8
 set splitbelow                              " On horizontal split, open the split below.
 set splitright                              " On veritcal split, open the split to the right.
 set t_Co=256
@@ -74,6 +81,7 @@ set tw=0
 set visualbell
 set wildmenu
 set wildmode=list:longest,full
+set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 
 let mapleader=","
 let g:syntastic_python_checkers=['pylint']
@@ -82,7 +90,6 @@ let g:airline#extensions#tmuxline#enabled=0
 let g:indent_guides_guide_size=1
 
 " }}}
-
 " {{{ Highlights
 
 highlight ColorColumn     ctermbg=4 ctermfg=1
@@ -98,44 +105,55 @@ highlight Visual          ctermbg=1 ctermfg=4
 highlight IndentGuidesOdd ctermbg=2
 
 " }}}
-
 " {{{ Mappings
 
 " Normal Mode:
-nnoremap ; :
-nnoremap / /\v
-nnoremap p p'[v']=
-nnoremap Y :normal y$
+nmap ; :
+" Open or close folds using space
+nmap <space> za
+nmap p p'[v']=
+nmap Y :normal y$
 nnoremap 0 ^
 nnoremap ^ 0
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <tab> %
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+nmap <tab> %
 
 " Command Mode:
-cnoremap %s/ %s/\v
-cnoremap w!! w !sudo tee % >/dev/null
+cmap %s/ %s/\v
+cmap w!! w !sudo tee % >/dev/null
 
 " Insert Mode:
-inoremap jk <Esc>
-inoremap kj <Esc>
-inoremap <esc> <nop>
+inoremap jk <ESC>
+inoremap kj <ESC>
+inoremap <ESC> <NOP>
 
 " All Modes:
-noremap <Leader>f <C-w>w
-noremap <Leader>w :w<CR>
-noremap <Leader>q :q<CR>
-noremap <Leader>v :vsplit<CR>
-noremap <Leader>s :split<CR>
-noremap <Leader>/ :nohl<CR>
-noremap <Leader>r :retab<CR>
-noremap <Leader>e :vsplit $MYVIMRC<CR>
-noremap <f9> :!javac %<CR>
-noremap <f10> :!gcc %<CR>
-noremap <f11> :!python %<CR>
-noremap <f12> :!clisp %<CR>
-noremap <Leader>n :NERDTreeToggle<CR>
+map <Leader>f <C-w>w
+map <Leader>w :w<CR>
+map <Leader>q :q<CR>
+map <Leader>v :vsplit<CR>
+map <Leader>s :split<CR>
+map <Leader>/ :nohl<CR>
+map <Leader>r :retab<CR>
+map <Leader>e :vsplit $MYVIMRC<CR>
+map <Leader>tn :tabnew<CR>
+map <Leader>tc :tabclose<CR>
+map <Leader>tm :tabmove
+map <Leader>te :tabedit
+map <Leader>ss :setlocal spell!<CR>
+map <Leader>sv :mksession<CR>
+map <Leader>so :source $MYVIMRC<CR>
+" Change directory to the directory of the current buffer
+map <Leader>cd :cd %:p:h<CR>:pwd<CR>
+map <f9> :!javac %<CR>
+map <f10> :!gcc %<CR>
+map <f11> :!python %<CR>
+map <f12> :!clisp %<CR>
+map <Leader>n :NERDTreeToggle<CR>
 
 " }}}
+
+" vim:foldmethod=marker:foldlevel=0

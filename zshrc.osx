@@ -1,6 +1,13 @@
-# Package Manager
+# .zshrc.osx
+
+# {{{ Package Manager
 alias upd="brew update"
 alias upg="brew upgrade"
+alias update="sudo softwareupdate -i -a; brew update; brew upgrade; npm update npm -g; npm update -g; sudo gem update --system; sudo gem update --user-install"
+# }}}
 
-# Brew stuff
+# {{{ Brew stuff
 export DYLD_FORCE_FLAT_NAMESPACE=1
+# }}}
+
+# vim:foldmethod=marker:foldlevel=0

@@ -8,6 +8,7 @@
     po = push -u origin
     pu = pull -u origin
     st = status -sb
+    merge = merge -no-ff
 [core]
     excludesfile = ~/.gitignore
     editor = vim
@@ -23,5 +24,10 @@
 [push]
     default = simple
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[merge]
+    tool = vimdiff
+[apply]
+    whitespace = fix
