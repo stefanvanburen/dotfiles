@@ -8,8 +8,8 @@ alias m="ncmpcpp"
 alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
 
 # Package Manager
-alias upg="sudo pacman -Syu"
-alias upd="sudo pacman -Syy"
+alias upg="yaourt -Syua"
+alias upd="yaourt -Syy"
 
 # Hardware
 alias sus="systemctl suspend"
