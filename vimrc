@@ -7,7 +7,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
-Plugin 'gmarik/vundle.vim'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'klen/python-mode'
@@ -25,6 +25,7 @@ Plugin 'tommcdo/vim-exchange'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'dahu/bisectly'
 
+call vundle#end()
 filetype plugin indent on
 
 " }}}
@@ -42,6 +43,7 @@ set autoread                                " Read changes in files during editi
 set autowriteall
 set background=dark
 set backspace=eol,indent,start              " Make backspacing work regularly.
+set cino=N-s
 set encoding=utf-8
 set expandtab
 set foldenable

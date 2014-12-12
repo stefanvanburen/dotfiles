@@ -1,16 +1,8 @@
-[user]
-    name = Stefan VanBuren
-    email = vanburenstefan@gmail.com
 [alias]
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     po = push -u origin
     pu = pull -u origin
     st = status -sb
-[core]
-    excludesfile = ~/.gitignore
-    editor = vim
-[github]
-    user = svanburen
 [color]
     ui = auto
     diff = auto
@@ -18,5 +10,17 @@
     branch = auto
     interactive = auto
     grep = auto
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+[credential]
+    helper = 'cache --timeout 3600'
+[diff]
+    tool = icdiff
+[github]
+    user = svanburen
 [push]
     default = simple
+[user]
+    name = Stefan VanBuren
+    email = vanburenstefan@gmail.com
