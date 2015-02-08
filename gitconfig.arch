@@ -14,7 +14,7 @@
     excludesfile = ~/.gitignore
     editor = vim
 [credential]
-    helper = 'cache --timeout 3600'
+    helper = 'store'
 [diff]
     tool = icdiff
 [github]
