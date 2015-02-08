@@ -23,14 +23,7 @@
     grep = auto
 [push]
     default = simple
-<<<<<<< HEAD:gitconfig
-[filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
 [merge]
     tool = vimdiff
 [apply]
     whitespace = fix
-=======
->>>>>>> 62fa99918d209189317ecfda594e2ea49113426b:gitconfig.osx

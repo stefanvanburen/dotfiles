@@ -24,6 +24,8 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'dahu/bisectly'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'mattn/emmet-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -90,6 +92,8 @@ let g:syntastic_python_checkers=['pylint']
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tmuxline#enabled=0
 let g:indent_guides_guide_size=1
+let g:solarized_visibility="low"
+let g:ycm_collect_identifiers_from_tags_files=1
 
 " }}}
 " {{{ Highlights
