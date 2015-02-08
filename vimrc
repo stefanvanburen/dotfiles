@@ -14,6 +14,7 @@ Plugin 'klen/python-mode'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
@@ -159,6 +160,12 @@ map <f10> :!gcc %<CR>
 map <f11> :!python %<CR>
 map <f12> :!clisp %<CR>
 map <Leader>n :NERDTreeToggle<CR>
+
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 " }}}
 

@@ -1,1 +1,3 @@
 gem: --no-ri --no-rdoc
+verbose: true
+backtrace: true
