@@ -5,7 +5,7 @@
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="zetetic"
 DISABLE_UPDATE_PROMPT=true
-plugins=(brew cp fasd gem git lein meteor pip themes tmux tmuxinator vi-mode vundle)
+plugins=(brew cp fasd gem git git-extras lein meteor pip themes tmux tmuxinator vi-mode)
 export PATH=$HOME/src/bin:$PATH
 source $ZSH/oh-my-zsh.sh
 
@@ -29,6 +29,7 @@ alias so="source $HOME/.zshrc"
 # {{{ Environment
 
 export EDITOR='vim'
+export PATH=$HOME/.nimble/bin:$PATH
 
 # }}}
 # {{{ OSX

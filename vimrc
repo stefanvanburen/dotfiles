@@ -1,34 +1,37 @@
 " .vimrc
 
-" {{{ Vundle
+" {{{ Plug
 
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'klen/python-mode'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-repeat'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'bling/vim-airline'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'dahu/bisectly'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'mattn/emmet-vim'
+Plug 'gmarik/Vundle.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'bling/vim-airline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'kchmck/vim-coffee-script'          " coffeescript
+Plug 'mattn/emmet-vim'                   " HTML / CSS
+Plug 'zah/nimrod.vim'                    " nim
+Plug 'klen/python-mode'                  " python
 
-call vundle#end()
+Plug 'vim-ruby/vim-ruby'                " ruby
+Plug 'tpope/vim-rails'                  " ruby on rails
+Plug 'dahu/bisectly'                    " tests for errors in vim
+Plug 'nathanaelkane/vim-indent-guides'  " shows indentation. doesn't work?
+Plug 'tpope/vim-fireplace'                    " clojure
+
+call plug#end()
 filetype plugin indent on
 
 " }}}
@@ -50,8 +53,7 @@ set cino=N-s
 set encoding=utf-8
 set expandtab
 set foldenable
-"set foldmethod=indent
-set formatoptions=c,q,r,t
+set formatoptions=c,q,r,t,j
 set history=10000
 set hlsearch
 set ignorecase
@@ -69,6 +71,7 @@ set nostartofline
 set noswapfile
 set nowrap
 set ruler
+set scrolloff=1
 set showcmd
 set showmatch
 set showmode
@@ -81,6 +84,8 @@ set splitright                              " On veritcal split, open the split 
 set t_Co=256
 set term=screen-256color
 set title
+set ttimeout
+set ttimeoutlen=100
 set ttyfast
 set tw=0
 set visualbell
@@ -99,17 +104,16 @@ let g:ycm_collect_identifiers_from_tags_files=1
 " }}}
 " {{{ Highlights
 
-highlight ColorColumn     ctermbg=4 ctermfg=1
-highlight ExtraWhitespace ctermbg=2 ctermfg=3
-highlight CursorColumn    ctermbg=16
-highlight CursorLine      ctermbg=16
-highlight StatusLine      ctermbg=4 ctermfg=1
-highlight StatusLineNC    ctermbg=9 ctermfg=12
-highlight IncSearch       ctermbg=1 ctermfg=4
-highlight VertSplit       ctermbg=1
-highlight MatchParen      ctermbg=1 ctermfg=4
-highlight Visual          ctermbg=1 ctermfg=4
-highlight IndentGuidesOdd ctermbg=2
+hi ColorColumn      ctermbg=4 ctermfg=1
+hi ExtraWhitespace  ctermbg=2 ctermfg=3
+hi CursorColumn     ctermbg=16
+hi CursorLine       ctermbg=16
+hi StatusLine       ctermbg=4 ctermfg=1
+hi StatusLineNC     ctermbg=9 ctermfg=12
+hi IncSearch        ctermbg=1 ctermfg=4
+hi VertSplit        ctermbg=1
+hi MatchParen       ctermbg=1 ctermfg=4
+hi Visual           ctermbg=1 ctermfg=4
 
 " }}}
 " {{{ Mappings
@@ -127,6 +131,8 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 nmap <tab> %
+nmap < <<
+nmap > >>
 
 " Command Mode:
 cmap %s/ %s/\v
@@ -146,6 +152,7 @@ map <Leader>s :split<CR>
 map <Leader>/ :nohl<CR>
 map <Leader>r :retab<CR>
 map <Leader>e :vsplit $MYVIMRC<CR>
+map <Leader>y <C-y>
 map <Leader>tn :tabnew<CR>
 map <Leader>tc :tabclose<CR>
 map <Leader>tm :tabmove
@@ -167,6 +174,8 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
+let g:user_emmet_install_global=0
+autocmd Filetype html,css EmmetInstall
+
 " }}}
 
-" vim:foldmethod=marker:foldlevel=0

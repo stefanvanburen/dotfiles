@@ -1,0 +1,9 @@
+# ~/.tmuxinator/osx.yml
+
+name: osx
+root: ~/
+
+windows:
+  - terminal:
+  - terminal:
+  - terminal:
