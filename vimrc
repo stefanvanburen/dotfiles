@@ -6,10 +6,9 @@ set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 
-Plug 'gmarik/Vundle.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'kien/ctrlp.vim'
+Plug 'shougo/unite.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -24,12 +23,13 @@ Plug 'kchmck/vim-coffee-script'          " coffeescript
 Plug 'mattn/emmet-vim'                   " HTML / CSS
 Plug 'zah/nimrod.vim'                    " nim
 Plug 'klen/python-mode'                  " python
-
 Plug 'vim-ruby/vim-ruby'                " ruby
 Plug 'tpope/vim-rails'                  " ruby on rails
-Plug 'dahu/bisectly'                    " tests for errors in vim
-Plug 'nathanaelkane/vim-indent-guides'  " shows indentation. doesn't work?
-Plug 'tpope/vim-fireplace'                    " clojure
+Plug 'tpope/vim-fireplace'              " clojure
+Plug 'jceb/vim-orgmode', { 'for' : 'org' }
+Plug 'majutsushi/tagbar'
+Plug 'farseer90718/vim-taskwarrior'
+Plug 'mbbill/undotree'
 
 call plug#end()
 filetype plugin indent on
@@ -53,6 +53,7 @@ set cino=N-s
 set encoding=utf-8
 set expandtab
 set foldenable
+set foldmethod=syntax
 set formatoptions=c,q,r,t,j
 set history=10000
 set hlsearch
@@ -120,8 +121,6 @@ hi Visual           ctermbg=1 ctermfg=4
 
 " Normal Mode:
 nmap ; :
-" Open or close folds using space
-nmap <space> za
 nmap p p'[v']=
 nmap Y :normal y$
 nnoremap 0 ^
@@ -144,15 +143,14 @@ inoremap kj <ESC>
 inoremap <ESC> <NOP>
 
 " All Modes:
-map <Leader>f <C-w>w
 map <Leader>w :w<CR>
 map <Leader>q :q<CR>
+map <Leader>f <C-w>w
 map <Leader>v :vsplit<CR>
 map <Leader>s :split<CR>
 map <Leader>/ :nohl<CR>
 map <Leader>r :retab<CR>
 map <Leader>e :vsplit $MYVIMRC<CR>
-map <Leader>y <C-y>
 map <Leader>tn :tabnew<CR>
 map <Leader>tc :tabclose<CR>
 map <Leader>tm :tabmove
@@ -160,13 +158,17 @@ map <Leader>te :tabedit
 map <Leader>ss :setlocal spell!<CR>
 map <Leader>sv :mksession<CR>
 map <Leader>so :source $MYVIMRC<CR>
-" Change directory to the directory of the current buffer
+map <Leader>i <Leader>so:PlugInstall<CR>
 map <Leader>cd :cd %:p:h<CR>:pwd<CR>
 map <f9> :!javac %<CR>
 map <f10> :!gcc %<CR>
 map <f11> :!python %<CR>
 map <f12> :!clisp %<CR>
 map <Leader>n :NERDTreeToggle<CR>
+map <Leader>tt :TagbarToggle<CR>
+map <Leader>u :Unite file<CR>
+map <Leader>tw :TW<CR>
+map <Leader>tr :UndotreeToggle<CR>
 
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-s)
