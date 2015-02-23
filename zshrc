@@ -3,7 +3,7 @@
 # {{{ Oh My Zsh
 
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="zetetic"
+ZSH_THEME="random"
 DISABLE_UPDATE_PROMPT=true
 plugins=(brew cp fasd gem git git-extras lein meteor pip themes tmux tmuxinator vi-mode)
 export PATH=$HOME/src/bin:$PATH
@@ -35,8 +35,16 @@ export PATH=$HOME/.nimble/bin:$PATH
 # {{{ OSX
 
 if [[ "$OSTYPE" == darwin* ]]; then
-    # OSX Specific stuff
+    source $HOME/dotfiles/zshrc.osx
 fi
 
 #}}}
+#
+# {{{ Arch
+
+if [[ "$OSTYPE" == linux* ]]; then
+    source $HOME/dotfiles/zshrc.arch
+fi
+
+# }}}
 
