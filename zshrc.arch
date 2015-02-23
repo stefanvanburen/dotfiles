@@ -1,17 +1,16 @@
-# Applications
-alias news="newsbeuter"
-alias bat="acpi -b"
-alias wifi="wicd-curses"
-alias m="ncmpcpp"
+# {{{ Oh My Zsh
 
-# Configuration
-alias font="setfont /usr/share/kbd/consolefonts/Lat2-Terminus16.psfu.gz"
+export ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="random"
+DISABLE_UPDATE_PROMPT=true
+plugins=(brew cp fasd gem git git-extras lein meteor pip themes tmux tmuxinator vi-mode)
+export PATH=$HOME/src/bin:$PATH
+source $ZSH/oh-my-zsh.sh
+
+# }}}
 
 # Package Manager
 alias upg="yaourt -Syua"
 alias upd="yaourt -Syy"
 
-# Hardware
-alias sus="systemctl suspend"
-alias sd="systemctl poweroff"
-alias rs="systemctl reboot"
+export PATH=$PATH:$HOME/src/oss/git/chrome/depot_tools/
