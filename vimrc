@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Valloric/YouCompleteMe'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'altercation/vim-colors-solarized'
 Plug 'shougo/unite.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -26,9 +27,9 @@ Plug 'klen/python-mode'                  " python
 Plug 'vim-ruby/vim-ruby'                " ruby
 Plug 'tpope/vim-rails'                  " ruby on rails
 Plug 'tpope/vim-fireplace'              " clojure
-Plug 'jceb/vim-orgmode', { 'for' : 'org' }
 Plug 'majutsushi/tagbar'
 Plug 'farseer90718/vim-taskwarrior'
+Plug 'jceb/vim-orgmode'
 Plug 'mbbill/undotree'
 
 call plug#end()
@@ -53,7 +54,7 @@ set cino=N-s
 set encoding=utf-8
 set expandtab
 set foldenable
-set foldmethod=syntax
+"set foldmethod=syntax
 set formatoptions=c,q,r,t,j
 set history=10000
 set hlsearch
@@ -94,23 +95,18 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 
-let mapleader=","
-let g:syntastic_python_checkers=['pylint']
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tmuxline#enabled=0
-let g:indent_guides_guide_size=1
-let g:solarized_visibility="low"
-let g:ycm_collect_identifiers_from_tags_files=1
+let mapleader = ","
+let g:syntastic_python_checkers = ['pylint']
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux.colors"
+let g:airline_theme="base16"
+let g:indent_guides_guide_size = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 " }}}
 " {{{ Highlights
 
-hi ColorColumn      ctermbg=4 ctermfg=1
 hi ExtraWhitespace  ctermbg=2 ctermfg=3
-hi CursorColumn     ctermbg=16
-hi CursorLine       ctermbg=16
-hi StatusLine       ctermbg=4 ctermfg=1
-hi StatusLineNC     ctermbg=9 ctermfg=12
 hi IncSearch        ctermbg=1 ctermfg=4
 hi VertSplit        ctermbg=1
 hi MatchParen       ctermbg=1 ctermfg=4
@@ -178,6 +174,8 @@ map <Leader>k <Plug>(easymotion-k)
 
 let g:user_emmet_install_global=0
 autocmd Filetype html,css EmmetInstall
+
+let g:airline#extensions#tabline#enabled=1
 
 " }}}
 
