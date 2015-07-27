@@ -52,7 +52,7 @@ set backspace=eol,indent,start              " Make backspacing work regularly.
 set cino=N-s
 set encoding=utf-8
 set expandtab
-set foldenable
+"set foldenable
 set foldmethod=syntax
 set formatoptions=c,q,r,t,j
 set history=10000
