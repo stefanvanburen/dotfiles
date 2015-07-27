@@ -1,4 +1,5 @@
-" .vimrc
+" vim: set foldmethod=marker foldlevel=0:
+" dot vimrc
 
 " {{{ Plug
 
@@ -6,31 +7,33 @@ set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe'
+Plug 'valloric/youcompleteme', { 'do' : './install.sh --clang-completer' }
 Plug 'Lokaltog/vim-easymotion'
 Plug 'altercation/vim-colors-solarized'
-Plug 'shougo/unite.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tommcdo/vim-exchange'
-Plug 'kchmck/vim-coffee-script'          " coffeescript
-Plug 'mattn/emmet-vim'                   " HTML / CSS
-Plug 'zah/nimrod.vim'                    " nim
-Plug 'klen/python-mode'                  " python
-Plug 'vim-ruby/vim-ruby'                " ruby
-Plug 'tpope/vim-rails'                  " ruby on rails
-Plug 'tpope/vim-fireplace'              " clojure
+Plug 'kchmck/vim-coffee-script'
+Plug 'mattn/emmet-vim'
+Plug 'zah/nimrod.vim', { 'for' : 'nim' }
+Plug 'klen/python-mode', { 'for' : 'python' }
+Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 Plug 'majutsushi/tagbar'
+Plug 'keith/investigate.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-github-dashboard'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'jceb/vim-orgmode'
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : 'yes \| ./install' }
+Plug 'terryma/vim-expand-region'
 
 call plug#end()
 filetype plugin indent on
@@ -54,7 +57,6 @@ set cino=N-s
 set encoding=utf-8
 set expandtab
 set foldenable
-"set foldmethod=syntax
 set formatoptions=c,q,r,t,j
 set history=10000
 set hlsearch
@@ -90,18 +92,37 @@ set ttimeout
 set ttimeoutlen=100
 set ttyfast
 set tw=0
+set undofile
+set undodir=~/.vim/undodir
 set visualbell
 set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 
-let mapleader = ","
+let mapleader = "\<Space>"
+" }}}
+" {{{ Plugins
+
 let g:syntastic_python_checkers = ['pylint']
+
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux.colors"
-let g:airline_theme="base16"
+let g:airline_theme="solarized"
+
 let g:indent_guides_guide_size = 1
+
 let g:ycm_collect_identifiers_from_tags_files = 1
+
+let g:user_emmet_install_global=0
+autocmd Filetype html,css EmmetInstall
+
+let g:airline#extensions#tabline#enabled=1
+
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 " }}}
 " {{{ Highlights
@@ -162,20 +183,8 @@ map <f11> :!python %<CR>
 map <f12> :!clisp %<CR>
 map <Leader>n :NERDTreeToggle<CR>
 map <Leader>tt :TagbarToggle<CR>
-map <Leader>u :Unite file<CR>
 map <Leader>tw :TW<CR>
 map <Leader>tr :UndotreeToggle<CR>
-
-let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-s)
-let g:EasyMotion_smartcase = 1
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
-let g:user_emmet_install_global=0
-autocmd Filetype html,css EmmetInstall
-
-let g:airline#extensions#tabline#enabled=1
+map <Leader><Leader> :FZF -m<CR>
 
 " }}}
-
