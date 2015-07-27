@@ -1,6 +1,6 @@
 # ~/.tmuxinator/osx.yml
 
-name: osx
+name: default
 root: ~/
 
 windows:

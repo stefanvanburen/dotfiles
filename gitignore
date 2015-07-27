@@ -28,3 +28,4 @@ Thumbs.db
 *.egg-info
 .project
 .DS_store
+*.dSYM

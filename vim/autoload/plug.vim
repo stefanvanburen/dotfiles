@@ -33,6 +33,7 @@
 "   " Unmanaged plugin (manually installed and updated)
 "   Plug '~/my-prototype-plugin'
 "
+"   " Add plugins to &runtimepath
 "   call plug#end()
 "
 " Then reload .vimrc and :PlugInstall to install plugins.
@@ -865,12 +866,21 @@ function! s:job_handler(job_id, data, event) abort
     let self.tick = get(self, 'tick', -1) + 1
     if self.tick % len(s:jobs) == 0
       call s:log(self.new ? '+' : '*', self.name, self.result)
+<<<<<<< HEAD
     endif
   elseif a:event == 'exit'
     let self.running = 0
     if a:data != 0
       let self.error = 1
     endif
+=======
+    endif
+  elseif a:event == 'exit'
+    let self.running = 0
+    if a:data != 0
+      let self.error = 1
+    endif
+>>>>>>> 36d15ee893baf875c9d86b4380253a279725b92f
     call s:reap(self.name)
     call s:tick()
   endif
@@ -1901,9 +1911,15 @@ function! s:preview_commit()
 
   execute 'pedit' sha
   wincmd P
+<<<<<<< HEAD
   setlocal filetype=git buftype=nofile nobuflisted
+=======
+  setlocal filetype=git buftype=nofile nobuflisted modifiable
+>>>>>>> 36d15ee893baf875c9d86b4380253a279725b92f
   execute 'silent read !cd' s:shellesc(g:plugs[name].dir) '&& git show --pretty=medium' sha
   normal! gg"_dd
+  setlocal nomodifiable
+  nnoremap <silent> <buffer> q :q<cr>
   wincmd p
 endfunction
 
