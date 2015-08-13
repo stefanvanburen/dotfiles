@@ -3,11 +3,20 @@
 
 " {{{ Plug
 
+function BuildYCM(info)
+  let os=system('uname')
+  if os == 'Darwin'
+    !./install.sh --clangcompleter
+  elseif os == 'Linux'
+    echo 'BuildYCM yourself'
+  endif
+endfunction
+
 set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 
-Plug 'valloric/youcompleteme', { 'do' : './install.sh --clang-completer' }
+Plug 'valloric/YouCompleteMe', { 'do' : function('BuildYCM') }
 Plug 'Lokaltog/vim-easymotion'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
