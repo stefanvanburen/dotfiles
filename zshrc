@@ -1,19 +1,7 @@
 # .zshrc
 
-# {{{ OSX
+source ~/.zshrc.local
 
-if [[ "$OSTYPE" == darwin* ]]; then
-    source $HOME/dotfiles/zshrc.osx
-fi
-
-#}}}
-# {{{ Arch
-
-if [[ "$OSTYPE" == linux* ]]; then
-    source $HOME/dotfiles/zshrc.arch
-fi
-
-# }}}
 # {{{ Various Aliases
 
 alias df="df -h --total"
