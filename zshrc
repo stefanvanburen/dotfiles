@@ -24,3 +24,4 @@ export EDITOR='vim'
 
 # }}}
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
