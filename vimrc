@@ -100,7 +100,7 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 
-let mapleader = "\<Space>"
+let mapleader = ","
 " }}}
 " {{{ Plugins
 
