@@ -1,4 +1,3 @@
-" vim: set foldmethod=marker foldlevel=0:
 " dot vimrc
 
 " {{{ Plug
@@ -33,6 +32,7 @@ Plug 'farseer90718/vim-taskwarrior'
 Plug 'jceb/vim-orgmode'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-expand-region'
 
 call plug#end()
@@ -56,9 +56,10 @@ set backspace=eol,indent,start              " Make backspacing work regularly.
 set cino=N-s
 set encoding=utf-8
 set expandtab
-"set foldenable
-set foldmethod=syntax
+set foldenable
+"set foldmethod=syntax
 set formatoptions=c,q,r,t,j
+set hidden
 set history=10000
 set hlsearch
 set ignorecase
@@ -169,14 +170,11 @@ map <Leader>s :split<CR>
 map <Leader>/ :nohl<CR>
 map <Leader>r :retab<CR>
 map <Leader>e :vsplit $MYVIMRC<CR>
-map <Leader>tn :tabnew<CR>
-map <Leader>tc :tabclose<CR>
-map <Leader>tm :tabmove
-map <Leader>te :tabedit
 map <Leader>ss :setlocal spell!<CR>
 map <Leader>sv :mksession<CR>
 map <Leader>so :source $MYVIMRC<CR>
 map <Leader>i <Leader>so:PlugInstall<CR>
+map <Leader>u <Leader>so:PlugUpdate<CR>
 map <Leader>cd :cd %:p:h<CR>:pwd<CR>
 map <f9> :!javac %<CR>
 map <f10> :!gcc %<CR>
