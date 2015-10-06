@@ -88,7 +88,6 @@ set scrolljump=8
 set splitbelow                              " On horizontal split, open the split below.
 set splitright                              " On veritcal split, open the split to the right.
 set t_Co=256
-set term=screen-256color
 set title
 set ttimeout
 set ttimeoutlen=100
@@ -101,7 +100,7 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 
-let mapleader = ","
+let mapleader = "\<Space>"
 " }}}
 " {{{ Plugins
 
@@ -156,6 +155,9 @@ nmap > >>
 cmap %s/ %s/\v
 cmap w!! w !sudo tee % >/dev/null
 
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
 " Insert Mode:
 inoremap jk <ESC>
 inoremap kj <ESC>
@@ -176,11 +178,15 @@ map <Leader>so :source $MYVIMRC<CR>
 map <Leader>i <Leader>so:PlugInstall<CR>
 map <Leader>u <Leader>so:PlugUpdate<CR>
 map <Leader>cd :cd %:p:h<CR>:pwd<CR>
+map <Leader>n :bn<CR>
+map <Leader>p :bp<CR>
+map <Leader>c :bd<CR>
 map <f9> :!javac %<CR>
 map <f10> :!gcc %<CR>
 map <f11> :!python %<CR>
 map <f12> :!clisp %<CR>
-map <Leader>n :NERDTreeToggle<CR>
+map <Leader>K :call investigate#Investigate()<CR>
+map <Leader>tn :NERDTreeToggle<CR>
 map <Leader>tt :TagbarToggle<CR>
 map <Leader>tw :TW<CR>
 map <Leader>tr :UndotreeToggle<CR>
