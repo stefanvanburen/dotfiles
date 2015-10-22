@@ -12,10 +12,12 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
+Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tommcdo/vim-exchange'
@@ -26,14 +28,18 @@ Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 Plug 'majutsushi/tagbar'
 Plug 'keith/investigate.vim'
-Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/vim-github-dashboard'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'jceb/vim-orgmode'
-Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-github-dashboard'
+Plug 'whatyouhide/vim-lengthmatters'
 Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 filetype plugin indent on
@@ -101,6 +107,7 @@ set wildmode=list:longest,full
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 
 let mapleader = "\<Space>"
+
 " }}}
 " {{{ Plugins
 
@@ -116,6 +123,9 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 
 let g:user_emmet_install_global=0
 autocmd Filetype html,css EmmetInstall
+
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 let g:airline#extensions#tabline#enabled=1
 
@@ -168,7 +178,6 @@ map <Leader>w :w<CR>
 map <Leader>q :q<CR>
 map <Leader>f <C-w>w
 map <Leader>v :vsplit<CR>
-map <Leader>s :split<CR>
 map <Leader>/ :nohl<CR>
 map <Leader>r :retab<CR>
 map <Leader>e :vsplit $MYVIMRC<CR>
@@ -177,19 +186,16 @@ map <Leader>sv :mksession<CR>
 map <Leader>so :source $MYVIMRC<CR>
 map <Leader>i <Leader>so:PlugInstall<CR>
 map <Leader>u <Leader>so:PlugUpdate<CR>
-map <Leader>cd :cd %:p:h<CR>:pwd<CR>
-map <Leader>n :bn<CR>
-map <Leader>p :bp<CR>
+map ]b :bn<CR>
+map [b :bp<CR>
 map <Leader>c :bd<CR>
-map <f9> :!javac %<CR>
-map <f10> :!gcc %<CR>
-map <f11> :!python %<CR>
-map <f12> :!clisp %<CR>
+inoremap <F10> <esc>:NerdTreeToggle<CR>
+nnoremap <F10> :NerdTreeToggle<CR>
+inoremap <F11> <esc>:TagbarToggle<CR>
+nnoremap <F11> :TagbarToggle<CR>
+inoremap <F12> <esc>:UndotreeToggle<CR>
+nnoremap <F12> :UndotreeToggle<CR>
 map <Leader>K :call investigate#Investigate()<CR>
-map <Leader>tn :NERDTreeToggle<CR>
-map <Leader>tt :TagbarToggle<CR>
-map <Leader>tw :TW<CR>
-map <Leader>tr :UndotreeToggle<CR>
-map <Leader><Leader> :FZF -m<CR>
+map <Leader><Leader> :Files<CR>
 
 " }}}
