@@ -29,3 +29,4 @@ Thumbs.db
 .project
 .DS_store
 *.dSYM
+*.ropeproject
