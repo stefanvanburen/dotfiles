@@ -109,7 +109,9 @@ let mapleader = "\<Space>"
 " }}}
 " {{{ Plugins
 
-let g:syntastic_python_checkers = ['pylint']
+let g:lengthmatters_on_by_default = 0
+
+let g:pymode_folding = 0
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux.colors"
