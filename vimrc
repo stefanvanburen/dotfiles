@@ -14,7 +14,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
@@ -40,6 +39,7 @@ Plug 'junegunn/vim-github-dashboard'
 Plug 'whatyouhide/vim-lengthmatters'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'reedes/vim-wordy'
 
 call plug#end()
 filetype plugin indent on
