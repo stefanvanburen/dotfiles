@@ -148,7 +148,7 @@ hi Visual           ctermbg=1 ctermfg=4
 " Normal Mode:
 nmap ; :
 nmap p p'[v']=
-nmap Y :normal y$
+nmap Y :normal y$<CR>
 nnoremap 0 ^
 nnoremap ^ 0
 nmap <C-h> <C-w>h
@@ -178,7 +178,7 @@ map <Leader>f <C-w>w
 map <Leader>v :vsplit<CR>
 map <Leader>/ :nohl<CR>
 map <Leader>r :retab<CR>
-map <Leader>e :vsplit $MYVIMRC<CR>
+map <Leader>e :e $MYVIMRC<CR>
 map <Leader>ss :setlocal spell!<CR>
 map <Leader>sv :mksession<CR>
 map <Leader>so :source $MYVIMRC<CR>
@@ -186,9 +186,9 @@ map <Leader>i <Leader>so:PlugInstall<CR>
 map <Leader>u <Leader>so:PlugUpdate<CR>
 map ]b :bn<CR>
 map [b :bp<CR>
-map <Leader>c :bd<CR>
-inoremap <F10> <esc>:NerdTreeToggle<CR>
-nnoremap <F10> :NerdTreeToggle<CR>
+map <Leader>d :bd<CR>
+inoremap <F10> <esc>:NERDTreeToggle<CR>
+nnoremap <F10> :NERDTreeToggle<CR>
 inoremap <F11> <esc>:TagbarToggle<CR>
 nnoremap <F11> :TagbarToggle<CR>
 inoremap <F12> <esc>:UndotreeToggle<CR>
