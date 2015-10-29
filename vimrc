@@ -40,6 +40,7 @@ Plug 'whatyouhide/vim-lengthmatters'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'reedes/vim-wordy'
+Plug 'ryanss/vim-hackernews'
 
 call plug#end()
 filetype plugin indent on

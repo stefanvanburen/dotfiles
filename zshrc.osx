@@ -1,6 +1,6 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="dieter"
+ZSH_THEME="zetetic"
 DISABLE_UPDATE_PROMPT=true
 plugins=(brew extract git git-extras vi-mode)
 source $ZSH/oh-my-zsh.sh
