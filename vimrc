@@ -172,7 +172,6 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " Insert Mode:
 inoremap jk <ESC>
 inoremap kj <ESC>
-inoremap <ESC> <NOP>
 
 " All Modes:
 map <Leader>w :w<CR>
@@ -185,8 +184,8 @@ map <Leader>e :e $MYVIMRC<CR>
 map <Leader>ss :setlocal spell!<CR>
 map <Leader>sv :mksession<CR>
 map <Leader>so :source $MYVIMRC<CR>
-map <Leader>i <Leader>so:PlugInstall<CR>
-map <Leader>u <Leader>so:PlugUpdate<CR>
+map <Leader>i :PlugInstall<CR>
+map <Leader>u :PlugUpdate<CR>
 map ]b :bn<CR>
 map [b :bp<CR>
 map <Leader>d :bd<CR>
