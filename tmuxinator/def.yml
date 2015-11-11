@@ -1,6 +1,6 @@
-# ~/.tmuxinator/osx.yml
+# ~/.tmuxinator/def.yml
 
-name: default
+name: def
 root: ~/
 
 windows:
