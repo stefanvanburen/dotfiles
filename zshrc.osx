@@ -8,4 +8,5 @@ source $ZSH/oh-my-zsh.sh
 # More path stuff
 export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:/usr/local/sbin:$HOME/src/bin
 
-alias git=hub
+eval "$(hub alias -s)"
+alias vim=nvim
