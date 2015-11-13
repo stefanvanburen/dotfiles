@@ -13,3 +13,5 @@ alias upg="yaourt -Syua"
 alias upd="yaourt -Syy"
 
 export PATH=$PATH:$HOME/src/bin:$HOME/.gem/ruby/2.2.0/bin/
+
+alias vim=nvim
