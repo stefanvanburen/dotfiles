@@ -8,7 +8,6 @@
     po = push -u origin
     pu = pull -u origin
     st = status -sb
-    merge = merge --no-ff
 [core]
     excludesfile = ~/.gitignore
     editor = vim
