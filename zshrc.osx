@@ -6,7 +6,6 @@ plugins=(brew extract git git-extras vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # More path stuff
-export PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin:/usr/local/sbin:$HOME/src/bin
+export PATH=$PATH:/usr/local/sbin:$HOME/src/bin
 
 eval "$(hub alias -s)"
-alias vim=nvim
