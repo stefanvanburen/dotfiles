@@ -29,7 +29,7 @@ Plug 'majutsushi/tagbar'
 Plug 'keith/investigate.vim'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'jceb/vim-orgmode'
-Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
@@ -41,6 +41,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'reedes/vim-wordy'
 Plug 'ryanss/vim-hackernews'
+Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
 call plug#end()
 filetype plugin indent on
