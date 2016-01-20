@@ -9,3 +9,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/sbin:$HOME/src/bin
 
 eval "$(hub alias -s)"
+
+eval "$(thefuck --alias)"
+
+export NVM_DIR=~/.nvm
+. $(brew --prefix nvm)/nvm.sh
