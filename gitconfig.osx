@@ -9,9 +9,12 @@
     pu = pull -u origin
     st = status -sb
     merge = merge --no-ff
+    unstage = reset -q HEAD --
+    amend = commit --amend
+    graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 [core]
     excludesfile = ~/.gitignore
-    editor = vim
+    editor = nvim
 [github]
     user = svanburen
 [color]
@@ -31,9 +34,3 @@
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f
     required = true
-[difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path =
-[mergetool "sourcetree"]
-    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
