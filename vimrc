@@ -167,13 +167,11 @@ nmap <C-l> <C-w>l
 nmap <tab> %
 nmap < <<
 nmap > >>
+nnoremap g= gg=Gg``
 
 " Command Mode:
 cmap %s/ %s/\v
 cmap w!! w !sudo tee % >/dev/null
-
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
 
 " Insert Mode:
 inoremap jk <ESC>
