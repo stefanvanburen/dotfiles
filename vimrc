@@ -44,6 +44,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'reedes/vim-wordy'
 Plug 'ryanss/vim-hackernews'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 filetype plugin indent on
