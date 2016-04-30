@@ -111,6 +111,8 @@ set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 
 let mapleader = "\<Space>"
 
+autocmd FileType help wincmd L
+
 " }}}
 " {{{ Plugins
 
