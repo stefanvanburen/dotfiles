@@ -193,6 +193,10 @@ map <Leader>u :PlugUpdate<CR>
 map ]b :bn<CR>
 map [b :bp<CR>
 map <Leader>d :bd<CR>
+
+" Plugin specific
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 inoremap <F10> <esc>:NERDTreeToggle<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
 inoremap <F11> <esc>:TagbarToggle<CR>
@@ -203,3 +207,8 @@ map <Leader>K :call investigate#Investigate()<CR>
 map <Leader><Leader> :Files<CR>
 
 " }}}
+
+
+" NOTES
+" Clear whitespace at end of lines:
+" :%s/\s\+$
