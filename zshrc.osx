@@ -12,5 +12,8 @@ eval "$(hub alias -s)"
 
 eval "$(thefuck --alias)"
 
+alias news=newsbeuter
+alias vim=nvim
+
 export NVM_DIR=~/.nvm
 . $(brew --prefix nvm)/nvm.sh
