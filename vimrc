@@ -13,20 +13,20 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tommcdo/vim-exchange'
-Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/emmet-vim'
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
+Plug 'kchmck/vim-coffee-script'
 Plug 'rust-lang/rust.vim'
 Plug 'majutsushi/tagbar'
 Plug 'keith/investigate.vim'
@@ -35,13 +35,14 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'junegunn/gv.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'whatyouhide/vim-lengthmatters'
+Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'reedes/vim-wordy'
@@ -67,6 +68,7 @@ set autoread                                " Read changes in files during editi
 set autowriteall
 set background=dark
 set backspace=eol,indent,start              " Make backspacing work regularly.
+set cc=80
 set cino=N-s
 set expandtab
 set foldenable
@@ -85,6 +87,7 @@ set mat=2                                   " Number of tenths of a second to bl
 set modelines=1
 set number
 set nobackup
+set nojoinspaces                            " Don't insert two spaces after punctuation with a join command
 set nostartofline
 set noswapfile
 set nowrap
