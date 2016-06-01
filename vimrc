@@ -14,6 +14,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
@@ -26,9 +27,11 @@ Plug 'mattn/emmet-vim'
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
+Plug 'rust-lang/rust.vim'
 Plug 'majutsushi/tagbar'
 Plug 'keith/investigate.vim'
 Plug 'farseer90718/vim-taskwarrior'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -109,16 +112,16 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 
-let mapleader = "\<Space>"
+let mapleader = "\<Space>" " Leader is space key
 
-autocmd FileType help wincmd L
+autocmd FileType help wincmd L " Help windows open as vertical splits, not horizontal ones
 
 " }}}
 " {{{ Plugins
 
 let g:lengthmatters_on_by_default = 0
 
-let g:pymode_folding = 0
+let g:pymode_folding = 0 " Don't fold my shit, pymode
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tmuxline#snapshot_file = "~/.tmux.colors"
@@ -141,6 +144,10 @@ nmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
 
 " }}}
 " {{{ Highlights
