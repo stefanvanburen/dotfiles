@@ -1,2 +1,3 @@
 verbose: true
 backtrace: true
+gem: --no-document

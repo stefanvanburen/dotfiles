@@ -31,7 +31,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'majutsushi/tagbar'
 Plug 'keith/investigate.vim'
 Plug 'farseer90718/vim-taskwarrior'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
 Plug 'junegunn/fzf.vim'

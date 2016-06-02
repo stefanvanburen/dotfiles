@@ -8,6 +8,7 @@
     po = push -u origin
     pu = pull -u origin
     st = status -sb
+    ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
     merge = merge --no-ff
     unstage = reset -q HEAD --
     amend = commit --amend
@@ -34,3 +35,5 @@
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f
     required = true
+[init]
+    templatedir = ~/.git_template
