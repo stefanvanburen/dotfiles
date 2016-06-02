@@ -48,6 +48,7 @@ Plug 'reedes/vim-wordy'
 Plug 'ryanss/vim-hackernews'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'mhinz/vim-startify'
+Plug 'chriskempson/vim-tomorrow-theme'
 
 call plug#end()
 filetype plugin indent on
@@ -216,8 +217,9 @@ map <Leader>K :call investigate#Investigate()<CR>
 map <Leader><Leader> :Files<CR>
 
 " }}}
-
-
-" NOTES
+" {{{ Notes
 " Clear whitespace at end of lines:
 " :%s/\s\+$
+" }}}
+
+" vim:foldmethod=marker
