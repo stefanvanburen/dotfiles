@@ -20,10 +20,10 @@ alias so="source $HOME/.zshrc"
 # }}}
 # {{{ Environment
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # }}}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# vim:foldmethod=marker
