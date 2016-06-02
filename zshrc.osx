@@ -17,3 +17,7 @@ alias vim=nvim
 
 export NVM_DIR=~/.nvm
 . $(brew --prefix nvm)/nvm.sh
+
+precmd() {
+    eval 'if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history | tail -n 1)" >>! ~/Dropbox/assorted/logs/zsh-history-$(date "+%Y-%m-%d").log; fi'
+}
