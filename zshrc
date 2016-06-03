@@ -13,8 +13,8 @@ alias ll="ls -alGh"
 # }}}
 # {{{ Configuration
 
-alias zshrc="vim $HOME/dotfiles/zshrc"
-alias vimrc="vim $HOME/dotfiles/vimrc"
+alias zshrc="vim $HOME/.dotfiles/zshrc"
+alias vimrc="vim $HOME/.dotfiles/vimrc"
 alias so="source $HOME/.zshrc"
 
 # }}}
