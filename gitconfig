@@ -8,11 +8,6 @@
     ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
     unstage = reset -q HEAD --
     amend = commit --amend
-[core]
-    excludesfile = ~/.gitignore
-    editor = nvim
-[github]
-    user = svanburen
 [color]
     ui = auto
     diff = auto
@@ -20,14 +15,23 @@
     branch = auto
     interactive = auto
     grep = auto
+[commit]
+    gpgsign = true
+[core]
+    excludesfile = ~/.gitignore
+    editor = nvim
+[credential]
+    helper = store
+[diff]
+    tool = icdiff
+[github]
+    user = svanburen
+[include]
+    path = ~/.gitconfig.local
+[init]
+    templatedir = ~/.git_template
 [push]
     default = simple
 [merge]
     tool = nvim -d
     ff = false
-[init]
-    templatedir = ~/.git_template
-[include]
-    path = ~/.gitconfig.local
-[diff]
-    tool = icdiff
