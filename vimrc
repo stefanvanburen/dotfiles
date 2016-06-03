@@ -32,7 +32,7 @@ Plug 'majutsushi/tagbar'
 Plug 'keith/investigate.vim'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'jceb/vim-orgmode'
-Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/vim-github-dashboard'
@@ -40,7 +40,7 @@ Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'whatyouhide/vim-lengthmatters'
+"Plug 'whatyouhide/vim-lengthmatters'
 Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
@@ -92,7 +92,7 @@ set nostartofline
 set noswapfile
 set nowrap
 set ruler
-set scrolloff=1
+set scrolloff=3
 set showcmd
 set showmatch
 set showmode
@@ -134,15 +134,6 @@ let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
-let g:tmuxline_preset = {
-            \'a'    : '#S',
-            \'c'    : ['#(whoami)', '#(uptime  | cut -d " " -f 1,2,3)'],
-            \'win'  : ['#I', '#W'],
-            \'cwin' : ['#I', '#W', '#F'],
-            \'x'    : '#(date)',
-            \'y'    : ['%R', '%a', '%Y'],
-            \'z'    : '#H'}
-
 let g:indent_guides_guide_size = 1
 
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -154,14 +145,7 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map n <Plug>(easymotion-next)
-map N <Plug>(easymotion-prev)
 
 " }}}
 " {{{ Highlights
@@ -202,6 +186,10 @@ inoremap kj <ESC>
 map <Leader>w :w<CR>
 map <Leader>q :q<CR>
 map <Leader>f <C-w>w
+map <Leader>J <C-w>j
+map <Leader>K <C-w>k
+map <Leader>L <C-w>l
+map <Leader>H <C-w>h
 map <Leader>v :vsplit<CR>
 map <Leader>/ :nohl<CR>
 map <Leader>r :retab<CR>
@@ -213,20 +201,33 @@ map <Leader>i :PlugInstall<CR>
 map <Leader>u :PlugUpdate<CR>
 map ]b :bn<CR>
 map [b :bp<CR>
+map - :bp<CR>
+map + :bn<CR>
 map <Leader>d :bd<CR>
 
-" Plugin specific
+" Plugin Specific:
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-inoremap <F10> <esc>:NERDTreeToggle<CR>
-nnoremap <F10> :NERDTreeToggle<CR>
-inoremap <F11> <esc>:TagbarToggle<CR>
-nnoremap <F11> :TagbarToggle<CR>
-inoremap <F12> <esc>:UndotreeToggle<CR>
-nnoremap <F12> :UndotreeToggle<CR>
+nmap s <Plug>(easymotion-s)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
 
-map <Leader>K :call investigate#Investigate()<CR>
+inoremap <F1> <esc>:NERDTreeToggle<CR>
+nnoremap <F1> :NERDTreeToggle<CR>
+
+inoremap <F2> <esc>:TagbarToggle<CR>
+nnoremap <F2> :TagbarToggle<CR>
+
+inoremap <F3> <esc>:UndotreeToggle<CR>
+nnoremap <F3> :UndotreeToggle<CR>
+
+map <Leader>? :call investigate#Investigate()<CR>
+
 map <Leader><Leader> :Files<CR>
 
 nmap <leader>1 <Plug>AirlineSelectTab1
