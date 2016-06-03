@@ -1,18 +1,13 @@
-[user]
-    name = Stefan VanBuren
-    email = vanburenstefan@gmail.com
-[credential]
-    helper = osxkeychain
 [alias]
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     po = push -u origin
     pu = pull -u origin
     st = status -sb
+    co = checkout
+    branches = branch --list
     ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
-    merge = merge --no-ff
     unstage = reset -q HEAD --
     amend = commit --amend
-    graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 [core]
     excludesfile = ~/.gitignore
     editor = nvim
@@ -29,11 +24,10 @@
     default = simple
 [merge]
     tool = nvim -d
-[apply]
-    whitespace = fix
-[filter "lfs"]
-    clean = git-lfs clean %f
-    smudge = git-lfs smudge %f
-    required = true
+    ff = false
 [init]
     templatedir = ~/.git_template
+[include]
+    path = ~/.gitconfig.local
+[diff]
+    tool = icdiff
