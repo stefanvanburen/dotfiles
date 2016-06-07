@@ -1,6 +1,6 @@
 # .zshrc
 
-source ~/.zshrc.local
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # {{{ Various Aliases
 
