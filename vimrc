@@ -68,7 +68,7 @@ set autoread                                " Read changes in files during editi
 set autowriteall
 set background=dark
 set backspace=eol,indent,start              " Make backspacing work regularly.
-set cc=80
+set cc=100
 set cino=N-s
 set expandtab
 set foldenable
@@ -138,7 +138,7 @@ let g:indent_guides_guide_size = 1
 
 let g:ycm_collect_identifiers_from_tags_files = 1
 
-let g:user_emmet_install_global=0
+let g:user_emmet_install_global = 0
 autocmd Filetype html,css EmmetInstall
 
 autocmd! User GoyoEnter Limelight
@@ -146,6 +146,8 @@ autocmd! User GoyoLeave Limelight!
 
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys = 'asdfghjkl;qwertyuiopzxcvbnm'
+let g:EasyMotion_enter_jump_first = 1
 
 " }}}
 " {{{ Highlights
@@ -209,7 +211,8 @@ map <Leader>d :bd<CR>
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-nmap s <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map / <Plug>(easymotion-sn)
