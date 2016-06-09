@@ -40,7 +40,7 @@ Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/seoul256.vim'
-"Plug 'whatyouhide/vim-lengthmatters'
+Plug 'whatyouhide/vim-lengthmatters'
 Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
@@ -49,6 +49,7 @@ Plug 'ryanss/vim-hackernews'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'mhinz/vim-startify'
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'fatih/vim-go'
 
 call plug#end()
 filetype plugin indent on
