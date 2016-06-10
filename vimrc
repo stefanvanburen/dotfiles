@@ -6,9 +6,9 @@ set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 
+Plug 'altercation/vim-colors-solarized'
 Plug 'valloric/YouCompleteMe'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -41,7 +41,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'whatyouhide/vim-lengthmatters'
-Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'reedes/vim-wordy'
@@ -50,6 +49,8 @@ Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'mhinz/vim-startify'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'fatih/vim-go'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 
 call plug#end()
 filetype plugin indent on
@@ -176,6 +177,10 @@ nmap <tab> %
 nmap < <<
 nmap > >>
 nnoremap g= gg=Gg``
+nnoremap <Leader>l :set list!<CR>
+nnoremap <Leader>V V`]
+nmap <Leader>W :%s/\s+$//<CR>:let @/=''<CR>
+nmap <Leader>a :Ag<CR>
 
 " Command Mode:
 cmap %s/ %s/\v
@@ -184,6 +189,9 @@ cmap w!! w !sudo tee % >/dev/null
 " Insert Mode:
 inoremap jk <ESC>
 inoremap kj <ESC>
+
+" Visual Mode:
+vnoremap / /\v
 
 " All Modes:
 map <Leader>w :w<CR>
@@ -246,10 +254,26 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
+nmap <Leader><tab> <plug>(fzf-maps-n)
+xmap <Leader><tab> <plug>(fzf-maps-x)
+omap <Leader><tab> <plug>(fzf-maps-o)
+
+" }}}
+" {{{ Filetype
+
+au FileType go set noexpandtab tabstop=4 shiftwidth=4
+au FileType c set cindent
+au FileType java set noexpandtab tabstop=4 shiftwidth=4
+au BufRead,BufNewFile {pending,completed,undo}.data set filetype=taskdata
+au BufRead,BufNewFile .taskrc                       set filetype=taskrc
+au BufRead,BufNewFile *.task                        set filetype=taskedit
+
 " }}}
 " {{{ Notes
+
 " Clear whitespace at end of lines:
 " :%s/\s\+$
+
 " }}}
 
 " vim:foldmethod=marker
