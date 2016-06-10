@@ -9,10 +9,12 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'valloric/YouCompleteMe'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-tbone'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -40,6 +42,7 @@ Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/seoul256.vim'
+Plug 'jungunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
@@ -179,22 +182,48 @@ nmap > >>
 nnoremap g= gg=Gg``
 nnoremap <Leader>l :set list!<CR>
 nnoremap <Leader>V V`]
+nnoremap <tab> <C-w>w
 nmap <Leader>W :%s/\s+$//<CR>:let @/=''<CR>
 nmap <Leader>a :Ag<CR>
+
+" Buffers:
+nnoremap ]b :bn<CR>
+nnoremap [b :bp<CR>
+nnoremap - :bp<CR>
+nnoremap + :bn<CR>
+nnoremap <Leader>d :bd<CR>
+
+" Tabs:
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
+
+" Quickfix:
+nnoremap ]q :cnext<CR>zz
+nnoremap [q :cprev<CR>zz
+nnoremap ]l :lnext<CR>zz
+nnoremap [l :lprev<CR>zz
 
 " Command Mode:
 cmap %s/ %s/\v
 cmap w!! w !sudo tee % >/dev/null
+cnoremap jk <ESC>
+cnoremap kj <ESC>
 
 " Insert Mode:
 inoremap jk <ESC>
 inoremap kj <ESC>
 
+" Visual And Select Mode:
+xnoremap jk <ESC>
+xnoremap kj <ESC>
+xnoremap < <gv
+xnoremap > >gv
+
 " Visual Mode:
 vnoremap / /\v
 
 " All Modes:
-map <Leader>w :w<CR>
+map <Leader>w :up<CR>
 map <Leader>q :q<CR>
 map <Leader>f <C-w>w
 map <Leader>J <C-w>j
@@ -210,11 +239,7 @@ map <Leader>sv :mksession<CR>
 map <Leader>so :source $MYVIMRC<CR>
 map <Leader>i :PlugInstall<CR>
 map <Leader>u :PlugUpdate<CR>
-map ]b :bn<CR>
-map [b :bp<CR>
-map - :bp<CR>
-map + :bn<CR>
-map <Leader>d :bd<CR>
+map <Leader>h :GitGutterLineHighlightsToggle<CR>
 
 " Plugin Specific:
 vmap v <Plug>(expand_region_expand)
@@ -235,12 +260,15 @@ nnoremap <F1> :NERDTreeToggle<CR>
 inoremap <F2> <esc>:TagbarToggle<CR>
 nnoremap <F2> :TagbarToggle<CR>
 
-inoremap <F3> <esc>:UndotreeToggle<CR>
-nnoremap <F3> :UndotreeToggle<CR>
+let g:undotree_WindowLayout = 2
+nnoremap U :UndotreeToggle<CR>
 
 map <Leader>? :call investigate#Investigate()<CR>
 
 map <Leader><Leader> :Files<CR>
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -253,6 +281,9 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
+
+nmap <leader>g :Gstatus<cr>gg<c-n>
+nmap <leader>d :Gdiff<cr>
 
 nmap <Leader><tab> <plug>(fzf-maps-n)
 xmap <Leader><tab> <plug>(fzf-maps-x)
@@ -267,12 +298,6 @@ au FileType java set noexpandtab tabstop=4 shiftwidth=4
 au BufRead,BufNewFile {pending,completed,undo}.data set filetype=taskdata
 au BufRead,BufNewFile .taskrc                       set filetype=taskrc
 au BufRead,BufNewFile *.task                        set filetype=taskedit
-
-" }}}
-" {{{ Notes
-
-" Clear whitespace at end of lines:
-" :%s/\s\+$
 
 " }}}
 
