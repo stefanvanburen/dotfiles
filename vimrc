@@ -214,8 +214,6 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 
 " Visual And Select Mode:
-xnoremap jk <ESC>
-xnoremap kj <ESC>
 xnoremap < <gv
 xnoremap > >gv
 
