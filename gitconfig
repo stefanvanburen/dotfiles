@@ -17,6 +17,7 @@
     grep = auto
 [commit]
     gpgsign = true
+    verbose = true
 [core]
     excludesfile = ~/.gitignore
     editor = nvim
@@ -34,4 +35,3 @@
     default = simple
 [merge]
     tool = nvim -d
-    ff = false
