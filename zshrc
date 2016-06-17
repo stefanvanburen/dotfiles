@@ -1,6 +1,10 @@
 # .zshrc
 
+export ZSH=$HOME/.oh-my-zsh
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+source $ZSH/oh-my-zsh.sh
 
 # {{{ Various Aliases
 
@@ -16,6 +20,8 @@ alias ll="ls -alGh"
 alias zshrc="vim $HOME/.dotfiles/zshrc"
 alias vimrc="vim $HOME/.dotfiles/vimrc"
 alias so="source $HOME/.zshrc"
+alias vim=nvim
+alias vi=nvim
 
 # }}}
 # {{{ Environment
