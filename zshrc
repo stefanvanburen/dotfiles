@@ -17,16 +17,12 @@ alias ll="ls -alGh"
 # }}}
 # {{{ Configuration
 
+alias vim=nvim
+alias vi=nvim
+alias vimdiff=nvim -d
 alias zshrc="vim $HOME/.dotfiles/zshrc"
 alias vimrc="vim $HOME/.dotfiles/vimrc"
 alias so="source $HOME/.zshrc"
-alias vim=nvim
-alias vi=nvim
-
-# }}}
-# {{{ Environment
-
-export EDITOR='nvim'
 
 # }}}
 
