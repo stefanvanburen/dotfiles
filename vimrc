@@ -6,6 +6,9 @@ set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 
+"Plug 'scrooloose/syntastic'
+"Plug 'whatyouhide/vim-lengthmatters'
+"Plug 'xolox/vim-easytags'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'andrewradev/splitjoin.vim'
@@ -31,14 +34,17 @@ Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'mhinz/vim-startify'
+Plug 'myusuf3/numbers.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'reedes/vim-wordy'
 Plug 'rust-lang/rust.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'ryanss/vim-hackernews'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
-Plug 'scrooloose/syntastic'
+Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tommcdo/vim-exchange'
@@ -51,8 +57,6 @@ Plug 'tpope/vim-tbone'
 Plug 'valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'whatyouhide/vim-lengthmatters'
-Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
@@ -102,6 +106,7 @@ set number
 set ruler
 set scrolljump=8
 set scrolloff=3
+set shiftwidth=4
 set showcmd
 set showmatch
 set showmode
@@ -111,6 +116,7 @@ set smartindent
 set splitbelow                              " On horizontal split, open the split below.
 set splitright                              " On veritcal split, open the split to the right.
 set t_Co=256
+set tabstop=4
 set title
 set ttimeout
 set ttimeoutlen=100
@@ -127,7 +133,7 @@ set wildmode=list:longest,full
 " {{{ Plugin Configuration
 
 let g:airline_theme                              = 'solarized'
-let g:airline_powerline_fonts                    = 1
+let g:airline_powerline_fonts                    = 0
 let g:airline#extensions#tabline#enabled         = 1
 let g:airline#extensions#tabline#show_tab_nr     = 1
 let g:airline#extensions#tabline#show_tab_type   = 1
@@ -137,6 +143,8 @@ let g:EasyMotion_do_mapping       = 0
 let g:EasyMotion_smartcase        = 1
 let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
 let g:EasyMotion_enter_jump_first = 1
+
+let g:easytags_async = 1
 
 let g:indent_guides_guide_size = 1
 
@@ -183,10 +191,10 @@ nmap <leader>w :up<cr>
 nmap <tab> %
 nmap Y :normal y$<cr>
 nmap p p'[v']=
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
+nmap <c-h> <c-w>h
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
 nnoremap <leader>f <c-w>w
 nnoremap <leader>V V`]
 nnoremap <leader>l :set list!<cr>
@@ -227,6 +235,7 @@ xnoremap > >gv
 
 " Visual Mode:
 vnoremap / /\v
+vmap <tab> %
 
 " Plugin Specific:
 nmap <leader>1 <plug>AirlineSelectTab1
@@ -289,6 +298,7 @@ nmap <leader>z :GV<cr>
 
 autocmd FileType go   set noexpandtab tabstop=4 shiftwidth=4
 autocmd FileType java set noexpandtab tabstop=4 shiftwidth=4
+autocmd FileType sh   set shiftwidth=4
 autocmd FileType c    set cindent
 
 autocmd FileType help wincmd L
