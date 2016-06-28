@@ -8,6 +8,7 @@
     ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
     unstage = reset -q HEAD --
     amend = commit --amend
+    stashes = stash list
 [color]
     ui = auto
     diff = auto
