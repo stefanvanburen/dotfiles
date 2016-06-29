@@ -32,4 +32,5 @@
 [push]
     default = simple
 [merge]
-    tool = nvim -d
+    tool = vimdiff
+    ff = false
