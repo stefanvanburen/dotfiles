@@ -6,7 +6,7 @@ set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 
-"Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 "Plug 'whatyouhide/vim-lengthmatters'
 "Plug 'xolox/vim-easytags'
 Plug 'airblade/vim-gitgutter'
