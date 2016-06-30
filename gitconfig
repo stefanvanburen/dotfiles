@@ -31,6 +31,8 @@
     path = ~/.gitconfig.local
 [push]
     default = simple
+[pull]
+    ff = true
 [merge]
     tool = vimdiff
     ff = false
