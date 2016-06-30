@@ -84,7 +84,7 @@ set colorcolumn=100
 set cinoptions=N-s
 set expandtab
 set foldenable
-set formatoptions=c,q,r,t,j
+set formatoptions=c,q,r,t,j,o               "
 set hidden
 set history=10000
 set hlsearch
@@ -117,6 +117,7 @@ set splitbelow                              " On horizontal split, open the spli
 set splitright                              " On veritcal split, open the split to the right.
 set t_Co=256
 set tabstop=4
+set tags+=tags;$HOME
 set title
 set ttimeout
 set ttimeoutlen=100
@@ -149,12 +150,21 @@ let g:easytags_async = 1
 let g:indent_guides_guide_size = 1
 
 let g:go_fmt_autosave = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_list_type = 'quickfix'
 
 let g:lengthmatters_on_by_default = 0
 
 let g:pymode_folding = 0
 
 let g:syntastic_vim_checkers = ['vint']
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 let g:undotree_WindowLayout = 2
 
@@ -181,16 +191,20 @@ nmap <leader>/ :nohl<cr>
 nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
 nmap <leader>a :Ag<cr>
 nmap <leader>e :e $MYVIMRC<cr>
+nmap <leader>m :mksession<cr>
+nmap <leader>o :source $MYVIMRC<cr>
+nmap <leader>p :setlocal spell!<cr>
 nmap <leader>q :q<cr>
 nmap <leader>r :retab<cr>
-nmap <leader>so :source $MYVIMRC<cr>
-nmap <leader>ss :setlocal spell!<cr>
-nmap <leader>sv :mksession<cr>
+nmap <leader>s :%s/
 nmap <leader>v :vsplit<cr>
+nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>t :TagbarToggle<cr>
 nmap <leader>w :up<cr>
 nmap <tab> %
 nmap Y :normal y$<cr>
-nmap p p'[v']=
+nmap p gp
+nmap P gP
 nmap <c-h> <c-w>h
 nmap <c-j> <c-w>j
 nmap <c-k> <c-w>k
@@ -236,6 +250,9 @@ xnoremap > >gv
 " Visual Mode:
 vnoremap / /\v
 vmap <tab> %
+vmap <leader>s :s/
+vmap s :!sort<cr>
+vmap u :!sort -u<cr>
 
 " Plugin Specific:
 nmap <leader>1 <plug>AirlineSelectTab1
@@ -263,12 +280,6 @@ map / <plug>(easymotion-sn)
 omap / <plug>(easymotion-tn)
 map n <plug>(easymotion-next)
 map N <plug>(easymotion-prev)
-
-inoremap <F1> <esc>:NERDTreeToggle<cr>
-nnoremap <F1> :NERDTreeToggle<cr>
-
-inoremap <F2> <esc>:TagbarToggle<cr>
-nnoremap <F2> :TagbarToggle<cr>
 
 nnoremap U :UndotreeToggle<cr>
 
