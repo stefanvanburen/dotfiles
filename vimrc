@@ -145,7 +145,7 @@ let g:EasyMotion_smartcase        = 1
 let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
 let g:EasyMotion_enter_jump_first = 1
 
-let g:easytags_async = 1
+let g:easytags_async = 0
 
 let g:indent_guides_guide_size = 1
 
@@ -165,6 +165,19 @@ let g:pymode_folding = 0
 let g:syntastic_vim_checkers = ['vint']
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_shell = "/bin/bash"
+
+let g:syntastic_loc_list_height=5
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0    " Don't auto-open linter
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_signs=1
 
 let g:undotree_WindowLayout = 2
 
@@ -205,10 +218,11 @@ nmap <tab> %
 nmap Y :normal y$<cr>
 nmap p gp
 nmap P gP
-nmap <c-h> <c-w>h
-nmap <c-j> <c-w>j
-nmap <c-k> <c-w>k
-nmap <c-l> <c-w>l
+nnoremap D d$
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 nnoremap <leader>f <c-w>w
 nnoremap <leader>V V`]
 nnoremap <leader>l :set list!<cr>
