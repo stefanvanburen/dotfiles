@@ -2,8 +2,6 @@
 
 " {{{ Plug
 
-set nocompatible
-filetype off
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/syntastic'
@@ -17,7 +15,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'fatih/vim-go'
 Plug 'jceb/vim-orgmode'
-Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --bin' }
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all --no-update-rc' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/gv.vim'
@@ -37,6 +35,7 @@ Plug 'mhinz/vim-startify'
 Plug 'myusuf3/numbers.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'nsf/gocode'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'reedes/vim-wordy'
 Plug 'rust-lang/rust.vim'
@@ -177,7 +176,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0    " Don't auto-open linter
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_signs=1
+let g:syntastic_enable_signs = 1
 
 let g:undotree_WindowLayout = 2
 
@@ -196,57 +195,6 @@ hi Visual          ctermbg=1 ctermfg=4
 " }}}
 " {{{ Mappings
 
-" Normal Mode:
-nmap ; :
-nmap < <<
-nmap > >>
-nmap <leader>/ :nohl<cr>
-nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
-nmap <leader>a :Ag<cr>
-nmap <leader>e :e $MYVIMRC<cr>
-nmap <leader>m :mksession<cr>
-nmap <leader>o :source $MYVIMRC<cr>
-nmap <leader>p :setlocal spell!<cr>
-nmap <leader>q :q<cr>
-nmap <leader>r :retab<cr>
-nmap <leader>s :%s/
-nmap <leader>v :vsplit<cr>
-nnoremap <leader>n :NERDTreeToggle<cr>
-nnoremap <leader>t :TagbarToggle<cr>
-nmap <leader>w :up<cr>
-nmap <tab> %
-nmap Y :normal y$<cr>
-nmap p gp
-nmap P gP
-nnoremap D d$
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <leader>f <c-w>w
-nnoremap <leader>V V`]
-nnoremap <leader>l :set list!<cr>
-nnoremap 0 ^
-nnoremap ^ 0
-nnoremap g= gg=Gg``
-
-" Buffers:
-nnoremap ]b :bn<cr>
-nnoremap [b :bp<cr>
-nnoremap - :bp<cr>
-nnoremap + :bn<cr>
-nnoremap <leader>d :bd<cr>
-
-" Tabs:
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
-
-" Quickfix:
-nnoremap ]q :cnext<cr>zz
-nnoremap [q :cprev<cr>zz
-nnoremap ]l :lnext<cr>zz
-nnoremap [l :lprev<cr>zz
-
 " Command Mode:
 cmap %s/ %s/\v
 cmap w!! w !sudo tee % >/dev/null
@@ -256,19 +204,23 @@ cnoremap kj <esc>
 " Insert Mode:
 inoremap jk <esc>
 inoremap kj <esc>
+map / <plug>(easymotion-sn)
+map <leader><leader> :Files<cr>
+map <leader>? :call investigate#Investigate()<cr>
+map <leader>h :GitGutterLineHighlightsToggle<cr>
+map <leader>i :PlugInstall<cr>
+map <leader>j <plug>(easymotion-j)
+map <leader>k <plug>(easymotion-k)
+map <leader>u :PlugUpdate<cr>
+map N <plug>(easymotion-prev)
+map n <plug>(easymotion-next)
 
-" Visual And Select Mode:
-xnoremap < <gv
-xnoremap > >gv
-
-" Visual Mode:
-vnoremap / /\v
-vmap <tab> %
-vmap <leader>s :s/
-vmap s :!sort<cr>
-vmap u :!sort -u<cr>
-
-" Plugin Specific:
+" Normal Mode:
+nmap ; :
+nmap < <<
+nmap <leader>+ <plug>AirlineSelectNextTab
+nmap <leader>- <plug>AirlineSelectPrevTab
+nmap <leader>/ :nohl<cr>
 nmap <leader>1 <plug>AirlineSelectTab1
 nmap <leader>2 <plug>AirlineSelectTab2
 nmap <leader>3 <plug>AirlineSelectTab3
@@ -278,64 +230,103 @@ nmap <leader>6 <plug>AirlineSelectTab6
 nmap <leader>7 <plug>AirlineSelectTab7
 nmap <leader>8 <plug>AirlineSelectTab8
 nmap <leader>9 <plug>AirlineSelectTab9
-nmap <leader>- <plug>AirlineSelectPrevTab
-nmap <leader>+ <plug>AirlineSelectNextTab
-
-map <leader>h :GitGutterLineHighlightsToggle<cr>
-
-vmap v <plug>(expand_region_expand)
-vmap <C-v> <plug>(expand_region_shrink)
-
+nmap <leader><tab> <plug>(fzf-maps-n)
+nmap <leader>G :Goyo<cr>
+nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
+nmap <leader>a :Ag<cr>
+nmap <leader>d :Gdiff<cr>
+nmap <leader>e :e $MYVIMRC<cr>
+nmap <leader>g :Gstatus<cr>gg<c-n>
+nmap <leader>m :mksession<cr>
+nmap <leader>o :source $MYVIMRC<cr>
+nmap <leader>p :setlocal spell!<cr>
+nmap <leader>q :q<cr>
+nmap <leader>r :retab<cr>
+nmap <leader>s :%s/
+nmap <leader>v :vsplit<cr>
+nmap <leader>w :up<cr>
+nmap <leader>z :GV<cr>
+nmap <tab> %
+nmap > >>
+nmap P gP
+nmap Y :normal y$<cr>
+nmap ga <plug>(EasyAlign)
+nmap p gp
 nmap s <plug>(easymotion-s2)
 nmap t <plug>(easymotion-t2)
-map <leader>j <plug>(easymotion-j)
-map <leader>k <plug>(easymotion-k)
-map / <plug>(easymotion-sn)
-omap / <plug>(easymotion-tn)
-map n <plug>(easymotion-next)
-map N <plug>(easymotion-prev)
-
+nnoremap + :bn<cr>
+nnoremap - :bp<cr>
+nnoremap 0 ^
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <leader>V V]
+nnoremap <leader>d :bd<cr>
+nnoremap <leader>f <c-w>w
+nnoremap <leader>l :set list!<cr>
+nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>t :TagbarToggle<cr>
+nnoremap D d$
 nnoremap U :UndotreeToggle<cr>
+nnoremap [b :bp<cr>
+nnoremap [l :lprev<cr>zz
+nnoremap [q :cprev<cr>zz
+nnoremap [t :tabp<cr>
+nnoremap ]b :bn<cr>
+nnoremap ]l :lnext<cr>zz
+" Next in quickfix list
+nnoremap ]q :cnext<cr>zz
+nnoremap ]t :tabn<cr>
+nnoremap ^ 0
+nnoremap g= gg=Gg`
 
-map <leader>? :call investigate#Investigate()<cr>
-
-map <leader><leader> :Files<cr>
-
-xmap ga <plug>(EasyAlign)
-nmap ga <plug>(EasyAlign)
-
-nmap <leader>g :Gstatus<cr>gg<c-n>
-nmap <leader>d :Gdiff<cr>
-
-nmap <leader>G :Goyo<cr>
-
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
+" Operator Pending Mode:
+omap / <plug>(easymotion-tn)
 omap <leader><tab> <plug>(fzf-maps-o)
 
-map <leader>i :PlugInstall<cr>
-map <leader>u :PlugUpdate<cr>
+" Visual Mode:
+vmap <C-v> <plug>(expand_region_shrink)
+vmap <leader>s :s/
+vmap <tab> %
+vmap s :!sort<cr>
+vmap u :!sort -u<cr>
+vmap v <plug>(expand_region_expand)
+vnoremap / /\v
 
-nmap <leader>z :GV<cr>
+" Visual And Select Mode:
+xmap <leader><tab> <plug>(fzf-maps-x)
+xmap ga <plug>(EasyAlign)
+xnoremap < <gv
+xnoremap > >gv
 
 " }}}
 " {{{ Autocommands
 
-autocmd FileType go   set noexpandtab tabstop=4 shiftwidth=4
-autocmd FileType java set noexpandtab tabstop=4 shiftwidth=4
-autocmd FileType sh   set shiftwidth=4
-autocmd FileType c    set cindent
+augroup FT
+    autocmd FileType go   set noexpandtab tabstop=4 shiftwidth=4
+    autocmd FileType java set noexpandtab tabstop=4 shiftwidth=4
+    autocmd FileType sh   set shiftwidth=4
+    autocmd FileType c    set cindent
+    autocmd FileType help wincmd L
+    autocmd Filetype html,css EmmetInstall
+augroup end
 
-autocmd FileType help wincmd L
+augroup task
+    autocmd BufRead,BufNewFile {pending,completed,undo}.data set filetype=taskdata
+    autocmd BufRead,BufNewFile .taskrc                       set filetype=taskrc
+    autocmd BufRead,BufNewFile *.task                        set filetype=taskedit
+augroup END
 
-autocmd BufRead,BufNewFile {pending,completed,undo}.data set filetype=taskdata
-autocmd BufRead,BufNewFile .taskrc                       set filetype=taskrc
-autocmd BufRead,BufNewFile *.task                        set filetype=taskedit
+augroup Goyo
+    autocmd! User GoyoEnter Limelight
+    autocmd! User GoyoLeave Limelight!
+augroup END
 
-autocmd Filetype html,css EmmetInstall
-
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+" Resize splits when window is resized
+augroup window
+    autocmd VimResized * :wincmd =
+augroup END
 
 
 " }}}
