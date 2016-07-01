@@ -1,13 +1,13 @@
 [alias]
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-    po = push -u origin
-    pu = pull -u origin
+    p = push
     st = status -sb
     co = checkout
     branches = branch --list
     unstage = reset -q HEAD --
     amend = commit --amend
     stashes = stash list
+    ic = icdiff
 [color]
     ui = auto
     diff = auto
@@ -15,6 +15,18 @@
     branch = auto
     interactive = auto
     grep = auto
+[color "diff"]
+    meta = magenta bold
+    commit = magenta bold
+    frag = magenta bold
+    old = red bold
+    new = 46 bold
+    whitespace = red reverse
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = 46 bold
+    newHighlight = 46 bold 22
 [commit]
     gpgsign = true
     verbose = true
@@ -23,14 +35,12 @@
     editor = nvim
 [credential]
     helper = store
-[diff]
-    tool = icdiff
 [github]
     user = svanburen
 [include]
     path = ~/.gitconfig.local
 [push]
-    default = simple
+    default = current
 [pull]
     ff = true
 [merge]
