@@ -2,9 +2,10 @@
 
 " {{{ Plug
 
+scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/syntastic'
+"Plug 'sheerun/vim-polyglot'
 "Plug 'whatyouhide/vim-lengthmatters'
 "Plug 'xolox/vim-easytags'
 Plug 'airblade/vim-gitgutter'
@@ -14,6 +15,9 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'edkolev/tmuxline.vim'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'fatih/vim-go'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/vim-operator-flashy'
 Plug 'jceb/vim-orgmode'
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all --no-update-rc' }
 Plug 'junegunn/fzf.vim'
@@ -24,6 +28,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-github-dashboard'
 Plug 'junegunn/vim-peekaboo'
+Plug 'kana/vim-operator-user'
 Plug 'kchmck/vim-coffee-script'
 Plug 'keith/investigate.vim'
 Plug 'klen/python-mode', { 'for' : 'python' }
@@ -34,8 +39,8 @@ Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'mhinz/vim-startify'
 Plug 'myusuf3/numbers.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'nsf/gocode'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'reedes/vim-wordy'
 Plug 'rust-lang/rust.vim'
@@ -43,7 +48,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ryanss/vim-hackernews'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
-Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tommcdo/vim-exchange'
@@ -77,16 +82,15 @@ let g:mapleader = "\<Space>" " Leader is space key
 set autoindent
 set autoread                                " Read changes in files during editing.
 set autowriteall
-set background=dark
+set background=dark                         " Dark background
 set backspace=eol,indent,start              " Make backspacing work regularly.
-set colorcolumn=100
+set colorcolumn=100                         " Set a color column at 100 characters
 set cinoptions=N-s
 set expandtab
 set foldenable
-set formatoptions=c,q,r,t,j,o               "
-set hidden
-set history=10000
-set hlsearch
+set formatoptions=c,q,r,t,j,o               " test
+set hidden                                  " Don't get rid of hidden buffers
+set history=10000                           " Save 10000 lines of command history
 set ignorecase
 set incsearch
 set laststatus=2                            " Always show the last command.
@@ -116,10 +120,10 @@ set splitbelow                              " On horizontal split, open the spli
 set splitright                              " On veritcal split, open the split to the right.
 set t_Co=256
 set tabstop=4
-set tags+=tags;$HOME
-set title
+set tags+=tags;$HOME                        " Recurse up to HOME dir for tags
+set title                                   " Set the title of the window
 set ttimeout
-set ttimeoutlen=100
+set ttimeoutlen=50
 set ttyfast
 set textwidth=0
 set undodir=~/.vim/undodir
@@ -143,6 +147,7 @@ let g:EasyMotion_do_mapping       = 0
 let g:EasyMotion_smartcase        = 1
 let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
 let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_startofline      = 0
 
 let g:easytags_async = 0
 
@@ -155,27 +160,31 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:go_list_type = 'quickfix'
+"let g:go_list_type = 'quickfix'
+let g:go_fmt_command = 'goimports'
+let g:go_def_reuse_buffer = 1
+
+let g:incsearch#consistent_n_direction = 1
 
 let g:lengthmatters_on_by_default = 0
 
 let g:pymode_folding = 0
 
 let g:syntastic_vim_checkers = ['vint']
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_shell = "/bin/bash"
+let g:syntastic_shell = '/bin/bash'
 
 let g:syntastic_loc_list_height=5
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0    " Don't auto-open linter
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_loc_list = 1    " Don't auto-open linter
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_signs = 1
 
 let g:undotree_WindowLayout = 2
@@ -204,7 +213,8 @@ cnoremap kj <esc>
 " Insert Mode:
 inoremap jk <esc>
 inoremap kj <esc>
-map / <plug>(easymotion-sn)
+
+" Mappings:
 map <leader><leader> :Files<cr>
 map <leader>? :call investigate#Investigate()<cr>
 map <leader>h :GitGutterLineHighlightsToggle<cr>
@@ -212,14 +222,30 @@ map <leader>i :PlugInstall<cr>
 map <leader>j <plug>(easymotion-j)
 map <leader>k <plug>(easymotion-k)
 map <leader>u :PlugUpdate<cr>
-map N <plug>(easymotion-prev)
-map n <plug>(easymotion-next)
+
+function! s:incsearch_config(...) abort
+  return incsearch#util#deepextend(deepcopy({
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {
+  \     "\<CR>": '<Over>(easymotion)'
+  \   },
+  \   'is_expr': 0
+  \ }), get(a:, 1, {}))
+endfunction
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
 
 " Normal Mode:
+
 nmap ; :
 nmap < <<
-nmap <leader>+ <plug>AirlineSelectNextTab
-nmap <leader>- <plug>AirlineSelectPrevTab
+nmap > >>
 nmap <leader>/ :nohl<cr>
 nmap <leader>1 <plug>AirlineSelectTab1
 nmap <leader>2 <plug>AirlineSelectTab2
@@ -234,55 +260,52 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 nmap <leader>G :Goyo<cr>
 nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
 nmap <leader>a :Ag<cr>
-nmap <leader>d :Gdiff<cr>
-nmap <leader>e :e $MYVIMRC<cr>
-nmap <leader>g :Gstatus<cr>gg<c-n>
-nmap <leader>m :mksession<cr>
-nmap <leader>o :source $MYVIMRC<cr>
-nmap <leader>p :setlocal spell!<cr>
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>ev :e $MYVIMRC<cr>
+nmap <leader>eg :e $HOME/.gitconfig<cr>
+nmap <leader>ez :e $HOME/.zshrc<cr>
+nmap <leader>gs :Gstatus<cr>gg<c-n>
+nmap <leader>mk :mksession<cr>
+nmap <leader>so :source $MYVIMRC<cr>
+nmap <leader>sp :setlocal spell!<cr>
 nmap <leader>q :q<cr>
-nmap <leader>r :retab<cr>
-nmap <leader>s :%s/
+nmap <leader>rt :retab<cr>
+nmap <leader>ra :%s/
 nmap <leader>v :vsplit<cr>
 nmap <leader>w :up<cr>
 nmap <leader>z :GV<cr>
 nmap <tab> %
-nmap > >>
-nmap P gP
-nmap Y :normal y$<cr>
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
 nmap ga <plug>(EasyAlign)
-nmap p gp
-nmap s <plug>(easymotion-s2)
-nmap t <plug>(easymotion-t2)
+nmap s <plug>(easymotion-overwin-f)
 nnoremap + :bn<cr>
 nnoremap - :bp<cr>
 nnoremap 0 ^
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-d>zz
+nnoremap <C-k> <C-u>zz
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 nnoremap <leader>V V]
 nnoremap <leader>d :bd<cr>
 nnoremap <leader>f <c-w>w
 nnoremap <leader>l :set list!<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
-nnoremap <leader>t :TagbarToggle<cr>
 nnoremap D d$
 nnoremap U :UndotreeToggle<cr>
+nnoremap T :TagbarToggle<cr>
 nnoremap [b :bp<cr>
 nnoremap [l :lprev<cr>zz
 nnoremap [q :cprev<cr>zz
 nnoremap [t :tabp<cr>
 nnoremap ]b :bn<cr>
 nnoremap ]l :lnext<cr>zz
-" Next in quickfix list
 nnoremap ]q :cnext<cr>zz
 nnoremap ]t :tabn<cr>
 nnoremap ^ 0
-nnoremap g= gg=Gg`
+nnoremap g= gg=G``
 
 " Operator Pending Mode:
-omap / <plug>(easymotion-tn)
 omap <leader><tab> <plug>(fzf-maps-o)
 
 " Visual Mode:
@@ -328,6 +351,19 @@ augroup window
     autocmd VimResized * :wincmd =
 augroup END
 
+augroup GO
+    autocmd FileType go nmap <leader>ob <Plug>(go-build)
+    autocmd FileType go nmap <leader>oc <Plug>(go-coverage-toggle)
+    autocmd FileType go nmap <leader>od <Plug>(go-doc-vertical)
+    autocmd FileType go nmap <leader>oe <Plug>(go-rename)
+    autocmd FileType go nmap <leader>of <Plug>(go-imports)
+    autocmd FileType go nmap <leader>og <Plug>(go-def-vertical)
+    autocmd FileType go nmap <leader>oi <Plug>(go-info)
+    autocmd FileType go nmap <leader>or <Plug>(go-run)
+    autocmd FileType go nmap <leader>os <Plug>(go-implements)
+    autocmd FileType go nmap <leader>ot <Plug>(go-test)
+    autocmd FileType go nmap <leader>ov <Plug>(go-vet)
+augroup END
 
 " }}}
 
