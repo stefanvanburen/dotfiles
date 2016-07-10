@@ -129,6 +129,7 @@ set textwidth=0
 set undodir=~/.vim/undodir
 set undofile
 set visualbell
+set viminfo='1000,<500,:500,/500'
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 set wildmenu
 set wildmode=list:longest,full
