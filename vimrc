@@ -5,13 +5,8 @@
 scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
-"Plug 'sheerun/vim-polyglot'
-"Plug 'whatyouhide/vim-lengthmatters'
-"Plug 'xolox/vim-easytags'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
-Plug 'andrewradev/splitjoin.vim'
-Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'edkolev/tmuxline.vim'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'fatih/vim-go'
@@ -24,26 +19,20 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-github-dashboard'
 Plug 'junegunn/vim-peekaboo'
-Plug 'kana/vim-operator-user'
-Plug 'kchmck/vim-coffee-script'
+Plug 'kana/vim-operator-user' " Required for vim-operator-flashy
 Plug 'keith/investigate.vim'
 Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'lokaltog/vim-easymotion'
 Plug 'majutsushi/tagbar'
-Plug 'mattn/emmet-vim'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'mhinz/vim-startify'
 Plug 'myusuf3/numbers.vim'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'nsf/gocode'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'reedes/vim-wordy'
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'ryanss/vim-hackernews'
 Plug 'scrooloose/nerdcommenter'
@@ -57,10 +46,10 @@ Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-tbone'
 Plug 'valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'whatyouhide/vim-lengthmatters'
 Plug 'xolox/vim-misc'
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
@@ -74,7 +63,8 @@ syntax enable
 
 colorscheme solarized
 
-let g:mapleader = "\<Space>" " Leader is space key
+ " Leader is space key
+let g:mapleader = "\<Space>"
 
 " }}}
 " {{{ Settings
@@ -84,7 +74,6 @@ set autoread                                " Read changes in files during editi
 set autowriteall
 set background=dark                         " Dark background
 set backspace=eol,indent,start              " Make backspacing work regularly.
-set colorcolumn=100                         " Set a color column at 100 characters
 set cinoptions=N-s
 set expandtab
 set foldenable
@@ -129,7 +118,6 @@ set textwidth=0
 set undodir=~/.vim/undodir
 set undofile
 set visualbell
-set viminfo='1000,<500,:500,/500'
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 set wildmenu
 set wildmode=list:longest,full
@@ -140,67 +128,44 @@ set wildmode=list:longest,full
 let g:airline_theme                              = 'solarized'
 let g:airline_powerline_fonts                    = 0
 let g:airline#extensions#tabline#enabled         = 1
-let g:airline#extensions#tabline#show_tab_nr     = 1
-let g:airline#extensions#tabline#show_tab_type   = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 let g:EasyMotion_do_mapping       = 0
 let g:EasyMotion_smartcase        = 1
 let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
 let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_startofline      = 0
 
-let g:easytags_async = 0
+let g:incsearch#auto_nohlsearch = 1
 
-let g:indent_guides_guide_size = 1
-
-let g:go_fmt_autosave = 0
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-"let g:go_list_type = 'quickfix'
 let g:go_fmt_command = 'goimports'
-let g:go_def_reuse_buffer = 1
 
 let g:incsearch#consistent_n_direction = 1
 
 let g:lengthmatters_on_by_default = 0
 
-let g:pymode_folding = 0
+" Insert a space after using NERDCommenter
+let g:NERDSpaceDelims = 1
 
 let g:syntastic_vim_checkers = ['vint']
-"let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
 
-let g:syntastic_shell = '/bin/bash'
-
-let g:syntastic_loc_list_height=5
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1    " Don't auto-open linter
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_enable_signs = 1
+let g:syntastic_error_symbol   = "\u2717"
+let g:syntastic_warning_symbol = "\u26A0"
 
 let g:undotree_WindowLayout = 2
-
-let g:user_emmet_install_global = 0
 
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 " }}}
 " {{{ Highlights
 
-hi IncSearch       ctermbg=1 ctermfg=4
-hi MatchParen      ctermbg=1 ctermfg=4
-hi VertSplit       ctermbg=1
-hi Visual          ctermbg=1 ctermfg=4
+highlight ColorColumn ctermbg=4 ctermfg=1
+highlight IncSearch   ctermbg=1 ctermfg=4
+highlight MatchParen  ctermbg=1 ctermfg=4
+highlight VertSplit   ctermbg=1
+highlight Visual      ctermbg=1 ctermfg=4
 
 " }}}
 " {{{ Mappings
@@ -236,14 +201,12 @@ endfunction
 noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
 noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
 noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 
 " Normal Mode:
-
 nmap ; :
 nmap < <<
 nmap > >>
@@ -270,8 +233,7 @@ nmap <leader>mk :mksession<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>sp :setlocal spell!<cr>
 nmap <leader>q :q<cr>
-nmap <leader>rt :retab<cr>
-nmap <leader>ra :%s/
+nmap <leader>r :retab<cr>
 nmap <leader>v :vsplit<cr>
 nmap <leader>w :up<cr>
 nmap <leader>z :GV<cr>
@@ -305,17 +267,19 @@ nnoremap ]q :cnext<cr>zz
 nnoremap ]t :tabn<cr>
 nnoremap ^ 0
 nnoremap g= gg=G``
+nnoremap <leader>cc :set cc=100<cr>
+nnoremap <leader>co :set cc=""<cr>
 
 " Operator Pending Mode:
 omap <leader><tab> <plug>(fzf-maps-o)
 
 " Visual Mode:
 vmap <C-v> <plug>(expand_region_shrink)
+vmap v <plug>(expand_region_expand)
 vmap <leader>s :s/
 vmap <tab> %
 vmap s :!sort<cr>
 vmap u :!sort -u<cr>
-vmap v <plug>(expand_region_expand)
 vnoremap / /\v
 
 " Visual And Select Mode:
@@ -333,7 +297,6 @@ augroup FT
     autocmd FileType sh   set shiftwidth=4
     autocmd FileType c    set cindent
     autocmd FileType help wincmd L
-    autocmd Filetype html,css EmmetInstall
 augroup end
 
 augroup task
@@ -352,6 +315,8 @@ augroup window
     autocmd VimResized * :wincmd =
 augroup END
 
+" Go related mappings
+" All are prefixed with 'o', because 'g' is for git
 augroup GO
     autocmd FileType go nmap <leader>ob <Plug>(go-build)
     autocmd FileType go nmap <leader>oc <Plug>(go-coverage-toggle)
