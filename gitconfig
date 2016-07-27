@@ -1,12 +1,22 @@
 [alias]
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     p = push
+    s = status -s
     st = status -sb
+    c = commit
     co = checkout
+    d = diff
+# mnemonic for diff staged
+    ds = diff --cached
+# mnemonic for diff all
+    da = diff HEAD
+    dw = diff --word-diff
     branches = branch --list
     unstage = reset -q HEAD --
     amend = commit --amend
     stashes = stash list
+    sl = stash list
+    bl = branch --list
     ic = icdiff
 [color]
     ui = auto

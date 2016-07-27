@@ -1,5 +1,7 @@
 " dot vimrc
 
+command -nargs=+ -complete=file -bar Agtemp silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Agtemp<SPACE>
 " {{{ Plug
 
 scriptencoding utf-8
@@ -10,6 +12,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'edkolev/tmuxline.vim'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'fatih/vim-go'
+Plug 'vim-scripts/LanguageTool'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/vim-operator-flashy'
@@ -27,6 +30,8 @@ Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'lokaltog/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
+"Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
+Plug 'mileszs/ack.vim'
 Plug 'mhinz/vim-startify'
 Plug 'myusuf3/numbers.vim'
 Plug 'ntpeters/vim-better-whitespace'
@@ -50,7 +55,6 @@ Plug 'valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'whatyouhide/vim-lengthmatters'
-Plug 'xolox/vim-misc'
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
 call plug#end()
@@ -117,6 +121,7 @@ set ttyfast
 set textwidth=0
 set undodir=~/.vim/undodir
 set undofile
+set updatetime=250                          " Time to update in milliseconds
 set visualbell
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 set wildmenu
@@ -129,6 +134,8 @@ let g:airline_theme                              = 'solarized'
 let g:airline_powerline_fonts                    = 0
 let g:airline#extensions#tabline#enabled         = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_left_sep='›'
+let g:airline_right_sep='‹'
 
 let g:EasyMotion_do_mapping       = 0
 let g:EasyMotion_smartcase        = 1
@@ -139,7 +146,11 @@ let g:EasyMotion_startofline      = 0
 
 let g:incsearch#auto_nohlsearch = 1
 
+let g:gitgutter_eager = 1
+
 let g:go_fmt_command = 'goimports'
+" let g:go_metalinter_command = 'gometalinter'
+" let g:go_metalinter_enable = ['vet', 'golint', 'errcheck', 'gotype', 'gofmt', 'goimports', 'testify', 'test', 'dupl', 'structcheck', 'aligncheck', 'gocyclo', 'ineffassign', 'vetshadow', 'varcheck', 'deadcode', 'interfacer', 'goconst', 'gosimple', 'staticcheck']
 
 let g:incsearch#consistent_n_direction = 1
 
@@ -157,6 +168,14 @@ let g:syntastic_warning_symbol = "\u26A0"
 let g:undotree_WindowLayout = 2
 
 let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_complete_in_comments                = 1
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<C-J>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>', '<C-K>']
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
 
 " }}}
 " {{{ Highlights
@@ -173,8 +192,8 @@ highlight Visual      ctermbg=1 ctermfg=4
 " Command Mode:
 cmap %s/ %s/\v
 cmap w!! w !sudo tee % >/dev/null
-cnoremap jk <esc>
-cnoremap kj <esc>
+cnoremap jk <C-c>
+cnoremap kj <C-c>
 
 " Insert Mode:
 inoremap jk <esc>
@@ -184,10 +203,8 @@ inoremap kj <esc>
 map <leader><leader> :Files<cr>
 map <leader>? :call investigate#Investigate()<cr>
 map <leader>h :GitGutterLineHighlightsToggle<cr>
-map <leader>i :PlugInstall<cr>
 map <leader>j <plug>(easymotion-j)
 map <leader>k <plug>(easymotion-k)
-map <leader>u :PlugUpdate<cr>
 
 function! s:incsearch_config(...) abort
   return incsearch#util#deepextend(deepcopy({
@@ -201,6 +218,7 @@ endfunction
 noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
 noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
 noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
@@ -210,6 +228,8 @@ map #  <Plug>(incsearch-nohl-#)
 nmap ; :
 nmap < <<
 nmap > >>
+nnoremap j gj
+nnoremap k gk
 nmap <leader>/ :nohl<cr>
 nmap <leader>1 <plug>AirlineSelectTab1
 nmap <leader>2 <plug>AirlineSelectTab2
@@ -223,19 +243,18 @@ nmap <leader>9 <plug>AirlineSelectTab9
 nmap <leader><tab> <plug>(fzf-maps-n)
 nmap <leader>G :Goyo<cr>
 nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
-nmap <leader>a :Ag<cr>
 nmap <leader>gd :Gdiff<cr>
 nmap <leader>ev :e $MYVIMRC<cr>
 nmap <leader>eg :e $HOME/.gitconfig<cr>
 nmap <leader>ez :e $HOME/.zshrc<cr>
 nmap <leader>gs :Gstatus<cr>gg<c-n>
-nmap <leader>mk :mksession<cr>
+nmap <leader>ms :mksession<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>sp :setlocal spell!<cr>
 nmap <leader>q :q<cr>
 nmap <leader>r :retab<cr>
 nmap <leader>v :vsplit<cr>
-nmap <leader>w :up<cr>
+nmap <leader>w :w<cr>
 nmap <leader>z :GV<cr>
 nmap <tab> %
 map y <Plug>(operator-flashy)
@@ -251,9 +270,20 @@ nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 nnoremap <leader>V V]
 nnoremap <leader>d :bd<cr>
-nnoremap <leader>f <c-w>w
+nnoremap <leader>f <C-w>w
 nnoremap <leader>l :set list!<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader><Enter> :Buffers<cr>
+nnoremap <leader>ag :Ag<cr>
+nnoremap <leader>` :Marks<cr>
+nnoremap <leader>pu :PlugUpdate<cr>
+nnoremap <leader>pg :PlugUpdate<cr>
+nnoremap <leader>pc :PlugClean<cr>
+nnoremap <leader>ps :PlugStatus<cr>
+nnoremap <leader>sl <C-w>l
+nnoremap <leader>sh <C-w>h
+nnoremap <leader>sj <C-w>j
+nnoremap <leader>sk <C-w>k
 nnoremap D d$
 nnoremap U :UndotreeToggle<cr>
 nnoremap T :TagbarToggle<cr>
@@ -288,6 +318,20 @@ xmap ga <plug>(EasyAlign)
 xnoremap < <gv
 xnoremap > >gv
 
+" ----------------------------------------------------------------------------
+" <Leader>?/! | Google it / Feeling lucky
+" ----------------------------------------------------------------------------
+function! s:goog(pat, lucky)
+  let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
+  let q = substitute(q, '[[:punct:] ]',
+       \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
+  call system(printf('open "https://www.google.com/search?%sq=%s"',
+                   \ a:lucky ? 'btnI&' : '', q))
+endfunction
+
+nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 0)<cr>
+nnoremap <leader>@ :call <SID>goog(expand("<cWORD>"), 1)<cr>
+
 " }}}
 " {{{ Autocommands
 
@@ -297,6 +341,7 @@ augroup FT
     autocmd FileType sh   set shiftwidth=4
     autocmd FileType c    set cindent
     autocmd FileType help wincmd L
+    autocmd FileType asciidoc set wrap
 augroup end
 
 augroup task
