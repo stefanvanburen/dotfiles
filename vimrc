@@ -161,7 +161,6 @@ let g:NERDSpaceDelims = 1
 
 let g:syntastic_vim_checkers = ['vint']
 let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
-
 let g:syntastic_error_symbol   = "\u2717"
 let g:syntastic_warning_symbol = "\u26A0"
 
@@ -188,6 +187,53 @@ highlight Visual      ctermbg=1 ctermfg=4
 
 " }}}
 " {{{ Mappings
+
+" Normal Mode:
+nmap ; :
+nmap < <<
+nmap > >>
+nmap <leader>/ :nohl<cr>
+nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
+nmap <leader>a :Ag<cr>
+nmap <leader>e :e $MYVIMRC<cr>
+nmap <leader>q :q<cr>
+nmap <leader>r :retab<cr>
+nmap <leader>so :source $MYVIMRC<cr>
+nmap <leader>ss :setlocal spell!<cr>
+nmap <leader>sv :mksession<cr>
+nmap <leader>v :vsplit<cr>
+nmap <leader>w :up<cr>
+nmap <tab> %
+nmap Y :normal y$<cr>
+nnoremap D d$
+nmap p p'[v']=
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <leader>f <c-w>w
+nnoremap <leader>V V`]
+nnoremap <leader>l :set list!<cr>
+nnoremap 0 ^
+nnoremap ^ 0
+nnoremap g= gg=Gg``
+
+" Buffers:
+nnoremap ]b :bn<cr>
+nnoremap [b :bp<cr>
+nnoremap - :bp<cr>
+nnoremap + :bn<cr>
+nnoremap <leader>d :bd<cr>
+
+" Tabs:
+nnoremap ]t :tabn<cr>
+nnoremap [t :tabp<cr>
+
+" Quickfix:
+nnoremap ]q :cnext<cr>zz
+nnoremap [q :cprev<cr>zz
+nnoremap ]l :lnext<cr>zz
+nnoremap [l :lprev<cr>zz
 
 " Command Mode:
 cmap %s/ %s/\v
