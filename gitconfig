@@ -1,23 +1,32 @@
 [alias]
-    lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-    p = push
-    s = status -s
-    st = status -sb
+    aa = add .
+    amend = commit --amend
+    bl = branch --list
+    branches = branch --list
     c = commit
     co = checkout
     d = diff
-# mnemonic for diff staged
-    ds = diff --cached
+
 # mnemonic for diff all
     da = diff HEAD
+
+# mnemonic for diff staged
+    ds = diff --cached
+
     dw = diff --word-diff
-    branches = branch --list
-    unstage = reset -q HEAD --
-    amend = commit --amend
-    stashes = stash list
-    sl = stash list
-    bl = branch --list
+
+# Switch to a branch, creating it if necessary
+    go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
     ic = icdiff
+    lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    p = push
+    s = status -s
+    sl = stash list
+    st = status -sb
+    stashes = stash list
+    unstage = reset -q HEAD --
+    us = reset -q HEAD --
 [color]
     ui = auto
     diff = auto
@@ -43,16 +52,17 @@
 [core]
     excludesfile = ~/.gitignore
     editor = nvim
+    untrackedCache = true
 [credential]
     helper = store
 [github]
     user = svanburen
 [include]
     path = ~/.gitconfig.local
-[push]
-    default = current
-[pull]
-    ff = true
 [merge]
     tool = vimdiff
     ff = false
+[pull]
+    ff = true
+[push]
+    default = current
