@@ -1,7 +1,4 @@
 # .zshrc
-
-export ZSH=$HOME/.oh-my-zsh
-
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 source $ZSH/oh-my-zsh.sh
