@@ -1,7 +1,5 @@
 " dot vimrc
 
-command -nargs=+ -complete=file -bar Agtemp silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Agtemp<SPACE>
 " {{{ Plug
 
 scriptencoding utf-8
@@ -51,6 +49,7 @@ Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -218,22 +217,7 @@ nnoremap 0 ^
 nnoremap ^ 0
 nnoremap g= gg=Gg``
 
-" Buffers:
-nnoremap ]b :bn<cr>
-nnoremap [b :bp<cr>
-nnoremap - :bp<cr>
-nnoremap + :bn<cr>
 nnoremap <leader>d :bd<cr>
-
-" Tabs:
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
-
-" Quickfix:
-nnoremap ]q :cnext<cr>zz
-nnoremap [q :cprev<cr>zz
-nnoremap ]l :lnext<cr>zz
-nnoremap [l :lprev<cr>zz
 
 " Command Mode:
 cmap %s/ %s/\v
@@ -378,6 +362,35 @@ endfunction
 nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 0)<cr>
 nnoremap <leader>@ :call <SID>goog(expand("<cWORD>"), 1)<cr>
 
+iab <expr> dts strftime("%m/%d/%y")
+
+function! s:goyo_enter()
+  silent !tmux set status off
+  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  Limelight
+  set tw=72
+  set wrap
+  " ...
+endfunction
+
+function! s:goyo_leave()
+  silent !tmux set status on
+  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  set showmode
+  set showcmd
+  set scrolloff=5
+  Limelight!
+  set tw=0
+  set nowrap
+  " ...
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 " }}}
 " {{{ Autocommands
 
@@ -394,11 +407,6 @@ augroup task
     autocmd BufRead,BufNewFile {pending,completed,undo}.data set filetype=taskdata
     autocmd BufRead,BufNewFile .taskrc                       set filetype=taskrc
     autocmd BufRead,BufNewFile *.task                        set filetype=taskedit
-augroup END
-
-augroup Goyo
-    autocmd! User GoyoEnter Limelight
-    autocmd! User GoyoLeave Limelight!
 augroup END
 
 " Resize splits when window is resized
