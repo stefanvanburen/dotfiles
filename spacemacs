@@ -90,7 +90,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Essential PragmataPro"
-                               :size 10
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -202,3 +202,18 @@ layers configuration. You are free to put any user code."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (spinner log4e gntp request gitignore-mode fringe-helper git-gutter+ epl flx pos-tip git-commit with-editor xterm-color volatile-highlights toc-org spacemacs-theme spaceline powerline smooth-scrolling shell-pop persp-mode page-break-lines orgit org-pomodoro org-plus-contrib neotree multi-term markdown-toc s markdown-mode magit-gitflow leuven-theme ledger-mode info+ indent-guide hl-todo highlight-numbers helm-swoop helm-projectile helm-flyspell helm-descbinds helm-ag gitconfig-mode git-timemachine git-messenger expand-region evil-mc evil-matchit evil-magit magit magit-popup evil-escape eshell-prompt-extras diff-hl buffer-move auto-yasnippet auto-compile aggressive-indent auto-complete avy anzu iedit smartparens highlight flycheck git-gutter yasnippet company projectile dash helm popup helm-core async hydra package-build use-package which-key bind-map evil ws-butler window-numbering vi-tilde-fringe undo-tree solarized-theme smeargle reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa popwin pkg-info pcre2el pbcopy parent-mode paradox packed osx-trash org-repo-todo org-present org-bullets open-junk-file move-text mmm-mode macrostep lorem-ipsum linum-relative launchctl ido-vertical-mode hungry-delete htmlize highlight-parentheses highlight-indentation help-fns+ helm-themes helm-mode-manager helm-make helm-gitignore helm-flx helm-company helm-c-yasnippet goto-chg google-translate golden-ratio gnuplot gitattributes-mode git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flycheck-ledger flx-ido fill-column-indicator fancy-battery exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-args evil-anzu eval-sexp-fu esh-help elisp-slime-nav diminish define-word company-statistics company-quickhelp clean-aindent-mode bracketed-paste bind-key auto-highlight-symbol auto-dictionary alert adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
