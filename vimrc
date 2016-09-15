@@ -60,6 +60,7 @@ call plug#end()
 filetype plugin indent on
 
 " }}}
+
 " {{{ Basic things
 
 syntax enable
@@ -70,6 +71,7 @@ colorscheme solarized
 let g:mapleader = "\<Space>"
 
 " }}}
+
 " {{{ Settings
 
 set autoindent
@@ -127,6 +129,183 @@ set wildmenu
 set wildmode=list:longest,full
 
 " }}}
+
+" {{{ Mappings
+nmap ; :
+nmap < <<
+nmap > >>
+nmap <tab> %
+nmap Y :normal y$<cr>
+nmap p p'[v']=
+nmap <leader>/ :nohl<cr>
+nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
+nmap <leader>eg :e $HOME/.gitconfig<cr>
+nmap <leader>ev :e $MYVIMRC<cr>
+nmap <leader>ez :e $HOME/.zshrc<cr>
+nmap <leader>ms :mksession<cr>
+nmap <leader>q :q<cr>
+nmap <leader>r :retab<cr>
+nmap <leader>so :source $MYVIMRC<cr>
+nmap <leader>sp :setlocal spell!<cr>
+nmap <leader>sv :mksession<cr>
+nmap <leader>v :vsplit<cr>
+nmap <leader>w :w<cr>
+
+nnoremap 0 ^
+nnoremap ^ 0
+nnoremap D d$
+nnoremap g= gg=G``
+nnoremap j gj
+nnoremap k gk
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <leader>V V`]
+nnoremap <leader>cc :set cc=100<cr>
+nnoremap <leader>co :set cc=""<cr>
+nnoremap <leader>d :bd<cr>
+nnoremap <leader>f <C-w>w
+nnoremap <leader>l :set list!<cr>
+nnoremap <leader>sh <C-w>h
+nnoremap <leader>sj <C-w>j
+nnoremap <leader>sk <C-w>k
+nnoremap <leader>sl <C-w>l
+
+cmap %s/ %s/\v
+cmap w!! w !sudo tee % >/dev/null
+
+cnoremap jk <C-c>
+cnoremap kj <C-c>
+
+inoremap jk <esc>
+inoremap kj <esc>
+
+vmap <leader>s :s/
+vmap <tab> %
+vmap s :!sort<cr>
+vmap u :!sort -u<cr>
+
+vnoremap / /\v
+
+xnoremap < <gv
+xnoremap > >gv
+
+" Fugitive
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>gs :Gstatus<cr>gg<c-n>
+nmap <leader>z :GV<cr>
+
+" operator-flashy
+nmap Y <Plug>(operator-flashy)$
+map y <Plug>(operator-flashy)
+
+" EasyAlign
+nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
+
+" NERDTree
+nnoremap <leader>n :NERDTreeToggle<cr>
+
+" vim-plug
+nnoremap <leader>pc :PlugClean<cr>
+nnoremap <leader>pg :PlugUpdate<cr>
+nnoremap <leader>ps :PlugStatus<cr>
+nnoremap <leader>pu :PlugUpdate<cr>
+
+" Tagbar
+nnoremap T :TagbarToggle<cr>
+
+"Undotree
+nnoremap U :UndotreeToggle<cr>
+
+" Investigate
+map <leader>? :call investigate#Investigate()<cr>
+
+" GitGutter
+map <leader>h :GitGutterLineHighlightsToggle<cr>
+
+" EasyMotion
+map <leader>j <plug>(easymotion-j)
+map <leader>k <plug>(easymotion-k)
+nmap s <plug>(easymotion-overwin-f)
+
+" EasyMotion x incsearch
+function! s:incsearch_config(...) abort
+    return incsearch#util#deepextend(deepcopy({
+                \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+                \   'keymap': {
+                \     "\<CR>": '<Over>(easymotion)'
+                \   },
+                \   'is_expr': 0
+                \ }), get(a:, 1, {}))
+endfunction
+
+" incsearch
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+
+" FZF
+omap <leader><tab> <plug>(fzf-maps-o)
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+nnoremap <leader><Enter> :Buffers<cr>
+nnoremap <leader>` :Marks<cr>
+nnoremap <leader>ag :Ag<cr>
+map <leader><leader> :Files<cr>
+
+" expand-region
+vmap <C-v> <plug>(expand_region_shrink)
+vmap v <plug>(expand_region_expand)
+
+" <Leader>?/! | Google it / Feeling lucky
+function! s:goog(pat, lucky)
+    let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
+    let q = substitute(q, '[[:punct:] ]',
+                \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
+    call system(printf('open "https://www.google.com/search?%sq=%s"',
+                \ a:lucky ? 'btnI&' : '', q))
+endfunction
+nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 0)<cr>
+nnoremap <leader>@ :call <SID>goog(expand("<cWORD>"), 1)<cr>
+
+" Goyo
+function! s:goyo_enter()
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    set noshowmode
+    set noshowcmd
+    set scrolloff=999
+    Limelight
+    set tw=72
+    set wrap
+    " ...
+endfunction
+
+function! s:goyo_leave()
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    set showmode
+    set showcmd
+    set scrolloff=5
+    Limelight!
+    set tw=0
+    set nowrap
+    " ...
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+nmap <leader>G :Goyo<cr>
+
+" Abbreviations
+iab <expr> dts strftime("%m/%d/%y")
+
+" }}}
+
 " {{{ Plugin Configuration
 
 let g:airline_theme                              = 'solarized'
@@ -135,6 +314,15 @@ let g:airline#extensions#tabline#enabled         = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline_left_sep='›'
 let g:airline_right_sep='‹'
+nmap <leader>1 <plug>AirlineSelectTab1
+nmap <leader>2 <plug>AirlineSelectTab2
+nmap <leader>3 <plug>AirlineSelectTab3
+nmap <leader>4 <plug>AirlineSelectTab4
+nmap <leader>5 <plug>AirlineSelectTab5
+nmap <leader>6 <plug>AirlineSelectTab6
+nmap <leader>7 <plug>AirlineSelectTab7
+nmap <leader>8 <plug>AirlineSelectTab8
+nmap <leader>9 <plug>AirlineSelectTab9
 
 let g:EasyMotion_do_mapping       = 0
 let g:EasyMotion_smartcase        = 1
@@ -176,6 +364,7 @@ if executable('ag')
 endif
 
 " }}}
+
 " {{{ Highlights
 
 highlight ColorColumn ctermbg=4 ctermfg=1
@@ -185,213 +374,7 @@ highlight VertSplit   ctermbg=1
 highlight Visual      ctermbg=1 ctermfg=4
 
 " }}}
-" {{{ Mappings
 
-" Normal Mode:
-nmap ; :
-nmap < <<
-nmap > >>
-nmap <leader>/ :nohl<cr>
-nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
-nmap <leader>a :Ag<cr>
-nmap <leader>e :e $MYVIMRC<cr>
-nmap <leader>q :q<cr>
-nmap <leader>r :retab<cr>
-nmap <leader>so :source $MYVIMRC<cr>
-nmap <leader>ss :setlocal spell!<cr>
-nmap <leader>sv :mksession<cr>
-nmap <leader>v :vsplit<cr>
-nmap <leader>w :up<cr>
-nmap <tab> %
-nmap Y :normal y$<cr>
-nnoremap D d$
-nmap p p'[v']=
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <leader>f <c-w>w
-nnoremap <leader>V V`]
-nnoremap <leader>l :set list!<cr>
-nnoremap 0 ^
-nnoremap ^ 0
-nnoremap g= gg=Gg``
-
-nnoremap <leader>d :bd<cr>
-
-" Command Mode:
-cmap %s/ %s/\v
-cmap w!! w !sudo tee % >/dev/null
-cnoremap jk <C-c>
-cnoremap kj <C-c>
-
-" Insert Mode:
-inoremap jk <esc>
-inoremap kj <esc>
-
-" Mappings:
-map <leader><leader> :Files<cr>
-map <leader>? :call investigate#Investigate()<cr>
-map <leader>h :GitGutterLineHighlightsToggle<cr>
-map <leader>j <plug>(easymotion-j)
-map <leader>k <plug>(easymotion-k)
-
-function! s:incsearch_config(...) abort
-  return incsearch#util#deepextend(deepcopy({
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {
-  \     "\<CR>": '<Over>(easymotion)'
-  \   },
-  \   'is_expr': 0
-  \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-
-" Normal Mode:
-nmap ; :
-nmap < <<
-nmap > >>
-nnoremap j gj
-nnoremap k gk
-nmap <leader>/ :nohl<cr>
-nmap <leader>1 <plug>AirlineSelectTab1
-nmap <leader>2 <plug>AirlineSelectTab2
-nmap <leader>3 <plug>AirlineSelectTab3
-nmap <leader>4 <plug>AirlineSelectTab4
-nmap <leader>5 <plug>AirlineSelectTab5
-nmap <leader>6 <plug>AirlineSelectTab6
-nmap <leader>7 <plug>AirlineSelectTab7
-nmap <leader>8 <plug>AirlineSelectTab8
-nmap <leader>9 <plug>AirlineSelectTab9
-nmap <leader><tab> <plug>(fzf-maps-n)
-nmap <leader>G :Goyo<cr>
-nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
-nmap <leader>gd :Gdiff<cr>
-nmap <leader>ev :e $MYVIMRC<cr>
-nmap <leader>eg :e $HOME/.gitconfig<cr>
-nmap <leader>ez :e $HOME/.zshrc<cr>
-nmap <leader>gs :Gstatus<cr>gg<c-n>
-nmap <leader>ms :mksession<cr>
-nmap <leader>so :source $MYVIMRC<cr>
-nmap <leader>sp :setlocal spell!<cr>
-nmap <leader>q :q<cr>
-nmap <leader>r :retab<cr>
-nmap <leader>v :vsplit<cr>
-nmap <leader>w :w<cr>
-nmap <leader>z :GV<cr>
-nmap <tab> %
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-nmap ga <plug>(EasyAlign)
-nmap s <plug>(easymotion-overwin-f)
-nnoremap + :bn<cr>
-nnoremap - :bp<cr>
-nnoremap 0 ^
-nnoremap <C-j> <C-d>zz
-nnoremap <C-k> <C-u>zz
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
-nnoremap <leader>V V]
-nnoremap <leader>d :bd<cr>
-nnoremap <leader>f <C-w>w
-nnoremap <leader>l :set list!<cr>
-nnoremap <leader>n :NERDTreeToggle<cr>
-nnoremap <leader><Enter> :Buffers<cr>
-nnoremap <leader>ag :Ag<cr>
-nnoremap <leader>` :Marks<cr>
-nnoremap <leader>pu :PlugUpdate<cr>
-nnoremap <leader>pg :PlugUpdate<cr>
-nnoremap <leader>pc :PlugClean<cr>
-nnoremap <leader>ps :PlugStatus<cr>
-nnoremap <leader>sl <C-w>l
-nnoremap <leader>sh <C-w>h
-nnoremap <leader>sj <C-w>j
-nnoremap <leader>sk <C-w>k
-nnoremap D d$
-nnoremap U :UndotreeToggle<cr>
-nnoremap T :TagbarToggle<cr>
-nnoremap [b :bp<cr>
-nnoremap [l :lprev<cr>zz
-nnoremap [q :cprev<cr>zz
-nnoremap [t :tabp<cr>
-nnoremap ]b :bn<cr>
-nnoremap ]l :lnext<cr>zz
-nnoremap ]q :cnext<cr>zz
-nnoremap ]t :tabn<cr>
-nnoremap ^ 0
-nnoremap g= gg=G``
-nnoremap <leader>cc :set cc=100<cr>
-nnoremap <leader>co :set cc=""<cr>
-
-" Operator Pending Mode:
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Visual Mode:
-vmap <C-v> <plug>(expand_region_shrink)
-vmap v <plug>(expand_region_expand)
-vmap <leader>s :s/
-vmap <tab> %
-vmap s :!sort<cr>
-vmap u :!sort -u<cr>
-vnoremap / /\v
-
-" Visual And Select Mode:
-xmap <leader><tab> <plug>(fzf-maps-x)
-xmap ga <plug>(EasyAlign)
-xnoremap < <gv
-xnoremap > >gv
-
-" ----------------------------------------------------------------------------
-" <Leader>?/! | Google it / Feeling lucky
-" ----------------------------------------------------------------------------
-function! s:goog(pat, lucky)
-  let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
-  let q = substitute(q, '[[:punct:] ]',
-       \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
-  call system(printf('open "https://www.google.com/search?%sq=%s"',
-                   \ a:lucky ? 'btnI&' : '', q))
-endfunction
-
-nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 0)<cr>
-nnoremap <leader>@ :call <SID>goog(expand("<cWORD>"), 1)<cr>
-
-iab <expr> dts strftime("%m/%d/%y")
-
-function! s:goyo_enter()
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-  Limelight
-  set tw=72
-  set wrap
-  " ...
-endfunction
-
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
-  set showcmd
-  set scrolloff=5
-  Limelight!
-  set tw=0
-  set nowrap
-  " ...
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-" }}}
 " {{{ Autocommands
 
 augroup FT
