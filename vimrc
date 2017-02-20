@@ -6,11 +6,13 @@ scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'Alok/notational-fzf-vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'blindFS/vim-taskwarrior'
 Plug 'edkolev/tmuxline.vim'
-Plug 'farseer90718/vim-taskwarrior'
+Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
-Plug 'vim-scripts/LanguageTool'
+"Plug 'vim-scripts/LanguageTool'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/vim-operator-flashy'
@@ -21,6 +23,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
+"Plug 'junegunn/vim-journal'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-operator-user' " Required for vim-operator-flashy
 Plug 'keith/investigate.vim'
@@ -40,7 +43,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ryanss/vim-hackernews'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tommcdo/vim-exchange'
@@ -48,12 +51,15 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
 Plug 'valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'whatyouhide/vim-lengthmatters'
+Plug 'w0rp/ale'
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
 call plug#end()
