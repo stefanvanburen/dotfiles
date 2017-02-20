@@ -270,7 +270,7 @@ map <leader><leader> :Files<cr>
 vmap <C-v> <plug>(expand_region_shrink)
 vmap v <plug>(expand_region_expand)
 
-" <Leader>?/! | Google it / Feeling lucky
+" <Leader>!/@ | Google it / Feeling lucky
 function! s:goog(pat, lucky)
     let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
     let q = substitute(q, '[[:punct:] ]',
@@ -280,6 +280,8 @@ function! s:goog(pat, lucky)
 endfunction
 nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 0)<cr>
 nnoremap <leader>@ :call <SID>goog(expand("<cWORD>"), 1)<cr>
+
+let g:limelight_conceal_ctermfg = 'darkgray'
 
 " Goyo
 function! s:goyo_enter()
@@ -291,6 +293,9 @@ function! s:goyo_enter()
     Limelight
     set tw=72
     set wrap
+    set nolist
+    NumbersDisable
+    set norelativenumber
     " ...
 endfunction
 
@@ -303,6 +308,8 @@ function! s:goyo_leave()
     Limelight!
     set tw=0
     set nowrap
+    set list
+    NumbersEnable
     " ...
 endfunction
 
@@ -318,11 +325,11 @@ iab <expr> dts strftime("%m/%d/%y")
 " {{{ Plugin Configuration
 
 let g:airline_theme                              = 'solarized'
-let g:airline_powerline_fonts                    = 0
+let g:airline_powerline_fonts                    = 1
 let g:airline#extensions#tabline#enabled         = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline_left_sep='›'
-let g:airline_right_sep='‹'
+"let g:airline_left_sep='›'
+"let g:airline_right_sep='‹'
 nmap <leader>1 <plug>AirlineSelectTab1
 nmap <leader>2 <plug>AirlineSelectTab2
 nmap <leader>3 <plug>AirlineSelectTab3
@@ -347,6 +354,12 @@ let g:gitgutter_eager = 1
 let g:go_fmt_command = 'goimports'
 " let g:go_metalinter_command = 'gometalinter'
 " let g:go_metalinter_enable = ['vet', 'golint', 'errcheck', 'gotype', 'gofmt', 'goimports', 'testify', 'test', 'dupl', 'structcheck', 'aligncheck', 'gocyclo', 'ineffassign', 'vetshadow', 'varcheck', 'deadcode', 'interfacer', 'goconst', 'gosimple', 'staticcheck']
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 let g:incsearch#consistent_n_direction = 1
 
@@ -355,10 +368,20 @@ let g:lengthmatters_on_by_default = 0
 " Insert a space after using NERDCommenter
 let g:NERDSpaceDelims = 1
 
-let g:syntastic_vim_checkers = ['vint']
-let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
-let g:syntastic_error_symbol   = "\u2717"
-let g:syntastic_warning_symbol = "\u26A0"
+" open files in netrw in vertical split
+let g:netrw_browse_split = 2
+" take 25% of the window
+let g:netrw_winsize = 25
+" tree-style netrw
+let g:netrw_liststyle = 3
+
+let g:nv_directories = ['~/Dropbox/Apps/notational_velocity']
+nnoremap <c-l> :NV<cr>
+
+" let g:syntastic_vim_checkers = ['vint']
+" let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
+" let g:syntastic_error_symbol   = "\u2717"
+" let g:syntastic_warning_symbol = "\u26A0"
 
 let g:undotree_WindowLayout = 2
 
@@ -367,7 +390,9 @@ let g:ycm_complete_in_comments                = 1
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<C-J>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>', '<C-K>']
 
-if executable('ag')
+if executable('rg')
+    set grepprg=rg\ --vimgrep
+elseif executable('ag')
   let g:ackprg = 'ag --vimgrep'
   set grepprg=ag\ --nogroup\ --nocolor
 endif
