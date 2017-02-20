@@ -30,3 +30,5 @@ Thumbs.db
 .DS_store
 *.dSYM
 *.ropeproject
+.*
+*~
