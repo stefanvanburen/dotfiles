@@ -157,6 +157,8 @@ nmap <leader>sv :mksession<cr>
 nmap <leader>v :vsplit<cr>
 nmap <leader>w :w<cr>
 
+nnoremap ]r :tabn<cr>
+nnoremap [r :tabp<cr>
 nnoremap 0 ^
 nnoremap ^ 0
 nnoremap D d$
@@ -175,6 +177,7 @@ nnoremap <leader>sh <C-w>h
 nnoremap <leader>sj <C-w>j
 nnoremap <leader>sk <C-w>k
 nnoremap <leader>sl <C-w>l
+nnoremap <leader>x :Vexplore<cr>
 
 cmap %s/ %s/\v
 cmap w!! w !sudo tee % >/dev/null
@@ -213,7 +216,7 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 
 " vim-plug
 nnoremap <leader>pc :PlugClean<cr>
-nnoremap <leader>pg :PlugUpdate<cr>
+nnoremap <leader>pg :PlugUpgrade<cr>
 nnoremap <leader>ps :PlugStatus<cr>
 nnoremap <leader>pu :PlugUpdate<cr>
 
