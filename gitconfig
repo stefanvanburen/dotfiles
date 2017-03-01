@@ -66,3 +66,7 @@
     ff = true
 [push]
     default = current
+[init]
+    templatedir = ~/.git_template
+[hub]
+    protocol = https
