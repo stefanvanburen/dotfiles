@@ -12,6 +12,7 @@ Plug 'blindFS/vim-taskwarrior'
 "Plug 'edkolev/tmuxline.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
+Plug 'google/vim-searchindex'
 "Plug 'vim-scripts/LanguageTool'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch.vim'
@@ -27,7 +28,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-operator-user' " Required for vim-operator-flashy
 Plug 'keith/investigate.vim'
-Plug 'klen/python-mode', { 'for' : 'python' }
+"Plug 'klen/python-mode', { 'for' : 'python' }
 Plug 'lokaltog/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
@@ -38,6 +39,8 @@ Plug 'myusuf3/numbers.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'reedes/vim-wordy'
+Plug 'rhysd/committia.vim'
+Plug 'rizzatti/dash.vim'
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'ryanss/vim-hackernews'
@@ -63,7 +66,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'whatyouhide/vim-lengthmatters'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
 call plug#end()
