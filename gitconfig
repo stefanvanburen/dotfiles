@@ -1,10 +1,18 @@
 [alias]
     aa = add .
+
+# show git aliases
+    aliases = config --get-regexp alias
+
     amend = commit --amend
+
     bl = branch --list
     branches = branch --list
+
     c = commit
+
     co = checkout
+
     d = diff
 
 # mnemonic for diff all
@@ -19,14 +27,20 @@
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
     ic = icdiff
+
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+
     p = push
+
     s = status -s
     sl = stash list
     st = status -sb
+
     stashes = stash list
+
     unstage = reset -q HEAD --
     us = reset -q HEAD --
+
 [color]
     ui = auto
     diff = auto
@@ -34,6 +48,7 @@
     branch = auto
     interactive = auto
     grep = auto
+
 [color "diff"]
     meta = magenta bold
     commit = magenta bold
@@ -41,32 +56,47 @@
     old = red bold
     new = 46 bold
     whitespace = red reverse
+
 [color "diff-highlight"]
     oldNormal = red bold
     oldHighlight = red bold 52
     newNormal = 46 bold
     newHighlight = 46 bold 22
+
 [commit]
-    gpgsign = true
+    # gpgsign = true
     verbose = true
+
 [core]
     excludesfile = ~/.gitignore
     editor = nvim
     untrackedCache = true
+
 [credential]
     helper = store
+
 [github]
     user = svanburen
+
 [include]
     path = ~/.gitconfig.local
+
 [merge]
     tool = vimdiff
     ff = false
+
 [pull]
     ff = true
+
 [push]
     default = current
+
 [init]
     templatedir = ~/.git_template
+
 [hub]
     protocol = https
+
+[user]
+    name = Stefan VanBuren
+    email = vanburenstefan@gmail.com
