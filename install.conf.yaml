@@ -1,0 +1,26 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.dotfiles: ''
+    ~/.tmux.conf: tmux.conf
+    ~/.vim: vim
+    ~/.vimrc: vimrc
+    ~/.agignore: agignore
+    ~/.gemrc: gemrc
+    ~/.gitconfig: gitconfig
+    ~/.gitignore: gitignore
+    ~/.spacemacs: spacemacs
+    ~/.newsbeuter/config:
+        create: true
+        path: newsbeuter_config
+    ~/.tmuxinator: tmuxinator
+    ~/.config/nvim:
+        create: true
+        path: vim
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
