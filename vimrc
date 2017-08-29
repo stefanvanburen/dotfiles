@@ -1,149 +1,454 @@
 " dot vimrc
 
-" {{{ Plug
+" {{{ Basic things
+
+syntax enable
+
+" Leader is space key
+let g:mapleader = "\<Space>"
+
+" vim-plug
+nnoremap <leader>pc :PlugClean<cr>
+nnoremap <leader>pg :PlugUpgrade<cr>
+nnoremap <leader>ps :PlugStatus<cr>
+nnoremap <leader>pu :PlugUpdate<cr>
+
+" }}}
+
+" {{{ Plugins
 
 scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
-Plug 'airblade/vim-gitgutter'
-Plug 'Alok/notational-fzf-vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'blindFS/vim-taskwarrior'
-"Plug 'edkolev/tmuxline.vim'
-Plug 'elzr/vim-json'
-Plug 'fatih/vim-go'
-Plug 'google/vim-searchindex'
-"Plug 'vim-scripts/LanguageTool'
-Plug 'haya14busa/incsearch-easymotion.vim'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/vim-operator-flashy'
-Plug 'jceb/vim-orgmode'
-Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all --no-update-rc' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/gv.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/vim-easy-align'
-"Plug 'junegunn/vim-journal'
-Plug 'junegunn/vim-peekaboo'
-Plug 'kana/vim-operator-user' " Required for vim-operator-flashy
-Plug 'keith/investigate.vim'
-"Plug 'klen/python-mode', { 'for' : 'python' }
-Plug 'lokaltog/vim-easymotion'
-Plug 'majutsushi/tagbar'
-Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
-"Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
-Plug 'mileszs/ack.vim'
+" {{{ UI
+
 Plug 'mhinz/vim-startify'
-Plug 'myusuf3/numbers.vim'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
-Plug 'reedes/vim-wordy'
-Plug 'rhysd/committia.vim'
-Plug 'rizzatti/dash.vim'
-Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
-Plug 'ryanoasis/vim-devicons'
-Plug 'ryanss/vim-hackernews'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
-"Plug 'scrooloose/syntastic'
-Plug 'terryma/vim-expand-region'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-Plug 'valloric/YouCompleteMe'
-" Plug 'ajh17/VimCompletesMe'
-Plug 'ludovicchabant/vim-gutentags'
+let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
+
+Plug 'google/vim-searchindex'
+
+Plug 'kana/vim-operator-user' " Required for vim-operator-flashy
+Plug 'haya14busa/vim-operator-flashy'
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme                              = 'solarized'
+let g:airline_powerline_fonts                    = 1
+let g:airline#extensions#tabline#enabled         = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <plug>AirlineSelectTab1
+nmap <leader>2 <plug>AirlineSelectTab2
+nmap <leader>3 <plug>AirlineSelectTab3
+nmap <leader>4 <plug>AirlineSelectTab4
+nmap <leader>5 <plug>AirlineSelectTab5
+nmap <leader>6 <plug>AirlineSelectTab6
+nmap <leader>7 <plug>AirlineSelectTab7
+nmap <leader>8 <plug>AirlineSelectTab8
+nmap <leader>9 <plug>AirlineSelectTab9
+
+Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
+let g:undotree_WindowLayout = 2
+nnoremap U :UndotreeToggle<cr>
+
+Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+nnoremap <leader>n :NERDTreeToggle<cr>
+
+Plug 'junegunn/vim-peekaboo'
+
+Plug 'majutsushi/tagbar'
+nnoremap T :TagbarToggle<cr>
+
+Plug 'junegunn/goyo.vim'
+function! s:goyo_enter()
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    set noshowmode
+    set noshowcmd
+    set scrolloff=999
+    Limelight
+    set tw=72
+    set wrap
+    set nolist
+    NumbersDisable
+    set norelativenumber
+    " ...
+endfunction
+
+function! s:goyo_leave()
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    set showmode
+    set showcmd
+    set scrolloff=5
+    Limelight!
+    set tw=0
+    set nowrap
+    set list
+    NumbersEnable
+    " ...
+endfunction
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+nmap <leader>G :Goyo<cr>
+
+Plug 'junegunn/limelight.vim'
+let g:limelight_conceal_ctermfg = 'darkgray'
+
+Plug 'myusuf3/numbers.vim'
+
+" Better whitespace highlighting / provides :StripWhitespace
+Plug 'ntpeters/vim-better-whitespace'
+
+" Enhances builtin netrw file browser
+Plug 'tpope/vim-vinegar'
+
+" Highlights the overflowing part of a line that's too long
 Plug 'whatyouhide/vim-lengthmatters'
-"Plug 'w0rp/ale'
+let g:lengthmatters_on_by_default = 0
+
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'edkolev/tmuxline.vim'
+" Not using this because I'm not using a patched font
+" Plug 'ryanoasis/vim-devicons'
+
+
+" }}}
+
+" {{{ Git
+
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_eager = 1
+
+Plug 'junegunn/gv.vim'
+
+Plug 'tpope/vim-fugitive'
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>gs :Gstatus<cr>gg<c-n>
+nmap <leader>z :GV<cr>
+
+Plug 'rhysd/committia.vim'
+
+" }}}
+
+" {{{ Language / Filetype
+
+Plug 'blindFS/vim-taskwarrior'
+
+Plug 'elzr/vim-json'
+
+Plug 'fatih/vim-go'
+let g:go_fmt_command = 'goimports'
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+
+Plug 'jceb/vim-orgmode'
+
+Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
+
+Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
+
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
+
+Plug 'rhysd/vim-crystal'
+
+" for prose
+Plug 'reedes/vim-wordy'
+
+" Plug 'junegunn/vim-journal'
+" Plug 'klen/python-mode', { 'for' : 'python' }
+" Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
+
+" Language pack
+" Plug 'sheerun/vim-polyglot'
+
+" }}}
+
+" {{{ Completion
+
+Plug 'valloric/YouCompleteMe'
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_complete_in_comments                = 1
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<C-J>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>', '<C-K>']
+
+Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
+
+" Plug 'ajh17/VimCompletesMe'
+" Plug 'Shougo/deoplete.nvim'
+
+" }}}
+
+" {{{ Colorschemes
+
+Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
+Plug 'rakr/vim-one'
+
+" }}}
+
+" {{{ fzf
+
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all --no-update-rc' }
+Plug 'junegunn/fzf.vim'
+omap <leader><tab> <plug>(fzf-maps-o)
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+nnoremap <leader><Enter> :Buffers<cr>
+nnoremap <leader>` :Marks<cr>
+nnoremap <leader>ag :Ag<cr>
+map <leader><leader> :Files<cr>
+
+Plug 'Alok/notational-fzf-vim'
+let g:nv_directories = ['~/Dropbox/Apps/notational_velocity']
+nnoremap <c-l> :NV<cr>
+
+" }}}
+
+" {{{ Linters / Syntax / Formatting
+
+Plug 'w0rp/ale'
+
+Plug 'sbdchd/neoformat'
+
+" linting / make
+" Plug 'neomake/neomake'
+
+" Plug 'vim-syntastic/syntastic'
+" let g:syntastic_vim_checkers = ['vint']
+" let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
+" let g:syntastic_error_symbol   = "\u2717"
+" let g:syntastic_warning_symbol = "\u26A0"
+
+" }}}
+
+" {{{ Movement / Motions
+
+Plug 'easymotion/vim-easymotion'
+map <leader>j <plug>(easymotion-j)
+map <leader>k <plug>(easymotion-k)
+nmap s <plug>(easymotion-overwin-f)
+let g:EasyMotion_do_mapping       = 0
+let g:EasyMotion_smartcase        = 1
+let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+let g:EasyMotion_startofline      = 0
+
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch.vim'
+let g:incsearch#auto_nohlsearch = 1
+function! s:incsearch_config(...) abort
+    return incsearch#util#deepextend(deepcopy({
+                \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+                \   'keymap': {
+                \     "\<CR>": '<Over>(easymotion)'
+                \   },
+                \   'is_expr': 0
+                \ }), get(a:, 1, {}))
+endfunction
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+let g:incsearch#consistent_n_direction = 1
+
+Plug 'junegunn/vim-easy-align'
+nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
+
+Plug 'terryma/vim-expand-region'
+vmap <C-v> <plug>(expand_region_shrink)
+vmap v <plug>(expand_region_expand)
+
+" Lightweight version of vim-easymotion
+" Plug 'justinmk/vim-sneak'
+" Lightweight improvement of search
+" Plug 'junegunn/vim-slash'
+
+" }}}
+
+" {{{ Search
+
+Plug 'mileszs/ack.vim'
+
+Plug 'mhinz/vim-grepper'
+nnoremap <leader>gr :Grepper -tool git<cr>
+nnoremap <leader>rg :Grepper -tool ag<cr>
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+Plug 'rhysd/clever-f.vim'
+
+" }}}
+
+" {{{ Commenting
+
+Plug 'tpope/vim-commentary'
+
+Plug 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1
+
+" }}}
+
+" {{{ Documentation
+
+Plug 'keith/investigate.vim'
+map <leader>? :call investigate#Investigate()<cr>
+
+Plug 'rizzatti/dash.vim'
+
+" }}}
+
+" {{{ Other
+
+Plug 'johngrib/vim-game-code-break'
+
+Plug 'ryanss/vim-hackernews'
+
+Plug 'tmux-plugins/vim-tmux'
+
+" Deal with parentheses, quotes, etc.
+Plug 'tpope/vim-surround'
+
+" Manage session files
+Plug 'tpope/vim-obsession'
+
+" Repeat plugin maps
+Plug 'tpope/vim-repeat'
+
+" Use ^a / ^x to increment / decrement dates, times, etc.
+Plug 'tpope/vim-speeddating'
+
+" Handy bracket ( ] and [ ) mappings
+Plug 'tpope/vim-unimpaired'
+
+" Text exchange operator (cx)
+Plug 'tommcdo/vim-exchange'
+
+" Manages and creates tag files
+Plug 'ludovicchabant/vim-gutentags'
+
+" }}}
 
 call plug#end()
 filetype plugin indent on
 
 " }}}
 
-" {{{ Basic things
-
-syntax enable
+" {{{ Settings
 
 colorscheme solarized
 
- " Leader is space key
-let g:mapleader = "\<Space>"
+set autoindent                     " Automatically indent based on previous line.
+set expandtab                      " Convert tabs into spaces.
+set shiftwidth=4                   " >> indents by 4 spaces.
+set shiftround                     " >> indents to next multiple of 'shiftwidth'.
+set softtabstop=4                  " Tab key indents by 4 spaces.
 
-" }}}
+" set termguicolors
 
-" {{{ Settings
+set wrapscan                       " Wrap around the end of the buffer when searching.
 
-set autoindent
-set autoread                                " Read changes in files during editing.
-set autowriteall
-set background=dark                         " Dark background
-set backspace=eol,indent,start              " Make backspacing work regularly.
-set cinoptions=N-s
-set expandtab
-set foldenable
-set formatoptions=c,q,r,t,j,o               " test
-set hidden                                  " Don't get rid of hidden buffers
-set history=10000                           " Save 10000 lines of command history
-set ignorecase
-set incsearch
-set laststatus=2                            " Always show the last command.
-set lazyredraw                              " Don't redraw when using macros.
-set list                                    " Displays invisible characters.
+set autoread                       " Read changes in files during editing.
+set autowriteall                   " Write the file on a lot of different commands.
+
+set background=dark                " Dark background.
+
+set backspace=eol,indent,start     " Make backspacing work regularly.
+
+set cinoptions=N-s                 " For C program indentation.
+
+set foldenable                     " Enable folds.
+
+set formatoptions=c,q,r,t,j,o      " test
+
+set gdefault                       " Global substitutions by default
+
+set hidden                         " Don't get rid of hidden buffers
+
+set history=10000                  " Save 10000 lines of command history
+
+set infercase                      " For completions (replaces ignorecase)
+
+set incsearch                      " Incrementally search
+
+set laststatus=2                   " Always show the last command.
+
+set lazyredraw                     " Don't redraw when using macros.
+
+set list                           " Displays invisible characters.
 set listchars=tab:→-,eol:¬,trail:⋅
-set magic                                   " For regex
-set mat=2                                   " Number of tenths of a second to blink
+
+set magic                          " For regex
+
+set mat=2                          " Number of tenths of a second to blink for a match.
+
 set modelines=1
-set nobackup
-set nojoinspaces                            " Don't insert two spaces after punctuation with a join command
+
+set nojoinspaces                   " Don't insert two spaces after punctuation with a join command.
+
 set nostartofline
+
+set nobackup
 set noswapfile
+set tags+=tags;$HOME               " Recurse up to HOME dir for tags
+set undodir=~/.vim/undodir
+set undofile
+
 set nowrap
-set number
+
+" set number
 set ruler
 set scrolljump=8
 set scrolloff=3
-set shiftwidth=4
+
 set showcmd
 set showmatch
 set showmode
-set showtabline=2                           " Always show tabs in vim
+set showtabline=2                  " Always show tabline.
+
 set smartcase
 set smartindent
-set splitbelow                              " On horizontal split, open the split below.
-set splitright                              " On veritcal split, open the split to the right.
-set t_Co=256
-set tabstop=4
-set tags+=tags;$HOME                        " Recurse up to HOME dir for tags
-set title                                   " Set the title of the window
+
+set splitbelow                     " On horizontal split, open the split below.
+set splitright                     " On veritcal split, open the split to the right.
+
+set synmaxcol=200                  " Don't syntax highlight after 200 columns (for larger files).
+set title                          " Set the title of the window.
 set ttimeout
 set ttimeoutlen=50
-set ttyfast
 set textwidth=0
-set undodir=~/.vim/undodir
-set undofile
-set updatetime=250                          " Time to update in milliseconds
+
+set updatetime=250                 " Time to update in milliseconds
 set visualbell
+
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 set wildmenu
 set wildmode=list:longest,full
 
+" Some other useful options that I'm not using
+" set cursorline
+" highlight ColorColumn ctermbg=4 ctermfg=1
+
+" These options are ignored in Neovim
+set ttyfast
+set t_Co=256
+
 " }}}
 
 " {{{ Mappings
+
 nmap ; :
 nmap < <<
 nmap > >>
@@ -152,12 +457,14 @@ nmap Y :normal y$<cr>
 nmap p p'[v']=
 nmap <leader>/ :nohl<cr>
 nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
+
 nmap <leader>eg :e $HOME/.gitconfig<cr>
 nmap <leader>ev :e $MYVIMRC<cr>
 nmap <leader>ez :e $HOME/.zshrc<cr>
+
 nmap <leader>ms :mksession<cr>
 nmap <leader>q :q<cr>
-nmap <leader>r :retab<cr>
+nmap <leader>rt :retab<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>sp :setlocal spell!<cr>
 nmap <leader>sv :mksession<cr>
@@ -205,176 +512,6 @@ vnoremap / /\v
 xnoremap < <gv
 xnoremap > >gv
 
-" Fugitive
-nmap <leader>gd :Gdiff<cr>
-nmap <leader>gs :Gstatus<cr>gg<c-n>
-nmap <leader>z :GV<cr>
-
-" operator-flashy
-nmap Y <Plug>(operator-flashy)$
-map y <Plug>(operator-flashy)
-
-" EasyAlign
-nmap ga <plug>(EasyAlign)
-xmap ga <plug>(EasyAlign)
-
-" NERDTree
-nnoremap <leader>n :NERDTreeToggle<cr>
-
-" vim-plug
-nnoremap <leader>pc :PlugClean<cr>
-nnoremap <leader>pg :PlugUpgrade<cr>
-nnoremap <leader>ps :PlugStatus<cr>
-nnoremap <leader>pu :PlugUpdate<cr>
-
-" Tagbar
-nnoremap T :TagbarToggle<cr>
-
-"Undotree
-nnoremap U :UndotreeToggle<cr>
-
-" Investigate
-map <leader>? :call investigate#Investigate()<cr>
-
-" GitGutter
-map <leader>h :GitGutterLineHighlightsToggle<cr>
-
-" EasyMotion
-map <leader>j <plug>(easymotion-j)
-map <leader>k <plug>(easymotion-k)
-nmap s <plug>(easymotion-overwin-f)
-
-" EasyMotion x incsearch
-function! s:incsearch_config(...) abort
-    return incsearch#util#deepextend(deepcopy({
-                \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-                \   'keymap': {
-                \     "\<CR>": '<Over>(easymotion)'
-                \   },
-                \   'is_expr': 0
-                \ }), get(a:, 1, {}))
-endfunction
-
-" incsearch
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-
-" FZF
-omap <leader><tab> <plug>(fzf-maps-o)
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-nnoremap <leader><Enter> :Buffers<cr>
-nnoremap <leader>` :Marks<cr>
-nnoremap <leader>ag :Ag<cr>
-map <leader><leader> :Files<cr>
-
-" expand-region
-vmap <C-v> <plug>(expand_region_shrink)
-vmap v <plug>(expand_region_expand)
-
-" <Leader>!/@ | Google it / Feeling lucky
-function! s:goog(pat, lucky)
-    let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
-    let q = substitute(q, '[[:punct:] ]',
-                \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
-    call system(printf('open "https://www.google.com/search?%sq=%s"',
-                \ a:lucky ? 'btnI&' : '', q))
-endfunction
-nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 0)<cr>
-nnoremap <leader>@ :call <SID>goog(expand("<cWORD>"), 1)<cr>
-
-let g:limelight_conceal_ctermfg = 'darkgray'
-
-" Goyo
-function! s:goyo_enter()
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    set noshowmode
-    set noshowcmd
-    set scrolloff=999
-    Limelight
-    set tw=72
-    set wrap
-    set nolist
-    NumbersDisable
-    set norelativenumber
-    " ...
-endfunction
-
-function! s:goyo_leave()
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    set showmode
-    set showcmd
-    set scrolloff=5
-    Limelight!
-    set tw=0
-    set nowrap
-    set list
-    NumbersEnable
-    " ...
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-nmap <leader>G :Goyo<cr>
-
-" Abbreviations
-iab <expr> dts strftime("%m/%d/%y")
-
-" }}}
-
-" {{{ Plugin Configuration
-
-let g:airline_theme                              = 'solarized'
-let g:airline_powerline_fonts                    = 1
-let g:airline#extensions#tabline#enabled         = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-"let g:airline_left_sep='›'
-"let g:airline_right_sep='‹'
-nmap <leader>1 <plug>AirlineSelectTab1
-nmap <leader>2 <plug>AirlineSelectTab2
-nmap <leader>3 <plug>AirlineSelectTab3
-nmap <leader>4 <plug>AirlineSelectTab4
-nmap <leader>5 <plug>AirlineSelectTab5
-nmap <leader>6 <plug>AirlineSelectTab6
-nmap <leader>7 <plug>AirlineSelectTab7
-nmap <leader>8 <plug>AirlineSelectTab8
-nmap <leader>9 <plug>AirlineSelectTab9
-
-let g:EasyMotion_do_mapping       = 0
-let g:EasyMotion_smartcase        = 1
-let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
-let g:EasyMotion_enter_jump_first = 1
-let g:EasyMotion_space_jump_first = 1
-let g:EasyMotion_startofline      = 0
-
-let g:incsearch#auto_nohlsearch = 1
-
-let g:gitgutter_eager = 1
-
-let g:go_fmt_command = 'goimports'
-" let g:go_metalinter_command = 'gometalinter'
-" let g:go_metalinter_enable = ['vet', 'golint', 'errcheck', 'gotype', 'gofmt', 'goimports', 'testify', 'test', 'dupl', 'structcheck', 'aligncheck', 'gocyclo', 'ineffassign', 'vetshadow', 'varcheck', 'deadcode', 'interfacer', 'goconst', 'gosimple', 'staticcheck']
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-let g:incsearch#consistent_n_direction = 1
-
-let g:lengthmatters_on_by_default = 0
-
-" Insert a space after using NERDCommenter
-let g:NERDSpaceDelims = 1
-
 " open files in netrw in vertical split
 let g:netrw_browse_split = 2
 " take 25% of the window
@@ -382,33 +519,20 @@ let g:netrw_winsize = 25
 " tree-style netrw
 let g:netrw_liststyle = 3
 
-let g:nv_directories = ['~/Dropbox/Apps/notational_velocity']
-nnoremap <c-l> :NV<cr>
-
-" let g:syntastic_vim_checkers = ['vint']
-" let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
-" let g:syntastic_error_symbol   = "\u2717"
-" let g:syntastic_warning_symbol = "\u26A0"
-
-let g:undotree_WindowLayout = 2
-
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_complete_in_comments                = 1
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<C-J>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>', '<C-K>']
-
 if executable('rg')
     set grepprg=rg\ --vimgrep
 elseif executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-  set grepprg=ag\ --nogroup\ --nocolor
+    let g:ackprg = 'ag --vimgrep'
+    set grepprg=ag\ --nogroup\ --nocolor
 endif
+
+" Abbreviations
+iab <expr> dts strftime("%m/%d/%y")
 
 " }}}
 
 " {{{ Highlights
 
-highlight ColorColumn ctermbg=4 ctermfg=1
 highlight IncSearch   ctermbg=1 ctermfg=4
 highlight MatchParen  ctermbg=1 ctermfg=4
 highlight VertSplit   ctermbg=1
@@ -420,7 +544,7 @@ highlight Visual      ctermbg=1 ctermfg=4
 
 augroup FT
     autocmd FileType go   set noexpandtab tabstop=4 shiftwidth=4
-    autocmd FileType java set noexpandtab tabstop=4 shiftwidth=4
+    autocmd FileType java set expandtab tabstop=4 shiftwidth=4
     autocmd FileType sh   set shiftwidth=4
     autocmd FileType c    set cindent
     autocmd FileType help wincmd L
@@ -453,6 +577,15 @@ augroup GO
     autocmd FileType go nmap <leader>ot <Plug>(go-test)
     autocmd FileType go nmap <leader>ov <Plug>(go-vet)
 augroup END
+
+" }}}
+
+" {{{ Local Overrides
+
+let $LOCALFILE=expand("~/.vimrc_local")
+if filereadable($LOCALFILE)
+    source $LOCALFILE
+endif
 
 " }}}
 
