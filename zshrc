@@ -15,6 +15,8 @@ zplug "plugins/zsh_reload", from:oh-my-zsh
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
+zplug "supercrabtree/k"
+
 # Theme
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
@@ -36,6 +38,8 @@ zplug load
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 # }}}
 
 # {{{ other
@@ -51,13 +55,18 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
+
 alias -- -='cd -'
+
 alias md='mkdir -p'
 alias rd='rmdir'
 
 alias ll='ls -alGh'
 alias u='cd .. && ll'
+alias fn='find . -name'
+
 alias sh='space-hogs'
+alias cat='ccat'
 
 # from zsh_reload plugin
 alias so='src'
@@ -67,24 +76,26 @@ alias bubo='brew update && brew outdated'
 alias bubc='brew upgrade && brew cleanup'
 alias bubu='bubo && bubc'
 
-alias vim=nvim
-alias vi=nvim
-alias vimdiff=nvim -d
+alias vim='nvim'
+alias vi='nvim'
+alias vimdiff='nvim -d'
 
 alias zshrc="$EDITOR $HOME/.dotfiles/zshrc"
 alias vimrc="$EDITOR $HOME/.dotfiles/vimrc"
 
-alias news=newsbeuter
+alias news='newsbeuter'
 alias rm=trash
 alias rip='java -jar ~/src/bin/ripme.jar'
-alias 750=750words
-alias make=mmake
-alias mux=tmux
-alias n='nnn -d'
+alias 750='750words'
+alias make='mmake'
+alias mux='tmux'
+alias n='nnn'
 alias ls='exa'
+alias cb='clipboard'
 
-alias pip3up='pip3 list --outdated | cut -d " " -f1 | xargs -n1 pip3 install -U'
-alias pipup='pip list --outdated | cut -d " " -f1 | xargs -n1 pip install -U'
+alias brewcup='brew cu -y -a'
+alias pip3up='pip3 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip3 install -U'
+alias pip2up='pip2 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip2 install -U'
 alias goup='go get -u all'
 alias npmup='npm up -g'
 alias vimup='vim +PlugUpgrade +PlugUpdate +qall'
@@ -93,16 +104,13 @@ alias gemups='gem update --system'
 alias zpup='zplug update'
 alias masup='mas upgrade'
 alias rup='rustup update'
+alias aup='apm upgrade --no-confirm'
 
-alias up='bubu && pip3up && pipup && npmup && vimup && gemup && gemups && zpup && masup && rup && goup'
+alias up='bubu && brewcup && pip3up && pip2up && npmup && vimup && gemup && gemups && zpup && masup && rup && aup && goup'
 
-# }}}
-
-# {{{ Environment
-
-export FZF_DEFAULT_COMMAND='ag -g --hidden --ignore .git ""'
-
-export PATH="$PATH:~/src/bin/other/depot_tools"
+clone() {
+    git clone git@github.com:$1/$2.git
+}
 
 # }}}
 
@@ -191,14 +199,12 @@ setopt share_history
 # remove superfluous blanks from command line added to history list
 setopt hist_reduce_blanks
 
-export HISTFILE=~/.zsh_history
-export HISTSIZE=1000000
-export SAVEHIST=1000000
-
 # Misc
 # if we type a command that can't be issued, but is a directory, then cd to it
 setopt autocd
 
 # }}}
+
+eval "$(direnv hook zsh)"
 
 # vim:foldmethod=marker
