@@ -73,7 +73,7 @@ function! s:goyo_enter()
     set wrap
     set nolist
     NumbersDisable
-    set norelativenumber
+    " ALEDisable
     " ...
 endfunction
 
@@ -88,6 +88,7 @@ function! s:goyo_leave()
     set nowrap
     set list
     NumbersEnable
+    " ALEEnable
     " ...
 endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -114,7 +115,6 @@ let g:lengthmatters_on_by_default = 0
 " Not using this because I'm not using a patched font
 " Plug 'ryanoasis/vim-devicons'
 
-
 " }}}
 
 " {{{ Git
@@ -128,6 +128,8 @@ Plug 'tpope/vim-fugitive'
 nmap <leader>gd :Gdiff<cr>
 nmap <leader>gs :Gstatus<cr>gg<c-n>
 nmap <leader>z :GV<cr>
+
+Plug 'tpope/vim-rhubarb'
 
 Plug 'rhysd/committia.vim'
 
@@ -158,6 +160,8 @@ Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
 Plug 'rhysd/vim-crystal'
+
+Plug 'mattn/gist-vim'
 
 " for prose
 Plug 'reedes/vim-wordy'
@@ -214,18 +218,26 @@ nnoremap <c-l> :NV<cr>
 
 " {{{ Linters / Syntax / Formatting
 
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 Plug 'sbdchd/neoformat'
 
 " linting / make
 " Plug 'neomake/neomake'
 
-" Plug 'vim-syntastic/syntastic'
-" let g:syntastic_vim_checkers = ['vint']
-" let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
-" let g:syntastic_error_symbol   = "\u2717"
-" let g:syntastic_warning_symbol = "\u26A0"
+Plug 'vim-syntastic/syntastic'
+let g:syntastic_vim_checkers = ['vint']
+let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
+let g:syntastic_error_symbol   = "\u2717"
+let g:syntastic_warning_symbol = "\u26A0"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " }}}
 
@@ -379,7 +391,8 @@ set hidden                         " Don't get rid of hidden buffers
 
 set history=10000                  " Save 10000 lines of command history
 
-set infercase                      " For completions (replaces ignorecase)
+set ignorecase                     " Needed for infercase
+" set infercase                      " For completions (replaces ignorecase)
 
 set incsearch                      " Incrementally search
 
@@ -434,6 +447,7 @@ set updatetime=250                 " Time to update in milliseconds
 set visualbell
 
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
+set wildignorecase
 set wildmenu
 set wildmode=list:longest,full
 
