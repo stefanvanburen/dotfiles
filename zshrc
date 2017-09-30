@@ -13,9 +13,12 @@ zplug "plugins/taskwarrior", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "plugins/zsh_reload", from:oh-my-zsh
 
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
+zplug "b4b4r07/enhancd", use:init.sh
 zplug "supercrabtree/k"
+
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Theme
 zplug "mafredri/zsh-async", from:github
@@ -40,6 +43,10 @@ zplug load
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+eval "$(direnv hook zsh)"
+
+if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
+
 # }}}
 
 # {{{ other
@@ -56,17 +63,21 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
-alias -- -='cd -'
+alias -- -='\cd -'
 
 alias md='mkdir -p'
 alias rd='rmdir'
 
+alias k='k -h' # relies on k plugin
 alias ll='ls -alGh'
 alias u='cd .. && ll'
 alias fn='find . -name'
+alias h="cd $HOME"
 
 alias sh='space-hogs'
 alias cat='ccat'
+alias rm='trash' # npm install --global trash-cli
+alias cb='clipboard' # npm install --global clipboard-cli
 
 # from zsh_reload plugin
 alias so='src'
@@ -82,16 +93,18 @@ alias vimdiff='nvim -d'
 
 alias zshrc="$EDITOR $HOME/.dotfiles/zshrc"
 alias vimrc="$EDITOR $HOME/.dotfiles/vimrc"
+alias ze="$EDITOR $HOME/.dotfiles/zshrc"
+alias ve="$EDITOR $HOME/.dotfiles/vimrc"
 
 alias news='newsbeuter'
-alias rm=trash
-alias rip='java -jar ~/src/bin/ripme.jar'
+alias rip='java -jar ~/src/bp/ripme.jar'
 alias 750='750words'
-alias make='mmake'
 alias mux='tmux'
 alias n='nnn'
 alias ls='exa'
-alias cb='clipboard'
+alias g='git'
+alias ytdl='youtube-dl'
+alias yg='you-get'
 
 alias brewcup='brew cu -y -a'
 alias pip3up='pip3 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip3 install -U'
@@ -107,6 +120,8 @@ alias rup='rustup update'
 alias aup='apm upgrade --no-confirm'
 
 alias up='bubu && brewcup && pip3up && pip2up && npmup && vimup && gemup && gemups && zpup && masup && rup && aup && goup'
+
+alias ss='savestory'
 
 clone() {
     git clone git@github.com:$1/$2.git
@@ -204,7 +219,5 @@ setopt hist_reduce_blanks
 setopt autocd
 
 # }}}
-
-eval "$(direnv hook zsh)"
 
 # vim:foldmethod=marker
