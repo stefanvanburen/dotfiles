@@ -40,6 +40,7 @@
 
     unstage = reset -q HEAD --
     us = reset -q HEAD --
+	git = !exec git
 
 [color]
     ui = auto
