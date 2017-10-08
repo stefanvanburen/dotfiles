@@ -9,6 +9,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
+    ~/.cheat: cheat
     ~/.agignore: agignore
     ~/.gemrc: gemrc
     ~/.gitconfig: gitconfig

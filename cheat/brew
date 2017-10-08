@@ -1,0 +1,5 @@
+# Generate a Brewfile with `brew bundle`
+brew bundle dump
+
+# Install contents of a Brewfile
+brew bundle
