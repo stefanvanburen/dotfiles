@@ -211,7 +211,7 @@ nnoremap <leader>ag :Ag<cr>
 map <leader><leader> :Files<cr>
 
 Plug 'Alok/notational-fzf-vim'
-let g:nv_directories = ['~/Dropbox/Apps/notational_velocity']
+let g:nv_directories = ['~/nv']
 nnoremap <c-l> :NV<cr>
 
 " }}}
@@ -234,10 +234,10 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " }}}
 
