@@ -37,8 +37,6 @@ zplug load
 
 # {{{ scripts
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -46,10 +44,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 eval "$(direnv hook zsh)"
 
 if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
-
-# }}}
-
-# {{{ other
 
 eval "$(thefuck --alias)"
 
@@ -76,7 +70,7 @@ alias h="cd $HOME"
 
 alias sh='space-hogs'
 alias cat='ccat'
-alias rm='trash' # npm install --global trash-cli
+# alias rm='trash' # npm install --global trash-cli
 alias cb='clipboard' # npm install --global clipboard-cli
 
 # from zsh_reload plugin
@@ -105,8 +99,10 @@ alias ls='exa'
 alias g='git'
 alias ytdl='youtube-dl'
 alias yg='you-get'
+alias ssh='mosh'
 
-alias brewcup='brew cu -y -a'
+# -a forces updates
+alias brewcup='brew cu -y'
 alias pip3up='pip3 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip3 install -U'
 alias pip2up='pip2 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip2 install -U'
 alias goup='go get -u all'
@@ -122,10 +118,6 @@ alias aup='apm upgrade --no-confirm'
 alias up='bubu && brewcup && pip3up && pip2up && npmup && vimup && gemup && gemups && zpup && masup && rup && aup && goup'
 
 alias ss='savestory'
-
-clone() {
-    git clone git@github.com:$1/$2.git
-}
 
 # }}}
 
@@ -217,6 +209,12 @@ setopt hist_reduce_blanks
 # Misc
 # if we type a command that can't be issued, but is a directory, then cd to it
 setopt autocd
+
+# }}}
+
+# {{{ Local Configuration
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # }}}
 
