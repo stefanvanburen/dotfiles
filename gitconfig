@@ -40,7 +40,8 @@
 
     unstage = reset -q HEAD --
     us = reset -q HEAD --
-	git = !exec git
+    git = !exec git
+    ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
 [color]
     ui = auto
