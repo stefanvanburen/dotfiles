@@ -18,6 +18,7 @@
     ~/.zshrc: zshrc
     ~/.zprofile: zprofile
     ~/.zshenv: zshenv
+    ~/.curlrc: curlrc
     ~/.newsbeuter/config:
         create: true
         path: newsbeuter_config
