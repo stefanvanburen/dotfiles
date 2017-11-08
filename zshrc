@@ -62,47 +62,102 @@ alias -- -='\cd -'
 alias md='mkdir -p'
 alias rd='rmdir'
 
-alias k='k -h' # relies on k plugin
+# relies on k plugin
+if (( $+commands[k] )); then
+    alias k='k -h'
+    alias l=k
+fi
+
 alias ll='ls -alGh'
 alias u='cd .. && ll'
 alias fn='find . -name'
 alias h="cd $HOME"
 
-alias sh='space-hogs'
-alias cat='ccat'
-# alias rm='trash' # npm install --global trash-cli
-alias cb='clipboard' # npm install --global clipboard-cli
+# npm install --global space-hogs
+if (( $+commands[space-hogs] )); then
+    alias sh='space-hogs'
+fi
+
+# brew install ccat
+if (( $+commands[ccat] )); then
+    alias cat='ccat'
+fi
+
+# npm install --global clipboard-cli
+if (( $+commands[ccat] )); then
+    alias cb='clipboard'
+fi
 
 # from zsh_reload plugin
 alias so='src'
 
 # taken from oh-my-zsh brew plugin
-alias bubo='brew update && brew outdated'
-alias bubc='brew upgrade && brew cleanup'
-alias bubu='bubo && bubc'
+if (( $+commands[brew] )); then
+    alias bubo='brew update && brew outdated'
+    alias bubc='brew upgrade && brew cleanup'
+    alias bubu='bubo && bubc'
+fi
 
-alias vim='nvim'
-alias vi='nvim'
-alias vimdiff='nvim -d'
+# if (( $+commands[nvim] )); then
+#     alias vim='nvim'
+#     alias vi='nvim'
+#     alias v='nvim'
+#     alias vimdiff='nvim -d'
+# elif (( $+commands[vim] )); then
+#     alias vi='vim'
+#     alias v='vim'
+# fi
+
+if (( $+commands[vim] )); then
+    alias vi='vim'
+    alias v='vim'
+fi
 
 alias zshrc="$EDITOR $HOME/.dotfiles/zshrc"
 alias vimrc="$EDITOR $HOME/.dotfiles/vimrc"
 alias ze="$EDITOR $HOME/.dotfiles/zshrc"
 alias ve="$EDITOR $HOME/.dotfiles/vimrc"
 
-alias news='newsbeuter'
-alias rip='java -jar ~/src/bp/ripme.jar'
-alias 750='750words'
-alias mux='tmux'
-alias n='nnn'
-alias ls='exa'
-alias g='git'
-alias ytdl='youtube-dl'
-alias yg='you-get'
-alias ssh='mosh'
+if (( $+commands[newsbeuter] )); then
+    alias news='newsbeuter'
+fi
+
+if (( $+commands[tmux] )); then
+    function tm() {
+        [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+        if [ $1 ]; then
+            tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+        fi
+        session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+    }
+fi
+
+if (( $+commands[nnn] )); then
+    alias n='nnn'
+fi
+
+if (( $+commands[exa] )); then
+    alias ls='exa'
+fi
+
+if (( $+commands[git] )); then
+    alias g='git'
+fi
+
+if (( $+commands[youtube-dl] )); then
+    alias ytdl='youtube-dl'
+fi
+
+if (( $+commands[you-get] )); then
+    alias yg='you-get'
+fi
+
+if (( $+commands[mosh] )); then
+    alias ssh='mosh'
+fi
 
 # -a forces updates
-alias brewcup='brew cu -y'
+alias brewcup='brew cu -y && brew cask cleanup'
 alias pip3up='pip3 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip3 install -U'
 alias pip2up='pip2 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip2 install -U'
 alias goup='go get -u all'
@@ -117,13 +172,16 @@ alias aup='apm upgrade --no-confirm'
 
 alias up='bubu && brewcup && pip3up && pip2up && npmup && vimup && gemup && gemups && zpup && masup && rup && aup && goup'
 
-alias ss='savestory'
+alias pip='pip3'
+alias python='python3'
 
 # }}}
 
 # {{{ Configuration
 
-# {{{ Literally the oh-my-zsh lib completion.zsh file with some minor modifications
+# {{{ Completion
+
+# Literally the oh-my-zsh lib completion.zsh file with some minor modifications
 
 zmodload -i zsh/complist
 
@@ -192,7 +250,8 @@ fi
 
 # }}}
 
-### History
+# {{{ History
+
 # add timestamp to history
 setopt extended_history
 # don't store the "history" command when calling it
@@ -205,6 +264,8 @@ setopt inc_append_history
 setopt share_history
 # remove superfluous blanks from command line added to history list
 setopt hist_reduce_blanks
+
+# }}}
 
 # Misc
 # if we type a command that can't be issued, but is a directory, then cd to it

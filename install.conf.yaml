@@ -14,7 +14,6 @@
     ~/.gemrc: gemrc
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
-    ~/.spacemacs: spacemacs
     ~/.zshrc: zshrc
     ~/.zprofile: zprofile
     ~/.zshenv: zshenv

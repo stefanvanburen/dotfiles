@@ -3,8 +3,17 @@
 # {{{ Typical
 
 export PAGER='less'
-export EDITOR='nvim'
-export PATH="/usr/local/sbin:$HOME/src/bin:$HOME/src/bp:$HOME/src/go/bin:$HOME/.cargo/bin:$PATH"
+# export LESS='-FMiX'
+export PURE_PROMPT_SYMBOL='∞'
+
+# if (( $+commands[nvim] )); then
+#     export EDITOR='nvim'
+# elif (( $+commands[vim] )); then
+#     export EDITOR='vim'
+# fi
+export EDITOR='vim'
+
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/src/bin:$HOME/src/bp:$HOME/src/go/bin:$HOME/.cargo/bin:$HOME/.fastlane/bin:$PATH"
 
 # }}}
 
@@ -14,7 +23,13 @@ export GOPATH="$HOME/src/go"
 
 # }}}
 
-export FZF_DEFAULT_COMMAND='ag -g --hidden --ignore .git ""'
+# {{{ FZF
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+
+# }}}
 
 # {{{ ZSH options
 
