@@ -32,6 +32,8 @@ Thumbs.db
 *.ropeproject
 *~
 
-tags
+TODO*
 
-vim/files
+NOTES*
+
+tags
