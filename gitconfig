@@ -1,4 +1,5 @@
 [alias]
+    a = add
     aa = add .
 
 # show git aliases
@@ -30,7 +31,7 @@
 
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 
-    p = push
+    p = pull
 
     s = status -s
     sl = stash list
@@ -77,6 +78,9 @@
 [credential]
     helper = store
 
+[diff]
+    tool = vimdiff
+
 [github]
     user = svanburen
 
@@ -94,11 +98,13 @@
     default = current
 
 [init]
-    templatedir = ~/.git_template
+    ; templatedir = ~/.git_template
 
 [hub]
-    protocol = https
+    protocol = ssh
 
 [user]
     name = Stefan VanBuren
     email = vanburenstefan@gmail.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/
