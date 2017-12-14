@@ -67,7 +67,7 @@
     newHighlight = 46 bold 22
 
 [commit]
-    # gpgsign = true
+    ; gpgsign = true
     verbose = true
 
 [core]
@@ -106,5 +106,7 @@
 [user]
     name = Stefan VanBuren
     email = vanburenstefan@gmail.com
+
+; For work SSO
 [url "git@github.com:"]
 	insteadOf = https://github.com/

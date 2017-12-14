@@ -58,6 +58,8 @@ nnoremap U :UndotreeToggle<cr>
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 nnoremap <leader>n :NERDTreeToggle<cr>
+" Show hidden files in NERDTree
+let NERDTreeShowHidden=1
 
 Plug 'junegunn/vim-peekaboo'
 
@@ -149,13 +151,19 @@ Plug 'rhysd/committia.vim'
 " Better default for diffs
 Plug 'chrisbra/vim-diff-enhanced'
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
-if &diff
-    let &diffexpr='EnhancedDiff#Diff("git diff", --diff-algorithm=patience")'
-endif
+" if &diff
+"     let &diffexpr='EnhancedDiff#Diff("git diff", --diff-algorithm=patience")'
+" endif
 
 " }}}
 
 " {{{ Language / Filetype
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 Plug 'blindFS/vim-taskwarrior'
 
@@ -169,8 +177,15 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_test_prepend_name = 1
 
-Plug 'jceb/vim-orgmode'
+" Run gometalinter on save
+let g:go_metalinter_autosave = 1
+" Just run vet and golint from gometalinter on save
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
 
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 
@@ -179,11 +194,11 @@ Plug 'rhysd/vim-crystal'
 
 Plug 'mattn/gist-vim'
 
+Plug 'fatih/vim-nginx'
+
 " for prose
 " Not super maintained - using ale + vale & write-good instead
 " Plug 'reedes/vim-wordy'
-
-" for tmux.conf files
 
 " for tmux.conf files
 Plug 'tmux-plugins/vim-tmux'
@@ -191,6 +206,7 @@ Plug 'tmux-plugins/vim-tmux'
 
 Plug 'cespare/vim-toml'
 
+" Plug 'jceb/vim-orgmode'
 " Plug 'junegunn/vim-journal'
 " Plug 'klen/python-mode', { 'for' : 'python' }
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
@@ -210,8 +226,8 @@ Plug 'cespare/vim-toml'
 Plug 'valloric/YouCompleteMe'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_complete_in_comments                = 1
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<C-J>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>', '<C-K>']
+let g:ycm_key_list_select_completion = ['<Tab>']
+let g:ycm_key_list_previous_completion = ['<S-Tab>']
 
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
@@ -244,7 +260,7 @@ nnoremap <leader><leader> :Files<cr>
 " nnoremap <leader>ag :Ag<cr>
 
 Plug 'Alok/notational-fzf-vim'
-let g:nv_directories = ['~/nv']
+let g:nv_search_paths = ['~/nv']
 nnoremap <c-l> :NV<cr>
 
 " }}}
@@ -552,7 +568,7 @@ set ttimeoutlen=50
 
 set textwidth=0
 
-" set updatetime=250                 " Time to write swap file to disk in milliseconds
+set updatetime=100                 " Time to write swap file to disk in milliseconds
 
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
