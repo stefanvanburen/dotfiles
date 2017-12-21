@@ -1,0 +1,75 @@
+# Start tmux:
+tmux
+
+# Detach from tmux:
+<prefix> d
+
+# Restore tmux session:
+tmux attach
+
+# Detach an already attached session (great if you are moving devices with different screen resolutions)
+tmux attach -d
+
+# Display session:
+tmux ls
+
+# Rename session:
+<prefix> $
+
+# Switch session:
+<prefix> s
+
+# Start a shared session:
+tmux -S /tmp/your_shared_session
+chmod 777 /tmp/your_shared_session
+
+# Help screen (q to quit):
+<prefix> ?
+
+# Scroll in window:
+<prefix> PageUp/PageDown
+
+# Reload configuration file
+<prefix> : source-file /path/to/file
+
+# Window management
+# =================
+
+# Create window:
+<prefix> c
+
+# Destroy window:
+<prefix> x
+
+# Switch between windows:
+<prefix> [0-9]
+or
+<prefix> Arrows
+
+# Split windows horizontally:
+<prefix> %
+
+# Split windows vertically:
+<prefix> "
+
+# Pane management
+# ===============
+
+# Rename pane
+<prefix> ,
+
+# Swap panes
+# Swap to the left
+<prefix> {
+# Swap to the right
+<prefix> }
+
+# Choose pane
+# Will decorate panes with increasing numbers; can quickly press the number to switch to a pane
+<prefix> q
+
+# Renumber window
+<prefix> .
+
+# Maximize pane (repeat to restore layout)
+<prefix> z
