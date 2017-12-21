@@ -32,8 +32,10 @@ Thumbs.db
 *.ropeproject
 *~
 
+# ignore TODO files
 TODO*
 
+# ignore NOTES files
 NOTES*
 
 tags
