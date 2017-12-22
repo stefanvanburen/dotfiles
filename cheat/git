@@ -95,6 +95,13 @@ git diff branch_1 branch_2                              # Check difference betwe
 git log                                                 # Show all the commits
 git status                                              # Show the changes from last commit
 
+# Keep a fork up to date
+git clone https://github.com/USER/REPO
+cd REPO
+git remote add upstream https://github.com/ORIGINAL-USER/REPO
+git fetch upstream
+git merge upstream/master
+
 # Commit history of a set of files
 git log --pretty=email --patch-with-stat --reverse --full-index -- Admin\*.py > Sripts.patch
 
