@@ -37,14 +37,27 @@ zplug load
 
 # {{{ scripts
 
+# https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# https://www.iterm2.com/documentation-shell-integration.html
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# https://direnv.net/
+# https://github.com/direnv/direnv
 eval "$(direnv hook zsh)"
 
+# https://github.com/Homebrew/homebrew-command-not-found
 if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
 
+# https://github.com/aykamko/tag
+if (( $+commands[tag] )); then
+  export TAG_SEARCH_PROG=rg
+  tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
+  alias rg=tag
+fi
+
+# https://github.com/nvbn/thefuck
 eval "$(thefuck --alias)"
 
 # }}}
@@ -97,7 +110,7 @@ if (( $+commands[ccat] )); then
 fi
 
 # npm install --global clipboard-cli
-if (( $+commands[ccat] )); then
+if (( $+commands[clipboard] )); then
     alias cb='clipboard'
 fi
 
@@ -200,10 +213,16 @@ zmodload -i zsh/complist
 
 WORDCHARS=''
 
-unsetopt menu_complete   # do not autoselect the first completion entry
+# do not autoselect the first completion entry
+unsetopt menu_complete
+
 unsetopt flowcontrol
-setopt auto_menu         # show completion menu on successive tab press
+
+# show completion menu on successive tab press
+setopt auto_menu
+
 setopt complete_in_word
+
 setopt always_to_end
 
 # should this be in keybindings?
@@ -282,7 +301,8 @@ setopt hist_reduce_blanks
 
 # }}}
 
-# Misc
+# {{{ Misc
+
 # if we type a command that can't be issued, but is a directory, then cd to it
 setopt autocd
 
@@ -295,3 +315,5 @@ setopt autocd
 # }}}
 
 # vim:foldmethod=marker
+
+export GPG_TTY=$(tty)

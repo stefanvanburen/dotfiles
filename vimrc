@@ -77,6 +77,8 @@ let NERDTreeQuitOnOpen = 1
 " Start NERDtree when starting vim
 " Nah
 " autocmd vimenter * NERDTree
+" Show hidden files in NERDTree
+let NERDTreeShowHidden=1
 
 Plug 'junegunn/vim-peekaboo'
 
@@ -169,7 +171,7 @@ Plug 'rhysd/committia.vim'
 Plug 'chrisbra/vim-diff-enhanced'
 " This has trouble when it comes to using vim as git's mergetool, so turning
 " off for now
-" " started In Diff-Mode set diffexpr (plugin not loaded yet)
+" started In Diff-Mode set diffexpr (plugin not loaded yet)
 " if &diff
 "     let &diffexpr='EnhancedDiff#Diff("git diff", --diff-algorithm=patience")'
 " endif
@@ -206,6 +208,14 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_test_prepend_name = 1
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
+
+" Run gometalinter on save
+let g:go_metalinter_autosave = 1
+" Just run vet and golint from gometalinter on save
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 
 " Takes a bit too long
 " let g:go_metalinter_autosave = 1
@@ -225,6 +235,8 @@ Plug 'rhysd/vim-crystal'
 " Gist
 Plug 'mattn/gist-vim'
 
+Plug 'fatih/vim-nginx'
+
 " for prose
 " Not super maintained - using ale + vale & write-good instead
 " Plug 'reedes/vim-wordy'
@@ -236,6 +248,7 @@ Plug 'tmux-plugins/vim-tmux'
 " TOML
 Plug 'cespare/vim-toml'
 
+" Plug 'jceb/vim-orgmode'
 " Plug 'junegunn/vim-journal'
 
 " Python
@@ -627,7 +640,7 @@ set ttimeoutlen=50
 
 set textwidth=0
 
-" set updatetime=250                 " Time to write swap file to disk in milliseconds
+set updatetime=100                 " Time to write swap file to disk in milliseconds
 
 if has('nvim')
     set shada='100,n$HOME/.vim/files/info/nviminfo
