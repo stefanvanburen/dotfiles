@@ -80,6 +80,9 @@ let NERDTreeQuitOnOpen = 1
 " autocmd vimenter * NERDTree
 =======
 nnoremap <leader>n :NERDTreeToggle<cr>
+<<<<<<< HEAD
+>>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
+=======
 >>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
 " Show hidden files in NERDTree
 let NERDTreeShowHidden=1
@@ -185,6 +188,7 @@ Plug 'chrisbra/vim-diff-enhanced'
 " {{{ Language / Filetype
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 " Track the engine.
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
@@ -197,12 +201,17 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Taskwarrior
 =======
+=======
+>>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
+<<<<<<< HEAD
+>>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
+=======
 >>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
 Plug 'blindFS/vim-taskwarrior'
 
@@ -223,8 +232,11 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_test_prepend_name = 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
+=======
+>>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
 =======
 >>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
 
@@ -234,6 +246,7 @@ let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 " Takes a bit too long
 " let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
@@ -242,6 +255,10 @@ let g:go_metalinter_deadline = "5s"
 
 " Org-Mode
 Plug 'jceb/vim-orgmode'
+=======
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
+>>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
 =======
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
@@ -297,8 +314,13 @@ Plug 'valloric/YouCompleteMe'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_complete_in_comments                = 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 let g:ycm_key_list_select_completion = ['<TAB>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>']
+=======
+let g:ycm_key_list_select_completion = ['<Tab>']
+let g:ycm_key_list_previous_completion = ['<S-Tab>']
+>>>>>>> 3082f569b0b3891a9eca173d25447d648cab3c40
 =======
 let g:ycm_key_list_select_completion = ['<Tab>']
 let g:ycm_key_list_previous_completion = ['<S-Tab>']
