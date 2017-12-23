@@ -24,23 +24,36 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'mhinz/vim-startify'
 let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
+" use utf-8 for fortune rather than ascii
+let g:startify_fortune_use_unicode    = 1
+" update startify while vim is running
+let g:startify_update_oldfiles        = 1
+" use environment variables if they shorten path names
+let g:startify_use_env                = 1
+" Don't change to the directory of a file when using startify
+let g:startify_change_to_dir = 0
 
 " Resizes active windows according to Golden Ratio
 " Neat idea in theory - tends to wonk things up in practice
 " Plug 'roman/golden-ratio'
 
-Plug 'kana/vim-operator-user' " Required for vim-operator-flashy
+" Required for vim-operator-flashy
+Plug 'kana/vim-operator-user'
 Plug 'haya14busa/vim-operator-flashy'
 map y <plug>(operator-flashy)
 nmap Y <plug>(operator-flashy)$
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" Not terribly useful
+" Plug 'bling/vim-bufferline'
 let g:airline_theme                              = 'solarized'
 let g:airline_powerline_fonts                    = 1
+" Don't need this as I have my own tmux statusline config
 " let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#tabline#enabled         = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#ale#enabled = 1
 nmap <leader>1 <plug>AirlineSelectTab1
 nmap <leader>2 <plug>AirlineSelectTab2
 nmap <leader>3 <plug>AirlineSelectTab3
@@ -53,18 +66,24 @@ nmap <leader>9 <plug>AirlineSelectTab9
 
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 let g:undotree_WindowLayout = 2
-nnoremap U :UndotreeToggle<cr>
+nnoremap <leader>U :UndotreeToggle<cr>
 
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>N :NERDTreeToggle<cr>
+nnoremap <C-n> :NERDTreeToggle<cr>
+" Quit NERDTree on opening a file
+let NERDTreeQuitOnOpen = 1
+" Start NERDtree when starting vim
+" Nah
+" autocmd vimenter * NERDTree
 " Show hidden files in NERDTree
 let NERDTreeShowHidden=1
 
 Plug 'junegunn/vim-peekaboo'
 
 Plug 'majutsushi/tagbar'
-nnoremap T :TagbarToggle<cr>
+nnoremap <leader>T :TagbarToggle<cr>
 
 Plug 'junegunn/goyo.vim'
 function! s:goyo_enter()
@@ -80,7 +99,6 @@ function! s:goyo_enter()
     set tw=72
     set wrap
     set nolist
-    " ALEDisable
     " ...
 endfunction
 
@@ -95,7 +113,6 @@ function! s:goyo_leave()
     set tw=0
     set nowrap
     set list
-    " ALEEnable
     " ...
 endfunction
 
@@ -133,6 +150,8 @@ let g:lengthmatters_on_by_default = 0
 " {{{ Git
 
 Plug 'airblade/vim-gitgutter'
+" Turns on gitgutter updating for a variety of events
+" ex: switch buffers, tabs, etc
 let g:gitgutter_eager = 1
 
 Plug 'junegunn/gv.vim'
@@ -150,6 +169,8 @@ Plug 'rhysd/committia.vim'
 
 " Better default for diffs
 Plug 'chrisbra/vim-diff-enhanced'
+" This has trouble when it comes to using vim as git's mergetool, so turning
+" off for now
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
 " if &diff
 "     let &diffexpr='EnhancedDiff#Diff("git diff", --diff-algorithm=patience")'
@@ -159,16 +180,26 @@ Plug 'chrisbra/vim-diff-enhanced'
 
 " {{{ Language / Filetype
 
+" Track the engine.
 Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
+" Taskwarrior
 Plug 'blindFS/vim-taskwarrior'
 
+" GraphQL
+Plug 'jparise/vim-graphql'
+
+" JSON
 Plug 'elzr/vim-json'
 
+" Go
 Plug 'fatih/vim-go'
 let g:go_fmt_command = 'goimports'
 let g:go_highlight_functions = 1
@@ -178,20 +209,25 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_test_prepend_name = 1
-
-" Run gometalinter on save
-let g:go_metalinter_autosave = 1
-" Just run vet and golint from gometalinter on save
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 
+" Takes a bit too long
+" let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+" How long to allow metalinter to run (5s is the default)
+let g:go_metalinter_deadline = "5s"
+
+" Org-Mode
+Plug 'jceb/vim-orgmode'
+
+" Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 
-" crystal-lang
+" Crystal
 Plug 'rhysd/vim-crystal'
 
+" Gist
 Plug 'mattn/gist-vim'
 
 Plug 'fatih/vim-nginx'
@@ -204,11 +240,19 @@ Plug 'fatih/vim-nginx'
 Plug 'tmux-plugins/vim-tmux'
 " Plug 'keith/tmux.vim'
 
+" TOML
 Plug 'cespare/vim-toml'
 
 " Plug 'jceb/vim-orgmode'
 " Plug 'junegunn/vim-journal'
-" Plug 'klen/python-mode', { 'for' : 'python' }
+
+" Python
+Plug 'vim-python/python-syntax'
+
+" Pretty laggy
+" Plug 'python-mode/python-mode', { 'for' : 'python' }
+" let g:pymode_python = 'python3'
+
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'lervag/vimtex'
 " Plug 'ledger/vim-ledger'
@@ -226,8 +270,8 @@ Plug 'cespare/vim-toml'
 Plug 'valloric/YouCompleteMe'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_complete_in_comments                = 1
-let g:ycm_key_list_select_completion = ['<Tab>']
-let g:ycm_key_list_previous_completion = ['<S-Tab>']
+let g:ycm_key_list_select_completion = ['<TAB>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>']
 
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
@@ -241,6 +285,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
+Plug 'flazz/vim-colorschemes'
 
 " }}}
 
@@ -253,9 +298,11 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 
 nnoremap <leader><Enter> :Buffers<cr>
-nnoremap <leader>` :Marks<cr>
+nnoremap <leader>m :Marks<cr>
 nnoremap <leader>t :Tags<cr>
 nnoremap <leader><leader> :Files<cr>
+nnoremap ? :GFiles<cr>
+nnoremap <leader>gc :Commits<cr>
 " Having trouble with this - probably best to use vim-grepper instead
 " nnoremap <leader>ag :Ag<cr>
 
@@ -269,6 +316,11 @@ nnoremap <c-l> :NV<cr>
 
 " For linting
 Plug 'w0rp/ale'
+" let g:ale_sign_error = '💥 '
+" let g:ale_sign_warning = '🚧 '
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_linters = {'go': ['gometalinter']}
+" let g:ale_go_gometalinter_options = '--fast'
 
 Plug 'sbdchd/neoformat'
 
@@ -283,8 +335,9 @@ Plug 'rhysd/vim-clang-format'
 " autocmd FileType java AutoFormatBuffer google-java-format
 
 " linting / make
-" Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 
+" Using ale instead
 " Plug 'vim-syntastic/syntastic'
 " let g:syntastic_vim_checkers = ['vint']
 " let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
@@ -293,7 +346,6 @@ Plug 'rhysd/vim-clang-format'
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
-
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
@@ -306,7 +358,9 @@ Plug 'rhysd/vim-clang-format'
 Plug 'easymotion/vim-easymotion'
 map <leader>j <plug>(easymotion-j)
 map <leader>k <plug>(easymotion-k)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
 nmap s <plug>(easymotion-overwin-f2)
+nmap F <plug>(easymotion-overwin-f2)
 let g:EasyMotion_do_mapping       = 0
 let g:EasyMotion_smartcase        = 1
 "let g:EasyMotion_use_upper        = 1
@@ -315,6 +369,8 @@ let g:EasyMotion_enter_jump_first = 1
 let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_startofline      = 0
 
+" Possible update to incsearch? (TODO: does it provide all the functionality fleshed out below?)
+" Plug 'haya14busa/is.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 " Not using fuzzy search for now - add the lines below the plug to the inner
@@ -334,7 +390,8 @@ function! s:incsearch_config(...) abort
                 \ }), get(a:, 1, {}))
 endfunction
 noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+" Using ? for :GFiles mapping
+" noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
 noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
 map n <plug>(incsearch-nohl-n)
 map N <plug>(incsearch-nohl-N)
@@ -476,6 +533,8 @@ colorscheme solarized
 
 set autoindent                     " Automatically indent based on previous line.
 set expandtab                      " Convert tabs into spaces.
+
+" Setting these language by language
 " set shiftwidth=4                   " >> and << indent by 4 spaces.
 " set shiftround                     " >> and << indent to next multiple of 'shiftwidth'.
 " set softtabstop=4                  " Tab key indents by 4 spaces.
@@ -496,7 +555,13 @@ set cinoptions=N-s                 " For C program indentation.
 set foldenable                     " Enable folds.
 set foldmethod=marker              " Use markers for folds ({{{ and }}}).
 
-set formatoptions=c,q,r,t,j,o      " test
+" c: Auto-wrap comments using textwidth, inserting the current comment leader automatically.
+" q: Allow formatting of comments with "gq".
+" r: Automatically insert the current comment leader after hitting <Enter> in Insert mode.
+" t: Auto-wrap text using textwidth
+" j: Where it makes sense, remove a comment leader when joining lines
+" o: Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
+set formatoptions=c,q,r,t,j,o
 
 set gdefault                       " Global substitutions by default.
 
@@ -527,6 +592,8 @@ set magic                          " For regex
 set modeline                       " Checks the bottom 1 line for set commands for vim. See bottom of this file.
 set modelines=1
 
+set mouse=a                        " Enable mouse for all modes
+
 set nojoinspaces                   " Don't insert two spaces after punctuation with a join command.
 
 set nostartofline
@@ -543,7 +610,7 @@ set nowrap
 " set number
 
 " This is controlled by airline.vim
-set ruler
+" set ruler
 
 set scrolljump=8                   " Minimum lines to scroll when cursor is going off the screen.
 set scrolloff=3                    " Keep the cursor this many lines away from the top / bottom of screen.
@@ -570,7 +637,11 @@ set textwidth=0
 
 set updatetime=100                 " Time to write swap file to disk in milliseconds
 
-set viminfo='100,n$HOME/.vim/files/info/viminfo
+if has('nvim')
+    set shada='100,n$HOME/.vim/files/info/nviminfo
+else
+    set viminfo='100,n$HOME/.vim/files/info/viminfo
+endif
 
 set visualbell t_vb=                " No beeping
 
@@ -631,6 +702,10 @@ nmap <leader>v :vsplit<cr>
 nnoremap <silent> ]r :tabn<cr>
 nnoremap <silent> [r :tabp<cr>
 
+" Swap the behavior of the ^ and 0 operators
+" ^ Usually goes to the first non-whitespace character, while 0 goes to the
+" first column in the line. ^ is more useful, but harder to hit, so swap it
+" with 0
 nnoremap 0 ^
 nnoremap ^ 0
 
@@ -651,7 +726,8 @@ nnoremap <leader>cc :set cc=100<cr>
 nnoremap <leader>co :set cc=""<cr>
 nnoremap <leader>d :bd<cr>
 nnoremap <leader>f <C-w>w
-nnoremap <leader>l :set list!<cr>
+" I don't really use this
+" nnoremap <leader>l :set list!<cr>
 nnoremap <leader>sh <C-w>h
 nnoremap <leader>sj <C-w>j
 nnoremap <leader>sk <C-w>k
@@ -719,7 +795,7 @@ highlight Visual      ctermbg=1 ctermfg=4
 
 augroup FT
     autocmd FileType go   set noexpandtab tabstop=4 shiftwidth=4
-"    autocmd FileType java set expandtab tabstop=4 shiftwidth=4
+    " autocmd FileType java set expandtab tabstop=4 shiftwidth=4
     autocmd FileType sh   set shiftwidth=4
     autocmd FileType c    set cindent
     autocmd FileType help wincmd L
@@ -740,7 +816,12 @@ augroup END
 
 " Go related mappings
 " All are prefixed with 'o', because 'g' is for git
-augroup GO
+augroup go
+    " FIXME
+    " autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+    " autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+    " autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+    " autocmd FileType go nmap <leader>oa :A<cr>
     autocmd FileType go nmap <leader>ob <plug>(go-build)
     autocmd FileType go nmap <leader>oc <plug>(go-coverage-toggle)
     autocmd FileType go nmap <leader>od <plug>(go-doc-vertical)
@@ -758,7 +839,7 @@ augroup END
 
 " {{{ Local Overrides
 
-let $LOCALFILE=expand("~/.vimrc_local")
+let $LOCALFILE=expand("~/.vimrc.local")
 if filereadable($LOCALFILE)
     source $LOCALFILE
 endif

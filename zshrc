@@ -2,7 +2,7 @@
 
 # {{{ zplug
 
-export ZPLUG_HOME="/usr/local/opt/zplug"
+export ZPLUG_HOME="$HOME/.zplug"
 source $ZPLUG_HOME/init.zsh
 
 zplug "plugins/extract", from:oh-my-zsh
@@ -74,6 +74,19 @@ alias -- -='\cd -'
 
 alias md='mkdir -p'
 alias rd='rmdir'
+
+# git
+if (( $+commands[git] )); then
+  alias commit='git commit'
+  alias co='git checkout'
+fi
+
+if (( $+commands[mmake] )); then
+  alias make=mmake
+  alias m=mmake
+elif (( $+commands[make] )); then
+  alias m=make
+fi
 
 # relies on k plugin
 if (( $+commands[k] )); then
@@ -170,7 +183,7 @@ if (( $+commands[mosh] )); then
 fi
 
 # -a forces updates
-alias brewcup='brew cu -y && brew cask cleanup'
+alias brewcup='brew cask upgrade && brew cask cleanup'
 alias pip3up='pip3 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip3 install -U'
 alias pip2up='pip2 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip2 install -U'
 alias goup='go get -u all'
@@ -271,6 +284,8 @@ fi
 
 # {{{ History
 
+# up history size
+HISTSIZE=SAVEHIST=100000
 # add timestamp to history
 setopt extended_history
 # don't store the "history" command when calling it

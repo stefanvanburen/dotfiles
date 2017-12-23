@@ -1,47 +1,68 @@
 [alias]
+    ; mnemonic for add
     a = add
+    ; mnemonic for add all
     aa = add .
 
-# show git aliases
+    ; show git aliases
     aliases = config --get-regexp alias
 
     amend = commit --amend
 
+    ; mnemonic for branches
+    b = branch --list
     bl = branch --list
     branches = branch --list
 
+    ; mnemonic for commit
     c = commit
 
+    ; mnemonic for checkout
     co = checkout
 
+    ; mnemonic for diff
     d = diff
 
-# mnemonic for diff all
+    ; mnemonic for diff all
     da = diff HEAD
 
-# mnemonic for diff staged
+    ; mnemonic for diff staged
     ds = diff --cached
+
+    ; mnemonic for diff master...
+    dm = diff master...
 
     dw = diff --word-diff
 
-# Switch to a branch, creating it if necessary
+    ; Switch to a branch, creating it if necessary
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
     ic = icdiff
 
+    ; Prettier logging
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 
+    ; mnemonic for pull
     p = pull
 
+    ; Pushes and sets up tracking to same named branch
+    pu = push -u
+
     s = status -s
-    sl = stash list
     st = status -sb
 
+    ; For showing stashes
+    sl = stash list
     stashes = stash list
 
-    unstage = reset -q HEAD --
+    ; To unstage files, etc
     us = reset -q HEAD --
+    unstage = reset -q HEAD --
+
+    ; Properly handles mistypes like `git git diff`; etc
     git = !exec git
+
+    ; Add an ignore file from gitignore.io; use something like `git ignore go`
     ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
 [color]
@@ -103,10 +124,10 @@
 [hub]
     protocol = ssh
 
+; For work SSO
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
 [user]
     name = Stefan VanBuren
     email = vanburenstefan@gmail.com
-
-; For work SSO
-[url "git@github.com:"]
-	insteadOf = https://github.com/
