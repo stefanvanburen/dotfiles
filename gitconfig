@@ -101,6 +101,7 @@
 
 [diff]
     tool = vimdiff
+    algorithm = histogram
 
 [github]
     user = svanburen
