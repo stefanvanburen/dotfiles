@@ -73,3 +73,9 @@ or
 
 # Maximize pane (repeat to restore layout)
 <prefix> z
+
+# Mark pane (can also unmark current pane if it is marked)
+<prefix> m
+
+# Unmark marked pane (from any pane)
+<prefix> M
