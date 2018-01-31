@@ -101,6 +101,7 @@
 
 [diff]
     tool = vimdiff
+    colorMoved = zebra
 
 [github]
     user = svanburen
