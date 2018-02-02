@@ -6,14 +6,15 @@ export PAGER='less'
 # export LESS='-FMiX'
 export PURE_PROMPT_SYMBOL='∞'
 
-# if (( $+commands[nvim] )); then
-#     export EDITOR='nvim'
-# elif (( $+commands[vim] )); then
-#     export EDITOR='vim'
-# fi
-export EDITOR='vim'
+export EDITOR='nvim'
 
 export PATH="/usr/local/sbin:/usr/local/bin:$HOME/src/bin:$HOME/src/bp:$HOME/src/go/bin:$HOME/.cargo/bin:$HOME/.fastlane/bin:$PATH"
+
+# }}}
+
+# {{{ nnn
+
+export NNN_USE_EDITOR=1
 
 # }}}
 
@@ -25,7 +26,7 @@ export GOPATH="$HOME/src/go"
 
 # {{{ FZF
 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='rg --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
@@ -48,12 +49,5 @@ export CHEATCOLORS=true
 # {{{ Local Configuration
 
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
-
-# }}}
-
-# {{{ RVM
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 
 # }}}

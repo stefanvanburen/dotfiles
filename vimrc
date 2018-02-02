@@ -209,8 +209,8 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_test_prepend_name = 1
-let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
+" let g:go_auto_type_info = 1
+" let g:go_auto_sameids = 1
 
 " Takes a bit too long
 " let g:go_metalinter_autosave = 1
@@ -301,10 +301,17 @@ nnoremap <leader><Enter> :Buffers<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>t :Tags<cr>
 nnoremap <leader><leader> :Files<cr>
-nnoremap ? :GFiles<cr>
+nnoremap <leader>gf :GFiles<cr>
 nnoremap <leader>gc :Commits<cr>
-" Having trouble with this - probably best to use vim-grepper instead
-" nnoremap <leader>ag :Ag<cr>
+nnoremap <leader>ag :Ag!<cr>
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+nnoremap <leader>rg :Rg<cr>
 
 Plug 'Alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/nv']
@@ -325,7 +332,9 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 Plug 'sbdchd/neoformat'
 
 " For pasting with indentation
-Plug 'sickill/vim-pasta'
+" TODO: I think this plugin breaks certain pasting - investigate!
+" Seems like it will force certain text to all paste on one line
+" Plug 'sickill/vim-pasta'
 
 " For Java formatting
 Plug 'rhysd/vim-clang-format'
@@ -438,7 +447,7 @@ vmap v <plug>(expand_region_expand)
 
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 nnoremap <leader>gr :Grepper -tool git<cr>
-nnoremap <leader>rg :Grepper -tool rg<cr>
+" nnoremap <leader>rg :Grepper -tool rg<cr>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
@@ -471,6 +480,7 @@ let g:investigate_use_dash=1
 " Roughly redundant, given these settings
 Plug 'rizzatti/dash.vim'
 nnoremap <leader>D :Dash<cr>
+nnoremap <leader>d :Dash<cr>
 
 " }}}
 
@@ -482,7 +492,7 @@ Plug 'tpope/vim-eunuch'
 " Adds end, fi, esac, etc in languages where they are needed
 Plug 'tpope/vim-endwise'
 
-" Heuristically set buffer format options
+" Heuristically set buffer options
 Plug 'tpope/vim-sleuth'
 
 " Pong-like game
@@ -519,6 +529,9 @@ Plug 'tommcdo/vim-exchange'
 
 " Manages and creates tag files
 Plug 'ludovicchabant/vim-gutentags'
+
+" Easily search for, substitute, and abbreviate multiple variants of a word
+Plug 'tpope/vim-abolish'
 
 " }}}
 
@@ -694,7 +707,6 @@ nmap <leader>w :w<cr>
 nmap <leader>rt :retab<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>sp :setlocal spell!<cr>
-nmap <leader>ms :mksession<cr>
 nmap <leader>sv :mksession<cr>
 
 nmap <leader>v :vsplit<cr>
@@ -724,7 +736,8 @@ nnoremap <C-u> <C-u>zz
 nnoremap <leader>V V`]
 nnoremap <leader>cc :set cc=100<cr>
 nnoremap <leader>co :set cc=""<cr>
-nnoremap <leader>d :bd<cr>
+" This is now used for opening Dash
+" nnoremap <leader>d :bd<cr>
 nnoremap <leader>f <C-w>w
 " I don't really use this
 " nnoremap <leader>l :set list!<cr>
@@ -761,6 +774,10 @@ vnoremap > >gv
 " similar to vmap but only for visual mode - NOT select mode
 xnoremap < <gv
 xnoremap > >gv
+
+" Highlight fenced code in markdown
+" https://til.hashrocket.com/posts/e8915e62c0-highlight-markdown-fenced-code-syntax-in-vim
+let g:markdown_fenced_languages = ['html', 'vim', 'go', 'python', 'bash=sh']
 
 " open files in netrw in vertical split
 let g:netrw_browse_split = 2

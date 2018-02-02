@@ -102,6 +102,7 @@
 [diff]
     tool = vimdiff
     algorithm = histogram
+    colorMoved = zebra
 
 [github]
     user = svanburen

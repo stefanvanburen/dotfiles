@@ -158,9 +158,9 @@ if (( $+commands[tmux] )); then
     }
 fi
 
-if (( $+commands[nnn] )); then
-    alias n='nnn'
-fi
+# if (( $+commands[nnn] )); then
+#     alias n='nnn'
+# fi
 
 if (( $+commands[exa] )); then
     alias ls='exa'
@@ -301,6 +301,8 @@ setopt hist_reduce_blanks
 
 # }}}
 
+# }}}
+
 # {{{ Misc
 
 # if we type a command that can't be issued, but is a directory, then cd to it
@@ -317,3 +319,5 @@ setopt autocd
 # vim:foldmethod=marker
 
 export GPG_TTY=$(tty)
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
