@@ -209,6 +209,9 @@ let g:prettier#config#trailing_comma = 'all' " none|es5|all
 let g:prettier#config#parser = 'babylon' " flow|babylon|typescript|postcss|json|graphql
 let g:prettier#config#config_precedence = 'prefer-file' " cli-override|file-override|prefer-file
 
+" Markdown
+Plug 'plasticboy/vim-markdown'
+
 " GraphQL
 Plug 'jparise/vim-graphql'
 
