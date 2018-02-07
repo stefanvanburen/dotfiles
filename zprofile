@@ -2,6 +2,6 @@
 
 # {{{ Local Configuration
 
-    [[ -f ~/.zprofile.local ]] && source ~/.zprofile.local
+[[ -f ~/.zprofile.local ]] && source ~/.zprofile.local
 
 # }}}
