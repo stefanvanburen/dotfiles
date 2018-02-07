@@ -193,6 +193,9 @@ let g:UltiSnipsEditSplit="vertical"
 " Taskwarrior
 Plug 'blindFS/vim-taskwarrior'
 
+" Markdown
+Plug 'plasticboy/vim-markdown'
+
 " GraphQL
 Plug 'jparise/vim-graphql'
 

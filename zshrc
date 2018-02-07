@@ -2,7 +2,7 @@
 
 # {{{ zplug
 
-export ZPLUG_HOME="$HOME/.zplug"
+export ZPLUG_HOME="/usr/local/opt/zplug"
 source $ZPLUG_HOME/init.zsh
 
 zplug "plugins/extract", from:oh-my-zsh
@@ -99,11 +99,6 @@ alias u='cd .. && ll'
 alias fn='find . -name'
 alias h="cd $HOME"
 
-# npm install --global space-hogs
-if (( $+commands[space-hogs] )); then
-    alias sh='space-hogs'
-fi
-
 # brew install ccat
 if (( $+commands[ccat] )); then
     alias cat='ccat'
@@ -195,8 +190,6 @@ alias zpup='zplug update'
 alias masup='mas upgrade'
 alias rup='rustup update'
 alias aup='apm upgrade --no-confirm'
-
-alias up='bubu && brewcup && pip3up && pip2up && npmup && vimup && gemup && gemups && zpup && masup && rup && aup && goup'
 
 alias pip='pip3'
 alias python='python3'
