@@ -218,6 +218,9 @@ Plug 'jparise/vim-graphql'
 " JSON
 Plug 'elzr/vim-json'
 
+" gitignore
+Plug 'gisphm/vim-gitignore'
+
 " Go
 Plug 'fatih/vim-go'
 let g:go_fmt_command = 'goimports'

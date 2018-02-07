@@ -1,9 +1,0 @@
-# ~/.tmuxinator/def.yml
-
-name: def
-root: ~/
-
-windows:
-  - terminal:
-  - terminal:
-  - terminal:
