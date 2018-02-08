@@ -193,6 +193,22 @@ let g:UltiSnipsEditSplit="vertical"
 " Taskwarrior
 Plug 'blindFS/vim-taskwarrior'
 
+" Javascript
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" Vim Prettier Settings
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql Prettier
+let g:prettier#config#print_width = 80 " max line length that prettier will wrap on
+let g:prettier#config#tab_width = 2 " number of spaces per indentation level
+let g:prettier#config#use_tabs = 'false' " use tabs over spaces
+let g:prettier#config#semi = 'true' " print semicolons
+let g:prettier#config#single_quote = 'true' " single quotes over double quotes
+let g:prettier#config#bracket_spacing = 'true' " print spaces between brackets
+let g:prettier#config#jsx_bracket_same_line = 'true' " put > on the last line instead of new line
+let g:prettier#config#trailing_comma = 'all' " none|es5|all
+let g:prettier#config#parser = 'babylon' " flow|babylon|typescript|postcss|json|graphql
+let g:prettier#config#config_precedence = 'prefer-file' " cli-override|file-override|prefer-file
+
 " Markdown
 Plug 'plasticboy/vim-markdown'
 
@@ -201,6 +217,9 @@ Plug 'jparise/vim-graphql'
 
 " JSON
 Plug 'elzr/vim-json'
+
+" gitignore
+Plug 'gisphm/vim-gitignore'
 
 " Go
 Plug 'fatih/vim-go'
