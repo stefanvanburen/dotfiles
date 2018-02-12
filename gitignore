@@ -38,4 +38,7 @@ TODO*
 # ignore NOTES files
 NOTES*
 
+# ignore tags files
 tags
+tags.lock
+tags.temp*

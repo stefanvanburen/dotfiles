@@ -80,6 +80,8 @@ let NERDTreeQuitOnOpen = 1
 " Show hidden files in NERDTree
 let NERDTreeShowHidden=1
 
+Plug 'justinmk/vim-dirvish'
+
 Plug 'junegunn/vim-peekaboo'
 
 Plug 'majutsushi/tagbar'
@@ -219,10 +221,12 @@ Plug 'jparise/vim-graphql'
 Plug 'elzr/vim-json'
 
 " gitignore
-Plug 'gisphm/vim-gitignore'
+" Causes some problems with UltiSnips
+" Plug 'gisphm/vim-gitignore'
 
 " Go
-Plug 'fatih/vim-go'
+" vim-go tip -> if things seemingly aren't working, :GoUpdateBinaries
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 let g:go_fmt_command = 'goimports'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -231,6 +235,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_test_prepend_name = 1
+" These make things slow
 " let g:go_auto_type_info = 1
 " let g:go_auto_sameids = 1
 
@@ -328,13 +333,13 @@ nnoremap <leader>gf :GFiles<cr>
 nnoremap <leader>gc :Commits<cr>
 nnoremap <leader>ag :Ag!<cr>
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-nnoremap <leader>rg :Rg<cr>
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \   <bang>0)
+" nnoremap <leader>rg :Rg<cr>
 
 Plug 'Alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/nv']
@@ -470,7 +475,7 @@ vmap v <plug>(expand_region_expand)
 
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 nnoremap <leader>gr :Grepper -tool git<cr>
-" nnoremap <leader>rg :Grepper -tool rg<cr>
+nnoremap <leader>rg :Grepper -tool rg<cr>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
@@ -860,11 +865,11 @@ augroup END
 " Go related mappings
 " All are prefixed with 'o', because 'g' is for git
 augroup go
-    " FIXME
+    " FIXME - these don't seem to work
     " autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
     " autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
     " autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-    " autocmd FileType go nmap <leader>oa :A<cr>
+    autocmd FileType go nmap <leader>oa :A<cr>
     autocmd FileType go nmap <leader>ob <plug>(go-build)
     autocmd FileType go nmap <leader>oc <plug>(go-coverage-toggle)
     autocmd FileType go nmap <leader>od <plug>(go-doc-vertical)

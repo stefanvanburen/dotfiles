@@ -21,10 +21,10 @@
     ~/.newsbeuter/config:
         create: true
         path: newsbeuter_config
-    ~/.tmuxinator: tmuxinator
     ~/.config/nvim:
         create: true
         path: vim
+    ~/.ripgreprc: ripgreprc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

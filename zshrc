@@ -183,6 +183,7 @@ alias pip3up='pip3 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 
 alias pip2up='pip2 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip2 install -U'
 alias goup='go get -u all'
 alias npmup='npm up -g'
+alias yarnup='yarn global upgrade'
 alias vimup='vim +PlugUpgrade +PlugUpdate +qall'
 alias gemup='gem update'
 alias gemups='gem update --system'
