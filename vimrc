@@ -851,6 +851,11 @@ augroup FT
     autocmd Filetype crontab setlocal nobackup nowritebackup
 augroup end
 
+augroup filetypedetect
+    autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+    autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+augroup END
+
 augroup task
     autocmd BufRead,BufNewFile {pending,completed,undo}.data set filetype=taskdata
     autocmd BufRead,BufNewFile .taskrc                       set filetype=taskrc

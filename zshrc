@@ -1,3 +1,4 @@
+# vim:foldmethod=marker
 # dot zshrc
 
 # {{{ zplug
@@ -23,6 +24,9 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 # Theme
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+
+# Slow!
+# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -301,6 +305,8 @@ setopt hist_reduce_blanks
 
 # if we type a command that can't be issued, but is a directory, then cd to it
 setopt autocd
+# automatically remove duplicates from these arrays
+typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 # }}}
 
@@ -309,8 +315,6 @@ setopt autocd
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # }}}
-
-# vim:foldmethod=marker
 
 export GPG_TTY=$(tty)
 
