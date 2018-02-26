@@ -852,6 +852,8 @@ augroup FT
     autocmd FileType help wincmd L
     autocmd FileType asciidoc set wrap
     autocmd Filetype crontab setlocal nobackup nowritebackup
+    " Turn off folding for diffs
+    autocmd Filetype diff setlocal nofoldenable
 augroup end
 
 augroup filetypedetect
