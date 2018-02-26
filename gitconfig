@@ -10,7 +10,7 @@
     amend = commit --amend
 
     ; mnemonic for branches
-    b = branch --list
+    b = branch
     bl = branch --list
     branches = branch --list
 
@@ -34,10 +34,16 @@
 
     dw = diff --word-diff
 
+    ; Properly handles mistypes like `git git diff`; etc
+    git = !exec git
+
     ; Switch to a branch, creating it if necessary
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
     ic = icdiff
+
+    ; Add an ignore file from gitignore.io; use something like `git ignore go`
+    ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
     ; Prettier logging
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
@@ -58,12 +64,6 @@
     ; To unstage files, etc
     us = reset -q HEAD --
     unstage = reset -q HEAD --
-
-    ; Properly handles mistypes like `git git diff`; etc
-    git = !exec git
-
-    ; Add an ignore file from gitignore.io; use something like `git ignore go`
-    ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
 [color]
     ui = auto
@@ -106,6 +106,9 @@
 
 [github]
     user = svanburen
+
+[icdiff]
+    options = --highlight --line-numbers
 
 [include]
     path = ~/.gitconfig.local
