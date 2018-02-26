@@ -186,9 +186,9 @@ Plug 'chrisbra/vim-diff-enhanced'
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsExpandTrigger="<TAB>"
+let g:UltiSnipsJumpForwardTrigger="<TAB>"
+let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
@@ -251,6 +251,9 @@ Plug 'jceb/vim-orgmode'
 " Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 
+" vgo
+Plug 'zchee/vim-vgo'
+
 " Crystal
 Plug 'rhysd/vim-crystal'
 
@@ -298,8 +301,8 @@ Plug 'vim-python/python-syntax'
 Plug 'valloric/YouCompleteMe'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_complete_in_comments                = 1
-let g:ycm_key_list_select_completion = ['<TAB>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>']
+let g:ycm_key_list_select_completion = ['<C-j>']
+let g:ycm_key_list_previous_completion = ['<C-k>']
 
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
@@ -325,12 +328,12 @@ omap <leader><tab> <plug>(fzf-maps-o)
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 
-nnoremap <leader><Enter> :Buffers<cr>
+nnoremap <leader><Enter> :GFiles!<cr>
+nnoremap <leader><leader> :Buffers<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>t :Tags<cr>
-nnoremap <leader><leader> :Files<cr>
-nnoremap <leader>gf :GFiles<cr>
-nnoremap <leader>gc :Commits<cr>
+" nnoremap <leader>gf :GFiles<cr>
+nnoremap <leader>gc :Commits!<cr>
 nnoremap <leader>ag :Ag!<cr>
 
 " command! -bang -nargs=* Rg
