@@ -26,10 +26,9 @@ export GOPATH="$HOME/src/go"
 
 # {{{ FZF
 
-export FZF_DEFAULT_COMMAND='rg --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --color=always'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# removing --reverse
-export FZF_DEFAULT_OPTS='--height 40% --border'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border --ansi'
 
 # }}}
 

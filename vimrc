@@ -535,6 +535,9 @@ Plug 'ryanss/vim-hackernews'
 " For editing prose
 Plug 'reedes/vim-pencil'
 
+" Handles buffer deletion intelligently
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+
 " Automatic :set paste
 Plug 'ConradIrwin/vim-bracketed-paste'
 
