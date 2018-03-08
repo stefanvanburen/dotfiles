@@ -14,6 +14,9 @@
     bl = branch --list
     branches = branch --list
 
+    ; mnemonic for browse
+    br = browse
+
     ; mnemonic for commit
     c = commit
 
@@ -48,6 +51,9 @@
     ; Prettier logging
     lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 
+    ; mnemonic for mergetool
+    mt = mergetool
+
     ; mnemonic for pull
     p = pull
 
@@ -60,6 +66,9 @@
     ; For showing stashes
     sl = stash list
     stashes = stash list
+
+    ; Show submodules when I add the s
+    submodules = submodule
 
     ; To unstage files, etc
     us = reset -q HEAD --

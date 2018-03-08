@@ -220,6 +220,12 @@ Plug 'jparise/vim-graphql'
 " JSON
 Plug 'elzr/vim-json'
 
+" Protocol Buffers (protobuf)
+Plug 'uarun/vim-protobuf'
+
+" Dockerfile
+Plug 'ekalinin/Dockerfile.vim'
+
 " gitignore
 " Causes some problems with UltiSnips
 " Plug 'gisphm/vim-gitignore'

@@ -51,6 +51,12 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # https://github.com/direnv/direnv
 eval "$(direnv hook zsh)"
 
+# https://github.com/pypa/pipenv/
+eval "$(pipenv --completion)"
+
+# https://github.com/nvbn/thefuck
+eval "$(thefuck --alias)"
+
 # https://github.com/Homebrew/homebrew-command-not-found
 if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
 
@@ -60,9 +66,6 @@ if (( $+commands[tag] )); then
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
   alias rg=tag
 fi
-
-# https://github.com/nvbn/thefuck
-eval "$(thefuck --alias)"
 
 # }}}
 
@@ -183,8 +186,7 @@ fi
 
 # -a forces updates
 alias brewcup='brew cask upgrade && brew cask cleanup'
-alias pip3up='pip3 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip3 install -U'
-alias pip2up='pip2 list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip2 install -U'
+alias pipup='pip list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip install -U'
 alias goup='go get -u all'
 alias npmup='npm up -g'
 alias yarnup='yarn global upgrade'
@@ -195,9 +197,6 @@ alias zpup='zplug update'
 alias masup='mas upgrade'
 alias rup='rustup update'
 alias aup='apm upgrade --no-confirm'
-
-alias pip='pip3'
-alias python='python3'
 
 # }}}
 
@@ -315,7 +314,4 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # }}}
-
-export GPG_TTY=$(tty)
-
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
