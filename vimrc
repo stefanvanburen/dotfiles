@@ -526,6 +526,12 @@ nnoremap <leader>d :Dash<cr>
 " Adds unix shell commands
 Plug 'tpope/vim-eunuch'
 
+" Modern database interface for vim
+Plug 'tpope/vim-db'
+
+" Basic support for .env and Procfile
+Plug 'tpope/vim-dotenv'
+
 " Adds end, fi, esac, etc in languages where they are needed
 Plug 'tpope/vim-endwise'
 
