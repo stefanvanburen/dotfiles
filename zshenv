@@ -3,12 +3,23 @@
 # {{{ Typical
 
 export PAGER='less'
-# export LESS='-FMiX'
+# wholesale copied from prezto's config; but at least explained:
+# -F : exit if less than a full screen
+# -g : highlight only the particular string found by last search command, not all of them
+# -i : ignore case
+# -M : long prompt
+# -R : only output ANSI "color" escape sequences in raw form
+# -S : chop long lines - truncate long lines rather than wrapping them
+# -w : briefly highlight the first new line after moving forward a page
+# -X : no init (???)
+# -z-4 : scroll by (length of page) - 4
+export LESS='-F -g -i -M -R -S -w -X -z-4'
+
 export PURE_PROMPT_SYMBOL='∆'
 
 export EDITOR='nvim'
 
-export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin:$PATH"
 
 # }}}
 
