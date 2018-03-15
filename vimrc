@@ -213,6 +213,8 @@ let g:prettier#config#config_precedence = 'prefer-file' " cli-override|file-over
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
+" Turn off folding
+let g:vim_markdown_folding_disabled = 1
 
 " GraphQL
 Plug 'jparise/vim-graphql'
@@ -360,8 +362,11 @@ nnoremap <c-l> :NV<cr>
 
 " For linting
 Plug 'w0rp/ale'
+" slow
 " let g:ale_sign_error = '💥 '
 " let g:ale_sign_warning = '🚧 '
+let g:ale_sign_error = '◉'
+let g:ale_sign_warning = '◉'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_linters = {'go': ['gometalinter']}
 " let g:ale_go_gometalinter_options = '--fast'
