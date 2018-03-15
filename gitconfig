@@ -23,6 +23,8 @@
     ; mnemonic for checkout
     co = checkout
 
+    cl = clone --recurse-submodules
+
     ; mnemonic for diff
     d = diff
 
@@ -69,6 +71,9 @@
 
     ; Show submodules when I add the s
     submodules = submodule
+
+    ; mnemonic for submodule
+    su = submodule
 
     ; To unstage files, etc
     us = reset -q HEAD --
