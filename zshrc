@@ -200,6 +200,13 @@ alias aup='apm upgrade --no-confirm'
 
 # }}}
 
+# {{{ Functions
+
+# generates gitignore files
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# }}}
+
 # {{{ Configuration
 
 # {{{ Completion
@@ -314,4 +321,3 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # }}}
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
