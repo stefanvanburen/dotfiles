@@ -193,10 +193,17 @@ alias yarnup='yarn global upgrade'
 alias vimup='vim +PlugUpgrade +PlugUpdate +qall'
 alias gemup='gem update'
 alias gemups='gem update --system'
+# zplug
 alias zpup='zplug update'
+# mac app store
 alias masup='mas upgrade'
+# rust
 alias rup='rustup update'
+# atom
 alias aup='apm upgrade --no-confirm'
+
+alias python='python3'
+alias pip='pip3'
 
 # }}}
 

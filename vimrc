@@ -169,6 +169,9 @@ Plug 'tpope/vim-rhubarb'
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
 
+" For git files
+Plug 'tpope/vim-git'
+
 " Better default for diffs
 Plug 'chrisbra/vim-diff-enhanced'
 " This has trouble when it comes to using vim as git's mergetool, so turning
@@ -215,6 +218,8 @@ let g:prettier#config#config_precedence = 'prefer-file' " cli-override|file-over
 Plug 'plasticboy/vim-markdown'
 " Turn off folding
 let g:vim_markdown_folding_disabled = 1
+" Alternative:
+" Plug 'tpope/vim-markdown'
 
 " GraphQL
 Plug 'jparise/vim-graphql'
@@ -532,7 +537,10 @@ nnoremap <leader>d :Dash<cr>
 Plug 'tpope/vim-eunuch'
 
 " Modern database interface for vim
-Plug 'tpope/vim-db'
+Plug 'tpope/vim-dadbod'
+
+" match matching matches
+Plug 'andymass/vim-matchup'
 
 " Basic support for .env and Procfile
 Plug 'tpope/vim-dotenv'
