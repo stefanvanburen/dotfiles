@@ -84,7 +84,7 @@ Plug 'justinmk/vim-dirvish'
 
 Plug 'junegunn/vim-peekaboo'
 
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 nnoremap <leader>T :TagbarToggle<cr>
 
 Plug 'junegunn/goyo.vim'
@@ -154,7 +154,7 @@ let g:lengthmatters_on_by_default = 0
 Plug 'airblade/vim-gitgutter'
 " Turns on gitgutter updating for a variety of events
 " ex: switch buffers, tabs, etc
-let g:gitgutter_eager = 1
+" let g:gitgutter_eager = 1
 
 Plug 'junegunn/gv.vim'
 nmap <leader>gv :GV<cr>
@@ -165,6 +165,9 @@ nmap <leader>gs :Gstatus<cr>gg<c-n>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
+
+" Git branch management
+Plug 'sodapopcan/vim-twiggy'
 
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
@@ -292,10 +295,12 @@ Plug 'cespare/vim-toml'
 
 " Python
 Plug 'vim-python/python-syntax'
-
-" Pretty laggy
-" Plug 'python-mode/python-mode', { 'for' : 'python' }
-" let g:pymode_python = 'python3'
+let g:python_highlight_all = 1
+" Trying this again, despite the lag
+Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
+let g:pymode_python = 'python3'
+" rtp = subdirectory of the plugin
+Plug 'ambv/black', { 'for': 'python', 'rtp': 'vim' }
 
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'lervag/vimtex'
@@ -316,6 +321,7 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_complete_in_comments                = 1
 let g:ycm_key_list_select_completion = ['<C-j>']
 let g:ycm_key_list_previous_completion = ['<C-k>']
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
@@ -347,15 +353,15 @@ nnoremap <leader>m :Marks<cr>
 nnoremap <leader>t :Tags<cr>
 " nnoremap <leader>gf :GFiles<cr>
 nnoremap <leader>gc :Commits!<cr>
-nnoremap <leader>ag :Ag!<cr>
+" nnoremap <leader>ag :Ag!<cr>
 
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-"   \   <bang>0)
-" nnoremap <leader>rg :Rg<cr>
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+nnoremap <leader>se :Rg<cr>
 
 Plug 'Alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/nv']
@@ -435,20 +441,23 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 " \   'converters': [
 " \     incsearch#config#fuzzy#converter(),
 " \   ],
-let g:incsearch#auto_nohlsearch = 1
-function! s:incsearch_config(...) abort
-    return incsearch#util#deepextend(deepcopy({
-                \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-                \   'keymap': {
-                \     "\<CR>": '<Over>(easymotion)'
-                \   },
-                \   'is_expr': 0
-                \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-" Using ? for :GFiles mapping
-" noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+
+" Not using this block for now
+" let g:incsearch#auto_nohlsearch = 1
+" function! s:incsearch_config(...) abort
+"     return incsearch#util#deepextend(deepcopy({
+"                 \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"                 \   'keymap': {
+"                 \     "\<CR>": '<Over>(easymotion)'
+"                 \   },
+"                 \   'is_expr': 0
+"                 \ }), get(a:, 1, {}))
+" endfunction
+" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+" " Using ? for :GFiles mapping
+" " noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+
 map n <plug>(incsearch-nohl-n)
 map N <plug>(incsearch-nohl-N)
 let g:incsearch#consistent_n_direction = 1
@@ -789,6 +798,12 @@ nnoremap ^ 0
 " Indent the whole file and return to starting position
 nnoremap g= gg=G``
 
+" https://til.hashrocket.com/posts/ba2afeb453-breezy-copy-to-system-clipboard-in-vim
+" copy to system clipboard
+map gy "*y
+" copy whole file to system clipboard
+nmap gY gg"*yG
+
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 
@@ -882,6 +897,7 @@ augroup FT
     autocmd Filetype crontab setlocal nobackup nowritebackup
     " Turn off folding for diffs
     autocmd Filetype diff setlocal nofoldenable
+    autocmd Filetype graphql setlocal shiftwidth=2
 augroup end
 
 augroup filetypedetect

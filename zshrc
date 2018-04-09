@@ -141,6 +141,8 @@ if (( $+commands[vim] )); then
     alias v='vim'
 fi
 
+alias ge="$EDITOR $HOME/.gitconfig"
+alias gitconfig="$EDITOR $HOME/.gitconfig"
 alias zshrc="$EDITOR $HOME/.dotfiles/zshrc"
 alias vimrc="$EDITOR $HOME/.dotfiles/vimrc"
 alias ze="$EDITOR $HOME/.dotfiles/zshrc"

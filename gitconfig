@@ -40,18 +40,25 @@
     dw = diff --word-diff
 
     ; Properly handles mistypes like `git git diff`; etc
-    git = !exec git
+    git = !git
 
     ; Switch to a branch, creating it if necessary
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
     ic = icdiff
 
-    ; Add an ignore file from gitignore.io; use something like `git ignore go`
-    ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+    ; Use git ignore-io from git-extras
+    ; ; Add an ignore file from gitignore.io; use something like `git ignore go`
+    ; ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
     ; Prettier logging
-    lg = log --color --decorate --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    l = lg
+    lg = log --oneline --graph --decorate
+    lga = log --oneline --graph --decorate --all
+    ; only show me what is not pushed yet
+    top = log --oneline --graph --decorate @{u}..
+    ; only show me what is not merged from remote yet
+    new = log --oneline --graph --decorate ..@{u}
 
     ; mnemonic for mergetool
     mt = mergetool
@@ -87,20 +94,6 @@
     interactive = auto
     grep = auto
 
-[color "diff"]
-    meta = magenta bold
-    commit = magenta bold
-    frag = magenta bold
-    old = red bold
-    new = 46 bold
-    whitespace = red reverse
-
-[color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = red bold 52
-    newNormal = 46 bold
-    newHighlight = 46 bold 22
-
 [commit]
     ; gpgsign = true
     verbose = true
@@ -115,11 +108,22 @@
 
 [diff]
     tool = vimdiff
-    algorithm = histogram
-    colorMoved = zebra
+    algorithm = minimal
+
+[difftool]
+    ; prompt = false
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 
 [github]
     user = svanburen
+
+[hub]
+    protocol = ssh
 
 [icdiff]
     options = --highlight --line-numbers
@@ -127,21 +131,24 @@
 [include]
     path = ~/.gitconfig.local
 
+[init]
+    ; templatedir = ~/.git_template
+
 [merge]
     tool = vimdiff
     ff = false
+    ; prompt = false
+    ; not super useful for me
+    ; conflictStyle = diff3
+
+[mergetool]
+    keepBackup = false
 
 [pull]
     ff = true
 
 [push]
     default = current
-
-[init]
-    ; templatedir = ~/.git_template
-
-[hub]
-    protocol = ssh
 
 ; For work SSO
 [url "git@github.com:"]
@@ -150,9 +157,3 @@
 [user]
     name = Stefan VanBuren
     email = vanburenstefan@gmail.com
-
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
