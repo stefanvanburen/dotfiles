@@ -1,3 +1,7 @@
+# globally ignore direnv files
+.direnv
+.envrc
+
 *.py[cod]
 *~
 *.log

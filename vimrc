@@ -48,7 +48,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Not terribly useful
 " Plug 'bling/vim-bufferline'
 let g:airline_theme = 'solarized'
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 " Don't need this as I have my own tmux statusline config
 " let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#tabline#enabled         = 1
@@ -239,7 +239,7 @@ Plug 'ekalinin/Dockerfile.vim'
 
 " Go
 " vim-go tip -> if things seemingly aren't working, :GoUpdateBinaries
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'tag': '*' }
 let g:go_fmt_command = 'goimports'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -549,7 +549,7 @@ Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-endwise'
 
 " Heuristically set buffer options
-Plug 'tpope/vim-sleuth'
+" Plug 'tpope/vim-sleuth'
 
 " Pong-like game
 Plug 'johngrib/vim-game-code-break'
@@ -874,7 +874,7 @@ highlight Visual      ctermbg=1 ctermfg=4
 
 augroup FT
     autocmd FileType go   set noexpandtab tabstop=4 shiftwidth=4
-    " autocmd FileType java set expandtab tabstop=4 shiftwidth=4
+    autocmd FileType java set expandtab tabstop=2 shiftwidth=2
     autocmd FileType sh   set shiftwidth=4
     autocmd FileType c    set cindent
     autocmd FileType help wincmd L

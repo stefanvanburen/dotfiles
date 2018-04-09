@@ -17,21 +17,22 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 export PURE_PROMPT_SYMBOL='∆'
 
-export EDITOR='nvim'
+# vim > nvim, for now
+export EDITOR='vim'
 
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin:$PATH"
+# {{{ Go
+
+export GOPATH="$HOME/src/go"
+
+# }}}
+
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin:$GOPATH/bin:$PATH"
 
 # }}}
 
 # {{{ nnn
 
 export NNN_USE_EDITOR=1
-
-# }}}
-
-# {{{ Go
-
-export GOPATH="$HOME/src/go"
 
 # }}}
 
