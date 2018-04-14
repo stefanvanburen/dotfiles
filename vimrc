@@ -229,6 +229,8 @@ Plug 'jparise/vim-graphql'
 
 " JSON
 Plug 'elzr/vim-json'
+" Don't really care for the concealing
+let g:vim_json_syntax_conceal = 0
 
 " Protocol Buffers (protobuf)
 Plug 'uarun/vim-protobuf'
@@ -301,6 +303,8 @@ Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
 let g:pymode_python = 'python3'
 " rtp = subdirectory of the plugin
 Plug 'ambv/black', { 'for': 'python', 'rtp': 'vim' }
+" For mypy
+Plug 'Integralist/vim-mypy', { 'for': 'python' }
 
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'lervag/vimtex'
@@ -895,6 +899,7 @@ augroup FT
     autocmd FileType help wincmd L
     autocmd FileType asciidoc set wrap
     autocmd Filetype crontab setlocal nobackup nowritebackup
+    autocmd Filetype json setlocal expandtab tabstop=2 shiftwidth=2
     " Turn off folding for diffs
     autocmd Filetype diff setlocal nofoldenable
     autocmd Filetype graphql setlocal shiftwidth=2
