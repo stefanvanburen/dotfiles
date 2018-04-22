@@ -299,8 +299,8 @@ Plug 'cespare/vim-toml'
 Plug 'vim-python/python-syntax'
 let g:python_highlight_all = 1
 " Trying this again, despite the lag
-Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
-let g:pymode_python = 'python3'
+" Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
+" let g:pymode_python = 'python3'
 " rtp = subdirectory of the plugin
 Plug 'ambv/black', { 'for': 'python', 'rtp': 'vim' }
 " For mypy
@@ -493,6 +493,10 @@ xmap ga <plug>(EasyAlign)
 Plug 'terryma/vim-expand-region'
 vmap <C-v> <plug>(expand_region_shrink)
 vmap v <plug>(expand_region_expand)
+
+" Allows for move lines up and down
+" Defaults: <A-k> and <A-j> to move visual selection
+Plug 'matze/vim-move'
 
 " Lightweight version of vim-easymotion
 " Plug 'justinmk/vim-sneak'

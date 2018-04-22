@@ -188,7 +188,6 @@ fi
 
 # -a forces updates
 alias brewcup='brew cask upgrade && brew cask cleanup'
-alias pipup='pip list --outdated --format=legacy | cut -d " " -f1 | xargs -n1 pip install -U'
 alias goup='go get -u all'
 alias npmup='npm up -g'
 alias yarnup='yarn global upgrade'
@@ -203,9 +202,6 @@ alias masup='mas upgrade'
 alias rup='rustup update'
 # atom
 alias aup='apm upgrade --no-confirm'
-
-alias python='python3'
-alias pip='pip3'
 
 # }}}
 
