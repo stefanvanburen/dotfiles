@@ -210,6 +210,9 @@ alias aup='apm upgrade --no-confirm'
 # generates gitignore files
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
+# mf opens "Matching Files" to a regex / string given to rg
+function mf() { rg -l $1 | xargs $EDITOR }
+
 # }}}
 
 # {{{ Configuration

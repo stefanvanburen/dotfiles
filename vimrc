@@ -256,6 +256,9 @@ let g:go_test_prepend_name = 1
 " These make things slow
 " let g:go_auto_type_info = 1
 " let g:go_auto_sameids = 1
+let g:go_fmt_options = {
+\ 'gofmt': '-s',
+\ }
 
 " Takes a bit too long
 " let g:go_metalinter_autosave = 1
@@ -296,11 +299,14 @@ Plug 'cespare/vim-toml'
 " Plug 'junegunn/vim-journal'
 
 " Python
-Plug 'vim-python/python-syntax'
+Plug 'vim-python/python-syntax', { 'for': 'python' }
 let g:python_highlight_all = 1
 " Trying this again, despite the lag
+" TOO MUCH
 " Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
-" let g:pymode_python = 'python3'
+let g:pymode_python = 'python3'
+" Turn off folding
+let g:pymode_folding = 1
 " rtp = subdirectory of the plugin
 Plug 'ambv/black', { 'for': 'python', 'rtp': 'vim' }
 " For mypy
@@ -380,11 +386,16 @@ Plug 'w0rp/ale'
 " slow
 " let g:ale_sign_error = '💥 '
 " let g:ale_sign_warning = '🚧 '
-let g:ale_sign_error = '◉'
-let g:ale_sign_warning = '◉'
+let g:ale_sign_error = '⨯⨯'
+let g:ale_sign_warning = '⦁⦁'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_linters = {'go': ['gometalinter']}
 " let g:ale_go_gometalinter_options = '--fast'
+" Without this, eslint complains about things that prettier fixes
+let g:ale_linters = {'javascript': ['prettier']}
+
 
 Plug 'sbdchd/neoformat'
 
@@ -638,7 +649,7 @@ set wrapscan                       " Wrap around the end of the buffer when sear
 set autoread                       " Read changes in files during editing.
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=dark                " Dark background.
+set background=light               " light background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
@@ -836,8 +847,17 @@ nnoremap <leader>x :Vexplore<cr>
 cmap %s/ %s/\v
 cmap w!! w !sudo tee % >/dev/null
 
+" These don't make much sense
 " cnoremap jk <C-c>
 " cnoremap kj <C-c>
+
+" Bash-like keybindings
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
 
 inoremap <silent> jk <esc>
 inoremap <silent> kj <esc>
