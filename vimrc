@@ -295,6 +295,9 @@ Plug 'tmux-plugins/vim-tmux'
 " TOML
 Plug 'cespare/vim-toml'
 
+" Terraform
+Plug 'hashivim/vim-terraform'
+
 " Plug 'jceb/vim-orgmode'
 " Plug 'junegunn/vim-journal'
 
@@ -395,6 +398,8 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_go_gometalinter_options = '--fast'
 " Without this, eslint complains about things that prettier fixes
 let g:ale_linters = {'javascript': ['prettier']}
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 
 Plug 'sbdchd/neoformat'
@@ -493,9 +498,10 @@ map zg* <Plug>(incsearch-nohl)<Plug>(asterisk-g*)
 map z#  <Plug>(incsearch-nohl)<Plug>(asterisk-#)
 map zg# <Plug>(incsearch-nohl)<Plug>(asterisk-g#)
 
-Plug 'haya14busa/vim-edgemotion'
-map <C-j> <Plug>(edgemotion-j)
-map <C-k> <Plug>(edgemotion-k)
+" Using these keymaps for ale instead
+" Plug 'haya14busa/vim-edgemotion'
+" map <C-j> <Plug>(edgemotion-j)
+" map <C-k> <Plug>(edgemotion-k)
 
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 nmap ga <plug>(EasyAlign)
@@ -932,6 +938,8 @@ augroup end
 augroup filetypedetect
     autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
     autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+    " Admittedly Pipfile.lock looks to be a subset of JSON but this is a start
+    autocmd BufNewFile,BufRead Pipfile.lock setf json
 augroup END
 
 augroup task

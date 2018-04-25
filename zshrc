@@ -21,6 +21,8 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
+zplug 'wfxr/forgit', defer:1
+
 # Theme
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
@@ -203,6 +205,27 @@ alias rup='rustup update'
 # atom
 alias aup='apm upgrade --no-confirm'
 
+# {{{ Misc
+
+# Docker
+alias d='docker'
+alias dc='docker-compose'
+alias db='docker build .'
+
+alias c=cheat
+alias tl=tldr
+alias nv='nvim'
+# needs https://github.com/sindresorhus/clipboard-cli
+alias cb='clipboard'
+
+# force `k` to use human readable memory sizes
+alias k='k -h'
+alias gs='g st'
+alias cat='ccat'
+alias v=$EDITOR
+
+# }}}
+
 # }}}
 
 # {{{ Functions
@@ -211,6 +234,8 @@ alias aup='apm upgrade --no-confirm'
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # mf opens "Matching Files" to a regex / string given to rg
+# TODO: vim always complains about this given that rg might not
+# return anything, or hang
 function mf() { rg -l $1 | xargs $EDITOR }
 
 # }}}
