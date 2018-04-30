@@ -19,6 +19,7 @@ export PURE_PROMPT_SYMBOL='∆'
 
 # vim > nvim, for now
 export EDITOR='vim'
+export VISUAL="$EDITOR"
 
 # {{{ Go
 

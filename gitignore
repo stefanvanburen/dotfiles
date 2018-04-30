@@ -82,3 +82,4 @@ Temporary Items
 
 # Python
 .pytest_cache
+.mypy_cache

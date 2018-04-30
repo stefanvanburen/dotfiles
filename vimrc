@@ -29,7 +29,8 @@ let g:startify_fortune_use_unicode = 1
 " update startify while vim is running
 let g:startify_update_oldfiles = 1
 " use environment variables if they shorten path names
-let g:startify_use_env = 1
+" Not terribly useful honestly
+" let g:startify_use_env = 1
 " Don't change to the directory of a file when using startify
 let g:startify_change_to_dir = 0
 
@@ -234,6 +235,7 @@ let g:vim_json_syntax_conceal = 0
 
 " Protocol Buffers (protobuf)
 Plug 'uarun/vim-protobuf'
+Plug 'uber/prototool', { 'rtp':'vim/prototool' }
 
 " Dockerfile
 Plug 'ekalinin/Dockerfile.vim'
@@ -306,14 +308,14 @@ Plug 'vim-python/python-syntax', { 'for': 'python' }
 let g:python_highlight_all = 1
 " Trying this again, despite the lag
 " TOO MUCH
-" Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
+Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
 let g:pymode_python = 'python3'
 " Turn off folding
 let g:pymode_folding = 1
 " rtp = subdirectory of the plugin
 Plug 'ambv/black', { 'for': 'python', 'rtp': 'vim' }
 " For mypy
-Plug 'Integralist/vim-mypy', { 'for': 'python' }
+" Plug 'Integralist/vim-mypy', { 'for': 'python' }
 
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'lervag/vimtex'
@@ -360,7 +362,8 @@ omap <leader><tab> <plug>(fzf-maps-o)
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 
-nnoremap <leader><Enter> :GFiles!<cr>
+nnoremap <leader><Enter> :GFiles<cr>
+nnoremap <leader>f :Files<cr>
 nnoremap <leader><leader> :Buffers<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>t :Tags<cr>
@@ -397,7 +400,10 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_linters = {'go': ['gometalinter']}
 " let g:ale_go_gometalinter_options = '--fast'
 " Without this, eslint complains about things that prettier fixes
-let g:ale_linters = {'javascript': ['prettier']}
+let g:ale_linters = {
+\   'javascript': ['prettier'],
+\   'proto': ['prototool'],
+\}
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -531,6 +537,7 @@ nnoremap <leader>gr :Grepper -tool git<cr>
 nnoremap <leader>rg :Grepper -tool rg<cr>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
+command! Todo Grepper -tool ag -query '(TODO|FIX|FIXME|XXX|NOTE|HACK|OPTIMIZE):'
 
 Plug 'rhysd/clever-f.vim'
 
@@ -596,6 +603,8 @@ Plug 'reedes/vim-pencil'
 
 " Handles buffer deletion intelligently
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+nmap <leader>q :Sayonara<cr>
+nmap <leader>Q :Sayonara!<cr>
 
 " Automatic :set paste
 Plug 'ConradIrwin/vim-bracketed-paste'
@@ -797,7 +806,8 @@ nmap <leader>eg :e $HOME/.gitconfig<cr>
 nmap <leader>ev :e $MYVIMRC<cr>
 nmap <leader>ez :e $HOME/.zshrc<cr>
 
-nmap <leader>q :q<cr>
+" Using Sayonara instead
+" nmap <leader>q :q<cr>
 nmap <leader>w :w<cr>
 
 nmap <leader>rt :retab<cr>
@@ -840,7 +850,8 @@ nnoremap <leader>cc :set cc=100<cr>
 nnoremap <leader>co :set cc=""<cr>
 " This is now used for opening Dash
 " nnoremap <leader>d :bd<cr>
-nnoremap <leader>f <C-w>w
+" This is now used for :Files
+" nnoremap <leader>f <C-w>w
 " I don't really use this
 " nnoremap <leader>l :set list!<cr>
 nnoremap <leader>sh <C-w>h
