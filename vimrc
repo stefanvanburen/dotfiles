@@ -312,8 +312,7 @@ Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
 let g:pymode_python = 'python3'
 " Turn off folding
 let g:pymode_folding = 1
-" rtp = subdirectory of the plugin
-Plug 'ambv/black', { 'for': 'python', 'rtp': 'vim' }
+Plug 'ambv/black'
 " For mypy
 " Plug 'Integralist/vim-mypy', { 'for': 'python' }
 

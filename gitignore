@@ -83,3 +83,6 @@ Temporary Items
 # Python
 .pytest_cache
 .mypy_cache
+
+# Ignore my own pre-commit hooks
+.pre-commit-config.yaml
