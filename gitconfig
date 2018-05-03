@@ -150,10 +150,6 @@
 [push]
     default = current
 
-; For work SSO
-[url "git@github.com:"]
-    insteadOf = https://github.com/
-
 [user]
     name = Stefan VanBuren
     email = vanburenstefan@gmail.com

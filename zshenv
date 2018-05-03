@@ -27,7 +27,7 @@ export GOPATH="$HOME/src/go"
 
 # }}}
 
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin:$GOPATH/bin:$PATH"
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin:$GOPATH/bin"
 
 # }}}
 

@@ -3,6 +3,7 @@
 
 # {{{ zplug
 
+# using the homebrew zplug
 export ZPLUG_HOME="/usr/local/opt/zplug"
 source $ZPLUG_HOME/init.zsh
 
@@ -13,8 +14,10 @@ zplug "plugins/ssh-agent", from:oh-my-zsh
 zplug "plugins/taskwarrior", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "plugins/zsh_reload", from:oh-my-zsh
+zplug "plugins/pyenv", from:oh-my-zsh
 
-zplug "b4b4r07/enhancd", use:init.sh
+# Not really useful
+# zplug "b4b4r07/enhancd", use:init.sh
 zplug "supercrabtree/k"
 
 zplug "zsh-users/zsh-completions"
