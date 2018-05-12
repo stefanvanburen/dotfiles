@@ -588,6 +588,9 @@ Plug 'tpope/vim-dotenv'
 " Adds end, fi, esac, etc in languages where they are needed
 Plug 'tpope/vim-endwise'
 
+" Set the 'path' option for miscellaneous file types
+Plug 'tpope/vim-apathy'
+
 " Heuristically set buffer options
 " Plug 'tpope/vim-sleuth'
 
