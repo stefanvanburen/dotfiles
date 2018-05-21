@@ -268,6 +268,8 @@ let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 " How long to allow metalinter to run (5s is the default)
 let g:go_metalinter_deadline = "5s"
 
+Plug 'buoto/gotests-vim'
+
 " Org-Mode
 Plug 'jceb/vim-orgmode'
 
@@ -306,13 +308,18 @@ Plug 'hashivim/vim-terraform'
 " Python
 Plug 'vim-python/python-syntax', { 'for': 'python' }
 let g:python_highlight_all = 1
+
 " Trying this again, despite the lag
 " TOO MUCH
-Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
-let g:pymode_python = 'python3'
-" Turn off folding
-let g:pymode_folding = 1
+" Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
+" let g:pymode_python = 'python3'
+" " Turn off folding
+" let g:pymode_folding = 1
+" " match black's default
+" let g:pymode_options_max_line_length = 88
+
 Plug 'ambv/black'
+
 " For mypy
 " Plug 'Integralist/vim-mypy', { 'for': 'python' }
 
@@ -396,6 +403,7 @@ let g:ale_sign_warning = '⦁⦁'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" note that python files have their ALE configuration in ftplugin/python.vim
 " let g:ale_linters = {'go': ['gometalinter']}
 " let g:ale_go_gometalinter_options = '--fast'
 " Without this, eslint complains about things that prettier fixes
@@ -970,10 +978,10 @@ augroup END
 " All are prefixed with 'o', because 'g' is for git
 augroup go
     " FIXME - these don't seem to work
-    " autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+    autocmd Filetype go command! -bang Alternate call go#alternate#Switch(<bang>0, 'edit')
     " autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
     " autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-    autocmd FileType go nmap <leader>oa :A<cr>
+    autocmd FileType go nmap <leader>oa :Alternate<cr>
     autocmd FileType go nmap <leader>ob <plug>(go-build)
     autocmd FileType go nmap <leader>oc <plug>(go-coverage-toggle)
     autocmd FileType go nmap <leader>od <plug>(go-doc-vertical)

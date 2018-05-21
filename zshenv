@@ -24,10 +24,11 @@ export VISUAL="$EDITOR"
 # {{{ Go
 
 export GOPATH="$HOME/src/go"
+export PATH="$PATH:$GOPATH/bin"
 
 # }}}
 
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin:$GOPATH/bin"
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin"
 
 # }}}
 

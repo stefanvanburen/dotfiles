@@ -7,14 +7,23 @@
 export ZPLUG_HOME="/usr/local/opt/zplug"
 source $ZPLUG_HOME/init.zsh
 
+# adds `x` command for unarchiving various formats
 zplug "plugins/extract", from:oh-my-zsh
+# initializes fasd; extra aliases
 zplug "plugins/fasd", from:oh-my-zsh
+# use `hub` for `git` if it's installed; extra aliases
 zplug "plugins/github", from:oh-my-zsh
-zplug "plugins/ssh-agent", from:oh-my-zsh
-zplug "plugins/taskwarrior", from:oh-my-zsh
-zplug "plugins/vi-mode", from:oh-my-zsh
-zplug "plugins/zsh_reload", from:oh-my-zsh
+# initializes pyenv
 zplug "plugins/pyenv", from:oh-my-zsh
+# handles ssh-agent
+zplug "plugins/ssh-agent", from:oh-my-zsh
+# adds t alias, taskwarrior completions
+# not really using taskwarrior much anymore
+# zplug "plugins/taskwarrior", from:oh-my-zsh
+# sets up vi-mode for the command line
+zplug "plugins/vi-mode", from:oh-my-zsh
+# adds `src` alias for reloading zsh session
+zplug "plugins/zsh_reload", from:oh-my-zsh
 
 # Not really useful
 # zplug "b4b4r07/enhancd", use:init.sh
@@ -27,6 +36,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug 'wfxr/forgit', defer:1
 
 # Theme
+# required for pure
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
@@ -131,27 +141,12 @@ if (( $+commands[brew] )); then
     alias bubu='bubo && bubc'
 fi
 
-# if (( $+commands[nvim] )); then
-#     alias vim='nvim'
-#     alias vi='nvim'
-#     alias v='nvim'
-#     alias vimdiff='nvim -d'
-# elif (( $+commands[vim] )); then
-#     alias vi='vim'
-#     alias v='vim'
-# fi
-
-if (( $+commands[vim] )); then
-    alias vi='vim'
-    alias v='vim'
-fi
-
-alias ge="$EDITOR $HOME/.gitconfig"
 alias gitconfig="$EDITOR $HOME/.gitconfig"
 alias zshrc="$EDITOR $HOME/.dotfiles/zshrc"
 alias vimrc="$EDITOR $HOME/.dotfiles/vimrc"
-alias ze="$EDITOR $HOME/.dotfiles/zshrc"
-alias ve="$EDITOR $HOME/.dotfiles/vimrc"
+alias ge=gitconfig
+alias ze=zshrc
+alias ve=vimrc
 
 if (( $+commands[newsbeuter] )); then
     alias news='newsbeuter'
@@ -167,6 +162,7 @@ if (( $+commands[tmux] )); then
     }
 fi
 
+# n is used for `n` - the node version manager
 # if (( $+commands[nnn] )); then
 #     alias n='nnn'
 # fi
