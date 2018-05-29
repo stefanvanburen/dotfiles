@@ -14,7 +14,8 @@ zplug "plugins/fasd", from:oh-my-zsh
 # use `hub` for `git` if it's installed; extra aliases
 zplug "plugins/github", from:oh-my-zsh
 # initializes pyenv
-zplug "plugins/pyenv", from:oh-my-zsh
+# not using pyenv for now
+# zplug "plugins/pyenv", from:oh-my-zsh
 # handles ssh-agent
 zplug "plugins/ssh-agent", from:oh-my-zsh
 # adds t alias, taskwarrior completions

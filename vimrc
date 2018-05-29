@@ -200,7 +200,7 @@ let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
 let g:UltiSnipsEditSplit="vertical"
 
 " Taskwarrior
-Plug 'blindFS/vim-taskwarrior'
+Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
 
 " Javascript
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -309,6 +309,8 @@ Plug 'hashivim/vim-terraform'
 Plug 'vim-python/python-syntax', { 'for': 'python' }
 let g:python_highlight_all = 1
 
+Plug 'Vimjas/vim-python-pep8-indent'
+
 " Trying this again, despite the lag
 " TOO MUCH
 " Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
@@ -318,7 +320,7 @@ let g:python_highlight_all = 1
 " " match black's default
 " let g:pymode_options_max_line_length = 88
 
-Plug 'ambv/black'
+Plug 'ambv/black', { 'on': 'Black' }
 
 " For mypy
 " Plug 'Integralist/vim-mypy', { 'for': 'python' }
@@ -342,7 +344,8 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_complete_in_comments                = 1
 let g:ycm_key_list_select_completion = ['<C-j>']
 let g:ycm_key_list_previous_completion = ['<C-k>']
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
+" commenting this out to use virtualenv python
+let g:ycm_python_binary_path = 'python'
 
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
