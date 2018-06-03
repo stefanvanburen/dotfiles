@@ -39,10 +39,11 @@ let g:startify_change_to_dir = 0
 " Plug 'roman/golden-ratio'
 
 " Required for vim-operator-flashy
-Plug 'kana/vim-operator-user'
-Plug 'haya14busa/vim-operator-flashy'
-map y <plug>(operator-flashy)
-nmap Y <plug>(operator-flashy)$
+" Plug 'kana/vim-operator-user'
+" Plug 'haya14busa/vim-operator-flashy'
+" map y <plug>(operator-flashy)
+" nmap Y <plug>(operator-flashy)$
+Plug 'machakann/vim-highlightedyank'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -156,6 +157,11 @@ Plug 'airblade/vim-gitgutter'
 " Turns on gitgutter updating for a variety of events
 " ex: switch buffers, tabs, etc
 " let g:gitgutter_eager = 1
+let g:gitgutter_sign_added = '·'
+let g:gitgutter_sign_modified = '·'
+let g:gitgutter_sign_removed = '·'
+let g:gitgutter_sign_removed_first_line = '·'
+let g:gitgutter_sign_modified_removed = '·'
 
 Plug 'junegunn/gv.vim'
 nmap <leader>gv :GV<cr>
@@ -306,9 +312,11 @@ Plug 'hashivim/vim-terraform'
 " Plug 'junegunn/vim-journal'
 
 " Python
+" Syntax
 Plug 'vim-python/python-syntax', { 'for': 'python' }
 let g:python_highlight_all = 1
 
+" Indent
 Plug 'Vimjas/vim-python-pep8-indent'
 
 " Trying this again, despite the lag
@@ -727,6 +735,7 @@ set mouse=a                        " Enable mouse for all modes
 
 set nojoinspaces                   " Don't insert two spaces after punctuation with a join command.
 
+set noshowmode
 set nostartofline
 
 set nobackup

@@ -104,7 +104,7 @@
     untrackedCache = true
 
 [credential]
-    helper = store
+	helper = osxkeychain
 
 [diff]
     tool = vimdiff
