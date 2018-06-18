@@ -381,6 +381,7 @@ xmap <leader><tab> <plug>(fzf-maps-x)
 
 nnoremap <leader><Enter> :GFiles<cr>
 nnoremap <leader>f :Files<cr>
+" nnoremap ; :Buffers<cr>
 nnoremap <leader><leader> :Buffers<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>t :Tags<cr>
@@ -623,9 +624,10 @@ Plug 'ryanss/vim-hackernews'
 Plug 'reedes/vim-pencil'
 
 " Handles buffer deletion intelligently
-Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-nmap <leader>q :Sayonara<cr>
-nmap <leader>Q :Sayonara!<cr>
+" This hangs on git merges :(
+" Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+" nmap <leader>q :Sayonara<cr>
+" nmap <leader>Q :Sayonara!<cr>
 
 " Automatic :set paste
 Plug 'ConradIrwin/vim-bracketed-paste'
@@ -654,7 +656,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tommcdo/vim-exchange'
 
 " Manages and creates tag files
-Plug 'ludovicchabant/vim-gutentags'
+" This seems to be having all sorts of issues recently
+" Plug 'ludovicchabant/vim-gutentags'
 
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
@@ -685,7 +688,7 @@ set wrapscan                       " Wrap around the end of the buffer when sear
 set autoread                       " Read changes in files during editing.
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=light               " light background.
+set background=dark                " dark background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
@@ -822,14 +825,14 @@ nmap <leader>/ :nohl<cr>
 " For stripping whitespace - :StripWhiteSpace is provided by vim-better-whitespace
 " nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
 nmap <leader>W :StripWhitespace<cr>
+nmap <leader>sw :StripWhitespace<cr>
 
 " For editing various configuration files
 nmap <leader>eg :e $HOME/.gitconfig<cr>
 nmap <leader>ev :e $MYVIMRC<cr>
 nmap <leader>ez :e $HOME/.zshrc<cr>
 
-" Using Sayonara instead
-" nmap <leader>q :q<cr>
+nmap <leader>q :q<cr>
 nmap <leader>w :w<cr>
 
 nmap <leader>rt :retab<cr>

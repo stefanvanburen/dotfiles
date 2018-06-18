@@ -16,6 +16,7 @@ env:
 # Window dimensions in character columns and lines
 # (changes require restart)
 window:
+  decorations: false
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
@@ -25,7 +26,6 @@ window:
   dimensions:
     columns: 200
     lines: 60
-  decorations: false
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 4
@@ -54,7 +54,7 @@ font:
     # style: Italic
 
   # Point size of the font
-  size: 24.0
+  size: 12.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.

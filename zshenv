@@ -17,8 +17,8 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 export PURE_PROMPT_SYMBOL='∆'
 
-# vim > nvim, for now
-export EDITOR='vim'
+# switching back to nvim
+export EDITOR='nvim'
 export VISUAL="$EDITOR"
 
 # {{{ Go
