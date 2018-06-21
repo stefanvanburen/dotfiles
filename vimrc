@@ -38,11 +38,7 @@ let g:startify_change_to_dir = 0
 " Neat idea in theory - tends to wonk things up in practice
 " Plug 'roman/golden-ratio'
 
-" Required for vim-operator-flashy
-" Plug 'kana/vim-operator-user'
-" Plug 'haya14busa/vim-operator-flashy'
-" map y <plug>(operator-flashy)
-" nmap Y <plug>(operator-flashy)$
+" replaces vim-operator-flashy
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'vim-airline/vim-airline'
@@ -476,52 +472,17 @@ let g:EasyMotion_enter_jump_first = 1
 let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_startofline      = 0
 
-" Possible update to incsearch? (TODO: does it provide all the functionality fleshed out below?)
-" Plug 'haya14busa/is.vim'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
-" Not using fuzzy search for now - add the lines below the plug to the inner
-" part of the function below for fuzzy search
-" Plug 'haya14busa/incsearch-fuzzy.vim'
-" \   'converters': [
-" \     incsearch#config#fuzzy#converter(),
-" \   ],
-
-" Not using this block for now
-" let g:incsearch#auto_nohlsearch = 1
-" function! s:incsearch_config(...) abort
-"     return incsearch#util#deepextend(deepcopy({
-"                 \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-"                 \   'keymap': {
-"                 \     "\<CR>": '<Over>(easymotion)'
-"                 \   },
-"                 \   'is_expr': 0
-"                 \ }), get(a:, 1, {}))
-" endfunction
-" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-" " Using ? for :GFiles mapping
-" " noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-
-map n <plug>(incsearch-nohl-n)
-map N <plug>(incsearch-nohl-N)
-let g:incsearch#consistent_n_direction = 1
-" These mappings are replaced by vim-asterisk in the following section
-" map * <plug>(incsearch-nohl-*)
-" map # <plug>(incsearch-nohl-#)
+" replaces incsearch.vim
+Plug 'haya14busa/is.vim'
 
 Plug 'haya14busa/vim-asterisk'
+" keeps position across matches
 let g:asterisk#keeppos = 1
-
-map *  <Plug>(asterisk-z*)
-map g* <Plug>(incsearch-nohl2)<Plug>(asterisk-gz*)
-map #  <Plug>(incsearch-nohl2)<Plug>(asterisk-z#)
-map g# <Plug>(incsearch-nohl2)<Plug>(asterisk-gz#)
-
-map z*  <Plug>(incsearch-nohl)<Plug>(asterisk-*)
-map zg* <Plug>(incsearch-nohl)<Plug>(asterisk-g*)
-map z#  <Plug>(incsearch-nohl)<Plug>(asterisk-#)
-map zg# <Plug>(incsearch-nohl)<Plug>(asterisk-g#)
+" these mappings stay at the current match until another motion
+map * <Plug>(asterisk-z*)
+map # <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
 
 " Using these keymaps for ale instead
 " Plug 'haya14busa/vim-edgemotion'
@@ -711,13 +672,17 @@ set hidden                         " Don't get rid of hidden buffers.
 
 set history=10000                  " Save 10000 lines of command history.
 
+set incsearch                      " Incremental search
+
+if has('nvim')
+    set inccommand=nosplit
+endif
+
 set infercase                      " For completion
 
 set ignorecase                     " Ignore case while searching
 set smartcase                      " ... except when capitals are used
 set hlsearch
-" unncessary - handled by incsearch.vim
-" set incsearch                      " Incrementally search
 
 set laststatus=2                   " Always show the last command.
 
