@@ -78,6 +78,8 @@ let NERDTreeQuitOnOpen = 1
 " Show hidden files in NERDTree
 let NERDTreeShowHidden=1
 
+" disable netrw_
+let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
 
 Plug 'junegunn/vim-peekaboo'
@@ -132,7 +134,8 @@ Plug 'myusuf3/numbers.vim'
 Plug 'ntpeters/vim-better-whitespace'
 
 " Enhances builtin netrw file browser
-Plug 'tpope/vim-vinegar'
+" Note that netrw is disabled and we're using dirvish
+" Plug 'tpope/vim-vinegar'
 
 " Highlights the overflowing part of a line that's too long
 Plug 'whatyouhide/vim-lengthmatters'
@@ -248,7 +251,7 @@ Plug 'ekalinin/Dockerfile.vim'
 
 " Go
 " vim-go tip -> if things seemingly aren't working, :GoUpdateBinaries
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'tag': '*' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'branch': 'master' }
 let g:go_fmt_command = 'goimports'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -562,6 +565,10 @@ Plug 'tpope/vim-dadbod'
 
 " match matching matches
 Plug 'andymass/vim-matchup'
+" improve cursor performance by delaying match
+let g:matchup_matchparen_deferred = 1
+" don't replace statusline with offscreen match
+let g:matchup_matchparen_status_offscreen = 0
 
 " Basic support for .env and Procfile
 Plug 'tpope/vim-dotenv'
@@ -577,9 +584,6 @@ Plug 'tpope/vim-apathy'
 
 " Pong-like game
 Plug 'johngrib/vim-game-code-break'
-
-" Browse hackernews in vim
-Plug 'ryanss/vim-hackernews'
 
 " For editing prose
 Plug 'reedes/vim-pencil'
@@ -631,6 +635,9 @@ filetype plugin indent on
 " }}}
 
 " {{{ Settings
+
+" this is ignored in neovim, but should be set before colorscheme
+set t_Co=256
 
 colorscheme solarized
 
@@ -743,6 +750,9 @@ set ttimeoutlen=50
 
 set textwidth=0
 
+" This is ignored in neovim
+set ttyfast
+
 set updatetime=100                 " Time to write swap file to disk in milliseconds
 
 if has('nvim')
@@ -761,10 +771,6 @@ set wildignorecase
 " Some other useful options that I'm not using
 " set cursorline
 " highlight ColorColumn ctermbg=4 ctermfg=1
-
-" These options are ignored in Neovim
-set ttyfast
-set t_Co=256
 
 " }}}
 
@@ -914,7 +920,7 @@ iab <expr> dts strftime("%y-%m-%d")
 " {{{ Highlights
 
 highlight IncSearch   ctermbg=1 ctermfg=4
-highlight MatchParen  ctermbg=1 ctermfg=4
+" highlight MatchParen  ctermbg=1 ctermfg=4
 highlight VertSplit   ctermbg=1
 highlight Visual      ctermbg=1 ctermfg=4
 
@@ -973,6 +979,10 @@ augroup go
     autocmd FileType go nmap <leader>os <plug>(go-implements)
     autocmd FileType go nmap <leader>ot <plug>(go-test)
     autocmd FileType go nmap <leader>ov <plug>(go-vet)
+augroup END
+
+augroup python
+    autocmd Filetype python nmap <C-]> :YcmCompleter GoTo<cr>
 augroup END
 
 " }}}
