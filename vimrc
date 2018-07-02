@@ -741,7 +741,7 @@ set smartindent
 set splitbelow                     " On horizontal split, open the split below.
 set splitright                     " On veritcal split, open the split to the right.
 
-set synmaxcol=200                  " Don't syntax highlight after 200 columns (for larger files).
+set synmaxcol=400                  " Don't syntax highlight after 400 columns (for larger files).
 
 set title                          " Set the title of the window.
 
