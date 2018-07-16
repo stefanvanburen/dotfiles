@@ -36,3 +36,12 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 docker volume rm $(docker volume ls |awk '{print $2}')
 rm -rf ~/Library/Containers/com.docker.docker/Data/*
+
+# remove dangling unused images
+docker system prune
+
+# remove all unused images
+docker system prune -a
+
+# attach local standard input, output and error streams to a running container
+docker attach <container>
