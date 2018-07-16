@@ -7,6 +7,12 @@ syntax enable
 " Leader is space key
 let g:mapleader = "\<Space>"
 
+" https://github.com/vim/vim/issues/3117#issuecomment-402622616
+" TODO: should remove this when vim is fixed
+if has('python3')
+  silent! python3 1
+endif
+
 " vim-plug
 nnoremap <leader>pc :PlugClean<cr>
 nnoremap <leader>pg :PlugUpgrade<cr>
@@ -194,6 +200,7 @@ Plug 'chrisbra/vim-diff-enhanced'
 
 " {{{ Language / Filetype
 
+Plug 'wilsaj/chuck.vim'
 " Track the engine.
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
@@ -278,6 +285,9 @@ Plug 'buoto/gotests-vim'
 " Org-Mode
 Plug 'jceb/vim-orgmode'
 
+Plug 'dzeban/vim-log-syntax'
+" Plug 'andreshazard/vim-logreview'
+
 " Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 
@@ -328,6 +338,9 @@ Plug 'Vimjas/vim-python-pep8-indent'
 " let g:pymode_options_max_line_length = 88
 
 Plug 'ambv/black', { 'on': 'Black' }
+
+Plug 'alfredodeza/pytest.vim'
+Plug 'alfredodeza/coveragepy.vim'
 
 " For mypy
 " Plug 'Integralist/vim-mypy', { 'for': 'python' }
