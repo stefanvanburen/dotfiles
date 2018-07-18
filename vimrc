@@ -377,6 +377,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 " {{{ Colorschemes
 
 Plug 'morhetz/gruvbox'
+let g:gruvbox_contrast_dark = 'hard'
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
 Plug 'flazz/vim-colorschemes'
@@ -454,6 +455,7 @@ Plug 'rhysd/vim-clang-format'
 " autocmd FileType java AutoFormatBuffer google-java-format
 
 " linting / make
+" Honestly, this just doesn't seem better than ale for my uses
 "Plug 'neomake/neomake'
 
 " Using ale instead
