@@ -26,6 +26,7 @@
         path: vim
     ~/.ripgreprc: ripgreprc
     ~/.config/alacritty/alacritty.yml: alacritty.yml
+    ~/.isort.cfg: isort.cfg
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
