@@ -215,10 +215,14 @@ let g:UltiSnipsEditSplit="vertical"
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
 
 " Javascript
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" note that prettier has docs for setting up with ALE
+" less configuration, though
+Plug 'prettier/vim-prettier', {
+                        \ 'do': 'yarn install',
+                        \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
 " Vim Prettier Settings
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql Prettier
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql Prettier
 let g:prettier#config#print_width = 80 " max line length that prettier will wrap on
 let g:prettier#config#tab_width = 2 " number of spaces per indentation level
 let g:prettier#config#use_tabs = 'false' " use tabs over spaces
@@ -267,8 +271,9 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_test_prepend_name = 1
+let g:go_def_mode = 'godef'
 " These make things slow
-" let g:go_auto_type_info = 1
+let g:go_auto_type_info = 1
 " let g:go_auto_sameids = 1
 let g:go_fmt_options = {
 \ 'gofmt': '-s',
@@ -671,7 +676,7 @@ set wrapscan                       " Wrap around the end of the buffer when sear
 set autoread                       " Read changes in files during editing.
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=dark                " dark background.
+set background=light                " dark background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
@@ -683,10 +688,9 @@ set foldmethod=marker              " Use markers for folds ({{{ and }}}).
 " c: Auto-wrap comments using textwidth, inserting the current comment leader automatically.
 " q: Allow formatting of comments with "gq".
 " r: Automatically insert the current comment leader after hitting <Enter> in Insert mode.
-" t: Auto-wrap text using textwidth
 " j: Where it makes sense, remove a comment leader when joining lines
 " o: Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
-set formatoptions=c,q,r,t,j,o
+set formatoptions=c,q,r,j,o
 
 set gdefault                       " Global substitutions by default.
 
@@ -768,7 +772,7 @@ set textwidth=0
 " This is ignored in neovim
 set ttyfast
 
-set updatetime=100                 " Time to write swap file to disk in milliseconds
+set updatetime=100                 " Time to write swap file to disk in milliseconds, and CursorHold autocommand
 
 if has('nvim')
     set shada='100,n$HOME/.vim/files/info/nviminfo
@@ -962,6 +966,12 @@ augroup filetypedetect
     autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
     " Admittedly Pipfile.lock looks to be a subset of JSON but this is a start
     autocmd BufNewFile,BufRead Pipfile.lock setf json
+augroup END
+
+augroup python
+        autocmd Filetype python nmap <leader>ptc :Pytest class<cr>
+        autocmd Filetype python nmap <leader>ptf :Pytest file<cr>
+        autocmd Filetype python nmap <leader>ptm :Pytest method<cr>
 augroup END
 
 augroup task
