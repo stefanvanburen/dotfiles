@@ -222,7 +222,7 @@ alias cb='clipboard'
 alias k='k -h'
 alias gs='g st'
 alias cat='ccat'
-alias v=$EDITOR
+alias v="$EDITOR"
 
 # }}}
 
@@ -232,6 +232,12 @@ alias v=$EDITOR
 
 # generates gitignore files
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# initializes a private repo on github and opens the page
+# relies on `hub` for `git create`
+function initialize() {
+  git init && git commit --allow-empty -m "Initial commit" && git create -p -o
+}
 
 # mf opens "Matching Files" to a regex / string given to rg
 # TODO: vim always complains about this given that rg might not
