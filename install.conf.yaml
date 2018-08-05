@@ -27,6 +27,7 @@
     ~/.ripgreprc: ripgreprc
     ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.isort.cfg: isort.cfg
+    ~/.config/flake8: flake8
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

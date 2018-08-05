@@ -198,7 +198,7 @@ Plug 'chrisbra/vim-diff-enhanced'
 
 " }}}
 
-" {{{ Language / Filetype
+" {{{ Languages / Filetype
 
 Plug 'wilsaj/chuck.vim'
 " Track the engine.
@@ -273,7 +273,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_test_prepend_name = 1
 let g:go_def_mode = 'godef'
 " These make things slow
-let g:go_auto_type_info = 1
+" let g:go_auto_type_info = 1
 " let g:go_auto_sameids = 1
 let g:go_fmt_options = {
 \ 'gofmt': '-s',
@@ -290,6 +290,7 @@ Plug 'buoto/gotests-vim'
 " Org-Mode
 Plug 'jceb/vim-orgmode'
 
+" Logs
 Plug 'dzeban/vim-log-syntax'
 " Plug 'andreshazard/vim-logreview'
 
@@ -346,6 +347,8 @@ Plug 'ambv/black', { 'on': 'Black' }
 
 Plug 'alfredodeza/pytest.vim'
 Plug 'alfredodeza/coveragepy.vim'
+
+Plug 'fisadev/vim-isort', { 'for': 'python' }
 
 " For mypy
 " Plug 'Integralist/vim-mypy', { 'for': 'python' }
@@ -676,7 +679,7 @@ set wrapscan                       " Wrap around the end of the buffer when sear
 set autoread                       " Read changes in files during editing.
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=light                " dark background.
+set background=light               " light background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
@@ -972,6 +975,7 @@ augroup python
         autocmd Filetype python nmap <leader>ptc :Pytest class<cr>
         autocmd Filetype python nmap <leader>ptf :Pytest file<cr>
         autocmd Filetype python nmap <leader>ptm :Pytest method<cr>
+        autocmd Filetype python set tw=88
 augroup END
 
 augroup task

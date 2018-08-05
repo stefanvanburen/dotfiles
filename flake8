@@ -1,0 +1,3 @@
+[flake8]
+# matches black
+max-line-length = 88

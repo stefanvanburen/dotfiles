@@ -79,3 +79,7 @@ or
 
 # Unmark marked pane (from any pane)
 <prefix> M
+
+# move window to <session> from current session
+<prefix> :movew -t session
+<prefix> :move-window -t session
