@@ -1,4 +1,7 @@
-" Check Python files with flake8 and pylint.
-let b:ale_linters = ['flake8', 'pylint']
-" Fix Python files with black and isort
-let b:ale_fixers = ['black', 'isort']
+" Check Python files with flake8
+" TODO: should look into using a type checker (pyre or mypy)
+let b:ale_linters = ['flake8']
+" Fix Python files with isort
+" TODO: would like to use black, but probably just for personal projects for
+" the time being
+let b:ale_fixers = ['isort']
