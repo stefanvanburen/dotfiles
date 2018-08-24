@@ -158,6 +158,7 @@ let g:lengthmatters_on_by_default = 0
 
 " {{{ Git
 
+" Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
 " Turns on gitgutter updating for a variety of events
 " ex: switch buffers, tabs, etc
@@ -271,7 +272,8 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_test_prepend_name = 1
-let g:go_def_mode = 'godef'
+" This doesn't work quite as well as guru
+" let g:go_def_mode = 'godef'
 " These make things slow
 " let g:go_auto_type_info = 1
 " let g:go_auto_sameids = 1
@@ -406,6 +408,7 @@ nnoremap <leader>f :Files<cr>
 nnoremap <leader><leader> :Buffers<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>t :Tags<cr>
+nnoremap <leader>sn :Snippets<cr>
 " nnoremap <leader>gf :GFiles<cr>
 nnoremap <leader>gc :Commits!<cr>
 " nnoremap <leader>ag :Ag!<cr>
@@ -417,6 +420,8 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 nnoremap <leader>se :Rg<cr>
+
+command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 Plug 'Alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/nv']
@@ -444,6 +449,7 @@ let g:ale_linters = {
 \   'javascript': ['prettier'],
 \   'proto': ['prototool'],
 \}
+nnoremap <silent> <leader>af :ALEFix<cr>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -1010,9 +1016,9 @@ augroup go
     autocmd FileType go nmap <leader>ov <plug>(go-vet)
 augroup END
 
-augroup python
-    autocmd Filetype python nmap <C-]> :YcmCompleter GoTo<cr>
-augroup END
+" augroup python
+"     autocmd Filetype python nmap <C-]> :YcmCompleter GoTo<cr>
+" augroup END
 
 " }}}
 
