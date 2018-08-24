@@ -44,4 +44,8 @@ docker system prune
 docker system prune -a
 
 # attach local standard input, output and error streams to a running container
+# NOTE that this just attaches these streams and is relatively difficult to detatch from
 docker attach <container>
+
+# attach shell to a running docker container
+docker exec -it "id of running container" bash
