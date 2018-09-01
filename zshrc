@@ -28,7 +28,8 @@ zplug "plugins/zsh_reload", from:oh-my-zsh
 
 # Not really useful
 # zplug "b4b4r07/enhancd", use:init.sh
-zplug "supercrabtree/k"
+# k is pretty slow
+# zplug "supercrabtree/k"
 
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
@@ -112,18 +113,22 @@ elif (( $+commands[make] )); then
 fi
 
 # relies on k plugin
-if (( $+commands[k] )); then
-    alias k='k -h'
-    alias l=k
-fi
+# k is slow
+# if (( $+commands[k] )); then
+#     alias k='k -h'
+#     alias l=k
+# fi
 
 alias ll='ls -alGh'
 alias u='cd .. && ll'
 alias fn='find . -name'
 alias h="cd $HOME"
 
-# brew install ccat
-if (( $+commands[ccat] )); then
+if (( $+commands[bat] )); then
+    # brew install bat
+    alias cat='bat'
+elif (( $+commands[ccat] )); then
+    # brew install ccat
     alias cat='ccat'
 fi
 
@@ -170,6 +175,8 @@ fi
 
 if (( $+commands[exa] )); then
     alias ls='exa'
+    alias l='exa --long --git'
+    alias k='l'
 fi
 
 if (( $+commands[git] )); then
@@ -218,10 +225,7 @@ alias nv='nvim'
 # needs https://github.com/sindresorhus/clipboard-cli
 alias cb='clipboard'
 
-# force `k` to use human readable memory sizes
-alias k='k -h'
 alias gs='g st'
-alias cat='ccat'
 alias v="$EDITOR"
 
 # }}}
