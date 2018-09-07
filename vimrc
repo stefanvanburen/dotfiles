@@ -47,32 +47,38 @@ let g:startify_change_to_dir = 0
 " replaces vim-operator-flashy
 Plug 'machakann/vim-highlightedyank'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Not terribly useful
-" Plug 'bling/vim-bufferline'
-let g:airline_theme = 'solarized'
-" let g:airline_powerline_fonts = 1
-" Don't need this as I have my own tmux statusline config
-" let g:airline#extensions#tmuxline#enabled = 1
-let g:airline#extensions#tabline#enabled         = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#ale#enabled = 1
-nmap <leader>1 <plug>AirlineSelectTab1
-nmap <leader>2 <plug>AirlineSelectTab2
-nmap <leader>3 <plug>AirlineSelectTab3
-nmap <leader>4 <plug>AirlineSelectTab4
-nmap <leader>5 <plug>AirlineSelectTab5
-nmap <leader>6 <plug>AirlineSelectTab6
-nmap <leader>7 <plug>AirlineSelectTab7
-nmap <leader>8 <plug>AirlineSelectTab8
-nmap <leader>9 <plug>AirlineSelectTab9
+" airline
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" " Not terribly useful
+" " Plug 'bling/vim-bufferline'
+" let g:airline_theme = 'solarized'
+" " let g:airline_powerline_fonts = 1
+" " Don't need this as I have my own tmux statusline config
+" " let g:airline#extensions#tmuxline#enabled = 1
+" let g:airline#extensions#tabline#enabled         = 1
+" let g:airline#extensions#tabline#buffer_idx_mode = 1
+" let g:airline#extensions#ale#enabled = 1
+" nmap <leader>1 <plug>AirlineSelectTab1
+" nmap <leader>2 <plug>AirlineSelectTab2
+" nmap <leader>3 <plug>AirlineSelectTab3
+" nmap <leader>4 <plug>AirlineSelectTab4
+" nmap <leader>5 <plug>AirlineSelectTab5
+" nmap <leader>6 <plug>AirlineSelectTab6
+" nmap <leader>7 <plug>AirlineSelectTab7
+" nmap <leader>8 <plug>AirlineSelectTab8
+" nmap <leader>9 <plug>AirlineSelectTab9
 
-Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
+
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 let g:undotree_WindowLayout = 2
 nnoremap <leader>U :UndotreeToggle<cr>
 
-Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 nnoremap <leader>N :NERDTreeToggle<cr>
 nnoremap <C-n> :NERDTreeToggle<cr>
@@ -93,7 +99,7 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 nnoremap <leader>T :TagbarToggle<cr>
 
-Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 function! s:goyo_enter()
     silent !tmux set status off
     silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
@@ -131,7 +137,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 nmap <leader>G :Goyo<cr>
 
-Plug 'junegunn/limelight.vim'
+Plug 'junegunn/limelight.vim', { 'on': 'LimeLight' }
 let g:limelight_conceal_ctermfg = 'darkgray'
 
 Plug 'myusuf3/numbers.vim'
@@ -144,7 +150,8 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'tpope/vim-vinegar'
 
 " Highlights the overflowing part of a line that's too long
-Plug 'whatyouhide/vim-lengthmatters'
+" TODO: test if this works
+Plug 'whatyouhide/vim-lengthmatters', { 'on': 'LengthMatters' }
 let g:lengthmatters_on_by_default = 0
 
 " Plug 'ctrlpvim/ctrlp.vim'
@@ -180,7 +187,7 @@ nmap <leader>gs :Gstatus<cr>gg<c-n>
 Plug 'tpope/vim-rhubarb'
 
 " Git branch management
-Plug 'sodapopcan/vim-twiggy'
+Plug 'sodapopcan/vim-twiggy', { 'on': 'Twiggy' }
 
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
@@ -215,6 +222,9 @@ let g:UltiSnipsEditSplit="vertical"
 " Taskwarrior
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
 
+" HTML5
+Plug 'othree/html5.vim'
+
 " Javascript
 " note that prettier has docs for setting up with ALE
 " less configuration, though
@@ -243,7 +253,7 @@ let g:vim_markdown_folding_disabled = 1
 " Plug 'tpope/vim-markdown'
 
 " GraphQL
-Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
 " JSON
 Plug 'elzr/vim-json'
@@ -251,8 +261,8 @@ Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 
 " Protocol Buffers (protobuf)
-Plug 'uarun/vim-protobuf'
-Plug 'uber/prototool', { 'rtp':'vim/prototool' }
+Plug 'uarun/vim-protobuf', { 'for': 'protobuf' }
+Plug 'uber/prototool', { 'rtp': 'vim/prototool', 'for': 'protobuf' }
 
 " Dockerfile
 Plug 'ekalinin/Dockerfile.vim'
@@ -263,8 +273,8 @@ Plug 'ekalinin/Dockerfile.vim'
 
 " Go
 " vim-go tip -> if things seemingly aren't working, :GoUpdateBinaries
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'branch': 'master' }
-let g:go_fmt_command = 'goimports'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'tag': '*' }
+let g:go_fmt_command = 'goreturns'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -287,7 +297,7 @@ let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 " How long to allow metalinter to run (5s is the default)
 let g:go_metalinter_deadline = "5s"
 
-Plug 'buoto/gotests-vim'
+Plug 'buoto/gotests-vim', { 'for': 'go' }
 
 " Org-Mode
 Plug 'jceb/vim-orgmode'
@@ -303,10 +313,10 @@ Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 Plug 'zchee/vim-vgo'
 
 " Crystal
-Plug 'rhysd/vim-crystal'
+Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 
 " Gist
-Plug 'mattn/gist-vim'
+Plug 'mattn/gist-vim', { 'for': 'gist' }
 
 " nginx
 Plug 'fatih/vim-nginx'
@@ -391,6 +401,7 @@ let g:gruvbox_contrast_dark = 'hard'
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
 Plug 'flazz/vim-colorschemes'
+Plug 'rhysd/vim-color-spring-night'
 
 " }}}
 
@@ -423,9 +434,10 @@ nnoremap <leader>se :Rg<cr>
 
 command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
-Plug 'Alok/notational-fzf-vim'
-let g:nv_search_paths = ['~/nv']
-nnoremap <c-l> :NV<cr>
+" XXX: I don't really use this
+" Plug 'Alok/notational-fzf-vim'
+" let g:nv_search_paths = ['~/nv']
+" nnoremap <c-l> :NV<cr>
 
 " }}}
 
@@ -462,7 +474,8 @@ Plug 'sbdchd/neoformat'
 " Plug 'sickill/vim-pasta'
 
 " For Java formatting
-Plug 'rhysd/vim-clang-format'
+" TODO: I suspect this is already covered in ALE
+" Plug 'rhysd/vim-clang-format'
 
 " Plug 'google/vim-maktaba'
 " Plug 'google/vim-codefmt'
@@ -525,9 +538,10 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 nmap ga <plug>(EasyAlign)
 xmap ga <plug>(EasyAlign)
 
-Plug 'terryma/vim-expand-region'
-vmap <C-v> <plug>(expand_region_shrink)
-vmap v <plug>(expand_region_expand)
+" TODO: re-enable this when I actually use it
+" Plug 'terryma/vim-expand-region'
+" vmap <C-v> <plug>(expand_region_shrink)
+" vmap v <plug>(expand_region_expand)
 
 " Allows for move lines up and down
 " Defaults: <A-k> and <A-j> to move visual selection
@@ -578,7 +592,7 @@ vnoremap <leader>K :call investigate#Investigate('v')<cr>
 let g:investigate_use_dash=1
 
 " Roughly redundant, given these settings
-Plug 'rizzatti/dash.vim'
+Plug 'rizzatti/dash.vim', { 'on': 'Dash' }
 nnoremap <leader>D :Dash<cr>
 nnoremap <leader>d :Dash<cr>
 
@@ -590,7 +604,7 @@ nnoremap <leader>d :Dash<cr>
 Plug 'tpope/vim-eunuch'
 
 " Modern database interface for vim
-Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-dadbod', { 'on': 'DB' }
 
 " match matching matches
 Plug 'andymass/vim-matchup'
@@ -600,22 +614,26 @@ let g:matchup_matchparen_deferred = 1
 let g:matchup_matchparen_status_offscreen = 0
 
 " Basic support for .env and Procfile
-Plug 'tpope/vim-dotenv'
+" TODO: I don't really use .env or Procfiles, turning off for now
+" Plug 'tpope/vim-dotenv'
 
 " Adds end, fi, esac, etc in languages where they are needed
-Plug 'tpope/vim-endwise'
+" TODO: either do this per filetype, or not at all
+" Plug 'tpope/vim-endwise'
 
 " Set the 'path' option for miscellaneous file types
-Plug 'tpope/vim-apathy'
+" TODO: This adds about 0.5 seconds to startup time
+" Plug 'tpope/vim-apathy'
 
 " Heuristically set buffer options
 " Plug 'tpope/vim-sleuth'
 
 " Pong-like game
-Plug 'johngrib/vim-game-code-break'
+Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
 
 " For editing prose
-Plug 'reedes/vim-pencil'
+" TODO: figure out how to turn this on for a few filetypes
+" Plug 'reedes/vim-pencil'
 
 " Handles buffer deletion intelligently
 " This hangs on git merges :(
@@ -632,7 +650,8 @@ Plug 'tpope/vim-surround'
 
 " Disables arrow keys, hljk, page-up / page-down to force using more specific
 " motions
-Plug 'wikitopian/hardmode'
+" Deprecated
+" Plug 'wikitopian/hardmode'
 
 " Manage session files
 Plug 'tpope/vim-obsession'
@@ -759,6 +778,8 @@ set nowrap
 set scrolljump=8                   " Minimum lines to scroll when cursor is going off the screen.
 set scrolloff=3                    " Keep the cursor this many lines away from the top / bottom of screen.
 set sidescrolloff=3                " Same, but for left / right sides of the screen.
+
+set shell=/bin/bash
 
 set showcmd                        " Show the command as it's being typed
 set showmatch                      " Show matching brackets briefly.
@@ -962,6 +983,7 @@ augroup FT
     autocmd FileType java set expandtab tabstop=2 shiftwidth=2
     autocmd FileType sh   set shiftwidth=4
     autocmd FileType c    set cindent
+    autocmd FileType html set expandtab tabstop=2 shiftwidth=2
     autocmd FileType help wincmd L
     autocmd FileType asciidoc set wrap
     autocmd Filetype crontab setlocal nobackup nowritebackup
