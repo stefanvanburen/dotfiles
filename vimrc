@@ -273,7 +273,7 @@ Plug 'ekalinin/Dockerfile.vim'
 
 " Go
 " vim-go tip -> if things seemingly aren't working, :GoUpdateBinaries
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'tag': '*' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 let g:go_fmt_command = 'goreturns'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -605,6 +605,10 @@ Plug 'tpope/vim-eunuch'
 
 " Modern database interface for vim
 Plug 'tpope/vim-dadbod', { 'on': 'DB' }
+
+Plug 'editorconfig/editorconfig-vim'
+" for integration with vim-fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " match matching matches
 Plug 'andymass/vim-matchup'
