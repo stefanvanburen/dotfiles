@@ -228,6 +228,11 @@ alias cb='clipboard'
 alias gs='g st'
 alias v="$EDITOR"
 
+function _root () {
+        cd $(git rev-parse --show-toplevel)
+}
+alias root=_root
+
 # }}}
 
 # }}}
