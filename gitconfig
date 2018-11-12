@@ -153,3 +153,5 @@
 [user]
     name = Stefan VanBuren
     email = vanburenstefan@gmail.com
+[protocol]
+	version = 2
