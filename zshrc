@@ -11,8 +11,6 @@ source $ZPLUG_HOME/init.zsh
 zplug "plugins/extract", from:oh-my-zsh
 # initializes fasd; extra aliases
 zplug "plugins/fasd", from:oh-my-zsh
-# use `hub` for `git` if it's installed; extra aliases
-zplug "plugins/github", from:oh-my-zsh
 # initializes pyenv
 # not using pyenv for now
 # zplug "plugins/pyenv", from:oh-my-zsh
@@ -32,7 +30,7 @@ zplug "plugins/zsh_reload", from:oh-my-zsh
 # zplug "supercrabtree/k"
 
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
+# zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 zplug 'wfxr/forgit', defer:1
@@ -82,6 +80,11 @@ if (( $+commands[tag] )); then
   export TAG_SEARCH_PROG=rg
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
   alias rg=tag
+fi
+
+# Set up hub wrapper for git, if it is available; https://github.com/github/hub
+if (( $+commands[hub] )); then
+  alias git=hub
 fi
 
 # }}}
@@ -232,6 +235,11 @@ function _root () {
         cd $(git rev-parse --show-toplevel)
 }
 alias root=_root
+
+function _mcd () {
+        md $1 && cd $1
+}
+alias mcd=_mcd
 
 # }}}
 
