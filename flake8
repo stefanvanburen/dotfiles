@@ -1,3 +1,5 @@
 [flake8]
 # matches black
 max-line-length = 88
+# https://github.com/PyCQA/flake8-bugbear#how-to-enable-opinionated-warnings
+select = C,E,F,W,B,B9
