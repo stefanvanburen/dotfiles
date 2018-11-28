@@ -85,3 +85,4 @@ Temporary Items
 .mypy_cache
 .pyre
 .pyre_configuration
+.python-version
