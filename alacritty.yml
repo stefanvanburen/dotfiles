@@ -16,7 +16,7 @@ env:
 # Window dimensions in character columns and lines
 # (changes require restart)
 window:
-  decorations: false
+  decorations: transparent
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
@@ -26,6 +26,29 @@ window:
   dimensions:
     columns: 200
     lines: 60
+
+scrolling:
+  # How many lines of scrollback to keep,
+  # '0' will disable scrolling.
+  history: 0
+
+  # Number of lines the viewport will move for every line
+  # scrolled when scrollback is enabled (history > 0).
+  multiplier: 3
+
+  # Faux Scrolling
+  #
+  # The `faux_multiplier` setting controls the number
+  # of lines the terminal should scroll when the alternate
+  # screen buffer is active. This is used to allow mouse
+  # scrolling for applications like `man`.
+  #
+  # To disable this completely, set `faux_multiplier` to 0.
+  faux_multiplier: 3
+
+  # Automatically scroll to the bottom when new text is written
+  # to the terminal.
+  auto_scroll: false
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 4
@@ -210,6 +233,18 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
 hide_cursor_when_typing: false
+
+# Cursor style
+#
+# Values for 'cursor_style':
+#   - Block
+#   - Underline
+#   - Beam
+cursor_style: Block
+
+# If this is `true`, the cursor will be rendered as a hollow box when the
+# window is not focused.
+unfocused_hollow_cursor: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
