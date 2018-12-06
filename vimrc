@@ -275,16 +275,17 @@ Plug 'ekalinin/Dockerfile.vim'
 " Plug 'gisphm/vim-gitignore'
 
 " Go
-" vim-go tip -> if things seemingly aren't working, :GoUpdateBinaries
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-let g:go_fmt_command = 'goreturns'
+" make sure to do :GoInstallBinaries on new systems
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+let g:go_fmt_command = 'goimports'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:go_test_prepend_name = 1
+let g:go_test_show_name = 1
 " This doesn't work quite as well as guru
 " let g:go_def_mode = 'godef'
 " These make things slow
