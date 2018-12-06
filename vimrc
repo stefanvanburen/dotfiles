@@ -208,6 +208,9 @@ Plug 'chrisbra/vim-diff-enhanced'
 
 " {{{ Languages / Filetype
 
+" yaml
+Plug 'stephpy/vim-yaml'
+" chucK
 Plug 'wilsaj/chuck.vim'
 " Track the engine.
 Plug 'SirVer/ultisnips'
