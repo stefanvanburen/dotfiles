@@ -708,7 +708,7 @@ set wrapscan                       " Wrap around the end of the buffer when sear
 set autoread                       " Read changes in files during editing.
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=light               " light background.
+set background=dark                " dark background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
