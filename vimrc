@@ -311,6 +311,7 @@ Plug 'dzeban/vim-log-syntax'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
+let g:rustfmt_autosave = 1
 
 " vgo
 Plug 'zchee/vim-vgo'
