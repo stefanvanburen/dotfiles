@@ -455,13 +455,25 @@ Plug 'w0rp/ale'
 " let g:ale_sign_warning = '🚧 '
 let g:ale_sign_error = '⨯⨯'
 let g:ale_sign_warning = '⦁⦁'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_echo_msg_format = '[%linter%] %s (%code%) [%severity%]'
+" let g:ale_python_auto_pipenv = 1
+" let g:ale_lint_on_text_changed = 'normal'
+" let g:ale_lint_on_insert_leave = 1
+let g:ale_set_balloons = 1
+" don't need this as we're setting VIRTUAL_ENV using direnv
+" https://github.com/w0rp/ale/issues/2021#issuecomment-433325140
+let g:ale_virtualenv_dir_names = []
 " note that python files have their ALE configuration in ftplugin/python.vim
 " let g:ale_linters = {'go': ['gometalinter']}
 " let g:ale_go_gometalinter_options = '--fast'
 " Without this, eslint complains about things that prettier fixes
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
 let g:ale_linters = {
 \   'javascript': ['prettier'],
 \   'proto': ['prototool'],
