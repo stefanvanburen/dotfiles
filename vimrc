@@ -404,6 +404,7 @@ Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_dark = 'hard'
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
+Plug 'rakr/vim-two-firewatch'
 Plug 'flazz/vim-colorschemes'
 Plug 'rhysd/vim-color-spring-night'
 
