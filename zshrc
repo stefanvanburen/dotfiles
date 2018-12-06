@@ -10,7 +10,8 @@ source $ZPLUG_HOME/init.zsh
 # adds `x` command for unarchiving various formats
 zplug "plugins/extract", from:oh-my-zsh
 # initializes fasd; extra aliases
-zplug "plugins/fasd", from:oh-my-zsh
+# turning this off to use jump
+# zplug "plugins/fasd", from:oh-my-zsh
 # initializes pyenv
 # not using pyenv for now
 # zplug "plugins/pyenv", from:oh-my-zsh
