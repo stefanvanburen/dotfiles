@@ -19,11 +19,6 @@ export PURE_PROMPT_SYMBOL='∆'
 
 export TERM="xterm-256color"
 
-# set up pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
 # switching back to nvim
 export EDITOR='nvim'
 export VISUAL="$EDITOR"
@@ -47,8 +42,8 @@ export NNN_USE_EDITOR=1
 
 # {{{ FZF
 
-export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --color=always"
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --color=always'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--reverse --no-height --border --ansi --preview 'bat --color=always {}'"
 export FZF_DEFAULT_OPTS="--height 40% --border --reverse --ansi"
 
