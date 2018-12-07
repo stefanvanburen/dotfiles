@@ -12,9 +12,11 @@ zplug "plugins/extract", from:oh-my-zsh
 # initializes fasd; extra aliases
 # turning this off to use jump
 # zplug "plugins/fasd", from:oh-my-zsh
+# use `hub` for `git` if it's installed; extra aliases
+zplug "plugins/github", from:oh-my-zsh
 # initializes pyenv
 # not using pyenv for now
-# zplug "plugins/pyenv", from:oh-my-zsh
+zplug "plugins/pyenv", from:oh-my-zsh
 # handles ssh-agent
 zplug "plugins/ssh-agent", from:oh-my-zsh
 # adds t alias, taskwarrior completions
@@ -72,6 +74,9 @@ eval "$(pipenv --completion)"
 
 # https://github.com/nvbn/thefuck
 eval "$(thefuck --alias)"
+
+# https://github.com/gsamokovarov/jump
+eval "$(jump shell)"
 
 # https://github.com/Homebrew/homebrew-command-not-found
 if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
