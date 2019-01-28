@@ -7,12 +7,6 @@ syntax enable
 " Leader is space key
 let g:mapleader = "\<Space>"
 
-" https://github.com/vim/vim/issues/3117#issuecomment-402622616
-" TODO: should remove this when vim is fixed
-if has('python3')
-  silent! python3 1
-endif
-
 " vim-plug
 nnoremap <leader>pc :PlugClean<cr>
 nnoremap <leader>pg :PlugUpgrade<cr>
@@ -72,7 +66,27 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
       \ }
+      \ }
+" I can't seem to get this working quite yet.
+" Plug 'maximbaz/lightline-ale'
+" let g:lightline.component_type = {
+"       \     'linter_checking': 'left',
+"       \     'linter_warnings': 'warning',
+"       \     'linter_errors': 'error',
+"       \     'linter_ok': 'left',
+"       \ }
+
+" let g:lightline#ale#indicator_checking = "\uf110"
+" let g:lightline#ale#indicator_warnings = "\uf071"
+" let g:lightline#ale#indicator_errors = "\uf05e"
+" let g:lightline#ale#indicator_ok = "\uf00c"
 
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 let g:undotree_WindowLayout = 2
@@ -141,6 +155,8 @@ Plug 'junegunn/limelight.vim', { 'on': 'LimeLight' }
 let g:limelight_conceal_ctermfg = 'darkgray'
 
 Plug 'myusuf3/numbers.vim'
+nnoremap <leader>nt :NumbersToggle<cr>
+nnoremap <leader>no :NumbersOnOff<cr>
 
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -181,10 +197,14 @@ nmap <leader>gv :GV<cr>
 
 Plug 'tpope/vim-fugitive'
 nmap <leader>gd :Gdiff<cr>
-nmap <leader>gs :Gstatus<cr>gg<c-n>
+" Bring up git status vertically
+nmap <silent> <leader>gs :vertical Gstatus<cr>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
+
+" Gitk for vim
+Plug 'gregsexton/gitv', {'on': ['Gitv']}
 
 " Git branch management
 Plug 'sodapopcan/vim-twiggy', { 'on': 'Twiggy' }
@@ -192,11 +212,21 @@ Plug 'sodapopcan/vim-twiggy', { 'on': 'Twiggy' }
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
 
+" github filetype
+Plug 'rhysd/vim-github-support'
+
+" github issues
+" Seems to have some issues itself
+" Plug 'jaxbot/github-issues.vim'
+
 " For git files
-Plug 'tpope/vim-git'
+" This shouldn't be needed after vim 7.2
+" Plug 'tpope/vim-git'
 
 " Better default for diffs
-Plug 'chrisbra/vim-diff-enhanced'
+" Turning this off completely, it seems like it's not needed anymore?
+" https://github.com/chrisbra/vim-diff-enhanced#update
+" Plug 'chrisbra/vim-diff-enhanced'
 " This has trouble when it comes to using vim as git's mergetool, so turning
 " off for now
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
@@ -231,22 +261,10 @@ Plug 'othree/html5.vim'
 " Javascript
 " note that prettier has docs for setting up with ALE
 " less configuration, though
-Plug 'prettier/vim-prettier', {
-                        \ 'do': 'yarn install',
-                        \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
-" Vim Prettier Settings
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql Prettier
-let g:prettier#config#print_width = 80 " max line length that prettier will wrap on
-let g:prettier#config#tab_width = 2 " number of spaces per indentation level
-let g:prettier#config#use_tabs = 'false' " use tabs over spaces
-let g:prettier#config#semi = 'true' " print semicolons
-let g:prettier#config#single_quote = 'true' " single quotes over double quotes
-let g:prettier#config#bracket_spacing = 'true' " print spaces between brackets
-let g:prettier#config#jsx_bracket_same_line = 'true' " put > on the last line instead of new line
-let g:prettier#config#trailing_comma = 'all' " none|es5|all
-let g:prettier#config#parser = 'babylon' " flow|babylon|typescript|postcss|json|graphql
-let g:prettier#config#config_precedence = 'prefer-file' " cli-override|file-override|prefer-file
+" TODO: set this up with ALE if I want to use it
+" Plug 'prettier/vim-prettier', {
+"                         \ 'do': 'yarn install',
+"                         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
@@ -265,7 +283,7 @@ let g:vim_json_syntax_conceal = 0
 
 " Protocol Buffers (protobuf)
 Plug 'uarun/vim-protobuf', { 'for': 'protobuf' }
-Plug 'uber/prototool', { 'rtp': 'vim/prototool', 'for': 'protobuf' }
+Plug 'uber/prototool', { 'rtp': 'vim/prototool' }
 
 " Dockerfile
 Plug 'ekalinin/Dockerfile.vim'
@@ -396,6 +414,8 @@ Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
 " Plug 'ajh17/VimCompletesMe'
 " Plug 'Shougo/deoplete.nvim'
+" ???
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " }}}
 
@@ -421,6 +441,7 @@ xmap <leader><tab> <plug>(fzf-maps-x)
 
 nnoremap <leader><Enter> :GFiles<cr>
 nnoremap <leader>f :Files<cr>
+nnoremap <leader>gf :GFiles?<cr>
 " nnoremap ; :Buffers<cr>
 nnoremap <leader><leader> :Buffers<cr>
 nnoremap <leader>m :Marks<cr>
@@ -621,6 +642,11 @@ nnoremap <leader>d :Dash<cr>
 " Adds unix shell commands
 Plug 'tpope/vim-eunuch'
 
+" tmux / vim navigation
+" I've disabled this because it tends to interfere with the way I use a lot of
+" terminal things.
+" Plug 'christoomey/vim-tmux-navigator'
+
 " Modern database interface for vim
 Plug 'tpope/vim-dadbod', { 'on': 'DB' }
 
@@ -652,6 +678,8 @@ let g:matchup_matchparen_status_offscreen = 0
 
 " Pong-like game
 Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
+
+Plug 'RRethy/vim-illuminate'
 
 " For editing prose
 " TODO: figure out how to turn this on for a few filetypes
@@ -731,6 +759,8 @@ set background=dark                " dark background.
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
 set cinoptions=N-s                 " For C program indentation.
+
+set cursorline                     " Highlight the line where the cursor is
 
 set foldenable                     " Enable folds.
 set foldmethod=marker              " Use markers for folds ({{{ and }}}).
@@ -841,7 +871,6 @@ set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 set wildignorecase
 
 " Some other useful options that I'm not using
-" set cursorline
 " highlight ColorColumn ctermbg=4 ctermfg=1
 
 " }}}
@@ -849,6 +878,16 @@ set wildignorecase
 " {{{ Mappings
 
 nmap ; :
+
+" Lol
+nnoremap j <nop>
+nnoremap k <nop>
+" nnoremap <silent> j gj
+" nnoremap <silent> k gk
+" vnoremap j gj
+" vnoremap k gk
+nnoremap h <nop>
+nnoremap l <nop>
 
 " In practice these mappings don't do much for me - and they appear to update
 " slowly anyways, would rather just use >> and <<
@@ -883,7 +922,9 @@ nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>sp :setlocal spell!<cr>
 nmap <leader>sv :mksession<cr>
 
-nmap <leader>v :vsplit<cr>
+nnoremap <leader>cl :close<cr>
+nnoremap <leader>ss :split<cr>
+nnoremap <leader>vs :vsplit<cr>
 
 nnoremap <silent> ]r :tabn<cr>
 nnoremap <silent> [r :tabp<cr>
@@ -906,9 +947,6 @@ nnoremap g= gg=G``
 map gy "*y
 " copy whole file to system clipboard
 nmap gY gg"*yG
-
-nnoremap <silent> j gj
-nnoremap <silent> k gk
 
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
@@ -954,9 +992,6 @@ vmap u :!sort -u<cr>
 
 " Keep the cursor in place while joining lines
 nnoremap J mzJ`z
-
-vnoremap j gj
-vnoremap k gk
 
 vnoremap < <gv
 vnoremap > >gv
