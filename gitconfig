@@ -19,6 +19,7 @@
 
     ; mnemonic for commit
     c = commit
+    cnv = commit --no-verify
 
     ; mnemonic for checkout
     co = checkout
