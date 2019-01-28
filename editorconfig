@@ -8,3 +8,14 @@ insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.toml]
+indent_size = 2
+
+# Makefiles always use tabs for indentation
+[Makefile]
+indent_style = tab
