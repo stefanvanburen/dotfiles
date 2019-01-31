@@ -879,15 +879,15 @@ set wildignorecase
 
 nmap ; :
 
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+vnoremap j gj
+vnoremap k gk
 " Lol
-nnoremap j <nop>
-nnoremap k <nop>
-" nnoremap <silent> j gj
-" nnoremap <silent> k gk
-" vnoremap j gj
-" vnoremap k gk
-nnoremap h <nop>
-nnoremap l <nop>
+" nnoremap h <nop>
+" nnoremap l <nop>
+" nnoremap j <nop>
+" nnoremap k <nop>
 
 " In practice these mappings don't do much for me - and they appear to update
 " slowly anyways, would rather just use >> and <<
