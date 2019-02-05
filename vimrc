@@ -697,6 +697,9 @@ Plug 'tommcdo/vim-exchange'
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
 
+" 🎄
+Plug 'rhysd/vim-syntax-christmas-tree'
+
 " }}}
 
 call plug#end()
@@ -726,7 +729,7 @@ set wrapscan                       " Wrap around the end of the buffer when sear
 set autoread                       " Read changes in files during editing.
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=dark                " dark background.
+set background=light                " dark background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
