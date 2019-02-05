@@ -60,6 +60,7 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
+    # family: ProggySquare
     family: PragmataPro Mono
     # Style can be specified to pick a specific face.
     # style: Regular
@@ -67,17 +68,19 @@ font:
   # The bold font face
   bold:
     family: PragmataPro Mono
+    # family: ProggySquare
     # Style can be specified to pick a specific face.
     # style: Bold
 
   # The italic font face
   italic:
     family: PragmataPro Mono
+    # family: ProggySquare
     # Style can be specified to pick a specific face.
     # style: Italic
 
   # Point size of the font
-  size: 10.0
+  size: 11.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -99,10 +102,6 @@ font:
 
 # Should display the render timer
 render_timer: false
-
-# Use custom cursor colors. If true, display the cursor in the cursor.foreground
-# and cursor.background colors, otherwise invert the colors of the cursor.
-custom_cursor_colors: false
 
 # # Colors (Tomorrow Night Bright)
 # colors:
@@ -232,19 +231,17 @@ mouse:
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
-hide_cursor_when_typing: false
-
 # Cursor style
 #
 # Values for 'cursor_style':
 #   - Block
 #   - Underline
 #   - Beam
-cursor_style: Block
+cursor:
+  style: Block
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.
-unfocused_hollow_cursor: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
