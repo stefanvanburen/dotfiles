@@ -240,20 +240,25 @@ Plug 'rhysd/vim-github-support'
 
 " yaml
 Plug 'stephpy/vim-yaml'
+
 " chucK
 Plug 'wilsaj/chuck.vim'
+
 " Track the engine.
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger="<TAB>"
-let g:UltiSnipsJumpForwardTrigger="<TAB>"
-let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+        let g:UltiSnipsExpandTrigger="<TAB>"
+        let g:UltiSnipsJumpForwardTrigger="<TAB>"
+        let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
+        " If you want :UltiSnipsEdit to split your window.
+        let g:UltiSnipsEditSplit="vertical"
 
 " Taskwarrior
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
+
+" Elm
+Plug 'elmcast/elm-vim'
 
 " HTML5
 Plug 'othree/html5.vim'
@@ -559,14 +564,39 @@ let g:EasyMotion_startofline      = 0
 " replaces incsearch.vim
 Plug 'haya14busa/is.vim'
 
+Plug 'qxxxb/vim-searchhi'
+        nmap / <Plug>(searchhi-/)
+        nmap ? <Plug>(searchhi-?)
+        nmap n <Plug>(searchhi-n)
+        nmap N <Plug>(searchhi-N)
+        nmap * <Plug>(searchhi-*)
+        nmap # <Plug>(searchhi-#)
+        nmap g* <Plug>(searchhi-g*)
+        nmap g# <Plug>(searchhi-g#)
+        nmap <silent> <C-L> <Plug>(searchhi-off-all)
+        vmap / <Plug>(searchhi-v-/)
+        vmap ? <Plug>(searchhi-v-?)
+        vmap n <Plug>(searchhi-v-n)
+        vmap N <Plug>(searchhi-v-N)
+        vmap * <Plug>(searchhi-v-*)
+        vmap # <Plug>(searchhi-v-#)
+        vmap g* <Plug>(searchhi-v-g*)
+        vmap g# <Plug>(searchhi-v-g#)
+        " integration with vim-asterisk
+        vmap <silent> <C-L> <Plug>(searchhi-v-off-all)
+        nmap * <Plug>(asterisk-*)<Plug>(searchhi-update)
+        nmap # <Plug>(asterisk-#)<Plug>(searchhi-update)
+        nmap g* <Plug>(asterisk-g*)<Plug>(searchhi-update)
+        nmap g# <Plug>(asterisk-g#)<Plug>(searchhi-update)
+
 Plug 'haya14busa/vim-asterisk'
-" keeps position across matches
-let g:asterisk#keeppos = 1
-" these mappings stay at the current match until another motion
-map * <Plug>(asterisk-z*)
-map # <Plug>(asterisk-z#)
-map g* <Plug>(asterisk-gz*)
-map g# <Plug>(asterisk-gz#)
+        " keeps position across matches
+        let g:asterisk#keeppos = 1
+        " these mappings stay at the current match until another motion
+        map * <Plug>(asterisk-z*)
+        map # <Plug>(asterisk-z#)
+        map g* <Plug>(asterisk-gz*)
+        map g# <Plug>(asterisk-gz#)
 
 " Using these keymaps for ale instead
 " Plug 'haya14busa/vim-edgemotion'
@@ -574,8 +604,8 @@ map g# <Plug>(asterisk-gz#)
 " map <C-k> <Plug>(edgemotion-k)
 
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-nmap ga <plug>(EasyAlign)
-xmap ga <plug>(EasyAlign)
+        nmap ga <plug>(EasyAlign)
+        xmap ga <plug>(EasyAlign)
 
 " TODO: re-enable this when I actually use it
 " Plug 'terryma/vim-expand-region'
@@ -757,7 +787,7 @@ set wrapscan                       " Wrap around the end of the buffer when sear
 set autoread                       " Read changes in files during editing.
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=light                " dark background.
+set background=dark                " dark background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
