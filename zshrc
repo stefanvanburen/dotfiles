@@ -194,7 +194,6 @@ fi
 if (( $+commands[exa] )); then
     alias ls='exa'
     alias l='exa --long --git'
-    alias k='l'
 fi
 
 if (( $+commands[git] )); then
