@@ -107,6 +107,7 @@ let NERDTreeShowHidden=1
 " disable netrw_
 let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
+" Plug 'mhinz/vim-tree'
 
 Plug 'junegunn/vim-peekaboo'
 
@@ -202,6 +203,9 @@ nmap <silent> <leader>gs :vertical Gstatus<cr>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
+
+" Git branch viewer
+Plug 'rbong/vim-flog'
 
 " Gitk for vim
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
@@ -433,6 +437,7 @@ Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
 Plug 'flazz/vim-colorschemes'
 Plug 'rhysd/vim-color-spring-night'
+Plug 'ayu-theme/ayu-vim'
 
 " }}}
 
