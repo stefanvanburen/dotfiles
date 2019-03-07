@@ -242,6 +242,8 @@ Plug 'rhysd/vim-github-support'
 
 " {{{ Languages / Filetype
 
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+
 " yaml
 Plug 'stephpy/vim-yaml'
 
