@@ -1106,6 +1106,7 @@ augroup python
         autocmd Filetype python nmap <leader>ptf :Pytest file<cr>
         autocmd Filetype python nmap <leader>ptm :Pytest method<cr>
         autocmd Filetype python set tw=88
+        autocmd Filetype python nnoremap <C-]> :ALEGoToDefinition<cr>
 augroup END
 
 augroup task
