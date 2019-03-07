@@ -435,6 +435,8 @@ fi
 HISTSIZE=SAVEHIST=100000
 # add timestamp to history
 setopt extended_history
+# add `cd` directories to the `dirs` stack
+setopt auto_pushd
 # don't store the "history" command when calling it
 setopt hist_no_store
 # don't store a command if it's a duplicate of a previous command
