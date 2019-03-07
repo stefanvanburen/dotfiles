@@ -414,12 +414,12 @@ Plug 'fisadev/vim-isort', { 'for': 'python' }
 " {{{ Completion
 
 Plug 'valloric/YouCompleteMe'
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_complete_in_comments                = 1
-let g:ycm_key_list_select_completion = ['<C-j>']
-let g:ycm_key_list_previous_completion = ['<C-k>']
-" commenting this out to use virtualenv python
-let g:ycm_python_binary_path = 'python'
+        let g:ycm_collect_identifiers_from_tags_files = 1
+        let g:ycm_complete_in_comments                = 1
+        let g:ycm_key_list_select_completion = ['<C-j>']
+        let g:ycm_key_list_previous_completion = ['<C-k>']
+        " commenting this out to use virtualenv python
+        let g:ycm_python_binary_path = 'python'
 
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
@@ -482,39 +482,43 @@ command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 " {{{ Linters / Syntax / Formatting
 
+" Enable completion where available.
+" This setting must be set before ALE is loaded.
+let g:ale_completion_enabled = 1
 " For linting
 Plug 'w0rp/ale'
-" slow
-" let g:ale_sign_error = '💥 '
-" let g:ale_sign_warning = '🚧 '
-let g:ale_sign_error = '⨯⨯'
-let g:ale_sign_warning = '⦁⦁'
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s (%code%) [%severity%]'
-" let g:ale_python_auto_pipenv = 1
-" let g:ale_lint_on_text_changed = 'normal'
-" let g:ale_lint_on_insert_leave = 1
-let g:ale_set_balloons = 1
-" don't need this as we're setting VIRTUAL_ENV using direnv
-" https://github.com/w0rp/ale/issues/2021#issuecomment-433325140
-let g:ale_virtualenv_dir_names = []
-" note that python files have their ALE configuration in ftplugin/python.vim
-" let g:ale_linters = {'go': ['gometalinter']}
-" let g:ale_go_gometalinter_options = '--fast'
-" Without this, eslint complains about things that prettier fixes
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\}
-let g:ale_linters = {
-\   'javascript': ['prettier'],
-\   'proto': ['prototool'],
-\}
-nnoremap <silent> <leader>af :ALEFix<cr>
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+        " slow
+        " let g:ale_sign_error = '💥 '
+        " let g:ale_sign_warning = '🚧 '
+        let g:ale_sign_error = '⨯⨯'
+        let g:ale_sign_warning = '⦁⦁'
+        highlight clear ALEErrorSign
+        highlight clear ALEWarningSign
+        let g:ale_echo_msg_error_str = 'E'
+        let g:ale_echo_msg_warning_str = 'W'
+        let g:ale_echo_msg_format = '[%linter%] %s (%code%) [%severity%]'
+        " let g:ale_python_auto_pipenv = 1
+        " let g:ale_lint_on_text_changed = 'normal'
+        " let g:ale_lint_on_insert_leave = 1
+        let g:ale_set_balloons = 1
+        " don't need this as we're setting VIRTUAL_ENV using direnv
+        " https://github.com/w0rp/ale/issues/2021#issuecomment-433325140
+        let g:ale_virtualenv_dir_names = []
+        " note that python files have their ALE configuration in ftplugin/python.vim
+        " let g:ale_linters = {'go': ['gometalinter']}
+        " let g:ale_go_gometalinter_options = '--fast'
+        " Without this, eslint complains about things that prettier fixes
+        let g:ale_fixers = {
+        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+        \   'javascript': ['prettier', 'eslint'],
+        \}
+        let g:ale_linters = {
+        \   'javascript': ['prettier', 'eslint'],
+        \   'proto': ['prototool-lint'],
+        \}
+        nnoremap <silent> <leader>af :ALEFix<cr>
+        nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+        nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 
 Plug 'sbdchd/neoformat'
