@@ -247,6 +247,9 @@ Plug 'rhysd/vim-github-support'
 " yaml
 Plug 'stephpy/vim-yaml'
 
+" elixir
+Plug 'elixir-editors/vim-elixir'
+
 " chucK
 Plug 'wilsaj/chuck.vim'
 
@@ -501,6 +504,8 @@ Plug 'w0rp/ale'
         " let g:ale_lint_on_text_changed = 'normal'
         " let g:ale_lint_on_insert_leave = 1
         let g:ale_set_balloons = 1
+        " Set this variable to 1 to fix files when you save them.
+        let g:ale_fix_on_save = 1
         " don't need this as we're setting VIRTUAL_ENV using direnv
         " https://github.com/w0rp/ale/issues/2021#issuecomment-433325140
         let g:ale_virtualenv_dir_names = []

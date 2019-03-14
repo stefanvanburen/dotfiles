@@ -5,5 +5,5 @@ let b:ale_linters = ['flake8']
 " Fix Python files with isort
 " TODO: would like to use black, but probably just for personal projects for
 " the time being
-let b:ale_fixers = ['isort']
+let b:ale_fixers = ['isort', 'black']
 " let b:ale_completion_enabled = 1
