@@ -27,10 +27,12 @@ export VISUAL="$EDITOR"
 
 export GOPATH="$HOME/src/go"
 export PATH="$PATH:$GOPATH/bin"
+# turn modules on
+export GO111MODULE=on
 
 # }}}
 
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin"
+export PATH="/usr/local/opt/grep/libexec/gnubin:/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin:$HOME/bin:$HOME/.local/bin:$PATH"
 
 # }}}
 

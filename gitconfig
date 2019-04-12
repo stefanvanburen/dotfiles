@@ -101,7 +101,9 @@
 
 [core]
     excludesfile = ~/.gitignore
-    editor = vim
+    ; This will use $EDITOR
+    ; Note that $GIT_EDITOR and $VISUAL take precedence, if set
+    ; editor = vim
     untrackedCache = true
 
 [credential]

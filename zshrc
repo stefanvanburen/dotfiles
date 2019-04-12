@@ -466,3 +466,4 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # }}}
+fpath+=${ZDOTDIR:-~}/.zsh_functions

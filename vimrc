@@ -92,6 +92,10 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 let g:undotree_WindowLayout = 2
 nnoremap <leader>U :UndotreeToggle<cr>
 
+" Vim undo tree visualizer
+" fork of sjl/gundo.vim
+Plug 'simnalamburt/vim-mundo'
+
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 nnoremap <leader>N :NERDTreeToggle<cr>
@@ -113,6 +117,8 @@ Plug 'junegunn/vim-peekaboo'
 
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 nnoremap <leader>T :TagbarToggle<cr>
+
+Plug 'liuchengxu/vista.vim'
 
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 function! s:goyo_enter()
@@ -219,6 +225,9 @@ Plug 'rhysd/committia.vim'
 " github filetype
 Plug 'rhysd/vim-github-support'
 
+" reveal last commit message
+Plug 'rhysd/git-messenger.vim'
+
 " github issues
 " Seems to have some issues itself
 " Plug 'jaxbot/github-issues.vim'
@@ -317,6 +326,9 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+" use golangci-lint
+let g:go_metalinter_command = 'golangci-lint'
+let g:go_def_mode = 'gopls'
 let g:go_test_show_name = 1
 " This doesn't work quite as well as guru
 " let g:go_def_mode = 'godef'
@@ -326,7 +338,6 @@ let g:go_test_show_name = 1
 let g:go_fmt_options = {
 \ 'gofmt': '-s',
 \ }
-
 " Takes a bit too long
 " let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
@@ -380,6 +391,9 @@ Plug 'hashivim/vim-terraform'
 Plug 'vim-python/python-syntax', { 'for': 'python' }
 let g:python_highlight_all = 1
 
+" Quickly open python modules
+Plug 'sloria/vim-ped'
+
 " Indent
 Plug 'Vimjas/vim-python-pep8-indent'
 
@@ -392,14 +406,20 @@ Plug 'Vimjas/vim-python-pep8-indent'
 " " match black's default
 " let g:pymode_options_max_line_length = 88
 
-Plug 'ambv/black', { 'on': 'Black' }
+" NOTE: using ale's black integration for this, instead
+" Plug 'ambv/black', { 'on': 'Black' }
 
 Plug 'alfredodeza/pytest.vim'
 Plug 'alfredodeza/coveragepy.vim'
 
 Plug 'fisadev/vim-isort', { 'for': 'python' }
+Plug 'davidhalter/jedi-vim'
+        let g:jedi#goto_command = "<C-]>"
+        " we use deoplete's jedi instead
+        let g:jedi#completions_enabled = 0
 
 " For mypy
+" Using ALE instead
 " Plug 'Integralist/vim-mypy', { 'for': 'python' }
 
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
@@ -416,18 +436,32 @@ Plug 'fisadev/vim-isort', { 'for': 'python' }
 
 " {{{ Completion
 
-Plug 'valloric/YouCompleteMe'
-        let g:ycm_collect_identifiers_from_tags_files = 1
-        let g:ycm_complete_in_comments                = 1
-        let g:ycm_key_list_select_completion = ['<C-j>']
-        let g:ycm_key_list_previous_completion = ['<C-k>']
-        " commenting this out to use virtualenv python
-        let g:ycm_python_binary_path = 'python'
+" TODO: for python, I should probably follow this:
+" http://valloric.github.io/YouCompleteMe/#configuring-through-vim-options
+" Plug 'valloric/YouCompleteMe'
+"         let g:ycm_collect_identifiers_from_tags_files = 1
+"         let g:ycm_complete_in_comments                = 1
+"         let g:ycm_key_list_select_completion = ['<C-j>']
+"         let g:ycm_key_list_previous_completion = ['<C-k>']
+"         " commenting this out to use virtualenv python
+"         let g:ycm_python_binary_path = 'python'
 
-Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
+" Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
 " Plug 'ajh17/VimCompletesMe'
-" Plug 'Shougo/deoplete.nvim'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+Plug 'deoplete-plugins/deoplete-jedi'
+
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
@@ -436,7 +470,8 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " {{{ Colorschemes
 
 Plug 'morhetz/gruvbox'
-let g:gruvbox_contrast_dark = 'hard'
+        let g:gruvbox_contrast_dark = 'hard'
+
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
@@ -487,7 +522,7 @@ command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 " Enable completion where available.
 " This setting must be set before ALE is loaded.
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 " For linting
 Plug 'w0rp/ale'
         " slow
@@ -521,6 +556,8 @@ Plug 'w0rp/ale'
         \   'javascript': ['prettier', 'eslint'],
         \   'proto': ['prototool-lint'],
         \}
+        " This works but is not officially supported
+        let g:ale_go_bingo_executable = 'gopls'
         nnoremap <silent> <leader>af :ALEFix<cr>
         nmap <silent> <C-k> <Plug>(ale_previous_wrap)
         nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -803,7 +840,7 @@ set wrapscan                       " Wrap around the end of the buffer when sear
 set autoread                       " Read changes in files during editing.
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=dark                " dark background.
+set background=light                " light background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
@@ -991,6 +1028,9 @@ nnoremap ^ 0
 " Indent the whole file and return to starting position
 nnoremap g= gg=G``
 
+" https://castel.dev/post/lecture-notes-1/
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 " https://til.hashrocket.com/posts/ba2afeb453-breezy-copy-to-system-clipboard-in-vim
 " copy to system clipboard
 map gy "*y
@@ -1085,13 +1125,13 @@ highlight Visual      ctermbg=1 ctermfg=4
 " {{{ Autocommands
 
 augroup FT
-    autocmd FileType go   set noexpandtab tabstop=4 shiftwidth=4
-    autocmd FileType java set expandtab tabstop=2 shiftwidth=2
-    autocmd FileType sh   set shiftwidth=4
-    autocmd FileType c    set cindent
-    autocmd FileType html set expandtab tabstop=2 shiftwidth=2
+    autocmd FileType go   setlocal noexpandtab tabstop=4 shiftwidth=4
+    autocmd FileType java setlocal expandtab tabstop=2 shiftwidth=2
+    autocmd FileType sh   setlocal shiftwidth=4
+    autocmd FileType c    setlocal cindent
+    autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2
     autocmd FileType help wincmd L
-    autocmd FileType asciidoc set wrap
+    autocmd FileType asciidoc setlocal wrap
     autocmd Filetype crontab setlocal nobackup nowritebackup
     autocmd Filetype json setlocal expandtab tabstop=2 shiftwidth=2
     " Turn off folding for diffs
@@ -1108,16 +1148,20 @@ augroup END
 
 augroup python
         autocmd Filetype python nmap <leader>ptc :Pytest class<cr>
-        autocmd Filetype python nmap <leader>ptf :Pytest file<cr>
+        autocmd Filetype python nmap <leader>ptfi :Pytest file<cr>
+        autocmd Filetype python nmap <leader>ptfn :Pytest function<cr>
         autocmd Filetype python nmap <leader>ptm :Pytest method<cr>
-        autocmd Filetype python set tw=88
-        autocmd Filetype python nnoremap <C-]> :ALEGoToDefinition<cr>
+        autocmd Filetype python nmap <leader>ptp :Pytest project<cr>
+        autocmd Filetype python nmap <leader>pts :Pytest session<cr>
+        autocmd Filetype python setlocal tw=88
+        " autocmd Filetype python setlocal formatprg=black\ -q\ -
+        " autocmd Filetype python nnoremap <C-]> :ALEGoToDefinition<cr>
 augroup END
 
 augroup task
-    autocmd BufRead,BufNewFile {pending,completed,undo}.data set filetype=taskdata
-    autocmd BufRead,BufNewFile .taskrc                       set filetype=taskrc
-    autocmd BufRead,BufNewFile *.task                        set filetype=taskedit
+    autocmd BufRead,BufNewFile {pending,completed,undo}.data setlocal filetype=taskdata
+    autocmd BufRead,BufNewFile .taskrc                       setlocal filetype=taskrc
+    autocmd BufRead,BufNewFile *.task                        setlocal filetype=taskedit
 augroup END
 
 " Resize splits when window is resized
@@ -1145,10 +1189,6 @@ augroup go
     autocmd FileType go nmap <leader>ot <plug>(go-test)
     autocmd FileType go nmap <leader>ov <plug>(go-vet)
 augroup END
-
-" augroup python
-"     autocmd Filetype python nmap <C-]> :YcmCompleter GoTo<cr>
-" augroup END
 
 " }}}
 

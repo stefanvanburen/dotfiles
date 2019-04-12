@@ -12,5 +12,3 @@ tabs -4
 [[ -f ~/.zprofile.local ]] && source ~/.zprofile.local
 
 # }}}
-
-export PATH="$HOME/.cargo/bin:$PATH:$HOME/bin"
