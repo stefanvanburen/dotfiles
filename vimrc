@@ -42,38 +42,38 @@ let g:startify_change_to_dir = 0
 Plug 'machakann/vim-highlightedyank'
 
 " airline
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" " Not terribly useful
-" " Plug 'bling/vim-bufferline'
-" let g:airline_theme = 'solarized'
-" " let g:airline_powerline_fonts = 1
-" " Don't need this as I have my own tmux statusline config
-" " let g:airline#extensions#tmuxline#enabled = 1
-" let g:airline#extensions#tabline#enabled         = 1
-" let g:airline#extensions#tabline#buffer_idx_mode = 1
-" let g:airline#extensions#ale#enabled = 1
-" nmap <leader>1 <plug>AirlineSelectTab1
-" nmap <leader>2 <plug>AirlineSelectTab2
-" nmap <leader>3 <plug>AirlineSelectTab3
-" nmap <leader>4 <plug>AirlineSelectTab4
-" nmap <leader>5 <plug>AirlineSelectTab5
-" nmap <leader>6 <plug>AirlineSelectTab6
-" nmap <leader>7 <plug>AirlineSelectTab7
-" nmap <leader>8 <plug>AirlineSelectTab8
-" nmap <leader>9 <plug>AirlineSelectTab9
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Not terribly useful
+" Plug 'bling/vim-bufferline'
+let g:airline_theme = 'solarized'
+" let g:airline_powerline_fonts = 1
+" Don't need this as I have my own tmux statusline config
+" let g:airline#extensions#tmuxline#enabled = 1
+let g:airline#extensions#tabline#enabled         = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#ale#enabled = 1
+nmap <leader>1 <plug>AirlineSelectTab1
+nmap <leader>2 <plug>AirlineSelectTab2
+nmap <leader>3 <plug>AirlineSelectTab3
+nmap <leader>4 <plug>AirlineSelectTab4
+nmap <leader>5 <plug>AirlineSelectTab5
+nmap <leader>6 <plug>AirlineSelectTab6
+nmap <leader>7 <plug>AirlineSelectTab7
+nmap <leader>8 <plug>AirlineSelectTab8
+nmap <leader>9 <plug>AirlineSelectTab9
 
-Plug 'itchyny/lightline.vim'
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ }
-      \ }
+" Plug 'itchyny/lightline.vim'
+" let g:lightline = {
+"       \ 'colorscheme': 'solarized',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'fugitive#head'
+"       \ }
+"       \ }
 " I can't seem to get this working quite yet.
 " Plug 'maximbaz/lightline-ale'
 " let g:lightline.component_type = {
@@ -111,6 +111,7 @@ let NERDTreeShowHidden=1
 " disable netrw_
 let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
+Plug 'kristijanhusak/vim-dirvish-git'
 " Plug 'mhinz/vim-tree'
 
 Plug 'junegunn/vim-peekaboo'
@@ -119,6 +120,7 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 nnoremap <leader>T :TagbarToggle<cr>
 
 Plug 'liuchengxu/vista.vim'
+let g:vista#renderer#enable_icon = 1
 
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 function! s:goyo_enter()
@@ -209,6 +211,9 @@ nmap <silent> <leader>gs :vertical Gstatus<cr>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
+
+" Adds completion for github
+Plug 'rhysd/github-complete.vim'
 
 " Git branch viewer
 Plug 'rbong/vim-flog'
@@ -329,6 +334,7 @@ let g:go_highlight_build_constraints = 1
 " use golangci-lint
 let g:go_metalinter_command = 'golangci-lint'
 let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
 let g:go_test_show_name = 1
 " This doesn't work quite as well as guru
 " let g:go_def_mode = 'godef'
@@ -472,6 +478,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'morhetz/gruvbox'
         let g:gruvbox_contrast_dark = 'hard'
 
+Plug 'lifepillar/vim-solarized8'
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
@@ -495,7 +502,7 @@ nnoremap <leader>gf :GFiles?<cr>
 " nnoremap ; :Buffers<cr>
 nnoremap <leader><leader> :Buffers<cr>
 nnoremap <leader>m :Marks<cr>
-nnoremap <leader>t :Tags<cr>
+nnoremap <leader>tg :Tags<cr>
 nnoremap <leader>sn :Snippets<cr>
 " nnoremap <leader>gf :GFiles<cr>
 nnoremap <leader>gc :Commits!<cr>
@@ -833,7 +840,10 @@ set expandtab                      " Convert tabs into spaces.
 " set shiftround                     " >> and << indent to next multiple of 'shiftwidth'.
 " set softtabstop=4                  " Tab key indents by 4 spaces.
 
+" For solarized8
 " set termguicolors
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 set wrapscan                       " Wrap around the end of the buffer when searching.
 
@@ -1015,6 +1025,8 @@ nnoremap <leader>vs :vsplit<cr>
 nnoremap <silent> ]r :tabn<cr>
 nnoremap <silent> [r :tabp<cr>
 
+nnoremap <silent> <leader>tn :tabnew<cr>
+
 " Swap the behavior of the ^ and 0 operators
 " ^ Usually goes to the first non-whitespace character, while 0 goes to the
 " first column in the line. ^ is more useful, but harder to hit, so swap it
@@ -1174,9 +1186,9 @@ augroup END
 augroup go
     " FIXME - these don't seem to work
     autocmd Filetype go command! -bang Alternate call go#alternate#Switch(<bang>0, 'edit')
-    " autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-    " autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-    autocmd FileType go nmap <leader>oa :Alternate<cr>
+    autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+    autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+    autocmd FileType go nmap <leader>oa :AV<cr>
     autocmd FileType go nmap <leader>ob <plug>(go-build)
     autocmd FileType go nmap <leader>oc <plug>(go-coverage-toggle)
     autocmd FileType go nmap <leader>od <plug>(go-doc-vertical)
