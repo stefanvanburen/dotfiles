@@ -24,18 +24,18 @@ zplug "plugins/ssh-agent", from:oh-my-zsh
 # sets up vi-mode for the command line
 zplug "plugins/vi-mode", from:oh-my-zsh
 # adds `src` alias for reloading zsh session
-zplug "plugins/zsh_reload", from:oh-my-zsh
+# zplug "plugins/zsh_reload", from:oh-my-zsh
 
 # Not really useful
 # zplug "b4b4r07/enhancd", use:init.sh
 # k is pretty slow
 # zplug "supercrabtree/k"
 
-zplug "zsh-users/zsh-completions"
+# zplug "zsh-users/zsh-completions"
 # zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-zplug 'wfxr/forgit', defer:1
+# zplug 'wfxr/forgit', defer:1
 
 # Theme
 # required for pure

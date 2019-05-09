@@ -266,7 +266,7 @@ selection:
 #   - Underline
 #   - Beam
 cursor:
-  style: Block
+  style: Beam
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.

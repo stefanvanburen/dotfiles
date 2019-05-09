@@ -17,7 +17,7 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 export PURE_PROMPT_SYMBOL='∆'
 
-export TERM="xterm-256color"
+export TERM="screen-256color"
 
 # switching back to nvim
 export EDITOR='nvim'
@@ -28,7 +28,9 @@ export VISUAL="$EDITOR"
 export GOPATH="$HOME/src/go"
 export PATH="$PATH:$GOPATH/bin"
 # turn modules on
-export GO111MODULE=on
+# https://github.com/golang/go/wiki/Modules#how-to-install-and-activate-module-support
+export GO111MODULE=auto
+export GOPROXY=https://proxy.golang.org
 
 # }}}
 
