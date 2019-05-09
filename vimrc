@@ -256,7 +256,73 @@ Plug 'rhysd/git-messenger.vim'
 
 " {{{ Languages / Filetype
 
+" This is still a bit beta, had some issues with using it. Sticking with ALE
+" for the time being.
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+"         " always show signcolumns
+"         set signcolumn=yes
+
+"         " Use tab for trigger completion with characters ahead and navigate.
+"         " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+"         inoremap <silent><expr> <TAB>
+"               \ pumvisible() ? "\<C-n>" :
+"               \ <SID>check_back_space() ? "\<TAB>" :
+"               \ coc#refresh()
+"         inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+"         function! s:check_back_space() abort
+"           let col = col('.') - 1
+"           return !col || getline('.')[col - 1]  =~# '\s'
+"         endfunction
+
+"         " Use <c-space> to trigger completion.
+"         inoremap <silent><expr> <c-space> coc#refresh()
+
+"         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+"         " Coc only does snippet and additional edit on confirm.
+"         inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+"         " Use `[c` and `]c` to navigate diagnostics
+"         nmap <silent> [c <Plug>(coc-diagnostic-prev)
+"         nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+"         " Remap keys for gotos
+"         nmap <silent> gd <Plug>(coc-definition)
+"         nmap <silent> gy <Plug>(coc-type-definition)
+"         nmap <silent> gi <Plug>(coc-implementation)
+"         nmap <silent> gr <Plug>(coc-references)
+
+"         " Use K to show documentation in preview window
+"         nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+"         function! s:show_documentation()
+"           if (index(['vim','help'], &filetype) >= 0)
+"             execute 'h '.expand('<cword>')
+"           else
+"             call CocAction('doHover')
+"           endif
+"         endfunction
+
+"         " Highlight symbol under cursor on CursorHold
+"         autocmd CursorHold * silent call CocActionAsync('highlight')
+
+"         " Remap for rename current word
+"         nmap <leader>rn <Plug>(coc-rename)
+
+"         " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+"         vmap <leader>a  <Plug>(coc-codeaction-selected)
+"         nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+"         " Remap for do codeAction of current line
+"         nmap <leader>ac  <Plug>(coc-codeaction)
+"         " Fix autofix problem of current line
+"         nmap <leader>qf  <Plug>(coc-fix-current)
+
+"         " Use `:Format` to format current buffer
+"         command! -nargs=0 Format :call CocAction('format')
+
+"         " Use `:Fold` to fold current buffer
+"         command! -nargs=? Fold :call     CocAction('fold', <f-args>)<Paste>j
 
 " yaml
 Plug 'stephpy/vim-yaml'
@@ -322,33 +388,38 @@ Plug 'ekalinin/Dockerfile.vim'
 
 " Go
 " make sure to do :GoInstallBinaries on new systems
+" if has('nvim')
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-let g:go_fmt_command = 'goimports'
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-" use golangci-lint
-let g:go_metalinter_command = 'golangci-lint'
-let g:go_def_mode = 'gopls'
-let g:go_info_mode = 'gopls'
-let g:go_test_show_name = 1
-" This doesn't work quite as well as guru
-" let g:go_def_mode = 'godef'
-" These make things slow
-" let g:go_auto_type_info = 1
-" let g:go_auto_sameids = 1
-let g:go_fmt_options = {
-\ 'gofmt': '-s',
-\ }
-" Takes a bit too long
-" let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-" How long to allow metalinter to run (5s is the default)
-let g:go_metalinter_deadline = "5s"
+        let g:go_fmt_command = 'goimports'
+        let g:go_highlight_functions = 1
+        let g:go_highlight_methods = 1
+        let g:go_highlight_generate_tags = 1
+        let g:go_highlight_fields = 1
+        let g:go_highlight_types = 1
+        let g:go_highlight_operators = 1
+        let g:go_highlight_build_constraints = 1
+        " use golangci-lint
+        let g:go_metalinter_command = 'golangci-lint'
+        let g:go_def_mode = 'gopls'
+        let g:go_info_mode = 'gopls'
+        let g:go_test_show_name = 1
+        " This doesn't work quite as well as guru
+        " let g:go_def_mode = 'godef'
+        " These make things slow
+        " let g:go_auto_type_info = 1
+        " let g:go_auto_sameids = 1
+        let g:go_fmt_options = {
+        \ 'gofmt': '-s',
+        \ }
+        " Takes a bit too long
+        " let g:go_metalinter_autosave = 1
+        let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+        " How long to allow metalinter to run (5s is the default)
+        let g:go_metalinter_deadline = "5s"
+" else
+" This is promising, but not now
+"         Plug 'myitcv/govim'
+" endif
 
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 
@@ -552,8 +623,6 @@ Plug 'w0rp/ale'
         " https://github.com/w0rp/ale/issues/2021#issuecomment-433325140
         let g:ale_virtualenv_dir_names = []
         " note that python files have their ALE configuration in ftplugin/python.vim
-        " let g:ale_linters = {'go': ['gometalinter']}
-        " let g:ale_go_gometalinter_options = '--fast'
         " Without this, eslint complains about things that prettier fixes
         let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -563,8 +632,6 @@ Plug 'w0rp/ale'
         \   'javascript': ['prettier', 'eslint'],
         \   'proto': ['prototool-lint'],
         \}
-        " This works but is not officially supported
-        let g:ale_go_bingo_executable = 'gopls'
         nnoremap <silent> <leader>af :ALEFix<cr>
         nmap <silent> <C-k> <Plug>(ale_previous_wrap)
         nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -737,7 +804,11 @@ Plug 'tpope/vim-eunuch'
 " terminal things.
 " Plug 'christoomey/vim-tmux-navigator'
 
+" Tmux basics
+Plug 'tpope/vim-tbone'
+
 " Modern database interface for vim
+" Note that this doesn't work for neovim
 Plug 'tpope/vim-dadbod', { 'on': 'DB' }
 
 Plug 'editorconfig/editorconfig-vim'
@@ -841,9 +912,12 @@ set expandtab                      " Convert tabs into spaces.
 " set softtabstop=4                  " Tab key indents by 4 spaces.
 
 " For solarized8
-" set termguicolors
 " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" let &t_SI = "\<Esc>[6 q"
+" let &t_SR = "\<Esc>[4 q"
+" let &t_EI = "\<Esc>[2 q"
+" set termguicolors
 
 set wrapscan                       " Wrap around the end of the buffer when searching.
 
@@ -853,6 +927,11 @@ set autowriteall                   " Write the file on a lot of different comman
 set background=light                " light background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
+
+if !has('nvim')
+        set balloonevalterm
+        set ttymouse=sgr
+endif
 
 set cinoptions=N-s                 " For C program indentation.
 
