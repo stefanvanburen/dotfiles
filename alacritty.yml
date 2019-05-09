@@ -265,8 +265,10 @@ selection:
 #   - Block
 #   - Underline
 #   - Beam
+#   Using Beam makes it difficult to see the cursor when trying to select in
+#   tmux's copy mode.
 cursor:
-  style: Beam
+  style: Block
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.
