@@ -27,6 +27,7 @@
     ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.config/isort/isort.cfg: isort.cfg
     ~/.config/flake8: flake8
+    ~/.config/bat/config: bat_config
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
