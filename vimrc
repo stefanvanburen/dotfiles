@@ -232,6 +232,17 @@ Plug 'rhysd/vim-github-support'
 
 " reveal last commit message
 Plug 'rhysd/git-messenger.vim'
+        " Header such as 'Commit:', 'Author:'
+        hi link gitmessengerHeader Identifier
+
+        " Commit hash at 'Commit:' header
+        hi link gitmessengerHash Comment
+
+        " History number at 'History:' header
+        hi link gitmessengerHistory Constant
+
+        " Normal color. This color is the most important
+        hi link gitmessengerPopupNormal CursorLine
 
 " github issues
 " Seems to have some issues itself
@@ -418,7 +429,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
         let g:go_metalinter_deadline = "5s"
 " else
 " This is promising, but not now
-"         Plug 'myitcv/govim'
+" Something is wrong with this - not entirely sure what
+" Plug 'myitcv/govim'
 " endif
 
 Plug 'buoto/gotests-vim', { 'for': 'go' }
@@ -930,6 +942,7 @@ set backspace=eol,indent,start     " Make backspacing work regularly.
 
 if !has('nvim')
         set balloonevalterm
+        set balloondelay=250
         set ttymouse=sgr
 endif
 
