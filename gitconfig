@@ -62,7 +62,7 @@
     new = log --oneline --graph --decorate ..@{u}
 
     ; mnemonic for mergetool
-    mt = mergetool
+    mt = "!$EDITOR +Conflicted"
 
     ; mnemonic for pull
     p = pull

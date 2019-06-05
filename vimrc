@@ -20,6 +20,12 @@ nnoremap <leader>pu :PlugUpdate<cr>
 scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
+" https://github.com/junegunn/vim-plug/wiki/tips#conditional-activation
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
 " {{{ UI
 
 Plug 'mhinz/vim-startify'
@@ -42,51 +48,51 @@ let g:startify_change_to_dir = 0
 Plug 'machakann/vim-highlightedyank'
 
 " airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Not terribly useful
-" Plug 'bling/vim-bufferline'
-let g:airline_theme = 'solarized'
-" let g:airline_powerline_fonts = 1
-" Don't need this as I have my own tmux statusline config
-" let g:airline#extensions#tmuxline#enabled = 1
-let g:airline#extensions#tabline#enabled         = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#ale#enabled = 1
-nmap <leader>1 <plug>AirlineSelectTab1
-nmap <leader>2 <plug>AirlineSelectTab2
-nmap <leader>3 <plug>AirlineSelectTab3
-nmap <leader>4 <plug>AirlineSelectTab4
-nmap <leader>5 <plug>AirlineSelectTab5
-nmap <leader>6 <plug>AirlineSelectTab6
-nmap <leader>7 <plug>AirlineSelectTab7
-nmap <leader>8 <plug>AirlineSelectTab8
-nmap <leader>9 <plug>AirlineSelectTab9
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+"         " Not terribly useful
+"         " Plug 'bling/vim-bufferline'
+"         let g:airline_theme = 'solarized'
+"         " let g:airline_powerline_fonts = 1
+"         " Don't need this as I have my own tmux statusline config
+"         " let g:airline#extensions#tmuxline#enabled = 1
+"         let g:airline#extensions#tabline#enabled         = 1
+"         let g:airline#extensions#tabline#buffer_idx_mode = 1
+"         let g:airline#extensions#ale#enabled = 1
+"         nmap <leader>1 <plug>AirlineSelectTab1
+"         nmap <leader>2 <plug>AirlineSelectTab2
+"         nmap <leader>3 <plug>AirlineSelectTab3
+"         nmap <leader>4 <plug>AirlineSelectTab4
+"         nmap <leader>5 <plug>AirlineSelectTab5
+"         nmap <leader>6 <plug>AirlineSelectTab6
+"         nmap <leader>7 <plug>AirlineSelectTab7
+"         nmap <leader>8 <plug>AirlineSelectTab8
+"         nmap <leader>9 <plug>AirlineSelectTab9
 
-" Plug 'itchyny/lightline.vim'
-" let g:lightline = {
-"       \ 'colorscheme': 'solarized',
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'paste' ],
-"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-"       \ },
-"       \ 'component_function': {
-"       \   'gitbranch': 'fugitive#head'
-"       \ }
-"       \ }
-" I can't seem to get this working quite yet.
-" Plug 'maximbaz/lightline-ale'
-" let g:lightline.component_type = {
-"       \     'linter_checking': 'left',
-"       \     'linter_warnings': 'warning',
-"       \     'linter_errors': 'error',
-"       \     'linter_ok': 'left',
-"       \ }
+Plug 'itchyny/lightline.vim'
+        let g:lightline = {
+              \ 'colorscheme': 'solarized',
+              \ 'active': {
+              \   'left': [ [ 'mode', 'paste' ],
+              \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+              \ },
+              \ 'component_function': {
+              \   'gitbranch': 'fugitive#head'
+              \ }
+              \ }
+        " I can't seem to get this working quite yet.
+        Plug 'maximbaz/lightline-ale'
+        let g:lightline.component_type = {
+              \     'linter_checking': 'left',
+              \     'linter_warnings': 'warning',
+              \     'linter_errors': 'error',
+              \     'linter_ok': 'left',
+              \ }
 
-" let g:lightline#ale#indicator_checking = "\uf110"
-" let g:lightline#ale#indicator_warnings = "\uf071"
-" let g:lightline#ale#indicator_errors = "\uf05e"
-" let g:lightline#ale#indicator_ok = "\uf00c"
+        let g:lightline#ale#indicator_checking = "\uf110"
+        let g:lightline#ale#indicator_warnings = "\uf071"
+        let g:lightline#ale#indicator_errors = "\uf05e"
+        let g:lightline#ale#indicator_ok = "\uf00c"
 
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 let g:undotree_WindowLayout = 2
@@ -192,14 +198,14 @@ let g:lengthmatters_on_by_default = 0
 
 " Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
-" Turns on gitgutter updating for a variety of events
-" ex: switch buffers, tabs, etc
-" let g:gitgutter_eager = 1
-let g:gitgutter_sign_added = '·'
-let g:gitgutter_sign_modified = '·'
-let g:gitgutter_sign_removed = '·'
-let g:gitgutter_sign_removed_first_line = '·'
-let g:gitgutter_sign_modified_removed = '·'
+        " Turns on gitgutter updating for a variety of events
+        " ex: switch buffers, tabs, etc
+        " let g:gitgutter_eager = 1
+        let g:gitgutter_sign_added = '·'
+        let g:gitgutter_sign_modified = '·'
+        let g:gitgutter_sign_removed = '·'
+        let g:gitgutter_sign_removed_first_line = '·'
+        let g:gitgutter_sign_modified_removed = '·'
 
 Plug 'junegunn/gv.vim'
 nmap <leader>gv :GV<cr>
@@ -211,6 +217,9 @@ nmap <silent> <leader>gs :vertical Gstatus<cr>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
+
+" for mergetool
+Plug 'christoomey/vim-conflicted'
 
 " Adds completion for github
 Plug 'rhysd/github-complete.vim'
@@ -399,8 +408,7 @@ Plug 'ekalinin/Dockerfile.vim'
 
 " Go
 " make sure to do :GoInstallBinaries on new systems
-" if has('nvim')
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries' })
         let g:go_fmt_command = 'goimports'
         let g:go_highlight_functions = 1
         let g:go_highlight_methods = 1
@@ -427,11 +435,10 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
         let g:go_metalinter_autosave_enabled = ['vet', 'golint']
         " How long to allow metalinter to run (5s is the default)
         let g:go_metalinter_deadline = "5s"
-" else
+
 " This is promising, but not now
 " Something is wrong with this - not entirely sure what
-" Plug 'myitcv/govim'
-" endif
+Plug 'myitcv/govim' , Cond(has('vim'))
 
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 
@@ -602,9 +609,9 @@ nnoremap <leader>se :Rg<cr>
 command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 " XXX: I don't really use this
-" Plug 'Alok/notational-fzf-vim'
-" let g:nv_search_paths = ['~/nv']
-" nnoremap <c-l> :NV<cr>
+Plug 'Alok/notational-fzf-vim'
+let g:nv_search_paths = ['~/nv']
+nnoremap <c-l> :NV<cr>
 
 " }}}
 
@@ -828,11 +835,12 @@ Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " match matching matches
-Plug 'andymass/vim-matchup'
-" improve cursor performance by delaying match
-let g:matchup_matchparen_deferred = 1
-" don't replace statusline with offscreen match
-let g:matchup_matchparen_status_offscreen = 0
+" TODO: maybe this is slowing things down?
+" Plug 'andymass/vim-matchup'
+"         " improve cursor performance by delaying match
+"         let g:matchup_matchparen_deferred = 1
+"         " don't replace statusline with offscreen match
+"         let g:matchup_matchparen_status_offscreen = 0
 
 " Basic support for .env and Procfile
 " TODO: I don't really use .env or Procfiles, turning off for now
@@ -852,7 +860,9 @@ let g:matchup_matchparen_status_offscreen = 0
 " Pong-like game
 Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
 
-Plug 'RRethy/vim-illuminate'
+" plugin for automatically highlighting other uses of the word under the
+" cursor
+" Plug 'RRethy/vim-illuminate'
 
 " For editing prose
 " TODO: figure out how to turn this on for a few filetypes
@@ -983,6 +993,8 @@ set laststatus=2                   " Always show the last command.
 
 set lazyredraw                     " Don't redraw when using macros.
 
+" set redrawtime=500
+
 set list                           " Displays invisible characters.
 set listchars=tab:→-,eol:¬,trail:⋅
 
@@ -1006,6 +1018,9 @@ set noswapfile
 set tags+=tags;$HOME               " Recurse up to HOME dir for tags
 set undodir=~/.vim/undodir
 set undofile
+
+" use old regexpengine?
+set regexpengine=1
 
 set nowrap
 
@@ -1108,7 +1123,8 @@ nmap <leader>w :w<cr>
 nmap <leader>rt :retab<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>sp :setlocal spell!<cr>
-nmap <leader>sv :mksession<cr>
+" I basically never use this, always mistype it.
+" nmap <leader>sv :mksession<cr>
 
 nnoremap <leader>cl :close<cr>
 nnoremap <leader>ss :split<cr>
