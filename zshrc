@@ -7,6 +7,8 @@
 export ZPLUG_HOME="/usr/local/opt/zplug"
 source $ZPLUG_HOME/init.zsh
 
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
 # adds `x` command for unarchiving various formats
 zplug "plugins/extract", from:oh-my-zsh
 # initializes fasd; extra aliases
