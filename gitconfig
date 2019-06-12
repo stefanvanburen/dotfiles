@@ -1,161 +1,163 @@
 [alias]
-        ; mnemonic for add
-        a = add
-        ; mnemonic for add all
-        aa = add .
+	; mnemonic for add
+	a = add
+	; mnemonic for add all
+	aa = add .
 
-        ; show git aliases
-        aliases = config --get-regexp alias
+	; show git aliases
+	aliases = config --get-regexp alias
 
-        amend = commit --amend
+	amend = commit --amend
 
-        ; mnemonic for branches
-        b = branch
-        bl = branch --list
-        branches = branch --list
+	; mnemonic for branches
+	b = branch
+	bl = branch --list
+	branches = branch --list
 
-        ; mnemonic for browse
-        br = browse
+	; mnemonic for browse
+	br = browse
 
-        ; mnemonic for commit
-        c = commit
-        cnv = commit --no-verify
+	; mnemonic for commit
+	c = commit
+	cnv = commit --no-verify
 
-        ; mnemonic for checkout
-        co = checkout
+	; mnemonic for checkout
+	co = checkout
 
-        cl = clone --recurse-submodules
+	cl = clone --recurse-submodules
 
-        ; mnemonic for diff
-        d = diff
+	; mnemonic for diff
+	d = diff
 
-        ; mnemonic for diff all
-        da = diff HEAD
+	; mnemonic for diff all
+	da = diff HEAD
 
-        ; mnemonic for diff staged
-        ds = diff --cached
+	; mnemonic for diff staged
+	ds = diff --cached
 
-        ; mnemonic for diff master...
-        dm = diff master...
+	; mnemonic for diff master...
+	dm = diff master...
 
-        dw = diff --word-diff
+	dw = diff --word-diff
 
-        ; Properly handles mistypes like `git git diff`; etc
-        git = !git
+	; Properly handles mistypes like `git git diff`; etc
+	git = !git
 
-        ; Switch to a branch, creating it if necessary
-        go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	; Switch to a branch, creating it if necessary
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
-        ic = icdiff
+	ic = icdiff
 
-        ; Use git ignore-io from git-extras
-        ; ; Add an ignore file from gitignore.io; use something like `git ignore go`
-        ; ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	; Use git ignore-io from git-extras
+	; ; Add an ignore file from gitignore.io; use something like `git ignore go`
+	; ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
-        ; Prettier logging
-        l = log --oneline
-        lg = log --oneline --graph --decorate
-        lga = log --oneline --graph --decorate --all
-        ; only show me what is not pushed yet
-        top = log --oneline --graph --decorate @{u}..
-        ; only show me what is not merged from remote yet
-        new = log --oneline --graph --decorate ..@{u}
+	; Prettier logging
+	l = log --oneline
+	lg = log --oneline --graph --decorate
+	lga = log --oneline --graph --decorate --all
+	; only show me what is not pushed yet
+	top = log --oneline --graph --decorate @{u}..
+	; only show me what is not merged from remote yet
+	new = log --oneline --graph --decorate ..@{u}
 
-        ; mnemonic for mergetool
-        mt = mergetool
+	; mnemonic for mergetool
+	mt = mergetool
 
-        ; mnemonic for pull
-        p = pull
+	; mnemonic for pull
+	p = pull
 
-        ; Pushes and sets up tracking to same named branch
-        pu = push -u
+	; Pushes and sets up tracking to same named branch
+	pu = push -u
 
-        s = status -s
-        st = status -sb
+	s = status -s
+	st = status -sb
 
-        ; For showing stashes
-        sl = stash list
-        stashes = stash list
+	; For showing stashes
+	sl = stash list
+	stashes = stash list
 
-        ; Show submodules when I add the s
-        submodules = submodule
+	; Show submodules when I add the s
+	submodules = submodule
 
-        ; mnemonic for submodule
-        su = submodule
+	; mnemonic for submodule
+	su = submodule
 
-        ; To unstage files, etc
-        us = reset -q HEAD --
-        unstage = reset -q HEAD --
+	; To unstage files, etc
+	us = reset -q HEAD --
+	unstage = reset -q HEAD --
 
 [color]
-        ui = auto
-        diff = auto
-        status = auto
-        branch = auto
-        interactive = auto
-        grep = auto
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	grep = auto
 
 [commit]
-        ; gpgsign = true
-        verbose = true
+	; gpgsign = true
+	verbose = true
 
 [core]
-        excludesfile = ~/.gitignore
-        ; This will use $EDITOR
-        ; Note that $GIT_EDITOR and $VISUAL take precedence, if set
-        ; editor = vim
-        untrackedCache = true
+	excludesfile = ~/.gitignore
+	; This will use $EDITOR
+	; Note that $GIT_EDITOR and $VISUAL take precedence, if set
+	; editor = vim
+	untrackedCache = true
 
 [credential]
-        helper = osxkeychain
+	helper = osxkeychain
 
 [diff]
-        tool = vimdiff
-        algorithm = minimal
+	tool = vimdiff
+	algorithm = minimal
 
 [difftool]
-        ; prompt = false
+	; prompt = false
 
 [filter "lfs"]
-        clean = git-lfs clean -- %f
-        smudge = git-lfs smudge -- %f
-        process = git-lfs filter-process
-        required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 
 [github]
-        user = svanburen
+	user = svanburen
 
 [hub]
-        protocol = ssh
+	protocol = ssh
 
 [icdiff]
-        options = --highlight --line-numbers
+	options = --highlight --line-numbers
 
 [include]
-        path = ~/.gitconfig.local
+	path = ~/.gitconfig.local
 
 [init]
-        ; templatedir = ~/.git_template
+	; templatedir = ~/.git_template
 
 [merge]
-        tool = nvim
-        ff = false
-        ; prompt = false
-        ; not super useful for me
-        ; conflictStyle = diff3
+	tool = nvim
+	ff = false
+	; prompt = false
+	; not super useful for me
+	; conflictStyle = diff3
 
 [mergetool "nvim"]
-        ; https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool/
-        cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+	; https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool/
+	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 
 [pull]
-        ff = true
+	ff = true
 
 [push]
-        default = current
+	default = current
 
 [user]
-        name = Stefan VanBuren
-        email = vanburenstefan@gmail.com
+	name = Stefan VanBuren
+	email = vanburenstefan@gmail.com
 [protocol]
-        version = 2
+	version = 2
+
+; vim: set noexpandtab:
