@@ -28,24 +28,26 @@ endfunction
 
 " {{{ UI
 
-Plug 'mhinz/vim-startify'
-let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
-" use utf-8 for fortune rather than ascii
-let g:startify_fortune_use_unicode = 1
-" update startify while vim is running
-let g:startify_update_oldfiles = 1
-" use environment variables if they shorten path names
-" Not terribly useful honestly
-" let g:startify_use_env = 1
-" Don't change to the directory of a file when using startify
-let g:startify_change_to_dir = 0
+" NOTE: Not _super_ useful
+" Plug 'mhinz/vim-startify'
+"         let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
+"         " use utf-8 for fortune rather than ascii
+"         let g:startify_fortune_use_unicode = 1
+"         " update startify while vim is running
+"         let g:startify_update_oldfiles = 1
+"         " use environment variables if they shorten path names
+"         " Not terribly useful honestly
+"         " let g:startify_use_env = 1
+"         " Don't change to the directory of a file when using startify
+"         let g:startify_change_to_dir = 0
 
 " Resizes active windows according to Golden Ratio
 " Neat idea in theory - tends to wonk things up in practice
 " Plug 'roman/golden-ratio'
 
 " replaces vim-operator-flashy
-Plug 'machakann/vim-highlightedyank'
+" NOTE: Disabling for now
+" Plug 'machakann/vim-highlightedyank'
 
 " airline
 " Plug 'vim-airline/vim-airline'
@@ -80,8 +82,8 @@ Plug 'itchyny/lightline.vim'
               \   'gitbranch': 'fugitive#head'
               \ }
               \ }
-        " I can't seem to get this working quite yet.
-        Plug 'maximbaz/lightline-ale'
+" I can't seem to get this working quite yet.
+Plug 'maximbaz/lightline-ale'
         let g:lightline.component_type = {
               \     'linter_checking': 'left',
               \     'linter_warnings': 'warning',
@@ -94,39 +96,44 @@ Plug 'itchyny/lightline.vim'
         let g:lightline#ale#indicator_errors = "\uf05e"
         let g:lightline#ale#indicator_ok = "\uf00c"
 
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-let g:undotree_WindowLayout = 2
-nnoremap <leader>U :UndotreeToggle<cr>
+" NOTE: I don't really use this
+" Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+" let g:undotree_WindowLayout = 2
+" nnoremap <leader>U :UndotreeToggle<cr>
 
+" NOTE: I don't really use this
 " Vim undo tree visualizer
 " fork of sjl/gundo.vim
-Plug 'simnalamburt/vim-mundo'
+" Plug 'simnalamburt/vim-mundo'
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-nnoremap <leader>N :NERDTreeToggle<cr>
-nnoremap <C-n> :NERDTreeToggle<cr>
-" Quit NERDTree on opening a file
-let NERDTreeQuitOnOpen = 1
-" Start NERDtree when starting vim
-" Nah
-" autocmd vimenter * NERDTree
-" Show hidden files in NERDTree
-let NERDTreeShowHidden=1
+" NOTE: I don't really use this
+" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"         Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+"         nnoremap <leader>N :NERDTreeToggle<cr>
+"         nnoremap <C-n> :NERDTreeToggle<cr>
+"         " Quit NERDTree on opening a file
+"         let NERDTreeQuitOnOpen = 1
+"         " Start NERDtree when starting vim
+"         " Nah
+"         " autocmd vimenter * NERDTree
+"         " Show hidden files in NERDTree
+"         let NERDTreeShowHidden=1
 
 " disable netrw_
 let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
 Plug 'kristijanhusak/vim-dirvish-git'
+
 " Plug 'mhinz/vim-tree'
 
 Plug 'junegunn/vim-peekaboo'
 
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-nnoremap <leader>T :TagbarToggle<cr>
+" NOTE: I don't really use this
+" Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+" nnoremap <leader>T :TagbarToggle<cr>
 
-Plug 'liuchengxu/vista.vim'
-let g:vista#renderer#enable_icon = 1
+Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
+        let g:vista#renderer#enable_icon = 1
 
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 function! s:goyo_enter()
@@ -169,9 +176,10 @@ nmap <leader>G :Goyo<cr>
 Plug 'junegunn/limelight.vim', { 'on': 'LimeLight' }
 let g:limelight_conceal_ctermfg = 'darkgray'
 
-Plug 'myusuf3/numbers.vim'
-nnoremap <leader>nt :NumbersToggle<cr>
-nnoremap <leader>no :NumbersOnOff<cr>
+" NOTE: I should probably use this more, but don't
+" Plug 'myusuf3/numbers.vim'
+"         nnoremap <leader>nt :NumbersToggle<cr>
+"         nnoremap <leader>no :NumbersOnOff<cr>
 
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -181,9 +189,9 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'tpope/vim-vinegar'
 
 " Highlights the overflowing part of a line that's too long
-" TODO: test if this works
-Plug 'whatyouhide/vim-lengthmatters', { 'on': 'LengthMatters' }
-let g:lengthmatters_on_by_default = 0
+" NOTE: I almost never use this
+" Plug 'whatyouhide/vim-lengthmatters', { 'on': 'LengthMatters' }
+"         let g:lengthmatters_on_by_default = 0
 
 " Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'edkolev/tmuxline.vim'
@@ -197,6 +205,8 @@ let g:lengthmatters_on_by_default = 0
 " {{{ Git
 
 " Plug 'mhinz/vim-signify'
+
+" This makes things a bit slow?
 Plug 'airblade/vim-gitgutter'
         " Turns on gitgutter updating for a variety of events
         " ex: switch buffers, tabs, etc
@@ -206,32 +216,38 @@ Plug 'airblade/vim-gitgutter'
         let g:gitgutter_sign_removed = '·'
         let g:gitgutter_sign_removed_first_line = '·'
         let g:gitgutter_sign_modified_removed = '·'
+        " NOTE: trying this provisionally
+        let g:gitgutter_grep = 'rg'
 
-Plug 'junegunn/gv.vim'
-nmap <leader>gv :GV<cr>
+" TODO: Decide on one of these
+" Plug 'junegunn/gv.vim'
+"         nmap <leader>gv :GV<cr>
+" " Git branch viewer
+" Plug 'rbong/vim-flog'
+" " Gitk for vim
+" Plug 'gregsexton/gitv', {'on': ['Gitv']}
 
 Plug 'tpope/vim-fugitive'
-nmap <leader>gd :Gdiff<cr>
-" Bring up git status vertically
-nmap <silent> <leader>gs :vertical Gstatus<cr>
+        nmap <leader>gd :Gdiff<cr>
+        " Bring up git status vertically
+        nmap <silent> <leader>gs :vertical Gstatus<cr>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
 
 " for mergetool
-Plug 'christoomey/vim-conflicted'
+Plug 'whiteinge/diffconflicts'
+" for mergetool
+" NOTE: eh
+" Plug 'christoomey/vim-conflicted'
 
 " Adds completion for github
-Plug 'rhysd/github-complete.vim'
+" NOTE: eh
+" Plug 'rhysd/github-complete.vim'
 
-" Git branch viewer
-Plug 'rbong/vim-flog'
-
-" Gitk for vim
-Plug 'gregsexton/gitv', {'on': ['Gitv']}
-
-" Git branch management
-Plug 'sodapopcan/vim-twiggy', { 'on': 'Twiggy' }
+" " Git branch management
+" NOTE: eh
+" Plug 'sodapopcan/vim-twiggy', { 'on': 'Twiggy' }
 
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
@@ -347,6 +363,9 @@ Plug 'rhysd/git-messenger.vim'
 " yaml
 Plug 'stephpy/vim-yaml'
 
+" nim
+Plug 'zah/nim.vim'
+
 " elixir
 Plug 'elixir-editors/vim-elixir'
 
@@ -367,7 +386,7 @@ Plug 'honza/vim-snippets'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
 
 " Elm
-Plug 'elmcast/elm-vim'
+Plug 'elmcast/elm-vim', { 'for': 'elm' }
 
 " HTML5
 Plug 'othree/html5.vim'
@@ -382,8 +401,8 @@ Plug 'othree/html5.vim'
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
-" Turn off folding
-let g:vim_markdown_folding_disabled = 1
+        " Turn off folding
+        let g:vim_markdown_folding_disabled = 1
 " Alternative:
 " Plug 'tpope/vim-markdown'
 
@@ -392,12 +411,12 @@ Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
 " JSON
 Plug 'elzr/vim-json'
-" Don't really care for the concealing
-let g:vim_json_syntax_conceal = 0
+        " Don't really care for the concealing
+        let g:vim_json_syntax_conceal = 0
 
 " Protocol Buffers (protobuf)
 Plug 'uarun/vim-protobuf', { 'for': 'protobuf' }
-Plug 'uber/prototool', { 'rtp': 'vim/prototool' }
+Plug 'uber/prototool', { 'rtp': 'vim/prototool', 'for': 'protobuf' }
 
 " Dockerfile
 Plug 'ekalinin/Dockerfile.vim'
@@ -408,7 +427,7 @@ Plug 'ekalinin/Dockerfile.vim'
 
 " Go
 " make sure to do :GoInstallBinaries on new systems
-Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries' })
+Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries', 'for': 'go' })
         let g:go_fmt_command = 'goimports'
         let g:go_highlight_functions = 1
         let g:go_highlight_methods = 1
@@ -437,8 +456,7 @@ Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries' })
         let g:go_metalinter_deadline = "5s"
 
 " This is promising, but not now
-" Something is wrong with this - not entirely sure what
-Plug 'myitcv/govim' , Cond(has('vim'))
+" Plug 'myitcv/govim' , Cond(has('vim'), { 'for': 'go' })
 
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 
@@ -446,15 +464,12 @@ Plug 'buoto/gotests-vim', { 'for': 'go' }
 Plug 'jceb/vim-orgmode'
 
 " Logs
-Plug 'dzeban/vim-log-syntax'
+" Plug 'dzeban/vim-log-syntax'
 " Plug 'andreshazard/vim-logreview'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
-let g:rustfmt_autosave = 1
-
-" vgo
-Plug 'zchee/vim-vgo'
+        let g:rustfmt_autosave = 1
 
 " Crystal
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
@@ -485,13 +500,14 @@ Plug 'hashivim/vim-terraform'
 " Python
 " Syntax
 Plug 'vim-python/python-syntax', { 'for': 'python' }
-let g:python_highlight_all = 1
+        " I think this slows things down
+        let g:python_highlight_all = 1
 
 " Quickly open python modules
-Plug 'sloria/vim-ped'
+Plug 'sloria/vim-ped', { 'for': 'python' }
 
 " Indent
-Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Trying this again, despite the lag
 " TOO MUCH
@@ -505,11 +521,11 @@ Plug 'Vimjas/vim-python-pep8-indent'
 " NOTE: using ale's black integration for this, instead
 " Plug 'ambv/black', { 'on': 'Black' }
 
-Plug 'alfredodeza/pytest.vim'
-Plug 'alfredodeza/coveragepy.vim'
+Plug 'alfredodeza/pytest.vim', { 'for': 'python' }
+Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
 
 Plug 'fisadev/vim-isort', { 'for': 'python' }
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         let g:jedi#goto_command = "<C-]>"
         " we use deoplete's jedi instead
         let g:jedi#completions_enabled = 0
@@ -555,8 +571,8 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
+Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -565,16 +581,16 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " {{{ Colorschemes
 
-Plug 'morhetz/gruvbox'
-        let g:gruvbox_contrast_dark = 'hard'
-
-Plug 'lifepillar/vim-solarized8'
 Plug 'altercation/vim-colors-solarized'
-Plug 'rakr/vim-one'
-Plug 'rakr/vim-two-firewatch'
-Plug 'flazz/vim-colorschemes'
-Plug 'rhysd/vim-color-spring-night'
-Plug 'ayu-theme/ayu-vim'
+" Plug 'morhetz/gruvbox'
+"         let g:gruvbox_contrast_dark = 'hard'
+
+" Plug 'lifepillar/vim-solarized8'
+" Plug 'rakr/vim-one'
+" Plug 'rakr/vim-two-firewatch'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'rhysd/vim-color-spring-night'
+" Plug 'ayu-theme/ayu-vim'
 
 " }}}
 
@@ -582,36 +598,40 @@ Plug 'ayu-theme/ayu-vim'
 
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all --no-update-rc' }
 Plug 'junegunn/fzf.vim'
-omap <leader><tab> <plug>(fzf-maps-o)
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
+        omap <leader><tab> <plug>(fzf-maps-o)
+        nmap <leader><tab> <plug>(fzf-maps-n)
+        xmap <leader><tab> <plug>(fzf-maps-x)
 
-nnoremap <leader><Enter> :GFiles<cr>
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>gf :GFiles?<cr>
-" nnoremap ; :Buffers<cr>
-nnoremap <leader><leader> :Buffers<cr>
-nnoremap <leader>m :Marks<cr>
-nnoremap <leader>tg :Tags<cr>
-nnoremap <leader>sn :Snippets<cr>
-" nnoremap <leader>gf :GFiles<cr>
-nnoremap <leader>gc :Commits!<cr>
-" nnoremap <leader>ag :Ag!<cr>
+        nnoremap <leader><Enter> :GFiles<cr>
+        nnoremap <leader>f :Files<cr>
+        nnoremap <leader>gf :GFiles?<cr>
+        " nnoremap ; :Buffers<cr>
+        nnoremap <leader><leader> :Buffers<cr>
+        nnoremap <leader>? :History<CR>
+        nnoremap <leader>m :Marks<cr>
+        nnoremap <leader>; :BLines<CR>
+        nnoremap <leader>W :Windows<CR>
+        nnoremap <leader>tg :Tags<cr>
+        nnoremap <leader>sn :Snippets<cr>
+        nnoremap <leader>gc :Commits!<cr>
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --smart-case --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-  \   <bang>0)
-nnoremap <leader>se :Rg<cr>
+        " Try this out?
+        " imap <C-x><C-l> <plug>(fzf-complete-line)
 
-command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
+        command! -bang -nargs=* Rg
+          \ call fzf#vim#grep(
+          \   'rg --column --smart-case --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+          \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+          \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+          \   <bang>0)
+        nnoremap <leader>se :Rg<cr>
+
+        command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 " XXX: I don't really use this
-Plug 'Alok/notational-fzf-vim'
-let g:nv_search_paths = ['~/nv']
-nnoremap <c-l> :NV<cr>
+" Plug 'Alok/notational-fzf-vim'
+" let g:nv_search_paths = ['~/nv']
+" nnoremap <c-l> :NV<cr>
 
 " }}}
 
@@ -652,11 +672,13 @@ Plug 'w0rp/ale'
         \   'proto': ['prototool-lint'],
         \}
         nnoremap <silent> <leader>af :ALEFix<cr>
-        nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-        nmap <silent> <C-j> <Plug>(ale_next_wrap)
+        " Using these for moving windows
+        " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+        " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 
-Plug 'sbdchd/neoformat'
+" NOTE: I don't use this
+" Plug 'sbdchd/neoformat'
 
 " For pasting with indentation
 " TODO: I think this plugin breaks certain pasting - investigate!
@@ -694,18 +716,18 @@ Plug 'sbdchd/neoformat'
 " {{{ Movement / Motions
 
 Plug 'easymotion/vim-easymotion'
-map <leader>j <plug>(easymotion-j)
-map <leader>k <plug>(easymotion-k)
-nmap <Leader>l <Plug>(easymotion-overwin-line)
-nmap s <plug>(easymotion-overwin-f2)
-nmap F <plug>(easymotion-overwin-f2)
-let g:EasyMotion_do_mapping       = 0
-let g:EasyMotion_smartcase        = 1
-"let g:EasyMotion_use_upper        = 1
-let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
-let g:EasyMotion_enter_jump_first = 1
-let g:EasyMotion_space_jump_first = 1
-let g:EasyMotion_startofline      = 0
+        noremap <leader>j <plug>(easymotion-j)
+        noremap <leader>k <plug>(easymotion-k)
+        " nmap <Leader>l <Plug>(easymotion-overwin-line)
+        nnoremap s <plug>(easymotion-overwin-f2)
+        nnoremap F <plug>(easymotion-overwin-f2)
+        let g:EasyMotion_do_mapping       = 0
+        let g:EasyMotion_smartcase        = 1
+        "let g:EasyMotion_use_upper        = 1
+        let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
+        let g:EasyMotion_enter_jump_first = 1
+        let g:EasyMotion_space_jump_first = 1
+        let g:EasyMotion_startofline      = 0
 
 " replaces incsearch.vim
 Plug 'haya14busa/is.vim'
@@ -735,14 +757,15 @@ Plug 'haya14busa/is.vim'
 "         nmap g* <Plug>(asterisk-g*)<Plug>(searchhi-update)
 "         nmap g# <Plug>(asterisk-g#)<Plug>(searchhi-update)
 
-Plug 'haya14busa/vim-asterisk'
-        " keeps position across matches
-        let g:asterisk#keeppos = 1
-        " these mappings stay at the current match until another motion
-        map * <Plug>(asterisk-z*)
-        map # <Plug>(asterisk-z#)
-        map g* <Plug>(asterisk-gz*)
-        map g# <Plug>(asterisk-gz#)
+" TODO: Try this out
+" Plug 'haya14busa/vim-asterisk'
+"         " keeps position across matches
+"         let g:asterisk#keeppos = 1
+"         " these mappings stay at the current match until another motion
+"         map * <Plug>(asterisk-z*)
+"         map # <Plug>(asterisk-z#)
+"         map g* <Plug>(asterisk-gz*)
+"         map g# <Plug>(asterisk-gz#)
 
 " Using these keymaps for ale instead
 " Plug 'haya14busa/vim-edgemotion'
@@ -760,7 +783,8 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 
 " Allows for move lines up and down
 " Defaults: <A-k> and <A-j> to move visual selection
-Plug 'matze/vim-move'
+" TODO: learn this
+" Plug 'matze/vim-move'
 
 " Lightweight version of vim-easymotion
 " Plug 'justinmk/vim-sneak'
@@ -774,11 +798,11 @@ Plug 'matze/vim-move'
 " {{{ Search
 
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-nnoremap <leader>gr :Grepper -tool git<cr>
-nnoremap <leader>rg :Grepper -tool rg<cr>
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
-command! Todo Grepper -tool ag -query '(TODO|FIX|FIXME|XXX|NOTE|HACK|OPTIMIZE):'
+        nnoremap <leader>gr :Grepper -tool git<cr>
+        nnoremap <leader>rg :Grepper -tool rg<cr>
+        nmap gs <plug>(GrepperOperator)
+        xmap gs <plug>(GrepperOperator)
+        command! Todo Grepper -tool ag -query '(TODO|FIX|FIXME|XXX|NOTE|HACK|OPTIMIZE):'
 
 Plug 'rhysd/clever-f.vim'
 
@@ -800,16 +824,17 @@ Plug 'tpope/vim-commentary'
 
 " {{{ Documentation
 
-Plug 'keith/investigate.vim'
-nnoremap <leader>? :call investigate#Investigate('n')<cr>
-nnoremap <leader>K :call investigate#Investigate('n')<cr>
-vnoremap <leader>K :call investigate#Investigate('v')<cr>
-let g:investigate_use_dash=1
+" TODO: decide on one of these to use
+" Plug 'keith/investigate.vim'
+"         nnoremap <leader>? :call investigate#Investigate('n')<cr>
+"         nnoremap <leader>K :call investigate#Investigate('n')<cr>
+"         vnoremap <leader>K :call investigate#Investigate('v')<cr>
+"         let g:investigate_use_dash=1
 
-" Roughly redundant, given these settings
-Plug 'rizzatti/dash.vim', { 'on': 'Dash' }
-nnoremap <leader>D :Dash<cr>
-nnoremap <leader>d :Dash<cr>
+" " Roughly redundant, given these settings
+" Plug 'rizzatti/dash.vim', { 'on': 'Dash' }
+"         nnoremap <leader>D :Dash<cr>
+"         nnoremap <leader>d :Dash<cr>
 
 " }}}
 
@@ -819,20 +844,20 @@ nnoremap <leader>d :Dash<cr>
 Plug 'tpope/vim-eunuch'
 
 " tmux / vim navigation
-" I've disabled this because it tends to interfere with the way I use a lot of
-" terminal things.
-" Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Tmux basics
-Plug 'tpope/vim-tbone'
+" TODO: Learn how to use this
+" Plug 'tpope/vim-tbone'
 
 " Modern database interface for vim
 " Note that this doesn't work for neovim
 Plug 'tpope/vim-dadbod', { 'on': 'DB' }
 
-Plug 'editorconfig/editorconfig-vim'
-" for integration with vim-fugitive
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+" NOTE: I don't really use editorconfig
+" Plug 'editorconfig/editorconfig-vim'
+"         " for integration with vim-fugitive
+"         let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " match matching matches
 " TODO: maybe this is slowing things down?
@@ -879,7 +904,8 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Deal with parentheses, quotes, etc.
 Plug 'tpope/vim-surround'
-" Plug 'machakann/vim-sandwich' "could be looked into as an alternative!
+" Alternative:
+" Plug 'machakann/vim-sandwich'
 
 " Disables arrow keys, hljk, page-up / page-down to force using more specific
 " motions
@@ -887,7 +913,8 @@ Plug 'tpope/vim-surround'
 " Plug 'wikitopian/hardmode'
 
 " Manage session files
-Plug 'tpope/vim-obsession'
+" TODO: Learn to use session files
+" Plug 'tpope/vim-obsession'
 
 " Repeat plugin maps
 Plug 'tpope/vim-repeat'
@@ -899,7 +926,8 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-unimpaired'
 
 " Text exchange operator (cx)
-Plug 'tommcdo/vim-exchange'
+" NOTE: I never use this
+" Plug 'tommcdo/vim-exchange'
 
 " Manages and creates tag files
 " This seems to be having all sorts of issues recently
@@ -909,7 +937,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-abolish'
 
 " 🎄
-Plug 'rhysd/vim-syntax-christmas-tree'
+Plug 'rhysd/vim-syntax-christmas-tree', { 'on': 'MerryChristmas' }
 
 " }}}
 
@@ -959,6 +987,13 @@ endif
 set cinoptions=N-s                 " For C program indentation.
 
 set cursorline                     " Highlight the line where the cursor is
+
+" statusline current ^
+" statusline not current =
+" vertical empty (escaped space)
+" fold -
+" diff -
+set fillchars=stl:^,stlnc:=,vert:\ ,fold:-,diff:-
 
 set foldenable                     " Enable folds.
 set foldmethod=marker              " Use markers for folds ({{{ and }}}).
@@ -1025,7 +1060,9 @@ set regexpengine=1
 set nowrap
 
 " number is controlled by the numbers.vim plugin
-" set number
+" NOTE: I don't use numbers.vim for now, so turn this on.
+" This is controlled by an augroup below - but starts with relativenumber
+" set relativenumber
 
 " This is controlled by airline.vim
 " set ruler
@@ -1086,6 +1123,7 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 vnoremap j gj
 vnoremap k gk
+
 " Lol
 " nnoremap h <nop>
 " nnoremap l <nop>
@@ -1109,7 +1147,7 @@ nmap <leader>/ :nohl<cr>
 
 " For stripping whitespace - :StripWhiteSpace is provided by vim-better-whitespace
 " nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
-nmap <leader>W :StripWhitespace<cr>
+" nmap <leader>W :StripWhitespace<cr>
 nmap <leader>sw :StripWhitespace<cr>
 
 " For editing various configuration files
@@ -1135,6 +1173,9 @@ nnoremap <silent> [r :tabp<cr>
 
 nnoremap <silent> <leader>tn :tabnew<cr>
 
+" Use Q to repeat last macro, rather than going into ex mode
+nnoremap Q @@
+
 " Swap the behavior of the ^ and 0 operators
 " ^ Usually goes to the first non-whitespace character, while 0 goes to the
 " first column in the line. ^ is more useful, but harder to hit, so swap it
@@ -1159,6 +1200,12 @@ nmap gY gg"*yG
 
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+
+" These are controlled by vim-tmux-navigator
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
 
 nnoremap <leader>V V`]
 nnoremap <leader>cc :set cc=100<cr>
@@ -1237,7 +1284,7 @@ iab <expr> dts strftime("%y-%m-%d")
 
 highlight IncSearch   ctermbg=1 ctermfg=4
 " highlight MatchParen  ctermbg=1 ctermfg=4
-highlight VertSplit   ctermbg=1
+highlight VertSplit   ctermbg=2
 highlight Visual      ctermbg=1 ctermfg=4
 
 " }}}
@@ -1257,6 +1304,7 @@ augroup FT
     " Turn off folding for diffs
     autocmd Filetype diff setlocal nofoldenable
     autocmd Filetype graphql setlocal shiftwidth=2
+    autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 augroup end
 
 augroup filetypedetect
@@ -1288,6 +1336,13 @@ augroup END
 augroup window
     autocmd VimResized * :wincmd =
 augroup END
+
+" Only turn off relative number for insert mode
+" augroup every
+"   autocmd!
+"   au InsertEnter * set norelativenumber
+"   au InsertLeave * set relativenumber
+" augroup END
 
 " Go related mappings
 " All are prefixed with 'o', because 'g' is for git
