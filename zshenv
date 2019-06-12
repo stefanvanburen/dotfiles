@@ -15,7 +15,8 @@ export PAGER='less'
 # -z-4 : scroll by (length of page) - 4
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
-export PURE_PROMPT_SYMBOL='∆'
+export PURE_PROMPT_SYMBOL='▵'
+export PURE_PROMPT_VICMD_SYMBOL='▿'
 
 export TERM="screen-256color"
 
