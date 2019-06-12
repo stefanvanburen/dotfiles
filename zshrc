@@ -68,9 +68,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # https://github.com/direnv/direnv
 eval "$(direnv hook zsh)"
 
-# https://github.com/pypa/pipenv/
-eval "$(pipenv --completion)"
-
 # https://github.com/nvbn/thefuck
 eval "$(thefuck --alias)"
 
@@ -78,7 +75,8 @@ eval "$(thefuck --alias)"
 eval "$(jump shell)"
 
 # https://github.com/Homebrew/homebrew-command-not-found
-if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
+# Is this worth it?
+# if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
 
 # https://github.com/aykamko/tag
 if (( $+commands[tag] )); then
@@ -91,6 +89,8 @@ fi
 if (( $+commands[hub] )); then
   alias g=hub
   alias git=hub
+elif (( $+commands[git] )); then
+  alias g='git'
 fi
 
 # }}}
@@ -172,7 +172,9 @@ alias w='curl wttr.in/Boston'
 alias vim="$EDITOR"
 alias nv="$EDITOR"
 
-if (( $+commands[newsbeuter] )); then
+if (( $+commands[newsboat] )); then
+    alias news='newsboat'
+elif (( $+commands[newsbeuter] )); then
     alias news='newsbeuter'
 fi
 
@@ -186,18 +188,13 @@ if (( $+commands[tmux] )); then
     }
 fi
 
-# n is used for `n` - the node version manager
-# if (( $+commands[nnn] )); then
-#     alias n='nnn'
-# fi
+if (( $+commands[nnn] )); then
+    alias n='nnn'
+fi
 
 if (( $+commands[exa] )); then
     alias ls='exa'
     alias l='exa --long --git'
-fi
-
-if (( $+commands[git] )); then
-    alias g='git'
 fi
 
 if (( $+commands[youtube-dl] )); then
@@ -231,14 +228,8 @@ alias aup='apm upgrade --no-confirm'
 
 # {{{ Misc
 
-# Docker
-alias d='docker'
-alias dc='docker-compose'
-alias db='docker build .'
-
 alias c=cheat
 alias tl=tldr
-alias nv='nvim'
 # needs https://github.com/sindresorhus/clipboard-cli
 alias cb='clipboard'
 
@@ -466,4 +457,3 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # }}}
-fpath+=${ZDOTDIR:-~}/.zsh_functions
