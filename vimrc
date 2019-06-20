@@ -29,17 +29,17 @@ endfunction
 " {{{ UI
 
 " NOTE: Not _super_ useful
-" Plug 'mhinz/vim-startify'
-"         let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
-"         " use utf-8 for fortune rather than ascii
-"         let g:startify_fortune_use_unicode = 1
-"         " update startify while vim is running
-"         let g:startify_update_oldfiles = 1
-"         " use environment variables if they shorten path names
-"         " Not terribly useful honestly
-"         " let g:startify_use_env = 1
-"         " Don't change to the directory of a file when using startify
-"         let g:startify_change_to_dir = 0
+Plug 'mhinz/vim-startify'
+        let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
+        " use utf-8 for fortune rather than ascii
+        let g:startify_fortune_use_unicode = 1
+        " update startify while vim is running
+        let g:startify_update_oldfiles = 1
+        " use environment variables if they shorten path names
+        " Not terribly useful honestly
+        " let g:startify_use_env = 1
+        " Don't change to the directory of a file when using startify
+        let g:startify_change_to_dir = 0
 
 " Resizes active windows according to Golden Ratio
 " Neat idea in theory - tends to wonk things up in practice
@@ -126,12 +126,14 @@ Plug 'kristijanhusak/vim-dirvish-git'
 
 " Plug 'mhinz/vim-tree'
 
+" Shows mappings, registers, etc
 Plug 'junegunn/vim-peekaboo'
 
 " NOTE: I don't really use this
 " Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " nnoremap <leader>T :TagbarToggle<cr>
 
+nnoremap <leader>T :Vista<cr>
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
         let g:vista#renderer#enable_icon = 1
 
@@ -142,7 +144,7 @@ function! s:goyo_enter()
     set noshowmode
     set noshowcmd
     set scrolloff=999
-    NumbersDisable
+    " NumbersDisable
     set nonumber
     set norelativenumber
     Limelight
@@ -159,7 +161,7 @@ function! s:goyo_leave()
     set showcmd
     set scrolloff=5
     Limelight!
-    NumbersEnable
+    " NumbersEnable
     set tw=0
     set nowrap
     set list
@@ -173,8 +175,8 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 nmap <leader>G :Goyo<cr>
 
-Plug 'junegunn/limelight.vim', { 'on': 'LimeLight' }
-let g:limelight_conceal_ctermfg = 'darkgray'
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
+  let g:limelight_conceal_ctermfg = 'darkgray'
 
 " NOTE: I should probably use this more, but don't
 " Plug 'myusuf3/numbers.vim'
@@ -458,6 +460,10 @@ Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries', 'for': 'go' 
 " This is promising, but not now
 " Plug 'myitcv/govim' , Cond(has('vim'), { 'for': 'go' })
 
+" Alternative to vim-go's delve integration
+" Plug 'sebdah/vim-delve'
+  " let g:delve_backend = "native"
+
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 
 " Org-Mode
@@ -528,7 +534,7 @@ Plug 'fisadev/vim-isort', { 'for': 'python' }
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
         let g:jedi#goto_command = "<C-]>"
         " we use deoplete's jedi instead
-        let g:jedi#completions_enabled = 0
+        " let g:jedi#completions_enabled = 0
 
 " For mypy
 " Using ALE instead
@@ -573,6 +579,7 @@ let g:deoplete#enable_at_startup = 1
 
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
 Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+        let g:deoplete#sources#jedi#show_docstring = 1
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -585,7 +592,7 @@ Plug 'altercation/vim-colors-solarized'
 " Plug 'morhetz/gruvbox'
 "         let g:gruvbox_contrast_dark = 'hard'
 
-" Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-solarized8'
 " Plug 'rakr/vim-one'
 " Plug 'rakr/vim-two-firewatch'
 " Plug 'flazz/vim-colorschemes'
@@ -608,6 +615,9 @@ Plug 'junegunn/fzf.vim'
         " nnoremap ; :Buffers<cr>
         nnoremap <leader><leader> :Buffers<cr>
         nnoremap <leader>? :History<CR>
+        " mnemonic for command history
+        nnoremap <leader>ch :History:<CR>
+        nnoremap <leader>sh :History/<CR>
         nnoremap <leader>m :Marks<cr>
         nnoremap <leader>; :BLines<CR>
         nnoremap <leader>W :Windows<CR>
@@ -645,8 +655,9 @@ Plug 'w0rp/ale'
         " slow
         " let g:ale_sign_error = '💥 '
         " let g:ale_sign_warning = '🚧 '
-        let g:ale_sign_error = '⨯⨯'
-        let g:ale_sign_warning = '⦁⦁'
+        let g:ale_sign_error = '✖✖'
+        " let g:ale_sign_error = '⨯⨯'
+        let g:ale_sign_warning = '··'
         highlight clear ALEErrorSign
         highlight clear ALEWarningSign
         let g:ale_echo_msg_error_str = 'E'
@@ -666,9 +677,11 @@ Plug 'w0rp/ale'
         let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'javascript': ['prettier', 'eslint'],
+        \   'json': ['prettier'],
         \}
         let g:ale_linters = {
         \   'javascript': ['prettier', 'eslint'],
+        \   'json': ['prettier'],
         \   'proto': ['prototool-lint'],
         \}
         nnoremap <silent> <leader>af :ALEFix<cr>
@@ -716,11 +729,11 @@ Plug 'w0rp/ale'
 " {{{ Movement / Motions
 
 Plug 'easymotion/vim-easymotion'
-        noremap <leader>j <plug>(easymotion-j)
-        noremap <leader>k <plug>(easymotion-k)
-        " nmap <Leader>l <Plug>(easymotion-overwin-line)
-        nnoremap s <plug>(easymotion-overwin-f2)
-        nnoremap F <plug>(easymotion-overwin-f2)
+        nmap <leader>j <plug>(easymotion-j)
+        nmap <leader>k <plug>(easymotion-k)
+        " map  <Leader>f <Plug>(easymotion-bd-f)
+        " nmap <Leader>f <Plug>(easymotion-overwin-f)
+        nmap s <Plug>(easymotion-overwin-f2)
         let g:EasyMotion_do_mapping       = 0
         let g:EasyMotion_smartcase        = 1
         "let g:EasyMotion_use_upper        = 1
@@ -729,8 +742,17 @@ Plug 'easymotion/vim-easymotion'
         let g:EasyMotion_space_jump_first = 1
         let g:EasyMotion_startofline      = 0
 
+" Lightweight version of vim-easymotion
+" Plug 'justinmk/vim-sneak'
+"         let g:sneak#label = 1
+
 " replaces incsearch.vim
-Plug 'haya14busa/is.vim'
+" Plug 'haya14busa/is.vim'
+
+" Lightweight improvement of search
+" Not using because I like the "over" function of easymotion and incsearch
+" together
+" Plug 'junegunn/vim-slash'
 
 " Plug 'qxxxb/vim-searchhi'
 "         nmap / <Plug>(searchhi-/)
@@ -786,13 +808,6 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 " TODO: learn this
 " Plug 'matze/vim-move'
 
-" Lightweight version of vim-easymotion
-" Plug 'justinmk/vim-sneak'
-" Lightweight improvement of search
-" Not using because I like the "over" function of easymotion and incsearch
-" together
-" Plug 'junegunn/vim-slash'
-
 " }}}
 
 " {{{ Search
@@ -802,7 +817,6 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
         nnoremap <leader>rg :Grepper -tool rg<cr>
         nmap gs <plug>(GrepperOperator)
         xmap gs <plug>(GrepperOperator)
-        command! Todo Grepper -tool ag -query '(TODO|FIX|FIXME|XXX|NOTE|HACK|OPTIMIZE):'
 
 Plug 'rhysd/clever-f.vim'
 
@@ -845,6 +859,18 @@ Plug 'tpope/vim-eunuch'
 
 " tmux / vim navigation
 Plug 'christoomey/vim-tmux-navigator'
+  " Disable tmux navigator when zooming the Vim pane
+  let g:tmux_navigator_disable_when_zoomed = 1
+
+  " Disable defaults
+  let g:tmux_navigator_no_mappings = 1
+
+  " maximzes the vertical window size when switching
+  nnoremap <silent> <C-h> :TmuxNavigateLeft<cr><C-w>_
+  nnoremap <silent> <C-j> :TmuxNavigateDown<cr><C-w>_
+  nnoremap <silent> <C-k> :TmuxNavigateUp<cr><C-w>_
+  nnoremap <silent> <C-l> :TmuxNavigateRight<cr><C-w>_
+  nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr><C-w>_
 
 " Tmux basics
 " TODO: Learn how to use this
@@ -880,7 +906,8 @@ Plug 'tpope/vim-dadbod', { 'on': 'DB' }
 " Plug 'tpope/vim-apathy'
 
 " Heuristically set buffer options
-" Plug 'tpope/vim-sleuth'
+" NOTE: Turning this back on temporarily to determine if it's reasonable
+Plug 'tpope/vim-sleuth'
 
 " Pong-like game
 Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
@@ -906,11 +933,15 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'tpope/vim-surround'
 " Alternative:
 " Plug 'machakann/vim-sandwich'
+Plug 'wellle/targets.vim'
 
 " Disables arrow keys, hljk, page-up / page-down to force using more specific
 " motions
 " Deprecated
 " Plug 'wikitopian/hardmode'
+Plug 'takac/vim-hardtime'
+  " On by default
+  let g:hardtime_default_on = 1
 
 " Manage session files
 " TODO: Learn to use session files
@@ -951,9 +982,9 @@ filetype plugin indent on
 " this is ignored in neovim, but should be set before colorscheme
 set t_Co=256
 
-colorscheme solarized
+colorscheme solarized8
 
-set autoindent                     " Automatically indent based on previous line.
+" set autoindent                     " Automatically indent based on previous line.
 set expandtab                      " Convert tabs into spaces.
 
 " Setting these language by language
@@ -962,16 +993,21 @@ set expandtab                      " Convert tabs into spaces.
 " set softtabstop=4                  " Tab key indents by 4 spaces.
 
 " For solarized8
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " let &t_SI = "\<Esc>[6 q"
 " let &t_SR = "\<Esc>[4 q"
 " let &t_EI = "\<Esc>[2 q"
-" set termguicolors
+set termguicolors
 
 set wrapscan                       " Wrap around the end of the buffer when searching.
 
 set autoread                       " Read changes in files during editing.
+augroup autoRead
+  autocmd!
+  autocmd CursorHold * silent! checktime
+augroup END
+
 set autowriteall                   " Write the file on a lot of different commands.
 
 set background=light                " light background.
@@ -983,6 +1019,13 @@ if !has('nvim')
         set balloondelay=250
         set ttymouse=sgr
 endif
+
+set breakindent
+set breakindentopt=shift:2
+set showbreak=↳
+" using this for breakindent
+set wrap
+" set nowrap
 
 set cinoptions=N-s                 " For C program indentation.
 
@@ -1018,8 +1061,8 @@ if has('nvim')
     set inccommand=nosplit
 endif
 
+" TODO: figure these options out
 set infercase                      " For completion
-
 set ignorecase                     " Ignore case while searching
 set smartcase                      " ... except when capitals are used
 set hlsearch
@@ -1048,6 +1091,9 @@ set nojoinspaces                   " Don't insert two spaces after punctuation w
 set noshowmode
 set nostartofline
 
+" Default spell checking to false; can toggle with <Leader>sp map
+set nospell
+
 set nobackup
 set noswapfile
 set tags+=tags;$HOME               " Recurse up to HOME dir for tags
@@ -1055,9 +1101,7 @@ set undodir=~/.vim/undodir
 set undofile
 
 " use old regexpengine?
-set regexpengine=1
-
-set nowrap
+" set regexpengine=1
 
 " number is controlled by the numbers.vim plugin
 " NOTE: I don't use numbers.vim for now, so turn this on.
@@ -1078,12 +1122,12 @@ set showmatch                      " Show matching brackets briefly.
 set showmode                       " Show the mode you're in on the last line. (Somewhat redundant with airline).
 set showtabline=2                  " Always show tabline.
 
-set smartindent
+" set smartindent
 
 set splitbelow                     " On horizontal split, open the split below.
 set splitright                     " On veritcal split, open the split to the right.
 
-set synmaxcol=400                  " Don't syntax highlight after 400 columns (for larger files).
+set synmaxcol=200                  " Don't syntax highlight after 200 columns (for larger files).
 
 set title                          " Set the title of the window.
 
@@ -1117,7 +1161,7 @@ set wildignorecase
 
 " {{{ Mappings
 
-nmap ; :
+nnoremap ; :
 
 nnoremap <silent> j gj
 nnoremap <silent> k gk
@@ -1199,6 +1243,8 @@ map gy "*y
 nmap gY gg"*yG
 
 nnoremap <C-d> <C-d>zz
+nnoremap <C-f> <C-f>zz
+nnoremap <C-b> <C-b>zz
 nnoremap <C-u> <C-u>zz
 
 " These are controlled by vim-tmux-navigator
@@ -1206,6 +1252,10 @@ nnoremap <C-u> <C-u>zz
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-l> <C-w>l
 " nnoremap <C-h> <C-w>h
+
+
+" https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
+nnoremap <silent> <leader>S :syntax sync fromstart<CR>
 
 nnoremap <leader>V V`]
 nnoremap <leader>cc :set cc=100<cr>
@@ -1216,11 +1266,11 @@ nnoremap <leader>co :set cc=""<cr>
 " nnoremap <leader>f <C-w>w
 " I don't really use this
 " nnoremap <leader>l :set list!<cr>
-nnoremap <leader>sh <C-w>h
-nnoremap <leader>sj <C-w>j
-nnoremap <leader>sk <C-w>k
-nnoremap <leader>sl <C-w>l
-nnoremap <leader>x :Vexplore<cr>
+" nnoremap <leader>sh <C-w>h
+" nnoremap <leader>sj <C-w>j
+" nnoremap <leader>sk <C-w>k
+" nnoremap <leader>sl <C-w>l
+" nnoremap <leader>x :Vexplore<cr>
 
 " cmap s/ s/\v
 cmap %s/ %s/\v

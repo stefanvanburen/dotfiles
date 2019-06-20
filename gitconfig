@@ -61,6 +61,8 @@
 	; only show me what is not merged from remote yet
 	new = log --oneline --graph --decorate ..@{u}
 
+	last = log -1 HEAD
+
 	; mnemonic for mergetool
 	mt = mergetool
 
@@ -76,6 +78,10 @@
 	; For showing stashes
 	sl = stash list
 	stashes = stash list
+	; stash show
+	ss = "!f() { git stash show stash^{/$*} -p; }; f"
+	; stash apply
+	sa = "!f() { git stash apply stash^{/$*}; }; f"
 
 	; Show submodules when I add the s
 	submodules = submodule
@@ -111,16 +117,10 @@
 
 [diff]
 	tool = vimdiff
-	algorithm = minimal
+	algorithm = patience
 
 [difftool]
 	; prompt = false
-
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 
 [github]
 	user = svanburen
