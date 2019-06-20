@@ -7,7 +7,8 @@
 export ZPLUG_HOME="/usr/local/opt/zplug"
 source $ZPLUG_HOME/init.zsh
 
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+# This seems to cause more trouble than it's worth
+# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # adds `x` command for unarchiving various formats
 zplug "plugins/extract", from:oh-my-zsh
@@ -267,6 +268,20 @@ function initialize() {
 # TODO: vim always complains about this given that rg might not
 # return anything, or hang
 function mf() { rg -l $1 | xargs $EDITOR }
+
+# https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+# Seems to break things?
+# fancy-ctrl-z () {
+#   if [[ $#BUFFER -eq 0 ]]; then
+#     BUFFER="fg"
+#     zle accept-line
+#   else
+#     zle push-input
+#     zle clear-screen
+#   fi
+# }
+# zle -N fancy-ctrl-z
+# bindkey '^Z' fancy-ctrl-z
 
 # from https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
 # https://junegunn.kr/2016/07/fzf-git/
