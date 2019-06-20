@@ -86,3 +86,7 @@ Temporary Items
 .pyre
 .pyre_configuration
 .python-version
+
+# Vim
+# session files
+Session.vim

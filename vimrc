@@ -945,7 +945,7 @@ Plug 'takac/vim-hardtime'
 
 " Manage session files
 " TODO: Learn to use session files
-" Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'
 
 " Repeat plugin maps
 Plug 'tpope/vim-repeat'
