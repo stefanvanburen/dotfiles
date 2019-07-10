@@ -531,8 +531,8 @@ Plug 'alfredodeza/pytest.vim', { 'for': 'python' }
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
 
 Plug 'fisadev/vim-isort', { 'for': 'python' }
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-        let g:jedi#goto_command = "<C-]>"
+" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+"         let g:jedi#goto_command = "<C-]>"
         " we use deoplete's jedi instead
         " let g:jedi#completions_enabled = 0
 
@@ -555,31 +555,32 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 " {{{ Completion
 
 " TODO: for python, I should probably follow this:
-" http://valloric.github.io/YouCompleteMe/#configuring-through-vim-options
-" Plug 'valloric/YouCompleteMe'
-"         let g:ycm_collect_identifiers_from_tags_files = 1
-"         let g:ycm_complete_in_comments                = 1
-"         let g:ycm_key_list_select_completion = ['<C-j>']
-"         let g:ycm_key_list_previous_completion = ['<C-k>']
-"         " commenting this out to use virtualenv python
-"         let g:ycm_python_binary_path = 'python'
+" http://ycm-core.github.io/YouCompleteMe/#configuring-through-vim-options
+Plug 'valloric/YouCompleteMe'
+        let g:ycm_collect_identifiers_from_tags_files = 1
+        let g:ycm_complete_in_comments                = 1
+        let g:ycm_key_list_select_completion = ['<C-j>']
+        let g:ycm_key_list_previous_completion = ['<C-k>']
+        nnoremap <C-]> :YcmCompleter GoTo<cr>
+        " commenting this out to use virtualenv python
+        let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 " Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
 " Plug 'ajh17/VimCompletesMe'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+" let g:deoplete#enable_at_startup = 1
 
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
-Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-        let g:deoplete#sources#jedi#show_docstring = 1
+" Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
+" Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+        " let g:deoplete#sources#jedi#show_docstring = 1
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -588,11 +589,12 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " {{{ Colorschemes
 
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 " Plug 'morhetz/gruvbox'
 "         let g:gruvbox_contrast_dark = 'hard'
 
 Plug 'lifepillar/vim-solarized8'
+" Plug 'sickill/vim-monokai'
 " Plug 'rakr/vim-one'
 " Plug 'rakr/vim-two-firewatch'
 " Plug 'flazz/vim-colorschemes'
@@ -819,6 +821,7 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
         xmap gs <plug>(GrepperOperator)
 
 Plug 'rhysd/clever-f.vim'
+  let g:clever_f_mark_direct = 1
 
 " Probably unnecessary given other tools
 " Plug 'mileszs/ack.vim'
@@ -939,9 +942,9 @@ Plug 'wellle/targets.vim'
 " motions
 " Deprecated
 " Plug 'wikitopian/hardmode'
-Plug 'takac/vim-hardtime'
+" Plug 'takac/vim-hardtime'
   " On by default
-  let g:hardtime_default_on = 1
+  " let g:hardtime_default_on = 1
 
 " Manage session files
 " TODO: Learn to use session files
@@ -967,6 +970,10 @@ Plug 'tpope/vim-unimpaired'
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
 
+Plug 'tpope/vim-dispatch'
+Plug 'janko/vim-test'
+  let test#strategy = "dispatch"
+
 " 🎄
 Plug 'rhysd/vim-syntax-christmas-tree', { 'on': 'MerryChristmas' }
 
@@ -982,6 +989,14 @@ filetype plugin indent on
 " this is ignored in neovim, but should be set before colorscheme
 set t_Co=256
 
+" For solarized8 - must be set before
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" let &t_SI = "\<Esc>[6 q"
+" let &t_SR = "\<Esc>[4 q"
+" let &t_EI = "\<Esc>[2 q"
+set termguicolors
+
 colorscheme solarized8
 
 " set autoindent                     " Automatically indent based on previous line.
@@ -991,14 +1006,6 @@ set expandtab                      " Convert tabs into spaces.
 " set shiftwidth=4                   " >> and << indent by 4 spaces.
 " set shiftround                     " >> and << indent to next multiple of 'shiftwidth'.
 " set softtabstop=4                  " Tab key indents by 4 spaces.
-
-" For solarized8
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" let &t_SI = "\<Esc>[6 q"
-" let &t_SR = "\<Esc>[4 q"
-" let &t_EI = "\<Esc>[2 q"
-set termguicolors
 
 set wrapscan                       " Wrap around the end of the buffer when searching.
 
@@ -1024,8 +1031,8 @@ set breakindent
 set breakindentopt=shift:2
 set showbreak=↳
 " using this for breakindent
-set wrap
-" set nowrap
+" set wrap
+set nowrap
 
 set cinoptions=N-s                 " For C program indentation.
 
@@ -1150,8 +1157,12 @@ endif
 set visualbell t_vb=                " No beeping
 
 set wildmenu
-set wildmode=list:longest,full
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
+if has('nvim')
+  set wildoptions=pum
+else
+  set wildmode=list:longest,full
+endif
 set wildignorecase
 
 " Some other useful options that I'm not using
@@ -1351,8 +1362,8 @@ augroup FT
     autocmd FileType asciidoc setlocal wrap
     autocmd Filetype crontab setlocal nobackup nowritebackup
     autocmd Filetype json setlocal expandtab tabstop=2 shiftwidth=2
-    " Turn off folding for diffs
-    autocmd Filetype diff setlocal nofoldenable
+    autocmd Filetype diff setlocal foldmethod=syntax
+    autocmd Filetype git setlocal foldmethod=syntax
     autocmd Filetype graphql setlocal shiftwidth=2
     autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 augroup end

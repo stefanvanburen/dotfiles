@@ -146,7 +146,7 @@
 
 [mergetool "nvim"]
 	; https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool/
-	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+	; cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 
 [pull]
 	ff = true
