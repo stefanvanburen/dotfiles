@@ -23,6 +23,12 @@
     ~/.config/nvim:
         create: true
         path: vim
+    ~/.config/fish/fishfile:
+        create: true
+        path: fishfile
+    ~/.config/fish/config.fish:
+        create: true
+        path: config.fish
     ~/.ripgreprc: ripgreprc
     ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.config/isort/isort.cfg: isort.cfg
