@@ -458,7 +458,8 @@ Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries', 'for': 'go' 
         let g:go_metalinter_deadline = "5s"
 
 " This is promising, but not now
-" Plug 'myitcv/govim' , Cond(has('vim'), { 'for': 'go' })
+" Still isn't working with neovim, seems to hang when opening certain go files
+" Plug 'myitcv/govim', Cond(has('vim'), { 'for': 'go' })
 
 " Alternative to vim-go's delve integration
 " Plug 'sebdah/vim-delve'
