@@ -636,7 +636,7 @@ Plug 'junegunn/fzf.vim'
           \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
           \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
           \   <bang>0)
-        nnoremap <leader>se :Rg<cr>
+        nnoremap <leader>se :Rg!<cr>
 
         command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
@@ -685,11 +685,12 @@ Plug 'w0rp/ale'
         \   'javascript': ['prettier', 'eslint'],
         \   'json': ['prettier'],
         \   'proto': ['prototool-lint'],
+        \   'text': ['vale'],
+        \   'markdown': ['vale'],
         \}
         nnoremap <silent> <leader>af :ALEFix<cr>
-        " Using these for moving windows
-        " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-        " nmap <silent> <C-j> <Plug>(ale_next_wrap)
+        nmap <silent> [w <Plug>(ale_previous_wrap)
+        nmap <silent> ]w <Plug>(ale_next_wrap)
 
 
 " NOTE: I don't use this
@@ -869,11 +870,12 @@ Plug 'christoomey/vim-tmux-navigator'
   let g:tmux_navigator_no_mappings = 1
 
   " maximzes the vertical window size when switching
-  nnoremap <silent> <C-h> :TmuxNavigateLeft<cr><C-w>_
-  nnoremap <silent> <C-j> :TmuxNavigateDown<cr><C-w>_
-  nnoremap <silent> <C-k> :TmuxNavigateUp<cr><C-w>_
-  nnoremap <silent> <C-l> :TmuxNavigateRight<cr><C-w>_
-  nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr><C-w>_
+  " Add <C-w>_ if you want to maximize the window switched to
+  nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+  nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+  nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+  nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+  nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
 " Tmux basics
 " TODO: Learn how to use this
