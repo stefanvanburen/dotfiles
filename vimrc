@@ -685,6 +685,7 @@ Plug 'w0rp/ale'
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'javascript': ['prettier', 'eslint'],
         \   'json': ['prettier'],
+        \   'elixir': ['mix_format'],
         \}
         let g:ale_linters = {
         \   'javascript': ['prettier', 'eslint'],
@@ -1383,6 +1384,7 @@ augroup FT
     autocmd FileType java setlocal expandtab tabstop=2 shiftwidth=2
     autocmd FileType sh   setlocal shiftwidth=4
     autocmd FileType c    setlocal cindent
+    " autocmd FileType elixir setlocal formatprg=mix\ format\ -
     autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2
     autocmd FileType help wincmd L
     autocmd FileType asciidoc setlocal wrap
