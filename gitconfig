@@ -138,15 +138,12 @@
 	; templatedir = ~/.git_template
 
 [merge]
-	tool = nvim
+	tool = vimdiff
 	ff = false
-	prompt = false
-	; not super useful for me
-	; conflictStyle = diff3
+	conflictstyle = "diff3"
 
-[mergetool "nvim"]
-	; https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool/
-	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+[mergetool]
+	prompt = false
 
 [pull]
 	ff = true

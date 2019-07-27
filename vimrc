@@ -206,20 +206,20 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " {{{ Git
 
-" Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 
 " This makes things a bit slow?
-Plug 'airblade/vim-gitgutter'
-        " Turns on gitgutter updating for a variety of events
-        " ex: switch buffers, tabs, etc
-        " let g:gitgutter_eager = 1
-        let g:gitgutter_sign_added = '·'
-        let g:gitgutter_sign_modified = '·'
-        let g:gitgutter_sign_removed = '·'
-        let g:gitgutter_sign_removed_first_line = '·'
-        let g:gitgutter_sign_modified_removed = '·'
-        " NOTE: trying this provisionally
-        let g:gitgutter_grep = 'rg'
+" Plug 'airblade/vim-gitgutter'
+"         " Turns on gitgutter updating for a variety of events
+"         " ex: switch buffers, tabs, etc
+"         " let g:gitgutter_eager = 1
+"         let g:gitgutter_sign_added = '·'
+"         let g:gitgutter_sign_modified = '·'
+"         let g:gitgutter_sign_removed = '·'
+"         let g:gitgutter_sign_removed_first_line = '·'
+"         let g:gitgutter_sign_modified_removed = '·'
+"         " NOTE: trying this provisionally
+"         let g:gitgutter_grep = 'rg'
 
 " TODO: Decide on one of these
 " Plug 'junegunn/gv.vim'
@@ -363,19 +363,19 @@ Plug 'rhysd/git-messenger.vim'
 "         command! -nargs=? Fold :call     CocAction('fold', <f-args>)<Paste>j
 
 " yaml
-Plug 'stephpy/vim-yaml'
+Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
 
 " nim
-Plug 'zah/nim.vim'
+Plug 'zah/nim.vim', { 'for': 'nim' }
 
 " elixir
-Plug 'elixir-editors/vim-elixir'
+Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 
 " chucK
-Plug 'wilsaj/chuck.vim'
+Plug 'wilsaj/chuck.vim', { 'for': 'chuck' }
 
 " Track the engine.
-Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips', { 'on': [] }
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
         let g:UltiSnipsExpandTrigger="<TAB>"
@@ -391,7 +391,7 @@ Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
 Plug 'elmcast/elm-vim', { 'for': 'elm' }
 
 " HTML5
-Plug 'othree/html5.vim'
+Plug 'othree/html5.vim', { 'for': 'html' }
 
 " Javascript
 " note that prettier has docs for setting up with ALE
@@ -402,7 +402,7 @@ Plug 'othree/html5.vim'
 "                         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
 
 " Markdown
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
         " Turn off folding
         let g:vim_markdown_folding_disabled = 1
 " Alternative:
@@ -412,16 +412,16 @@ Plug 'plasticboy/vim-markdown'
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
 " JSON
-Plug 'elzr/vim-json'
+Plug 'elzr/vim-json', { 'for': 'json' }
         " Don't really care for the concealing
         let g:vim_json_syntax_conceal = 0
 
 " Protocol Buffers (protobuf)
-Plug 'uarun/vim-protobuf', { 'for': 'protobuf' }
-Plug 'uber/prototool', { 'rtp': 'vim/prototool', 'for': 'protobuf' }
+Plug 'uarun/vim-protobuf', { 'for': 'proto' }
+Plug 'uber/prototool', { 'rtp': 'vim/prototool', 'for': 'proto' }
 
 " Dockerfile
-Plug 'ekalinin/Dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
 " gitignore
 " Causes some problems with UltiSnips
@@ -468,7 +468,8 @@ Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries', 'for': 'go' 
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 
 " Org-Mode
-Plug 'jceb/vim-orgmode'
+" I never really use orgmode...
+" Plug 'jceb/vim-orgmode'
 
 " Logs
 " Plug 'dzeban/vim-log-syntax'
@@ -485,21 +486,21 @@ Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'mattn/gist-vim', { 'for': 'gist' }
 
 " nginx
-Plug 'fatih/vim-nginx'
+Plug 'fatih/vim-nginx', { 'for': 'nginx' }
 
 " for prose
 " Not super maintained - using ale + vale & write-good instead
 " Plug 'reedes/vim-wordy'
 
 " for tmux.conf files
-Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 " Plug 'keith/tmux.vim'
 
 " TOML
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 " Terraform
-Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 
 " Plug 'jceb/vim-orgmode'
 " Plug 'junegunn/vim-journal'
@@ -511,10 +512,11 @@ Plug 'vim-python/python-syntax', { 'for': 'python' }
         let g:python_highlight_all = 1
 
 " Quickly open python modules
-Plug 'sloria/vim-ped', { 'for': 'python' }
+Plug 'sloria/vim-ped', { 'for': 'python', 'on': 'Ped' }
 
 " Indent
-Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
+" Is this useful now that I'm using black?
+" Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Trying this again, despite the lag
 " TOO MUCH
@@ -528,10 +530,11 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 " NOTE: using ale's black integration for this, instead
 " Plug 'ambv/black', { 'on': 'Black' }
 
-Plug 'alfredodeza/pytest.vim', { 'for': 'python' }
-Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
+Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest' }
+Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
-Plug 'fisadev/vim-isort', { 'for': 'python' }
+" This is super slow to load
+" Plug 'fisadev/vim-isort', { 'for': 'python' }
 " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 "         let g:jedi#goto_command = "<C-]>"
         " we use deoplete's jedi instead
@@ -557,6 +560,7 @@ Plug 'fisadev/vim-isort', { 'for': 'python' }
 
 " TODO: for python, I should probably follow this:
 " http://ycm-core.github.io/YouCompleteMe/#configuring-through-vim-options
+" UGH this is a huge delay in opening a file
 Plug 'valloric/YouCompleteMe'
         let g:ycm_collect_identifiers_from_tags_files = 1
         let g:ycm_complete_in_comments                = 1
@@ -945,9 +949,9 @@ Plug 'wellle/targets.vim'
 " motions
 " Deprecated
 " Plug 'wikitopian/hardmode'
-" Plug 'takac/vim-hardtime'
+Plug 'takac/vim-hardtime'
   " On by default
-  " let g:hardtime_default_on = 1
+  let g:hardtime_default_on = 1
 
 " Manage session files
 " TODO: Learn to use session files
@@ -968,14 +972,21 @@ Plug 'tpope/vim-unimpaired'
 
 " Manages and creates tag files
 " This seems to be having all sorts of issues recently
+" Yikes
 " Plug 'ludovicchabant/vim-gutentags'
 
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
 
 Plug 'tpope/vim-dispatch'
+  nnoremap <leader>h :Make<cr>
 Plug 'janko/vim-test'
   let test#strategy = "dispatch"
+  nmap <silent> t<C-n> :TestNearest<CR>
+  nmap <silent> t<C-f> :TestFile<CR>
+  nmap <silent> t<C-s> :TestSuite<CR>
+  nmap <silent> t<C-l> :TestLast<CR>
+  nmap <silent> t<C-g> :TestVisit<CR>
 
 " 🎄
 Plug 'rhysd/vim-syntax-christmas-tree', { 'on': 'MerryChristmas' }
@@ -1020,7 +1031,7 @@ augroup END
 
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=light                " light background.
+set background=dark                " light background.
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
@@ -1030,16 +1041,19 @@ if !has('nvim')
         set ttymouse=sgr
 endif
 
+" :set wrap to use this
 set breakindent
 set breakindentopt=shift:2
 set showbreak=↳
-" using this for breakindent
-" set wrap
 set nowrap
 
 set cinoptions=N-s                 " For C program indentation.
 
+set cmdheight=1
+
 set cursorline                     " Highlight the line where the cursor is
+
+set diffopt+=internal,algorithm:patience
 
 " statusline current ^
 " statusline not current =
@@ -1094,7 +1108,7 @@ set magic                          " For regex
 set modeline                       " Checks the bottom 1 line for set commands for vim. See bottom of this file.
 set modelines=1
 
-set mouse=a                        " Enable mouse for all modes
+set mouse=n                        " Enable mouse for normal mode
 
 set nojoinspaces                   " Don't insert two spaces after punctuation with a join command.
 
@@ -1104,9 +1118,18 @@ set nostartofline
 " Default spell checking to false; can toggle with <Leader>sp map
 set nospell
 
+" I doubt this is needed
+" set tags+=tags;$HOME               " Recurse up to HOME dir for tags
+
+set swapfile
+set directory^=~/.vim/swap//
+" protect against crash-during-write
+set writebackup
+" but do not persist backup after successful write
 set nobackup
-set noswapfile
-set tags+=tags;$HOME               " Recurse up to HOME dir for tags
+" use rename-and-write-new method whenever safe
+set backupcopy=auto
+set backupdir^=~/.vim/backup//
 set undodir=~/.vim/undodir
 set undofile
 
@@ -1213,7 +1236,7 @@ nmap <leader>eg :e $HOME/.gitconfig<cr>
 nmap <leader>ev :e $MYVIMRC<cr>
 nmap <leader>ez :e $HOME/.zshrc<cr>
 
-nmap <leader>q :q<cr>
+" nmap <leader>q :q<cr>
 nmap <leader>w :w<cr>
 
 nmap <leader>rt :retab<cr>
@@ -1428,6 +1451,13 @@ augroup go
     autocmd FileType go nmap <leader>ot <plug>(go-test)
     autocmd FileType go nmap <leader>ov <plug>(go-vet)
 augroup END
+
+" " These are loaded when we first go into insert mode
+" augroup load_us_ycm
+"   autocmd!
+"   autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
+"                      \| autocmd! load_us_ycm
+" augroup END
 
 " }}}
 
