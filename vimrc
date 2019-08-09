@@ -28,6 +28,11 @@ endfunction
 
 " {{{ UI
 
+" Dim inactive panes
+" NOTE: eh, doesn't look super great - seems like limitations with vim
+" Plug 'blueyed/vim-diminactive'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
 " NOTE: Not _super_ useful
 Plug 'mhinz/vim-startify'
         let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
@@ -120,7 +125,7 @@ Plug 'maximbaz/lightline-ale'
 "         let NERDTreeShowHidden=1
 
 " disable netrw_
-let loaded_netrwPlugin = 1
+" let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
 Plug 'kristijanhusak/vim-dirvish-git'
 
@@ -206,20 +211,20 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " {{{ Git
 
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
 
 " This makes things a bit slow?
-" Plug 'airblade/vim-gitgutter'
-"         " Turns on gitgutter updating for a variety of events
-"         " ex: switch buffers, tabs, etc
-"         " let g:gitgutter_eager = 1
-"         let g:gitgutter_sign_added = '·'
-"         let g:gitgutter_sign_modified = '·'
-"         let g:gitgutter_sign_removed = '·'
-"         let g:gitgutter_sign_removed_first_line = '·'
-"         let g:gitgutter_sign_modified_removed = '·'
-"         " NOTE: trying this provisionally
-"         let g:gitgutter_grep = 'rg'
+Plug 'airblade/vim-gitgutter'
+        " Turns on gitgutter updating for a variety of events
+        " ex: switch buffers, tabs, etc
+        " let g:gitgutter_eager = 1
+        let g:gitgutter_sign_added = '·'
+        let g:gitgutter_sign_modified = '·'
+        let g:gitgutter_sign_removed = '·'
+        let g:gitgutter_sign_removed_first_line = '·'
+        let g:gitgutter_sign_modified_removed = '·'
+        " NOTE: trying this provisionally
+        let g:gitgutter_grep = 'rg'
 
 " TODO: Decide on one of these
 " Plug 'junegunn/gv.vim'
@@ -516,7 +521,7 @@ Plug 'sloria/vim-ped', { 'for': 'python', 'on': 'Ped' }
 
 " Indent
 " Is this useful now that I'm using black?
-" Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
+Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Trying this again, despite the lag
 " TOO MUCH
@@ -561,14 +566,14 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 " TODO: for python, I should probably follow this:
 " http://ycm-core.github.io/YouCompleteMe/#configuring-through-vim-options
 " UGH this is a huge delay in opening a file
-Plug 'valloric/YouCompleteMe'
-        let g:ycm_collect_identifiers_from_tags_files = 1
-        let g:ycm_complete_in_comments                = 1
-        let g:ycm_key_list_select_completion = ['<C-j>']
-        let g:ycm_key_list_previous_completion = ['<C-k>']
-        nnoremap <C-]> :YcmCompleter GoTo<cr>
-        " commenting this out to use virtualenv python
-        let g:ycm_python_binary_path = '/usr/local/bin/python3'
+" Plug 'valloric/YouCompleteMe'
+"         let g:ycm_collect_identifiers_from_tags_files = 1
+"         let g:ycm_complete_in_comments                = 1
+"         let g:ycm_key_list_select_completion = ['<C-j>']
+"         let g:ycm_key_list_previous_completion = ['<C-k>']
+"         nnoremap <C-]> :YcmCompleter GoTo<cr>
+"         " commenting this out to use virtualenv python
+"         let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 " Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 
@@ -585,7 +590,7 @@ Plug 'valloric/YouCompleteMe'
 
 " Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
 " Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-        " let g:deoplete#sources#jedi#show_docstring = 1
+"         let g:deoplete#sources#jedi#show_docstring = 1
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -737,6 +742,7 @@ Plug 'w0rp/ale'
 
 " {{{ Movement / Motions
 
+" TODO: Use this more
 Plug 'easymotion/vim-easymotion'
         nmap <leader>j <plug>(easymotion-j)
         nmap <leader>k <plug>(easymotion-k)
@@ -953,6 +959,9 @@ Plug 'wellle/targets.vim'
 Plug 'takac/vim-hardtime'
   " On by default
   let g:hardtime_default_on = 1
+  " Remove - from the list - this is for vim-dirvish
+  let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+  let g:hardtime_timeout = 2000
 
 " Manage session files
 " TODO: Learn to use session files
@@ -989,8 +998,14 @@ Plug 'janko/vim-test'
   nmap <silent> t<C-l> :TestLast<CR>
   nmap <silent> t<C-g> :TestVisit<CR>
 
+" project
+Plug 'tpope/vim-projectionist'
+
 " 🎄
 Plug 'rhysd/vim-syntax-christmas-tree', { 'on': 'MerryChristmas' }
+
+" Generates images of source code
+Plug 'segeljakt/vim-silicon'
 
 " }}}
 
@@ -1032,7 +1047,7 @@ augroup END
 
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=dark                " light background.
+set background=light               " background shade
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
@@ -1051,6 +1066,8 @@ set nowrap
 set cinoptions=N-s                 " For C program indentation.
 
 set cmdheight=1
+
+set completeopt-=preview
 
 set cursorline                     " Highlight the line where the cursor is
 
@@ -1121,6 +1138,9 @@ set nospell
 
 " I doubt this is needed
 " set tags+=tags;$HOME               " Recurse up to HOME dir for tags
+
+" turn on line numbers
+set number
 
 set swapfile
 set directory^=~/.vim/swap//

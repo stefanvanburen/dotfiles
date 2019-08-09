@@ -1,5 +1,4 @@
-alias g="hub"
-alias git="hub"
+set -gx EDITOR nvim
 
 alias v="$EDITOR"
 
@@ -14,3 +13,5 @@ direnv hook fish | source
 
 # for jump
 status --is-interactive; and source (jump shell fish | psub)
+
+eval (starship init fish)

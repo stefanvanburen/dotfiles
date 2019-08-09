@@ -1,3 +1,15 @@
+; vim: set noexpandtab:
+
+[user]
+	name = Stefan VanBuren
+	email = vanburenstefan@gmail.com
+
+[github]
+	user = svanburen
+
+[protocol]
+	version = 2
+
 [alias]
 	; mnemonic for add
 	a = add
@@ -45,8 +57,6 @@
 
 	; Switch to a branch, creating it if necessary
 	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
-
-	ic = icdiff
 
 	; Use git ignore-io from git-extras
 	; ; Add an ignore file from gitignore.io; use something like `git ignore go`
@@ -121,15 +131,8 @@
 
 [difftool]
 	; prompt = false
-
-[github]
-	user = svanburen
-
 [hub]
 	protocol = ssh
-
-[icdiff]
-	options = --highlight --line-numbers
 
 [include]
 	path = ~/.gitconfig.local
@@ -138,12 +141,13 @@
 	; templatedir = ~/.git_template
 
 [merge]
-	tool = vimdiff
+	tool = fugitive
 	ff = false
 	conflictstyle = "diff3"
 
 [mergetool]
 	prompt = false
+	keepBackup = false
 
 [pull]
 	ff = true
@@ -151,10 +155,8 @@
 [push]
 	default = current
 
-[user]
-	name = Stefan VanBuren
-	email = vanburenstefan@gmail.com
-[protocol]
-	version = 2
+[icdiff]
+	options = --no-bold --line-numbers
 
-; vim: set noexpandtab:
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"

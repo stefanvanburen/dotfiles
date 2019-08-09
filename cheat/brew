@@ -3,3 +3,6 @@ brew bundle dump
 
 # Install contents of a Brewfile
 brew bundle
+
+# Remove dependencies of only uninstalled brews
+brew bundle dump && brew bundle --force cleanup

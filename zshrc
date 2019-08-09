@@ -75,7 +75,7 @@ eval "$(direnv hook zsh)"
 eval "$(thefuck --alias)"
 
 # https://github.com/gsamokovarov/jump
-eval "$(jump shell)"
+eval "$(jump shell zsh)"
 
 # https://github.com/Homebrew/homebrew-command-not-found
 # Is this worth it?
@@ -157,6 +157,7 @@ if (( $+commands[brew] )); then
     alias bubo='brew update && brew outdated'
     alias bubc='brew upgrade && brew cleanup'
     alias bubu='bubo && bubc'
+    export FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
 alias gitconfig="$EDITOR $HOME/.gitconfig"
