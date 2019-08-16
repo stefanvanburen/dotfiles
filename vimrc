@@ -87,7 +87,6 @@ Plug 'itchyny/lightline.vim'
               \   'gitbranch': 'fugitive#head'
               \ }
               \ }
-" I can't seem to get this working quite yet.
 Plug 'maximbaz/lightline-ale'
         let g:lightline.component_type = {
               \     'linter_checking': 'left',
@@ -138,47 +137,47 @@ Plug 'junegunn/vim-peekaboo'
 " Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " nnoremap <leader>T :TagbarToggle<cr>
 
-nnoremap <leader>T :Vista<cr>
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
-        let g:vista#renderer#enable_icon = 1
+  nnoremap <leader>T :Vista<cr>
+  let g:vista#renderer#enable_icon = 1
 
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-function! s:goyo_enter()
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    set noshowmode
-    set noshowcmd
-    set scrolloff=999
-    " NumbersDisable
-    set nonumber
-    set norelativenumber
-    Limelight
-    set tw=72
-    set wrap
-    set nolist
-    " ...
-endfunction
+  function! s:goyo_enter()
+      silent !tmux set status off
+      silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+      set noshowmode
+      set noshowcmd
+      set scrolloff=999
+      " NumbersDisable
+      set nonumber
+      set norelativenumber
+      Limelight
+      set tw=72
+      set wrap
+      set nolist
+      " ...
+  endfunction
 
-function! s:goyo_leave()
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    set showmode
-    set showcmd
-    set scrolloff=5
-    Limelight!
-    " NumbersEnable
-    set tw=0
-    set nowrap
-    set list
-    " ...
-endfunction
+  function! s:goyo_leave()
+      silent !tmux set status on
+      silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+      set showmode
+      set showcmd
+      set scrolloff=5
+      Limelight!
+      " NumbersEnable
+      set tw=0
+      set nowrap
+      set list
+      " ...
+  endfunction
 
-let g:goyo_linenr=1
+  let g:goyo_linenr=1
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+  autocmd! User GoyoEnter nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-nmap <leader>G :Goyo<cr>
+  nmap <leader>G :Goyo<cr>
 
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
   let g:limelight_conceal_ctermfg = 'darkgray'
@@ -215,35 +214,36 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " This makes things a bit slow?
 Plug 'airblade/vim-gitgutter'
-        " Turns on gitgutter updating for a variety of events
-        " ex: switch buffers, tabs, etc
-        " let g:gitgutter_eager = 1
-        let g:gitgutter_sign_added = '·'
-        let g:gitgutter_sign_modified = '·'
-        let g:gitgutter_sign_removed = '·'
-        let g:gitgutter_sign_removed_first_line = '·'
-        let g:gitgutter_sign_modified_removed = '·'
-        " NOTE: trying this provisionally
-        let g:gitgutter_grep = 'rg'
+  " Turns on gitgutter updating for a variety of events
+  " ex: switch buffers, tabs, etc
+  " let g:gitgutter_eager = 1
+  let g:gitgutter_sign_added = '·'
+  let g:gitgutter_sign_modified = '·'
+  let g:gitgutter_sign_removed = '·'
+  let g:gitgutter_sign_removed_first_line = '·'
+  let g:gitgutter_sign_modified_removed = '·'
+  " NOTE: trying this provisionally
+  let g:gitgutter_grep = 'rg'
 
-" TODO: Decide on one of these
-" Plug 'junegunn/gv.vim'
-"         nmap <leader>gv :GV<cr>
+Plug 'junegunn/gv.vim', { 'on': ['GV'] }
+  nmap <leader>gv :GV<cr>
+
 " " Git branch viewer
 " Plug 'rbong/vim-flog'
 " " Gitk for vim
 " Plug 'gregsexton/gitv', {'on': ['Gitv']}
 
 Plug 'tpope/vim-fugitive'
-        nmap <leader>gd :Gdiff<cr>
-        " Bring up git status vertically
-        nmap <silent> <leader>gs :vertical Gstatus<cr>
+  nmap <leader>gd :Gdiff<cr>
+  " Bring up git status vertically
+  nmap <silent> <leader>gs :vertical Gstatus<cr>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
 
 " for mergetool
-Plug 'whiteinge/diffconflicts'
+" NOTE: not using this
+" Plug 'whiteinge/diffconflicts'
 " for mergetool
 " NOTE: eh
 " Plug 'christoomey/vim-conflicted'
@@ -264,17 +264,17 @@ Plug 'rhysd/vim-github-support'
 
 " reveal last commit message
 Plug 'rhysd/git-messenger.vim'
-        " Header such as 'Commit:', 'Author:'
-        hi link gitmessengerHeader Identifier
+  " Header such as 'Commit:', 'Author:'
+  hi link gitmessengerHeader Identifier
 
-        " Commit hash at 'Commit:' header
-        hi link gitmessengerHash Comment
+  " Commit hash at 'Commit:' header
+  hi link gitmessengerHash Comment
 
-        " History number at 'History:' header
-        hi link gitmessengerHistory Constant
+  " History number at 'History:' header
+  hi link gitmessengerHistory Constant
 
-        " Normal color. This color is the most important
-        hi link gitmessengerPopupNormal CursorLine
+  " Normal color. This color is the most important
+  hi link gitmessengerPopupNormal CursorLine
 
 " github issues
 " Seems to have some issues itself
@@ -383,11 +383,11 @@ Plug 'wilsaj/chuck.vim', { 'for': 'chuck' }
 Plug 'SirVer/ultisnips', { 'on': [] }
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-        let g:UltiSnipsExpandTrigger="<TAB>"
-        let g:UltiSnipsJumpForwardTrigger="<TAB>"
-        let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
-        " If you want :UltiSnipsEdit to split your window.
-        let g:UltiSnipsEditSplit="vertical"
+  let g:UltiSnipsExpandTrigger="<TAB>"
+  let g:UltiSnipsJumpForwardTrigger="<TAB>"
+  let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
+  " If you want :UltiSnipsEdit to split your window.
+  let g:UltiSnipsEditSplit="vertical"
 
 " Taskwarrior
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
@@ -566,7 +566,7 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 " TODO: for python, I should probably follow this:
 " http://ycm-core.github.io/YouCompleteMe/#configuring-through-vim-options
 " UGH this is a huge delay in opening a file
-" Plug 'valloric/YouCompleteMe'
+" Plug 'ycm-core/YouCompleteMe'
 "         let g:ycm_collect_identifiers_from_tags_files = 1
 "         let g:ycm_complete_in_comments                = 1
 "         let g:ycm_key_list_select_completion = ['<C-j>']
@@ -667,14 +667,15 @@ Plug 'w0rp/ale'
         " slow
         " let g:ale_sign_error = '💥 '
         " let g:ale_sign_warning = '🚧 '
-        let g:ale_sign_error = '✖✖'
+        let g:ale_sign_error = '→'
         " let g:ale_sign_error = '⨯⨯'
-        let g:ale_sign_warning = '··'
-        highlight clear ALEErrorSign
-        highlight clear ALEWarningSign
+        let g:ale_sign_warning = '→'
+        let g:ale_sign_info = '→'
+        " highlight clear ALEErrorSign
+        " highlight clear ALEWarningSign
         let g:ale_echo_msg_error_str = 'E'
         let g:ale_echo_msg_warning_str = 'W'
-        let g:ale_echo_msg_format = '[%linter%] %s (%code%) [%severity%]'
+        let g:ale_echo_msg_format = '[%linter%] %s'
         " let g:ale_python_auto_pipenv = 1
         " let g:ale_lint_on_text_changed = 'normal'
         " let g:ale_lint_on_insert_leave = 1
@@ -1169,7 +1170,7 @@ set scrolljump=8                   " Minimum lines to scroll when cursor is goin
 set scrolloff=3                    " Keep the cursor this many lines away from the top / bottom of screen.
 set sidescrolloff=3                " Same, but for left / right sides of the screen.
 
-set shell=/bin/bash
+set shell=/usr/local/bin/bash
 
 set showcmd                        " Show the command as it's being typed
 set showmatch                      " Show matching brackets briefly.

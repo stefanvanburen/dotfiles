@@ -2,6 +2,9 @@
 .direnv
 .envrc
 
+# ignore my own pre-commit hooks
+.pre-commit-config.yaml
+
 *.py[cod]
 *~
 *.log

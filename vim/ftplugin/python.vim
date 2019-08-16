@@ -1,4 +1,4 @@
-" Check Python files with flake8, mypy, pyls
+" Check Python files with flake8, mypy
 " pydocstyle is a bit too annoying
 " pylama detects too much
 " pyls, bandit

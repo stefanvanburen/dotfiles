@@ -22,3 +22,8 @@ indent_style = tab
 
 [*.go]
 indent_style = tab
+indent_size = 4
+
+[go.mod]
+indent_style = tab
+indent_size = 4

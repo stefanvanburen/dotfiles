@@ -1,4 +1,4 @@
-; vim: set noexpandtab:
+; vim: set noexpandtab filetype=gitconfig:
 
 [user]
 	name = Stefan VanBuren
@@ -29,6 +29,9 @@
 	; mnemonic for browse
 	br = browse
 
+	# Show branches, verbosely, sorted by last touch, with commit messages.
+	brv = "!f() { git branch --sort=-creatordate --color=always --format='%(color:reset)%(creatordate:short) %(color:bold white)%(align:2,right)%(upstream:trackshort)%(end)%(color:nobold) %(align:40,left)%(color:yellow)%(refname:short)%(end) %(color:reset)%(contents:subject)'; }; f"
+
 	; mnemonic for commit
 	c = commit
 	cnv = commit --no-verify
@@ -51,6 +54,8 @@
 	dm = diff master...
 
 	dw = diff --word-diff
+
+	fa = fetch --all --prune --tags
 
 	; Properly handles mistypes like `git git diff`; etc
 	git = !git
@@ -78,12 +83,21 @@
 
 	; mnemonic for pull
 	p = pull
+	# Get a plain-text diff, for making patches.
+	patch = "!f() { git --no-pager diff --no-color $@; }; f"
 
 	; Pushes and sets up tracking to same named branch
 	pu = push -u
+	; Safer version of push --force
+	pf = push --force-with-lease
 
-	s = status -s
-	st = status -sb
+	; Open a pull-request - note that this overwrites hub's default `pr`
+	; command, which is used for viewing PRs
+	pr = "!f() { hub pull-request "$@"; }; f"
+
+	# status, short, show-branch, show stashes
+	s = status -sb --show-stash
+	st = status -sb --show-stash
 
 	; For showing stashes
 	sl = stash list
@@ -143,7 +157,7 @@
 [merge]
 	tool = fugitive
 	ff = false
-	conflictstyle = "diff3"
+	; conflictstyle = "diff3"
 
 [mergetool]
 	prompt = false
