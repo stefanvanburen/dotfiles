@@ -2,6 +2,10 @@
 
 zsh, vim, tmux, git
 
+I use [dotbot](https://github.com/anishathalye/dotbot) for managing my
+dotfiles. Run `./install.sh` from this directory to install the symlinks it
+sets up.
+
 ## Post-Installation
 
 ### Install zsh and zplug

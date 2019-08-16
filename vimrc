@@ -418,8 +418,8 @@ Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
 " JSON
 Plug 'elzr/vim-json', { 'for': 'json' }
-        " Don't really care for the concealing
-        let g:vim_json_syntax_conceal = 0
+  " Don't really care for the concealing
+  let g:vim_json_syntax_conceal = 0
 
 " Protocol Buffers (protobuf)
 Plug 'uarun/vim-protobuf', { 'for': 'proto' }
@@ -435,32 +435,32 @@ Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 " Go
 " make sure to do :GoInstallBinaries on new systems
 Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries', 'for': 'go' })
-        let g:go_fmt_command = 'goimports'
-        let g:go_highlight_functions = 1
-        let g:go_highlight_methods = 1
-        let g:go_highlight_generate_tags = 1
-        let g:go_highlight_fields = 1
-        let g:go_highlight_types = 1
-        let g:go_highlight_operators = 1
-        let g:go_highlight_build_constraints = 1
-        " use golangci-lint
-        let g:go_metalinter_command = 'golangci-lint'
-        let g:go_def_mode = 'gopls'
-        let g:go_info_mode = 'gopls'
-        let g:go_test_show_name = 1
-        " This doesn't work quite as well as guru
-        " let g:go_def_mode = 'godef'
-        " These make things slow
-        " let g:go_auto_type_info = 1
-        " let g:go_auto_sameids = 1
-        let g:go_fmt_options = {
-        \ 'gofmt': '-s',
-        \ }
-        " Takes a bit too long
-        " let g:go_metalinter_autosave = 1
-        let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-        " How long to allow metalinter to run (5s is the default)
-        let g:go_metalinter_deadline = "5s"
+  let g:go_fmt_command = 'goimports'
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+  let g:go_highlight_generate_tags = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_types = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_build_constraints = 1
+  " use golangci-lint
+  let g:go_metalinter_command = 'golangci-lint'
+  let g:go_def_mode = 'gopls'
+  let g:go_info_mode = 'gopls'
+  let g:go_test_show_name = 1
+  " This doesn't work quite as well as guru
+  " let g:go_def_mode = 'godef'
+  " These make things slow
+  " let g:go_auto_type_info = 1
+  " let g:go_auto_sameids = 1
+  let g:go_fmt_options = {
+  \ 'gofmt': '-s',
+  \ }
+  " Takes a bit too long
+  " let g:go_metalinter_autosave = 1
+  let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+  " How long to allow metalinter to run (5s is the default)
+  let g:go_metalinter_deadline = "5s"
 
 " This is promising, but not now
 " Still isn't working with neovim, seems to hang when opening certain go files
@@ -475,6 +475,9 @@ Plug 'buoto/gotests-vim', { 'for': 'go' }
 " Org-Mode
 " I never really use orgmode...
 " Plug 'jceb/vim-orgmode'
+
+" Brewfile
+Plug 'bfontaine/Brewfile.vim'
 
 " Logs
 " Plug 'dzeban/vim-log-syntax'
@@ -507,7 +510,6 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 " Terraform
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 
-" Plug 'jceb/vim-orgmode'
 " Plug 'junegunn/vim-journal'
 
 " Python
