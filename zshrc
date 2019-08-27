@@ -81,13 +81,6 @@ eval "$(jump shell zsh)"
 # Is this worth it?
 # if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
 
-# https://github.com/aykamko/tag
-if (( $+commands[tag] )); then
-  export TAG_SEARCH_PROG=rg
-  tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
-  alias rg=tag
-fi
-
 # Set up hub wrapper for git, if it is available; https://github.com/github/hub
 if (( $+commands[hub] )); then
   alias g=hub

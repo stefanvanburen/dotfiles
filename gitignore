@@ -5,6 +5,8 @@
 # ignore my own pre-commit hooks
 .pre-commit-config.yaml
 
+*.swp
+
 *.py[cod]
 *~
 *.log

@@ -135,6 +135,7 @@
 	; Note that $GIT_EDITOR and $VISUAL take precedence, if set
 	; editor = vim
 	untrackedCache = true
+	pager = bat --decorations=never
 
 [credential]
 	helper = osxkeychain
@@ -174,3 +175,5 @@
 
 [mergetool "fugitive"]
 	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+[fetch]
+	prune = true
