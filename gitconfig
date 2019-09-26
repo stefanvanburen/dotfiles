@@ -40,6 +40,7 @@
 	co = checkout
 
 	cl = clone --recurse-submodules
+	ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
 
 	; mnemonic for diff
 	d = diff
@@ -153,7 +154,7 @@
 	path = ~/.gitconfig.local
 
 [init]
-	; templatedir = ~/.git_template
+	templatedir = ~/.git_template
 
 [merge]
 	tool = fugitive

@@ -34,17 +34,17 @@ endfunction
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " NOTE: Not _super_ useful
-Plug 'mhinz/vim-startify'
-        let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
-        " use utf-8 for fortune rather than ascii
-        let g:startify_fortune_use_unicode = 1
-        " update startify while vim is running
-        let g:startify_update_oldfiles = 1
-        " use environment variables if they shorten path names
-        " Not terribly useful honestly
-        " let g:startify_use_env = 1
-        " Don't change to the directory of a file when using startify
-        let g:startify_change_to_dir = 0
+" Plug 'mhinz/vim-startify'
+"         let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
+"         " use utf-8 for fortune rather than ascii
+"         let g:startify_fortune_use_unicode = 1
+"         " update startify while vim is running
+"         let g:startify_update_oldfiles = 1
+"         " use environment variables if they shorten path names
+"         " Not terribly useful honestly
+"         " let g:startify_use_env = 1
+"         " Don't change to the directory of a file when using startify
+"         let g:startify_change_to_dir = 0
 
 " Resizes active windows according to Golden Ratio
 " Neat idea in theory - tends to wonk things up in practice
@@ -126,7 +126,7 @@ Plug 'maximbaz/lightline-ale'
 " disable netrw_
 " let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'
+" Plug 'kristijanhusak/vim-dirvish-git'
 
 " Plug 'mhinz/vim-tree'
 
@@ -210,20 +210,23 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " {{{ Git
 
-" Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 
-" This makes things a bit slow?
-Plug 'airblade/vim-gitgutter'
-  " Turns on gitgutter updating for a variety of events
-  " ex: switch buffers, tabs, etc
-  " let g:gitgutter_eager = 1
-  let g:gitgutter_sign_added = '·'
-  let g:gitgutter_sign_modified = '·'
-  let g:gitgutter_sign_removed = '·'
-  let g:gitgutter_sign_removed_first_line = '·'
-  let g:gitgutter_sign_modified_removed = '·'
-  " NOTE: trying this provisionally
-  let g:gitgutter_grep = 'rg'
+" " This makes things a bit slow?
+" Plug 'airblade/vim-gitgutter'
+"   " Turns on gitgutter updating for a variety of events
+"   " ex: switch buffers, tabs, etc
+"   " let g:gitgutter_eager = 1
+"   let g:gitgutter_sign_added = '·'
+"   let g:gitgutter_sign_modified = '·'
+"   let g:gitgutter_sign_removed = '·'
+"   let g:gitgutter_sign_removed_first_line = '·'
+"   let g:gitgutter_sign_modified_removed = '·'
+"   " NOTE: trying this provisionally
+"   let g:gitgutter_grep = 'rg'
+"   " turn off gitgutter mappings
+"   " Leaving this on for ]c [c
+"   " let g:gitgutter_map_keys = 0
 
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
   nmap <leader>gv :GV<cr>
@@ -301,71 +304,71 @@ Plug 'rhysd/git-messenger.vim'
 
 " This is still a bit beta, had some issues with using it. Sticking with ALE
 " for the time being.
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-        " always show signcolumns
-        set signcolumn=yes
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+"         " always show signcolumns
+"         set signcolumn=yes
 
-        " Use tab for trigger completion with characters ahead and navigate.
-        " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-        inoremap <silent><expr> <TAB>
-              \ pumvisible() ? "\<C-n>" :
-              \ <SID>check_back_space() ? "\<TAB>" :
-              \ coc#refresh()
-        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"         " Use tab for trigger completion with characters ahead and navigate.
+"         " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+"         inoremap <silent><expr> <TAB>
+"               \ pumvisible() ? "\<C-n>" :
+"               \ <SID>check_back_space() ? "\<TAB>" :
+"               \ coc#refresh()
+"         inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-        function! s:check_back_space() abort
-          let col = col('.') - 1
-          return !col || getline('.')[col - 1]  =~# '\s'
-        endfunction
+"         function! s:check_back_space() abort
+"           let col = col('.') - 1
+"           return !col || getline('.')[col - 1]  =~# '\s'
+"         endfunction
 
-        " Use <c-space> to trigger completion.
-        inoremap <silent><expr> <c-space> coc#refresh()
+"         " Use <c-space> to trigger completion.
+"         inoremap <silent><expr> <c-space> coc#refresh()
 
-        " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-        " Coc only does snippet and additional edit on confirm.
-        inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+"         " Coc only does snippet and additional edit on confirm.
+"         inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-        " Use `[c` and `]c` to navigate diagnostics
-        nmap <silent> [c <Plug>(coc-diagnostic-prev)
-        nmap <silent> ]c <Plug>(coc-diagnostic-next)
+"         " Use `[c` and `]c` to navigate diagnostics
+"         nmap <silent> [c <Plug>(coc-diagnostic-prev)
+"         nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-        " Remap keys for gotos
-        nmap <silent> gd <Plug>(coc-definition)
-        nmap <silent> gy <Plug>(coc-type-definition)
-        nmap <silent> gi <Plug>(coc-implementation)
-        nmap <silent> gr <Plug>(coc-references)
+"         " Remap keys for gotos
+"         nmap <silent> gd <Plug>(coc-definition)
+"         nmap <silent> gy <Plug>(coc-type-definition)
+"         nmap <silent> gi <Plug>(coc-implementation)
+"         nmap <silent> gr <Plug>(coc-references)
 
-        " Use K to show documentation in preview window
-        nnoremap <silent> K :call <SID>show_documentation()<CR>
+"         " Use K to show documentation in preview window
+"         nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-        function! s:show_documentation()
-          if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-          else
-            call CocAction('doHover')
-          endif
-        endfunction
+"         function! s:show_documentation()
+"           if (index(['vim','help'], &filetype) >= 0)
+"             execute 'h '.expand('<cword>')
+"           else
+"             call CocAction('doHover')
+"           endif
+"         endfunction
 
-        " Highlight symbol under cursor on CursorHold
-        autocmd CursorHold * silent call CocActionAsync('highlight')
+"         " Highlight symbol under cursor on CursorHold
+"         autocmd CursorHold * silent call CocActionAsync('highlight')
 
-        " Remap for rename current word
-        nmap <leader>rn <Plug>(coc-rename)
+"         " Remap for rename current word
+"         nmap <leader>rn <Plug>(coc-rename)
 
-        " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-        vmap <leader>a  <Plug>(coc-codeaction-selected)
-        nmap <leader>a  <Plug>(coc-codeaction-selected)
+"         " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+"         vmap <leader>a  <Plug>(coc-codeaction-selected)
+"         nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-        " Remap for do codeAction of current line
-        nmap <leader>ac  <Plug>(coc-codeaction)
-        " Fix autofix problem of current line
-        nmap <leader>qf  <Plug>(coc-fix-current)
+"         " Remap for do codeAction of current line
+"         nmap <leader>ac  <Plug>(coc-codeaction)
+"         " Fix autofix problem of current line
+"         nmap <leader>qf  <Plug>(coc-fix-current)
 
-        " Use `:Format` to format current buffer
-        command! -nargs=0 Format :call CocAction('format')
+"         " Use `:Format` to format current buffer
+"         command! -nargs=0 Format :call CocAction('format')
 
-        " Use `:Fold` to fold current buffer
-        command! -nargs=? Fold :call CocAction('fold', <f-args>)<Paste>j
+"         " Use `:Fold` to fold current buffer
+"         command! -nargs=? Fold :call CocAction('fold', <f-args>)<Paste>j
 
 " yaml
 Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
@@ -521,6 +524,9 @@ Plug 'vim-python/python-syntax', { 'for': 'python' }
         " I think this slows things down
         let g:python_highlight_all = 1
 
+" This is pretty ugly, hah
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
 " Quickly open python modules
 Plug 'sloria/vim-ped', { 'for': 'python', 'on': 'Ped' }
 
@@ -584,18 +590,18 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
 " Plug 'ajh17/VimCompletesMe'
 
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" let g:deoplete#enable_at_startup = 1
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
-" Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
-" Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-"         let g:deoplete#sources#jedi#show_docstring = 1
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
+Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+        let g:deoplete#sources#jedi#show_docstring = 1
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -899,8 +905,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " TODO: Learn how to use this
 " Plug 'tpope/vim-tbone'
 
-" Modern database interface for vim
-" Note that this doesn't work for neovim
+" Modern database interface
 Plug 'tpope/vim-dadbod', { 'on': 'DB' }
 
 " NOTE: I don't really use editorconfig
@@ -910,11 +915,11 @@ Plug 'tpope/vim-dadbod', { 'on': 'DB' }
 
 " match matching matches
 " TODO: maybe this is slowing things down?
-" Plug 'andymass/vim-matchup'
-"         " improve cursor performance by delaying match
-"         let g:matchup_matchparen_deferred = 1
-"         " don't replace statusline with offscreen match
-"         let g:matchup_matchparen_status_offscreen = 0
+Plug 'andymass/vim-matchup'
+        " improve cursor performance by delaying match
+        let g:matchup_matchparen_deferred = 1
+        " don't replace statusline with offscreen match
+        let g:matchup_matchparen_status_offscreen = 0
 
 " Basic support for .env and Procfile
 " TODO: I don't really use .env or Procfiles, turning off for now
@@ -964,7 +969,7 @@ Plug 'wellle/targets.vim'
 " Plug 'wikitopian/hardmode'
 Plug 'takac/vim-hardtime'
   " On by default
-  let g:hardtime_default_on = 1
+  let g:hardtime_default_on = 0
   " Remove - from the list - this is for vim-dirvish
   let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
   let g:hardtime_timeout = 2000
@@ -987,9 +992,66 @@ Plug 'tpope/vim-unimpaired'
 " Plug 'tommcdo/vim-exchange'
 
 " Manages and creates tag files
-" This seems to be having all sorts of issues recently
-" Yikes
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
+  let g:gutentags_add_default_project_roots = 0
+  let g:gutentags_project_root = ['.git']
+  let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+  let g:gutentags_generate_on_new = 1
+  let g:gutentags_generate_on_missing = 1
+  let g:gutentags_generate_on_write = 1
+  let g:gutentags_generate_on_empty_buffer = 0
+  let g:gutentags_ctags_extra_args = [
+        \ '--tag-relative=yes',
+        \ '--fields=+ailmnS',
+        \ ]
+  let g:gutentags_ctags_exclude = [
+        \ '*.git', '*.svg', '*.hg',
+        \ '*/tests/*',
+        \ 'build',
+        \ 'dist',
+        \ '*sites/*/files/*',
+        \ 'bin',
+        \ 'node_modules',
+        \ 'bower_components',
+        \ 'cache',
+        \ 'compiled',
+        \ 'docs',
+        \ 'example',
+        \ 'bundle',
+        \ 'vendor',
+        \ '*.md',
+        \ '*-lock.json',
+        \ '*.lock',
+        \ '*bundle*.js',
+        \ '*build*.js',
+        \ '.*rc*',
+        \ '*.json',
+        \ '*.min.*',
+        \ '*.map',
+        \ '*.bak',
+        \ '*.zip',
+        \ '*.pyc',
+        \ '*.class',
+        \ '*.sln',
+        \ '*.Master',
+        \ '*.csproj',
+        \ '*.tmp',
+        \ '*.csproj.user',
+        \ '*.cache',
+        \ '*.pdb',
+        \ 'tags*',
+        \ 'cscope.*',
+        \ '*.css',
+        \ '*.less',
+        \ '*.scss',
+        \ '*.exe', '*.dll',
+        \ '*.mp3', '*.ogg', '*.flac',
+        \ '*.swp', '*.swo',
+        \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+        \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+        \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+        \ ]
+
 
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
@@ -1144,6 +1206,7 @@ set nospell
 
 " I doubt this is needed
 " set tags+=tags;$HOME               " Recurse up to HOME dir for tags
+set tags^=./.git/tags
 
 " turn on line numbers
 set number
@@ -1175,7 +1238,8 @@ set scrolljump=8                   " Minimum lines to scroll when cursor is goin
 set scrolloff=3                    " Keep the cursor this many lines away from the top / bottom of screen.
 set sidescrolloff=3                " Same, but for left / right sides of the screen.
 
-set shell=/usr/local/bin/bash
+" This shouldn't be needed
+" set shell=/usr/local/bin/fish
 
 set showcmd                        " Show the command as it's being typed
 set showmatch                      " Show matching brackets briefly.

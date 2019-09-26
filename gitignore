@@ -2,9 +2,13 @@
 .direnv
 .envrc
 
+# ignore my rgignore files
+.rgignore
+
 # ignore my own pre-commit hooks
 .pre-commit-config.yaml
 
+# ignore swap files
 *.swp
 
 *.py[cod]
