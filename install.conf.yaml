@@ -10,7 +10,6 @@
     ~/.vim: vim
     ~/.vimrc: vimrc
     ~/.cheat: cheat
-    ~/.gemrc: gemrc
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.zshrc: zshrc
