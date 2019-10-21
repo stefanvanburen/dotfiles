@@ -136,7 +136,7 @@
 	; Note that $GIT_EDITOR and $VISUAL take precedence, if set
 	; editor = vim
 	untrackedCache = true
-	pager = bat --decorations=never
+	; pager = bat --decorations=never
 
 [credential]
 	helper = osxkeychain
@@ -154,7 +154,7 @@
 	path = ~/.gitconfig.local
 
 [init]
-	templatedir = ~/.git_template
+	; templatedir = ~/.git_template
 
 [merge]
 	tool = fugitive

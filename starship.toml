@@ -1,0 +1,6 @@
+[aws]
+disabled = true
+
+[character]
+symbol = "⊙"
+vicmd_symbol = "⊛"

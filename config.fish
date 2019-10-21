@@ -2,8 +2,7 @@ set -gx EDITOR nvim
 
 alias v="$EDITOR"
 
-alias m="mmake"
-alias make="mmake"
+alias m="make"
 
 alias md="mkdir -p"
 alias rd="rmdir"
@@ -11,8 +10,17 @@ alias rd="rmdir"
 # for direnv
 direnv hook fish | source
 
+# for pyenv
+status --is-interactive; and source (pyenv init -|psub)
+status --is-interactive; and source (pyenv virtualenv-init -|psub)
+
+
 # for jump
 status --is-interactive; and source (jump shell fish | psub)
 
-eval (starship init fish)
-set -g fish_user_paths "/usr/local/opt/mongodb@3.4/bin" $fish_user_paths
+# for starship prompt
+# eval (starship init fish)
+status --is-interactive; and source (starship init fish |psub)
+
+# TODO: local file
+set PATH /usr/local/opt/mongodb@3.4/bin /Users/stefan/.local/bin $HOME/.local/bin $HOME/.cargo/bin $PATH

@@ -19,12 +19,12 @@
     ~/.newsbeuter/config:
         create: true
         path: newsbeuter_config
-    ~/.config/nvim:
-        create: true
-        path: vim
     ~/.config/fish/fishfile:
         create: true
         path: fishfile
+    ~/.config/nvim/init.vim:
+        create: true
+        path: init.vim
     ~/.config/fish/config.fish:
         create: true
         path: config.fish
@@ -33,6 +33,7 @@
     ~/.config/isort/isort.cfg: isort.cfg
     ~/.config/flake8: flake8
     ~/.config/bat/config: bat_config
+    ~/.config/starship.toml: starship.toml
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
@@ -41,3 +42,4 @@
   - [touch ~/.zprofile.local]
   - [touch ~/.gitconfig.local]
   - [touch ~/.vimrc.local]
+  - [mkdir -p ~/.vim/backup]

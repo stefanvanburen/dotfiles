@@ -305,70 +305,12 @@ Plug 'rhysd/git-messenger.vim'
 " This is still a bit beta, had some issues with using it. Sticking with ALE
 " for the time being.
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-"         " always show signcolumns
-"         set signcolumn=yes
 
-"         " Use tab for trigger completion with characters ahead and navigate.
-"         " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-"         inoremap <silent><expr> <TAB>
-"               \ pumvisible() ? "\<C-n>" :
-"               \ <SID>check_back_space() ? "\<TAB>" :
-"               \ coc#refresh()
-"         inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-"         function! s:check_back_space() abort
-"           let col = col('.') - 1
-"           return !col || getline('.')[col - 1]  =~# '\s'
-"         endfunction
-
-"         " Use <c-space> to trigger completion.
-"         inoremap <silent><expr> <c-space> coc#refresh()
-
-"         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-"         " Coc only does snippet and additional edit on confirm.
-"         inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-"         " Use `[c` and `]c` to navigate diagnostics
-"         nmap <silent> [c <Plug>(coc-diagnostic-prev)
-"         nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-"         " Remap keys for gotos
-"         nmap <silent> gd <Plug>(coc-definition)
-"         nmap <silent> gy <Plug>(coc-type-definition)
-"         nmap <silent> gi <Plug>(coc-implementation)
-"         nmap <silent> gr <Plug>(coc-references)
-
-"         " Use K to show documentation in preview window
-"         nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-"         function! s:show_documentation()
-"           if (index(['vim','help'], &filetype) >= 0)
-"             execute 'h '.expand('<cword>')
-"           else
-"             call CocAction('doHover')
-"           endif
-"         endfunction
-
-"         " Highlight symbol under cursor on CursorHold
-"         autocmd CursorHold * silent call CocActionAsync('highlight')
-
-"         " Remap for rename current word
-"         nmap <leader>rn <Plug>(coc-rename)
-
-"         " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-"         vmap <leader>a  <Plug>(coc-codeaction-selected)
-"         nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-"         " Remap for do codeAction of current line
-"         nmap <leader>ac  <Plug>(coc-codeaction)
-"         " Fix autofix problem of current line
-"         nmap <leader>qf  <Plug>(coc-fix-current)
-
-"         " Use `:Format` to format current buffer
-"         command! -nargs=0 Format :call CocAction('format')
-
-"         " Use `:Fold` to fold current buffer
-"         command! -nargs=? Fold :call CocAction('fold', <f-args>)<Paste>j
+" fish
+" There are some more up to date forks
+" This ruined filetype detection - ensure that we've got a ftplugin/fish.vim
+" or this might do the same in the future
+Plug 'dag/vim-fish'
 
 " yaml
 Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
@@ -524,6 +466,8 @@ Plug 'vim-python/python-syntax', { 'for': 'python' }
         " I think this slows things down
         let g:python_highlight_all = 1
 
+"set verbose=9
+
 " This is pretty ugly, hah
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
@@ -590,18 +534,18 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
 " Plug 'ajh17/VimCompletesMe'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
-Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-        let g:deoplete#sources#jedi#show_docstring = 1
+"if has('nvim')
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+"let g:deoplete#enable_at_startup = 1
+"
+"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
+"Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+"        let g:deoplete#sources#jedi#show_docstring = 1
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -755,23 +699,23 @@ Plug 'w0rp/ale'
 " {{{ Movement / Motions
 
 " TODO: Use this more
-Plug 'easymotion/vim-easymotion'
-        nmap <leader>j <plug>(easymotion-j)
-        nmap <leader>k <plug>(easymotion-k)
-        " map  <Leader>f <Plug>(easymotion-bd-f)
-        " nmap <Leader>f <Plug>(easymotion-overwin-f)
-        nmap s <Plug>(easymotion-overwin-f2)
-        let g:EasyMotion_do_mapping       = 0
-        let g:EasyMotion_smartcase        = 1
-        "let g:EasyMotion_use_upper        = 1
-        let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
-        let g:EasyMotion_enter_jump_first = 1
-        let g:EasyMotion_space_jump_first = 1
-        let g:EasyMotion_startofline      = 0
+"Plug 'easymotion/vim-easymotion'
+"        nmap <leader>j <plug>(easymotion-j)
+"        nmap <leader>k <plug>(easymotion-k)
+"        " map  <Leader>f <Plug>(easymotion-bd-f)
+"        " nmap <Leader>f <Plug>(easymotion-overwin-f)
+"        nmap s <Plug>(easymotion-overwin-f2)
+"        let g:EasyMotion_do_mapping       = 0
+"        let g:EasyMotion_smartcase        = 1
+"        "let g:EasyMotion_use_upper        = 1
+"        let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
+"        let g:EasyMotion_enter_jump_first = 1
+"        let g:EasyMotion_space_jump_first = 1
+"        let g:EasyMotion_startofline      = 0
 
 " Lightweight version of vim-easymotion
-" Plug 'justinmk/vim-sneak'
-"         let g:sneak#label = 1
+Plug 'justinmk/vim-sneak'
+        let g:sneak#label = 1
 
 " replaces incsearch.vim
 " Plug 'haya14busa/is.vim'
@@ -961,7 +905,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'tpope/vim-surround'
 " Alternative:
 " Plug 'machakann/vim-sandwich'
-Plug 'wellle/targets.vim'
+" Plug 'wellle/targets.vim'
 
 " Disables arrow keys, hljk, page-up / page-down to force using more specific
 " motions
@@ -992,7 +936,7 @@ Plug 'tpope/vim-unimpaired'
 " Plug 'tommcdo/vim-exchange'
 
 " Manages and creates tag files
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
   let g:gutentags_add_default_project_roots = 0
   let g:gutentags_project_root = ['.git']
   let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
@@ -1078,6 +1022,7 @@ Plug 'segeljakt/vim-silicon'
 " }}}
 
 call plug#end()
+" filetype off
 filetype plugin indent on
 
 " }}}
@@ -1365,6 +1310,8 @@ nnoremap g= gg=G``
 " https://castel.dev/post/lecture-notes-1/
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
+" This seems to do weird things
+" set clipboard+=unnamedplus
 " https://til.hashrocket.com/posts/ba2afeb453-breezy-copy-to-system-clipboard-in-vim
 " copy to system clipboard
 map gy "*y

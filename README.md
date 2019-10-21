@@ -8,29 +8,23 @@ sets up.
 
 ## Post-Installation
 
-### Install zsh and zplug
-
-```bash
-brew install zsh zplug
-```
-
-### Install rust via rustup
-
-```bash
-curl https://sh.rustup.rs -sSf | sh
-```
-
 ### Install vim and vim-plug
 * vim:
 
-```bash
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```console
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
 * neovim:
 
-```bash
+```console
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+### Install `tpm`
+
+```console
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 
