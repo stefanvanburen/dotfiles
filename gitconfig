@@ -148,7 +148,7 @@
 [difftool]
 	; prompt = false
 [hub]
-	protocol = ssh
+	; protocol = ssh
 
 [include]
 	path = ~/.gitconfig.local
