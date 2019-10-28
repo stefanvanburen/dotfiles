@@ -6,6 +6,8 @@ if not functions -q fisher
 end
 
 set -gx EDITOR nvim
+# https://github.com/venantius/ultra/issues/108#issuecomment-522347422
+set -gx LEIN_USE_BOOTCLASSPATH no
 
 alias vim="$EDITOR"
 abbr v vim
