@@ -30,7 +30,7 @@
         path: config.fish
     ~/.lein/profiles.clj:
         create: true
-        path: config.fish
+        path: profiles.clj
     ~/.ripgreprc: ripgreprc
     ~/.config/alacritty/alacritty.yml:
         create: true
