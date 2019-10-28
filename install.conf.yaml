@@ -28,11 +28,20 @@
     ~/.config/fish/config.fish:
         create: true
         path: config.fish
+    ~/.lein/profiles.clj:
+        create: true
+        path: config.fish
     ~/.ripgreprc: ripgreprc
-    ~/.config/alacritty/alacritty.yml: alacritty.yml
-    ~/.config/isort/isort.cfg: isort.cfg
+    ~/.config/alacritty/alacritty.yml:
+        create: true
+        path: alacritty.yml
+    ~/.config/isort/isort.cfg:
+        create: true
+        path: isort.cfg
     ~/.config/flake8: flake8
-    ~/.config/bat/config: bat_config
+    ~/.config/bat/config:
+        create: true
+        path: bat_config
     ~/.config/starship.toml: starship.toml
 
 - shell:

@@ -4,8 +4,13 @@ alias v="$EDITOR"
 
 alias m="make"
 
+alias c="clear"
+
 alias md="mkdir -p"
 alias rd="rmdir"
+
+alias ...="../.."
+alias ....="../../.."
 
 # for direnv
 direnv hook fish | source

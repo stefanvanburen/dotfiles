@@ -509,7 +509,7 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 " Plug 'ledger/vim-ledger'
 " Plug 'keith/swift.vim'
 " Plug 'zah/nimrod.vim', { 'for' : 'nim' }
-" Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 
 " Language pack
 " Plug 'sheerun/vim-polyglot'
