@@ -811,11 +811,11 @@ Plug 'tpope/vim-commentary'
 " {{{ Documentation
 
 " TODO: decide on one of these to use
-" Plug 'keith/investigate.vim'
-"         nnoremap <leader>? :call investigate#Investigate('n')<cr>
-"         nnoremap <leader>K :call investigate#Investigate('n')<cr>
-"         vnoremap <leader>K :call investigate#Investigate('v')<cr>
-"         let g:investigate_use_dash=1
+Plug 'keith/investigate.vim'
+  nnoremap <leader>? :call investigate#Investigate('n')<cr>
+  nnoremap <leader>K :call investigate#Investigate('n')<cr>
+  vnoremap <leader>K :call investigate#Investigate('v')<cr>
+  let g:investigate_use_dash=1
 
 " " Roughly redundant, given these settings
 " Plug 'rizzatti/dash.vim', { 'on': 'Dash' }

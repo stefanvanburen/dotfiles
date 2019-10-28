@@ -2,5 +2,5 @@
 disabled = true
 
 [character]
-symbol = "⊙"
-vicmd_symbol = "⊛"
+symbol = "▵"
+vicmd_symbol = "▿"

@@ -5,6 +5,9 @@
 # ignore my rgignore files
 .rgignore
 
+# ignore my personal .ignore files
+.ignore
+
 # ignore my own pre-commit hooks
 .pre-commit-config.yaml
 

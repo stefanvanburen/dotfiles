@@ -83,7 +83,7 @@ font:
     # style: Italic
 
   # Point size of the font
-  size: 14.0
+  size: 11.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -272,7 +272,7 @@ selection:
 #   Using Beam makes it difficult to see the cursor when trying to select in
 #   tmux's copy mode.
 cursor:
-  style: Block
+  style: Beam
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.
