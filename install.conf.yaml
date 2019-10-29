@@ -42,6 +42,9 @@
     ~/.config/bat/config:
         create: true
         path: bat_config
+    ~/.config/mypy/config:
+        create: true
+        path: mypy.ini
     ~/.config/starship.toml: starship.toml
 
 - shell:
