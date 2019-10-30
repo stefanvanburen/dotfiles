@@ -1014,7 +1014,8 @@ Plug 'janko/vim-test'
   nmap <silent> t<C-g> :TestVisit<CR>
 
 " project
-Plug 'tpope/vim-projectionist'
+" TODO: configure this for projects
+" Plug 'tpope/vim-projectionist'
 
 " 🎄
 Plug 'rhysd/vim-syntax-christmas-tree', { 'on': 'MerryChristmas' }

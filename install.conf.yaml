@@ -9,7 +9,6 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
-    ~/.cheat: cheat
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.zshrc: zshrc
@@ -45,6 +44,9 @@
     ~/.config/mypy/config:
         create: true
         path: mypy.ini
+    ~/.config/cheat:
+        create: true
+        path: cheat
     ~/.config/starship.toml: starship.toml
 
 - shell:
