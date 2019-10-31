@@ -231,8 +231,9 @@ Plug 'mhinz/vim-signify'
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
   nmap <leader>gv :GV<cr>
 
-" " Git branch viewer
-" Plug 'rbong/vim-flog'
+" https://github.com/rbong/vim-flog/issues/15
+" Git branch viewer
+Plug 'rbong/vim-flog'
 " " Gitk for vim
 " Plug 'gregsexton/gitv', {'on': ['Gitv']}
 
