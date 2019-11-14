@@ -54,7 +54,6 @@ source ~/.iterm2_shell_integration.(basename $SHELL)
 # NOTE: still can't really use for python as it doesn't have great integration
 # with pyenv quite yet
 source /usr/local/opt/asdf/asdf.fish
-set -gx HOMEBREW_GITHUB_API_TOKEN 680560cd3f5cae7c52f46d750a79499e6099b3b4
 
 # functions
 
@@ -84,6 +83,8 @@ function extract -d "extract files from archives"
         end
 
         set success 0
+        # TODO: for items like `*.tar.gz`, this matches just the `*.gz`, leaving
+        # us with a `*.tar` extension. This match needs to work better.
         set extension (string match -r ".*(\.[^\.]*)\$" $i)[2]
         switch $extension
             case '*.tar.gz' '*.tgz'
