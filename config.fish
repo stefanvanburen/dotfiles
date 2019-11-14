@@ -128,3 +128,10 @@ function extract -d "extract files from archives"
         end
     end
 end
+
+# ---
+
+# local things
+if test -e "$HOME/.extra.fish";
+	source ~/.extra.fish
+end
