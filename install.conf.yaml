@@ -48,6 +48,7 @@
         create: true
         path: cheat
     ~/.config/starship.toml: starship.toml
+    ~/.vale.ini: vale.ini
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
