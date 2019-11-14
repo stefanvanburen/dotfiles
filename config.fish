@@ -27,6 +27,10 @@ alias rd="rmdir"
 
 alias cat="bat"
 
+function sudo!!
+    eval sudo $history[1]
+end
+
 alias ...="../.."
 alias ....="../../.."
 
