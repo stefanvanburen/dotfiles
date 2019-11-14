@@ -124,7 +124,7 @@ Plug 'maximbaz/lightline-ale'
 "         let NERDTreeShowHidden=1
 
 " disable netrw_
-" let loaded_netrwPlugin = 1
+let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
 " Plug 'kristijanhusak/vim-dirvish-git'
 
@@ -356,11 +356,11 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 "                         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
 
 " Markdown
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-        " Turn off folding
-        let g:vim_markdown_folding_disabled = 1
-" Alternative:
-" Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
+" More heavyweight alternative:
+" Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+"         " Turn off folding
+"         let g:vim_markdown_folding_disabled = 1
 
 " GraphQL
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
@@ -433,8 +433,10 @@ Plug 'bfontaine/Brewfile.vim'
 " Plug 'andreshazard/vim-logreview'
 
 " Rust
-Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
         let g:rustfmt_autosave = 1
+
+Plug 'mhinz/vim-crates', { 'for': 'rust' }
 
 " Crystal
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
@@ -651,6 +653,7 @@ Plug 'w0rp/ale'
         \   'javascript': ['prettier', 'eslint'],
         \   'json': ['prettier'],
         \   'elixir': ['mix_format'],
+        \   'rust': ['rustfmt'],
         \}
         let g:ale_linters = {
         \   'javascript': ['prettier', 'eslint'],
