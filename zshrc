@@ -468,4 +468,3 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # }}}
-export PATH="/usr/local/opt/mongodb@3.4/bin:$PATH"
