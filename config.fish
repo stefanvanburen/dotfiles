@@ -19,6 +19,8 @@ alias vim="$EDITOR"
 abbr v vim
 abbr g git
 
+alias dc="docker-compose"
+
 alias git="hub"
 
 alias m="make"
@@ -58,8 +60,7 @@ status --is-interactive; and source (jump shell fish | psub)
 # eval (starship init fish)
 status --is-interactive; and source (starship init fish |psub)
 
-# TODO: local file
-set PATH $HOME/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
+set PATH $HOME/bin $HOME/go/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
 
 # for iterm
 source ~/.iterm2_shell_integration.(basename $SHELL)
