@@ -9,6 +9,12 @@ set -gx EDITOR nvim
 # https://github.com/venantius/ultra/issues/108#issuecomment-522347422
 set -gx LEIN_USE_BOOTCLASSPATH no
 
+# https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
+set -gx PYTHONDONTWRITEBYTECODE 1
+
+# https://github.com/sharkdp/bat#man
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+
 alias vim="$EDITOR"
 abbr v vim
 abbr g git
@@ -31,8 +37,12 @@ function sudo!!
     eval sudo $history[1]
 end
 
-alias ...="../.."
-alias ....="../../.."
+function vimrc
+    vim ~/.vimrc
+end
+
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 # for direnv
 direnv hook fish | source
@@ -49,7 +59,7 @@ status --is-interactive; and source (jump shell fish | psub)
 status --is-interactive; and source (starship init fish |psub)
 
 # TODO: local file
-set PATH /usr/local/opt/mongodb-community@3.4/bin /Users/stefan/.local/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
+set PATH $HOME/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
 
 # for iterm
 source ~/.iterm2_shell_integration.(basename $SHELL)
@@ -62,7 +72,12 @@ source /usr/local/opt/asdf/asdf.fish
 # functions
 
 function root -d "cd to the root of the git repository"
-    cd (git rev-parse --show-toplevel)
+    set root (git rev-parse --show-toplevel)
+    if root != ""
+        cd root
+    else
+        echo "Not in git repository"
+    end
 end
 
 function extract -d "extract files from archives"
@@ -133,5 +148,10 @@ end
 
 # local things
 if test -e "$HOME/.extra.fish";
-	source ~/.extra.fish
+    source ~/.extra.fish
 end
+
+set -gx VOLTA_HOME "$HOME/.volta"
+test -s "$VOLTA_HOME/load.fish"; and source "$VOLTA_HOME/load.fish"
+
+string match -r ".volta" "$PATH" > /dev/null; or set -gx PATH "$VOLTA_HOME/bin" $PATH

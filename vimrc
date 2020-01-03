@@ -17,6 +17,7 @@ nnoremap <leader>pu :PlugUpdate<cr>
 
 " {{{ Plugins
 
+let g:python3_host_prog = '/Users/zttc/.pyenv/versions/neovim3/bin/python'
 scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
@@ -31,7 +32,7 @@ endfunction
 " Dim inactive panes
 " NOTE: eh, doesn't look super great - seems like limitations with vim
 " Plug 'blueyed/vim-diminactive'
-Plug 'tmux-plugins/vim-tmux-focus-events'
+" Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " NOTE: Not _super_ useful
 " Plug 'mhinz/vim-startify'
@@ -100,6 +101,11 @@ Plug 'maximbaz/lightline-ale'
         let g:lightline#ale#indicator_errors = "\uf05e"
         let g:lightline#ale#indicator_ok = "\uf00c"
 
+Plug 'vim/killersheep'
+
+" NOTE: I'd need to fork this to make it look good with solarized
+" Plug 'liuchengxu/eleline.vim'
+
 " NOTE: I don't really use this
 " Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 " let g:undotree_WindowLayout = 2
@@ -126,6 +132,8 @@ Plug 'maximbaz/lightline-ale'
 " disable netrw_
 let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-gtfo'
+nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
 " Plug 'kristijanhusak/vim-dirvish-git'
 
 " Plug 'mhinz/vim-tree'
@@ -264,7 +272,9 @@ Plug 'tpope/vim-rhubarb'
 Plug 'rhysd/committia.vim'
 
 " github filetype
-Plug 'rhysd/vim-github-support'
+" Plug 'rhysd/vim-github-support'
+" Trying this out for now
+Plug 'jez/vim-github-hub'
 
 " reveal last commit message
 Plug 'rhysd/git-messenger.vim'
@@ -509,13 +519,19 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'lervag/vimtex'
-" Plug 'ledger/vim-ledger'
+Plug 'ledger/vim-ledger'
 " Plug 'keith/swift.vim'
 " Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
 " Clojure
 Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 Plug 'tpope/vim-salve', { 'for' : 'clojure' }
+Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'v2.1.2', 'do': 'bin/compile' }
+  let g:conjure_log_direction = "horizontal"
+Plug 'venantius/vim-cljfmt', { 'for': 'clojure' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " Language pack
 " Plug 'sheerun/vim-polyglot'
@@ -540,18 +556,21 @@ Plug 'tpope/vim-salve', { 'for' : 'clojure' }
 
 " Plug 'ajh17/VimCompletesMe'
 
-"if has('nvim')
-"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-"  Plug 'Shougo/deoplete.nvim'
-"  Plug 'roxma/nvim-yarp'
-"  Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-"let g:deoplete#enable_at_startup = 1
-"
-"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
-"Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-"        let g:deoplete#sources#jedi#show_docstring = 1
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
+Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+        let g:deoplete#sources#jedi#show_docstring = 1
+        let g:float_preview#docked = 0
+        let g:float_preview#max_width = 80
+        let g:float_preview#max_height = 40
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -612,9 +631,9 @@ Plug 'junegunn/fzf.vim'
         command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 " XXX: I don't really use this
-" Plug 'Alok/notational-fzf-vim'
-" let g:nv_search_paths = ['~/nv']
-" nnoremap <c-l> :NV<cr>
+Plug 'Alok/notational-fzf-vim'
+let g:nv_search_paths = ['~/nv']
+nnoremap <silent> <c-s> :NV<cr>
 
 " }}}
 
@@ -661,6 +680,7 @@ Plug 'w0rp/ale'
         \   'proto': ['prototool-lint'],
         \   'text': ['vale'],
         \   'markdown': ['vale'],
+        \   'clojure': ['joker', 'clj-kondo'],
         \}
         nnoremap <silent> <leader>af :ALEFix<cr>
         nmap <silent> [w <Plug>(ale_previous_wrap)
@@ -851,6 +871,8 @@ Plug 'christoomey/vim-tmux-navigator'
   nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
   nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+
+Plug 'tyru/open-browser.vim'
 
 " Tmux basics
 " TODO: Learn how to use this
@@ -1508,6 +1530,9 @@ augroup END
 " augroup END
 
 " }}}
+
+" This has to be after plug#end
+call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
 
 " {{{ Local Overrides
 
