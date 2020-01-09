@@ -15,7 +15,13 @@ set -gx PYTHONDONTWRITEBYTECODE 1
 # https://github.com/sharkdp/bat#man
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
+set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git --color=always'
+set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -gx FZF_CTRL_T_OPTS "--reverse --no-height --border --ansi --preview 'bat --color=always {}'"
+set -gx FZF_DEFAULT_OPTS "--height 40% --border --reverse --ansi"
+
 alias vim="$EDITOR"
+
 abbr v vim
 abbr g git
 
