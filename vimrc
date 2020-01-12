@@ -1307,7 +1307,9 @@ nmap <leader>sw :StripWhitespace<cr>
 
 " For editing various configuration files
 nmap <leader>eg :e $HOME/.gitconfig<cr>
-nmap <leader>ev :e $MYVIMRC<cr>
+" Ensure we're editing ~/.vimrc, rather than $MYVIMRC - since in neovim
+" $MYVIMRC just points to a wrapper
+nmap <leader>ev :e $USERPROFILE/.vimrc<cr>
 nmap <leader>ez :e $HOME/.zshrc<cr>
 
 " nmap <leader>q :q<cr>
