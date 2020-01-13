@@ -5,6 +5,8 @@ if not functions -q fisher
     fish -c fisher
 end
 
+fish_vi_key_bindings
+
 set -gx EDITOR nvim
 # https://github.com/venantius/ultra/issues/108#issuecomment-522347422
 set -gx LEIN_USE_BOOTCLASSPATH no
@@ -77,15 +79,6 @@ source ~/.iterm2_shell_integration.(basename $SHELL)
 source /usr/local/opt/asdf/asdf.fish
 
 # functions
-
-function root -d "cd to the root of the git repository"
-    set root (git rev-parse --show-toplevel)
-    if root != ""
-        cd root
-    else
-        echo "Not in git repository"
-    end
-end
 
 function extract -d "extract files from archives"
     # largely adapted from https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/extract/extract.plugin.zsh

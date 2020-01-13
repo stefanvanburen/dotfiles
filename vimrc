@@ -24,7 +24,6 @@ nnoremap <leader>pu :PlugUpdate<cr>
 
 " {{{ Plugins
 
-let g:python3_host_prog = '/Users/zttc/.pyenv/versions/neovim3/bin/python'
 scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
@@ -334,7 +333,7 @@ Plug 'dag/vim-fish'
 Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
 
 " typescript
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 
 " nim
 Plug 'zah/nim.vim', { 'for': 'nim' }
@@ -371,6 +370,10 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 " Plug 'prettier/vim-prettier', {
 "                         \ 'do': 'yarn install',
 "                         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+
+Plug 'posva/vim-vue'
 
 " Markdown
 Plug 'tpope/vim-markdown'
@@ -573,11 +576,11 @@ endif
 let g:deoplete#enable_at_startup = 1
 
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
-Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-        let g:deoplete#sources#jedi#show_docstring = 1
-        let g:float_preview#docked = 0
-        let g:float_preview#max_width = 80
-        let g:float_preview#max_height = 40
+" Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+"         let g:deoplete#sources#jedi#show_docstring = 1
+"         let g:float_preview#docked = 0
+"         let g:float_preview#max_width = 80
+"         let g:float_preview#max_height = 40
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -638,7 +641,7 @@ Plug 'junegunn/fzf.vim'
         command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 " XXX: I don't really use this
-Plug 'Alok/notational-fzf-vim'
+Plug 'alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/nv']
 nnoremap <silent> <c-s> :NV<cr>
 
@@ -972,65 +975,65 @@ Plug 'tpope/vim-unimpaired'
 " Plug 'tommcdo/vim-exchange'
 
 " Manages and creates tag files
-Plug 'ludovicchabant/vim-gutentags'
-  let g:gutentags_add_default_project_roots = 0
-  let g:gutentags_project_root = ['.git']
-  let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
-  let g:gutentags_generate_on_new = 1
-  let g:gutentags_generate_on_missing = 1
-  let g:gutentags_generate_on_write = 1
-  let g:gutentags_generate_on_empty_buffer = 0
-  let g:gutentags_ctags_extra_args = [
-        \ '--tag-relative=yes',
-        \ '--fields=+ailmnS',
-        \ ]
-  let g:gutentags_ctags_exclude = [
-        \ '*.git', '*.svg', '*.hg',
-        \ '*/tests/*',
-        \ 'build',
-        \ 'dist',
-        \ '*sites/*/files/*',
-        \ 'bin',
-        \ 'node_modules',
-        \ 'bower_components',
-        \ 'cache',
-        \ 'compiled',
-        \ 'docs',
-        \ 'example',
-        \ 'bundle',
-        \ 'vendor',
-        \ '*.md',
-        \ '*-lock.json',
-        \ '*.lock',
-        \ '*bundle*.js',
-        \ '*build*.js',
-        \ '.*rc*',
-        \ '*.json',
-        \ '*.min.*',
-        \ '*.map',
-        \ '*.bak',
-        \ '*.zip',
-        \ '*.pyc',
-        \ '*.class',
-        \ '*.sln',
-        \ '*.Master',
-        \ '*.csproj',
-        \ '*.tmp',
-        \ '*.csproj.user',
-        \ '*.cache',
-        \ '*.pdb',
-        \ 'tags*',
-        \ 'cscope.*',
-        \ '*.css',
-        \ '*.less',
-        \ '*.scss',
-        \ '*.exe', '*.dll',
-        \ '*.mp3', '*.ogg', '*.flac',
-        \ '*.swp', '*.swo',
-        \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
-        \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
-        \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
-        \ ]
+" Plug 'ludovicchabant/vim-gutentags'
+"   let g:gutentags_add_default_project_roots = 0
+"   let g:gutentags_project_root = ['.git']
+"   let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+"   let g:gutentags_generate_on_new = 1
+"   let g:gutentags_generate_on_missing = 1
+"   let g:gutentags_generate_on_write = 1
+"   let g:gutentags_generate_on_empty_buffer = 0
+"   let g:gutentags_ctags_extra_args = [
+"         \ '--tag-relative=yes',
+"         \ '--fields=+ailmnS',
+"         \ ]
+"   let g:gutentags_ctags_exclude = [
+"         \ '*.git', '*.svg', '*.hg',
+"         \ '*/tests/*',
+"         \ 'build',
+"         \ 'dist',
+"         \ '*sites/*/files/*',
+"         \ 'bin',
+"         \ 'node_modules',
+"         \ 'bower_components',
+"         \ 'cache',
+"         \ 'compiled',
+"         \ 'docs',
+"         \ 'example',
+"         \ 'bundle',
+"         \ 'vendor',
+"         \ '*.md',
+"         \ '*-lock.json',
+"         \ '*.lock',
+"         \ '*bundle*.js',
+"         \ '*build*.js',
+"         \ '.*rc*',
+"         \ '*.json',
+"         \ '*.min.*',
+"         \ '*.map',
+"         \ '*.bak',
+"         \ '*.zip',
+"         \ '*.pyc',
+"         \ '*.class',
+"         \ '*.sln',
+"         \ '*.Master',
+"         \ '*.csproj',
+"         \ '*.tmp',
+"         \ '*.csproj.user',
+"         \ '*.cache',
+"         \ '*.pdb',
+"         \ 'tags*',
+"         \ 'cscope.*',
+"         \ '*.css',
+"         \ '*.less',
+"         \ '*.scss',
+"         \ '*.exe', '*.dll',
+"         \ '*.mp3', '*.ogg', '*.flac',
+"         \ '*.swp', '*.swo',
+"         \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+"         \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+"         \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+"         \ ]
 
 
 " Easily search for, substitute, and abbreviate multiple variants of a word
@@ -1527,7 +1530,7 @@ augroup go
     autocmd FileType go nmap <leader>oi <plug>(go-info)
     autocmd FileType go nmap <leader>or <plug>(go-run)
     autocmd FileType go nmap <leader>os <plug>(go-implements)
-    autocmd FileType go nmap <leader>ot <plug>(go-test)
+    autocmd FileType go nmap <leader>ot :GoTestFunc<cr>
     autocmd FileType go nmap <leader>ov <plug>(go-vet)
 augroup END
 
