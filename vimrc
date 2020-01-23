@@ -537,7 +537,7 @@ Plug 'ledger/vim-ledger'
 Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 Plug 'tpope/vim-salve', { 'for' : 'clojure' }
 Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'v2.1.2', 'do': 'bin/compile' }
-  let g:conjure_log_direction = "horizontal"
+  " let g:conjure_log_direction = "horizontal"
 Plug 'venantius/vim-cljfmt', { 'for': 'clojure' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'guns/vim-sexp'
@@ -751,8 +751,9 @@ Plug 'w0rp/ale'
 "        let g:EasyMotion_startofline      = 0
 
 " Lightweight version of vim-easymotion
-Plug 'justinmk/vim-sneak'
-        let g:sneak#label = 1
+" TODO: I don't really use this, and it interferes with vim-sandwich
+" Plug 'justinmk/vim-sneak'
+"         let g:sneak#label = 1
 
 " replaces incsearch.vim
 " Plug 'haya14busa/is.vim'
@@ -941,9 +942,9 @@ Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
 Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Deal with parentheses, quotes, etc.
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 " Alternative:
-" Plug 'machakann/vim-sandwich'
+Plug 'machakann/vim-sandwich'
 " Plug 'wellle/targets.vim'
 
 " Disables arrow keys, hljk, page-up / page-down to force using more specific
