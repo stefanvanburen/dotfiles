@@ -48,6 +48,12 @@
         create: true
         path: cheat
     ~/.config/starship.toml: starship.toml
+    ~/.config/skhd/skhdrc:
+      create: true
+      path: skhdrc
+    ~/.config/yabai/yabairc:
+      create: true
+      path: yabairc
     ~/.vale.ini: vale.ini
     ~/Library/Preferences/topgrade.toml: topgrade.toml
 
