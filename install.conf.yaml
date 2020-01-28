@@ -18,6 +18,8 @@
     ~/.zprofile: zprofile
     ~/.zshenv: zshenv
     ~/.curlrc: curlrc
+    ~/.vale.ini: vale.ini
+    ~/Library/Preferences/topgrade.toml: topgrade.toml
     ~/.newsbeuter/config:
         create: true
         path: newsbeuter_config
@@ -60,11 +62,8 @@
     ~/.config/yabai/yabairc:
       create: true
       path: yabairc
-    ~/.vale.ini: vale.ini
-    ~/Library/Preferences/topgrade.toml: topgrade.toml
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
   - touch ~/.zshrc.local
   - touch ~/.zshenv.local
   - touch ~/.zprofile.local
