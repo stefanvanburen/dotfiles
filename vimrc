@@ -871,6 +871,9 @@ Plug 'keith/investigate.vim'
 
 " {{{ Other
 
+" For profiling startup time
+Plug 'dstein64/vim-startuptime'
+
 " Adds unix shell commands
 Plug 'tpope/vim-eunuch'
 
