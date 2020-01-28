@@ -4,6 +4,9 @@
 
 - clean: ['~']
 
+# - create:
+#   - ~/.vim/backup
+
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
@@ -27,6 +30,9 @@
     ~/.config/fish/config.fish:
         create: true
         path: config.fish
+    ~/.config/fish/functions:
+        create: true
+        path: fish_functions
     ~/.lein/profiles.clj:
         create: true
         path: profiles.clj
@@ -59,9 +65,9 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [touch ~/.zshrc.local]
-  - [touch ~/.zshenv.local]
-  - [touch ~/.zprofile.local]
-  - [touch ~/.gitconfig.local]
-  - [touch ~/.vimrc.local]
-  - [mkdir -p ~/.vim/backup]
+  - touch ~/.zshrc.local
+  - touch ~/.zshenv.local
+  - touch ~/.zprofile.local
+  - touch ~/.gitconfig.local
+  - touch ~/.vimrc.local
+  - chsh -s $(which fish)

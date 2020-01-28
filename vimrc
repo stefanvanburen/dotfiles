@@ -355,7 +355,13 @@ Plug 'honza/vim-snippets'
   let g:UltiSnipsEditSplit="vertical"
 
 " Taskwarrior
-Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
+" This isn't really maintained
+" Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
+" augroup task
+"     autocmd BufRead,BufNewFile {pending,completed,undo}.data setlocal filetype=taskdata
+"     autocmd BufRead,BufNewFile .taskrc                       setlocal filetype=taskrc
+"     autocmd BufRead,BufNewFile *.task                        setlocal filetype=taskedit
+" augroup END
 
 " Elm
 Plug 'elmcast/elm-vim', { 'for': 'elm' }
@@ -403,7 +409,7 @@ Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
 " Go
 " make sure to do :GoInstallBinaries on new systems
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
   let g:go_fmt_command = 'goimports'
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
@@ -1495,12 +1501,6 @@ augroup python
         autocmd Filetype python setlocal tw=88
         " autocmd Filetype python setlocal formatprg=black\ -q\ -
         " autocmd Filetype python nnoremap <C-]> :ALEGoToDefinition<cr>
-augroup END
-
-augroup task
-    autocmd BufRead,BufNewFile {pending,completed,undo}.data setlocal filetype=taskdata
-    autocmd BufRead,BufNewFile .taskrc                       setlocal filetype=taskrc
-    autocmd BufRead,BufNewFile *.task                        setlocal filetype=taskedit
 augroup END
 
 " Resize splits when window is resized

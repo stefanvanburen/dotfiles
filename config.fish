@@ -28,9 +28,6 @@ set -gx FZF_DEFAULT_OPTS "--height 40% --border --reverse --ansi"
 
 alias vim="$EDITOR"
 
-abbr v vim
-abbr g git
-
 alias dc="docker-compose"
 
 alias git="hub"
@@ -57,22 +54,24 @@ function vimrc
     vim ~/.vimrc
 end
 
+if status --is-interactive
+    abbr --add --global - 'prevd'
+    abbr --add --global v vim
+    abbr --add --global g git
+
+    source (pyenv init -|psub)
+    source (pyenv virtualenv-init -|psub)
+
+    source (jump shell fish | psub)
+
+    source (starship init fish |psub)
+end
+
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
 # for direnv
 direnv hook fish | source
-
-# for pyenv
-status --is-interactive; and source (pyenv init -|psub)
-status --is-interactive; and source (pyenv virtualenv-init -|psub)
-
-# for jump
-status --is-interactive; and source (jump shell fish | psub)
-
-# for starship prompt
-# eval (starship init fish)
-status --is-interactive; and source (starship init fish |psub)
 
 set PATH $HOME/bin $HOME/go/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
 
@@ -83,74 +82,6 @@ source ~/.iterm2_shell_integration.(basename $SHELL)
 # NOTE: still can't really use for python as it doesn't have great integration
 # with pyenv quite yet
 source /usr/local/opt/asdf/asdf.fish
-
-# functions
-
-function extract -d "extract files from archives"
-    # largely adapted from https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/extract/extract.plugin.zsh
-
-    # no arguments, write usage
-    if test (count $argv) -eq 0
-        echo "Usage: extract [-option] [file ...]\n Options:\n -r, --remove    Remove archive after unpacking." >&2
-        exit 1
-    end
-
-    set remove_file 0
-    if test $argv[1] = "-r"; or test $argv[1] = "--remove"
-        set remove_file 1
-        set --erase argv[1]
-    end
-
-    for i in $argv[1..-1]
-        if test ! -f $i
-            echo "extract: '$i' is not a valid file" >&2
-            continue
-        end
-
-        set success 0
-        # TODO: for items like `*.tar.gz`, this matches just the `*.gz`, leaving
-        # us with a `*.tar` extension. This match needs to work better.
-        set extension (string match -r ".*(\.[^\.]*)\$" $i)[2]
-        switch $extension
-            case '*.tar.gz' '*.tgz'
-                tar xv; or tar zxvf "$i"
-            case '*.tar.bz2' '*.tbz' '*.tbz2'
-                tar xvjf "$i"
-            case '*.tar.xz' '*.txz'
-                tar --xz -xvf "$i"; or xzcat "$i" | tar xvf -
-            case '*.tar.zma' '*.tlz'
-                tar --lzma -xvf "$i"; or lzcat "$i" | tar xvf -
-            case '*.tar'
-                tar xvf "$i"
-            case '*.gz'
-                gunzip -k "$i"
-            case '*.bz2'
-                bunzip2 "$i"
-            case '*.xz'
-                unxz "$i"
-            case '*.lzma'
-                unlzma "$i"
-            case '*.z'
-                uncompress "$i"
-            case '*.zip' '*.war' '*.jar' '*.sublime-package' '*.ipsw' '*.xpi' '*.apk' '*.aar' '*.whl'
-                set extract_dir (string match -r "(.*)\.[^\.]*\$" $i)[2]
-                unzip "$i" -d $extract_dir
-            case '*.rar'
-                unrar x -ad "$i"
-            case '*.7z'
-                7za x "$i"
-            case '*'
-                echo "extract: '$i' cannot be extracted" >&2
-                set success 1
-        end
-
-        if test $success -eq 0; and test $remove_file -eq 1
-            rm $i
-        end
-    end
-end
-
-# ---
 
 # local things
 if test -e "$HOME/.extra.fish";
