@@ -17,6 +17,10 @@ set -gx PYTHONDONTWRITEBYTECODE 1
 # https://github.com/sharkdp/bat#man
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
+# default git base branch
+# https://blog.jez.io/cli-code-review/
+set -gx REVIEW_BASE "master"
+
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git --color=always'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_CTRL_T_OPTS "--reverse --no-height --border --ansi --preview 'bat --color=always {}'"
@@ -35,6 +39,8 @@ alias m="make"
 alias make="mmake"
 
 alias x="extract"
+
+alias ls="exa"
 
 alias c="clear"
 

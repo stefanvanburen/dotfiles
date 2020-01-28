@@ -370,8 +370,8 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 " Plug 'prettier/vim-prettier', {
 "                         \ 'do': 'yarn install',
 "                         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'yuezk/vim-js', { 'for': 'javascript' }
+Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 
 Plug 'posva/vim-vue'
 
@@ -403,7 +403,7 @@ Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
 " Go
 " make sure to do :GoInstallBinaries on new systems
-Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries', 'for': 'go' })
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_fmt_command = 'goimports'
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
@@ -433,7 +433,7 @@ Plug 'fatih/vim-go', Cond(has('nvim'), { 'do': ':GoUpdateBinaries', 'for': 'go' 
 
 " This is promising, but not now
 " Still isn't working with neovim, seems to hang when opening certain go files
-" Plug 'myitcv/govim', Cond(has('vim'), { 'for': 'go' })
+" Plug 'myitcv/govim', { 'for': 'go' }
 
 " Alternative to vim-go's delve integration
 " Plug 'sebdah/vim-delve'
@@ -568,19 +568,20 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_at_startup = 1
 
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
-" Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-"         let g:deoplete#sources#jedi#show_docstring = 1
-"         let g:float_preview#docked = 0
-"         let g:float_preview#max_width = 80
-"         let g:float_preview#max_height = 40
+  Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
+  " Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+  "         let g:deoplete#sources#jedi#show_docstring = 1
+  "         let g:float_preview#docked = 0
+  "         let g:float_preview#max_width = 80
+  "         let g:float_preview#max_height = 40
+endif
+" else
+"   " Plug 'Shougo/deoplete.nvim'
+"   " Plug 'roxma/nvim-yarp'
+"   " Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -1533,6 +1534,7 @@ augroup go
     autocmd FileType go nmap <leader>os <plug>(go-implements)
     autocmd FileType go nmap <leader>ot :GoTestFunc<cr>
     autocmd FileType go nmap <leader>ov <plug>(go-vet)
+    au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 augroup END
 
 " " These are loaded when we first go into insert mode
@@ -1544,8 +1546,10 @@ augroup END
 
 " }}}
 
-" This has to be after plug#end
-call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
+if has('nvim')
+  " This has to be after plug#end
+  call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
+endif
 
 " {{{ Local Overrides
 
