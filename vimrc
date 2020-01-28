@@ -537,7 +537,7 @@ Plug 'ledger/vim-ledger'
 Plug 'tpope/vim-fireplace', { 'for' : 'clojure' }
 Plug 'tpope/vim-salve', { 'for' : 'clojure' }
 Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'v2.1.2', 'do': 'bin/compile' }
-  " let g:conjure_log_direction = "horizontal"
+  let g:conjure_log_direction = "horizontal"
 Plug 'venantius/vim-cljfmt', { 'for': 'clojure' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'guns/vim-sexp'
@@ -1313,7 +1313,7 @@ nmap <leader>sw :StripWhitespace<cr>
 nmap <leader>eg :e $HOME/.gitconfig<cr>
 " Ensure we're editing ~/.vimrc, rather than $MYVIMRC - since in neovim
 " $MYVIMRC just points to a wrapper
-nmap <leader>ev :e $USERPROFILE/.vimrc<cr>
+nmap <leader>ev :e $HOME/.vimrc<cr>
 nmap <leader>ez :e $HOME/.zshrc<cr>
 
 " nmap <leader>q :q<cr>
