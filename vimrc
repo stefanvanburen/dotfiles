@@ -409,7 +409,7 @@ Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
 " Go
 " make sure to do :GoInstallBinaries on new systems
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_fmt_command = 'goimports'
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
