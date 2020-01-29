@@ -20,6 +20,7 @@
     ~/.curlrc: curlrc
     ~/.vale.ini: vale.ini
     ~/Library/Preferences/topgrade.toml: topgrade.toml
+    ~/.config/topgrade.toml: topgrade.toml
     ~/.newsbeuter/config:
         create: true
         path: newsbeuter_config
