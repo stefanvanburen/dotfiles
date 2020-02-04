@@ -644,6 +644,7 @@ Plug 'junegunn/fzf.vim'
           \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
           \   <bang>0)
         nnoremap <leader>se :Rg!<cr>
+        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
         command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
@@ -870,6 +871,10 @@ Plug 'keith/investigate.vim'
 " }}}
 
 " {{{ Other
+
+" Hooks neovim up to the browser
+" Not much luck in getting this working, maybe later?
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " For profiling startup time
 Plug 'dstein64/vim-startuptime'
