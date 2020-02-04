@@ -61,34 +61,22 @@ if status --is-interactive
 
     source (pyenv init -|psub)
     source (pyenv virtualenv-init -|psub)
-
     source (jump shell fish | psub)
 
-    source (starship init fish |psub)
+    starship init fish | source
+
+    direnv hook fish | source
 end
 
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-# for direnv
-direnv hook fish | source
 
 set PATH $HOME/bin $HOME/go/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
 
 # for iterm
 source ~/.iterm2_shell_integration.(basename $SHELL)
 
-# for asdf
-# NOTE: still can't really use for python as it doesn't have great integration
-# with pyenv quite yet
-source /usr/local/opt/asdf/asdf.fish
-
 # local things
 if test -e "$HOME/.extra.fish";
     source ~/.extra.fish
 end
-
-set -gx VOLTA_HOME "$HOME/.volta"
-test -s "$VOLTA_HOME/load.fish"; and source "$VOLTA_HOME/load.fish"
-
-string match -r ".volta" "$PATH" > /dev/null; or set -gx PATH "$VOLTA_HOME/bin" $PATH

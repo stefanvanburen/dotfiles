@@ -600,6 +600,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " Plug 'morhetz/gruvbox'
 "         let g:gruvbox_contrast_dark = 'hard'
 
+Plug 'wadackel/vim-dogrun'
 Plug 'lifepillar/vim-solarized8'
 " Plug 'sickill/vim-monokai'
 " Plug 'rakr/vim-one'
@@ -646,12 +647,30 @@ Plug 'junegunn/fzf.vim'
         nnoremap <leader>se :Rg!<cr>
         let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
-        command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
+        " command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 " XXX: I don't really use this
 Plug 'alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/nv']
 nnoremap <silent> <c-s> :NV<cr>
+
+" Clap is nice, but for now fzf is just better (and faster)
+" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+"   nnoremap <leader><leader> :Clap grep<CR>
+"   nnoremap <leader><Enter> :Clap gfiles<CR>
+"   nnoremap <leader>ff :Clap files --hidden<CR>
+"   nnoremap <leader>fd :Clap filer<CR>
+"   nnoremap <leader>fb :Clap buffers<CR>
+"   nnoremap <leader>fw :Clap windows<CR>
+"   nnoremap <leader>fh :Clap history<CR>
+"   nnoremap <leader>f: :Clap command_history<CR>
+"   nnoremap <leader>fj :Clap jumps<CR>
+"   nnoremap <leader>fl :Clap blines<CR>
+"   nnoremap <leader>fL :Clap lines<CR>
+"   nnoremap <leader>ft :Clap filetypes<CR>
+"   nnoremap <leader>fm :Clap marks<CR>
+"   nnoremap <leader>fy :Clap yanks<CR>
+"   let g:clap_layout = { 'relative': 'editor' }
 
 " }}}
 
@@ -1116,7 +1135,7 @@ augroup END
 
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=light               " background shade
+set background=dark               " background shade
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
