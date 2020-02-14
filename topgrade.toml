@@ -1,2 +1,2 @@
 # https://github.com/r-darwish/topgrade/blob/master/config.example.toml
-disable = ["go", "tldr", "gem"]
+disable = ["go", "tldr", "gem", "node"]

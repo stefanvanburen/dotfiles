@@ -1228,8 +1228,8 @@ set nospell
 " set tags+=tags;$HOME               " Recurse up to HOME dir for tags
 set tags^=./.git/tags
 
-" turn on line numbers
-set number
+" line numbers
+set nonumber
 
 set swapfile
 set directory^=~/.vim/swap//
@@ -1296,7 +1296,6 @@ set visualbell t_vb=                " No beeping
 set wildmenu
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 if has('nvim')
-  " Not quite up to date
   set wildoptions=pum
 else
   set wildmode=list:longest,full
@@ -1434,12 +1433,12 @@ cmap w!! w !sudo tee % >/dev/null
 " cnoremap kj <C-c>
 
 " Bash-like keybindings
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
-cnoremap <C-K> <C-U>
+" cnoremap <C-A> <Home>
+" cnoremap <C-E> <End>
+" cnoremap <C-K> <C-U>
 
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
+" cnoremap <C-P> <Up>
+" cnoremap <C-N> <Down>
 
 inoremap <silent> jk <esc>
 inoremap <silent> kj <esc>

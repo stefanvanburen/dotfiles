@@ -7,6 +7,7 @@ end
 
 fish_vi_key_bindings
 
+set -gx VISUAL nvim
 set -gx EDITOR nvim
 # https://github.com/venantius/ultra/issues/108#issuecomment-522347422
 set -gx LEIN_USE_BOOTCLASSPATH no
@@ -20,6 +21,9 @@ set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # default git base branch
 # https://blog.jez.io/cli-code-review/
 set -gx REVIEW_BASE "master"
+
+# https://volta.sh/
+set -gx VOLTA_HOME "$HOME/.volta"
 
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git --color=always'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
@@ -71,7 +75,7 @@ end
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-set PATH $HOME/bin $HOME/go/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
+set PATH $VOLTA_HOME/bin $HOME/bin $HOME/go/bin $HOME/.local/bin $HOME/.cargo/bin /usr/local/sbin $PATH
 
 # for iterm
 source ~/.iterm2_shell_integration.(basename $SHELL)

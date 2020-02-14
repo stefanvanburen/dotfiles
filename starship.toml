@@ -4,3 +4,9 @@ disabled = true
 [character]
 symbol = "▵"
 vicmd_symbol = "▿"
+
+[golang]
+disabled = true
+
+[nodejs]
+disabled = true
