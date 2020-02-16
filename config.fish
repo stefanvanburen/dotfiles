@@ -9,6 +9,8 @@ fish_vi_key_bindings
 
 set -gx VISUAL nvim
 set -gx EDITOR nvim
+set -gx VISUAL nvim
+
 # https://github.com/venantius/ultra/issues/108#issuecomment-522347422
 set -gx LEIN_USE_BOOTCLASSPATH no
 
@@ -30,14 +32,22 @@ set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_CTRL_T_OPTS "--reverse --no-height --border --ansi --preview 'bat --color=always {}'"
 set -gx FZF_DEFAULT_OPTS "--height 40% --border --reverse --ansi"
 
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
 alias vim="$EDITOR"
 
 alias dc="docker-compose"
 
 alias git="hub"
 
+alias b="buku -a"
+
 alias m="make"
 alias make="mmake"
+
+# https://github.com/b4b4r07/gomi
+alias rm="gomi"
 
 alias x="extract"
 
@@ -54,9 +64,8 @@ function sudo!!
     eval sudo $history[1]
 end
 
-function vimrc
-    vim ~/.vimrc
-end
+alias vimrc="$EDITOR ~/.vimrc"
+alias fishrc="$EDITOR ~/.config/fish/config.fish"
 
 if status --is-interactive
     abbr --add --global - 'prevd'
@@ -71,9 +80,6 @@ if status --is-interactive
 
     direnv hook fish | source
 end
-
-alias ...="cd ../.."
-alias ....="cd ../../.."
 
 set PATH $VOLTA_HOME/bin $HOME/bin $HOME/go/bin $HOME/.local/bin $HOME/.cargo/bin /usr/local/sbin $PATH
 

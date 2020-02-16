@@ -7,6 +7,9 @@ syntax enable
 " Leader is space key
 let g:mapleader = "\<Space>"
 
+" LocalLeader is the comma key
+let g:maplocalleader = ","
+
 " Install vim-plug if it doesn't exist.
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -649,7 +652,6 @@ Plug 'junegunn/fzf.vim'
 
         " command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
-" XXX: I don't really use this
 Plug 'alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/nv']
 nnoremap <silent> <c-s> :NV<cr>
@@ -1086,7 +1088,7 @@ Plug 'janko/vim-test'
 
 " project
 " TODO: configure this for projects
-" Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-projectionist'
 
 " 🎄
 Plug 'rhysd/vim-syntax-christmas-tree', { 'on': 'MerryChristmas' }
