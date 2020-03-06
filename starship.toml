@@ -1,12 +1,17 @@
-[aws]
-disabled = true
+# https://starship.rs/config
 
 [character]
 symbol = "▵"
 vicmd_symbol = "▿"
 
-[golang]
+[aws]
 disabled = true
 
-[nodejs]
+[package]
 disabled = true
+
+# [golang]
+# disabled = true
+
+# [nodejs]
+# disabled = true

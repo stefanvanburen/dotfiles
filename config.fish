@@ -17,6 +17,8 @@ set -gx LEIN_USE_BOOTCLASSPATH no
 # https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
 set -gx PYTHONDONTWRITEBYTECODE 1
 
+set -gx BAT_THEME "GitHub"
+
 # https://github.com/sharkdp/bat#man
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
@@ -45,9 +47,6 @@ alias b="buku -a"
 
 alias m="make"
 alias make="mmake"
-
-# https://github.com/b4b4r07/gomi
-alias rm="gomi"
 
 alias x="extract"
 

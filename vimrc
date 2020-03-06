@@ -559,9 +559,6 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " {{{ Completion
 
-" TODO: for python, I should probably follow this:
-" http://ycm-core.github.io/YouCompleteMe/#configuring-through-vim-options
-" UGH this is a huge delay in opening a file
 " Plug 'ycm-core/YouCompleteMe'
 "         let g:ycm_collect_identifiers_from_tags_files = 1
 "         let g:ycm_complete_in_comments                = 1
@@ -607,7 +604,7 @@ Plug 'wadackel/vim-dogrun'
 Plug 'lifepillar/vim-solarized8'
 " Plug 'sickill/vim-monokai'
 " Plug 'rakr/vim-one'
-" Plug 'rakr/vim-two-firewatch'
+Plug 'rakr/vim-two-firewatch'
 " Plug 'flazz/vim-colorschemes'
 " Plug 'rhysd/vim-color-spring-night'
 " Plug 'ayu-theme/ayu-vim'
@@ -709,13 +706,11 @@ Plug 'w0rp/ale'
         let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'javascript': ['prettier', 'eslint'],
-        \   'json': ['prettier'],
         \   'elixir': ['mix_format'],
         \   'rust': ['rustfmt'],
         \}
         let g:ale_linters = {
         \   'javascript': ['prettier', 'eslint'],
-        \   'json': ['prettier'],
         \   'proto': ['prototool-lint'],
         \   'text': ['vale'],
         \   'markdown': ['vale'],
@@ -1079,7 +1074,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
   nnoremap <leader>h :Make<cr>
 Plug 'janko/vim-test'
-  let test#strategy = "dispatch"
+  " let test#strategy = "dispatch"
   nmap <silent> t<C-n> :TestNearest<CR>
   nmap <silent> t<C-f> :TestFile<CR>
   nmap <silent> t<C-s> :TestSuite<CR>
@@ -1137,7 +1132,7 @@ augroup END
 
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=dark               " background shade
+set background=light               " background shade
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
