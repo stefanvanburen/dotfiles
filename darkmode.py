@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# https://gitlab.com/gnachman/iterm2/issues/6764#note_280850922
+
 import asyncio
 import iterm2
 
