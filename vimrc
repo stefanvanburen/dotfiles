@@ -110,7 +110,9 @@ Plug 'maximbaz/lightline-ale'
         let g:lightline#ale#indicator_errors = "\uf05e"
         let g:lightline#ale#indicator_ok = "\uf00c"
 
-Plug 'vim/killersheep'
+if has('vim')
+  Plug 'vim/killersheep'
+endif
 
 " NOTE: I'd need to fork this to make it look good with solarized
 " Plug 'liuchengxu/eleline.vim'
