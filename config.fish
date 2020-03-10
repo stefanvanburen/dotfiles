@@ -44,7 +44,6 @@ alias git="hub"
 
 alias b="buku -a"
 
-alias m="make"
 alias make="mmake"
 
 alias x="extract"
