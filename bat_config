@@ -1,4 +1,7 @@
---theme="Monokai Extended Light"
+# NOTE: bat _must_ have less installed via homebrew to function
+
+# GitHub looks better on light themes
+--theme="GitHub"
 
 # Show line numbers, Git modifications and file header (but no grid)
 --style="numbers,changes,header"

@@ -713,7 +713,7 @@ Plug 'w0rp/ale'
         \   'javascript': ['prettier', 'eslint'],
         \   'proto': ['prototool-lint'],
         \   'text': ['vale'],
-        \   'markdown': ['vale'],
+        \   'markdown': ['vale', 'markdownlint'],
         \   'clojure': ['joker', 'clj-kondo'],
         \}
         nnoremap <silent> <leader>af :ALEFix<cr>
@@ -914,14 +914,17 @@ Plug 'christoomey/vim-tmux-navigator'
   nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
-Plug 'tyru/open-browser.vim'
+" NOTE: I installed this when "gx" wasn't working in vim, for whatever reason
+" It now appears to work, so there's not much use for this.
+" Plug 'tyru/open-browser.vim'
 
 " Tmux basics
 " TODO: Learn how to use this
 " Plug 'tpope/vim-tbone'
 
 " Modern database interface
-Plug 'tpope/vim-dadbod', { 'on': 'DB' }
+" NOTE: This is cool, but I usually access databases in other ways.
+" Plug 'tpope/vim-dadbod', { 'on': 'DB' }
 
 " NOTE: I don't really use editorconfig
 " Plug 'editorconfig/editorconfig-vim'
