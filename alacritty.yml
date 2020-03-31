@@ -46,27 +46,21 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    # family: ProggySquare
-    # family: PragmataPro Mono
-    family: Iosevka
+    family: Iosevka Term SS08
     # Style can be specified to pick a specific face.
-    # style: Regular
+    style: Regular
 
   # The bold font face
   bold:
-    # family: PragmataPro Mono
-    # family: ProggySquare
-    family: Iosevka
+    family: Iosevka Term SS08
     # Style can be specified to pick a specific face.
-    # style: Bold
+    style: Bold
 
   # The italic font face
   italic:
-    # family: PragmataPro Mono
-    # family: ProggySquare
-    family: Iosevka
+    family: Iosevka Term SS08
     # Style can be specified to pick a specific face.
-    # style: Italic
+    style: Italic
 
   # Point size of the font
   size: 12.0
