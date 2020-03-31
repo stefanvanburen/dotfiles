@@ -84,6 +84,6 @@ end
 set PATH $VOLTA_HOME/bin $HOME/bin $HOME/go/bin $HOME/.local/bin $HOME/.cargo/bin /usr/local/sbin $PATH
 
 # local things
-if test -e "$HOME/.extra.fish";
+if test -e "$HOME/.extra.fish"
     source ~/.extra.fish
 end
