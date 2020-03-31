@@ -36,8 +36,6 @@ set -gx FZF_DEFAULT_OPTS "--height 40% --border --reverse --ansi"
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias vim="$EDITOR"
-
 alias dc="docker-compose"
 
 alias git="hub"
@@ -68,7 +66,7 @@ alias fishrc="$EDITOR ~/.config/fish/config.fish"
 
 if status --is-interactive
     abbr --add --global - 'prevd'
-    abbr --add --global v vim
+    abbr --add --global v $EDITOR
     abbr --add --global g git
 
     source (pyenv init -|psub)
