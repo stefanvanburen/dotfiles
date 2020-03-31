@@ -87,28 +87,28 @@ endfunction
 "         nmap <leader>9 <plug>AirlineSelectTab9
 
 Plug 'itchyny/lightline.vim'
-        let g:lightline = {
-              \ 'colorscheme': 'solarized',
-              \ 'active': {
-              \   'left': [ [ 'mode', 'paste' ],
-              \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-              \ },
-              \ 'component_function': {
-              \   'gitbranch': 'fugitive#head'
-              \ }
-              \ }
+  let g:lightline = {
+    \ 'colorscheme': 'solarized',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ }
+    \ }
 Plug 'maximbaz/lightline-ale'
-        let g:lightline.component_type = {
-              \     'linter_checking': 'left',
-              \     'linter_warnings': 'warning',
-              \     'linter_errors': 'error',
-              \     'linter_ok': 'left',
-              \ }
+  let g:lightline.component_type = {
+    \ 'linter_checking': 'left',
+    \ 'linter_warnings': 'warning',
+    \ 'linter_errors': 'error',
+    \ 'linter_ok': 'left',
+    \ }
 
-        let g:lightline#ale#indicator_checking = "\uf110"
-        let g:lightline#ale#indicator_warnings = "\uf071"
-        let g:lightline#ale#indicator_errors = "\uf05e"
-        let g:lightline#ale#indicator_ok = "\uf00c"
+  let g:lightline#ale#indicator_checking = "\uf110"
+  let g:lightline#ale#indicator_warnings = "\uf071"
+  let g:lightline#ale#indicator_errors = "\uf05e"
+  let g:lightline#ale#indicator_ok = "\uf00c"
 
 if has('vim')
   Plug 'vim/killersheep'
@@ -162,33 +162,33 @@ Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
 
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
   function! s:goyo_enter()
-      silent !tmux set status off
-      silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-      set noshowmode
-      set noshowcmd
-      set scrolloff=999
-      " NumbersDisable
-      set nonumber
-      set norelativenumber
-      Limelight
-      set tw=72
-      set wrap
-      set nolist
-      " ...
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    set noshowmode
+    set noshowcmd
+    set scrolloff=999
+    " NumbersDisable
+    set nonumber
+    set norelativenumber
+    Limelight
+    set tw=72
+    set wrap
+    set nolist
+    " ...
   endfunction
 
   function! s:goyo_leave()
-      silent !tmux set status on
-      silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-      set showmode
-      set showcmd
-      set scrolloff=5
-      Limelight!
-      " NumbersEnable
-      set tw=0
-      set nowrap
-      set list
-      " ...
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    set showmode
+    set showcmd
+    set scrolloff=5
+    Limelight!
+    " NumbersEnable
+    set tw=0
+    set nowrap
+    set list
+    " ...
   endfunction
 
   let g:goyo_linenr=1
@@ -229,23 +229,23 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " {{{ Git
 
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
 
 " " This makes things a bit slow?
-" Plug 'airblade/vim-gitgutter'
-"   " Turns on gitgutter updating for a variety of events
-"   " ex: switch buffers, tabs, etc
-"   " let g:gitgutter_eager = 1
-"   let g:gitgutter_sign_added = '·'
-"   let g:gitgutter_sign_modified = '·'
-"   let g:gitgutter_sign_removed = '·'
-"   let g:gitgutter_sign_removed_first_line = '·'
-"   let g:gitgutter_sign_modified_removed = '·'
-"   " NOTE: trying this provisionally
-"   let g:gitgutter_grep = 'rg'
-"   " turn off gitgutter mappings
-"   " Leaving this on for ]c [c
-"   " let g:gitgutter_map_keys = 0
+Plug 'airblade/vim-gitgutter'
+  " Turns on gitgutter updating for a variety of events
+  " ex: switch buffers, tabs, etc
+  " let g:gitgutter_eager = 1
+  let g:gitgutter_sign_added = '·'
+  let g:gitgutter_sign_modified = '·'
+  let g:gitgutter_sign_removed = '·'
+  let g:gitgutter_sign_removed_first_line = '·'
+  let g:gitgutter_sign_modified_removed = '·'
+  " NOTE: trying this provisionally
+  let g:gitgutter_grep = 'rg'
+  " turn off gitgutter mappings
+  " Leaving this on for ]c [c
+  " let g:gitgutter_map_keys = 0
 
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
   nmap <leader>gv :GV<cr>
@@ -259,7 +259,7 @@ Plug 'rbong/vim-flog'
 Plug 'tpope/vim-fugitive'
   nmap <leader>gd :Gdiff<cr>
   " Bring up git status vertically
-  nmap <silent> <leader>gs :vertical Gstatus<cr>
+  nmap <silent> <leader>gs :vertical Git<cr>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
@@ -332,13 +332,10 @@ Plug 'rhysd/git-messenger.vim'
 " There are some more up to date forks
 " This ruined filetype detection - ensure that we've got a ftplugin/fish.vim
 " or this might do the same in the future
-Plug 'dag/vim-fish'
+Plug 'dag/vim-fish', { 'for': 'fish' }
 
 " yaml
 Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
-
-" typescript
-Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 
 " nim
 Plug 'zah/nim.vim', { 'for': 'nim' }
@@ -350,7 +347,7 @@ Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 Plug 'wilsaj/chuck.vim', { 'for': 'chuck' }
 
 " Track the engine.
-Plug 'SirVer/ultisnips', { 'on': [] }
+Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
   let g:UltiSnipsExpandTrigger="<TAB>"
@@ -373,6 +370,7 @@ Plug 'elmcast/elm-vim', { 'for': 'elm' }
 
 " HTML5
 Plug 'othree/html5.vim', { 'for': 'html' }
+Plug 'mattn/emmet-vim'
 
 " Javascript
 " note that prettier has docs for setting up with ALE
@@ -381,13 +379,19 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 " Plug 'prettier/vim-prettier', {
 "                         \ 'do': 'yarn install',
 "                         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
-Plug 'yuezk/vim-js', { 'for': 'javascript' }
-Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
+" Plug 'yuezk/vim-js', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'maxmellon/vim-jsx-pretty'
 
-Plug 'posva/vim-vue'
+" typescript
+" Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'peitalin/vim-jsx-typescript'
+
+Plug 'posva/vim-vue', { 'for': 'vue' }
 
 " Markdown
-Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 " More heavyweight alternative:
 " Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 "         " Turn off folding
@@ -465,7 +469,7 @@ Plug 'bfontaine/Brewfile.vim'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-        let g:rustfmt_autosave = 1
+  let g:rustfmt_autosave = 1
 
 Plug 'mhinz/vim-crates', { 'for': 'rust' }
 
@@ -497,8 +501,8 @@ Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 " Python
 " Syntax
 Plug 'vim-python/python-syntax', { 'for': 'python' }
-        " I think this slows things down
-        let g:python_highlight_all = 1
+  " I think this slows things down
+  let g:python_highlight_all = 1
 
 "set verbose=9
 
@@ -602,11 +606,11 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " Plug 'morhetz/gruvbox'
 "         let g:gruvbox_contrast_dark = 'hard'
 
-Plug 'wadackel/vim-dogrun'
 Plug 'lifepillar/vim-solarized8'
+" Plug 'wadackel/vim-dogrun'
 " Plug 'sickill/vim-monokai'
 " Plug 'rakr/vim-one'
-Plug 'rakr/vim-two-firewatch'
+" Plug 'rakr/vim-two-firewatch'
 " Plug 'flazz/vim-colorschemes'
 " Plug 'rhysd/vim-color-spring-night'
 " Plug 'ayu-theme/ayu-vim'
@@ -617,43 +621,43 @@ Plug 'rakr/vim-two-firewatch'
 
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all --no-update-rc' }
 Plug 'junegunn/fzf.vim'
-        omap <leader><tab> <plug>(fzf-maps-o)
-        nmap <leader><tab> <plug>(fzf-maps-n)
-        xmap <leader><tab> <plug>(fzf-maps-x)
+  omap <leader><tab> <plug>(fzf-maps-o)
+  nmap <leader><tab> <plug>(fzf-maps-n)
+  xmap <leader><tab> <plug>(fzf-maps-x)
 
-        nnoremap <leader><Enter> :GFiles<cr>
-        nnoremap <leader>f :Files<cr>
-        nnoremap <leader>gf :GFiles?<cr>
-        " nnoremap ; :Buffers<cr>
-        nnoremap <leader><leader> :Buffers<cr>
-        nnoremap <leader>? :History<CR>
-        " mnemonic for command history
-        nnoremap <leader>ch :History:<CR>
-        nnoremap <leader>sh :History/<CR>
-        nnoremap <leader>m :Marks<cr>
-        nnoremap <leader>; :BLines<CR>
-        nnoremap <leader>W :Windows<CR>
-        nnoremap <leader>tg :Tags<cr>
-        nnoremap <leader>sn :Snippets<cr>
-        nnoremap <leader>gc :Commits!<cr>
+  nnoremap <leader><Enter> :GFiles<cr>
+  nnoremap <leader>f :Files<cr>
+  nnoremap <leader>gf :GFiles?<cr>
+  " nnoremap ; :Buffers<cr>
+  nnoremap <leader><leader> :Buffers<cr>
+  nnoremap <leader>? :History<CR>
+  " mnemonic for command history
+  nnoremap <leader>ch :History:<CR>
+  nnoremap <leader>sh :History/<CR>
+  nnoremap <leader>m :Marks<cr>
+  nnoremap <leader>; :BLines<CR>
+  nnoremap <leader>W :Windows<CR>
+  nnoremap <leader>tg :Tags<cr>
+  nnoremap <leader>sn :Snippets<cr>
+  nnoremap <leader>gc :Commits!<cr>
 
-        " Try this out?
-        " imap <C-x><C-l> <plug>(fzf-complete-line)
+  " Try this out?
+  " imap <C-x><C-l> <plug>(fzf-complete-line)
 
-        command! -bang -nargs=* Rg
-          \ call fzf#vim#grep(
-          \   'rg --column --smart-case --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-          \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-          \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-          \   <bang>0)
-        nnoremap <leader>se :Rg!<cr>
-        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --smart-case --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+    \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+    \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+    \   <bang>0)
+  nnoremap <leader>se :Rg!<cr>
+  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
-        " command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
+  " command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 Plug 'alok/notational-fzf-vim'
-let g:nv_search_paths = ['~/nv']
-nnoremap <silent> <c-s> :NV<cr>
+  let g:nv_search_paths = ['~/nv']
+  nnoremap <silent> <c-s> :NV<cr>
 
 " Clap is nice, but for now fzf is just better (and faster)
 " Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
@@ -682,45 +686,47 @@ nnoremap <silent> <c-s> :NV<cr>
 let g:ale_completion_enabled = 0
 " For linting
 Plug 'w0rp/ale'
-        " slow
-        " let g:ale_sign_error = '💥 '
-        " let g:ale_sign_warning = '🚧 '
-        let g:ale_sign_error = '→'
-        " let g:ale_sign_error = '⨯⨯'
-        let g:ale_sign_warning = '→'
-        let g:ale_sign_info = '→'
-        " highlight clear ALEErrorSign
-        " highlight clear ALEWarningSign
-        let g:ale_echo_msg_error_str = 'E'
-        let g:ale_echo_msg_warning_str = 'W'
-        let g:ale_echo_msg_format = '[%linter%] %s'
-        " let g:ale_python_auto_pipenv = 1
-        " let g:ale_lint_on_text_changed = 'normal'
-        " let g:ale_lint_on_insert_leave = 1
-        let g:ale_set_balloons = 1
-        " Set this variable to 1 to fix files when you save them.
-        let g:ale_fix_on_save = 1
-        " don't need this as we're setting VIRTUAL_ENV using direnv
-        " https://github.com/w0rp/ale/issues/2021#issuecomment-433325140
-        let g:ale_virtualenv_dir_names = []
-        " note that python files have their ALE configuration in ftplugin/python.vim
-        " Without this, eslint complains about things that prettier fixes
-        let g:ale_fixers = {
-        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'javascript': ['prettier', 'eslint'],
-        \   'elixir': ['mix_format'],
-        \   'rust': ['rustfmt'],
-        \}
-        let g:ale_linters = {
-        \   'javascript': ['prettier', 'eslint'],
-        \   'proto': ['prototool-lint'],
-        \   'text': ['vale'],
-        \   'markdown': ['vale', 'markdownlint'],
-        \   'clojure': ['joker', 'clj-kondo'],
-        \}
-        nnoremap <silent> <leader>af :ALEFix<cr>
-        nmap <silent> [w <Plug>(ale_previous_wrap)
-        nmap <silent> ]w <Plug>(ale_next_wrap)
+  " slow
+  " let g:ale_sign_error = '💥 '
+  " let g:ale_sign_warning = '🚧 '
+  let g:ale_sign_error = '→'
+  " let g:ale_sign_error = '⨯⨯'
+  let g:ale_sign_warning = '→'
+  let g:ale_sign_info = '→'
+  " highlight clear ALEErrorSign
+  " highlight clear ALEWarningSign
+  let g:ale_echo_msg_error_str = 'E'
+  let g:ale_echo_msg_warning_str = 'W'
+  let g:ale_echo_msg_format = '[%linter%] %s'
+  " let g:ale_python_auto_pipenv = 1
+  " let g:ale_lint_on_text_changed = 'normal'
+  " let g:ale_lint_on_insert_leave = 1
+  let g:ale_set_balloons = 1
+  " Set this variable to 1 to fix files when you save them.
+  let g:ale_fix_on_save = 1
+  " don't need this as we're setting VIRTUAL_ENV using direnv
+  " https://github.com/w0rp/ale/issues/2021#issuecomment-433325140
+  let g:ale_virtualenv_dir_names = []
+  " note that python files have their ALE configuration in ftplugin/python.vim
+  " Without this, eslint complains about things that prettier fixes
+  let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'elixir': ['mix_format'],
+  \   'rust': ['rustfmt'],
+  \}
+  let g:ale_linters = {
+  \   'fish': [],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'proto': ['prototool-lint'],
+  \   'text': ['vale'],
+  \   'markdown': ['vale', 'markdownlint'],
+  \   'clojure': ['joker', 'clj-kondo'],
+  \}
+  nnoremap <silent> <leader>af :ALEFix<cr>
+  nnoremap <C-]> :ALEGoToDefinition<cr>
+  nmap <silent> [w <Plug>(ale_previous_wrap)
+  nmap <silent> ]w <Plug>(ale_next_wrap)
 
 
 " NOTE: I don't use this
@@ -763,18 +769,18 @@ Plug 'w0rp/ale'
 
 " TODO: Use this more
 "Plug 'easymotion/vim-easymotion'
-"        nmap <leader>j <plug>(easymotion-j)
-"        nmap <leader>k <plug>(easymotion-k)
-"        " map  <Leader>f <Plug>(easymotion-bd-f)
-"        " nmap <Leader>f <Plug>(easymotion-overwin-f)
-"        nmap s <Plug>(easymotion-overwin-f2)
-"        let g:EasyMotion_do_mapping       = 0
-"        let g:EasyMotion_smartcase        = 1
-"        "let g:EasyMotion_use_upper        = 1
-"        let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
-"        let g:EasyMotion_enter_jump_first = 1
-"        let g:EasyMotion_space_jump_first = 1
-"        let g:EasyMotion_startofline      = 0
+  "nmap <leader>j <plug>(easymotion-j)
+  "nmap <leader>k <plug>(easymotion-k)
+  "" map  <Leader>f <Plug>(easymotion-bd-f)
+  "" nmap <Leader>f <Plug>(easymotion-overwin-f)
+  "nmap s <Plug>(easymotion-overwin-f2)
+  "let g:EasyMotion_do_mapping       = 0
+  "let g:EasyMotion_smartcase        = 1
+  ""let g:EasyMotion_use_upper        = 1
+  "let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
+  "let g:EasyMotion_enter_jump_first = 1
+  "let g:EasyMotion_space_jump_first = 1
+  "let g:EasyMotion_startofline      = 0
 
 " Lightweight version of vim-easymotion
 " TODO: I don't really use this, and it interferes with vim-sandwich
@@ -830,8 +836,8 @@ Plug 'w0rp/ale'
 " map <C-k> <Plug>(edgemotion-k)
 
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-        nmap ga <plug>(EasyAlign)
-        xmap ga <plug>(EasyAlign)
+  " nmap ga <plug>(EasyAlign)
+  " xmap ga <plug>(EasyAlign)
 
 " TODO: re-enable this when I actually use it
 " Plug 'terryma/vim-expand-region'
@@ -848,10 +854,10 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 " {{{ Search
 
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-        nnoremap <leader>gr :Grepper -tool git<cr>
-        nnoremap <leader>rg :Grepper -tool rg<cr>
-        nmap gs <plug>(GrepperOperator)
-        xmap gs <plug>(GrepperOperator)
+  " nnoremap <leader>gr :Grepper -tool git<cr>
+  " nnoremap <leader>rg :Grepper -tool rg<cr>
+  " nmap gs <plug>(GrepperOperator)
+  " xmap gs <plug>(GrepperOperator)
 
 Plug 'rhysd/clever-f.vim'
   let g:clever_f_mark_direct = 1
@@ -936,10 +942,10 @@ Plug 'christoomey/vim-tmux-navigator'
 " match matching matches
 " TODO: maybe this is slowing things down?
 Plug 'andymass/vim-matchup'
-        " improve cursor performance by delaying match
-        let g:matchup_matchparen_deferred = 1
-        " don't replace statusline with offscreen match
-        let g:matchup_matchparen_status_offscreen = 0
+  " improve cursor performance by delaying match
+  let g:matchup_matchparen_deferred = 1
+  " don't replace statusline with offscreen match
+  let g:matchup_matchparen_status_offscreen = 0
 
 " Basic support for .env and Procfile
 " TODO: I don't really use .env or Procfiles, turning off for now
@@ -1012,6 +1018,7 @@ Plug 'tpope/vim-unimpaired'
 " Plug 'tommcdo/vim-exchange'
 
 " Manages and creates tag files
+" Honestly, just use ale's language server stuff instead
 " Plug 'ludovicchabant/vim-gutentags'
 "   let g:gutentags_add_default_project_roots = 0
 "   let g:gutentags_project_root = ['.git']
@@ -1085,6 +1092,7 @@ Plug 'janko/vim-test'
   nmap <silent> t<C-s> :TestSuite<CR>
   nmap <silent> t<C-l> :TestLast<CR>
   nmap <silent> t<C-g> :TestVisit<CR>
+  " let g:test#javascript#webdriverio#file_pattern = '\vtests?/.*\.ts$'
 
 " project
 " TODO: configure this for projects
@@ -1137,14 +1145,14 @@ augroup END
 
 set autowriteall                   " Write the file on a lot of different commands.
 
-set background=light               " background shade
+set background=dark                " background shade
 
 set backspace=eol,indent,start     " Make backspacing work regularly.
 
 if !has('nvim')
-        set balloonevalterm
-        set balloondelay=250
-        set ttymouse=sgr
+  set balloonevalterm
+  set balloondelay=250
+  set ttymouse=sgr
 endif
 
 " :set wrap to use this
@@ -1190,7 +1198,7 @@ set history=10000                  " Save 10000 lines of command history.
 set incsearch                      " Incremental search
 
 if has('nvim')
-    set inccommand=nosplit
+  set inccommand=nosplit
 endif
 
 " TODO: figure these options out
@@ -1231,7 +1239,7 @@ set nospell
 set tags^=./.git/tags
 
 " line numbers
-set nonumber
+set number
 
 set swapfile
 set directory^=~/.vim/swap//
@@ -1288,9 +1296,9 @@ set ttyfast
 set updatetime=100                 " Time to write swap file to disk in milliseconds, and CursorHold autocommand
 
 if has('nvim')
-    set shada='100,n$HOME/.vim/files/info/nviminfo
+  set shada='100,n$HOME/.vim/files/info/nviminfo
 else
-    set viminfo='100,n$HOME/.vim/files/info/viminfo
+  set viminfo='100,n$HOME/.vim/files/info/viminfo
 endif
 
 set visualbell t_vb=                " No beeping
@@ -1472,10 +1480,10 @@ let g:netrw_winsize = 25
 let g:netrw_liststyle = 3
 
 if executable('rg')
-    set grepprg=rg\ --vimgrep
+  set grepprg=rg\ --vimgrep
 elseif executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-    set grepprg=ag\ --nogroup\ --nocolor
+  let g:ackprg = 'ag --vimgrep'
+  set grepprg=ag\ --nogroup\ --nocolor
 endif
 
 " Abbreviations
@@ -1496,44 +1504,44 @@ highlight Visual      ctermbg=1 ctermfg=4
 " {{{ Autocommands
 
 augroup FT
-    autocmd FileType go   setlocal noexpandtab tabstop=4 shiftwidth=4
-    autocmd FileType java setlocal expandtab tabstop=2 shiftwidth=2
-    autocmd FileType sh   setlocal shiftwidth=4
-    autocmd FileType c    setlocal cindent
-    " autocmd FileType elixir setlocal formatprg=mix\ format\ -
-    autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2
-    autocmd FileType help wincmd L
-    autocmd FileType asciidoc setlocal wrap
-    autocmd Filetype crontab setlocal nobackup nowritebackup
-    autocmd Filetype json setlocal expandtab tabstop=2 shiftwidth=2
-    autocmd Filetype diff setlocal foldmethod=syntax
-    autocmd Filetype git setlocal foldmethod=syntax
-    autocmd Filetype graphql setlocal shiftwidth=2
-    autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+  autocmd FileType go   setlocal noexpandtab tabstop=4 shiftwidth=4
+  autocmd FileType java setlocal expandtab tabstop=2 shiftwidth=2
+  autocmd FileType sh   setlocal shiftwidth=4
+  autocmd FileType c    setlocal cindent
+  " autocmd FileType elixir setlocal formatprg=mix\ format\ -
+  autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2
+  autocmd FileType help wincmd L
+  autocmd FileType asciidoc setlocal wrap
+  autocmd Filetype crontab setlocal nobackup nowritebackup
+  autocmd Filetype json setlocal expandtab tabstop=2 shiftwidth=2
+  autocmd Filetype diff setlocal foldmethod=syntax
+  autocmd Filetype git setlocal foldmethod=syntax
+  autocmd Filetype graphql setlocal shiftwidth=2
+  autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 augroup end
 
 augroup filetypedetect
-    autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
-    autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
-    " Admittedly Pipfile.lock looks to be a subset of JSON but this is a start
-    autocmd BufNewFile,BufRead Pipfile.lock setf json
+  autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+  autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+  " Admittedly Pipfile.lock looks to be a subset of JSON but this is a start
+  autocmd BufNewFile,BufRead Pipfile.lock setf json
 augroup END
 
 augroup python
-        autocmd Filetype python nmap <leader>ptc :Pytest class<cr>
-        autocmd Filetype python nmap <leader>ptfi :Pytest file<cr>
-        autocmd Filetype python nmap <leader>ptfn :Pytest function<cr>
-        autocmd Filetype python nmap <leader>ptm :Pytest method<cr>
-        autocmd Filetype python nmap <leader>ptp :Pytest project<cr>
-        autocmd Filetype python nmap <leader>pts :Pytest session<cr>
-        autocmd Filetype python setlocal tw=88
-        " autocmd Filetype python setlocal formatprg=black\ -q\ -
-        " autocmd Filetype python nnoremap <C-]> :ALEGoToDefinition<cr>
+  autocmd Filetype python nmap <leader>ptc :Pytest class<cr>
+  autocmd Filetype python nmap <leader>ptfi :Pytest file<cr>
+  autocmd Filetype python nmap <leader>ptfn :Pytest function<cr>
+  autocmd Filetype python nmap <leader>ptm :Pytest method<cr>
+  autocmd Filetype python nmap <leader>ptp :Pytest project<cr>
+  autocmd Filetype python nmap <leader>pts :Pytest session<cr>
+  autocmd Filetype python setlocal tw=88
+  " autocmd Filetype python setlocal formatprg=black\ -q\ -
+  " autocmd Filetype python nnoremap <C-]> :ALEGoToDefinition<cr>
 augroup END
 
 " Resize splits when window is resized
 augroup window
-    autocmd VimResized * :wincmd =
+  autocmd VimResized * :wincmd =
 augroup END
 
 " Only turn off relative number for insert mode
@@ -1546,24 +1554,28 @@ augroup END
 " Go related mappings
 " All are prefixed with 'o', because 'g' is for git
 augroup go
-    " FIXME - these don't seem to work
-    autocmd Filetype go command! -bang Alternate call go#alternate#Switch(<bang>0, 'edit')
-    autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-    autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-    autocmd FileType go nmap <leader>oa :AV<cr>
-    autocmd FileType go nmap <leader>ob <plug>(go-build)
-    autocmd FileType go nmap <leader>oc <plug>(go-coverage-toggle)
-    autocmd FileType go nmap <leader>od <plug>(go-doc-vertical)
-    autocmd FileType go nmap <leader>oe <plug>(go-rename)
-    autocmd FileType go nmap <leader>of <plug>(go-imports)
-    autocmd FileType go nmap <leader>og <plug>(go-def-vertical)
-    autocmd FileType go nmap <leader>oi <plug>(go-info)
-    autocmd FileType go nmap <leader>or <plug>(go-run)
-    autocmd FileType go nmap <leader>os <plug>(go-implements)
-    autocmd FileType go nmap <leader>ot :GoTestFunc<cr>
-    autocmd FileType go nmap <leader>ov <plug>(go-vet)
-    au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
+  " FIXME - these don't seem to work
+  autocmd Filetype go command! -bang Alternate call go#alternate#Switch(<bang>0, 'edit')
+  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+  autocmd FileType go nmap <leader>oa :AV<cr>
+  autocmd FileType go nmap <leader>ob <plug>(go-build)
+  autocmd FileType go nmap <leader>oc <plug>(go-coverage-toggle)
+  autocmd FileType go nmap <leader>od <plug>(go-doc-vertical)
+  autocmd FileType go nmap <leader>oe <plug>(go-rename)
+  autocmd FileType go nmap <leader>of <plug>(go-imports)
+  autocmd FileType go nmap <leader>og <plug>(go-def-vertical)
+  autocmd FileType go nmap <leader>oi <plug>(go-info)
+  autocmd FileType go nmap <leader>or <plug>(go-run)
+  autocmd FileType go nmap <leader>os <plug>(go-implements)
+  autocmd FileType go nmap <leader>ot :GoTestFunc<cr>
+  autocmd FileType go nmap <leader>ov <plug>(go-vet)
+  au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 augroup END
+
+augroup javascript
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+augroup end
 
 " " These are loaded when we first go into insert mode
 " augroup load_us_ycm
@@ -1583,7 +1595,7 @@ endif
 
 let $LOCALFILE=expand("~/.vimrc.local")
 if filereadable($LOCALFILE)
-    source $LOCALFILE
+  source $LOCALFILE
 endif
 
 " }}}
