@@ -88,7 +88,7 @@ Plug 'mhinz/vim-startify'
 
 Plug 'itchyny/lightline.vim'
   let g:lightline = {
-    \ 'colorscheme': 'solarized',
+    \ 'colorscheme': 'gruvbox',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
@@ -603,10 +603,11 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " {{{ Colorschemes
 
 " Plug 'altercation/vim-colors-solarized'
-" Plug 'morhetz/gruvbox'
-"         let g:gruvbox_contrast_dark = 'hard'
+Plug 'morhetz/gruvbox'
+  let g:gruvbox_contrast_dark = 'hard'
+  let g:gruvbox_italic = 1
 
-Plug 'lifepillar/vim-solarized8'
+" Plug 'lifepillar/vim-solarized8'
 " Plug 'wadackel/vim-dogrun'
 " Plug 'sickill/vim-monokai'
 " Plug 'rakr/vim-one'
@@ -1125,7 +1126,8 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " let &t_EI = "\<Esc>[2 q"
 set termguicolors
 
-colorscheme solarized8
+" colorscheme solarized8
+colorscheme gruvbox
 
 " set autoindent                     " Automatically indent based on previous line.
 set expandtab                      " Convert tabs into spaces.
