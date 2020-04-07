@@ -10,8 +10,8 @@ disabled = true
 [package]
 disabled = true
 
-# [golang]
-# disabled = true
+[golang]
+disabled = true
 
-# [nodejs]
-# disabled = true
+[nodejs]
+disabled = true
