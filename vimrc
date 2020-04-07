@@ -44,17 +44,17 @@ endfunction
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " NOTE: Not _super_ useful
-" Plug 'mhinz/vim-startify'
-"         let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
-"         " use utf-8 for fortune rather than ascii
-"         let g:startify_fortune_use_unicode = 1
-"         " update startify while vim is running
-"         let g:startify_update_oldfiles = 1
-"         " use environment variables if they shorten path names
-"         " Not terribly useful honestly
-"         " let g:startify_use_env = 1
-"         " Don't change to the directory of a file when using startify
-"         let g:startify_change_to_dir = 0
+Plug 'mhinz/vim-startify'
+  let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
+  " use utf-8 for fortune rather than ascii
+  let g:startify_fortune_use_unicode = 1
+  " update startify while vim is running
+  let g:startify_update_oldfiles = 1
+  " use environment variables if they shorten path names
+  " Not terribly useful honestly
+  " let g:startify_use_env = 1
+  " Don't change to the directory of a file when using startify
+  let g:startify_change_to_dir = 0
 
 " Resizes active windows according to Golden Ratio
 " Neat idea in theory - tends to wonk things up in practice
