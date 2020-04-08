@@ -136,10 +136,6 @@ Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
 
-" Enhances builtin netrw file browser
-" Note that netrw is disabled and we're using dirvish
-" Plug 'tpope/vim-vinegar'
-
 " }}}
 
 " {{{ Git
