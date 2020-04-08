@@ -52,18 +52,6 @@ Plug 'itchyny/lightline.vim'
     \   'gitbranch': 'fugitive#head'
     \ }
     \ }
-Plug 'maximbaz/lightline-ale'
-  let g:lightline.component_type = {
-    \ 'linter_checking': 'left',
-    \ 'linter_warnings': 'warning',
-    \ 'linter_errors': 'error',
-    \ 'linter_ok': 'left',
-    \ }
-
-  let g:lightline#ale#indicator_checking = "\uf110"
-  let g:lightline#ale#indicator_warnings = "\uf071"
-  let g:lightline#ale#indicator_errors = "\uf05e"
-  let g:lightline#ale#indicator_ok = "\uf00c"
 
 " disable netrw_
 let loaded_netrwPlugin = 1
