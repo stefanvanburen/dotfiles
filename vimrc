@@ -611,10 +611,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " NOTE: Turning this back on temporarily to determine if it's reasonable
 Plug 'tpope/vim-sleuth'
 
-" For editing prose
-" TODO: figure out how to turn this on for a few filetypes
-" Plug 'reedes/vim-pencil'
-
 " Automatic :set paste
 Plug 'ConradIrwin/vim-bracketed-paste'
 
