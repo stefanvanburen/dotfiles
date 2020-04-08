@@ -723,11 +723,6 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
   " nmap ga <plug>(EasyAlign)
   " xmap ga <plug>(EasyAlign)
 
-" TODO: re-enable this when I actually use it
-" Plug 'terryma/vim-expand-region'
-" vmap <C-v> <plug>(expand_region_shrink)
-" vmap v <plug>(expand_region_expand)
-
 " Allows for move lines up and down
 " Defaults: <A-k> and <A-j> to move visual selection
 " TODO: learn this
