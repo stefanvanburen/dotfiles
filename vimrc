@@ -216,7 +216,7 @@ Plug 'mattn/emmet-vim'
 
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'typescript.tsx', 'javascriptreact' ] }
 
 " typescript
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
