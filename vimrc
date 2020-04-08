@@ -821,10 +821,6 @@ augroup go
   au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 augroup END
 
-augroup javascript
-  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-augroup end
-
 " }}}
 
 if has('nvim')
