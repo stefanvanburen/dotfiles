@@ -236,10 +236,6 @@ Plug 'elzr/vim-json', { 'for': 'json' }
   " Don't really care for the concealing
   let g:vim_json_syntax_conceal = 0
 
-" Protocol Buffers (protobuf)
-Plug 'uarun/vim-protobuf', { 'for': 'proto' }
-Plug 'uber/prototool', { 'rtp': 'vim/prototool', 'for': 'proto' }
-
 " Dockerfile
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
@@ -448,7 +444,6 @@ Plug 'w0rp/ale'
   let g:ale_linters = {
   \   'fish': [],
   \   'javascript': ['prettier', 'eslint'],
-  \   'proto': ['prototool-lint'],
   \   'text': ['vale'],
   \   'markdown': ['vale', 'markdownlint'],
   \   'clojure': ['joker', 'clj-kondo'],
