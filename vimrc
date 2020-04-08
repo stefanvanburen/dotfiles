@@ -839,11 +839,6 @@ colorscheme gruvbox
 " set autoindent                     " Automatically indent based on previous line.
 set expandtab                      " Convert tabs into spaces.
 
-" Setting these language by language
-" set shiftwidth=4                   " >> and << indent by 4 spaces.
-" set shiftround                     " >> and << indent to next multiple of 'shiftwidth'.
-" set softtabstop=4                  " Tab key indents by 4 spaces.
-
 set wrapscan                       " Wrap around the end of the buffer when searching.
 
 set autoread                       " Read changes in files during editing.
