@@ -227,10 +227,6 @@ Plug 'posva/vim-vue', { 'for': 'vue' }
 
 " Markdown
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
-" More heavyweight alternative:
-" Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-"         " Turn off folding
-"         let g:vim_markdown_folding_disabled = 1
 
 " GraphQL
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
