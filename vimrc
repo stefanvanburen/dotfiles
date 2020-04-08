@@ -639,11 +639,6 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
   " nmap ga <plug>(EasyAlign)
   " xmap ga <plug>(EasyAlign)
 
-" Allows for move lines up and down
-" Defaults: <A-k> and <A-j> to move visual selection
-" TODO: learn this
-" Plug 'matze/vim-move'
-
 " }}}
 
 " {{{ Search
