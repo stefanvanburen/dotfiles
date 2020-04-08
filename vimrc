@@ -539,31 +539,6 @@ Plug 'w0rp/ale'
 " together
 " Plug 'junegunn/vim-slash'
 
-" Plug 'qxxxb/vim-searchhi'
-"         nmap / <Plug>(searchhi-/)
-"         nmap ? <Plug>(searchhi-?)
-"         nmap n <Plug>(searchhi-n)
-"         nmap N <Plug>(searchhi-N)
-"         nmap * <Plug>(searchhi-*)
-"         nmap # <Plug>(searchhi-#)
-"         nmap g* <Plug>(searchhi-g*)
-"         nmap g# <Plug>(searchhi-g#)
-"         nmap <silent> <C-L> <Plug>(searchhi-off-all)
-"         vmap / <Plug>(searchhi-v-/)
-"         vmap ? <Plug>(searchhi-v-?)
-"         vmap n <Plug>(searchhi-v-n)
-"         vmap N <Plug>(searchhi-v-N)
-"         vmap * <Plug>(searchhi-v-*)
-"         vmap # <Plug>(searchhi-v-#)
-"         vmap g* <Plug>(searchhi-v-g*)
-"         vmap g# <Plug>(searchhi-v-g#)
-"         " integration with vim-asterisk
-"         vmap <silent> <C-L> <Plug>(searchhi-v-off-all)
-"         nmap * <Plug>(asterisk-*)<Plug>(searchhi-update)
-"         nmap # <Plug>(asterisk-#)<Plug>(searchhi-update)
-"         nmap g* <Plug>(asterisk-g*)<Plug>(searchhi-update)
-"         nmap g# <Plug>(asterisk-g#)<Plug>(searchhi-update)
-
 " TODO: Try this out
 " Plug 'haya14busa/vim-asterisk'
 "         " keeps position across matches
