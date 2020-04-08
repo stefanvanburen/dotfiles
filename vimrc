@@ -30,12 +30,6 @@ nnoremap <leader>pu :PlugUpdate<cr>
 scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
-" https://github.com/junegunn/vim-plug/wiki/tips#conditional-activation
-function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-endfunction
-
 " {{{ UI
 
 " Dim inactive panes
