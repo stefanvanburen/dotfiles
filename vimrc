@@ -153,8 +153,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'rhysd/committia.vim'
 
 " github filetype
-" Plug 'rhysd/vim-github-support'
-" Trying this out for now
 Plug 'jez/vim-github-hub'
 
 " reveal last commit message (default binding: <Leader>gm)
