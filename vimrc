@@ -569,6 +569,7 @@ Plug 'tpope/vim-commentary'
 
 " {{{ Documentation
 
+" TODO: can I ditch investigate for keywordprg?
 " TODO: decide on one of these to use
 Plug 'keith/investigate.vim'
   nnoremap <leader>? :call investigate#Investigate('n')<cr>
