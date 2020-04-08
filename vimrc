@@ -689,7 +689,7 @@ Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
 " {{{ Other
 
 " For profiling startup time
-Plug 'dstein64/vim-startuptime'
+Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
 
 " Adds unix shell commands
 Plug 'tpope/vim-eunuch'
