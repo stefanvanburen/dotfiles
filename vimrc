@@ -45,10 +45,6 @@ Plug 'mhinz/vim-startify'
   " Don't change to the directory of a file when using startify
   let g:startify_change_to_dir = 0
 
-" Resizes active windows according to Golden Ratio
-" Neat idea in theory - tends to wonk things up in practice
-" Plug 'roman/golden-ratio'
-
 " replaces vim-operator-flashy
 " NOTE: Disabling for now
 " Plug 'machakann/vim-highlightedyank'
