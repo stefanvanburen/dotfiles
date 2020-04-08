@@ -459,10 +459,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Deal with parentheses, quotes, etc.
-" Plug 'tpope/vim-surround'
-" Alternative:
 Plug 'machakann/vim-sandwich'
-" Plug 'wellle/targets.vim'
 
 " Disables arrow keys, hljk, page-up / page-down to force using more specific motions
 Plug 'takac/vim-hardtime'
