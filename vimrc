@@ -599,10 +599,6 @@ Plug 'christoomey/vim-tmux-navigator'
 "         " for integration with vim-fugitive
 "         let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" Adds end, fi, esac, etc in languages where they are needed
-" TODO: either do this per filetype, or not at all
-" Plug 'tpope/vim-endwise'
-
 " Heuristically set buffer options
 " TODO: determine if not enabling this causes weird buffer options
 " Plug 'tpope/vim-sleuth'
