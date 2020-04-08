@@ -503,10 +503,6 @@ Plug 'w0rp/ale'
 " Seems like it will force certain text to all paste on one line
 " Plug 'sickill/vim-pasta'
 
-" For Java formatting
-" TODO: I suspect this is already covered in ALE
-" Plug 'rhysd/vim-clang-format'
-
 " }}}
 
 " {{{ Movement / Motions
