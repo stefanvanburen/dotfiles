@@ -346,8 +346,6 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 " Terraform
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 
-" Plug 'junegunn/vim-journal'
-
 " Python
 " Syntax
 Plug 'vim-python/python-syntax', { 'for': 'python' }
