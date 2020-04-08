@@ -510,10 +510,6 @@ Plug 'w0rp/ale'
 " TODO: I suspect this is already covered in ALE
 " Plug 'rhysd/vim-clang-format'
 
-" Plug 'google/vim-maktaba'
-" Plug 'google/vim-codefmt'
-" autocmd FileType java AutoFormatBuffer google-java-format
-
 " }}}
 
 " {{{ Movement / Motions
