@@ -80,8 +80,6 @@ Plug 'justinmk/vim-gtfo'
 nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
 " Plug 'kristijanhusak/vim-dirvish-git'
 
-" Plug 'mhinz/vim-tree'
-
 " Shows mappings, registers, etc
 Plug 'junegunn/vim-peekaboo'
 
