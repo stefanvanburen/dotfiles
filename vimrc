@@ -511,21 +511,6 @@ Plug 'w0rp/ale'
 
 " {{{ Movement / Motions
 
-" TODO: Use this more
-"Plug 'easymotion/vim-easymotion'
-  "nmap <leader>j <plug>(easymotion-j)
-  "nmap <leader>k <plug>(easymotion-k)
-  "" map  <Leader>f <Plug>(easymotion-bd-f)
-  "" nmap <Leader>f <Plug>(easymotion-overwin-f)
-  "nmap s <Plug>(easymotion-overwin-f2)
-  "let g:EasyMotion_do_mapping       = 0
-  "let g:EasyMotion_smartcase        = 1
-  ""let g:EasyMotion_use_upper        = 1
-  "let g:EasyMotion_keys             = 'asdfghjkl;qwertyuiopzxcvbnm'
-  "let g:EasyMotion_enter_jump_first = 1
-  "let g:EasyMotion_space_jump_first = 1
-  "let g:EasyMotion_startofline      = 0
-
 " Lightweight version of vim-easymotion
 " TODO: I don't really use this, and it interferes with vim-sandwich
 " Plug 'justinmk/vim-sneak'
