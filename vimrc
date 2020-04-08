@@ -212,10 +212,6 @@ Plug 'rhysd/git-messenger.vim'
 
 " {{{ Languages / Filetype
 
-" This is still a bit beta, had some issues with using it. Sticking with ALE
-" for the time being.
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-
 " fish
 " There are some more up to date forks
 " This ruined filetype detection - ensure that we've got a ftplugin/fish.vim
