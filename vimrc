@@ -335,7 +335,6 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest' }
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
-" Plug 'keith/swift.vim'
 " Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
 " Clojure
