@@ -225,17 +225,6 @@ Plug 'rhysd/git-messenger.vim'
 " Seems to have some issues itself
 " Plug 'jaxbot/github-issues.vim'
 
-" Better default for diffs
-" Turning this off completely, it seems like it's not needed anymore?
-" https://github.com/chrisbra/vim-diff-enhanced#update
-" Plug 'chrisbra/vim-diff-enhanced'
-" This has trouble when it comes to using vim as git's mergetool, so turning
-" off for now
-" started In Diff-Mode set diffexpr (plugin not loaded yet)
-" if &diff
-"     let &diffexpr='EnhancedDiff#Diff("git diff", --diff-algorithm=patience")'
-" endif
-
 " }}}
 
 " {{{ Languages / Filetype
