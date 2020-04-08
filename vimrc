@@ -438,17 +438,6 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " {{{ Completion
 
-" Plug 'ycm-core/YouCompleteMe'
-"         let g:ycm_collect_identifiers_from_tags_files = 1
-"         let g:ycm_complete_in_comments                = 1
-"         let g:ycm_key_list_select_completion = ['<C-j>']
-"         let g:ycm_key_list_previous_completion = ['<C-k>']
-"         nnoremap <C-]> :YcmCompleter GoTo<cr>
-"         " commenting this out to use virtualenv python
-"         let g:ycm_python_binary_path = '/usr/local/bin/python3'
-
-" Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
-
 " Plug 'ajh17/VimCompletesMe'
 
 if has('nvim')
@@ -1312,13 +1301,6 @@ augroup END
 augroup javascript
   autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 augroup end
-
-" " These are loaded when we first go into insert mode
-" augroup load_us_ycm
-"   autocmd!
-"   autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
-"                      \| autocmd! load_us_ycm
-" augroup END
 
 " }}}
 
