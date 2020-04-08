@@ -369,10 +369,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 
-" Org-Mode
-" I never really use orgmode...
-" Plug 'jceb/vim-orgmode'
-
 " Brewfile
 Plug 'bfontaine/Brewfile.vim'
 
