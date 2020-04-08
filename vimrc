@@ -644,10 +644,6 @@ Plug 'tpope/vim-speeddating'
 " Handy bracket ( ] and [ ) mappings
 Plug 'tpope/vim-unimpaired'
 
-" Text exchange operator (cx)
-" NOTE: I never use this
-" Plug 'tommcdo/vim-exchange'
-
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
 
