@@ -923,10 +923,6 @@ Plug 'christoomey/vim-tmux-navigator'
 "         " for integration with vim-fugitive
 "         let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" Basic support for .env and Procfile
-" TODO: I don't really use .env or Procfiles, turning off for now
-" Plug 'tpope/vim-dotenv'
-
 " Adds end, fi, esac, etc in languages where they are needed
 " TODO: either do this per filetype, or not at all
 " Plug 'tpope/vim-endwise'
