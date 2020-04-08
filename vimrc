@@ -277,8 +277,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Still isn't working with neovim, seems to hang when opening certain go files
 " Plug 'myitcv/govim', { 'for': 'go' }
 
-Plug 'buoto/gotests-vim', { 'for': 'go' }
-
 " Brewfile
 Plug 'bfontaine/Brewfile.vim'
 
