@@ -39,9 +39,6 @@ Plug 'mhinz/vim-startify'
   let g:startify_fortune_use_unicode = 1
   " update startify while vim is running
   let g:startify_update_oldfiles = 1
-  " use environment variables if they shorten path names
-  " Not terribly useful honestly
-  " let g:startify_use_env = 1
   " Don't change to the directory of a file when using startify
   let g:startify_change_to_dir = 0
 
