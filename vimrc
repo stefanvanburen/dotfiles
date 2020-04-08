@@ -364,15 +364,6 @@ Plug 'sloria/vim-ped', { 'for': 'python', 'on': 'Ped' }
 " Is this useful now that I'm using black?
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
-" Trying this again, despite the lag
-" TOO MUCH
-" Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
-" let g:pymode_python = 'python3'
-" " Turn off folding
-" let g:pymode_folding = 1
-" " match black's default
-" let g:pymode_options_max_line_length = 88
-
 Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest' }
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
