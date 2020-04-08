@@ -221,6 +221,8 @@ Plug 'maxmellon/vim-jsx-pretty'
 " typescript
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
+" Vue.js
+" TODO: Remove once I stop using Vue
 Plug 'posva/vim-vue', { 'for': 'vue' }
 
 " Markdown
