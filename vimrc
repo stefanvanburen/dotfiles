@@ -90,14 +90,12 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
     set noshowmode
     set noshowcmd
     set scrolloff=999
-    " NumbersDisable
     set nonumber
     set norelativenumber
     Limelight
     set tw=72
     set wrap
     set nolist
-    " ...
   endfunction
 
   function! s:goyo_leave()
@@ -107,11 +105,9 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
     set showcmd
     set scrolloff=5
     Limelight!
-    " NumbersEnable
     set tw=0
     set nowrap
     set list
-    " ...
   endfunction
 
   let g:goyo_linenr=1
@@ -123,11 +119,6 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
   let g:limelight_conceal_ctermfg = 'darkgray'
-
-" NOTE: I should probably use this more, but don't
-" Plug 'myusuf3/numbers.vim'
-"         nnoremap <leader>nt :NumbersToggle<cr>
-"         nnoremap <leader>no :NumbersOnOff<cr>
 
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -942,13 +933,6 @@ augroup END
 augroup window
   autocmd VimResized * :wincmd =
 augroup END
-
-" Only turn off relative number for insert mode
-" augroup every
-"   autocmd!
-"   au InsertEnter * set norelativenumber
-"   au InsertLeave * set relativenumber
-" augroup END
 
 " Go related mappings
 " All are prefixed with 'o', because 'g' is for git
