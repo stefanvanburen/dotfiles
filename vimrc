@@ -511,19 +511,21 @@ Plug 'w0rp/ale'
 
 " {{{ Movement / Motions
 
-" Lightweight version of vim-easymotion
-" TODO: I don't really use this, and it interferes with vim-sandwich
-" Plug 'justinmk/vim-sneak'
-"         let g:sneak#label = 1
-
 " Lightweight improvement of search
-" Not using because I like the "over" function of easymotion and incsearch
-" together
-" Plug 'junegunn/vim-slash'
+Plug 'junegunn/vim-slash'
+if has('timers')
+  " Blink 2 times with 50ms interval
+  noremap <expr> <plug>(slash-after) slash#blink(2, 50)
+endif
 
 " }}}
 
 " {{{ Search
+
+" Lightweight version of vim-easymotion
+" TODO: I don't really use this, and it interferes with vim-sandwich
+" Plug 'justinmk/vim-sneak'
+"         let g:sneak#label = 1
 
 Plug 'rhysd/clever-f.vim'
   let g:clever_f_mark_direct = 1
