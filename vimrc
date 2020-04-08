@@ -620,10 +620,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'machakann/vim-sandwich'
 " Plug 'wellle/targets.vim'
 
-" Disables arrow keys, hljk, page-up / page-down to force using more specific
-" motions
-" Deprecated
-" Plug 'wikitopian/hardmode'
+" Disables arrow keys, hljk, page-up / page-down to force using more specific motions
 Plug 'takac/vim-hardtime'
   " On by default
   let g:hardtime_default_on = 1
