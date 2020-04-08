@@ -590,10 +590,6 @@ Plug 'christoomey/vim-tmux-navigator'
   nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
-" Tmux basics
-" TODO: Learn how to use this
-" Plug 'tpope/vim-tbone'
-
 " Modern database interface
 " NOTE: This is cool, but I usually access databases in other ways.
 " Plug 'tpope/vim-dadbod', { 'on': 'DB' }
