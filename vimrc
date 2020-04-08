@@ -134,12 +134,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
   nmap <leader>gv :GV<cr>
 
-" https://github.com/rbong/vim-flog/issues/15
-" Git branch viewer
-Plug 'rbong/vim-flog'
-" " Gitk for vim
-" Plug 'gregsexton/gitv', {'on': ['Gitv']}
-
 Plug 'tpope/vim-fugitive'
   nmap <leader>gd :Gdiff<cr>
   " Bring up git status vertically
