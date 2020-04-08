@@ -308,19 +308,11 @@ endif
 
 " {{{ Colorschemes
 
+" Plug 'lifepillar/vim-solarized8'
 " Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
   let g:gruvbox_contrast_dark = 'hard'
   let g:gruvbox_italic = 1
-
-" Plug 'lifepillar/vim-solarized8'
-" Plug 'wadackel/vim-dogrun'
-" Plug 'sickill/vim-monokai'
-" Plug 'rakr/vim-one'
-" Plug 'rakr/vim-two-firewatch'
-" Plug 'flazz/vim-colorschemes'
-" Plug 'rhysd/vim-color-spring-night'
-" Plug 'ayu-theme/ayu-vim'
 
 " }}}
 
