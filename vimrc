@@ -906,10 +906,6 @@ Plug 'christoomey/vim-tmux-navigator'
   nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
-" NOTE: I installed this when "gx" wasn't working in vim, for whatever reason
-" It now appears to work, so there's not much use for this.
-" Plug 'tyru/open-browser.vim'
-
 " Tmux basics
 " TODO: Learn how to use this
 " Plug 'tpope/vim-tbone'
