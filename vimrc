@@ -555,10 +555,6 @@ Plug 'w0rp/ale'
   nmap <silent> [w <Plug>(ale_previous_wrap)
   nmap <silent> ]w <Plug>(ale_next_wrap)
 
-
-" NOTE: I don't use this
-" Plug 'sbdchd/neoformat'
-
 " For pasting with indentation
 " TODO: I think this plugin breaks certain pasting - investigate!
 " Seems like it will force certain text to all paste on one line
