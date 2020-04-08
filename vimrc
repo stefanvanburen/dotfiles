@@ -1454,9 +1454,6 @@ let g:netrw_liststyle = 3
 
 if executable('rg')
   set grepprg=rg\ --vimgrep
-elseif executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-  set grepprg=ag\ --nogroup\ --nocolor
 endif
 
 " Abbreviations
