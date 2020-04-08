@@ -561,17 +561,6 @@ Plug 'christoomey/vim-tmux-navigator'
   " Disable tmux navigator when zooming the Vim pane
   let g:tmux_navigator_disable_when_zoomed = 1
 
-  " Disable defaults
-  let g:tmux_navigator_no_mappings = 1
-
-  " maximzes the vertical window size when switching
-  " Add <C-w>_ if you want to maximize the window switched to
-  nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-  nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-  nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-  nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-  nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
-
 " Heuristically set buffer options
 " TODO: determine if not enabling this causes weird buffer options
 " Plug 'tpope/vim-sleuth'
