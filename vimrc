@@ -688,10 +688,6 @@ Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
 
 " {{{ Other
 
-" Hooks neovim up to the browser
-" Not much luck in getting this working, maybe later?
-" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-
 " For profiling startup time
 Plug 'dstein64/vim-startuptime'
 
