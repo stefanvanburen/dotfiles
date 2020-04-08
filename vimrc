@@ -650,6 +650,7 @@ map gy "*y
 " copy whole file to system clipboard
 nmap gY gg"*yG
 
+" always center the screen after any movement command
 nnoremap <C-d> <C-d>zz
 nnoremap <C-f> <C-f>zz
 nnoremap <C-b> <C-b>zz
@@ -751,7 +752,6 @@ augroup go
   autocmd FileType go nmap <leader>os <plug>(go-implements)
   autocmd FileType go nmap <leader>ot :GoTestFunc<cr>
   autocmd FileType go nmap <leader>ov <plug>(go-vet)
-  au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 augroup END
 
 augroup javascript
