@@ -286,10 +286,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Still isn't working with neovim, seems to hang when opening certain go files
 " Plug 'myitcv/govim', { 'for': 'go' }
 
-" Alternative to vim-go's delve integration
-" Plug 'sebdah/vim-delve'
-  " let g:delve_backend = "native"
-
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 
 " Brewfile
