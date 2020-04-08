@@ -141,7 +141,6 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'tpope/vim-vinegar'
 
 " Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'edkolev/tmuxline.vim'
 
 " }}}
 
