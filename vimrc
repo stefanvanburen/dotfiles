@@ -142,8 +142,6 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'edkolev/tmuxline.vim'
-" Not using this because I'm not using a patched font
-" Plug 'ryanoasis/vim-devicons'
 
 " }}}
 
