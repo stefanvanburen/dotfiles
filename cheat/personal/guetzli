@@ -1,2 +1,0 @@
-# guetzli every file in a directory
-for file in **/**.jpg; do guetzli "$file" "$file"; done

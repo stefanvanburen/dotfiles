@@ -1,2 +1,0 @@
-# append to $PATH
-set -Ua fish_user_paths ~/.local/bin

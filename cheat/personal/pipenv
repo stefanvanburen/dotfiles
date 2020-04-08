@@ -1,5 +1,0 @@
-# install dependencies
-pipenv install
-
-# install dependecies + dev dependencies
-pipenv install --dev
