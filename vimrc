@@ -855,11 +855,6 @@ Plug 'rhysd/clever-f.vim'
 
 Plug 'tpope/vim-commentary'
 
-" I mostly use g mappings with vim-commentary, rather than <leader> based
-" mappings in nerdcommenter
-" Plug 'scrooloose/nerdcommenter'
-" let g:NERDSpaceDelims = 1
-
 " }}}
 
 " {{{ Documentation
