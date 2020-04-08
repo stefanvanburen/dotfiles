@@ -590,10 +590,6 @@ Plug 'christoomey/vim-tmux-navigator'
   nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
-" Modern database interface
-" NOTE: This is cool, but I usually access databases in other ways.
-" Plug 'tpope/vim-dadbod', { 'on': 'DB' }
-
 " NOTE: I don't really use editorconfig
 " Plug 'editorconfig/editorconfig-vim'
 "         " for integration with vim-fugitive
