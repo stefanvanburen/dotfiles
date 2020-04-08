@@ -74,10 +74,6 @@ nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfi
 " Shows mappings, registers, etc
 Plug 'junegunn/vim-peekaboo'
 
-Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
-  nnoremap <leader>T :Vista<cr>
-  let g:vista#renderer#enable_icon = 1
-
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
   function! s:goyo_enter()
     silent !tmux set status off
@@ -124,7 +120,6 @@ Plug 'ntpeters/vim-better-whitespace'
 " {{{ Git
 
 Plug 'airblade/vim-gitgutter'
-  " NOTE: trying this provisionally
   let g:gitgutter_grep = 'rg'
 
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
