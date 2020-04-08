@@ -946,6 +946,14 @@ endif
 
 set visualbell t_vb=                " No beeping
 
+" Highlight fenced code in markdown
+" https://til.hashrocket.com/posts/e8915e62c0-highlight-markdown-fenced-code-syntax-in-vim
+let g:markdown_fenced_languages = ['html', 'vim', 'go', 'python', 'bash=sh']
+
+if executable('rg')
+  set grepprg=rg\ --vimgrep
+endif
+
 set wildmenu
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
 if has('nvim')
@@ -954,9 +962,6 @@ else
   set wildmode=list:longest,full
 endif
 set wildignorecase
-
-" Some other useful options that I'm not using
-" highlight ColorColumn ctermbg=4 ctermfg=1
 
 " }}}
 
@@ -969,25 +974,9 @@ nnoremap <silent> k gk
 vnoremap j gj
 vnoremap k gk
 
-" Lol
-" nnoremap h <nop>
-" nnoremap l <nop>
-" nnoremap j <nop>
-" nnoremap k <nop>
-
-" In practice these mappings don't do much for me - and they appear to update
-" slowly anyways, would rather just use >> and <<
-" nmap < <<
-" nmap > >>
-
 " Navigate between matching brackets
 nmap <tab> %
 
-" Handled by vim-operator-flashy
-" nmap Y :normal y$<cr>
-
-" " This is used for re-indenting after a paste
-" nnoremap p p'[v']=
 nmap <leader>/ :nohl<cr>
 
 " For editing various configuration files
@@ -995,16 +984,12 @@ nmap <leader>eg :e $HOME/.gitconfig<cr>
 " Ensure we're editing ~/.vimrc, rather than $MYVIMRC - since in neovim
 " $MYVIMRC just points to a wrapper
 nmap <leader>ev :e $HOME/.vimrc<cr>
-nmap <leader>ez :e $HOME/.zshrc<cr>
 
-" nmap <leader>q :q<cr>
 nmap <leader>w :w<cr>
 
 nmap <leader>rt :retab<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>sp :setlocal spell!<cr>
-" I basically never use this, always mistype it.
-" nmap <leader>sv :mksession<cr>
 
 nnoremap <leader>cl :close<cr>
 nnoremap <leader>ss :split<cr>
@@ -1025,17 +1010,12 @@ nnoremap Q @@
 nnoremap 0 ^
 nnoremap ^ 0
 
-" This is actually the default behavior - only different for Y
-" nnoremap D d$
-
 " Indent the whole file and return to starting position
 nnoremap g= gg=G``
 
 " https://castel.dev/post/lecture-notes-1/
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-" This seems to do weird things
-" set clipboard+=unnamedplus
 " https://til.hashrocket.com/posts/ba2afeb453-breezy-copy-to-system-clipboard-in-vim
 " copy to system clipboard
 map gy "*y
@@ -1047,46 +1027,15 @@ nnoremap <C-f> <C-f>zz
 nnoremap <C-b> <C-b>zz
 nnoremap <C-u> <C-u>zz
 
-" These are controlled by vim-tmux-navigator
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
-" nnoremap <C-h> <C-w>h
-
-
 " https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
 nnoremap <silent> <leader>S :syntax sync fromstart<CR>
 
 nnoremap <leader>V V`]
 nnoremap <leader>cc :set cc=100<cr>
 nnoremap <leader>co :set cc=""<cr>
-" This is now used for opening Dash
-" nnoremap <leader>d :bd<cr>
-" This is now used for :Files
-" nnoremap <leader>f <C-w>w
-" I don't really use this
-" nnoremap <leader>l :set list!<cr>
-" nnoremap <leader>sh <C-w>h
-" nnoremap <leader>sj <C-w>j
-" nnoremap <leader>sk <C-w>k
-" nnoremap <leader>sl <C-w>l
-" nnoremap <leader>x :Vexplore<cr>
 
-" cmap s/ s/\v
 cmap %s/ %s/\v
 cmap w!! w !sudo tee % >/dev/null
-
-" These don't make much sense
-" cnoremap jk <C-c>
-" cnoremap kj <C-c>
-
-" Bash-like keybindings
-" cnoremap <C-A> <Home>
-" cnoremap <C-E> <End>
-" cnoremap <C-K> <C-U>
-
-" cnoremap <C-P> <Up>
-" cnoremap <C-N> <Down>
 
 inoremap <silent> jk <esc>
 inoremap <silent> kj <esc>
@@ -1106,31 +1055,11 @@ vnoremap > >gv
 xnoremap < <gv
 xnoremap > >gv
 
-" Highlight fenced code in markdown
-" https://til.hashrocket.com/posts/e8915e62c0-highlight-markdown-fenced-code-syntax-in-vim
-let g:markdown_fenced_languages = ['html', 'vim', 'go', 'python', 'bash=sh']
-
-" open files in netrw in vertical split
-let g:netrw_browse_split = 2
-" take 25% of the window
-let g:netrw_winsize = 25
-" tree-style netrw
-let g:netrw_liststyle = 3
-
-if executable('rg')
-  set grepprg=rg\ --vimgrep
-endif
-
-" Abbreviations
-" Trying to match ISO 8601
-iab <expr> dts strftime("%y-%m-%d")
-
 " }}}
 
 " {{{ Highlights
 
 highlight IncSearch   ctermbg=1 ctermfg=4
-" highlight MatchParen  ctermbg=1 ctermfg=4
 highlight VertSplit   ctermbg=2
 highlight Visual      ctermbg=1 ctermfg=4
 
