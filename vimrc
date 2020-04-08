@@ -234,15 +234,6 @@ Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 " chucK
 Plug 'wilsaj/chuck.vim', { 'for': 'chuck' }
 
-" Taskwarrior
-" This isn't really maintained
-" Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
-" augroup task
-"     autocmd BufRead,BufNewFile {pending,completed,undo}.data setlocal filetype=taskdata
-"     autocmd BufRead,BufNewFile .taskrc                       setlocal filetype=taskrc
-"     autocmd BufRead,BufNewFile *.task                        setlocal filetype=taskedit
-" augroup END
-
 " Elm
 Plug 'elmcast/elm-vim', { 'for': 'elm' }
 
