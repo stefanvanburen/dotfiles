@@ -352,9 +352,6 @@ Plug 'vim-python/python-syntax', { 'for': 'python' }
   " I think this slows things down
   let g:python_highlight_all = 1
 
-" This is pretty ugly, hah
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-
 " Quickly open python modules
 Plug 'sloria/vim-ped', { 'for': 'python', 'on': 'Ped' }
 
