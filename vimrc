@@ -193,10 +193,6 @@ Plug 'tpope/vim-rhubarb'
 " NOTE: eh
 " Plug 'rhysd/github-complete.vim'
 
-" " Git branch management
-" NOTE: eh
-" Plug 'sodapopcan/vim-twiggy', { 'on': 'Twiggy' }
-
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
 
