@@ -59,14 +59,8 @@
     ~/.config/yabai/yabairc:
       create: true
       path: yabairc
-    '~/Library/Application Support/iTerm2/Scripts/AutoLaunch/darkmode.py':
-      create: true
-      path: darkmode.py
 
 - shell:
-  - touch ~/.zshrc.local
-  - touch ~/.zshenv.local
-  - touch ~/.zprofile.local
   - touch ~/.gitconfig.local
   - touch ~/.vimrc.local
   - chsh -s $(which fish)
