@@ -233,10 +233,6 @@ Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_fmt_command = 'goimports'
 
-" This is promising, but not now
-" Still isn't working with neovim, seems to hang when opening certain go files
-" Plug 'myitcv/govim', { 'for': 'go' }
-
 " Brewfile
 Plug 'bfontaine/Brewfile.vim'
 
