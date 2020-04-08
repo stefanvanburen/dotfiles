@@ -140,11 +140,6 @@ Plug 'ntpeters/vim-better-whitespace'
 " Note that netrw is disabled and we're using dirvish
 " Plug 'tpope/vim-vinegar'
 
-" Highlights the overflowing part of a line that's too long
-" NOTE: I almost never use this
-" Plug 'whatyouhide/vim-lengthmatters', { 'on': 'LengthMatters' }
-"         let g:lengthmatters_on_by_default = 0
-
 " Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'edkolev/tmuxline.vim'
 " Not using this because I'm not using a patched font
