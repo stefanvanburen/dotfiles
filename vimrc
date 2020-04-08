@@ -634,7 +634,6 @@ Plug 'rhysd/vim-syntax-christmas-tree', { 'on': 'MerryChristmas' }
 " }}}
 
 call plug#end()
-" filetype off
 filetype plugin indent on
 
 " }}}
@@ -722,7 +721,6 @@ if has('nvim')
   set inccommand=nosplit
 endif
 
-" TODO: figure these options out
 set infercase                      " For completion
 set ignorecase                     " Ignore case while searching
 set smartcase                      " ... except when capitals are used
@@ -732,15 +730,10 @@ set laststatus=2                   " Always show the last command.
 
 set lazyredraw                     " Don't redraw when using macros.
 
-" set redrawtime=500
-
 set list                           " Displays invisible characters.
 set listchars=tab:→-,eol:¬,trail:⋅
 
 set magic                          " For regex
-
-" Not really sure if this is an option anymore
-" set mat=2                          " Number of tenths of a second to blink for a match.
 
 set modeline                       " Checks the bottom 1 line for set commands for vim. See bottom of this file.
 set modelines=1
@@ -774,30 +767,14 @@ set backupdir^=~/.vim/backup//
 set undodir=~/.vim/undodir
 set undofile
 
-" use old regexpengine?
-" set regexpengine=1
-
-" number is controlled by the numbers.vim plugin
-" NOTE: I don't use numbers.vim for now, so turn this on.
-" This is controlled by an augroup below - but starts with relativenumber
-" set relativenumber
-
-" This is controlled by airline.vim
-" set ruler
-
 set scrolljump=8                   " Minimum lines to scroll when cursor is going off the screen.
 set scrolloff=3                    " Keep the cursor this many lines away from the top / bottom of screen.
 set sidescrolloff=3                " Same, but for left / right sides of the screen.
-
-" This shouldn't be needed
-" set shell=/usr/local/bin/fish
 
 set showcmd                        " Show the command as it's being typed
 set showmatch                      " Show matching brackets briefly.
 set showmode                       " Show the mode you're in on the last line. (Somewhat redundant with airline).
 set showtabline=2                  " Always show tabline.
-
-" set smartindent
 
 set splitbelow                     " On horizontal split, open the split below.
 set splitright                     " On veritcal split, open the split to the right.
