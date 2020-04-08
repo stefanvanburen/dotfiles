@@ -34,7 +34,7 @@ call plug#begin('~/.vim/plugged')
 
 " NOTE: Not _super_ useful
 Plug 'mhinz/vim-startify'
-  let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
+  let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'f': '~/.config/fish/config.fish'} ]
   " use utf-8 for fortune rather than ascii
   let g:startify_fortune_use_unicode = 1
   " update startify while vim is running
