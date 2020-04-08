@@ -775,7 +775,6 @@ augroup FT
   autocmd FileType java setlocal expandtab tabstop=2 shiftwidth=2
   autocmd FileType sh   setlocal shiftwidth=4
   autocmd FileType c    setlocal cindent
-  " autocmd FileType elixir setlocal formatprg=mix\ format\ -
   autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2
   autocmd FileType help wincmd L
   autocmd FileType asciidoc setlocal wrap
@@ -788,7 +787,6 @@ augroup FT
 augroup end
 
 augroup filetypedetect
-  autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   " Admittedly Pipfile.lock looks to be a subset of JSON but this is a start
   autocmd BufNewFile,BufRead Pipfile.lock setf json
@@ -802,8 +800,6 @@ augroup python
   autocmd Filetype python nmap <leader>ptp :Pytest project<cr>
   autocmd Filetype python nmap <leader>pts :Pytest session<cr>
   autocmd Filetype python setlocal tw=88
-  " autocmd Filetype python setlocal formatprg=black\ -q\ -
-  " autocmd Filetype python nnoremap <C-]> :ALEGoToDefinition<cr>
 augroup END
 
 " Resize splits when window is resized
