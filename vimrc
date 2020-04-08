@@ -135,6 +135,7 @@ Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
+  nmap <silent> <leader>sw :StripWhitespace<cr>
 
 " }}}
 
@@ -1107,11 +1108,6 @@ nmap <tab> %
 " " This is used for re-indenting after a paste
 " nnoremap p p'[v']=
 nmap <leader>/ :nohl<cr>
-
-" For stripping whitespace - :StripWhiteSpace is provided by vim-better-whitespace
-" nmap <leader>W :%s/\s+$//<cr>:let @/=''<cr>
-" nmap <leader>W :StripWhitespace<cr>
-nmap <leader>sw :StripWhitespace<cr>
 
 " For editing various configuration files
 nmap <leader>eg :e $HOME/.gitconfig<cr>
