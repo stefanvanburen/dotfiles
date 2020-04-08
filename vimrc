@@ -923,14 +923,6 @@ Plug 'christoomey/vim-tmux-navigator'
 "         " for integration with vim-fugitive
 "         let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" match matching matches
-" TODO: maybe this is slowing things down?
-Plug 'andymass/vim-matchup'
-  " improve cursor performance by delaying match
-  let g:matchup_matchparen_deferred = 1
-  " don't replace statusline with offscreen match
-  let g:matchup_matchparen_status_offscreen = 0
-
 " Basic support for .env and Procfile
 " TODO: I don't really use .env or Procfiles, turning off for now
 " Plug 'tpope/vim-dotenv'
