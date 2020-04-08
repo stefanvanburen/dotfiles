@@ -144,8 +144,6 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'edkolev/tmuxline.vim'
 " Not using this because I'm not using a patched font
 " Plug 'ryanoasis/vim-devicons'
-" Interferes with incsearch.vim
-" Plug 'google/vim-searchindex'
 
 " }}}
 
