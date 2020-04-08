@@ -96,13 +96,6 @@ Plug 'tpope/vim-fugitive'
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
 
-" for mergetool
-" NOTE: not using this
-" Plug 'whiteinge/diffconflicts'
-" for mergetool
-" NOTE: eh
-" Plug 'christoomey/vim-conflicted'
-
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
 
