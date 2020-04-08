@@ -80,11 +80,6 @@ endif
 " NOTE: I'd need to fork this to make it look good with solarized
 " Plug 'liuchengxu/eleline.vim'
 
-" NOTE: I don't really use this
-" Vim undo tree visualizer
-" fork of sjl/gundo.vim
-" Plug 'simnalamburt/vim-mundo'
-
 " disable netrw_
 let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
