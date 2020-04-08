@@ -373,9 +373,6 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 " " match black's default
 " let g:pymode_options_max_line_length = 88
 
-" NOTE: using ale's black integration for this, instead
-" Plug 'ambv/black', { 'on': 'Black' }
-
 Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest' }
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
