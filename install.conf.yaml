@@ -17,9 +17,6 @@
     ~/.curlrc: curlrc
     ~/.vale.ini: vale.ini
     ~/.config/topgrade.toml: topgrade.toml
-    ~/.newsbeuter/config:
-        create: true
-        path: newsbeuter_config
     ~/.config/fish/fishfile:
         create: true
         path: fishfile

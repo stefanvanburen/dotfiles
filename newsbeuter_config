@@ -1,6 +1,0 @@
-auto-reload yes
-color info black magenta
-color listfocus black magenta
-show-read-feeds no
-text-width 72
-reload-threads 4
