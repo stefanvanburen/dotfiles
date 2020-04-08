@@ -417,7 +417,6 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'lervag/vimtex'
-Plug 'ledger/vim-ledger'
 " Plug 'keith/swift.vim'
 " Plug 'zah/nimrod.vim', { 'for' : 'nim' }
 
