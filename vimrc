@@ -457,10 +457,6 @@ Plug 'takac/vim-hardtime'
   let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
   let g:hardtime_timeout = 2000
 
-" Manage session files
-" TODO: Learn to use session files
-Plug 'tpope/vim-obsession'
-
 " Repeat plugin maps
 Plug 'tpope/vim-repeat'
 
