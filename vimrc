@@ -365,8 +365,6 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest' }
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
-" This is super slow to load
-" Plug 'fisadev/vim-isort', { 'for': 'python' }
 " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 "         let g:jedi#goto_command = "<C-]>"
         " we use deoplete's jedi instead
