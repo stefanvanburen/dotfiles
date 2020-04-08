@@ -43,7 +43,7 @@ Plug 'mhinz/vim-startify'
 
 Plug 'itchyny/lightline.vim'
   let g:lightline = {
-    \ 'colorscheme': 'gruvbox',
+    \ 'colorscheme': 'seoul256',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
