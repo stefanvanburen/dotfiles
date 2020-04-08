@@ -77,9 +77,6 @@ if has('vim')
   Plug 'vim/killersheep'
 endif
 
-" NOTE: I'd need to fork this to make it look good with solarized
-" Plug 'liuchengxu/eleline.vim'
-
 " disable netrw_
 let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
