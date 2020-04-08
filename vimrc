@@ -413,8 +413,6 @@ Plug 'vim-python/python-syntax', { 'for': 'python' }
   " I think this slows things down
   let g:python_highlight_all = 1
 
-"set verbose=9
-
 " This is pretty ugly, hah
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
