@@ -81,11 +81,6 @@ endif
 " Plug 'liuchengxu/eleline.vim'
 
 " NOTE: I don't really use this
-" Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-" let g:undotree_WindowLayout = 2
-" nnoremap <leader>U :UndotreeToggle<cr>
-
-" NOTE: I don't really use this
 " Vim undo tree visualizer
 " fork of sjl/gundo.vim
 " Plug 'simnalamburt/vim-mundo'
