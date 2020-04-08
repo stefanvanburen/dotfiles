@@ -73,10 +73,6 @@ Plug 'maximbaz/lightline-ale'
   let g:lightline#ale#indicator_errors = "\uf05e"
   let g:lightline#ale#indicator_ok = "\uf00c"
 
-if has('vim')
-  Plug 'vim/killersheep'
-endif
-
 " disable netrw_
 let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
@@ -791,6 +787,17 @@ Plug 'keith/investigate.vim'
 
 " }}}
 
+" {{{ Games
+
+if has('vim')
+  Plug 'vim/killersheep'
+endif
+
+" Pong-like game
+Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
+
+" }}}
+
 " {{{ Other
 
 " Hooks neovim up to the browser
@@ -843,9 +850,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " Heuristically set buffer options
 " NOTE: Turning this back on temporarily to determine if it's reasonable
 Plug 'tpope/vim-sleuth'
-
-" Pong-like game
-Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
 
 " plugin for automatically highlighting other uses of the word under the
 " cursor
