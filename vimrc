@@ -290,10 +290,6 @@ Plug 'buoto/gotests-vim', { 'for': 'go' }
 " Brewfile
 Plug 'bfontaine/Brewfile.vim'
 
-" Logs
-" Plug 'dzeban/vim-log-syntax'
-" Plug 'andreshazard/vim-logreview'
-
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
   let g:rustfmt_autosave = 1
