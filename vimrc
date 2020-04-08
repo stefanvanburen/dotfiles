@@ -365,11 +365,6 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'alfredodeza/pytest.vim', { 'for': 'python', 'on': 'Pytest' }
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
 
-" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-"         let g:jedi#goto_command = "<C-]>"
-        " we use deoplete's jedi instead
-        " let g:jedi#completions_enabled = 0
-
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'lervag/vimtex'
 " Plug 'keith/swift.vim'
