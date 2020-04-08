@@ -215,7 +215,6 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'mattn/emmet-vim'
 
 " Javascript
-" Plug 'yuezk/vim-js', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty'
 
