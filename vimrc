@@ -549,10 +549,6 @@ Plug 'w0rp/ale'
 "         map g* <Plug>(asterisk-gz*)
 "         map g# <Plug>(asterisk-gz#)
 
-Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-  " nmap ga <plug>(EasyAlign)
-  " xmap ga <plug>(EasyAlign)
-
 " }}}
 
 " {{{ Search
