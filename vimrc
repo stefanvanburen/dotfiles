@@ -1006,9 +1006,6 @@ Plug 'tpope/vim-projectionist'
 " 🎄
 Plug 'rhysd/vim-syntax-christmas-tree', { 'on': 'MerryChristmas' }
 
-" Generates images of source code
-Plug 'segeljakt/vim-silicon'
-
 " }}}
 
 call plug#end()
