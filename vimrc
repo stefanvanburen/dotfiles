@@ -346,10 +346,6 @@ Plug 'keith/investigate.vim'
 
 " {{{ Games
 
-if has('vim')
-  Plug 'vim/killersheep'
-endif
-
 " Pong-like game
 Plug 'johngrib/vim-game-code-break', { 'on': 'VimGameCodeBreak' }
 
@@ -420,9 +416,6 @@ filetype plugin indent on
 
 " {{{ Settings
 
-" this is ignored in neovim, but should be set before colorscheme
-set t_Co=256
-
 set termguicolors
 
 colorscheme gruvbox
@@ -490,9 +483,7 @@ set history=10000                  " Save 10000 lines of command history.
 
 set incsearch                      " Incremental search
 
-if has('nvim')
-  set inccommand=nosplit
-endif
+set inccommand=nosplit
 
 set infercase                      " For completion
 set ignorecase                     " Ignore case while searching
@@ -561,16 +552,9 @@ set ttimeoutlen=50
 
 set textwidth=0
 
-" This is ignored in neovim
-set ttyfast
-
 set updatetime=100                 " Time to write swap file to disk in milliseconds, and CursorHold autocommand
 
-if has('nvim')
-  set shada='100,n$HOME/.vim/files/info/nviminfo
-else
-  set viminfo='100,n$HOME/.vim/files/info/viminfo
-endif
+set shada='100,n$HOME/.vim/files/info/nviminfo
 
 set visualbell t_vb=                " No beeping
 
@@ -584,11 +568,7 @@ endif
 
 set wildmenu
 set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
-if has('nvim')
-  set wildoptions=pum
-else
-  set wildmode=list:longest,full
-endif
+set wildoptions=pum
 set wildignorecase
 
 " }}}
@@ -759,11 +739,6 @@ augroup javascript
 augroup end
 
 " }}}
-
-if has('nvim')
-  " This has to be after plug#end
-  call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
-endif
 
 " {{{ Local Overrides
 
