@@ -123,9 +123,6 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " {{{ Git
 
-" Plug 'mhinz/vim-signify'
-
-" " This makes things a bit slow?
 Plug 'airblade/vim-gitgutter'
   " NOTE: trying this provisionally
   let g:gitgutter_grep = 'rg'
