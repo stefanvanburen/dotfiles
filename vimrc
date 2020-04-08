@@ -140,8 +140,6 @@ Plug 'ntpeters/vim-better-whitespace'
 " Note that netrw is disabled and we're using dirvish
 " Plug 'tpope/vim-vinegar'
 
-" Plug 'ctrlpvim/ctrlp.vim'
-
 " }}}
 
 " {{{ Git
