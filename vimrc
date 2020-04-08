@@ -220,7 +220,6 @@ Plug 'maxmellon/vim-jsx-pretty'
 
 " typescript
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'posva/vim-vue', { 'for': 'vue' }
 
