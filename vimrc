@@ -90,19 +90,6 @@ endif
 " fork of sjl/gundo.vim
 " Plug 'simnalamburt/vim-mundo'
 
-" NOTE: I don't really use this
-" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-"         Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-"         nnoremap <leader>N :NERDTreeToggle<cr>
-"         nnoremap <C-n> :NERDTreeToggle<cr>
-"         " Quit NERDTree on opening a file
-"         let NERDTreeQuitOnOpen = 1
-"         " Start NERDtree when starting vim
-"         " Nah
-"         " autocmd vimenter * NERDTree
-"         " Show hidden files in NERDTree
-"         let NERDTreeShowHidden=1
-
 " disable netrw_
 let loaded_netrwPlugin = 1
 Plug 'justinmk/vim-dirvish'
