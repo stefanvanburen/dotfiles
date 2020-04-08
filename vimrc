@@ -604,8 +604,8 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'tpope/vim-endwise'
 
 " Heuristically set buffer options
-" NOTE: Turning this back on temporarily to determine if it's reasonable
-Plug 'tpope/vim-sleuth'
+" TODO: determine if not enabling this causes weird buffer options
+" Plug 'tpope/vim-sleuth'
 
 " Automatic :set paste
 Plug 'ConradIrwin/vim-bracketed-paste'
