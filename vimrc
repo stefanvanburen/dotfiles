@@ -32,7 +32,6 @@ call plug#begin('~/.vim/plugged')
 
 " {{{ UI
 
-" NOTE: Not _super_ useful
 Plug 'mhinz/vim-startify'
   let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'f': '~/.config/fish/config.fish'} ]
   " use utf-8 for fortune rather than ascii
