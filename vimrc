@@ -540,12 +540,6 @@ Plug 'w0rp/ale'
 
 " {{{ Search
 
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-  " nnoremap <leader>gr :Grepper -tool git<cr>
-  " nnoremap <leader>rg :Grepper -tool rg<cr>
-  " nmap gs <plug>(GrepperOperator)
-  " xmap gs <plug>(GrepperOperator)
-
 Plug 'rhysd/clever-f.vim'
   let g:clever_f_mark_direct = 1
 
