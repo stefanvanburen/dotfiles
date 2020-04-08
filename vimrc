@@ -389,9 +389,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
-" Language pack
-" Plug 'sheerun/vim-polyglot'
-
 " }}}
 
 " {{{ Completion
