@@ -221,10 +221,6 @@ Plug 'rhysd/git-messenger.vim'
   " Normal color. This color is the most important
   hi link gitmessengerPopupNormal CursorLine
 
-" github issues
-" Seems to have some issues itself
-" Plug 'jaxbot/github-issues.vim'
-
 " }}}
 
 " {{{ Languages / Filetype
