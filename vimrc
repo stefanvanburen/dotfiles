@@ -714,11 +714,6 @@ Plug 'w0rp/ale'
 "         map g* <Plug>(asterisk-gz*)
 "         map g# <Plug>(asterisk-gz#)
 
-" Using these keymaps for ale instead
-" Plug 'haya14busa/vim-edgemotion'
-" map <C-j> <Plug>(edgemotion-j)
-" map <C-k> <Plug>(edgemotion-k)
-
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
   " nmap ga <plug>(EasyAlign)
   " xmap ga <plug>(EasyAlign)
