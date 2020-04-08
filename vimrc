@@ -89,10 +89,6 @@ nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfi
 " Shows mappings, registers, etc
 Plug 'junegunn/vim-peekaboo'
 
-" NOTE: I don't really use this
-" Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-" nnoremap <leader>T :TagbarToggle<cr>
-
 Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
   nnoremap <leader>T :Vista<cr>
   let g:vista#renderer#enable_icon = 1
