@@ -603,10 +603,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " TODO: either do this per filetype, or not at all
 " Plug 'tpope/vim-endwise'
 
-" Set the 'path' option for miscellaneous file types
-" TODO: This adds about 0.5 seconds to startup time
-" Plug 'tpope/vim-apathy'
-
 " Heuristically set buffer options
 " NOTE: Turning this back on temporarily to determine if it's reasonable
 Plug 'tpope/vim-sleuth'
