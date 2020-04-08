@@ -194,7 +194,7 @@ Plug 'rhysd/committia.vim'
 " Trying this out for now
 Plug 'jez/vim-github-hub'
 
-" reveal last commit message
+" reveal last commit message (default binding: <Leader>gm)
 Plug 'rhysd/git-messenger.vim'
   " Header such as 'Commit:', 'Author:'
   hi link gitmessengerHeader Identifier
