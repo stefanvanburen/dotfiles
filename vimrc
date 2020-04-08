@@ -531,9 +531,6 @@ Plug 'w0rp/ale'
 " Plug 'justinmk/vim-sneak'
 "         let g:sneak#label = 1
 
-" replaces incsearch.vim
-" Plug 'haya14busa/is.vim'
-
 " Lightweight improvement of search
 " Not using because I like the "over" function of easymotion and incsearch
 " together
