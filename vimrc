@@ -729,10 +729,6 @@ Plug 'w0rp/ale'
 " Plug 'google/vim-codefmt'
 " autocmd FileType java AutoFormatBuffer google-java-format
 
-" linting / make
-" Honestly, this just doesn't seem better than ale for my uses
-"Plug 'neomake/neomake'
-
 " Using ale instead
 " Plug 'vim-syntastic/syntastic'
 " let g:syntastic_vim_checkers = ['vint']
