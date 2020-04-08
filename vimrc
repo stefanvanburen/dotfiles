@@ -232,10 +232,6 @@ Plug 'rhysd/git-messenger.vim'
 " Seems to have some issues itself
 " Plug 'jaxbot/github-issues.vim'
 
-" For git files
-" This shouldn't be needed after vim 7.2
-" Plug 'tpope/vim-git'
-
 " Better default for diffs
 " Turning this off completely, it seems like it's not needed anymore?
 " https://github.com/chrisbra/vim-diff-enhanced#update
