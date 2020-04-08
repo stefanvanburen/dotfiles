@@ -185,10 +185,10 @@ Plug 'mattn/emmet-vim'
 
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'typescript.tsx', 'javascriptreact' ] }
+Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'typescriptreact', 'javascriptreact' ] }
 
 " typescript
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
 
 " Vue.js
 " TODO: Remove once I stop using Vue
@@ -820,6 +820,10 @@ augroup go
   autocmd FileType go nmap <leader>ov <plug>(go-vet)
   au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 augroup END
+
+augroup javascript
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+augroup end
 
 " }}}
 
