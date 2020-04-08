@@ -630,7 +630,7 @@ Plug 'machakann/vim-sandwich'
 " Plug 'wikitopian/hardmode'
 Plug 'takac/vim-hardtime'
   " On by default
-  let g:hardtime_default_on = 0
+  let g:hardtime_default_on = 1
   " Remove - from the list - this is for vim-dirvish
   let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
   let g:hardtime_timeout = 2000
