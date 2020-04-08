@@ -536,16 +536,6 @@ Plug 'w0rp/ale'
 " together
 " Plug 'junegunn/vim-slash'
 
-" TODO: Try this out
-" Plug 'haya14busa/vim-asterisk'
-"         " keeps position across matches
-"         let g:asterisk#keeppos = 1
-"         " these mappings stay at the current match until another motion
-"         map * <Plug>(asterisk-z*)
-"         map # <Plug>(asterisk-z#)
-"         map g* <Plug>(asterisk-gz*)
-"         map g# <Plug>(asterisk-gz#)
-
 " }}}
 
 " {{{ Search
