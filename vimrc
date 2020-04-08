@@ -690,12 +690,6 @@ Plug 'tpope/vim-sleuth'
 " TODO: figure out how to turn this on for a few filetypes
 " Plug 'reedes/vim-pencil'
 
-" Handles buffer deletion intelligently
-" This hangs on git merges :(
-" Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-" nmap <leader>q :Sayonara<cr>
-" nmap <leader>Q :Sayonara!<cr>
-
 " Automatic :set paste
 Plug 'ConradIrwin/vim-bracketed-paste'
 
