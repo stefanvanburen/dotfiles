@@ -305,10 +305,6 @@ Plug 'mattn/gist-vim', { 'for': 'gist' }
 " nginx
 Plug 'fatih/vim-nginx', { 'for': 'nginx' }
 
-" for prose
-" Not super maintained - using ale + vale & write-good instead
-" Plug 'reedes/vim-wordy'
-
 " for tmux.conf files
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 " Plug 'keith/tmux.vim'
