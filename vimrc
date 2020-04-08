@@ -308,8 +308,6 @@ endif
 
 " {{{ Colorschemes
 
-" Plug 'lifepillar/vim-solarized8'
-" Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
   let g:gruvbox_contrast_dark = 'hard'
   let g:gruvbox_italic = 1
@@ -523,15 +521,8 @@ filetype plugin indent on
 " this is ignored in neovim, but should be set before colorscheme
 set t_Co=256
 
-" For solarized8 - must be set before
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" let &t_SI = "\<Esc>[6 q"
-" let &t_SR = "\<Esc>[4 q"
-" let &t_EI = "\<Esc>[2 q"
 set termguicolors
 
-" colorscheme solarized8
 colorscheme gruvbox
 
 " set autoindent                     " Automatically indent based on previous line.
