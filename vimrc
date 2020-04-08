@@ -842,9 +842,6 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'rhysd/clever-f.vim'
   let g:clever_f_mark_direct = 1
 
-" Probably unnecessary given other tools
-" Plug 'mileszs/ack.vim'
-
 " }}}
 
 " {{{ Commenting
