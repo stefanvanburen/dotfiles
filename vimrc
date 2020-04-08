@@ -340,16 +340,6 @@ Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 " chucK
 Plug 'wilsaj/chuck.vim', { 'for': 'chuck' }
 
-" Track the engine.
-Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-  let g:UltiSnipsExpandTrigger="<TAB>"
-  let g:UltiSnipsJumpForwardTrigger="<TAB>"
-  let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
-  " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsEditSplit="vertical"
-
 " Taskwarrior
 " This isn't really maintained
 " Plug 'blindFS/vim-taskwarrior', { 'on': 'TW' }
@@ -633,7 +623,6 @@ Plug 'junegunn/fzf.vim'
   nnoremap <leader>; :BLines<CR>
   nnoremap <leader>W :Windows<CR>
   nnoremap <leader>tg :Tags<cr>
-  nnoremap <leader>sn :Snippets<cr>
   nnoremap <leader>gc :Commits!<cr>
 
   " Try this out?
