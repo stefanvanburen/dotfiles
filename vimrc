@@ -453,18 +453,6 @@ endif
 
 " }}}
 
-" {{{ Search
-
-" Lightweight version of vim-easymotion
-" TODO: I don't really use this, and it interferes with vim-sandwich
-" Plug 'justinmk/vim-sneak'
-"         let g:sneak#label = 1
-
-Plug 'rhysd/clever-f.vim'
-  let g:clever_f_mark_direct = 1
-
-" }}}
-
 " {{{ Commenting
 
 Plug 'tpope/vim-commentary'
