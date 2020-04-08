@@ -219,7 +219,6 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty'
 
 " typescript
-" Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'peitalin/vim-jsx-typescript'
 
