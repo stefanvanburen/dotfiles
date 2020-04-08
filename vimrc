@@ -196,17 +196,6 @@ Plug 'jez/vim-github-hub'
 
 " reveal last commit message (default binding: <Leader>gm)
 Plug 'rhysd/git-messenger.vim'
-  " Header such as 'Commit:', 'Author:'
-  hi link gitmessengerHeader Identifier
-
-  " Commit hash at 'Commit:' header
-  hi link gitmessengerHash Comment
-
-  " History number at 'History:' header
-  hi link gitmessengerHistory Constant
-
-  " Normal color. This color is the most important
-  hi link gitmessengerPopupNormal CursorLine
 
 " }}}
 
