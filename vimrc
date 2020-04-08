@@ -340,15 +340,9 @@ Plug 'alok/notational-fzf-vim'
 let g:ale_completion_enabled = 0
 " For linting
 Plug 'w0rp/ale'
-  " slow
-  " let g:ale_sign_error = '💥 '
-  " let g:ale_sign_warning = '🚧 '
   let g:ale_sign_error = '→'
-  " let g:ale_sign_error = '⨯⨯'
   let g:ale_sign_warning = '→'
   let g:ale_sign_info = '→'
-  " highlight clear ALEErrorSign
-  " highlight clear ALEWarningSign
   let g:ale_echo_msg_error_str = 'E'
   let g:ale_echo_msg_warning_str = 'W'
   let g:ale_echo_msg_format = '[%linter%] %s'
