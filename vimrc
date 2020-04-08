@@ -383,10 +383,6 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python', 'on': 'Coveragepy' }
         " we use deoplete's jedi instead
         " let g:jedi#completions_enabled = 0
 
-" For mypy
-" Using ALE instead
-" Plug 'Integralist/vim-mypy', { 'for': 'python' }
-
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'lervag/vimtex'
 " Plug 'keith/swift.vim'
