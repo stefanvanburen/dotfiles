@@ -590,11 +590,6 @@ Plug 'christoomey/vim-tmux-navigator'
   nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
-" NOTE: I don't really use editorconfig
-" Plug 'editorconfig/editorconfig-vim'
-"         " for integration with vim-fugitive
-"         let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
 " Heuristically set buffer options
 " TODO: determine if not enabling this causes weird buffer options
 " Plug 'tpope/vim-sleuth'
