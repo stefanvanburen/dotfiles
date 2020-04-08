@@ -445,9 +445,6 @@ if has('nvim')
   let g:deoplete#enable_at_startup = 1
 endif
 
-" ???
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-
 " }}}
 
 " {{{ Colorschemes
