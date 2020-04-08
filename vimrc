@@ -729,20 +729,6 @@ Plug 'w0rp/ale'
 " Plug 'google/vim-codefmt'
 " autocmd FileType java AutoFormatBuffer google-java-format
 
-" Using ale instead
-" Plug 'vim-syntastic/syntastic'
-" let g:syntastic_vim_checkers = ['vint']
-" let g:syntastic_go_checkers  = ['golint', 'govet', 'errcheck']
-" let g:syntastic_error_symbol   = "\u2717"
-" let g:syntastic_warning_symbol = "\u26A0"
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
 " }}}
 
 " {{{ Movement / Motions
