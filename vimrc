@@ -159,10 +159,6 @@ Plug 'tpope/vim-rhubarb'
 " NOTE: eh
 " Plug 'christoomey/vim-conflicted'
 
-" Adds completion for github
-" NOTE: eh
-" Plug 'rhysd/github-complete.vim'
-
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
 
