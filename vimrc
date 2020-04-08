@@ -215,12 +215,6 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'mattn/emmet-vim'
 
 " Javascript
-" note that prettier has docs for setting up with ALE
-" less configuration, though
-" TODO: set this up with ALE if I want to use it
-" Plug 'prettier/vim-prettier', {
-"                         \ 'do': 'yarn install',
-"                         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss']}
 " Plug 'yuezk/vim-js', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty'
