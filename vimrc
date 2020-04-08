@@ -792,13 +792,12 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
   nnoremap <leader>h :Make<cr>
 Plug 'janko/vim-test'
-  " let test#strategy = "dispatch"
+  let test#strategy = "dispatch"
   nmap <silent> t<C-n> :TestNearest<CR>
   nmap <silent> t<C-f> :TestFile<CR>
   nmap <silent> t<C-s> :TestSuite<CR>
   nmap <silent> t<C-l> :TestLast<CR>
   nmap <silent> t<C-g> :TestVisit<CR>
-  " let g:test#javascript#webdriverio#file_pattern = '\vtests?/.*\.ts$'
 
 " project
 " TODO: configure this for projects
