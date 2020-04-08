@@ -32,11 +32,6 @@ call plug#begin('~/.vim/plugged')
 
 " {{{ UI
 
-" Dim inactive panes
-" NOTE: eh, doesn't look super great - seems like limitations with vim
-" Plug 'blueyed/vim-diminactive'
-" Plug 'tmux-plugins/vim-tmux-focus-events'
-
 " NOTE: Not _super_ useful
 Plug 'mhinz/vim-startify'
   let g:startify_bookmarks = [ {'v': '~/.vimrc'}, {'z': '~/.zshrc'} ]
