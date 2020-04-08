@@ -149,7 +149,7 @@
 	; Note that $GIT_EDITOR and $VISUAL take precedence, if set
 	; editor = vim
 	untrackedCache = true
-	pager = delta --theme='Solarized (light)'
+	pager = delta
 	; pager = bat --decorations=never
 
 [credential]
