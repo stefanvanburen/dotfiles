@@ -443,19 +443,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
-
-  Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go' }
-  " Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-  "         let g:deoplete#sources#jedi#show_docstring = 1
-  "         let g:float_preview#docked = 0
-  "         let g:float_preview#max_width = 80
-  "         let g:float_preview#max_height = 40
 endif
-" else
-"   " Plug 'Shougo/deoplete.nvim'
-"   " Plug 'roxma/nvim-yarp'
-"   " Plug 'roxma/vim-hug-neovim-rpc'
-" endif
 
 " ???
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
