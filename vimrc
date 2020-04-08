@@ -532,24 +532,6 @@ Plug 'alok/notational-fzf-vim'
   let g:nv_search_paths = ['~/nv']
   nnoremap <silent> <c-s> :NV<cr>
 
-" Clap is nice, but for now fzf is just better (and faster)
-" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-"   nnoremap <leader><leader> :Clap grep<CR>
-"   nnoremap <leader><Enter> :Clap gfiles<CR>
-"   nnoremap <leader>ff :Clap files --hidden<CR>
-"   nnoremap <leader>fd :Clap filer<CR>
-"   nnoremap <leader>fb :Clap buffers<CR>
-"   nnoremap <leader>fw :Clap windows<CR>
-"   nnoremap <leader>fh :Clap history<CR>
-"   nnoremap <leader>f: :Clap command_history<CR>
-"   nnoremap <leader>fj :Clap jumps<CR>
-"   nnoremap <leader>fl :Clap blines<CR>
-"   nnoremap <leader>fL :Clap lines<CR>
-"   nnoremap <leader>ft :Clap filetypes<CR>
-"   nnoremap <leader>fm :Clap marks<CR>
-"   nnoremap <leader>fy :Clap yanks<CR>
-"   let g:clap_layout = { 'relative': 'editor' }
-
 " }}}
 
 " {{{ Linters / Syntax / Formatting
