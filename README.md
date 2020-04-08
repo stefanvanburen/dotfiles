@@ -1,6 +1,6 @@
 # Dotfiles!
 
-zsh, vim, tmux, git
+fish, vim, tmux, git
 
 I use [dotbot](https://github.com/anishathalye/dotbot) for managing my
 dotfiles. Run `./install.sh` from this directory to install the symlinks it

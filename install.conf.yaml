@@ -14,9 +14,6 @@
     ~/.vimrc: vimrc
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
-    ~/.zshrc: zshrc
-    ~/.zprofile: zprofile
-    ~/.zshenv: zshenv
     ~/.curlrc: curlrc
     ~/.vale.ini: vale.ini
     ~/.config/topgrade.toml: topgrade.toml
