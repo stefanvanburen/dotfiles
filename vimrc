@@ -982,8 +982,6 @@ set diffopt+=internal,algorithm:patience
 set fillchars=stl:^,stlnc:=,vert:\ ,fold:-,diff:-
 
 set foldenable                     " Enable folds.
-set foldmethod=marker              " Use markers for folds ({{{ and }}}).
-set foldlevelstart=99              " start off not folded
 
 " c: Auto-wrap comments using textwidth, inserting the current comment leader automatically.
 " q: Allow formatting of comments with "gq".
@@ -1400,4 +1398,4 @@ endif
 
 " }}}
 
-" vim:foldmethod=marker
+" vim: foldlevel=99:foldmethod=marker
