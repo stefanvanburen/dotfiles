@@ -1,12 +1,6 @@
 vim/undodir
 vim/plugged
-vim/init.vim
 vim/spell/en.utf-8.add*
 vim/autoload/plug.vim*
 vim/files
-vim/view
 fish_functions/*
-
-# tag files
-tags.lock
-tags.temp*
