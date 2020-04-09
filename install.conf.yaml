@@ -46,9 +46,6 @@
     ~/.config/mypy/config:
         create: true
         path: mypy.ini
-    ~/.config/cheat:
-        create: true
-        path: cheat
     ~/.config/starship.toml: starship.toml
     ~/.config/skhd/skhdrc:
       create: true
