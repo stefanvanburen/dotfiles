@@ -40,6 +40,8 @@ alias dc="docker-compose"
 
 alias git="hub"
 
+alias vim="nvim"
+
 alias b="buku -a"
 
 alias make="mmake"
