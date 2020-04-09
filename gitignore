@@ -14,40 +14,6 @@
 # ignore swap files
 *.swp
 
-*.py[cod]
-*~
-*.log
-*.class
-*.dll
-*.exe
-*.o
-*.lib
-*.a
-*.dll
-*.out
-*.so
-*.tar
-*.zip
-*.rar
-*.tgz
-*.gz
-*.iso
-*.jar
-*.war
-*.ear
-*.dmg
-*.7z
-Thumbs.db
-*.com
-*.netrwhist
-*.egg
-*.egg-info
-.project
-.DS_store
-*.dSYM
-*.ropeproject
-*~
-
 # ignore TODO files
 TODO*
 
@@ -90,14 +56,6 @@ Temporary Items
 
 
 # End of https://www.gitignore.io/api/macos
-
-
-# Python
-.pytest_cache
-.mypy_cache
-.pyre
-.pyre_configuration
-.python-version
 
 # Vim
 # session files
