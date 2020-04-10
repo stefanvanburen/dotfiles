@@ -71,8 +71,7 @@ if status --is-interactive
     abbr --add --global v $EDITOR
     abbr --add --global g git
 
-    source (pyenv init -|psub)
-    source (pyenv virtualenv-init -|psub)
+    command -q pyenv; and source (pyenv init -|psub); and source (pyenv virtualenv-init -|psub)
     source (jump shell fish | psub)
 
     starship init fish | source
