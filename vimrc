@@ -417,56 +417,23 @@ filetype plugin indent on
 " {{{ Settings
 
 set termguicolors
-
 colorscheme gruvbox
-
-" set autoindent                     " Automatically indent based on previous line.
-set expandtab                      " Convert tabs into spaces.
-
-set wrapscan                       " Wrap around the end of the buffer when searching.
-
-set autoread                       " Read changes in files during editing.
-augroup autoRead
-  autocmd!
-  autocmd CursorHold * silent! checktime
-augroup END
-
-set autowriteall                   " Write the file on a lot of different commands.
-
-set background=dark                " background shade
-
-set backspace=eol,indent,start     " Make backspacing work regularly.
-
-if !has('nvim')
-  set balloonevalterm
-  set balloondelay=250
-  set ttymouse=sgr
-endif
+set background=light
 
 " :set wrap to use this
 set breakindent
 set breakindentopt=shift:2
 set showbreak=↳
-set nowrap
 
-set cinoptions=N-s                 " For C program indentation.
-
-set cmdheight=1
-
-set completeopt-=preview
-
-set cursorline                     " Highlight the line where the cursor is
-
-set diffopt+=internal,algorithm:patience
+" Highlight the line where the cursor is
+set cursorline
 
 " statusline current ^
 " statusline not current =
 " vertical empty (escaped space)
-" fold -
-" diff -
-set fillchars=stl:^,stlnc:=,vert:\ ,fold:-,diff:-
-
-set foldenable                     " Enable folds.
+" fold: filling foldtext
+" diff: deleted lines in diff
+set fillchars=stl:^,stlnc:=,vert:\ ,fold:·,diff:-
 
 " c: Auto-wrap comments using textwidth, inserting the current comment leader automatically.
 " q: Allow formatting of comments with "gq".
@@ -475,101 +442,67 @@ set foldenable                     " Enable folds.
 " o: Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
 set formatoptions=c,q,r,j,o
 
-set gdefault                       " Global substitutions by default.
+" Global substitutions by default.
+set gdefault
 
-set hidden                         " Don't get rid of hidden buffers.
+" Don't get rid of hidden buffers.
+set hidden
 
-set history=10000                  " Save 10000 lines of command history.
-
-set incsearch                      " Incremental search
-
-set inccommand=nosplit
-
-set infercase                      " For completion
-set ignorecase                     " Ignore case while searching
-set smartcase                      " ... except when capitals are used
+" turn on incremental search
+set incsearch
+" highlight search
 set hlsearch
 
-set laststatus=2                   " Always show the last command.
+" Show the results of a substitution in a separate preview buffer
+set inccommand=split
 
-set lazyredraw                     " Don't redraw when using macros.
+" Ignore case while searching
+set ignorecase
+" ... except when capitals are used
+set smartcase
 
-set list                           " Displays invisible characters.
+" Don't redraw when using macros.
+set lazyredraw
+
+" Display invisible characters
+set list
 set listchars=tab:→-,eol:¬,trail:⋅
 
-set magic                          " For regex
+" Don't insert two spaces after punctuation with a join command.
+set nojoinspaces
 
-set modeline                       " Checks the bottom 1 line for set commands for vim. See bottom of this file.
-set modelines=1
-
-set mouse=n                        " Enable mouse for normal mode
-
-set nojoinspaces                   " Don't insert two spaces after punctuation with a join command.
-
+" Don't show the mode on the command line - it's redundant with the status line.
 set noshowmode
+" When doing a variety of movement commands (gg, C-D, C-U, C-G, etc.) _don't_
+" move the cursor automatically to the beginning of the line
 set nostartofline
 
-" Default spell checking to false; can toggle with <Leader>sp map
-set nospell
-
-" I doubt this is needed
-" set tags+=tags;$HOME               " Recurse up to HOME dir for tags
-set tags^=./.git/tags
-
 " line numbers
+" setting these both together means that the current line number is the actual
+" line number of the file, while the other line numbers are relative.
 set number
+set relativenumber
 
-set swapfile
-set directory^=~/.vim/swap//
-" protect against crash-during-write
-set writebackup
-" but do not persist backup after successful write
-set nobackup
-" use rename-and-write-new method whenever safe
-set backupcopy=auto
-set backupdir^=~/.vim/backup//
-set undodir=~/.vim/undodir
+" maintain an undofile for undoing actions through neovim loads
 set undofile
 
-set scrolljump=8                   " Minimum lines to scroll when cursor is going off the screen.
-set scrolloff=3                    " Keep the cursor this many lines away from the top / bottom of screen.
-set sidescrolloff=3                " Same, but for left / right sides of the screen.
+" Show matching brackets briefly.
+set showmatch
 
-set showcmd                        " Show the command as it's being typed
-set showmatch                      " Show matching brackets briefly.
-set showmode                       " Show the mode you're in on the last line. (Somewhat redundant with airline).
-set showtabline=2                  " Always show tabline.
+" On horizontal split, open the split below.
+set splitbelow
+" On veritcal split, open the split to the right.
+set splitright
 
-set splitbelow                     " On horizontal split, open the split below.
-set splitright                     " On veritcal split, open the split to the right.
-
-set synmaxcol=200                  " Don't syntax highlight after 200 columns (for larger files).
-
-set title                          " Set the title of the window.
-
-set ttimeout
-set ttimeoutlen=50
-
-set textwidth=0
-
-set updatetime=100                 " Time to write swap file to disk in milliseconds, and CursorHold autocommand
-
-set shada='100,n$HOME/.vim/files/info/nviminfo
-
-set visualbell t_vb=                " No beeping
+" Don't syntax highlight after 200 columns (for larger files).
+set synmaxcol=200
 
 " Highlight fenced code in markdown
 " https://til.hashrocket.com/posts/e8915e62c0-highlight-markdown-fenced-code-syntax-in-vim
 let g:markdown_fenced_languages = ['html', 'vim', 'go', 'python', 'bash=sh']
 
-if executable('rg')
-  set grepprg=rg\ --vimgrep
-endif
-
-set wildmenu
-set wildignore+=*.o,*.pyc,*.DS_STORE,*.db,*~
-set wildoptions=pum
-set wildignorecase
+" maximum popup menu height of 20 items
+set pumheight=20
 
 " }}}
 
