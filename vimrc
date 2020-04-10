@@ -133,9 +133,6 @@ Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
 " TODO: Remove once I stop using Vue
 Plug 'posva/vim-vue', { 'for': 'vue' }
 
-" Markdown
-Plug 'tpope/vim-markdown', { 'for': 'markdown' }
-
 " GraphQL
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
