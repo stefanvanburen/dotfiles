@@ -10,13 +10,6 @@ let g:mapleader = "\<Space>"
 " LocalLeader is the comma key
 let g:maplocalleader = ","
 
-" Install vim-plug if it doesn't exist.
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 " vim-plug
 nnoremap <leader>pc :PlugClean<cr>
 nnoremap <leader>pg :PlugUpgrade<cr>
@@ -28,7 +21,7 @@ nnoremap <leader>pu :PlugUpdate<cr>
 " {{{ Plugins
 
 scriptencoding utf-8
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 
 " {{{ UI
 
