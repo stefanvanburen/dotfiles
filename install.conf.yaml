@@ -7,12 +7,11 @@
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
-    ~/.vim: vim
+    ~/.config/nvim: vim
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.curlrc: curlrc
     ~/.vale.ini: vale.ini
-    ~/.config/topgrade.toml: topgrade.toml
     ~/.config/fish/fishfile:
         create: true
         path: fishfile
@@ -29,16 +28,9 @@
     ~/.config/alacritty/alacritty.yml:
         create: true
         path: alacritty.yml
-    ~/.config/isort/isort.cfg:
-        create: true
-        path: isort.cfg
-    ~/.config/flake8: flake8
     ~/.config/bat/config:
         create: true
         path: bat_config
-    ~/.config/mypy/config:
-        create: true
-        path: mypy.ini
     ~/.config/starship.toml: starship.toml
     ~/.config/skhd/skhdrc:
       create: true
