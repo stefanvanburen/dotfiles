@@ -228,40 +228,16 @@ Plug 'morhetz/gruvbox'
 
 " {{{ fzf
 
-Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all --no-update-rc' }
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
-  omap <leader><tab> <plug>(fzf-maps-o)
-  nmap <leader><tab> <plug>(fzf-maps-n)
-  xmap <leader><tab> <plug>(fzf-maps-x)
-
   nnoremap <leader><Enter> :GFiles<cr>
   nnoremap <leader>f :Files<cr>
   nnoremap <leader>gf :GFiles?<cr>
-  " nnoremap ; :Buffers<cr>
   nnoremap <leader><leader> :Buffers<cr>
-  nnoremap <leader>? :History<CR>
-  " mnemonic for command history
-  nnoremap <leader>ch :History:<CR>
-  nnoremap <leader>sh :History/<CR>
-  nnoremap <leader>m :Marks<cr>
-  nnoremap <leader>; :BLines<CR>
-  nnoremap <leader>W :Windows<CR>
-  nnoremap <leader>tg :Tags<cr>
-  nnoremap <leader>gc :Commits!<cr>
-
-  " Try this out?
-  " imap <C-x><C-l> <plug>(fzf-complete-line)
-
-  command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --smart-case --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-    \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-    \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-    \   <bang>0)
-  nnoremap <leader>se :Rg!<cr>
+  nnoremap <leader>se :Rg<cr>
+  " Empty value to disable preview window altogether
+  let g:fzf_preview_window = ''
   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-
-  " command! -bang Directories call fzf#run(fzf#wrap({'source': 'find * -type d'}))
 
 Plug 'alok/notational-fzf-vim'
   let g:nv_search_paths = ['~/nv']
