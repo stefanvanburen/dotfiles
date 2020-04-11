@@ -7,7 +7,7 @@
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
-    ~/.config/nvim: vim
+    ~/.vim: vim
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.curlrc: curlrc
