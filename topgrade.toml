@@ -1,3 +1,0 @@
-# https://github.com/r-darwish/topgrade/blob/master/config.example.toml
-# disable = ["go", "tldr", "gem", "node", "asdf"]
-only = ["packagemanagers", "rustup", "cargo", "pipx", "vim"]
