@@ -11,9 +11,6 @@ fish_vi_key_bindings
 set -gx VISUAL nvim
 set -gx EDITOR nvim
 
-# https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
-set -gx PYTHONDONTWRITEBYTECODE 1
-
 # https://github.com/sharkdp/bat#man
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
