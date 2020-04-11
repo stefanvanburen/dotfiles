@@ -58,8 +58,11 @@ let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 
 Plug 'justinmk/vim-dirvish'
-Plug 'justinmk/vim-gtfo'
-nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+
+" open URLs
+Plug 'tyru/open-browser.vim'
+  nmap gx <Plug>(openbrowser-smart-search)
+  vmap gx <Plug>(openbrowser-smart-search)
 
 " Shows mappings, registers, etc
 Plug 'junegunn/vim-peekaboo'
