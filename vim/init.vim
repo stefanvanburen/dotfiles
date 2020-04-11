@@ -209,15 +209,6 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " }}}
 
-" {{{ Completion
-
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"   let g:deoplete#enable_at_startup = 1
-" endif
-
-" }}}
-
 " {{{ Colorschemes
 
 Plug 'morhetz/gruvbox'
