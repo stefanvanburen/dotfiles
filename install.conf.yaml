@@ -1,40 +1,27 @@
 - defaults:
     link:
       relink: true
+      create: true
 
 - clean: ['~']
+
+- create:
+  - ~/.config
 
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
     ~/.config/nvim: vim
-    ~/.gitconfig: gitconfig
-    ~/.gitignore: gitignore
-    ~/.curlrc: curlrc
-    ~/.vale.ini: vale.ini
-    ~/.config/fish/fishfile:
-        create: true
-        path: fishfile
-    ~/.config/fish/config.fish:
-        create: true
-        path: config.fish
-    ~/.config/fish/functions:
-        create: true
-        path: fish_functions
-    ~/.ripgreprc: ripgreprc
-    ~/.config/alacritty/alacritty.yml:
-        create: true
-        path: alacritty.yml
-    ~/.config/bat/config:
-        create: true
-        path: bat_config
+    ~/.config/git/config: gitconfig
+    ~/.config/git/ignore: gitignore
+    ~/.config/fish/fishfile: fishfile
+    ~/.config/fish/config.fish: config.fish
+    ~/.config/fish/functions: fish_functions
+    ~/.config/alacritty/alacritty.yml: alacritty.yml
+    ~/.config/bat/config: bat_config
     ~/.config/starship.toml: starship.toml
-    ~/.config/skhd/skhdrc:
-      create: true
-      path: skhdrc
-    ~/.config/yabai/yabairc:
-      create: true
-      path: yabairc
+    ~/.config/skhd/skhdrc: skhdrc
+    ~/.config/yabai/yabairc: yabairc
 
 - shell:
   - touch ~/.gitconfig.local
