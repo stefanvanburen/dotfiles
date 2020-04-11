@@ -4,14 +4,10 @@
 
 - clean: ['~']
 
-# - create:
-#   - ~/.vim/backup
-
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
-    ~/.vim: vim
-    ~/.vimrc: vimrc
+    ~/.config/nvim: vim
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.curlrc: curlrc
@@ -20,9 +16,6 @@
     ~/.config/fish/fishfile:
         create: true
         path: fishfile
-    ~/.config/nvim/init.vim:
-        create: true
-        path: init.vim
     ~/.config/fish/config.fish:
         create: true
         path: config.fish
@@ -56,5 +49,4 @@
 
 - shell:
   - touch ~/.gitconfig.local
-  - touch ~/.vimrc.local
   - chsh -s $(which fish)
