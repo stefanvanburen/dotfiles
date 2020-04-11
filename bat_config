@@ -13,6 +13,7 @@
 
 # Add mouse scrolling support in less (does not work with older
 # versions of "less")
+# This means that less needs to be installed via homebrew, or this won't work.
 --pager="less -FR"
 
 # Use C++ syntax (instead of C) for .h header files
