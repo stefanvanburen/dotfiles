@@ -679,4 +679,4 @@ endif
 
 " }}}
 
-" vim: foldlevel=99:foldmethod=marker
+" vim: foldlevel=99:foldmethod=marker:expandtab:sw=2
