@@ -39,3 +39,4 @@
 - shell:
   - touch ~/.gitconfig.local
   - chsh -s $(which fish)
+  - ["[ -d ~/.tmux ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm", Installing tpm]

@@ -10,6 +10,14 @@ let g:mapleader = "\<Space>"
 " LocalLeader is the comma key
 let g:maplocalleader = ","
 
+let plugfile = stdpath('config') . '/autoload/plug.vim'
+
+if empty(plugfile)
+  silent !curl -fLo plugfile --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " vim-plug
 nnoremap <leader>pc :PlugClean<cr>
 nnoremap <leader>pg :PlugUpgrade<cr>
@@ -482,9 +490,7 @@ nmap <leader>/ :nohl<cr>
 
 " For editing various configuration files
 nmap <leader>eg :e $HOME/.gitconfig<cr>
-" Ensure we're editing ~/.vimrc, rather than $MYVIMRC - since in neovim
-" $MYVIMRC just points to a wrapper
-nmap <leader>ev :e $HOME/.vimrc<cr>
+nmap <leader>ev :e $MYVIMRC<cr>
 
 nmap <leader>w :w<cr>
 
