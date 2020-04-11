@@ -69,7 +69,7 @@ if status --is-interactive
     direnv hook fish | source
 
     # for iterm
-    source ~/.iterm2_shell_integration.(basename $SHELL)
+    source ~/.iterm2_shell_integration.fish
 end
 
 set PATH $VOLTA_HOME/bin $HOME/bin $HOME/go/bin $HOME/.local/bin $HOME/.cargo/bin /usr/local/sbin $PATH
