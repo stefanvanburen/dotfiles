@@ -21,9 +21,6 @@
     ~/.config/fish/functions:
         create: true
         path: fish_functions
-    ~/.lein/profiles.clj:
-        create: true
-        path: profiles.clj
     ~/.ripgreprc: ripgreprc
     ~/.config/alacritty/alacritty.yml:
         create: true
