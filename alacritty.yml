@@ -1,43 +1,14 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty it self.
-env:
-  # TERM env customization.
-  #
-  # If this property is not set, alacritty will set it to xterm-256color.
-  #
-  # Note that some xterm terminfo databases don't declare support for italics.
-  # You can verify this by checking for the presence of `smso` and `sitm` in
-  # `infocmp xterm-256color`.
-  TERM: xterm-256color
-
 # Window dimensions in character columns and lines
 # (changes require restart)
 window:
-  decorations: transparent
-  # Adds this many blank pixels of padding around the window
-  # Units are physical pixels; this is not DPI aware.
-  # (change requires restart)
-  padding:
-    x: 1
-    y: 1
-  dimensions:
-    columns: 200
-    lines: 60
+  decorations: none
 
 scrolling:
   # How many lines of scrollback to keep,
   # '0' will disable scrolling.
   history: 0
-
-  # Number of lines the viewport will move for every line
-  # scrolled when scrollback is enabled (history > 0).
-  multiplier: 3
-
-# When true, bold text is drawn using the bright variant of colors.
-draw_bold_text_with_bright_colors: true
 
 # Font configuration (changes require restart)
 font:
@@ -61,19 +32,6 @@ font:
 
   # Point size of the font
   size: 14.0
-
-  # Offset is the extra space around each character. offset.y can be thought of
-  # as modifying the linespacing, and offset.x as modifying the letter spacing.
-  offset:
-    x: 0
-    y: 0
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increase the x offset to move the glyph to
-  # the right, increase the y offset to move the glyph upward.
-  glyph_offset:
-    x: 0
-    y: 0
 
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
@@ -201,85 +159,9 @@ schemes:
 colors: *gruvbox_dark
 
 # Visual Bell
-#
-# Any time the BEL code is received, Alacritty "rings" the visual bell. Once
-# rung, the terminal background will be set to white and transition back to the
-# default background color. You can control the rate of this transition by
-# setting the `duration` property (represented in milliseconds). You can also
-# configure the transition function by setting the `animation` property.
-#
-# Possible values for `animation`
-# `Ease`
-# `EaseOut`
-# `EaseOutSine`
-# `EaseOutQuad`
-# `EaseOutCubic`
-# `EaseOutQuart`
-# `EaseOutQuint`
-# `EaseOutExpo`
-# `EaseOutCirc`
-# `Linear`
-#
 # To completely disable the visual bell, set its duration to 0.
-#
 visual_bell:
-  animation: EaseOutExpo
   duration: 0
-
-# Background opacity
-background_opacity: 1.0
-
-# Mouse bindings
-#
-# Currently doesn't support modifiers. Both the `mouse` and `action` fields must
-# be specified.
-#
-# Values for `mouse`:
-# - Middle
-# - Left
-# - Right
-# - Numeric identifier such as `5`
-#
-# Values for `action`:
-# - Paste
-# - PasteSelection
-# - Copy (TODO)
-mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
-
-mouse:
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
-
-selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
-# Cursor style
-#
-# Values for 'cursor_style':
-#   - Block
-#   - Underline
-#   - Beam
-#   Using Beam makes it difficult to see the cursor when trying to select in
-#   tmux's copy mode.
-cursor:
-  style: Beam
-
-# If this is `true`, the cursor will be rendered as a hollow box when the
-# window is not focused.
-
-# Live config reload (changes require restart)
-live_config_reload: true
-
-# Shell
-#
-# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
-# Entries in shell.args are passed unmodified as arguments to the shell.
-#
-# shell:
-#   program: /bin/bash
-#   args:
-#     - --login
 
 # Key bindings
 #
