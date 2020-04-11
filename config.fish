@@ -11,9 +11,6 @@ fish_vi_key_bindings
 set -gx VISUAL nvim
 set -gx EDITOR nvim
 
-# https://github.com/venantius/ultra/issues/108#issuecomment-522347422
-set -gx LEIN_USE_BOOTCLASSPATH no
-
 # https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
 set -gx PYTHONDONTWRITEBYTECODE 1
 
@@ -33,18 +30,11 @@ set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_CTRL_T_OPTS "--reverse --no-height --border --ansi --preview 'bat --color=always {}'"
 set -gx FZF_DEFAULT_OPTS "--height 40% --border --reverse --ansi"
 
-alias ...="cd ../.."
-alias ....="cd ../../.."
-
-alias dc="docker-compose"
-
 alias git="hub"
 
 alias vim="nvim"
 
 alias b="buku -a"
-
-alias make="mmake"
 
 alias x="extract"
 
