@@ -17,10 +17,6 @@ set -gx PYTHONDONTWRITEBYTECODE 1
 # https://github.com/sharkdp/bat#man
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
-# default git base branch
-# https://blog.jez.io/cli-code-review/
-set -gx REVIEW_BASE "master"
-
 # https://volta.sh/
 set -gx VOLTA_HOME "$HOME/.volta"
 

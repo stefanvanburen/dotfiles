@@ -7,30 +7,17 @@
 [github]
 	user = svanburen
 
-[protocol]
-	version = 2
-
 [alias]
 	; mnemonic for add
 	a = add
 	; mnemonic for add all
 	aa = add .
 
-	; show git aliases
-	aliases = config --get-regexp alias
-
-	amend = commit --amend
-
 	; mnemonic for branches
 	b = branch
-	bl = branch --list
-	branches = branch --list
 
 	; mnemonic for browse
 	br = browse
-
-	# Show branches, verbosely, sorted by last touch, with commit messages.
-	brv = "!f() { git branch --sort=-creatordate --color=always --format='%(color:reset)%(creatordate:short) %(color:bold white)%(align:2,right)%(upstream:trackshort)%(end)%(color:nobold) %(align:40,left)%(color:yellow)%(refname:short)%(end) %(color:reset)%(contents:subject)'; }; f"
 
 	; mnemonic for commit
 	c = commit
@@ -38,9 +25,6 @@
 
 	; mnemonic for checkout
 	co = checkout
-
-	cl = clone --recurse-submodules
-	ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
 
 	; mnemonic for diff
 	d = diff
@@ -51,150 +35,37 @@
 	; mnemonic for diff staged
 	ds = diff --cached
 
-	; mnemonic for diff master...
-	dm = diff master...
-
-	dw = diff --word-diff
-
-	fa = fetch --all --prune --tags
-
-	; Properly handles mistypes like `git git diff`; etc
-	git = !git
-
-	; Switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
-
-	; Use git ignore-io from git-extras
-	; ; Add an ignore file from gitignore.io; use something like `git ignore go`
-	; ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-
-	; Prettier logging
-	l = log --oneline
-	lg = log --oneline --graph --decorate
-	lga = log --oneline --graph --decorate --all
-	; only show me what is not pushed yet
-	top = log --oneline --graph --decorate @{u}..
-	; only show me what is not merged from remote yet
-	new = log --oneline --graph --decorate ..@{u}
-
-	last = log -1 HEAD
-
 	; mnemonic for mergetool
 	mt = mergetool
 
 	; mnemonic for pull
 	p = pull
-	# Get a plain-text diff, for making patches.
-	patch = "!f() { git --no-pager diff --no-color $@; }; f"
 
 	; Pushes and sets up tracking to same named branch
 	pu = push -u
 	; Safer version of push --force
 	pf = push --force-with-lease
 
-	; Open a pull-request - note that this overwrites hub's default `pr`
-	; command, which is used for viewing PRs
-	pr = "!f() { hub pull-request "$@"; }; f"
-
 	# status, short, show-branch, show stashes
-	s = status -sb --show-stash
 	st = status -sb --show-stash
 
 	; For showing stashes
-	sl = stash list
 	stashes = stash list
-	; stash show
-	ss = "!f() { git stash show stash^{/$*} -p; }; f"
-	; stash apply
-	sa = "!f() { git stash apply stash^{/$*}; }; f"
-
-	; Show submodules when I add the s
-	submodules = submodule
 
 	; mnemonic for submodule
 	su = submodule
 
 	; To unstage files, etc
-	us = reset -q HEAD --
 	unstage = reset -q HEAD --
 
-	; list files which have changed since REVIEW_BASE
-	; (REVIEW_BASE defaults to 'master' in config.fish)
-	files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
-
-	; Open all files changed since REVIEW_BASE in Vim tabs
-	; Then, run fugitive's :Gdiff in each tab, and finally
-	; tell vim-gitgutter to show +/- for changes since REVIEW_BASE
-	review = !nvim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
-
-	; Same as above, but with a diff stat instead of just names
-	; (better for interactive use)
-	stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
-
-[color]
-	ui = auto
-	diff = auto
-	status = auto
-	branch = auto
-	interactive = auto
-	grep = auto
-
-[commit]
-	; gpgsign = true
-	verbose = true
-
 [core]
-	excludesfile = ~/.gitignore
-	; This will use $EDITOR
-	; Note that $GIT_EDITOR and $VISUAL take precedence, if set
-	; editor = vim
-	untrackedCache = true
+	; brew install git-delta
 	pager = delta
-	; pager = bat --decorations=never
 
 [credential]
+	; use the keychain for git credentials
 	helper = osxkeychain
 
-[diff]
-	tool = vimdiff
-	algorithm = patience
-	noprefix = true
-
-[difftool]
-	; prompt = false
-[hub]
-	; protocol = ssh
-
-[include]
-	path = ~/.gitconfig.local
-
-[init]
-	; templatedir = ~/.git_template
-
-[merge]
-	tool = fugitive
-	ff = false
-	; conflictstyle = "diff3"
-
 [mergetool]
-	prompt = false
+	; remove all .orig files
 	keepBackup = false
-
-[pull]
-	ff = true
-
-[push]
-	default = current
-
-[icdiff]
-	options = --no-bold --line-numbers
-
-[mergetool "fugitive"]
-	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
-[fetch]
-	prune = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
