@@ -25,10 +25,10 @@ set -gx REVIEW_BASE "master"
 set -gx VOLTA_HOME "$HOME/.volta"
 
 # fzf commands
-set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git --color=always'
+set -gx FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude .git"
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-set -gx FZF_CTRL_T_OPTS "--reverse --no-height --border --ansi --preview 'bat --color=always {}'"
-set -gx FZF_DEFAULT_OPTS "--height 40% --border --reverse --ansi"
+set -gx FZF_CTRL_T_OPTS "--no-height --layout=reverse"
+set -gx FZF_DEFAULT_OPTS "--height 40% --layout=reverse"
 
 alias git="hub"
 
