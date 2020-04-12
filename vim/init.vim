@@ -110,6 +110,8 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'v2.1.2', 'do': 'bin/compile' }
   let g:conjure_log_direction = "horizontal"
 Plug 'jiangmiao/auto-pairs', { 'for': 'clojure' }
+  " We don't want ' or ` being auto-paired in clojure
+  let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"'}
 
 " Colorscheme
 Plug 'lifepillar/vim-gruvbox8'
