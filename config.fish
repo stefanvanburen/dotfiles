@@ -8,7 +8,6 @@ end
 # enable fish's vi key bindings
 fish_vi_key_bindings
 
-set -gx VISUAL nvim
 set -gx EDITOR nvim
 
 # https://github.com/sharkdp/bat#man
@@ -46,7 +45,7 @@ function sudo!!
     eval sudo $history[1]
 end
 
-alias vimrc="$EDITOR ~/.vimrc"
+alias vimrc="$EDITOR ~/.config/nvim/init.vim"
 alias fishrc="$EDITOR ~/.config/fish/config.fish"
 
 if status --is-interactive
@@ -55,11 +54,11 @@ if status --is-interactive
     abbr --add --global g git
 
     command -q pyenv; and source (pyenv init -|psub); and source (pyenv virtualenv-init -|psub)
-    source (jump shell fish | psub)
+    command -q jump; and source (jump shell fish | psub)
 
-    starship init fish | source
+    command -q starship; and starship init fish | source
 
-    direnv hook fish | source
+    command -q direnv; and direnv hook fish | source
 
     # for iterm
     source ~/.iterm2_shell_integration.fish
