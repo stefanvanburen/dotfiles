@@ -112,9 +112,7 @@ Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'v2.1.2', 'do': 'bin/compile' 
 Plug 'jiangmiao/auto-pairs', { 'for': 'clojure' }
 
 " Colorscheme
-Plug 'morhetz/gruvbox'
-  let g:gruvbox_contrast_dark = 'hard'
-  let g:gruvbox_italic = 1
+Plug 'lifepillar/vim-gruvbox8'
 
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
@@ -176,7 +174,7 @@ Plug 'tpope/vim-abolish'
 call plug#end()
 
 set termguicolors
-colorscheme gruvbox
+colorscheme gruvbox8
 set background=light
 
 " :set wrap to use this
