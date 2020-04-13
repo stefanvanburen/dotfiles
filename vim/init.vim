@@ -154,6 +154,9 @@ Plug 'christoomey/vim-tmux-navigator'
 " Deal with parentheses, quotes, etc.
 Plug 'machakann/vim-sandwich'
 
+" heuristically set buffer options
+Plug 'tpope/vim-sleuth'
+
 " Repeat plugin maps
 Plug 'tpope/vim-repeat'
 
