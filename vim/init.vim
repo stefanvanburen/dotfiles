@@ -23,15 +23,6 @@ nnoremap <leader>pu :PlugUpdate<cr>
 scriptencoding utf-8
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'mhinz/vim-startify'
-  let g:startify_bookmarks = [ {'v': '~/.config/nvim/init.vim'}, {'f': '~/.config/fish/config.fish'} ]
-  " use utf-8 for fortune rather than ascii
-  let g:startify_fortune_use_unicode = 1
-  " update startify while vim is running
-  let g:startify_update_oldfiles = 1
-  " Don't change to the directory of a file when using startify
-  let g:startify_change_to_dir = 0
-
 Plug 'itchyny/lightline.vim'
 
 " disable netrw_
