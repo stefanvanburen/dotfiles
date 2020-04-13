@@ -44,8 +44,10 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'ntpeters/vim-better-whitespace'
   nmap <silent> <leader>sw :StripWhitespace<cr>
 
+" displays git changes in the gutter
+" also installs hunk operations, prefixed with <leader>h
+" :help gitgutter-mappings
 Plug 'airblade/vim-gitgutter'
-  let g:gitgutter_grep = 'rg'
 
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
   nmap <leader>gv :GV<cr>
