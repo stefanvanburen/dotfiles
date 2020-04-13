@@ -79,13 +79,11 @@ Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 
 " Go
-" make sure to do :GoInstallBinaries on new systems
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_fmt_command = 'goimports'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-  let g:rustfmt_autosave = 1
 
 " for tmux.conf files
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
@@ -100,9 +98,8 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 " Clojure
 Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'v2.1.2', 'do': 'bin/compile' }
   let g:conjure_log_direction = "horizontal"
+" Automatically match parenthesis
 Plug 'jiangmiao/auto-pairs', { 'for': 'clojure' }
-  " We don't want ' or ` being auto-paired in clojure
-  let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"'}
 
 " Colorscheme
 Plug 'lifepillar/vim-gruvbox8'
