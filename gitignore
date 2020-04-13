@@ -2,11 +2,10 @@
 .direnv
 .envrc
 
-# ignore my rgignore files
-.rgignore
-
 # ignore my personal .ignore files
 .ignore
+.fdignore
+.rgignore
 
 # ignore my own pre-commit hooks
 .pre-commit-config.yaml
@@ -20,43 +19,14 @@ TODO*
 # ignore NOTES files
 NOTES*
 
+# neo(vim)
+# session files
+Session.vim
+
 # ignore tags files
 tags
 tags.lock
 tags.temp*
 
-# Created by https://www.gitignore.io/api/macos
-
-### macOS ###
+# macOS
 *.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-
-# End of https://www.gitignore.io/api/macos
-
-# Vim
-# session files
-Session.vim
