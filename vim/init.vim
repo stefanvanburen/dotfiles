@@ -170,11 +170,11 @@ call plug#end()
 
 set termguicolors
 colorscheme gruvbox8
-set background=light
 
-" :set wrap to use this
+" on lines that will wrap, they instead 'break' and be visually indented by
+" the showbreak character, followed by the indent.
 set breakindent
-set breakindentopt=shift:2
+set breakindentopt=shift:2,sbr
 set showbreak=↳
 
 " Highlight the line where the cursor is
@@ -200,6 +200,10 @@ set inccommand=split
 set ignorecase
 " ... except when capitals are used
 set smartcase
+
+" how long to wait in milliseconds before writing to disk
+" this is set lower to help plugins like vim-gitgutter update their signs
+set updatetime=100
 
 " Helps when doing insert-mode completion
 set infercase
@@ -234,6 +238,11 @@ set splitbelow
 " On veritcal split, open the split to the right.
 set splitright
 
+" cobbled from https://github.com/liuchengxu/vim-better-default/blob/6acbe5236238340e64164f5823d1319886b88868/plugin/default.vim#L43
+" o: disables
+" c: no ins-completion-menu messages
+set shortmess=atOIoc
+
 " Don't syntax highlight after 200 columns (for larger files).
 set synmaxcol=200
 
@@ -244,6 +253,15 @@ let g:markdown_fenced_languages = ['html', 'vim', 'go', 'python', 'bash=sh']
 " maximum popup menu height of 20 items
 set pumheight=20
 
+" turn on mouse support
+set mouse=a
+
+" always use the clipboard for operations
+set clipboard+=unnamedplus
+
+" allows moving the cursor to where there is no actual character
+set virtualedit=all
+
 nnoremap ; :
 
 nnoremap <silent> j gj
@@ -252,25 +270,24 @@ vnoremap j gj
 vnoremap k gk
 
 " Navigate between matching brackets
-nmap <tab> %
-
-nmap <silent> <leader>/ :nohl<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " edit init.vim
-nmap <silent> <leader>ev :e $MYVIMRC<cr>
+nnoremap <silent> <leader>ev :e $MYVIMRC<cr>
 
-nmap <leader>w :w<cr>
+nnoremap <leader>w :w<cr>
 
-nmap <leader>so :source $MYVIMRC<cr>
-nmap <leader>sp :setlocal spell!<cr>
+nnoremap <leader>so :source $MYVIMRC<cr>
+nnoremap <leader>sp :setlocal spell!<cr>
 
 nnoremap <silent> <leader>cl :close<cr>
 nnoremap <silent> <leader>ss :split<cr>
 nnoremap <silent> <leader>vs :vsplit<cr>
 
+" tab mappings
 nnoremap <silent> ]r :tabn<cr>
 nnoremap <silent> [r :tabp<cr>
-
 nnoremap <silent> <leader>tn :tabnew<cr>
 
 " Use Q to repeat last macro, rather than going into ex mode
@@ -283,9 +300,6 @@ nnoremap Q @@
 nnoremap 0 ^
 nnoremap ^ 0
 
-" always use the clipboard for operations
-set clipboard+=unnamedplus
-
 " always center the screen after any movement command
 nnoremap <C-d> <C-d>zz
 nnoremap <C-f> <C-f>zz
@@ -294,8 +308,6 @@ nnoremap <C-u> <C-u>zz
 
 inoremap <silent> jk <esc>
 inoremap <silent> kj <esc>
-
-vmap <tab> %
 
 " Keep the cursor in place while joining lines
 nnoremap J mzJ`z
