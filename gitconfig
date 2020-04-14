@@ -67,5 +67,5 @@
 	helper = osxkeychain
 
 [mergetool]
-	; remove all .orig files
+	; remove all .orig files when using the mergetool
 	keepBackup = false
