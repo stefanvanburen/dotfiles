@@ -154,6 +154,9 @@ Plug 'machakann/vim-sandwich'
 " heuristically set buffer options
 Plug 'tpope/vim-sleuth'
 
+" Session file management
+Plug 'tpope/vim-obsession'
+
 " Repeat plugin maps
 Plug 'tpope/vim-repeat'
 
