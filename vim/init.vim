@@ -62,6 +62,9 @@ Plug 'jez/vim-github-hub'
 " reveal last commit message (default binding: <Leader>gm)
 Plug 'rhysd/git-messenger.vim'
 
+" auto-close HTML tags
+Plug 'alvan/vim-closetag'
+
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'typescriptreact', 'javascriptreact' ] }
