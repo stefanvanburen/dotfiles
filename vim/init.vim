@@ -134,6 +134,9 @@ if has('timers')
   noremap <expr> <plug>(slash-after) slash#blink(2, 50)
 endif
 
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
+
 " Commenting
 Plug 'tpope/vim-commentary'
 
