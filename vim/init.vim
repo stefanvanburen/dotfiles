@@ -30,7 +30,9 @@ Plug 'itchyny/lightline.vim'
 " providing the backend for :Gbrowse for futivie
 Plug 'justinmk/vim-dirvish'
 
-" Shows mappings, registers, etc
+" Shows registers in a sidebar
+" Access via '"' or '@' in normal mode, or <C-r> in insert mode
+" Toggle fullscreen with <space>
 Plug 'junegunn/vim-peekaboo'
 
 " Better whitespace highlighting / provides :StripWhitespace
@@ -39,6 +41,7 @@ Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'mhinz/vim-signify'
 
+" Git commit browser
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
   nnoremap <leader>gv :GV<cr>
 
@@ -313,6 +316,10 @@ xnoremap > >gv
 
 " Resize splits when window is resized
 augroup window
+  " deletes old autocommands - this prevents autocommands being defined twice
+  " when vim is reloaded
+  " help :augroup-delete
+  autocmd!
   autocmd VimResized * :wincmd =
 augroup END
 
