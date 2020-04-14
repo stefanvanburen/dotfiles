@@ -25,17 +25,10 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'itchyny/lightline.vim'
 
-" disable netrw_
-" :help netrw-noload
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
-
+" directory / file viewer. Largely replaces netrw.
+" netrw still loads as it's useful for it's `gx` binding for opening URLs, and
+" providing the backend for :Gbrowse for futivie
 Plug 'justinmk/vim-dirvish'
-
-" open URLs
-Plug 'tyru/open-browser.vim'
-  nmap gx <Plug>(openbrowser-smart-search)
-  vmap gx <Plug>(openbrowser-smart-search)
 
 " Shows mappings, registers, etc
 Plug 'junegunn/vim-peekaboo'
