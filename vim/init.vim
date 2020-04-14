@@ -35,7 +35,7 @@ Plug 'junegunn/vim-peekaboo'
 
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
-  nmap <silent> <leader>sw :StripWhitespace<cr>
+  nnoremap <silent> <leader>sw :StripWhitespace<cr>
 
 " displays git changes in the gutter
 " also installs hunk operations, prefixed with <leader>h
@@ -43,12 +43,12 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
-  nmap <leader>gv :GV<cr>
+  nnoremap <leader>gv :GV<cr>
 
 Plug 'tpope/vim-fugitive'
-  nmap <leader>gd :Gdiff<cr>
+  nnoremap <leader>gd :Gdiff<cr>
   " Bring up git status vertically
-  nmap <silent> <leader>gs :vertical Git<cr>
+  nnoremap <silent> <leader>gs :vertical Git<cr>
 
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
@@ -104,9 +104,7 @@ Plug 'lifepillar/vim-gruvbox8'
 
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
-  nnoremap <leader><Enter> :GFiles<cr>
-  nnoremap <leader>f :Files<cr>
-  nnoremap <leader>gf :GFiles?<cr>
+  nnoremap <leader><Enter> :Files<cr>
   nnoremap <leader><leader> :Buffers<cr>
   nnoremap <leader>se :Rg<cr>
   " Empty value to disable preview window altogether
@@ -126,8 +124,8 @@ Plug 'w0rp/ale'
   let g:ale_echo_msg_format = '[%linter%] %s'
 
   nnoremap <silent> <leader>af :ALEFix<cr>
-  nmap <silent> [w <Plug>(ale_previous_wrap)
-  nmap <silent> ]w <Plug>(ale_next_wrap)
+  nnoremap <silent> [w <Plug>(ale_previous_wrap)
+  nnoremap <silent> ]w <Plug>(ale_next_wrap)
 
 " Lightweight improvement of search
 Plug 'junegunn/vim-slash'
@@ -272,7 +270,9 @@ vnoremap <tab> %
 " edit init.vim
 nnoremap <silent> <leader>ev :e $MYVIMRC<cr>
 
-nnoremap <leader>w :w<cr>
+" save
+" :update only writes if there are changes
+nnoremap <leader>w :update<cr>
 
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <leader>sp :setlocal spell!<cr>
@@ -301,6 +301,8 @@ nnoremap <C-d> <C-d>zz
 nnoremap <C-f> <C-f>zz
 nnoremap <C-b> <C-b>zz
 nnoremap <C-u> <C-u>zz
+
+nnoremap <silent> <leader>/ :nohlsearch<cr>
 
 inoremap <silent> jk <esc>
 inoremap <silent> kj <esc>
