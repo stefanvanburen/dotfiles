@@ -62,8 +62,8 @@ Plug 'jez/vim-github-hub'
 " reveal last commit message (default binding: <Leader>gm)
 Plug 'rhysd/git-messenger.vim'
 
-" auto-close HTML tags
-Plug 'alvan/vim-closetag'
+" HTML5
+Plug 'othree/html5.vim'
 
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -94,10 +94,11 @@ Plug 'vim-python/python-syntax', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Clojure
-Plug 'Olical/conjure', { 'for': 'clojure', 'tag': 'v2.1.2', 'do': 'bin/compile' }
+Plug 'Olical/conjure', { 'for': 'clojure', 'branch': 'develop' }
   let g:conjure_log_direction = "horizontal"
+
 " Automatically match parenthesis
-Plug 'jiangmiao/auto-pairs', { 'for': 'clojure' }
+Plug 'tmsvg/pear-tree'
 
 " Colorscheme
 Plug 'lifepillar/vim-gruvbox8'
@@ -149,7 +150,7 @@ Plug 'christoomey/vim-tmux-navigator'
   let g:tmux_navigator_disable_when_zoomed = 1
 
 " Deal with parentheses, quotes, etc.
-Plug 'machakann/vim-sandwich'
+Plug 'tpope/vim-surround'
 
 " heuristically set buffer options
 Plug 'tpope/vim-sleuth'
@@ -162,6 +163,8 @@ Plug 'tpope/vim-repeat'
 
 " Handy bracket ( ] and [ ) mappings
 Plug 'tpope/vim-unimpaired'
+
+Plug 'andymass/vim-matchup'
 
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
