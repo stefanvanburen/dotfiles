@@ -270,18 +270,20 @@ vnoremap j gj
 vnoremap k gk
 
 " Navigate between matching brackets
-nnoremap <tab> %
-vnoremap <tab> %
+" These are specifically not `noremap`s because we want to be bound to
+" whatever % is (usually a plugin).
+nmap <tab> %
+vmap <tab> %
 
 " edit init.vim
 nnoremap <silent> <leader>ev :e $MYVIMRC<cr>
 
 " save
 " :update only writes if there are changes
-nnoremap <leader>w :update<cr>
+nnoremap <silent> <leader>w :update<cr>
 
-nnoremap <leader>so :source $MYVIMRC<cr>
-nnoremap <leader>sp :setlocal spell!<cr>
+nnoremap <silent> <leader>so :source $MYVIMRC<cr>
+nnoremap <silent> <leader>sp :setlocal spell!<cr>
 
 nnoremap <silent> <leader>cl :close<cr>
 nnoremap <silent> <leader>ss :split<cr>
