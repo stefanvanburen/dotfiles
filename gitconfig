@@ -66,6 +66,9 @@
 	; use the keychain for git credentials
 	helper = osxkeychain
 
+[push]
+	default = current
+
 [mergetool]
 	; remove all .orig files when using the mergetool
 	keepBackup = false
