@@ -72,3 +72,10 @@
 [mergetool]
 	; remove all .orig files when using the mergetool
 	keepBackup = false
+
+[merge]
+	tool = fugitive
+
+[mergetool "fugitive"]
+	cmd = nvim -c \"Gdiff\" \"$MERGED\"
+
