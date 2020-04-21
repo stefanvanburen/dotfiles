@@ -106,6 +106,7 @@ Plug 'lifepillar/vim-gruvbox8'
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
   nnoremap <leader><Enter> :Files<cr>
+  nnoremap <leader>f :GitFiles<cr>
   nnoremap <leader><leader> :Buffers<cr>
   nnoremap <leader>se :Rg<cr>
   " Empty value to disable preview window altogether
@@ -284,6 +285,8 @@ nnoremap <silent> <leader>ev :e $MYVIMRC<cr>
 " save
 " :update only writes if there are changes
 nnoremap <silent> <leader>w :update<cr>
+
+nnoremap <silent> <leader>q :q<cr>
 
 nnoremap <silent> <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <leader>sp :setlocal spell!<cr>
