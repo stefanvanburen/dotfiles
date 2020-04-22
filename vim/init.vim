@@ -93,6 +93,9 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'vim-python/python-syntax', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
+" Asciidoc{,tor}
+Plug 'habamax/vim-asciidoctor'
+
 " Clojure
 Plug 'Olical/conjure', { 'for': 'clojure', 'branch': 'develop' }
   let g:conjure_log_direction = "horizontal"
