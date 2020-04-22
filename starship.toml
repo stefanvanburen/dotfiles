@@ -15,3 +15,6 @@ disabled = true
 
 [nodejs]
 disabled = true
+
+[ruby]
+disabled = true
