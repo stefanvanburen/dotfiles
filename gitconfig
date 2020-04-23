@@ -69,6 +69,10 @@
 [push]
 	default = current
 
+[pull]
+	; prefer rebasing when pulling from remote, rather than merging
+	rebase = true
+
 [mergetool]
 	; remove all .orig files when using the mergetool
 	keepBackup = false
