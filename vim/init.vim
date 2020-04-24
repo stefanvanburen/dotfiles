@@ -50,7 +50,7 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'ntpeters/vim-better-whitespace'
   nnoremap <silent> <leader>sw :StripWhitespace<cr>
 
-Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
 
 " Git commit browser
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
