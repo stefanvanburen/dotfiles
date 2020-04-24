@@ -257,16 +257,6 @@ set splitright
 " c: no ins-completion-menu messages
 set shortmess=atOIoc
 
-" Don't syntax highlight after 200 columns (for larger files).
-set synmaxcol=200
-
-" Highlight fenced code in markdown
-" https://til.hashrocket.com/posts/e8915e62c0-highlight-markdown-fenced-code-syntax-in-vim
-let g:markdown_fenced_languages = ['html', 'vim', 'go', 'python', 'bash=sh']
-
-" maximum popup menu height of 20 items
-set pumheight=20
-
 " turn on mouse support
 set mouse=a
 
