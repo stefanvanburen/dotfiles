@@ -111,7 +111,7 @@ Plug 'habamax/vim-asciidoctor'
 Plug 'Olical/conjure', { 'for': 'clojure', 'branch': 'develop' }
 
 " Automatically match parenthesis
-Plug 'tmsvg/pear-tree'
+Plug  'jiangmiao/auto-pairs'
 
 " Colorscheme
 Plug 'huyvohcmc/atlas.vim'
