@@ -150,7 +150,7 @@ if has('timers')
 endif
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_at_startup = 1
 
 " Commenting
 Plug 'tpope/vim-commentary'
