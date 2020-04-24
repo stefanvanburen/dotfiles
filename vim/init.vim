@@ -109,7 +109,6 @@ Plug 'habamax/vim-asciidoctor'
 
 " Clojure
 Plug 'Olical/conjure', { 'for': 'clojure', 'branch': 'develop' }
-  let g:conjure_log_direction = "horizontal"
 
 " Automatically match parenthesis
 Plug 'tmsvg/pear-tree'
