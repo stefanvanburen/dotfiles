@@ -1,9 +1,9 @@
 # NOTE: bat _must_ have less installed via homebrew to function
 
 # GitHub looks better on light themes
-# --theme="GitHub"
+--theme="GitHub"
 # Nord looks better on dark themes
---theme="Nord"
+# --theme="Nord"
 
 # Show line numbers, Git modifications and file header (but no grid)
 --style="numbers,changes,header"

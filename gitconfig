@@ -60,7 +60,7 @@
 
 [core]
 	; brew install git-delta
-	pager = delta
+	pager = delta --light
 
 [credential]
 	; use the keychain for git credentials
