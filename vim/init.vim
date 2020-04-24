@@ -34,6 +34,7 @@ scriptencoding utf-8
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'itchyny/lightline.vim'
+  let g:lightline = { 'colorscheme': 'atlas' }
 
 " directory / file viewer. Largely replaces netrw.
 " netrw still loads as it's useful for it's `gx` binding for opening URLs, and
@@ -114,7 +115,7 @@ Plug 'Olical/conjure', { 'for': 'clojure', 'branch': 'develop' }
 Plug 'tmsvg/pear-tree'
 
 " Colorscheme
-Plug 'lifepillar/vim-gruvbox8'
+Plug 'huyvohcmc/atlas.vim'
 
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
@@ -186,7 +187,7 @@ Plug 'tpope/vim-abolish'
 call plug#end()
 
 set termguicolors
-colorscheme gruvbox8
+colorscheme atlas
 
 " on lines that will wrap, they instead 'break' and be visually indented by
 " the showbreak character, followed by the indent.
