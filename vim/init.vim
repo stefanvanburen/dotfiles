@@ -1,5 +1,15 @@
 " init dot vim
 
+" we're never going to install these providers
+let g:loaded_python_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+
+let g:python3_host_skip_check = 1
+if executable('python3')
+  let g:python3_host_prog = exepath('python3')
+endif
+
 syntax enable
 
 " Leader is space key
