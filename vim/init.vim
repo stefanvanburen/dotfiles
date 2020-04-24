@@ -194,9 +194,6 @@ set breakindent
 set breakindentopt=shift:2,sbr
 set showbreak=↳
 
-" Highlight the line where the cursor is
-set cursorline
-
 " statusline current ^
 " statusline not current =
 " vertical empty (escaped space)
