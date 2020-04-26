@@ -34,7 +34,9 @@ scriptencoding utf-8
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'itchyny/lightline.vim'
-  let g:lightline = { 'colorscheme': 'atlas' }
+  let g:lightline = { 'colorscheme': 'ayu_light' }
+
+Plug 'machakann/vim-highlightedyank'
 
 " directory / file viewer. Largely replaces netrw.
 " netrw still loads as it's useful for it's `gx` binding for opening URLs, and
@@ -114,7 +116,7 @@ Plug 'Olical/conjure', { 'for': 'clojure', 'branch': 'develop' }
 Plug  'jiangmiao/auto-pairs'
 
 " Colorscheme
-Plug 'huyvohcmc/atlas.vim'
+Plug 'p7g/vim-bow-wob'
 
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
@@ -131,12 +133,12 @@ Plug 'alok/notational-fzf-vim'
   nnoremap <silent> <c-s> :NV<cr>
 
 Plug 'w0rp/ale'
-  let g:ale_sign_error = '→'
+  let g:ale_sign_error = '×'
   let g:ale_sign_warning = '→'
   let g:ale_sign_info = '→'
   let g:ale_echo_msg_error_str = 'E'
   let g:ale_echo_msg_warning_str = 'W'
-  let g:ale_echo_msg_format = '[%linter%] %s'
+  let g:ale_echo_msg_format = '%linter% %severity% (%code%): %s'
 
   nnoremap <silent> <leader>af :ALEFix<cr>
   nnoremap <silent> [w <Plug>(ale_previous_wrap)
@@ -183,7 +185,8 @@ Plug 'tpope/vim-abolish'
 call plug#end()
 
 set termguicolors
-colorscheme atlas
+set background=light
+colorscheme bow-wob
 
 " on lines that will wrap, they instead 'break' and be visually indented by
 " the showbreak character, followed by the indent.
@@ -211,6 +214,9 @@ set inccommand=split
 set ignorecase
 " ... except when capitals are used
 set smartcase
+
+" Copy the indent of existing lines when autoindenting
+set copyindent
 
 " how long to wait in milliseconds before writing to disk
 " this is set lower to help plugins like vim-gitgutter update their signs
