@@ -1,6 +1,6 @@
 " init dot vim
 
-" we're never going to install these providers
+" I'm never going to install these providers
 let g:loaded_python_provider = 0
 let g:loaded_ruby_provider = 0
 let g:loaded_node_provider = 0
@@ -32,6 +32,9 @@ nnoremap <leader>pu :PlugUpdate<cr>
 
 scriptencoding utf-8
 call plug#begin(stdpath('data') . '/plugged')
+
+" colorscheme
+Plug 'lifepillar/vim-colortemplate'
 
 Plug 'itchyny/lightline.vim'
   let g:lightline = { 'colorscheme': 'ayu_light' }
@@ -115,9 +118,6 @@ Plug 'Olical/conjure', { 'for': 'clojure', 'branch': 'develop' }
 " Automatically match parenthesis
 Plug  'jiangmiao/auto-pairs'
 
-" Colorscheme
-Plug 'p7g/vim-bow-wob'
-
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
   nnoremap <leader><Enter> :Files<cr>
@@ -186,7 +186,7 @@ call plug#end()
 
 set termguicolors
 set background=light
-colorscheme bow-wob
+colorscheme rams
 
 " on lines that will wrap, they instead 'break' and be visually indented by
 " the showbreak character, followed by the indent.
@@ -199,7 +199,7 @@ set showbreak=↳
 " vertical empty (escaped space)
 " fold: filling foldtext
 " diff: deleted lines in diff
-set fillchars=stl:^,stlnc:=,vert:\ ,fold:·,diff:-
+set fillchars=stl:^,stlnc:=,vert:│,fold:·,diff:-
 
 " Global substitutions by default.
 set gdefault
@@ -255,7 +255,7 @@ set splitbelow
 " On veritcal split, open the split to the right.
 set splitright
 
-" cobbled from https://github.com/liuchengxu/vim-better-default/blob/6acbe5236238340e64164f5823d1319886b88868/plugin/default.vim#L43
+" cobbled from https://github.com/liuchengxu/vim-better-default
 " o: disables
 " c: no ins-completion-menu messages
 set shortmess=atOIoc
