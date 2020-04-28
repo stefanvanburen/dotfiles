@@ -43,7 +43,7 @@ Plug 'machakann/vim-highlightedyank'
 
 " directory / file viewer. Largely replaces netrw.
 " netrw still loads as it's useful for it's `gx` binding for opening URLs, and
-" providing the backend for :Gbrowse for futivie
+" providing the backend for :Gbrowse for fugitive
 Plug 'justinmk/vim-dirvish'
 
 " Shows registers in a sidebar
@@ -56,6 +56,7 @@ Plug 'ntpeters/vim-better-whitespace'
   nnoremap <silent> <leader>sw :StripWhitespace<cr>
 
 Plug 'airblade/vim-gitgutter'
+  let g:gitgutter_sign_modified = '▵'
 
 " Git commit browser
 Plug 'junegunn/gv.vim', { 'on': ['GV'] }
@@ -136,13 +137,15 @@ Plug 'w0rp/ale'
   let g:ale_sign_error = '×'
   let g:ale_sign_warning = '→'
   let g:ale_sign_info = '→'
-  let g:ale_echo_msg_error_str = 'E'
-  let g:ale_echo_msg_warning_str = 'W'
-  let g:ale_echo_msg_format = '%linter% %severity% (%code%): %s'
+  let g:ale_echo_msg_format = '%linter%: %s'
+
+  " TODO: Trying this provisionally
+  let g:ale_virtualtext_cursor = 1
+  let g:ale_virtualtext_prefix = '∴ '
 
   nnoremap <silent> <leader>af :ALEFix<cr>
-  nnoremap <silent> [w <Plug>(ale_previous_wrap)
-  nnoremap <silent> ]w <Plug>(ale_next_wrap)
+  nmap <silent> [w <Plug>(ale_previous_wrap)
+  nmap <silent> ]w <Plug>(ale_next_wrap)
 
 " Lightweight improvement of search
 Plug 'junegunn/vim-slash'
@@ -207,8 +210,8 @@ set gdefault
 " Don't get rid of hidden buffers.
 set hidden
 
-" Show the results of a substitution in a separate preview buffer
-set inccommand=split
+" Show substitution results incrementally
+set inccommand=nosplit
 
 " Ignore case while searching
 set ignorecase
@@ -229,7 +232,7 @@ set infercase
 set lazyredraw
 
 " Display invisible characters
-set list
+set nolist
 set listchars=tab:→-,eol:¬,trail:⋅
 
 " Don't insert two spaces after punctuation with a join command.

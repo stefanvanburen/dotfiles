@@ -19,7 +19,7 @@ Include: _help.colortemplate
 # }}}
 
 # Global definitions - put at the top of the colorscheme {{{
-QuickFixLine         ->  Search
+QuickFixLine         -> Search
 StatusLineTerm       -> StatusLine
 StatusLineTermNC     -> StatusLineNC
 Boolean              -> Constant
@@ -53,32 +53,25 @@ lCursor              -> Cursor
 Background: dark
 
 # Color palette for dark variant {{{
-# Color name                GUI                  Base256    Base16 (optional)
-Color: black                rgb( 57,  71,  89)     ~        Black
-Color: red                  rgb(255,  49,   0)     ~        DarkRed
-Color: white                rgb(235, 235, 235)     ~        LightGrey
+# Color name                GUI                  Base256    Base16
+Color: black                rgb(  8,   8,   8)     ~        none
+Color: accent               rgb(255,  61,  88)     ~        none
+Color: white                rgb(235, 235, 235)     ~        none
 # }}}
 
 # Terminal colors for dark variant {{{
-Term colors: black red red red red red red white
-Term colors: black red red red red red red white
+Term colors: black accent accent accent accent accent accent white
+Term colors: black accent accent accent accent accent accent white
 # }}}
 
 # Definitions common to all variants {{{
-Variant: gui
-#if get(g:, '@optionprefix_transp_bg', 0) && !has('gui_running')
-Variant: 256 8
-#if get(g:, '@optionprefix_transp_bg', 0)
 Variant: gui 256 8
-    Normal           white             none
-    Terminal         white             none
-#else
-    Normal           white             black
-    Terminal         white             black
-#endif
+
+Normal           white             black
+Terminal         white             black
 
 # Group              Foreground        Background        Attributes
-ColorColumn          fg                black
+ColorColumn          white             black
 Conceal              none              none
 Cursor               white             black
 CursorColumn         white             black
@@ -95,7 +88,7 @@ FoldColumn           white             black
 Folded               white             black             italic
 IncSearch            white             black             bold,reverse
 LineNr               white             black
-MatchParen           red               black
+MatchParen           accent            black             bold,reverse
 ModeMsg              white             black
 MoreMsg              white             black
 NonText              white             black
@@ -104,21 +97,22 @@ PmenuSbar            white             black
 PmenuSel             white             black
 PmenuThumb           white             black
 Question             white             black
-Search               white             black
+Search               white             black             bold,reverse
 SignColumn           white             black
 SpecialKey           white             black
-SpellBad             white             black             s=red
-SpellCap             white             black             s=red
-SpellLocal           white             black             s=red
-SpellRare            white             black             s=red reverse
+SpellBad             accent            black             undercurl
+SpellCap             white             black
+SpellLocal           white             black
+SpellRare            white             black
 StatusLine           white             black
 StatusLineNC         white             black
+Substitute           accent            black             bold,reverse
 TabLine              white             black
 TabLineFill          white             black
 TabLineSel           white             black
 Title                white             black
 VertSplit            white             black
-Visual               white             black            reverse
+Visual               white             black             reverse
 VisualNOS            white             black
 WarningMsg           white             black
 WildMenu             white             black
@@ -126,12 +120,12 @@ WildMenu             white             black
 Comment              white             none              italic
 Constant             white             none
 Error                white             black             reverse
-Identifier           white             none
+Identifier           white             none              bold
 Ignore               white             none
 PreProc              white             none
 Special              white             none
-Statement            white             none
-Todo                 white             none
+Statement            white             none              bold
+Todo                 accent            none              bold,underline
 Type                 white             none
 Underlined           white             none
 # See `:help CursorIM`
@@ -143,37 +137,42 @@ ToolbarButton        white             black             bold
 
 # Additional highlight groups {{{
 # Add additional highlight groups here if you want
+
+# w0rp/ale
+ALEError                         accent none underline
+ALEWarning                       accent none underline
+ALEInfo                          accent none underline
+ALEErrorSign                     accent none
+ALEWarningSign                   accent none
+ALEInfoSign                      accent none
+
+# vim-better-whitespace
+ExtraWhitespace -> SpellBad
+
 # }}}
 
 Background: light
 
 # Color palette for light variant {{{
-# Color name                GUI                  Base256    Base16 (optional)
-Color: black                rgb( 83,  88,  95)     ~        Black
-Color: red                  rgb(255,  49,   0)     ~        DarkRed
-Color: white                rgb(235, 235, 235)     ~        LightGrey
+# Color name                GUI                  Base256    Base16
+Color: black                rgb( 83,  88,  95)     ~        none
+Color: accent               rgb(255,  49,   0)     ~        none
+Color: white                rgb(235, 235, 235)     ~        none
 # }}}
 
 # Terminal colors for light variant {{{
-Term colors: black red red red red red red white
-Term colors: black red red red red red red white
+Term colors: black accent accent accent accent accent accent white
+Term colors: black accent accent accent accent accent accent white
 # }}}
 
 # Definitions common to all variants {{{
-Variant: gui
-#if get(g:, '@optionprefix_transp_bg', 0) && !has('gui_running')
-Variant: 256 8
-#if get(g:, '@optionprefix_transp_bg', 0) && !has('gui_running')
 Variant: gui 256 8
-    Normal           black             none
-    Terminal         black             none
-#else
-    Normal           black             white
-    Terminal         black             white
-#endif
+
+Normal           black             white
+Terminal         black             white
 
 # Group              Foreground        Background        Attributes
-ColorColumn          fg                black
+ColorColumn          white             black
 Conceal              none              none
 Cursor               black             white
 CursorColumn         black             white
@@ -190,7 +189,7 @@ FoldColumn           black             white
 Folded               black             white             italic
 IncSearch            black             white             bold,reverse
 LineNr               black             white
-MatchParen           red               white             reverse
+MatchParen           white             accent            bold,reverse
 ModeMsg              black             white
 MoreMsg              black             white
 NonText              black             white
@@ -199,15 +198,16 @@ PmenuSbar            black             white
 PmenuSel             black             white
 PmenuThumb           black             white
 Question             black             white
-Search               black             white
+Search               black             white             bold,reverse
 SignColumn           black             white
 SpecialKey           black             white
-SpellBad             black             white             s=red
-SpellCap             black             white             s=red
-SpellLocal           black             white             s=red
-SpellRare            black             white             s=red reverse
+SpellBad             accent            white             undercurl
+SpellCap             black             white
+SpellLocal           black             white
+SpellRare            black             white
 StatusLine           black             white
 StatusLineNC         black             white
+Substitute           accent            white             bold,reverse
 TabLine              black             white
 TabLineFill          black             white
 TabLineSel           black             white
@@ -221,12 +221,12 @@ WildMenu             black             white
 Comment              black             none              italic
 Constant             black             none
 Error                black             white             reverse
-Identifier           black             none
+Identifier           black             none              bold
 Ignore               black             none
 PreProc              black             none
 Special              black             none
-Statement            black             none
-Todo                 black             none
+Statement            black             none              bold
+Todo                 accent            none              bold,underline
 Type                 black             none
 Underlined           black             none
 # See `:help CursorIM`
@@ -238,6 +238,18 @@ ToolbarButton        black             white             bold
 
 # Additional highlight groups {{{
 # Add additional highlight groups here if you want
+
+# w0rp/ale
+ALEError                         accent none underline
+ALEWarning                       accent none underline
+ALEInfo                          accent none underline
+ALEErrorSign                     accent none
+ALEWarningSign                   accent none
+ALEInfoSign                      accent none
+
+# vim-better-whitespace
+ExtraWhitespace -> SpellBad
+
 # }}}
 
 Background: any
