@@ -37,7 +37,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'lifepillar/vim-colortemplate'
 
 Plug 'itchyny/lightline.vim'
-  let g:lightline = { 'colorscheme': 'ayu_light' }
+  let g:lightline = { 'colorscheme': 'PaperColor' }
 
 Plug 'machakann/vim-highlightedyank'
 
@@ -191,6 +191,8 @@ set termguicolors
 set background=light
 colorscheme rams
 
+set nowrap
+
 " on lines that will wrap, they instead 'break' and be visually indented by
 " the showbreak character, followed by the indent.
 set breakindent
@@ -266,8 +268,15 @@ set shortmess=atOIoc
 " turn on mouse support
 set mouse=a
 
-" always use the clipboard for operations
+" always use the system clipboard for operations
 set clipboard+=unnamedplus
+
+" Convenience for automatic formatting.
+"   t - auto-wrap text by respecting textwidth
+"   c - auto-wrap comments by respecting textwidth
+"   r - auto-insert comment leading after <CR> in insert mode
+"   o - auto-insert comment leading after O in normal mode
+set formatoptions=tcro
 
 " allows moving the cursor to where there is no actual character
 set virtualedit=all
