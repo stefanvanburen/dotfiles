@@ -10,8 +10,9 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.tmux.conf: tmux.conf
+    ~/.config/tmux/tmux.conf: tmux.conf
     ~/.config/nvim: vim
+    ~/.config/topgrade.toml: topgrade.toml
     ~/.config/git/config: gitconfig
     ~/.config/git/ignore: gitignore
     ~/.config/fish/config.fish: config.fish
