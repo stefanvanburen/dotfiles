@@ -114,7 +114,7 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'habamax/vim-asciidoctor'
 
 " Clojure
-Plug 'Olical/conjure', { 'for': 'clojure', 'branch': 'develop' }
+Plug 'Olical/conjure', { 'for': 'clojure' }
 
 " Automatically match parenthesis
 Plug  'jiangmiao/auto-pairs'
