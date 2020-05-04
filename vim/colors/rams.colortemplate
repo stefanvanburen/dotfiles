@@ -155,9 +155,12 @@ Background: light
 
 # Color palette for light variant {{{
 # Color name                GUI                  Base256    Base16
-Color: black                rgb( 83,  88,  95)     ~        none
-Color: accent               rgb(255,  49,   0)     ~        none
+Color: black                rgb( 38,  43,  49)     ~        none
 Color: white                rgb(235, 235, 235)     ~        none
+Color: grey                 rgb(107, 112, 120)     ~        none
+Color: accent               rgb(238,  72,  62)     ~        none
+Color: green                rgb(174, 255, 139)     ~        none
+Color: red                  rgb(255, 114, 110)     ~        none
 # }}}
 
 # Terminal colors for light variant {{{
@@ -178,9 +181,9 @@ Cursor               black             white
 CursorColumn         black             white
 CursorLine           black             white
 CursorLineNr         black             white
-DiffAdd              black             white             reverse
+DiffAdd              black             green
 DiffChange           black             white             reverse
-DiffDelete           black             white             reverse
+DiffDelete           black             red
 DiffText             black             white             bold,reverse
 Directory            black             white
 EndOfBuffer          black             white
@@ -218,7 +221,7 @@ VisualNOS            black             white
 WarningMsg           black             white
 WildMenu             black             white             reverse
 # Other conventional group names (see `:help group-name`)
-Comment              black             none              italic
+Comment              grey              none              italic
 Constant             black             none
 Error                black             white             reverse
 Identifier           black             none              bold
