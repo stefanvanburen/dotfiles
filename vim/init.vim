@@ -275,11 +275,10 @@ set mouse=a
 set clipboard+=unnamedplus
 
 " Convenience for automatic formatting.
-"   t - auto-wrap text by respecting textwidth
-"   c - auto-wrap comments by respecting textwidth
 "   r - auto-insert comment leading after <CR> in insert mode
 "   o - auto-insert comment leading after O in normal mode
-set formatoptions=tcro
+set formatoptions+=r
+set formatoptions+=o
 
 " allows moving the cursor to where there is no actual character
 set virtualedit=all
