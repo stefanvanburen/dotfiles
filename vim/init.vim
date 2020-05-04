@@ -34,10 +34,10 @@ scriptencoding utf-8
 call plug#begin(stdpath('data') . '/plugged')
 
 " colorscheme
-Plug 'lifepillar/vim-colortemplate'
+Plug 'lifepillar/vim-colortemplate', { 'for': 'colortemplate' }
 
 Plug 'itchyny/lightline.vim'
-  let g:lightline = { 'colorscheme': 'PaperColor' }
+  let g:lightline = { 'colorscheme': 'ayu_light' }
 
 Plug 'machakann/vim-highlightedyank'
 
@@ -71,16 +71,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 " Enhances git commit writing
-Plug 'rhysd/committia.vim'
+Plug 'rhysd/committia.vim', { 'for': 'gitcommit' }
 
 " github filetype
 Plug 'jez/vim-github-hub'
 
 " reveal last commit message (default binding: <Leader>gm)
-Plug 'rhysd/git-messenger.vim'
+Plug 'rhysd/git-messenger.vim', { 'on': 'GitMessenger' }
 
 " HTML5
-Plug 'othree/html5.vim'
+Plug 'othree/html5.vim', { 'for': 'html' }
 
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -88,10 +88,6 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascriptreact', 'typescriptreact'
 
 " typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': [ 'typescript', 'typescriptreact' ] }
-
-" Vue.js
-" TODO: Remove once I stop using Vue
-Plug 'posva/vim-vue', { 'for': 'vue' }
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -111,7 +107,7 @@ Plug 'vim-python/python-syntax', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Asciidoc{,tor}
-Plug 'habamax/vim-asciidoctor'
+Plug 'habamax/vim-asciidoctor', { 'for': 'asciidoctor' }
 
 " Clojure
 Plug 'Olical/conjure', { 'for': 'clojure' }
@@ -129,7 +125,7 @@ Plug 'junegunn/fzf.vim'
   let g:fzf_preview_window = ''
   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
-Plug 'alok/notational-fzf-vim'
+Plug 'alok/notational-fzf-vim', { 'on': 'NV' }
   let g:nv_search_paths = ['~/nv']
   nnoremap <silent> <c-s> :NV<cr>
 
