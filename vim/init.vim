@@ -139,6 +139,9 @@ Plug 'w0rp/ale'
   let g:ale_sign_info = '→'
   let g:ale_echo_msg_format = '%linter%: %s'
 
+  " In general, this is the right thing to do.
+  let g:ale_fix_on_save = 1
+
   " TODO: Trying this provisionally
   let g:ale_virtualtext_cursor = 1
   let g:ale_virtualtext_prefix = '∴ '
