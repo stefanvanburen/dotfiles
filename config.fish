@@ -3,8 +3,8 @@ fish_vi_key_bindings
 
 set -gx EDITOR nvim
 
-# https://github.com/sharkdp/bat#man
-set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -gx MANPAGER 'nvim +Man!'
+set -gx MANWIDTH 999
 
 # https://volta.sh/
 set -gx VOLTA_HOME "$HOME/.volta"
