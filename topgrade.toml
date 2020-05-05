@@ -1,5 +1,0 @@
-# Do not ask to retry failed steps (default: false)
-no_retry = true
-
-# Arguments to pass Git when pulling Repositories
-git_arguments = "--rebase --autostash"
