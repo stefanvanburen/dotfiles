@@ -140,7 +140,6 @@ Plug 'w0rp/ale'
   " In general, this is the right thing to do.
   let g:ale_fix_on_save = 1
 
-  " TODO: Trying this provisionally
   let g:ale_virtualtext_cursor = 1
   let g:ale_virtualtext_prefix = '∴ '
 
@@ -173,7 +172,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
 
 " heuristically set buffer options
-Plug 'tpope/vim-sleuth'
+" Plug 'tpope/vim-sleuth'
 
 " Repeat plugin maps
 Plug 'tpope/vim-repeat'
@@ -340,6 +339,7 @@ inoremap <silent> kj <esc>
 nnoremap J mzJ`z
 
 " similar to vmap but only for visual mode - NOT select mode
+" maintains the currently visual selection between invocations of '<' and '>'
 xnoremap < <gv
 xnoremap > >gv
 
