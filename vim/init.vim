@@ -109,6 +109,8 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 " Asciidoc{,tor}
 Plug 'habamax/vim-asciidoctor', { 'for': 'asciidoctor' }
 
+Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
+
 " Clojure
 Plug 'Olical/conjure', { 'for': 'clojure' }
 
