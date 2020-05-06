@@ -291,6 +291,7 @@ set splitright
 set shortmess=atOIoc
 
 " turn on mouse support
+" this is useful for resizing windows, using the mouse wheel to scroll, etc
 set mouse=a
 
 " always use the system clipboard for operations
