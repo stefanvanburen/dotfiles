@@ -195,7 +195,7 @@ LineNr               black             white
 MatchParen           white             accent            bold,reverse
 ModeMsg              black             white
 MoreMsg              black             white
-NonText              black             white
+NonText              grey              white
 Pmenu                black             white
 PmenuSbar            black             white
 PmenuSel             black             white             reverse
