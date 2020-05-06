@@ -92,7 +92,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 " Enhances git commit writing
-Plug 'rhysd/committia.vim', { 'for': 'gitcommit' }
+Plug 'rhysd/committia.vim'
 
 " github filetype
 Plug 'jez/vim-github-hub'
