@@ -79,6 +79,7 @@ Plug 'junegunn/gv.vim', { 'on': ['GV'] }
   nnoremap <leader>gv :GV<cr>
 
 Plug 'tpope/vim-fugitive'
+  nnoremap <leader>gb :Gbrowse<cr>
   nnoremap <leader>gd :Gdiff<cr>
   " Bring up git status vertically
   nnoremap <silent> <leader>gs :vertical Git<cr>
@@ -207,6 +208,7 @@ set termguicolors
 set background=light
 colorscheme rams
 
+" don't wrap by default
 set nowrap
 
 " on lines that will wrap, they instead 'break' and be visually indented by
@@ -214,6 +216,9 @@ set nowrap
 set breakindent
 set breakindentopt=shift:2,sbr
 set showbreak=↳
+
+" when using > and <, round the indent to a multiple of shiftwidth
+set shiftround
 
 " statusline current ^
 " statusline not current =
@@ -250,8 +255,8 @@ set infercase
 set lazyredraw
 
 " Display invisible characters
-set nolist
-set listchars=tab:→-,eol:¬,trail:⋅,extends:»,precedes:«,nbsp:␣
+set list
+set listchars=tab:→\ ,eol:¬,extends:»,precedes:«,nbsp:␣
 
 " Don't insert two spaces after punctuation with a join command.
 set nojoinspaces
