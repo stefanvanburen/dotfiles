@@ -21,6 +21,11 @@ let g:loaded_tarPlugin        = 1
 let g:loaded_vimballPlugin    = 1
 let g:loaded_zipPlugin        = 1
 
+" always reset autocmds when sourcing vimrc
+augroup vimrc
+  autocmd!
+augroup END
+
 syntax enable
 
 " Leader is space key
@@ -355,12 +360,11 @@ xnoremap < <gv
 xnoremap > >gv
 
 " Resize splits when window is resized
-augroup window
-  " deletes old autocommands - this prevents autocommands being defined twice
-  " when vim is reloaded
-  " help :augroup-delete
-  autocmd!
-  autocmd VimResized * :wincmd =
-augroup END
+" Uses the vimrc augroup
+autocmd vimrc VimResized * :wincmd =
+
+" only show trailing characters when not in insert mode
+autocmd vimrc InsertEnter * set listchars-=trail:⣿
+autocmd vimrc InsertLeave * set listchars+=trail:⣿
 
 " vim: foldlevel=99:foldmethod=marker:expandtab:sw=2
