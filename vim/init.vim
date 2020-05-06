@@ -215,6 +215,10 @@ colorscheme rams
 " don't wrap by default
 set nowrap
 
+" if wrap is set, break on characters in 'breakat' rather than the last
+" character that will fit on the screen.
+" This _should_ mean that lines generally break on words
+set linebreak
 " on lines that will wrap, they instead 'break' and be visually indented by
 " the showbreak character, followed by the indent.
 set breakindent
@@ -306,8 +310,11 @@ set formatoptions+=o
 " allows moving the cursor to where there is no actual character
 set virtualedit=all
 
+" I don't use ';' often enough
 nnoremap ; :
 
+" always move by visual lines, rather than real lines
+" this is useful when 'wrap' is set.
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 vnoremap j gj
@@ -315,7 +322,7 @@ vnoremap k gk
 
 " Navigate between matching brackets
 " These are specifically not `noremap`s because we want to be bound to
-" whatever % is (usually a plugin).
+" whatever % is (usually a plugin, matchit / matchup).
 nmap <tab> %
 vmap <tab> %
 
@@ -358,6 +365,7 @@ nnoremap <C-u> <C-u>zz
 
 nnoremap <silent> <leader>/ :nohlsearch<cr>
 
+" easier way to exit insert mode - pressing 'jk' or 'kj' quickly
 inoremap <silent> jk <esc>
 inoremap <silent> kj <esc>
 
