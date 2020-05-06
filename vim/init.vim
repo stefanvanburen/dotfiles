@@ -51,6 +51,10 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " colorscheme
 Plug 'lifepillar/vim-colortemplate', { 'for': 'colortemplate' }
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+  " virtual is cool, but it only works for one color per line (the first one detected)
+  let g:Hexokinase_highlighters = ['background']
+  let g:Hexokinase_ftEnabled = ['css', 'colortemplate']
 
 Plug 'itchyny/lightline.vim'
   let g:lightline = { 'colorscheme': 'ayu_light' }
