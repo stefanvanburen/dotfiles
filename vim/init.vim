@@ -138,6 +138,9 @@ Plug 'Olical/conjure', { 'for': 'clojure' }
 " Automatically match parenthesis
 Plug  'jiangmiao/auto-pairs'
 
+" Search
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
   nnoremap <leader><Enter> :Files<cr>
