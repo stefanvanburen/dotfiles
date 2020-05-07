@@ -145,8 +145,6 @@ Plug  'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
   nnoremap <leader>g :Grepper -tool git<cr>
   nnoremap <leader>G :Grepper -tool rg<cr>
-  nmap gs <plug>(GrepperOperator)
-  xmap gs <plug>(GrepperOperator)
 
 " Fuzzy find
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
