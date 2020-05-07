@@ -10,7 +10,7 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.config/tmux/tmux.conf: tmux.conf
+    ~/.tmux.conf: tmux.conf
     ~/.config/nvim: vim
     ~/.config/git/config: gitconfig
     ~/.config/git/ignore: gitignore
