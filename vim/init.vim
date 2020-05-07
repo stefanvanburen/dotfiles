@@ -132,6 +132,7 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 " Asciidoc{,tor}
 Plug 'habamax/vim-asciidoctor', { 'for': 'asciidoctor' }
 
+" Lisp-y languages?
 Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " Clojure
@@ -143,6 +144,7 @@ Plug  'jiangmiao/auto-pairs'
 " Search
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
+" Fuzzy find
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
   nnoremap <leader><Enter> :Files<cr>
@@ -153,10 +155,12 @@ Plug 'junegunn/fzf.vim'
   let g:fzf_preview_window = ''
   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
+  " Note access
 Plug 'alok/notational-fzf-vim', { 'on': 'NV' }
   let g:nv_search_paths = ['~/nv']
   nnoremap <silent> <c-s> :NV<cr>
 
+" Linting / fixing
 Plug 'w0rp/ale'
   let g:ale_sign_error = '×'
   let g:ale_sign_warning = '→'
