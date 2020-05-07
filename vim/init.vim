@@ -112,7 +112,9 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': [ 'typescript', 'typescriptreact' 
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  let g:go_fmt_command = 'goimports'
+  let g:go_fmt_command = 'gopls'
+  let g:go_imports_mode = 'gopls'
+  let g:go_imports_autosave = 1
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
