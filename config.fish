@@ -26,9 +26,6 @@ function sudo!!
     eval sudo $history[1]
 end
 
-alias vimrc="$EDITOR ~/.config/nvim/init.vim"
-alias fishrc="$EDITOR ~/.config/fish/config.fish"
-
 if status --is-interactive
     alias git="hub"
 
@@ -36,12 +33,9 @@ if status --is-interactive
     abbr --add --global v $EDITOR
     abbr --add --global g git
 
-    # https://github.com/sharkdp/bat
-    # Note that bat is configured in the bat_config file in dotfiles
-    alias cat="bat"
-
-
     alias vim="nvim"
+    alias vimrc="$EDITOR ~/.config/nvim/init.vim"
+    alias fishrc="$EDITOR ~/.config/fish/config.fish"
 
     alias x="extract"
 
@@ -54,6 +48,10 @@ if status --is-interactive
 
     abbr --add --global m 'make'
     command -q mmake; and alias make="mmake"
+
+    # https://github.com/sharkdp/bat
+    # Note that bat is configured in the bat_config file in dotfiles
+    command -q bat; and alias cat="bat"
 
     command -q buku; and abbr --add --global b 'buku -a'
 
