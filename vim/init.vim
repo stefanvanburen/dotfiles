@@ -143,6 +143,10 @@ Plug  'jiangmiao/auto-pairs'
 
 " Search
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+  nnoremap <leader>g :Grepper -tool git<cr>
+  nnoremap <leader>G :Grepper -tool rg<cr>
+  nmap gs <plug>(GrepperOperator)
+  xmap gs <plug>(GrepperOperator)
 
 " Fuzzy find
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
@@ -260,6 +264,9 @@ set smartcase
 
 " Copy the indent of existing lines when autoindenting
 set copyindent
+
+" Search with rg using :grep
+set grepprg=rg\ --vimgrep
 
 " how long to wait in milliseconds before writing to disk
 " this is set lower to help plugins like vim-gitgutter update their signs
