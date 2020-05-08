@@ -15,6 +15,7 @@ let g:loaded_2html_plugin     = 1
 let g:loaded_getscriptPlugin  = 1
 let g:loaded_gzip             = 1
 let g:loaded_logipat          = 1
+let g:loaded_matchit          = 1
 let g:loaded_rrhelper         = 1
 let g:loaded_spellfile_plugin = 1
 let g:loaded_tarPlugin        = 1
@@ -50,15 +51,17 @@ scriptencoding utf-8
 call plug#begin(stdpath('data') . '/plugged')
 
 " colorscheme
-Plug 'lifepillar/vim-colortemplate', { 'for': 'colortemplate' }
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'lifepillar/vim-colortemplate', { 'on': 'ColorTemplate', 'for': 'colortemplate' }
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'colortemplate'] }
   " virtual is cool, but it only works for one color per line (the first one detected)
   let g:Hexokinase_highlighters = ['background']
   let g:Hexokinase_ftEnabled = ['css', 'colortemplate']
 
+" status line
 Plug 'itchyny/lightline.vim'
   let g:lightline = { 'colorscheme': 'ayu_light' }
 
+" highlight yanked text briefly
 Plug 'machakann/vim-highlightedyank'
 
 " directory / file viewer. Largely replaces netrw.
@@ -132,14 +135,13 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 " Asciidoc{,tor}
 Plug 'habamax/vim-asciidoctor', { 'for': 'asciidoctor' }
 
-" Lisp-y languages?
-Plug 'guns/vim-sexp' | Plug 'tpope/vim-sexp-mappings-for-regular-people'
-
 " Clojure
 Plug 'Olical/conjure', { 'for': 'clojure' }
+Plug 'guns/vim-sexp', { 'for': 'clojure' }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 
 " Automatically match parenthesis
-Plug  'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " Search
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
@@ -200,15 +202,13 @@ Plug 'christoomey/vim-tmux-navigator'
 " Deal with parentheses, quotes, etc.
 Plug 'tpope/vim-surround'
 
-" heuristically set buffer options
-" Plug 'tpope/vim-sleuth'
-
 " Repeat plugin maps
 Plug 'tpope/vim-repeat'
 
 " Handy bracket ( ] and [ ) mappings
 Plug 'tpope/vim-unimpaired'
 
+" enhanced version of matchit plugin
 Plug 'andymass/vim-matchup'
 
 " Easily search for, substitute, and abbreviate multiple variants of a word
