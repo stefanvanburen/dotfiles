@@ -61,6 +61,7 @@
 [core]
 	; brew install git-delta
 	pager = delta --light
+	editor = nvim
 
 [credential]
 	; use the keychain for git credentials
@@ -82,4 +83,3 @@
 
 [mergetool "fugitive"]
 	cmd = nvim -c \"Gdiff\" \"$MERGED\"
-
