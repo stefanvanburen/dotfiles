@@ -343,9 +343,8 @@ vmap <tab> %
 " edit init.vim
 nnoremap <silent> <leader>ev :e $MYVIMRC<cr>
 
-" save
-" :update only writes if there are changes
-nnoremap <silent> <leader>w :update<cr>
+" write to disk
+nnoremap <leader>w :w<cr>
 
 nnoremap <silent> <leader>q :q<cr>
 
