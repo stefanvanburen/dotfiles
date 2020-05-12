@@ -21,6 +21,7 @@
     ~/.config/starship.toml: starship.toml
     ~/.config/skhd/skhdrc: skhdrc
     ~/.config/yabai/yabairc: yabairc
+    ~/.clojure/deps.edn: deps.edn
 
 - shell:
   - chsh -s $(which fish)
