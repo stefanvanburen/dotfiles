@@ -295,6 +295,9 @@ set undofile
 " Show matching brackets briefly.
 set showmatch
 
+" always show the menu - useful when the preview displays more information
+set completeopt+=menuone
+
 " On horizontal split, open the split below.
 set splitbelow
 " On veritcal split, open the split to the right.
