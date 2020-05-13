@@ -40,6 +40,7 @@
 
 	; mnemonic for pull
 	p = pull
+	pa = pull --autostash
 
 	; Pushes and sets up tracking to same named branch
 	pu = push -u
