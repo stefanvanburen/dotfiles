@@ -303,6 +303,11 @@ set splitbelow
 " On veritcal split, open the split to the right.
 set splitright
 
+" since I'm using fish, it's safer for shell to be /bin/sh since some plugins
+" will execute commands using shell
+" Note that this makes :terminal run /bin/sh, but I don't use :terminal.
+set shell=/bin/sh
+
 " cobbled from https://github.com/liuchengxu/vim-better-default
 " o: disables
 " c: no ins-completion-menu messages
