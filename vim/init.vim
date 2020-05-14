@@ -143,6 +143,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 " Automatically match parenthesis
 Plug 'jiangmiao/auto-pairs'
 
+" Underlines the word under the cursor
 Plug 'itchyny/vim-cursorword'
 
 " Search
