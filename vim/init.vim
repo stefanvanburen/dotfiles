@@ -86,7 +86,12 @@ Plug 'junegunn/gv.vim', { 'on': ['GV'] }
   nnoremap <leader>gv :GV<cr>
 
 Plug 'tpope/vim-fugitive'
-  nnoremap <leader>gb :Gbrowse<cr>
+  nnoremap <leader>gb :GBrowse<cr>
+  xnoremap <Leader>gb :'<'>GBrowse<CR>
+
+  nnoremap <leader>gy :.GBrowse!<cr>
+  xnoremap <Leader>gy :'<'>GBrowse!<CR>
+
   nnoremap <leader>gd :Gdiff<cr>
   " Bring up git status vertically
   nnoremap <silent> <leader>gs :vertical Git<cr>
