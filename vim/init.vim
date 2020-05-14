@@ -143,6 +143,8 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 " Automatically match parenthesis
 Plug 'jiangmiao/auto-pairs'
 
+Plug 'itchyny/vim-cursorword'
+
 " Search
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
   nnoremap <leader>g :Grepper -tool git<cr>
