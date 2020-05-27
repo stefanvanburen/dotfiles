@@ -275,7 +275,7 @@ set lazyredraw
 
 " Display invisible characters
 set list
-set listchars=tab:→\ ,eol:¬,extends:»,precedes:«,nbsp:␣
+set listchars=tab:⌁\ ,eol:¬
 
 " Don't insert two spaces after punctuation with a join command.
 set nojoinspaces
