@@ -149,6 +149,9 @@ ALEInfoSign                      accent none
 # vim-better-whitespace
 ExtraWhitespace -> SpellBad
 
+# when editing git commit text, highlight the overflow in the first line (over 50 characters).
+gitcommitOverflow -> SpellBad
+
 # }}}
 
 Background: light
@@ -252,6 +255,9 @@ ALEInfoSign                      accent none
 
 # vim-better-whitespace
 ExtraWhitespace -> SpellBad
+
+# when editing git commit text, highlight the overflow in the first line (over 50 characters).
+gitcommitOverflow -> SpellBad
 
 # }}}
 
