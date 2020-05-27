@@ -399,4 +399,7 @@ autocmd vimrc VimResized * :wincmd =
 autocmd vimrc InsertEnter * set listchars-=trail:⣿
 autocmd vimrc InsertLeave * set listchars+=trail:⣿
 
+" weirdly enough, most of the *.html files I interact with are go templates.
+" For now, default them to being vim-go's `gohtmltmpl` filetype.
+autocmd vimrc BufRead,BufNewFile *.html setfiletype gohtmltmpl
 " vim: foldlevel=99:foldmethod=marker:expandtab:sw=2
