@@ -151,9 +151,13 @@ Plug 'junegunn/fzf.vim'
   nnoremap <leader><Enter> :GitFiles<cr>
   nnoremap <leader><leader> :Buffers<cr>
   nnoremap <leader>se :Rg<cr>
-  " Empty value to disable preview window altogether
-  let g:fzf_preview_window = ''
+
   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+  command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
   " Note access
 Plug 'alok/notational-fzf-vim', { 'on': 'NV' }
