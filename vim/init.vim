@@ -134,7 +134,8 @@ Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 
 " Automatically match parenthesis
-Plug 'jiangmiao/auto-pairs'
+Plug 'tmsvg/pear-tree'
+  let g:pear_tree_repeatable_expand = 0
 
 " Underlines the word under the cursor
 Plug 'itchyny/vim-cursorword'
