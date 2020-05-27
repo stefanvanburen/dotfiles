@@ -147,8 +147,8 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " Fuzzy find
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
-  nnoremap <leader><Enter> :Files<cr>
-  nnoremap <leader>f :GitFiles<cr>
+  nnoremap <leader>f :Files<cr>
+  nnoremap <leader><Enter> :GitFiles<cr>
   nnoremap <leader><leader> :Buffers<cr>
   nnoremap <leader>se :Rg<cr>
   " Empty value to disable preview window altogether
