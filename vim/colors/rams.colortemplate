@@ -56,7 +56,7 @@ Background: dark
 # Color name                GUI                  Base256    Base16
 Color: black                rgb(  8,   8,   8)     ~        none
 Color: accent               rgb(255,  61,  88)     ~        none
-Color: white                rgb(235, 235, 235)     ~        none
+Color: white                rgb(184, 184, 184)     ~        none
 # }}}
 
 # Terminal colors for dark variant {{{
