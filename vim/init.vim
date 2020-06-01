@@ -379,6 +379,27 @@ nnoremap <C-f> <C-f>zz
 nnoremap <C-b> <C-b>zz
 nnoremap <C-u> <C-u>zz
 
+" I never use any of these bindings by choice, except for up / down in command
+" mode. I more often than not use them by accident.
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+" In insert mode, I occasionally hit PageUp / PageDown by accident when trying
+" to hit enter.
+inoremap <PageUp> <Nop>
+inoremap <PageDown> <Nop>
+
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Up> <Nop>
+
 nnoremap <silent> <leader>/ :nohlsearch<cr>
 
 " easier way to exit insert mode - pressing 'jk' or 'kj' quickly
