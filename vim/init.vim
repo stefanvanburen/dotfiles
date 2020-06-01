@@ -142,9 +142,6 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'tmsvg/pear-tree'
   let g:pear_tree_repeatable_expand = 0
 
-" Underlines the word under the cursor
-Plug 'itchyny/vim-cursorword'
-
 " Search
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
   nnoremap <leader>g :Grepper -tool git<cr>
