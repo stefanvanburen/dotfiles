@@ -41,7 +41,6 @@ nnoremap <leader>pg :PlugUpgrade<cr>
 nnoremap <leader>ps :PlugStatus<cr>
 nnoremap <leader>pu :PlugUpdate<cr>
 
-scriptencoding utf-8
 call plug#begin(stdpath('data') . '/plugged')
 
 " colorscheme
