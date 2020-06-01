@@ -1,4 +1,4 @@
-let b:ale_linters = ['gopls', 'staticcheck']
+let b:ale_linters = ['gopls', 'staticcheck', 'golangci-lint']
 let b:ale_fixers = ['goimports']
 
 " This has to be set so the entire package is linted (otherwise, staticcheck
