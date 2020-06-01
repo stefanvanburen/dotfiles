@@ -278,7 +278,7 @@ set lazyredraw
 
 " Display invisible characters
 set list
-set listchars=tab:⌁\ ,eol:¬
+set listchars=tab:⌁\ ,eol:¬,trail:⣿
 
 " Don't insert two spaces after punctuation with a join command.
 set nojoinspaces
@@ -394,12 +394,7 @@ xnoremap < <gv
 xnoremap > >gv
 
 " Resize splits when window is resized
-" Uses the vimrc augroup
 autocmd vimrc VimResized * :wincmd =
-
-" only show trailing characters when not in insert mode
-autocmd vimrc InsertEnter * set listchars-=trail:⣿
-autocmd vimrc InsertLeave * set listchars+=trail:⣿
 
 " weirdly enough, most of the *.html files I interact with are go templates.
 " For now, default them to being vim-go's `gohtmltmpl` filetype.
