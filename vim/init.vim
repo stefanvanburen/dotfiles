@@ -299,7 +299,7 @@ set undofile
 set showmatch
 
 " always show the menu - useful when the preview displays more information
-set completeopt+=menuone
+set completeopt+=menuone,noselect
 
 " On horizontal split, open the split below.
 set splitbelow
