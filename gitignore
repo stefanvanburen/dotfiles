@@ -10,6 +10,10 @@
 # ignore my own pre-commit hooks
 .pre-commit-config.yaml
 
+# ignore some clojure repl files
+.cpcache
+.rebel_readline_history
+
 # ignore swap files
 *.swp
 
