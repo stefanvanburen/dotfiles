@@ -62,6 +62,10 @@ Plug 'machakann/vim-highlightedyank'
 " providing the backend for :Gbrowse for fugitive
 Plug 'justinmk/vim-dirvish'
 
+Plug 'vimwiki/vimwiki'
+  let g:vimwiki_list = [{'path': '~/nv/',
+                        \ 'syntax': 'markdown', 'ext': '.md'}]
+
 " Shows registers in a sidebar
 " Access via '"' or '@' in normal mode, or <C-r> in insert mode
 " Toggle fullscreen with <space>
