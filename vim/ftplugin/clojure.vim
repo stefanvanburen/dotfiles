@@ -1,2 +1,1 @@
-  " We don't want ' or ` being auto-paired in clojure
-  let g:AutoPairs = {'(':')', '[':']', '{':'}','"':'"'}
+let b:ale_linters = ['clj-kondo']
