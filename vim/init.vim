@@ -383,6 +383,8 @@ nnoremap <C-f> <C-f>zz
 nnoremap <C-b> <C-b>zz
 nnoremap <C-u> <C-u>zz
 
+nnoremap Q :q<cr>
+
 " I never use any of these bindings by choice, except for up / down in command
 " mode. I more often than not use them by accident.
 inoremap <Down> <Nop>
