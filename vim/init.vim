@@ -50,10 +50,6 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'colorte
   let g:Hexokinase_highlighters = ['background']
   let g:Hexokinase_ftEnabled = ['css', 'colortemplate']
 
-" status line
-Plug 'itchyny/lightline.vim'
-  let g:lightline = { 'colorscheme': 'ayu_light' }
-
 " highlight yanked text briefly
 Plug 'machakann/vim-highlightedyank'
 
