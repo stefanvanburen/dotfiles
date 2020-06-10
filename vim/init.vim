@@ -58,9 +58,15 @@ Plug 'machakann/vim-highlightedyank'
 " providing the backend for :Gbrowse for fugitive
 Plug 'justinmk/vim-dirvish'
 
-Plug 'vimwiki/vimwiki'
-  let g:vimwiki_list = [{'path': '~/nv/',
-                        \ 'syntax': 'markdown', 'ext': '.md'}]
+" Plug 'vimwiki/vimwiki'
+"   let g:vimwiki_list = [{'path': '~/nv/',
+"                         \ 'syntax': 'markdown', 'ext': '.md'}]
+
+Plug 'lervag/wiki.vim'
+  let g:wiki_root = '~/Documents/notes/'
+  let g:wiki_filetypes = ['md']
+  " only enable wiki mappings in the wiki filetype
+  let g:wiki_mappings_use_defaults = 'local'
 
 " Shows registers in a sidebar
 " Access via '"' or '@' in normal mode, or <C-r> in insert mode
@@ -147,8 +153,12 @@ Plug 'tmsvg/pear-tree'
 
 " Search
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-  nnoremap <leader>g :Grepper -tool git<cr>
-  nnoremap <leader>G :Grepper -tool rg<cr>
+  " mnemonic 'git grep'
+  nnoremap <leader>gg :Grepper -tool git<cr>
+  " mnemonic 'ripgrep'
+  nnoremap <leader>rg :Grepper -tool rg<cr>
+  nmap gs <plug>(GrepperOperator)
+  xmap gs <plug>(GrepperOperator)
 
 " Fuzzy find
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
@@ -165,10 +175,8 @@ Plug 'junegunn/fzf.vim'
   \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-  " Note access
-Plug 'alok/notational-fzf-vim', { 'on': 'NV' }
-  let g:nv_search_paths = ['~/nv']
-  nnoremap <silent> <c-s> :NV<cr>
+Plug 'keith/investigate.vim'
+  let g:investigate_use_dash=1
 
 " Linting / fixing
 Plug 'w0rp/ale'
@@ -266,9 +274,6 @@ set smartcase
 " Copy the indent of existing lines when autoindenting
 set copyindent
 
-" Search with rg using :grep
-set grepprg=rg\ --vimgrep
-
 " how long to wait in milliseconds before writing to disk
 " this is set lower to help plugins like vim-gitgutter update their signs
 set updatetime=100
@@ -282,6 +287,8 @@ set lazyredraw
 " Display invisible characters
 set list
 set listchars=tab:⌁\ ,eol:¬,trail:⣿
+
+set grepprg=rg\ --vimgrep
 
 " Don't insert two spaces after punctuation with a join command.
 set nojoinspaces
@@ -354,7 +361,7 @@ nnoremap <leader>w :w<cr>
 
 nnoremap <silent> <leader>q :q<cr>
 
-nnoremap <silent> <leader>so :source $MYVIMRC<cr>
+nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <leader>sp :setlocal spell!<cr>
 
 nnoremap <silent> <leader>cl :close<cr>
@@ -382,7 +389,8 @@ nnoremap <C-f> <C-f>zz
 nnoremap <C-b> <C-b>zz
 nnoremap <C-u> <C-u>zz
 
-nnoremap Q :q<cr>
+nnoremap g;  g;zvzz
+nnoremap g,  g,zvzz
 
 " I never use any of these bindings by choice, except for up / down in command
 " mode. I more often than not use them by accident.
