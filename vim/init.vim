@@ -112,7 +112,7 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascriptreact', 'typescriptreact'
 Plug 'HerringtonDarkholme/yats.vim', { 'for': [ 'typescript', 'typescriptreact' ] }
 
 " Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'tag': '*' }
   let g:go_fmt_command = 'gopls'
   let g:go_imports_mode = 'gopls'
   let g:go_imports_autosave = 1
