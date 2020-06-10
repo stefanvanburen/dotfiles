@@ -101,6 +101,9 @@ Plug 'jez/vim-github-hub'
 " reveal last commit message (default binding: <Leader>gm)
 Plug 'rhysd/git-messenger.vim', { 'on': 'GitMessenger' }
 
+" fish
+Plug 'NovaDev94/vim-fish'
+
 " HTML5
 Plug 'othree/html5.vim', { 'for': 'html' }
 
@@ -112,7 +115,7 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascriptreact', 'typescriptreact'
 Plug 'HerringtonDarkholme/yats.vim', { 'for': [ 'typescript', 'typescriptreact' ] }
 
 " Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'tag': '*' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_fmt_command = 'gopls'
   let g:go_imports_mode = 'gopls'
   let g:go_imports_autosave = 1
