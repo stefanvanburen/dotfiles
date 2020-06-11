@@ -154,6 +154,7 @@ Plug 'junegunn/fzf.vim'
   nnoremap <leader><Enter> :GitFiles<cr>
   nnoremap <leader><leader> :Buffers<cr>
   nnoremap <leader>se :Rg<cr>
+  nnoremap <C-l> :Rg<cr>
 
   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
