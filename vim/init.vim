@@ -59,10 +59,6 @@ Plug 'machakann/vim-highlightedyank'
 " providing the backend for :Gbrowse for fugitive
 Plug 'justinmk/vim-dirvish'
 
-" Plug 'vimwiki/vimwiki'
-"   let g:vimwiki_list = [{'path': '~/nv/',
-"                         \ 'syntax': 'markdown', 'ext': '.md'}]
-
 Plug 'lervag/wiki.vim'
   let g:wiki_root = '~/Documents/notes/'
   let g:wiki_filetypes = ['md']
@@ -77,13 +73,6 @@ Plug 'junegunn/vim-peekaboo'
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
   nnoremap <silent> <leader>sw :StripWhitespace<cr>
-
-" Plug 'airblade/vim-gitgutter'
-"   let g:gitgutter_sign_modified = '▵'
-
-" Git commit browser
-Plug 'junegunn/gv.vim', { 'on': ['GV'] }
-  nnoremap <leader>gv :GV<cr>
 
 Plug 'tpope/vim-fugitive'
   nnoremap <leader>gb :GBrowse<cr>
@@ -104,9 +93,6 @@ Plug 'rhysd/committia.vim'
 
 " github filetype
 Plug 'jez/vim-github-hub'
-
-" reveal last commit message (default binding: <Leader>gm)
-Plug 'rhysd/git-messenger.vim', { 'on': 'GitMessenger' }
 
 " fish
 Plug 'NovaDev94/vim-fish'
