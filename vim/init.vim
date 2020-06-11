@@ -94,6 +94,9 @@ Plug 'rhysd/committia.vim'
 " github filetype
 Plug 'jez/vim-github-hub'
 
+" up-to-date git filetypes
+Plug 'tpope/vim-git'
+
 " fish
 Plug 'NovaDev94/vim-fish'
 
