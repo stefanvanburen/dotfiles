@@ -304,6 +304,9 @@ set splitright
 " c: no ins-completion-menu messages
 set shortmess=atOIoc
 
+" set statusline; currently the default + Fugitive's details
+set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+
 " turn on mouse support
 " this is useful for resizing windows, using the mouse wheel to scroll, etc
 set mouse=a
