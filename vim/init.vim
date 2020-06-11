@@ -208,11 +208,6 @@ Plug 'tpope/vim-commentary'
 " Adds unix shell commands
 Plug 'tpope/vim-eunuch'
 
-" tmux / vim navigation
-Plug 'christoomey/vim-tmux-navigator'
-  " Disable tmux navigator when zooming the Vim pane
-  let g:tmux_navigator_disable_when_zoomed = 1
-
 " Deal with parentheses, quotes, etc.
 Plug 'tpope/vim-surround'
 
