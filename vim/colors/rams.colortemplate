@@ -55,8 +55,12 @@ Background: dark
 # Color palette for dark variant {{{
 # Color name                GUI                  Base256    Base16
 Color: black                rgb(  8,   8,   8)     ~        none
-Color: accent               rgb(255,  61,  88)     ~        none
 Color: white                rgb(184, 184, 184)     ~        none
+Color: accent               rgb(255,  61,  88)     ~        none
+# TODO: Tweak these values
+Color: grey                 rgb(107, 112, 120)     ~        none
+Color: green                rgb(174, 255, 139)     ~        none
+Color: red                  rgb(255, 114, 110)     ~        none
 # }}}
 
 # Terminal colors for dark variant {{{
@@ -77,9 +81,9 @@ Cursor               white             black
 CursorColumn         white             black
 CursorLine           white             black
 CursorLineNr         white             black
-DiffAdd              white             black             reverse
+DiffAdd              black             green
 DiffChange           white             black             reverse
-DiffDelete           white             black             reverse
+DiffDelete           black             red
 DiffText             white             black             bold,reverse
 Directory            white             black
 EndOfBuffer          white             black
@@ -91,7 +95,7 @@ LineNr               white             black
 MatchParen           accent            black             bold,reverse
 ModeMsg              white             black
 MoreMsg              white             black
-NonText              white             black
+NonText              grey              black
 Pmenu                white             black
 PmenuSbar            white             black
 PmenuSel             white             black             reverse
@@ -117,7 +121,7 @@ VisualNOS            white             black
 WarningMsg           white             black
 WildMenu             white             black             reverse
 # Other conventional group names (see `:help group-name`)
-Comment              white             none              italic
+Comment              grey              none              italic
 Constant             white             none
 Error                white             black             reverse
 Identifier           white             none              bold
@@ -146,6 +150,11 @@ ALEErrorSign                     accent none
 ALEWarningSign                   accent none
 ALEInfoSign                      accent none
 
+# these are needed for things like inline diffs in Fugitive to work.
+# from runtime/syntax/diff.vim
+diffAdded -> DiffAdd
+diffRemoved -> DiffDelete
+
 # vim-better-whitespace
 ExtraWhitespace -> SpellBad
 
@@ -160,8 +169,8 @@ Background: light
 # Color name                GUI                  Base256    Base16
 Color: black                rgb( 38,  43,  49)     ~        none
 Color: white                rgb(235, 235, 235)     ~        none
-Color: grey                 rgb(107, 112, 120)     ~        none
 Color: accent               rgb(238,  72,  62)     ~        none
+Color: grey                 rgb(107, 112, 120)     ~        none
 Color: green                rgb(174, 255, 139)     ~        none
 Color: red                  rgb(255, 114, 110)     ~        none
 # }}}
@@ -187,7 +196,7 @@ CursorLineNr         black             white
 DiffAdd              black             green
 DiffChange           black             white             reverse
 DiffDelete           black             red
-DiffText             black             white             bold,reverse
+DiffText             black             white             bold
 Directory            black             white
 EndOfBuffer          black             white
 ErrorMsg             black             white             reverse
@@ -252,6 +261,11 @@ ALEInfo                          accent none underline
 ALEErrorSign                     accent none
 ALEWarningSign                   accent none
 ALEInfoSign                      accent none
+
+# these are needed for things like inline diffs in Fugitive to work.
+# from runtime/syntax/diff.vim
+diffAdded -> DiffAdd
+diffRemoved -> DiffDelete
 
 # vim-better-whitespace
 ExtraWhitespace -> SpellBad
