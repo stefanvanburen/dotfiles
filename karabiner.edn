@@ -1,3 +1,4 @@
+; https://github.com/yqrashawn/GokuRakuJoudo
 {:main
  [
   {:des "Remap caps lock to control, or escape if not chorded"
@@ -20,9 +21,12 @@
            [:!Ok "/usr/local/bin/yabai -m window --focus north"]
            [:!Oj "/usr/local/bin/yabai -m window --focus south"]
            ]}
-  {:des "Fast focus desktop with right cmd + option"
-   :rules [[:!QEz "/usr/local/bin/yabai -m space --focus prev"]
+  {:des "Fast focus desktop with right cmd + option, or right cmd + right ctrl"
+   :rules [
+           [:!QEz "/usr/local/bin/yabai -m space --focus prev"]
            [:!QEc "/usr/local/bin/yabai -m space --focus next"]
+           [:!QWz "/usr/local/bin/yabai -m space --focus prev"]
+           [:!QWc "/usr/local/bin/yabai -m space --focus next"]
            ]}
   {:des "Send window to desktop and follow focus with right command + shift"
    :rules [[:!QRz ["/usr/local/bin/yabai -m window --space prev" "/usr/local/bin/yabai -m space --focus prev"]]
