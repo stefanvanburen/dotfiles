@@ -22,6 +22,7 @@
     ~/.config/skhd/skhdrc: skhdrc
     ~/.config/yabai/yabairc: yabairc
     ~/.clojure/deps.edn: deps.edn
+    ~/.config/karabiner.edn: karabiner.edn
 
 - shell:
   - chsh -s $(which fish)
