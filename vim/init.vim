@@ -299,7 +299,7 @@ set completeopt+=menuone,noselect
 
 " On horizontal split, open the split below.
 set splitbelow
-" On veritcal split, open the split to the right.
+" On vertical split, open the split to the right.
 set splitright
 
 " cobbled from https://github.com/liuchengxu/vim-better-default
