@@ -195,6 +195,11 @@ schemes:
       background: '0xEEEEEE'
       foreground: '0x4D4D4C'
 
+    # from rams.vim
+    cursor:
+      text: '#000000'
+      cursor: '#ee483e'
+
     # Normal colors
     normal:
       black:   '0xEDEDED'
