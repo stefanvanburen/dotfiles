@@ -190,7 +190,7 @@ Terminal         black             white
 ColorColumn          white             black
 Conceal              none              none
 Cursor               black             white
-CursorColumn         black             white
+CursorColumn         black             grey
 CursorLine           black             white
 CursorLineNr         black             white
 DiffAdd              black             green
