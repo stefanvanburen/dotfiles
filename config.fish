@@ -9,6 +9,7 @@ alias c clear
 alias vim nvim
 alias vimrc 'vim ~/.config/nvim/init.vim'
 alias fishrc 'vim ~/.config/fish/config.fish'
+alias gv 'vim +G +only'
 alias vw 'vim -c "cd ~/nv" -c VimwikiIndex -c Rg'
 
 if status --is-interactive
