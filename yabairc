@@ -27,11 +27,15 @@ yabai -m config left_padding                 12
 yabai -m config right_padding                12
 yabai -m config window_gap                   06
 
-# don't manage Dash
+# deliberately avoid managing these apps
 yabai -m rule --add app='^Dash$' manage=off
-# don't manage VimR
 yabai -m rule --add app='^VimR$' manage=off
-# don't manage System Preferences
 yabai -m rule --add app='^System Preferences$' manage=off
+yabai -m rule --add app='^CARROTWeather$' manage=off
+yabai -m rule --add app='^Dictionary$' manage=off
+yabai -m rule --add app='^Things$' manage=off
+yabai -m rule --add app='^Messages$' manage=off
+yabai -m rule --add app='^Trello$' manage=off
+yabai -m rule --add app='^Ripcord$' manage=off
 
 echo "yabai configuration loaded.."
