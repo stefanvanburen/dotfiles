@@ -141,6 +141,9 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'tmsvg/pear-tree'
   let g:pear_tree_repeatable_expand = 0
 
+Plug 'tpope/vim-dispatch'
+  let g:dispatch_no_tmux_make = 1
+
 " Search
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
   " mnemonic 'git grep'
@@ -157,7 +160,6 @@ Plug 'junegunn/fzf.vim'
   nnoremap <leader><Enter> :GitFiles<cr>
   nnoremap <leader><leader> :Buffers<cr>
   nnoremap <leader>se :Rg<cr>
-  nnoremap <C-l> :Rg<cr>
 
   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
@@ -169,22 +171,26 @@ Plug 'junegunn/fzf.vim'
 Plug 'keith/investigate.vim'
   let g:investigate_use_dash=1
 
+Plug 'alok/notational-fzf-vim'
+  let g:nv_search_paths = ["~/Documents/notes"]
+  nnoremap <C-l> :NV<CR>
+
 " Linting / fixing
-Plug 'w0rp/ale'
-  let g:ale_sign_error = '×'
-  let g:ale_sign_warning = '→'
-  let g:ale_sign_info = '→'
-  let g:ale_echo_msg_format = '%linter%: %s'
+" Plug 'w0rp/ale'
+"   let g:ale_sign_error = '×'
+"   let g:ale_sign_warning = '→'
+"   let g:ale_sign_info = '→'
+"   let g:ale_echo_msg_format = '%linter%: %s'
 
-  " In general, this is the right thing to do.
-  let g:ale_fix_on_save = 1
+"   " In general, this is the right thing to do.
+"   let g:ale_fix_on_save = 1
 
-  let g:ale_virtualtext_cursor = 1
-  let g:ale_virtualtext_prefix = '∴ '
+"   let g:ale_virtualtext_cursor = 1
+"   let g:ale_virtualtext_prefix = '∴ '
 
-  nnoremap <silent> <leader>af :ALEFix<cr>
-  nmap <silent> [w <Plug>(ale_previous_wrap)
-  nmap <silent> ]w <Plug>(ale_next_wrap)
+"   nnoremap <silent> <leader>af :ALEFix<cr>
+"   nmap <silent> [w <Plug>(ale_previous_wrap)
+"   nmap <silent> ]w <Plug>(ale_next_wrap)
 
 " Lightweight improvement of search
 Plug 'junegunn/vim-slash'
@@ -325,6 +331,9 @@ set formatoptions+=o
 
 " allows moving the cursor to where there is no actual character
 set virtualedit=all
+
+" ignore case when completing files / directories in wildmenu
+set wildignorecase
 
 " I don't use ';' often enough
 nnoremap ; :
