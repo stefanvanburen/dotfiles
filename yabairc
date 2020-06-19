@@ -37,5 +37,7 @@ yabai -m rule --add app='^Things$' manage=off
 yabai -m rule --add app='^Messages$' manage=off
 yabai -m rule --add app='^Trello$' manage=off
 yabai -m rule --add app='^Ripcord$' manage=off
+yabai -m rule --add app='^1Password 7$' manage=off
+yabai -m rule --add app='^LICEcap 7$' manage=off
 
 echo "yabai configuration loaded.."
