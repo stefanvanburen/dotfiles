@@ -202,7 +202,7 @@ EndOfBuffer          black             white
 ErrorMsg             black             white             reverse
 FoldColumn           black             white
 Folded               black             white             italic
-IncSearch            black             white             bold,reverse
+IncSearch            accent            white             bold,reverse
 LineNr               black             white
 MatchParen           white             accent            bold,reverse
 ModeMsg              black             white
@@ -213,14 +213,14 @@ PmenuSbar            black             white
 PmenuSel             black             white             reverse
 PmenuThumb           black             white
 Question             black             white
-Search               black             white             bold,reverse
+Search               accent            white             bold,reverse
 SignColumn           black             white
 SpecialKey           black             white
 SpellBad             accent            white             undercurl
 SpellCap             black             white
 SpellLocal           black             white
 SpellRare            black             white
-StatusLine           black             white
+StatusLine           black             white             reverse
 StatusLineNC         black             white
 Substitute           accent            white             bold,reverse
 TabLine              black             white
