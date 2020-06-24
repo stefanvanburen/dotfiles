@@ -225,12 +225,12 @@ set showbreak=↳
 " when using > and <, round the indent to a multiple of shiftwidth
 set shiftround
 
-" statusline current ^
-" statusline not current =
+" statusline current " "
+" statusline not current " "
 " vertical empty (escaped space)
 " fold: filling foldtext
 " diff: deleted lines in diff
-set fillchars=stl:^,stlnc:=,vert:│,fold:·,diff:-
+set fillchars=stl:\ ,stlnc:\ ,vert:│,fold:·,diff:-
 
 " Global substitutions by default.
 set gdefault
@@ -296,8 +296,8 @@ set splitright
 " c: no ins-completion-menu messages
 set shortmess=atOIoc
 
-" set statusline; currently the default + Fugitive's details
-set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+" no statusline
+set laststatus=0
 
 " turn on mouse support
 " this is useful for resizing windows, using the mouse wheel to scroll, etc
