@@ -170,6 +170,9 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'takac/vim-hardtime'
   let g:hardtime_default_on = 1
+  " default keys without '-', which is used to activate vim-dirvish
+  let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+  let g:hardtime_timeout = 2000
 
 Plug 'alok/notational-fzf-vim'
   let g:nv_search_paths = ["~/Documents/notes"]
