@@ -40,5 +40,8 @@ yabai -m rule --add app='^Ripcord$' manage=off
 yabai -m rule --add app='^1Password 7$' manage=off
 yabai -m rule --add app='^LICEcap 7$' manage=off
 yabai -m rule --add app='^Anki$' manage=off
+yabai -m rule --add app='^IINA$' manage=off
+yabai -m rule --add app='^Monodraw$' manage=off
+yabai -m rule --add app='^Tiny Player$' manage=off
 
 echo "yabai configuration loaded.."
