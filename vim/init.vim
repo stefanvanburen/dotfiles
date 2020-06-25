@@ -168,9 +168,6 @@ Plug 'junegunn/fzf.vim'
   \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-Plug 'keith/investigate.vim'
-  let g:investigate_use_dash=1
-
 Plug 'takac/vim-hardtime'
   let g:hardtime_default_on = 1
 
