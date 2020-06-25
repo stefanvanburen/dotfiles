@@ -306,6 +306,9 @@ set mouse=a
 " always use the system clipboard for operations
 set clipboard+=unnamedplus
 
+" turn off swapfiles - for now, I find these more of a headache than a benefit
+set noswapfile
+
 " Convenience for automatic formatting.
 "   r - auto-insert comment leading after <CR> in insert mode
 "   o - auto-insert comment leading after O in normal mode
