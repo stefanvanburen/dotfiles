@@ -171,6 +171,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'keith/investigate.vim'
   let g:investigate_use_dash=1
 
+Plug 'takac/vim-hardtime'
+  let g:hardtime_default_on = 1
+
 Plug 'alok/notational-fzf-vim'
   let g:nv_search_paths = ["~/Documents/notes"]
   nnoremap <C-l> :NV<CR>
