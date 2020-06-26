@@ -259,8 +259,8 @@ set infercase
 " Don't redraw when using macros.
 set lazyredraw
 
-" Display invisible characters
-set list
+" Invisible characters
+set nolist
 set listchars=tab:⌁\ ,eol:¬,trail:⣿
 
 set grepprg=rg\ --vimgrep
