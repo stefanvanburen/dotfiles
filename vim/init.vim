@@ -91,9 +91,6 @@ Plug 'tpope/vim-rhubarb'
 " Enhances git commit writing
 Plug 'rhysd/committia.vim'
 
-" github filetype
-Plug 'jez/vim-github-hub'
-
 " up-to-date git filetypes
 Plug 'tpope/vim-git'
 
