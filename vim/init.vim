@@ -60,7 +60,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'justinmk/vim-dirvish'
 
 Plug 'lervag/wiki.vim'
-  let g:wiki_root = '~/Documents/notes/'
+  let g:wiki_root = '~/syncthing/notes/'
   let g:wiki_filetypes = ['md']
   " only enable wiki mappings in the wiki filetype
   let g:wiki_mappings_use_defaults = 'local'
@@ -175,7 +175,7 @@ Plug 'takac/vim-hardtime'
   let g:hardtime_timeout = 2000
 
 Plug 'alok/notational-fzf-vim'
-  let g:nv_search_paths = ["~/Documents/notes"]
+  let g:nv_search_paths = ["~/syncthing/notes"]
   nnoremap <C-l> :NV<CR>
 
 " Lightweight improvement of search
