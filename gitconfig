@@ -96,3 +96,9 @@
 
 [mergetool "fugitive"]
 	cmd = nvim -c \"Gdiff\" \"$MERGED\"
+
+[sendemail]
+	smtpserver = smtp.gmail.com
+	smtpuser = vanburenstefan@gmail.com
+	smtpencryption = tls
+	smtpserverport = 587
