@@ -51,9 +51,6 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'colorte
   let g:Hexokinase_highlighters = ['background']
   let g:Hexokinase_ftEnabled = ['css', 'colortemplate']
 
-" highlight yanked text briefly
-Plug 'machakann/vim-highlightedyank'
-
 " directory / file viewer. Largely replaces netrw.
 " netrw still loads as it's useful for it's `gx` binding for opening URLs, and
 " providing the backend for :Gbrowse for fugitive
@@ -396,5 +393,12 @@ autocmd vimrc VimResized * :wincmd =
 " weirdly enough, most of the *.html files I interact with are go templates.
 " For now, default them to being vim-go's `gohtmltmpl` filetype.
 autocmd vimrc BufRead,BufNewFile *.html setfiletype gohtmltmpl
+
+" replaces vim-highlightedyank - briefly highlights the yanked text
+" requires neovim 0.5.0
+augroup LuaHighlight
+  autocmd!
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+augroup END
 
 " vim: foldlevel=99:foldmethod=marker:expandtab:sw=2
