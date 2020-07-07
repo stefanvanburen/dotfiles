@@ -136,6 +136,9 @@ Plug 'tmsvg/pear-tree'
   let g:pear_tree_repeatable_expand = 0
 
 Plug 'tpope/vim-dispatch'
+  " dispatch will open up a tmux window by default to do certain things - I
+  " don't want this to occur by default since it'll 'un-zoom' tmux if I'm
+  " zoomed on a pane.
   let g:dispatch_no_tmux_make = 1
 
 " Search
@@ -260,8 +263,6 @@ set lazyredraw
 set nolist
 set listchars=tab:⌁\ ,eol:¬,trail:⣿
 
-set grepprg=rg\ --vimgrep
-
 " Don't insert two spaces after punctuation with a join command.
 set nojoinspaces
 
@@ -292,9 +293,6 @@ set splitright
 " o: disables
 " c: no ins-completion-menu messages
 set shortmess=atOIoc
-
-" no statusline
-set laststatus=0
 
 " turn on mouse support
 " this is useful for resizing windows, using the mouse wheel to scroll, etc
