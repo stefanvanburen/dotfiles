@@ -18,10 +18,10 @@
 *.swp
 
 # ignore TODO files
-TODO*
+TODO
 
 # ignore NOTES files
-NOTES*
+NOTES
 
 # neo(vim)
 # session files
