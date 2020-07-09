@@ -172,6 +172,23 @@ Plug 'alok/notational-fzf-vim'
   let g:nv_search_paths = ["~/syncthing/notes"]
   nnoremap <C-l> :NV<CR>
 
+" Linting / fixing
+" Plug 'w0rp/ale'
+"   let g:ale_sign_error = '×'
+"   let g:ale_sign_warning = '→'
+"   let g:ale_sign_info = '→'
+"   let g:ale_echo_msg_format = '%linter%: %s'
+
+"   " In general, this is the right thing to do.
+"   let g:ale_fix_on_save = 1
+
+"   let g:ale_virtualtext_cursor = 1
+"   let g:ale_virtualtext_prefix = '∴ '
+
+"   nnoremap <silent> <leader>af :ALEFix<cr>
+"   nmap <silent> [w <Plug>(ale_previous_wrap)
+"   nmap <silent> ]w <Plug>(ale_next_wrap)
+
 " Lightweight improvement of search
 Plug 'junegunn/vim-slash'
 if has('timers')
