@@ -102,3 +102,6 @@
 	smtpuser = vanburenstefan@gmail.com
 	smtpencryption = tls
 	smtpserverport = 587
+
+[commit]
+	verbose = true

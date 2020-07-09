@@ -85,9 +85,6 @@ Plug 'tpope/vim-fugitive'
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
 
-" Enhances git commit writing
-Plug 'rhysd/committia.vim'
-
 " up-to-date git filetypes
 Plug 'tpope/vim-git'
 
