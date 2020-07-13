@@ -113,7 +113,7 @@ StatusLineNC         white             black
 Substitute           accent            black             bold,reverse
 TabLine              white             black
 TabLineFill          white             black
-TabLineSel           white             black
+TabLineSel           white             black             reverse
 Title                white             black
 VertSplit            white             black
 Visual               white             black             reverse
@@ -225,7 +225,7 @@ StatusLineNC         black             white
 Substitute           accent            white             bold,reverse
 TabLine              black             white
 TabLineFill          black             white
-TabLineSel           black             white
+TabLineSel           black             white             reverse
 Title                black             white
 VertSplit            black             white
 Visual               black             white             reverse
