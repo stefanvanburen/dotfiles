@@ -1,8 +1,8 @@
 # https://starship.rs/config
 
 [character]
-symbol = "▵"
-vicmd_symbol = "▿"
+symbol = "△"
+vicmd_symbol = "▽"
 
 [aws]
 disabled = true
@@ -18,3 +18,19 @@ disabled = true
 
 [ruby]
 disabled = true
+
+[rust]
+disabled = true
+
+[git_branch]
+symbol = ""
+style = "white"
+
+[git_status]
+style = "white"
+prefix = " "
+suffix = " "
+deleted = "×"
+
+[directory]
+style = "white"
