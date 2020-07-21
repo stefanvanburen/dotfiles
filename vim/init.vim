@@ -198,13 +198,6 @@ Plug 'w0rp/ale'
   nmap <silent> [w <Plug>(ale_previous_wrap)
   nmap <silent> ]w <Plug>(ale_next_wrap)
 
-" Lightweight improvement of search
-Plug 'junegunn/vim-slash'
-if has('timers')
-  " Blink 2 times with 50ms interval
-  noremap <expr> <plug>(slash-after) slash#blink(2, 50)
-endif
-
 " Commenting
 Plug 'tpope/vim-commentary'
 
