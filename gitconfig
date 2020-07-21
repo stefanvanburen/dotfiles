@@ -105,3 +105,25 @@
 
 [commit]
 	verbose = true
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	features = decorations labels
+	zero-style = 8
+	navigate = true
+	side-by-side = true
+
+[delta "decorations"]
+	file-decoration-style = none
+	whitespace-error-style = 22 reverse
+	file-style = 7 italic
+	hunk-header-style = 7
+	hunk-header-decoration-style = 8 ul
+
+[delta "labels"]
+	file-modified-label = " MODIFIED "
+	file-removed-label  = " REMOVED "
+	file-added-label    = " ADDED "
+	file-renamed-label  = " RENAMED "
