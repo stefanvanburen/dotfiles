@@ -45,5 +45,6 @@ yabai -m rule --add app='^Monodraw$' manage=off
 yabai -m rule --add app='^Tiny Player$' manage=off
 yabai -m rule --add app='^Plexamp$' manage=off
 yabai -m rule --add app='^Slack$' manage=off
+yabai -m rule --add app='^Houseparty$' manage=off
 
 echo "yabai configuration loaded.."
