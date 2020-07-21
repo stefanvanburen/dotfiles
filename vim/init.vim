@@ -147,6 +147,15 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
   nmap gs <plug>(GrepperOperator)
   xmap gs <plug>(GrepperOperator)
 
+" s{char}{char} to search for a set of two characters
+Plug 'justinmk/vim-sneak'
+  " use 's' again to go to the next match
+  let g:sneak#s_next = 1
+  map f <Plug>Sneak_f
+  map F <Plug>Sneak_F
+  map t <Plug>Sneak_t
+  map T <Plug>Sneak_T
+
 " Fuzzy find
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
