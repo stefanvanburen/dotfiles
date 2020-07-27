@@ -112,7 +112,6 @@
 [delta]
 	features = decorations labels
 	zero-style = 8
-	navigate = true
 	side-by-side = true
 
 [delta "decorations"]
