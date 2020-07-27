@@ -28,9 +28,14 @@ style = "white"
 
 [git_status]
 style = "white"
-prefix = " "
+prefix = ""
+# ensure there's still space after the symbols
 suffix = " "
 deleted = "×"
 
 [directory]
 style = "white"
+
+[cmd_duration]
+# just use `time` instead
+disabled = true
