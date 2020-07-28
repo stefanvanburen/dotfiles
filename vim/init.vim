@@ -171,14 +171,14 @@ Plug 'junegunn/fzf.vim'
   \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-Plug 'takac/vim-hardtime'
-  let g:hardtime_default_on = 1
-  " default keys without '-', which is used to activate vim-dirvish
-  let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-  let g:hardtime_timeout = 2000
+" Plug 'takac/vim-hardtime'
+"   let g:hardtime_default_on = 1
+"   " default keys without '-', which is used to activate vim-dirvish
+"   let g:list_of_normal_keys = ['h', 'j', 'k', 'l', '+', '<UP>', '<DOWN>', '<LEFT>', '<RIGHT>']
+"   let g:hardtime_timeout = 2000
 
 Plug 'alok/notational-fzf-vim'
-  let g:nv_search_paths = ["~/syncthing/notes"]
+  let g:nv_search_paths = ['~/syncthing/notes']
   nnoremap <C-l> :NV<CR>
 
 " Linting / fixing
