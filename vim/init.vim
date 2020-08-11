@@ -208,6 +208,9 @@ Plug 'tpope/vim-commentary'
 " Adds unix shell commands
 Plug 'tpope/vim-eunuch'
 
+" Database access
+Plug 'tpope/vim-dadbod'
+
 " Deal with parentheses, quotes, etc.
 Plug 'tpope/vim-surround'
 
