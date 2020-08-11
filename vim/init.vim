@@ -171,6 +171,10 @@ Plug 'junegunn/fzf.vim'
   \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+  nmap <leader><tab> <plug>(fzf-maps-n)
+  xmap <leader><tab> <plug>(fzf-maps-x)
+  omap <leader><tab> <plug>(fzf-maps-o)
+
 " Plug 'takac/vim-hardtime'
 "   let g:hardtime_default_on = 1
 "   " default keys without '-', which is used to activate vim-dirvish
