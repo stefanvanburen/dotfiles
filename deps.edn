@@ -8,12 +8,12 @@
 
   :fmt
   {:extra-deps
-   {cljfmt {:mvn/version "0.6.7"}}
+   {cljfmt/cljfmt {:mvn/version "0.6.7"}}
    :main-opts ["-m" "cljfmt.main" "fix"]}
 
   :check
   {:extra-deps
-   {cljfmt {:mvn/version "0.6.7"}}
+   {cljfmt/cljfmt {:mvn/version "0.6.7"}}
    :main-opts ["-m" "cljfmt.main" "check"]}
 
   :rebel
