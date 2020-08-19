@@ -94,6 +94,9 @@ Plug 'NovaDev94/vim-fish'
 " HTML5
 Plug 'othree/html5.vim', { 'for': 'html' }
 
+" CSS
+Plug 'hail2u/vim-css3-syntax'
+
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascriptreact', 'typescriptreact' ] }
