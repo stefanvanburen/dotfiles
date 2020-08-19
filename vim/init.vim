@@ -113,6 +113,9 @@ Plug 'fatih/vim-go'
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
+" JSON
+Plug 'elzr/vim-json'
+
 " for tmux.conf files
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 
