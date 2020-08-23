@@ -7,44 +7,42 @@
    :rules [[:!CSh "/usr/local/bin/yabai -m window --warp west"]
            [:!CSl "/usr/local/bin/yabai -m window --warp east"]
            [:!CSk "/usr/local/bin/yabai -m window --warp north"]
-           [:!CSj "/usr/local/bin/yabai -m window --warp south"]
-           ]}
+           [:!CSj "/usr/local/bin/yabai -m window --warp south"]]}
+
   {:des "Swap windows with left option + shift"
    :rules [[:!OSh "/usr/local/bin/yabai -m window --swap west"]
            [:!OSl "/usr/local/bin/yabai -m window --swap east"]
            [:!OSk "/usr/local/bin/yabai -m window --swap north"]
-           [:!OSj "/usr/local/bin/yabai -m window --swap south"]
-           ]}
+           [:!OSj "/usr/local/bin/yabai -m window --swap south"]]}
+
   {:des "Focus windows with left option"
    :rules [[:!Oh "/usr/local/bin/yabai -m window --focus west"]
            [:!Ol "/usr/local/bin/yabai -m window --focus east"]
            [:!Ok "/usr/local/bin/yabai -m window --focus north"]
-           [:!Oj "/usr/local/bin/yabai -m window --focus south"]
-           ]}
+           [:!Oj "/usr/local/bin/yabai -m window --focus south"]]}
+
   {:des "Fast focus desktop with right cmd + option, or right cmd + right ctrl"
    :rules [
            [:!QEz "/usr/local/bin/yabai -m space --focus prev"]
            [:!QEc "/usr/local/bin/yabai -m space --focus next"]
            [:!QWz "/usr/local/bin/yabai -m space --focus prev"]
-           [:!QWc "/usr/local/bin/yabai -m space --focus next"]
-           ]}
+           [:!QWc "/usr/local/bin/yabai -m space --focus next"]]}
+
   {:des "Send window to desktop and follow focus with right command + shift"
    :rules [[:!QRz ["/usr/local/bin/yabai -m window --space prev" "/usr/local/bin/yabai -m space --focus prev"]]
-           [:!QRc ["/usr/local/bin/yabai -m window --space next" "/usr/local/bin/yabai -m space --focus next"]]
-           ]}
+           [:!QRc ["/usr/local/bin/yabai -m window --space next" "/usr/local/bin/yabai -m space --focus next"]]]}
+
   {:des "Send window to desktop and follow focus with right command + shift"
    :rules [[:!QRz ["/usr/local/bin/yabai -m window --space prev" "/usr/local/bin/yabai -m space --focus prev"]]
-           [:!QRc ["/usr/local/bin/yabai -m window --space next" "/usr/local/bin/yabai -m space --focus next"]]
-           ]}
+           [:!QRc ["/usr/local/bin/yabai -m window --space next" "/usr/local/bin/yabai -m space --focus next"]]]}
+
   {:des "A variety of option + key maps"
    :rules [
            [:!Of "/usr/local/bin/yabai -m window --toggle zoom-fullscreen"]
            [:!Or "/usr/local/bin/yabai -m space --rotate 90"]
            [:!Ot "/usr/local/bin/yabai -m window --toggle float"]
-           [:!Oo "/usr/local/bin/yabai -m window --toggle topmost"]
-           ]}
+           [:!Oo "/usr/local/bin/yabai -m window --toggle topmost"]]}
+
   {:des "Application keymaps"
    :rules [
-           [:!CTn "/usr/local/bin/vimr --nvim -c 'cd ~/syncthing/notes' -c WikiIndex -c NV"]
-           ]}
-  ]}
+           [:!CTn "/usr/local/bin/vimr --nvim -c 'cd ~/syncthing/notes' -c WikiIndex -c NV"]]}]}
