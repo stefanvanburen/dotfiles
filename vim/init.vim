@@ -471,4 +471,4 @@ augroup LuaHighlight
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
 
-" vim: foldlevel=99:foldmethod=marker:expandtab:sw=2
+" vim: expandtab:sw=2
