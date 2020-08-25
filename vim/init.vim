@@ -67,6 +67,42 @@ Plug 'lervag/wiki.vim'
 " Toggle fullscreen with <space>
 Plug 'junegunn/vim-peekaboo'
 
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+  function! s:goyo_enter()
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    set noshowmode
+    set noshowcmd
+    set scrolloff=999
+    set nonumber
+    set norelativenumber
+    Limelight
+    set tw=72
+    set wrap
+  endfunction
+
+  function! s:goyo_leave()
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    set showmode
+    set showcmd
+    set scrolloff=5
+    Limelight!
+    set tw=0
+    set nowrap
+  endfunction
+
+  let g:goyo_linenr=1
+
+  autocmd! User GoyoEnter nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+  nmap <leader>G :Goyo<cr>
+
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
+  let g:limelight_conceal_ctermfg = 'darkgray'
+
+
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
   nnoremap <silent> <leader>sw :StripWhitespace<cr>
