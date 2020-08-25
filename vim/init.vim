@@ -269,6 +269,8 @@ set shiftround
 " diff: deleted lines in diff
 set fillchars=stl:\ ,stlnc:\ ,vert:│,fold:·,diff:-
 
+set foldmethod=syntax
+
 " Global substitutions by default.
 set gdefault
 
