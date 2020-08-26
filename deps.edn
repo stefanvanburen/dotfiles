@@ -2,9 +2,10 @@
  {:nrepl
   {:extra-deps
    {nrepl/nrepl {:mvn/version "0.7.0"}
-    cider/piggieback {:mvn/version "0.4.2"}
-    cider/cider-nrepl {:mvn/version "0.24.0"}}
-   :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
+    ; TODO: is this needed? Maybe split out another alias for cljs repls
+    ; cider/piggieback {:mvn/version "0.5.1"}
+    cider/cider-nrepl {:mvn/version "0.25.3"}}
+   :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]" "--interactive"]}
 
   :fmt
   {:extra-deps
