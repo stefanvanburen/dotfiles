@@ -170,10 +170,6 @@ Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 " TOML
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 
-" Python
-Plug 'vim-python/python-syntax', { 'for': 'python' }
-Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
-
 " Asciidoc{,tor}
 Plug 'habamax/vim-asciidoctor', { 'for': 'asciidoctor' }
 
