@@ -133,6 +133,9 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 " CSS
 Plug 'hail2u/vim-css3-syntax'
 
+" Terraform (HCL)
+Plug 'hashivim/vim-terraform'
+
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascriptreact', 'typescriptreact' ] }
@@ -470,9 +473,16 @@ xnoremap > >gv
 " Resize splits when window is resized
 autocmd vimrc VimResized * :wincmd =
 
-" weirdly enough, most of the *.html files I interact with are go templates.
-" For now, default them to being vim-go's `gohtmltmpl` filetype.
-autocmd vimrc BufRead,BufNewFile *.html setfiletype gohtmltmpl
+augroup Filetypes
+  autocmd!
+  " weirdly enough, most of the *.html files I interact with are go templates.
+  " For now, default them to being vim-go's `gohtmltmpl` filetype.
+  autocmd BufRead,BufNewFile *.html setfiletype gohtmltmpl
+
+  " files ending in .job.tpl or .nomad are likely terraform (HCL) files.
+  autocmd BufRead,BufNewFile *.job.tpl setfiletype terraform
+  autocmd BufRead,BufNewFile *.nomad setfiletype terraform
+augroup END
 
 " replaces vim-highlightedyank - briefly highlights the yanked text
 " requires neovim 0.5.0
