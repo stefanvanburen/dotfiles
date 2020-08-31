@@ -498,15 +498,15 @@ let s:modes = {
   \  "t":      ["%2*", " term "],
   \}
 
-function! MoonflyModeColor(mode)
+function! ModeColor(mode)
     return get(s:modes, a:mode, "%*1")[0]
 endfunction
 
-function! MoonflyModeText(mode)
+function! ModeText(mode)
     return get(s:modes, a:mode, " normal ")[1]
 endfunction
 
-function! MoonflyFugitiveBranch()
+function! FugitiveBranch()
     if !exists("g:loaded_fugitive") || !exists("b:git_dir")
         return ""
     endif
@@ -514,7 +514,7 @@ function! MoonflyFugitiveBranch()
     return "[ " . fugitive#head() . "]"
 endfunction
 
-function! MoonflyShortFilePath()
+function! ShortFilePath()
     if &buftype == "terminal"
         return expand("%:t")
     else
@@ -527,7 +527,7 @@ function! MoonflyShortFilePath()
     endif
 endfunction
 
-function! MoonflyPluginsStatus()
+function! PluginsStatus()
     let l:status = ""
 
     " ALE plugin indicator.
@@ -540,24 +540,24 @@ function! MoonflyPluginsStatus()
     return l:status
 endfunction
 
-function! MoonflyActiveStatusLine()
+function! ActiveStatusLine()
     let l:mode = mode()
-    let l:statusline = MoonflyModeColor(l:mode)
-    let l:statusline .= MoonflyModeText(l:mode)
-    let l:statusline .= "%* %<%{MoonflyShortFilePath()} %H%M%R"
-    let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
-    let l:statusline .= "%6*%{MoonflyPluginsStatus()}"
+    let l:statusline = ModeColor(l:mode)
+    let l:statusline .= ModeText(l:mode)
+    let l:statusline .= "%* %<%{ShortFilePath()} %H%M%R"
+    let l:statusline .= "%5* %{FugitiveBranch()} "
+    let l:statusline .= "%6*%{PluginsStatus()}"
     let l:statusline .= "%*%=%l:%c | %7*%L%* | %P "
     return l:statusline
 endfunction
 
-function! MoonflyInactiveStatusLine()
-    let l:statusline = " %*%<%{MoonflyShortFilePath()}\ %H%M%R"
+function! InactiveStatusLine()
+    let l:statusline = " %*%<%{ShortFilePath()}\ %H%M%R"
     let l:statusline .= "%*%=%l:%c | %L | %P "
     return l:statusline
 endfunction
 
-function! MoonflyNoFileStatusLine()
+function! NoFileStatusLine()
     let l:statusline = " %{pathshorten(fnamemodify(getcwd(), ':~:.'))}"
     return l:statusline
 endfunction
@@ -565,14 +565,14 @@ endfunction
 function! s:StatusLine(active)
     if &buftype == "nofile" || &filetype == "netrw"
         " Likely a file explorer.
-        setlocal statusline=%!MoonflyNoFileStatusLine()
+        setlocal statusline=%!NoFileStatusLine()
     elseif &buftype == "nowrite"
         " Don't set a custom status line for certain special windows.
         return
     elseif a:active == v:true
-        setlocal statusline=%!MoonflyActiveStatusLine()
+        setlocal statusline=%!ActiveStatusLine()
     else
-        setlocal statusline=%!MoonflyInactiveStatusLine()
+        setlocal statusline=%!InactiveStatusLine()
     endif
 endfunction
 
@@ -588,12 +588,12 @@ endfunction
 function! s:UpdateInactiveWindows()
     for winnum in range(1, winnr('$'))
         if winnum != winnr()
-            call setwinvar(winnum, '&statusline', '%!MoonflyInactiveStatusLine()')
+            call setwinvar(winnum, '&statusline', '%!InactiveStatusLine()')
         endif
     endfor
 endfunction
 
-augroup MoonflyStatuslineEvents
+augroup StatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
     autocmd WinEnter,BufWinEnter  * call s:StatusLine(v:true)
