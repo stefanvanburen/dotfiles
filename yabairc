@@ -47,5 +47,6 @@ yabai -m rule --add app='^Plexamp$' manage=off
 yabai -m rule --add app='^Slack$' manage=off
 yabai -m rule --add app='^Houseparty$' manage=off
 yabai -m rule --add app='^Poolside FM$' manage=off
+yabai -m rule --add app='^Link Unshortener$' manage=off
 
 echo "yabai configuration loaded.."
