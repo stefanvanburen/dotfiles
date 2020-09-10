@@ -47,6 +47,10 @@
 	; Safer version of push --force
 	pf = push --force-with-lease
 
+	; mnemonic aliases for rebasing
+	rc = rebase --continue
+	ri = rebase --interactive
+
 	# status, short, show-branch, show stashes
 	st = status -sb --show-stash
 
