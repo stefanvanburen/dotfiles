@@ -244,7 +244,7 @@ Plug 'junegunn/fzf.vim'
 "   let g:hardtime_timeout = 2000
 
 Plug 'alok/notational-fzf-vim'
-  let g:nv_search_paths = ['~/syncthing/notes']
+  let g:nv_search_paths = ['~/Documents/notes']
   nnoremap <C-l> :NV<CR>
 
 " Linting / fixing
