@@ -156,6 +156,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_fmt_command = 'gopls'
   let g:go_imports_mode = 'gopls'
   let g:go_imports_autosave = 1
+  let g:go_auto_sameids = 1
 
   augroup GoMaps
     autocmd!
