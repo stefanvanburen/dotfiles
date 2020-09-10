@@ -67,6 +67,10 @@ Plug 'lervag/wiki.vim'
 " Toggle fullscreen with <space>
 Plug 'junegunn/vim-peekaboo'
 
+" Adds git added / modified / deleted in the sidebar (amongst other things)
+" Use ]c / [c to go to hunks within a file
+Plug 'airblade/vim-gitgutter'
+
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
   function! s:goyo_enter()
     silent !tmux set status off
