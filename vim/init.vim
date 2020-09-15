@@ -291,6 +291,9 @@ Plug 'andymass/vim-matchup'
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
 
+" colorscheme
+Plug 'svanburen/rams.vim'
+
 call plug#end()
 
 set termguicolors
