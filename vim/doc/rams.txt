@@ -1,4 +1,4 @@
-*rams.txt*	For Vim version 8.0	Last change: 2020 Jul 13
+*rams.txt*	For Vim version 8.0	Last change: 2020 Sep 15
 
 
 		  RAMS color scheme    by Stefan
