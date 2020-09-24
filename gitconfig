@@ -17,7 +17,8 @@
 	b = branch
 
 	; mnemonic for browse
-	br = browse
+	; uses the `gh` CLI, since `hub` has fallen out of favor
+	br = !gh pr view --web
 
 	; mnemonic for commit
 	c = commit

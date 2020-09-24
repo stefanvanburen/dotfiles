@@ -1,7 +1,6 @@
 alias x extract
 alias ls exa
 alias cat bat
-alias git hub
 alias c clear
 alias j just
 
