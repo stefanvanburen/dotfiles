@@ -332,6 +332,8 @@ set fillchars=stl:\ ,stlnc:\ ,vert:│,fold:·,diff:-
 
 " fold based on syntax cues
 set foldmethod=syntax
+" turn off folding by default
+set nofoldenable
 
 " Global substitutions by default.
 set gdefault
