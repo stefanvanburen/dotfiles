@@ -36,6 +36,9 @@
 	; mnemonic for diff staged
 	ds = diff --cached
 
+	; oneline log
+	lg = log --oneline
+
 	; mnemonic for mergetool
 	mt = mergetool
 
