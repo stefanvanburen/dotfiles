@@ -41,8 +41,4 @@
            [:!Of "/usr/local/bin/yabai -m window --toggle zoom-fullscreen"]
            [:!Or "/usr/local/bin/yabai -m space --rotate 90"]
            [:!Ot "/usr/local/bin/yabai -m window --toggle float"]
-           [:!Oo "/usr/local/bin/yabai -m window --toggle topmost"]]}
-
-  {:des "Application keymaps"
-   :rules [
-           [:!CTn "/usr/local/bin/vimr --nvim -c 'cd ~/syncthing/notes' -c WikiIndex -c NV"]]}]}
+           [:!Oo "/usr/local/bin/yabai -m window --toggle topmost"]]}]}
