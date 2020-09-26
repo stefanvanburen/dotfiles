@@ -167,15 +167,6 @@ Plug 'vim-test/vim-test'
   nmap <silent> t<C-g> :TestVisit<CR>
   let test#strategy = "dispatch"
 
-" Search
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-  " mnemonic 'git grep'
-  nnoremap <leader>gg :Grepper -tool git<cr>
-  " mnemonic 'ripgrep'
-  nnoremap <leader>rg :Grepper -tool rg<cr>
-  nmap gs <plug>(GrepperOperator)
-  xmap gs <plug>(GrepperOperator)
-
 " s{char}{char} to search for a set of two characters
 Plug 'justinmk/vim-sneak'
   " use 's' again to go to the next match
