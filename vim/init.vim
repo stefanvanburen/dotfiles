@@ -201,10 +201,6 @@ Plug 'junegunn/fzf.vim'
 "   let g:list_of_normal_keys = ['h', 'j', 'k', 'l', '+', '<UP>', '<DOWN>', '<LEFT>', '<RIGHT>']
 "   let g:hardtime_timeout = 2000
 
-Plug 'alok/notational-fzf-vim'
-  let g:nv_search_paths = ['~/Documents/notes']
-  nnoremap <C-l> :NV<CR>
-
 " Linting / fixing
 Plug 'w0rp/ale'
   let g:ale_sign_error = '×'
