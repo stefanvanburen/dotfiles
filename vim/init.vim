@@ -56,12 +56,6 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'colorte
 " providing the backend for :Gbrowse for fugitive
 Plug 'justinmk/vim-dirvish'
 
-Plug 'lervag/wiki.vim'
-  let g:wiki_root = '~/syncthing/notes/'
-  let g:wiki_filetypes = ['md']
-  " only enable wiki mappings in the wiki filetype
-  let g:wiki_mappings_use_defaults = 'local'
-
 " Shows registers in a sidebar
 " Access via '"' or '@' in normal mode, or <C-r> in insert mode
 " Toggle fullscreen with <space>
