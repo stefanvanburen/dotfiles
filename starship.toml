@@ -1,26 +1,9 @@
 # https://starship.rs/config
 
 [character]
-symbol = "△"
-vicmd_symbol = "▽"
-
-[aws]
-disabled = true
-
-[package]
-disabled = true
-
-[golang]
-disabled = true
-
-[nodejs]
-disabled = true
-
-[ruby]
-disabled = true
-
-[rust]
-disabled = true
+success_symbol = "[△](bold green) "
+error_symbol = "[✗](bold red) "
+vicmd_symbol = "[▽](bold green) "
 
 [git_branch]
 symbol = ""
@@ -28,14 +11,8 @@ style = "white"
 
 [git_status]
 style = "white"
-prefix = ""
-# ensure there's still space after the symbols
-suffix = " "
 deleted = "×"
+format = "[$all_status$ahead_behind]($style) "
 
 [directory]
 style = "white"
-
-[cmd_duration]
-# just use `time` instead
-disabled = true
