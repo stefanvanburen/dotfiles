@@ -128,6 +128,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " JSON
 Plug 'elzr/vim-json'
+  let g:vim_json_syntax_conceal = 0
 
 " for tmux.conf files
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
