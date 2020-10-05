@@ -65,11 +65,6 @@ Plug 'junegunn/vim-peekaboo'
 " Use ]c / [c to go to hunks within a file
 Plug 'airblade/vim-gitgutter'
 
-" completion engine for neovim
-" Adds completions while typing
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
-
 " Better whitespace highlighting / provides :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
   nnoremap <silent> <leader>sw :StripWhitespace<cr>
@@ -250,11 +245,6 @@ call plug#end()
 set termguicolors
 set background=light
 colorscheme rams
-
-" https://github.com/Olical/dotfiles/blob/8b6b4acb6a327b0184b1148cc1e683aa637e4999/stowed/.config/nvim/fnl/dotfiles/module/plugin/deoplete.fnl#L4
-call deoplete#custom#option('keyword_patterns', {
-\ 'clojure': "[\\w!$%&*+/:<=>?@\\^_~\\-\\.#]*",
-\})
 
 " don't wrap by default
 set nowrap
