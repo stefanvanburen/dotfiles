@@ -143,7 +143,7 @@ Plug 'habamax/vim-asciidoctor', { 'for': 'asciidoctor' }
 Plug 'Olical/conjure', { 'for': 'clojure' }
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
-" Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
+Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
 
 " Automatically match parenthesis
 Plug 'tmsvg/pear-tree'
