@@ -221,7 +221,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 
 " Database access
-Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-dadbod', { 'on': 'DB'}
 
 " Deal with parentheses, quotes, etc.
 Plug 'tpope/vim-surround'
