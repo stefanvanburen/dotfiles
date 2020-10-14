@@ -1,27 +1,18 @@
 {:aliases
- {:nrepl
-  {:extra-deps
-   {nrepl/nrepl {:mvn/version "0.7.0"}
-    ; TODO: is this needed? Maybe split out another alias for cljs repls
-    ; cider/piggieback {:mvn/version "0.5.1"}
-    cider/cider-nrepl {:mvn/version "0.25.3"}}
-   :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
+ {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.8.2"}
+                       ; TODO: is this needed? Maybe split out another alias for cljs repls
+                       ; cider/piggieback {:mvn/version "0.5.1"}
+                       cider/cider-nrepl {:mvn/version "0.25.4"}}
+          :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
 
-  :fmt
-  {:extra-deps
-   {cljfmt/cljfmt {:mvn/version "0.6.7"}}
-   :main-opts ["-m" "cljfmt.main" "fix"]}
+  :fmt {:extra-deps {cljfmt/cljfmt {:mvn/version "0.7.0"}}
+        :main-opts ["-m" "cljfmt.main" "fix"]}
 
-  :check
-  {:extra-deps
-   {cljfmt/cljfmt {:mvn/version "0.6.7"}}
-   :main-opts ["-m" "cljfmt.main" "check"]}
+  :check {:extra-deps {cljfmt/cljfmt {:mvn/version "0.7.0"}}
+          :main-opts ["-m" "cljfmt.main" "check"]}
 
-  :rebel
-  {:extra-deps
-   {com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
-   :main-opts  ["-m" "rebel-readline.main"]}
+  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
+          :main-opts  ["-m" "rebel-readline.main"]}
 
-  :depot
-  {:extra-deps {olical/depot {:mvn/version "1.8.4"}}
-   :main-opts ["-m" "depot.outdated.main"]}}}
+  :outdated {:extra-deps {antq/antq {:mvn/version "RELEASE"}}
+             :main-opts ["-m" "antq.core"]}}}
