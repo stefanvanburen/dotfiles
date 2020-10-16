@@ -111,8 +111,6 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': [ 'typescript', 'typescriptreact' 
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  let g:go_fmt_command = 'gopls'
-  let g:go_imports_mode = 'gopls'
   let g:go_imports_autosave = 1
 
   augroup GoMaps
