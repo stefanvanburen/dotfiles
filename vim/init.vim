@@ -83,6 +83,10 @@ Plug 'tpope/vim-fugitive'
 " Extends vim-fugitive for GitHub
 Plug 'tpope/vim-rhubarb'
 
+" Allows for viewing git commit messages related to the current line
+" <leader>gm to trigger the window, again to go inside.
+Plug 'rhysd/git-messenger.vim'
+
 " up-to-date git filetypes
 Plug 'tpope/vim-git'
 
