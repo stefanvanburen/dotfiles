@@ -134,5 +134,6 @@
 	file-removed-label  = " REMOVED "
 	file-added-label    = " ADDED "
 	file-renamed-label  = " RENAMED "
+
 [init]
 	defaultBranch = main
