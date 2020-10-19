@@ -4,7 +4,7 @@ function extract
     # no arguments, write usage
     if test (count $argv) -eq 0
         echo "Usage: extract [-option] [file ...]\n Options:\n -r, --remove    Remove archive after unpacking." >&2
-        exit 1
+        return 1
     end
 
     set remove_file 0
