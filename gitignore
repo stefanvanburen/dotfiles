@@ -13,6 +13,7 @@
 # ignore some clojure repl files
 .cpcache
 .rebel_readline_history
+.nrepl-port
 
 # ignore swap files
 *.swp
