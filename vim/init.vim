@@ -135,9 +135,6 @@ Plug 'elzr/vim-json'
 " for tmux.conf files
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 
-" Asciidoc{,tor}
-Plug 'habamax/vim-asciidoctor', { 'for': 'asciidoctor' }
-
 " Clojure
 Plug 'Olical/conjure', { 'for': 'clojure' }
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
