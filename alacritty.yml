@@ -57,7 +57,7 @@ schemes:
 
     # from rams.vim
     cursor:
-      text: '#000000'
+      text: CellBackground
       cursor: '#ee483e'
 
     # Normal colors
