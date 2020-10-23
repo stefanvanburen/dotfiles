@@ -84,7 +84,7 @@ Plug 'tpope/vim-git'
 Plug 'othree/html5.vim', { 'for': 'html' }
 
 " CSS
-Plug 'hail2u/vim-css3-syntax'
+Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
