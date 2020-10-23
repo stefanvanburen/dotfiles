@@ -58,18 +58,15 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ntpeters/vim-better-whitespace'
   nnoremap <silent> <leader>sw :StripWhitespace<cr>
 
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb'
+  " Bring up git status vertically
+  nnoremap <silent> <leader>gs :vertical Git<cr>
+
   nnoremap <leader>gb :GBrowse<cr>
   xnoremap <Leader>gb :'<'>GBrowse<CR>
 
   nnoremap <leader>gy :.GBrowse!<cr>
   xnoremap <Leader>gy :'<'>GBrowse!<CR>
-
-  " Bring up git status vertically
-  nnoremap <silent> <leader>gs :vertical Git<cr>
-
-" Extends vim-fugitive for GitHub
-Plug 'tpope/vim-rhubarb'
 
 " Allows for viewing git commit messages related to the current line
 " <leader>gm to trigger the window, again to go inside.
