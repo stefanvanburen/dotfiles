@@ -205,6 +205,8 @@ Plug 'tpope/vim-unimpaired'
 
 " enhanced version of matchit plugin
 Plug 'andymass/vim-matchup'
+  " I don't really want this to override my status line
+  let g:matchup_matchparen_offscreen = {}
 
 " Easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
