@@ -114,8 +114,7 @@ Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 
 " Clojure
 Plug 'Olical/conjure', { 'for': 'clojure' }
-Plug 'guns/vim-sexp', { 'for': 'clojure' }
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
+Plug 'guns/vim-sexp', { 'for': 'clojure' } | Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
 
 " Automatically match parenthesis
