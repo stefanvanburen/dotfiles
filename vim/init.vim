@@ -6,6 +6,9 @@ let g:loaded_ruby_provider = 0
 let g:loaded_node_provider = 0
 let g:loaded_perl_provider = 0
 
+" Handled by vim-matchup
+let g:loaded_matchit = 1
+
 let g:python3_host_skip_check = 1
 if executable('python3')
   let g:python3_host_prog = exepath('python3')
