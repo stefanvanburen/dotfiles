@@ -112,9 +112,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     autocmd FileType go nmap <buffer> <localleader>if <Plug>(go-iferr)
   augroup END
 
-" Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
 " JSON
 Plug 'elzr/vim-json'
   let g:vim_json_syntax_conceal = 0
