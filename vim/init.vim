@@ -56,11 +56,6 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'colorte
 " providing the backend for :Gbrowse for fugitive
 Plug 'justinmk/vim-dirvish'
 
-" Shows registers in a sidebar
-" Access via '"' or '@' in normal mode, or <C-r> in insert mode
-" Toggle fullscreen with <space>
-Plug 'junegunn/vim-peekaboo'
-
 " Adds git added / modified / deleted in the sidebar (amongst other things)
 " Use ]c / [c to go to hunks within a file
 Plug 'airblade/vim-gitgutter'
