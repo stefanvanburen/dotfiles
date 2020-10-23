@@ -10,7 +10,7 @@ scrolling:
   # '0' will disable scrolling.
   history: 0
 
-# Font configuration (changes require restart)
+# Font configuration
 font:
   # I commonly switch between Iosevka Term and PragmataPro Mono (no ligatures), so just leave both here.
 
