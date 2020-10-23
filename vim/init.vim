@@ -22,7 +22,7 @@ augroup END
 syntax enable
 
 " Leader is space key
-let g:mapleader = "\<Space>"
+let g:mapleader = " "
 
 " LocalLeader is the comma key
 let g:maplocalleader = ","
