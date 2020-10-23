@@ -41,9 +41,10 @@ font:
 
   size: 12.0
 
-  # macOS only: use thin stroke font rendering. Thin strokes are suitable
-  # for retina displays, but for non-retina you probably want this set to
-  # false.
+  # Thin stroke font rendering (macOS only)
+  #
+  # Thin strokes are suitable for retina displays, but for non-retina screens
+  # it is recommended to set `use_thin_strokes` to `false`.
   use_thin_strokes: false
 
 # https://github.com/alacritty/alacritty/wiki/Color-schemes
