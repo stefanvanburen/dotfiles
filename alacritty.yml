@@ -26,20 +26,27 @@ font:
 #     family: Iosevka Term SS08
 #     style: Italic
 
+#   bold_italic:
+#     family: Iosevka Term SS08
+#     style: Bold Italic
+
   normal:
     family: PragmataPro Mono
     style: Regular
 
   bold:
     family: PragmataPro Mono
-    # what if I told you ... bold is too thick, 
+    # what if I told you ... bold is too thick
     style: Regular
 
   italic:
     family: PragmataPro Mono
     style: Italic
 
-  size: 12.0
+  bold_italic:
+    family: PragmataPro Mono
+    # what if I told you ... bold is too thick
+    style: Regular Italic
 
   # Thin stroke font rendering (macOS only)
   #
