@@ -6,8 +6,8 @@ window:
   decorations: none
 
 scrolling:
-  # How many lines of scrollback to keep,
-  # '0' will disable scrolling.
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
   history: 0
 
 # Font configuration
