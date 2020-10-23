@@ -86,9 +86,6 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 " CSS
 Plug 'hail2u/vim-css3-syntax'
 
-" Terraform (HCL)
-Plug 'hashivim/vim-terraform'
-
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascriptreact', 'typescriptreact' ] }
