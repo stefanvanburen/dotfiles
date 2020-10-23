@@ -14,29 +14,30 @@ scrolling:
 font:
   # I commonly switch between Iosevka Term and PragmataPro Mono (no ligatures), so just leave both here.
 
+#   normal:
+#     family: Iosevka Term SS08
+#     style: Light
+
+#   bold:
+#     family: Iosevka Term SS08
+#     style: Medium
+
+#   italic:
+#     family: Iosevka Term SS08
+#     style: Italic
+
   normal:
-    family: Iosevka Term SS08
-    style: Light
+    family: PragmataPro Mono
+    style: Regular
 
   bold:
-    family: Iosevka Term SS08
-    style: Medium
+    family: PragmataPro Mono
+    # what if I told you ... bold is too thick, 
+    style: Regular
 
   italic:
-    family: Iosevka Term SS08
+    family: PragmataPro Mono
     style: Italic
-
-  # normal:
-  #   family: PragmataPro Mono
-  #   style: Regular
-
-  # bold:
-  #   family: PragmataPro Mono
-  #   style: Bold
-
-  # italic:
-  #   family: PragmataPro Mono
-  #   style: Italic
 
   size: 12.0
 
