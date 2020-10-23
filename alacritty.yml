@@ -48,6 +48,8 @@ font:
     # what if I told you ... bold is too thick
     style: Regular Italic
 
+  size: 18.0
+
   # Thin stroke font rendering (macOS only)
   #
   # Thin strokes are suitable for retina displays, but for non-retina screens
