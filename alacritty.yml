@@ -1,6 +1,6 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
-# Window dimensions in character columns and lines
+# Window decorations
 # (changes require restart)
 window:
   decorations: none
