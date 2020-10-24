@@ -230,6 +230,8 @@ call deoplete#custom#option('keyword_patterns', {
 \ 'clojure': "[\\w!$%&*+/:<=>?@\\^_~\\-\\.#]*",
 \})
 
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+
 " don't wrap by default
 set nowrap
 
