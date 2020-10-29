@@ -13,6 +13,8 @@ style = "white"
 style = "white"
 deleted = "×"
 format = "[$all_status$ahead_behind]($style) "
+# this still takes a long time on large repositories
+disabled = true
 
 [directory]
 style = "white"
