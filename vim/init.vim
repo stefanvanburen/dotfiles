@@ -151,7 +151,7 @@ Plug 'junegunn/fzf.vim'
   nnoremap <leader><leader> :Buffers<cr>
   nnoremap <leader>se :Rg<cr>
 
-  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+  let g:fzf_layout = { 'window': { 'width': 1.0, 'height': 0.5, 'yoffset': 1.0, 'border': 'top' } }
 
   command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
