@@ -62,6 +62,9 @@ Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb'
   " Bring up git status vertically
   nnoremap <silent> <leader>gs :vertical Git<cr>
 
+  nnoremap <leader>gw :Gwrite<cr>
+  nnoremap <leader>gc :Gcommit<cr>
+
   nnoremap <leader>gb :GBrowse<cr>
   xnoremap <Leader>gb :'<'>GBrowse<CR>
 
