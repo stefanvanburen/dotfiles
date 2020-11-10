@@ -54,8 +54,8 @@
 	rc = rebase --continue
 	ri = rebase --interactive
 
-	# status, short, show-branch, show stashes
-	st = status -sb --show-stash
+	# short status
+	st = status --short
 
 	; For showing stashes
 	stashes = stash list
