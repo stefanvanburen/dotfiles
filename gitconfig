@@ -102,7 +102,7 @@
 	tool = fugitive
 
 [mergetool "fugitive"]
-	cmd = nvim -c \"Gdiff\" \"$MERGED\"
+	cmd = nvim -c \"Git\" \"mergetool\"
 
 [sendemail]
 	smtpserver = smtp.gmail.com
