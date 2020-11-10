@@ -3,6 +3,9 @@ alias ls exa
 alias cat bat
 alias c clear
 alias j just
+alias mv 'mv -iv'
+alias cp 'cp -iv'
+alias md 'mkdir -vp'
 
 alias vim nvim
 alias vimrc 'vim ~/.config/nvim/init.vim'
