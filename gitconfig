@@ -112,7 +112,7 @@
 
 [mergetool "fugitive"]
 	; open neovim and invoke :Git mergetool
-	cmd = nvim -c \"Git\" \"mergetool\"
+	cmd = nvim -c \"Git mergetool\"
 
 [sendemail]
 	smtpserver = smtp.gmail.com
