@@ -389,10 +389,6 @@ nnoremap g,  g,zvzz
 
 nnoremap <silent> <leader>/ :nohlsearch<cr>
 
-" easier way to exit insert mode - pressing 'jk' or 'kj' quickly
-inoremap <silent> jk <esc>
-inoremap <silent> kj <esc>
-
 " Keep the cursor in place while joining lines
 nnoremap J mzJ`z
 
