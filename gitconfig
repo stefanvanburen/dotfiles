@@ -115,10 +115,10 @@
 	cmd = nvim -c \"Git mergetool\"
 
 [sendemail]
-	smtpserver = smtp.gmail.com
-	smtpuser = vanburenstefan@gmail.com
+	smtpserver = smtp.migadu.com
+	smtpuser = me@svbn.me
 	smtpencryption = tls
-	smtpserverport = 587
+	smtpserverport = 465
 
 [interactive]
 	diffFilter = delta --color-only
