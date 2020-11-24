@@ -117,7 +117,8 @@
 [sendemail]
 	smtpserver = smtp.migadu.com
 	smtpuser = me@svbn.me
-	smtpencryption = tls
+	; NOT tls, even if this is what should be used
+	smtpencryption = ssl
 	smtpserverport = 465
 
 [interactive]
