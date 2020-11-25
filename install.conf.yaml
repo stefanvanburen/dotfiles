@@ -19,9 +19,7 @@
     ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.config/bat/config: bat_config
     ~/.config/starship.toml: starship.toml
-    ~/.config/yabai/yabairc: yabairc
     ~/.clojure/deps.edn: deps.edn
-    ~/.config/karabiner.edn: karabiner.edn
 
 - shell:
   - chsh -s $(which fish)
