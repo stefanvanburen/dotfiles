@@ -91,6 +91,9 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascriptreact', 'typescriptreact'
 " typescript
 Plug 'HerringtonDarkholme/yats.vim', { 'for': [ 'typescript', 'typescriptreact' ] }
 
+" toml
+Plug 'cespare/vim-toml'
+
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_imports_autosave = 1
