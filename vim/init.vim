@@ -83,6 +83,11 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 
 " CSS
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
 
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
