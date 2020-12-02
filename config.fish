@@ -10,6 +10,7 @@ alias md 'mkdir -vp'
 alias vim nvim
 alias vimrc 'vim ~/.config/nvim/init.vim'
 alias fishrc 'vim ~/.config/fish/config.fish'
+alias ge 'git config --edit --global'
 alias gv 'vim +G +only'
 
 if status --is-interactive
