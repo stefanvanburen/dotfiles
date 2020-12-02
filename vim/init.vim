@@ -99,6 +99,10 @@ Plug 'HerringtonDarkholme/yats.vim', { 'for': [ 'typescript', 'typescriptreact' 
 " toml
 Plug 'cespare/vim-toml'
 
+" LaTeX
+Plug 'lervag/vimtex'
+  let g:vimtex_compiler_method = 'tectonic'
+
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   let g:go_imports_autosave = 1
