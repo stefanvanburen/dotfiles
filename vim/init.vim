@@ -44,6 +44,10 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " colorscheme
 Plug 'lifepillar/vim-colortemplate', { 'on': 'ColorTemplate', 'for': 'colortemplate' }
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'colortemplate'] }
+  " virtual is cool, but it only works for one color per line (the first one detected)
+  let g:Hexokinase_highlighters = ['background']
+  let g:Hexokinase_ftEnabled = ['css', 'colortemplate']
 
 " directory / file viewer. Largely replaces netrw.
 " netrw still loads as it's useful for it's `gx` binding for opening URLs, and
