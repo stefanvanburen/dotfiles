@@ -1,0 +1,5 @@
+aliases:
+    prs: pr list
+    issues: issue list
+    br: repo view --web
+    co: pr checkout
