@@ -236,7 +236,7 @@ Plug 'svanburen/rams.vim'
 call plug#end()
 
 set termguicolors
-set background=light
+set background=dark
 colorscheme rams
 
 " don't wrap by default
