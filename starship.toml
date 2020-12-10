@@ -7,17 +7,17 @@ vicmd_symbol = "[▽](bold green)"
 
 [git_branch]
 symbol = ""
-style = "white"
+style = "black"
 
 [git_status]
-style = "white"
+style = "black"
 deleted = "×"
 format = "[$all_status$ahead_behind]($style) "
 # this still takes a long time on large repositories
 disabled = true
 
 [directory]
-style = "white"
+style = "black"
 
 [aws]
 disabled = true
