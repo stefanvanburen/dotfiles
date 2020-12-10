@@ -19,9 +19,4 @@ if status --is-interactive
     command -q starship; and starship init fish | source
 
     command -q direnv; and direnv hook fish | source
-
-    if not set -q TMUX
-        # Create session '_' or attach to '_' if already exists.
-        tmux new-session -A -s _
-    end
 end
