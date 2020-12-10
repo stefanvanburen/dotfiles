@@ -32,7 +32,7 @@ font:
   bold:
     family: PragmataPro Mono
     # what if I told you ... bold is too thick
-    style: Regular
+    style: Bold
 
   italic:
     family: PragmataPro Mono
@@ -41,7 +41,7 @@ font:
   bold_italic:
     family: PragmataPro Mono
     # what if I told you ... bold is too thick
-    style: Regular Italic
+    style: Bold Italic
 
   size: 12.0
 
@@ -49,7 +49,7 @@ font:
   #
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`.
-  use_thin_strokes: false
+  use_thin_strokes: true
 
 # https://github.com/alacritty/alacritty/wiki/Color-schemes
 schemes:
