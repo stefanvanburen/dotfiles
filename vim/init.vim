@@ -19,8 +19,6 @@ augroup vimrc
   autocmd!
 augroup END
 
-syntax enable
-
 " Leader is space key
 let g:mapleader = " "
 
