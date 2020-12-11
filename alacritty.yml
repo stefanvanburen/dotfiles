@@ -7,49 +7,45 @@ scrolling:
 
 # Font configuration
 font:
-  # I commonly switch between Iosevka Term and PragmataPro Mono (no ligatures), so just leave both here.
+  # I commonly switch between Iosevka Fixed SS08 and PragmataPro Mono (no ligatures), so just leave both here.
 
-#   normal:
-#     family: Iosevka Term SS08
-#     style: Light
-
-#   bold:
-#     family: Iosevka Term SS08
-#     style: Medium
-
-#   italic:
-#     family: Iosevka Term SS08
-#     style: Italic
-
-#   bold_italic:
-#     family: Iosevka Term SS08
-#     style: Bold Italic
-
+  # Better for non-retina displays
   normal:
-    family: PragmataPro Mono
-    style: Regular
+    family: Iosevka Fixed SS08
+    style: Light
 
   bold:
-    family: PragmataPro Mono
-    # what if I told you ... bold is too thick
-    style: Bold
+    family: Iosevka Fixed SS08
+    style: Medium
 
   italic:
-    family: PragmataPro Mono
-    style: Italic
+    family: Iosevka Fixed SS08
+    style: Light Italic
 
   bold_italic:
-    family: PragmataPro Mono
-    # what if I told you ... bold is too thick
-    style: Bold Italic
+    family: Iosevka Fixed SS08
+    style: Medium Italic
+  use_thin_strokes: false
+
+  # Better for retina displays
+  # normal:
+  #   family: PragmataPro Mono
+  #   style: Regular
+
+  # bold:
+  #   family: PragmataPro Mono
+  #   style: Bold
+
+  # italic:
+  #   family: PragmataPro Mono
+  #   style: Italic
+
+  # bold_italic:
+  #   family: PragmataPro Mono
+  #   style: Bold Italic
+  # use_thin_strokes: true
 
   size: 12.0
-
-  # Thin stroke font rendering (macOS only)
-  #
-  # Thin strokes are suitable for retina displays, but for non-retina screens
-  # it is recommended to set `use_thin_strokes` to `false`.
-  use_thin_strokes: true
 
 # https://github.com/alacritty/alacritty/wiki/Color-schemes
 colors:
