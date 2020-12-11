@@ -379,8 +379,10 @@ vnoremap k gk
 nmap <tab> %
 vmap <tab> %
 
-" edit init.vim
+" edit config files
 nnoremap <silent> <leader>ev :e $MYVIMRC<cr>
+nnoremap <silent> <leader>ef :e ~/.config/fish/config.fish<cr>
+nnoremap <silent> <leader>eg :e ~/.config/git/config<cr>
 
 " write to disk
 nnoremap <leader>w :w<cr>
