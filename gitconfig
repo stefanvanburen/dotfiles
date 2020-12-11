@@ -37,6 +37,8 @@
 
 	; oneline log
 	lg = log --oneline
+	; use Fugitive's :Git log
+	l = !nvim -c \"Git log\" +only
 
 	; mnemonic for mergetool
 	mt = mergetool
