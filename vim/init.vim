@@ -239,11 +239,19 @@ Plug 'svanburen/rams.vim'
 call plug#end()
 
 set termguicolors
-if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
-   set background=dark
+
+if has("mac")
+  " on macOS, use system dark mode to set background
+  if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+    set background=dark
+  else
+    set background=light
+  endif
 else
+  " default background is light
   set background=light
-endif
+end
+
 colorscheme rams
 
 " don't wrap by default
