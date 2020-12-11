@@ -11,6 +11,7 @@
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
+    ~/.vimrc: minimal_vimrc
     ~/.config/nvim: vim
     ~/.config/git/config: gitconfig
     ~/.config/git/ignore: gitignore
