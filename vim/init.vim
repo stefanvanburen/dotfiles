@@ -116,6 +116,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
   augroup GoMaps
     autocmd!
+    autocmd FileType go nmap <buffer> <localleader>dc <Plug>(go-decls)
+    autocmd FileType go nmap <buffer> <localleader>dd <Plug>(go-decls-dir)
     autocmd FileType go nmap <buffer> <localleader>ru <Plug>(go-run)
     autocmd FileType go nmap <buffer> <localleader>re <Plug>(go-rename)
     autocmd FileType go nmap <buffer> <localleader>tn <Plug>(go-test-func)
