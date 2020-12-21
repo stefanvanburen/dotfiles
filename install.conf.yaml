@@ -21,7 +21,7 @@
     ~/.config/bat/config: bat_config
     ~/.config/starship.toml: starship.toml
     ~/.config/gh/config.yml: gh_config.yml
-    ~/.clojure/deps.edn: deps.edn
+    ~/.config/clojure/deps.edn: deps.edn
 
 - shell:
   - chsh -s $(which fish)
