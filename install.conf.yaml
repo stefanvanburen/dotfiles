@@ -25,4 +25,5 @@
 
 - shell:
   - chsh -s $(which fish)
+  - [tic tmux-256color.terminfo, Installing tmux .terminfo file]
   - ["[ -d ~/.tmux ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm", Installing tpm]
