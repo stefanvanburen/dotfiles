@@ -85,6 +85,9 @@ Plug 'rhysd/git-messenger.vim'
 " up-to-date git filetypes
 Plug 'tpope/vim-git'
 
+" Fish
+Plug 'blankname/vim-fish'
+
 " HTML5
 Plug 'othree/html5.vim', { 'for': 'html' }
 
