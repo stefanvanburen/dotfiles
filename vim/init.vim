@@ -9,6 +9,12 @@ let g:loaded_perl_provider = 0
 " Handled by vim-matchup
 let g:loaded_matchit = 1
 
+" Disable netrw
+" Supplanted by vim-dirvish.
+" URL opening handled by open-browser.vim
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
+
 let g:python3_host_skip_check = 1
 if executable('python3')
   let g:python3_host_prog = exepath('python3')
@@ -53,9 +59,17 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'colorte
   let g:Hexokinase_ftEnabled = ['css', 'colortemplate']
 
 " directory / file viewer. Largely replaces netrw.
-" netrw still loads as it's useful for it's `gx` binding for opening URLs, and
-" providing the backend for :Gbrowse for fugitive
 Plug 'justinmk/vim-dirvish'
+
+Plug 'tyru/open-browser.vim'
+  " handles :Gbrowse
+  command! -nargs=1 Browse OpenBrowser <args>
+  " suggested mappings / settings
+  " netrw_nogx isn't strictly required since it shouldn't be loaded, but just
+  " in case...
+  let g:netrw_nogx = 1
+  nmap gx <Plug>(openbrowser-smart-search)
+  vmap gx <Plug>(openbrowser-smart-search)
 
 " Adds git added / modified / deleted in the sidebar (amongst other things)
 " Use ]c / [c to go to hunks within a file
