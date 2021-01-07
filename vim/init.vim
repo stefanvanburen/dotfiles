@@ -139,8 +139,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     autocmd FileType go nmap <buffer> <localleader>re <Plug>(go-rename)
     autocmd FileType go nmap <buffer> <localleader>tn <Plug>(go-test-func)
     autocmd FileType go nmap <buffer> <localleader>tf <Plug>(go-test)
-    autocmd FileType go nmap <buffer> <localleader>do <Plug>(go-doc)
-    autocmd FileType go nmap <buffer> <localleader>de <Plug>(go-describe)
     autocmd FileType go nmap <buffer> <localleader>ae <Plug>(go-alternate-edit)
     autocmd FileType go nmap <buffer> <localleader>if <Plug>(go-iferr)
   augroup END
