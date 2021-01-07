@@ -16,7 +16,7 @@ font:
 
   bold:
     family: Iosevka Fixed SS08
-    style: Medium
+    style: Regular
 
   italic:
     family: Iosevka Fixed SS08
@@ -24,7 +24,7 @@ font:
 
   bold_italic:
     family: Iosevka Fixed SS08
-    style: Medium Italic
+    style: Regular Italic
   use_thin_strokes: false
 
   # Better for retina displays
