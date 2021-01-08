@@ -471,6 +471,9 @@ augroup Filetypes
   " files ending in .job.tpl or .nomad are likely terraform (HCL) files.
   autocmd BufRead,BufNewFile *.job.tpl setfiletype terraform
   autocmd BufRead,BufNewFile *.nomad setfiletype terraform
+
+  " yaml settings
+  autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 augroup END
 
 " replaces vim-highlightedyank - briefly highlights the yanked text
