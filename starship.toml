@@ -24,3 +24,6 @@ disabled = true
 
 [golang]
 disabled = true
+
+[java]
+disabled = true
