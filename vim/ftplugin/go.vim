@@ -5,5 +5,6 @@ let b:ale_fixers = ['goimports']
 " won't grab identifiers declared in other files).
 let b:ale_go_staticcheck_lint_package = 1
 
+set noexpandtab
 set tabstop=4
 set shiftwidth=4
