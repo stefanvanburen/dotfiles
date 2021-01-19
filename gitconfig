@@ -120,6 +120,9 @@
 	; open neovim and invoke :Git mergetool
 	cmd = nvim -c \"Git mergetool\"
 
+[rebase]
+	autosquash = true
+
 [sendemail]
 	smtpserver = smtp.migadu.com
 	smtpuser = me@svbn.me
