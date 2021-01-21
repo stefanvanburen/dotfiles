@@ -173,11 +173,6 @@ Plug 'vim-test/vim-test'
   nmap <silent> t<C-g> :TestVisit<CR>
   let test#strategy = "dispatch"
 
-" switch between single-line and multiline forms of code
-" gS -> split to multiple lines
-" gJ -> make single line
-Plug 'AndrewRadev/splitjoin.vim'
-
 " s{char}{char} to search for a set of two characters
 Plug 'justinmk/vim-sneak'
   " use 's' again to go to the next match
