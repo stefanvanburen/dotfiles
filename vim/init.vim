@@ -178,9 +178,6 @@ Plug 'vim-test/vim-test'
 " gJ -> make single line
 Plug 'AndrewRadev/splitjoin.vim'
 
-" snippets
-Plug 'SirVer/ultisnips'
-
 " s{char}{char} to search for a set of two characters
 Plug 'justinmk/vim-sneak'
   " use 's' again to go to the next match
