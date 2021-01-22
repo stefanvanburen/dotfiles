@@ -1,2 +1,1 @@
-set wrap
 set spell
