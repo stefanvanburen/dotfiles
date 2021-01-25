@@ -20,6 +20,10 @@ Plug 'lifepillar/vim-colortemplate', { 'for': 'colortemplate' }
     autocmd FileType colortemplate nmap <buffer> <localleader>ct :Colortemplate!<cr>
   augroup END
 
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+  let g:Hexokinase_highlighters = ['backgroundfull']
+  let g:Hexokinase_ftEnabled = ['colortemplate']
+
 Plug 'tpope/vim-sensible'
 
 " Initialize plugin system

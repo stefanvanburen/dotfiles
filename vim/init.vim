@@ -46,17 +46,9 @@ nnoremap <leader>pu :PlugUpdate<cr>
 
 call plug#begin(stdpath('data') . '/plugged')
 
-" colorscheme
-Plug 'lifepillar/vim-colortemplate', { 'for': 'colortemplate' }
-  augroup Colortemplate
-    autocmd!
-    autocmd FileType colortemplate nmap <buffer> <localleader>ct :Colortemplate!<cr>
-  augroup END
-
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'colortemplate'] }
-  " virtual is cool, but it only works for one color per line (the first one detected)
-  let g:Hexokinase_highlighters = ['background']
-  let g:Hexokinase_ftEnabled = ['css', 'colortemplate']
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+  let g:Hexokinase_highlighters = ['virtual']
+  let g:Hexokinase_ftEnabled = ['css', 'scss']
 
 " directory / file viewer. Largely replaces netrw.
 Plug 'justinmk/vim-dirvish'
