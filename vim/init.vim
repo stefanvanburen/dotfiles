@@ -287,8 +287,8 @@ set showbreak=↳
 " when using > and <, round the indent to a multiple of shiftwidth
 set shiftround
 
-" statusline current " "
-" statusline not current " "
+" statusline current ' '
+" statusline not current ' '
 " vertical empty (escaped space)
 " fold: filling foldtext
 " diff: deleted lines in diff
