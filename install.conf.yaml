@@ -12,7 +12,7 @@
     ~/.dotfiles: ''
     ~/.vimrc: minimal_vimrc
     ~/.config/tmux/tmux.conf: tmux.conf
-    ~/.config/nvim: vim
+    ~/.config/nvim: nvim
     ~/.config/ripgreprc: ripgreprc
     ~/.config/git/config: gitconfig
     ~/.config/git/ignore: gitignore
