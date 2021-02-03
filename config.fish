@@ -18,8 +18,14 @@ set -gx EDITOR nvim
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 
 if status --is-interactive
+    # `man abbr`
+    abbr --add --global - prevd
+    abbr --add --global v vim
+    abbr --add --global g git
+
     # jump is bound to `z`
     command -q jump; and source (jump shell --bind=z fish | psub)
+
     command -q starship; and starship init fish | source
 
     command -q direnv; and direnv hook fish | source
