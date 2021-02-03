@@ -1,5 +1,20 @@
 # https://starship.rs/config
 
+# basically, trim down all the language / tool versions
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$line_break\
+$battery\
+$time\
+$status\
+$character"""
+
 [character]
 success_symbol = "[△](bold green)"
 error_symbol = "[×](bold red)"
@@ -18,12 +33,3 @@ disabled = true
 
 [directory]
 style = "black"
-
-[aws]
-disabled = true
-
-[golang]
-disabled = true
-
-[java]
-disabled = true
