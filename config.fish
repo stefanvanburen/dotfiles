@@ -13,6 +13,10 @@ alias fishrc 'vim ~/.config/fish/config.fish'
 alias ge 'git config --edit --global'
 alias gv 'vim +G +only'
 
+set -gx EDITOR nvim
+# NOTE: keep in sync with install.conf.yaml
+set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
+
 if status --is-interactive
     # jump is bound to `z`
     command -q jump; and source (jump shell --bind=z fish | psub)
