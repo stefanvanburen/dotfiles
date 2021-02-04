@@ -1,6 +1,1 @@
-vim/undodir
-vim/plugged
-vim/spell/en.utf-8.add*
-vim/autoload/plug.vim*
-vim/files
 fish_functions/*

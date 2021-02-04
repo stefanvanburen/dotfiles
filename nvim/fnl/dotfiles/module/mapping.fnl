@@ -1,24 +1,63 @@
 (module dotfiles.module.mapping
   {require {nvim aniseed.nvim
             nu aniseed.nvim.util
+            util dotfiles.util
             core aniseed.core}})
 
 (defn- noremap [mode from to]
   "Sets a mapping with {:noremap true}."
   (nvim.set_keymap mode from to {:noremap true}))
 
-;; Generic mapping configuration.
-(nvim.set_keymap :n :<space> :<nop> {:noremap true})
 ;; Leader is space key
 (set nvim.g.mapleader " ")
 ;; LocalLeader is the comma key
 (set nvim.g.maplocalleader ",")
 
-(noremap :n :<leader>pc ":PlugClean<cr>")
-(noremap :n :<leader>pg ":PlugUpgrade<cr>")
-(noremap :n :<leader>ps ":PlugStatus<cr>")
-(noremap :n :<leader>pu ":PlugUpdate<cr>")
-(noremap :n :<leader>pi ":PlugInstall<cr>")
+;; packer
+(util.nnoremap :pc "PackerClean")
+(util.nnoremap :pg "PackerUpdate")
+(util.nnoremap :pu "PackerSync")
+(util.nnoremap :pi "PackerInstall")
+
+;; Fugitive
+(util.nnoremap :gs "vertical Git")
+(util.nnoremap :gw "Gwrite")
+(util.nnoremap :gc "Gcommit")
+(util.nnoremap :gb "GBrowse")
+(util.nnoremap :gy ".GBrowse!")
+
+;; vim-better-whitespace
+(util.nnoremap :sw "StripWhitespace")
+
+;; fzf
+(nvim.ex.command_
+  "-bang -nargs=* Rg"
+  "call fzf#vim#grep(\""
+  "rg --column --line-number --no-heading --color=always --smart-case --hidden --follow -g '!.git/'"
+  "-- \".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)")
+
+(util.nnoremap :f "Files")
+(util.nnoremap :<enter> "GitFiles")
+(util.nnoremap :<leader> "Buffers")
+(util.nnoremap :se "Rg")
+
+(nvim.set_keymap :n :<leader><tab> "<plug>(fzf-maps-n)" {})
+(nvim.set_keymap :x :<leader><tab> "<plug>(fzf-maps-x)" {})
+(nvim.set_keymap :o :<leader><tab> "<plug>(fzf-maps-o)" {})
+
+;; open-browser.vim
+(nvim.ex.command_
+  "-nargs=1 Browse"
+  "OpenBrowser <args>")
+
+(nvim.set_keymap :n :gx "<plug>(openbrowser-smart-search)" {})
+(nvim.set_keymap :v :gx "<plug>(openbrowser-smart-search)" {})
+
+;; vim-sneak
+(nvim.ex.map :f "<plug>Sneak_f")
+(nvim.ex.map :F "<plug>Sneak_F")
+(nvim.ex.map :t "<plug>Sneak_t")
+(nvim.ex.map :T "<plug>Sneak_T")
 
 ;; always move by visual lines, rather than real lines
 ;; this is useful when 'wrap' is set.
@@ -34,20 +73,19 @@
 (nvim.set_keymap :v :<tab> :% {})
 
 ;; edit config files
-(noremap :n :<leader>ev ":e $MYVIMRC<cr>")
-(noremap :n :<leader>ef ":e $HOME/.config/fish/config.fish<cr>")
-(noremap :n :<leader>eg ":e $HOME/.config/git/config<cr>")
+(util.nnoremap :ev "e $HOME/.config/nvim/init.lua")
+(util.nnoremap :ef "e $HOME/.config/fish/config.fish")
+(util.nnoremap :eg "e $HOME/.config/git/config")
 
-(noremap :n :<leader>w ":w<cr>")
-(noremap :n :<leader>q ":q<cr>")
-(noremap :n :<leader>so ":source $MYVIMRC<cr>")
-(noremap :n :<leader>cl ":close<cr>")
-(noremap :n :<leader>ss ":split<cr>")
-(noremap :n :<leader>vs ":vsplit<cr>")
+(util.nnoremap :w "w")
+(util.nnoremap :q "q")
+(util.nnoremap :cl "close")
+(util.nnoremap :ss "split")
+(util.nnoremap :vs "vsplit")
 
 ;; tab mappings
-; (noremap :n :\]r ":tabn<cr>")
-; (noremap :n :\[r ":tabp<cr>")
+; (noremap :n (tostring :]r) ":tabn<cr>")
+; (noremap :n (tostring :[r) ":tabp<cr>")
 (noremap :n :<leader>tn ":tabnew<cr>")
 
 ;; Use Q to repeat last macro, rather than going into ex mode
@@ -76,12 +114,7 @@
 (noremap :x :< "<gv")
 (noremap :x :> ">gv")
 
-;;; Taken from Olical's config
-
 ;; jk escape sequences.
 (noremap :i :jk :<esc>)
 (noremap :c :jk :<c-c>)
 (noremap :t :jk :<c-\><c-n>)
-
-;; Correct to first spelling suggestion.
-(noremap :n :<leader>zz ":normal! 1z=<cr>")

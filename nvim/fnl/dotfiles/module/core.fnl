@@ -1,14 +1,33 @@
 (module dotfiles.module.core
   {require {nvim aniseed.nvim
             str aniseed.string
-            a aniseed.core}})
+            a aniseed.core}
+   require-macros [dotfiles.macros]})
 
-;; autocommands
 ;; on resize, resize windows
 (nvim.ex.autocmd :VimResized   :* ":wincmd =")
+
 ;; show yanked text
 (nvim.ex.autocmd :TextYankPost :* "lua require'vim.highlight'.on_yank()")
 
+;; after writing init.lua, recompile
+(nvim.ex.autocmd :BufWritePost :init.lua "PackerCompile")
+
+(augroup filetypes
+         (do
+           (autocmd :FileType :go "set noexpandtab tabstop=4 shiftwidth=4")
+           (autocmd :FileType :python "set tabstop=4 shiftwidth=4 expandtab")
+           (autocmd :FileType :javascript "set expandtab tabstop=2 shiftwidth=2")
+           (autocmd :FileType :typescript "set tabstop=2 shiftwidth=2 expandtab")
+           (autocmd :FileType :typescriptreact "set tabstop=2 shiftwidth=2 expandtab")
+           (autocmd :FileType :html "set expandtab tabstop=2 shiftwidth=2")
+           (autocmd :FileType :css "set expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
+           (autocmd :FileType :fish "set expandtab tabstop=4 shiftwidth=4")
+           (autocmd :FileType :yaml "set expandtab tabstop=2 shiftwidth=2")
+           (autocmd :FileType :gitcommit "set spell")
+           (autocmd :FileType :markdown "set spell wrap conceallevel=2")))
+
+;; colorscheme
 (set nvim.o.termguicolors true)
 (nvim.ex.colorscheme :rams)
 (set nvim.o.background :light)
@@ -129,3 +148,32 @@
 
 ;; ignore case when completing files / directories in wildmenu
 (nvim.ex.set :wildignorecase)
+
+;; settings for plugins
+(set nvim.g.deoplete#enabled_at_startup 1)
+
+(set nvim.g.go_gopls_enabled 0)
+
+(set nvim.g.ale_disable_lsp 1)
+
+(set nvim.g.dispatch_no_tmux_make 1)
+
+(set nvim.g.Hexokinase_highlighters [:virtual])
+(set nvim.g.Hexokinase_ftEnabled [:css :scss])
+
+(set nvim.g.vim_json_syntax_conceal 1)
+
+(set nvim.g.matchup_matchparen_offscreen {})
+
+(set nvim.g.vimtex_compiler_method "tectonic")
+
+(set nvim.g.sneak#s_next 1)
+
+(set nvim.g.pear_tree_repeatable_expand 0)
+
+(set nvim.g.netrw_nogx 1)
+
+(set nvim.g.fzf_layout {:window {:width 1.0 :height 0.5 :yoffset 1.0 :border :top}})
+
+;; disable pear-tree for lispy languages, covered by parinfer
+(set nvim.g.pear_tree_ft_disabled [:clojure :fennel])

@@ -44,26 +44,12 @@ function! ShortFilePath()
     endif
 endfunction
 
-function! PluginsStatus()
-    let l:status = ""
-
-    " ALE plugin indicator.
-    if exists("g:loaded_ale")
-        if ale#statusline#Count(bufnr('')).total > 0
-            let l:status .= "✖" . " "
-        endif
-    endif
-
-    return l:status
-endfunction
-
 function! ActiveStatusLine()
     let l:mode = mode()
     let l:statusline = ModeColor(l:mode)
     let l:statusline .= ModeText(l:mode)
     let l:statusline .= "%* %<%{ShortFilePath()} %H%M%R"
     let l:statusline .= "%5* %{FugitiveBranch()} "
-    let l:statusline .= "%6*%{PluginsStatus()}"
     let l:statusline .= "%*%=%l:%c | %7*%L%* | %P "
     return l:statusline
 endfunction
