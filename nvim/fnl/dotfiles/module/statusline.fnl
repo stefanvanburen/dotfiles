@@ -1,7 +1,6 @@
 (module dotfiles.module.core
   {require {nvim aniseed.nvim
-            str aniseed.string
-            a aniseed.core}})
+            str aniseed.string}})
 
 (let [stl ["%f"
            "%m"
