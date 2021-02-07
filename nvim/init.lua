@@ -20,7 +20,7 @@ require('packer').startup(function(use)
   -- directory / file viewer. Largely replaces netrw.
   use 'justinmk/vim-dirvish'
 
-  use {'tyru/open-browser.vim', opt = true, cmd = {'OpenBrowser'} }
+  use 'tyru/open-browser.vim'
 
   -- Adds git added / modified / deleted in the sidebar (amongst other things)
   -- Use ]c / [c to go to hunks within a file

@@ -3,7 +3,8 @@
             str aniseed.string}})
 
 (let [stl ["%f"
-           "%m"
+           "%m "
+           " %{FugitiveHead()}"
            "%="
            "%l,%c "
            "%{&filetype}"]]
