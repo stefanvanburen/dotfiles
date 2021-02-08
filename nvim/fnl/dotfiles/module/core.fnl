@@ -120,7 +120,7 @@
 (wopt :relativenumber true)
 
 ;; maintain an undofile for undoing actions through neovim loads
-(bopt :undofile false)
+(bopt :undofile true)
 
 ;; Show matching brackets briefly.
 (opt :showmatch true)
