@@ -13,9 +13,9 @@
   ;; Set some keybinds conditional on server capabilities
   (if
     client.resolved_capabilities.document_formatting
-    (nnoremap bufnr "<leader>f" "<cmd>lua vim.lsp.buf.formatting()<CR>")
+    (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>")
     client.resolved_capabilities.document_range_formatting
-    (nnoremap bufnr "<leader>f" "<cmd>lua vim.lsp.buf.formatting()<CR>")
+    (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>")
     nil)
 
   (when client.resolved_capabilities.document_highlight

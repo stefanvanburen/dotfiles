@@ -27,129 +27,138 @@
            (autocmd :FileType :gitcommit "set spell")
            (autocmd :FileType :markdown "set spell wrap conceallevel=2")))
 
+(defn- opt [name value]
+  (tset vim.o name value))
+
+(defn- wopt [name value]
+  (tset vim.wo name value)
+  (opt name value))
+
+(defn- bopt [name value]
+  (tset vim.bo name value)
+  (opt name value))
+
 ;; colorscheme
-(set nvim.o.termguicolors true)
+(opt :termguicolors true)
 (nvim.ex.colorscheme :rams)
-(set nvim.o.background :light)
+(opt :background :light)
 
 ;; don't wrap by default
-(nvim.ex.set :nowrap)
+(wopt :wrap false)
 
 ;; if wrap is set, break on characters in 'breakat' rather than the last
 ;; character that will fit on the screen.
 ;; This _should_ mean that lines generally break on words
-(nvim.ex.set :linebreak)
+(wopt :linebreak true)
 ;; on lines that will wrap, they instead 'break' and be visually indented by
 ;; the showbreak character, followed by the indent.
-(nvim.ex.set :breakindent)
-(set nvim.o.breakindentopt "shift:2,sbr")
-(set nvim.o.showbreak "↳")
+(wopt :breakindent true)
+(wopt :breakindentopt "shift:2,sbr")
+(opt :showbreak "↳")
 
 ;; when using > and <, round the indent to a multiple of shiftwidth
-(nvim.ex.set :shiftround)
+(opt :shiftround true)
 
 ;; statusline current ' '
 ;; statusline not current ' '
 ;; vertical empty (escaped space)
 ;; fold: filling foldtext
 ;; diff: deleted lines in diff
-(set nvim.o.fillchars
-     (str.join "," ["stl: "
-                    "stlnc: "
-                    "vert:│"
-                    "fold:·"
-                    "diff:-"]))
+(wopt :fillchars (str.join "," ["stl: "
+                                "stlnc: "
+                                "vert:│"
+                                "fold:·"
+                                "diff:-"]))
 
 ;; fold based on syntax cues
-(set nvim.o.foldmethod :syntax)
+(wopt :foldmethod :syntax)
 ;; turn off folding by default
-(nvim.ex.set :nofoldenable)
+(wopt :foldenable false)
 
 ;; Global substitutions by default.
-(nvim.ex.set :gdefault)
+(opt :gdefault true)
 
 ;; Don't get rid of hidden buffers
-(nvim.ex.set :hidden)
+(opt :hidden true)
 
 ;; show incremental substitutions in a preview window
 ;; NOTE: trying this out provisionally
-(set nvim.o.inccommand "split")
+(opt :inccommand "split")
 
 ;; Ignore case while searching
-(nvim.ex.set :ignorecase)
+(opt :ignorecase true)
 ;; ... except when capitals are used
-(nvim.ex.set :smartcase)
+(opt :smartcase true)
 
 ;; Copy the indent of existing lines when autoindenting
-(nvim.ex.set :copyindent)
+(opt :copyindent true)
 
 ;; how long to wait in milliseconds before writing to disk
 ;; this is set lower to help plugins like vim-gitgutter update their signs
-(set nvim.o.updatetime 100)
+(opt :updatetime 100)
 
 ;; Helps when doing insert-mode completion
-(nvim.ex.set :infercase)
+(bopt :infercase true)
 
 ;; Don't redraw when using macros.
-(nvim.ex.set :nolazyredraw)
+(opt :lazyredraw false)
 
 ;; Invisible characters
-(nvim.ex.set :nolist)
-(set nvim.o.listchars (str.join "," ["tab:⌁ " "eol:¬" "trail:⣿"]))
+(wopt :list false)
+(wopt :listchars (str.join "," ["tab:⌁ " "eol:¬" "trail:⣿"]))
 
 ;; Don't insert two spaces after punctuation with a join command.
-(nvim.ex.set :nojoinspaces)
+(opt :joinspaces false)
 
 ;; Don't show the mode on the command line - it's redundant with the status line.
-(nvim.ex.set :noshowmode)
+(opt :showmode false)
 
 ;; line numbers
 ;; setting these both together means that the current line number is the actual
 ;; line number of the file, while the other line numbers are relative.
-(nvim.ex.set :number)
-(nvim.ex.set :relativenumber)
+(wopt :number true)
+(wopt :relativenumber true)
 
 ;; maintain an undofile for undoing actions through neovim loads
-(nvim.ex.set :undofile)
+(bopt :undofile false)
 
 ;; Show matching brackets briefly.
-(nvim.ex.set :showmatch)
+(opt :showmatch true)
 
 ;; On horizontal split, open the split below.
-(nvim.ex.set :splitbelow)
+(opt :splitbelow true)
 ;; On vertical split, open the split to the right.
-(nvim.ex.set :splitright)
+(opt :splitright true)
 
 ;; cobbled from https://github.com/liuchengxu/vim-better-default
 ;; o: disables
 ;; c: no ins-completion-menu messages
-(set nvim.o.shortmess "atOIoc")
+(opt :shortmess "atOIoc")
 
 ;; turn on mouse support
 ;; this is useful for resizing windows, using the mouse wheel to scroll, etc
-(set nvim.o.mouse "a")
+(opt :mouse "a")
 
 ;; always use the system clipboard for operations
 ; set clipboard+=unnamedplus
-(set nvim.o.clipboard "unnamedplus")
+(opt :clipboard "unnamedplus")
 
 ;; turn off swapfiles - for now, I find these more of a headache than a benefit
-(nvim.ex.set :noswapfile)
+(bopt :swapfile false)
 
 ;; Convenience for automatic formatting.
 ;;   r - auto-insert comment leading after <CR> in insert mode
 ;;   o - auto-insert comment leading after O in normal mode
-; set formatoptions+=r
-; set formatoptions+=o
-(set nvim.o.formatoptions (str.join "," (a.concat (str.split nvim.o.formatoptions ",") ["r" "o"])))
+(bopt :formatoptions "tcqjro")
 
 ;; allows moving the cursor to where there is no actual character
-(set nvim.o.virtualedit "all")
+(opt :virtualedit "all")
 
 ;; ignore case when completing files / directories in wildmenu
-(nvim.ex.set :wildignorecase)
+(opt :wildignorecase true)
 
-;; settings for plugins
+;;; settings for plugins
+
 (set nvim.g.deoplete#enabled_at_startup 1)
 
 (set nvim.g.go_gopls_enabled 0)
