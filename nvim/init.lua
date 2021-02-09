@@ -1,5 +1,15 @@
 -- init dot lua
 
+-- Disable standard plugins
+vim.g.loaded_getscriptPlugin = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_rrhelper = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
+vim.g.loaded_vimballPlugin = 1
+vim.g.loaded_zipPlugin = 1
+
 -- bootstrap packer
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
