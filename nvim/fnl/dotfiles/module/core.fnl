@@ -149,7 +149,8 @@
 ;; Convenience for automatic formatting.
 ;;   r - auto-insert comment leading after <CR> in insert mode
 ;;   o - auto-insert comment leading after O in normal mode
-(bopt :formatoptions "tcqjro")
+;;   n - recognize numbered lists in text
+(bopt :formatoptions "tcqjron")
 
 ;; allows moving the cursor to where there is no actual character
 (opt :virtualedit "all")
