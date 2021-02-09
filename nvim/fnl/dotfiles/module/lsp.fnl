@@ -22,7 +22,6 @@
     (augroup lsp_document_highlight
              (do
                (autocmd :CursorHold  :<buffer> "lua vim.lsp.buf.document_highlight()")
-               (autocmd :CursorHoldI :<buffer> "lua vim.lsp.buf.document_highlight()")
                (autocmd :CursorMoved :<buffer> "lua vim.lsp.buf.clear_references()"))))
 
   ;; set the omnifunc for the buffer
