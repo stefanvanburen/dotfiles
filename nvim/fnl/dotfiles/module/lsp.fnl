@@ -9,16 +9,16 @@
   "Sets a normal mode mapping within a buffer."
   (nvim.buf_set_keymap bufnr :n from to {:noremap true :silent true}))
 
+(defn- capable? [client capability]
+  (. client.resolved_capabilities capability))
+
 (defn- on-attach [client bufnr]
   ;; Set some keybinds conditional on server capabilities
-  (if
-    client.resolved_capabilities.document_formatting
-    (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>")
-    client.resolved_capabilities.document_range_formatting
-    (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>")
-    nil)
+  (when (or (capable? client :document_formatting) 
+            (capable? client :document_range_formatting))
+    (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>"))
 
-  (when client.resolved_capabilities.document_highlight
+  (when (capable? client :document_highlight)
     (augroup lsp_document_highlight
              (do
                (autocmd :CursorHold  :<buffer> "lua vim.lsp.buf.document_highlight()")
@@ -26,7 +26,9 @@
                (autocmd :CursorMoved :<buffer> "lua vim.lsp.buf.clear_references()"))))
 
   ;; set the omnifunc for the buffer
-  (set nvim.bo.omnifunc "v:lua.vim.lsp.omnifunc")
+  (when (capable? client :completion)
+    (set nvim.bo.omnifunc "v:lua.vim.lsp.omnifunc"))
+
   ;; setup mappings
   (nnoremap bufnr "gD"         "<cmd>lua vim.lsp.buf.declaration()<CR>")
   (nnoremap bufnr "gd"         "<cmd>lua vim.lsp.buf.definition()<CR>")
