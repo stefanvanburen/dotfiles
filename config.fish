@@ -22,6 +22,7 @@ if status --is-interactive
     abbr --add --global - prevd
     abbr --add --global v vim
     abbr --add --global g git
+    abbr --add --global tm tmux
 
     # jump is bound to `z`
     command -q jump; and source (jump shell --bind=z fish | psub)
