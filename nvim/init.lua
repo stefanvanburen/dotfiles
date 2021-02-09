@@ -10,15 +10,15 @@ vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_vimballPlugin = 1
 vim.g.loaded_zipPlugin = 1
 
+-- TODO: figure out how to do this in Fennel
+vim.api.nvim_set_keymap('n', ';', ':', { noremap = true })
+
 -- bootstrap packer
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
 end
-
--- TODO: figure out how to do this in Fennel
-vim.api.nvim_set_keymap('n', ';', ':', { noremap = true })
 
 vim.cmd [[packadd packer.nvim]]
 
