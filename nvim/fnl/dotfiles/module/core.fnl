@@ -183,6 +183,9 @@
 
 (set nvim.g.netrw_nogx 1)
 
+(set nvim.g.echodoc#enable_at_startup 1)
+(set nvim.g.echodoc#type "virtual")
+
 (set nvim.g.fzf_layout {:window {:width 1.0 :height 0.5 :yoffset 1.0 :border :top}})
 
 ;; disable pear-tree for lispy languages, covered by parinfer
