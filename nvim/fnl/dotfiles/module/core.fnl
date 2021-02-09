@@ -190,3 +190,6 @@
 
 ;; disable pear-tree for lispy languages, covered by parinfer
 (set nvim.g.pear_tree_ft_disabled [:clojure :fennel])
+
+;; run goimports on save for go files
+(set nvim.g.go_fmt_autosave 1)
