@@ -52,8 +52,7 @@ require('packer').startup(function(use)
 
   -- TODO: will I use this?
   -- use 'lervag/vimtex'
-  -- TODO: do I need this?
-  -- use {'fatih/vim-go', run = ':GoUpdateBinaries' }
+  use {'fatih/vim-go', run = ':GoUpdateBinaries' }
 
   -- profiling startup time
   use 'dstein64/vim-startuptime'
