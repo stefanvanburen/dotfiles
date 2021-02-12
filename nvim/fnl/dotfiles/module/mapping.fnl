@@ -135,3 +135,8 @@
 (noremap :i :jk :<esc>)
 (noremap :c :jk :<c-c>)
 (noremap :t :jk :<c-\><c-n>)
+;; ale mappings
+;; NOTE: these mappings should be overridden if attached to an nvim-lsp capable buffer
+(map :n :<leader>af ":ALEFix<cr>" {})
+(map :n "[w" "<plug>(ale_previous_wrap)" {})
+(map :n "]w" "<plug>(ale_next_wrap)" {})

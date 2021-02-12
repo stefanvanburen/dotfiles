@@ -40,6 +40,8 @@ require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
 
+  use 'w0rp/ale'
+
   -- Allows for viewing git commit messages related to the current line
   -- <leader>gm to trigger the window, again to go inside.
   use {'rhysd/git-messenger.vim', opt = true, cmd = {'GitMessenger'} }

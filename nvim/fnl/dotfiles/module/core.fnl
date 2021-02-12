@@ -166,6 +166,16 @@
 (set nvim.g.go_gopls_enabled 0)
 
 (set nvim.g.ale_disable_lsp 1)
+(set nvim.g.ale_sign_error "×")
+(set nvim.g.ale_sign_warning "→")
+(set nvim.g.ale_sign_info "→")
+(set nvim.g.ale_echo_msg_format "%linter%: %s")
+
+;; in general, this is the right thing to do
+(set nvim.g.ale_fix_on_save 1)
+
+(set nvim.g.ale_virtualtext_cursor 1)
+(set nvim.g.ale_virtualtext_prefix  "∴ ")
 
 (set nvim.g.dispatch_no_tmux_make 1)
 
