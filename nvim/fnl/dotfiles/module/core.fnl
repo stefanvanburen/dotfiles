@@ -22,6 +22,7 @@
            (autocmd :FileType :typescriptreact "set tabstop=2 shiftwidth=2 expandtab")
            (autocmd :FileType :html "set expandtab tabstop=2 shiftwidth=2")
            (autocmd :FileType :css "set expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
+           (autocmd :FileType :scss "set expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
            (autocmd :FileType :fish "set expandtab tabstop=4 shiftwidth=4")
            (autocmd :FileType :yaml "set expandtab tabstop=2 shiftwidth=2")
            (autocmd :FileType :gitcommit "set spell")
