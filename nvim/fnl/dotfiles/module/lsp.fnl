@@ -14,15 +14,18 @@
 
 (defn- on-attach [client bufnr]
   ;; Set some keybinds conditional on server capabilities
-  (when (or (capable? client :document_formatting) 
+  (when (or (capable? client :document_formatting)
             (capable? client :document_range_formatting))
     (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>"))
 
   (when (capable? client :document_highlight)
-    (augroup lsp_document_highlight
-             (do
-               (autocmd :CursorHold  :<buffer> "lua vim.lsp.buf.document_highlight()")
-               (autocmd :CursorMoved :<buffer> "lua vim.lsp.buf.clear_references()"))))
+    (do
+      (nvim.ex.augroup (tostring lsp-document-highlight))
+      ;; https://github.com/neovim/nvim-lspconfig/pull/728/files
+      (nvim.ex.autocmd_ :* :<buffer>)
+      (nvim.ex.autocmd  :CursorHold  :<buffer> "lua vim.lsp.buf.document_highlight()")
+      (nvim.ex.autocmd  :CursorMoved :<buffer> "lua vim.lsp.buf.clear_references()")
+      (nvim.ex.augroup  :END)))
 
   ;; set the omnifunc for the buffer
   (when (capable? client :completion)
