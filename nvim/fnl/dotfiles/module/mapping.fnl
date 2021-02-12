@@ -4,9 +4,14 @@
             util dotfiles.util
             core aniseed.core}})
 
+;; alias function
+(def map nvim.set_keymap)
+
 (defn- noremap [mode from to]
   "Sets a mapping with {:noremap true}."
-  (nvim.set_keymap mode from to {:noremap true}))
+  (map mode from to {:noremap true}))
+
+(map :n ";" ":" {:noremap true})
 
 ;; Leader is space key
 (set nvim.g.mapleader " ")
@@ -41,17 +46,17 @@
 (util.nnoremap :<leader> "Buffers")
 (util.nnoremap :se "Rg")
 
-(nvim.set_keymap :n :<leader><tab> "<plug>(fzf-maps-n)" {})
-(nvim.set_keymap :x :<leader><tab> "<plug>(fzf-maps-x)" {})
-(nvim.set_keymap :o :<leader><tab> "<plug>(fzf-maps-o)" {})
+(map :n :<leader><tab> "<plug>(fzf-maps-n)" {})
+(map :x :<leader><tab> "<plug>(fzf-maps-x)" {})
+(map :o :<leader><tab> "<plug>(fzf-maps-o)" {})
 
 ;; open-browser.vim
 (nvim.ex.command_
   "-nargs=1 Browse"
   "OpenBrowser <args>")
 
-(nvim.set_keymap :n :gx "<plug>(openbrowser-smart-search)" {})
-(nvim.set_keymap :v :gx "<plug>(openbrowser-smart-search)" {})
+(map :n :gx "<plug>(openbrowser-smart-search)" {})
+(map :v :gx "<plug>(openbrowser-smart-search)" {})
 
 ;; vim-sneak
 (nvim.ex.map :f "<plug>Sneak_f")
@@ -69,8 +74,8 @@
 ;; Navigate between matching brackets
 ;; These are specifically not `noremap`s because we want to be bound to
 ;; whatever % is (usually a plugin, matchit / matchup).
-(nvim.set_keymap :n :<tab> :% {})
-(nvim.set_keymap :v :<tab> :% {})
+(map :n :<tab> :% {})
+(map :v :<tab> :% {})
 
 ;; edit config files
 (util.nnoremap :ev "e $HOME/.config/nvim/init.lua")
@@ -84,8 +89,8 @@
 (util.nnoremap :vs "vsplit")
 
 ;; tab mappings
-; (noremap :n (tostring :]r) ":tabn<cr>")
-; (noremap :n (tostring :[r) ":tabp<cr>")
+(noremap :n "]r" ":tabnext<cr>")
+(noremap :n "[r" ":tabnprev<cr>")
 (noremap :n :<leader>tn ":tabnew<cr>")
 
 ;; Use Q to repeat last macro, rather than going into ex mode

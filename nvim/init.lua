@@ -10,11 +10,6 @@ vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_vimballPlugin = 1
 vim.g.loaded_zipPlugin = 1
 
--- TODO: figure out how to do this in Fennel
-vim.api.nvim_set_keymap('n', ';', ':', { noremap = true })
-vim.api.nvim_set_keymap('n', ']r', ':tabnext<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '[r', ':tabprev<cr>', { noremap = true })
-
 -- bootstrap packer
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
