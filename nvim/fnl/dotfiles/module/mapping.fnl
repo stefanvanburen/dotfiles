@@ -135,6 +135,14 @@
 (noremap :i :jk :<esc>)
 (noremap :c :jk :<c-c>)
 (noremap :t :jk :<c-\><c-n>)
+
+;; vim-test mappings
+(map :n :t<C-n> ":TestNearest<cr>" {:silent true})
+(map :n :t<C-f> ":TestFile<cr>" {:silent true})
+(map :n :t<C-s> ":TestSuite<cr>" {:silent true})
+(map :n :t<C-l> ":TestLast<cr>" {:silent true})
+(map :n :t<C-g> ":TestVisit<cr>" {:silent true})
+
 ;; ale mappings
 ;; NOTE: these mappings should be overridden if attached to an nvim-lsp capable buffer
 (map :n :<leader>af ":ALEFix<cr>" {})
