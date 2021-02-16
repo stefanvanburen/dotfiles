@@ -1,16 +1,17 @@
 alias x extract
 alias ls exa
 alias cat bat
+alias vim nvim
 alias c clear
 alias j just
 alias mv 'mv -iv'
 alias cp 'cp -iv'
 alias md 'mkdir -vp'
 
-alias vim nvim
-alias vimrc 'vim ~/.config/nvim/init.lua'
-alias fishrc 'vim ~/.config/fish/config.fish'
-alias ge 'git config --edit --global'
+alias ev 'vim ~/.config/nvim/init.lua'
+alias ef 'vim ~/.config/fish/config.fish'
+alias eg 'git config --edit --global'
+
 alias gv 'vim +G +only'
 
 set -gx EDITOR nvim
