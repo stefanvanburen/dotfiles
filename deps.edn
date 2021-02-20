@@ -14,10 +14,9 @@
   :project/outdated {:extra-deps {antq/antq {:mvn/version "RELEASE"}}
                      :main-opts ["-m" "antq.core"]}
 
-  :project/new {:extra-deps {seancorfield/clj-new {:mvn/version "1.1.228"}}
+  :project/new {:extra-deps {seancorfield/clj-new {:mvn/version "1.1.243"}}
                 :exec-fn    clj-new/create
-                :exec-args  {:template lib :name practicalli/playground}
-                :main-opts  ["-m" "clj-new.create"]}
+                :exec-args  {:template "app"}}
 
   :cljfmt/fmt {:extra-deps {cljfmt/cljfmt {:mvn/version "0.7.0"}}
                :main-opts ["-m" "cljfmt.main" "fix"]}
