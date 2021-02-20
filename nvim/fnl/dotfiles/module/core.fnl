@@ -164,6 +164,8 @@
 (set nvim.g.deoplete#enabled_at_startup 1)
 
 (set nvim.g.go_gopls_enabled 0)
+;; because we've disabled gopls, use goimports as fixer on save.
+(set nvim.g.go_fmt_command "goimports")
 
 (set nvim.g.ale_disable_lsp 1)
 (set nvim.g.ale_sign_error "×")
