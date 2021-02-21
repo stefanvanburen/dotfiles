@@ -166,7 +166,6 @@
 
 ;;; settings for plugins
 
-(set nvim.g.deoplete#enabled_at_startup 1)
 ;; completion-nvim - when I've typed something already, and hit delete, I want
 ;; the completions to re-trigger
 (set nvim.g.completion_trigger_on_delete 1)
