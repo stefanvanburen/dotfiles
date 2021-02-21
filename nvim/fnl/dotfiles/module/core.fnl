@@ -13,6 +13,9 @@
 ;; after writing init.lua, recompile
 (nvim.ex.autocmd :BufWritePost :init.lua "PackerCompile")
 
+;; completion-nvim
+(nvim.ex.autocmd :BufEnter :* "lua require'completion'.on_attach()")
+
 (augroup filetypes
          (do
            (autocmd :FileType :go "set noexpandtab tabstop=4 shiftwidth=4")
@@ -136,6 +139,8 @@
 ;; c: no ins-completion-menu messages
 (opt :shortmess "atOIoc")
 
+(opt :completeopt (str.join "," ["menuone" "noinsert" "noselect"]))
+
 ;; turn on mouse support
 ;; this is useful for resizing windows, using the mouse wheel to scroll, etc
 (opt :mouse "a")
@@ -162,6 +167,9 @@
 ;;; settings for plugins
 
 (set nvim.g.deoplete#enabled_at_startup 1)
+;; completion-nvim - when I've typed something already, and hit delete, I want
+;; the completions to re-trigger
+(set nvim.g.completion_trigger_on_delete 1)
 
 (set nvim.g.go_gopls_enabled 0)
 ;; because we've disabled gopls, use goimports as fixer on save.

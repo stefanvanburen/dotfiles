@@ -71,6 +71,9 @@ require('packer').startup(function(use)
   -- typical lsp configurations
   use 'neovim/nvim-lspconfig'
 
+  -- Autocompletion framework for built-in LSP
+  use 'nvim-lua/completion-nvim'
+
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Automatically match parenthesis
