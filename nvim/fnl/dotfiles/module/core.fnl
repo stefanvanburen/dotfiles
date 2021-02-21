@@ -170,6 +170,7 @@
 ;; the completions to re-trigger
 (set nvim.g.completion_trigger_on_delete 1)
 
+;; disable gopls, because we're using nvim-lsp
 (set nvim.g.go_gopls_enabled 0)
 ;; because we've disabled gopls, use goimports as fixer on save.
 (set nvim.g.go_fmt_command "goimports")
@@ -186,6 +187,8 @@
 (set nvim.g.ale_virtualtext_cursor 1)
 (set nvim.g.ale_virtualtext_prefix  "∴ ")
 
+;; because I commonly zoom tmux windows, and Dispatch will create a new window
+;; when within tmux, the default setting would unzoom my tmux. Turn it off.
 (set nvim.g.dispatch_no_tmux_make 1)
 
 (set nvim.g.Hexokinase_highlighters [:virtual])
