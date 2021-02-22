@@ -174,6 +174,9 @@
 (set nvim.g.go_gopls_enabled 0)
 ;; because we've disabled gopls, use goimports as fixer on save.
 (set nvim.g.go_fmt_command "goimports")
+;; This has to be set so the entire package is linted (otherwise, staticcheck)
+;; won't grab identifiers declared in other files).
+(set nvim.g.ale_go_staticcheck_lint_package 1)
 
 (set nvim.g.ale_disable_lsp 1)
 (set nvim.g.ale_sign_error "×")
@@ -186,6 +189,14 @@
 
 (set nvim.g.ale_virtualtext_cursor 1)
 (set nvim.g.ale_virtualtext_prefix  "∴ ")
+(set nvim.g.ale_linters {:clojure [:clj-kondo]
+                         :go [:gopls :staticcheck]
+                         :python [:flake8 :mypy]
+                         :rust [:cargo :analyzer]})
+
+(set nvim.g.ale_fixers {:go [:goimports]
+                        :javascript [:prettier :eslint]
+                        :python [:black :isort]})
 
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.
