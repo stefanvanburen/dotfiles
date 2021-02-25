@@ -13,9 +13,6 @@
 ;; after writing init.lua, recompile
 (nvim.ex.autocmd :BufWritePost :init.lua "PackerCompile")
 
-;; completion-nvim
-(nvim.ex.autocmd :BufEnter :* "lua require'completion'.on_attach()")
-
 (augroup filetypes
          (do
            (autocmd :FileType :go "set noexpandtab tabstop=4 shiftwidth=4")
@@ -165,10 +162,6 @@
 (opt :wildignorecase true)
 
 ;;; settings for plugins
-
-;; completion-nvim - when I've typed something already, and hit delete, I want
-;; the completions to re-trigger
-(set nvim.g.completion_trigger_on_delete 1)
 
 ;; disable gopls, because we're using nvim-lsp
 (set nvim.g.go_gopls_enabled 0)

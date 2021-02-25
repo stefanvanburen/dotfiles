@@ -51,6 +51,7 @@ require('packer').startup(function(use)
 
   -- TODO: will I use this?
   -- use 'lervag/vimtex'
+
   use {'fatih/vim-go', run = ':GoInstallBinaries' }
 
   -- profiling startup time
@@ -70,9 +71,6 @@ require('packer').startup(function(use)
 
   -- typical lsp configurations
   use 'neovim/nvim-lspconfig'
-
-  -- Autocompletion framework for built-in LSP
-  use 'nvim-lua/completion-nvim'
 
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
