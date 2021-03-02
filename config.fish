@@ -25,6 +25,16 @@ set -gx FZF_DEFAULT_OPTS    '--height 40% --layout=reverse'
 set -gx FZF_CTRL_T_COMMAND  'fd --type file --follow --hidden --exclude .git'
 set -gx FZF_CTRL_T_OPTS     '--no-height --layout=reverse'
 
+# fish_add_path requires fish 3.2.0
+# pipx
+fish_add_path ~/.local/bin
+# rust
+fish_add_path ~/.cargo/bin
+# go
+fish_add_path ~/go/bin
+# my scripts
+fish_add_path ~/bin
+
 if status --is-interactive
     # `man abbr`
     abbr --add --global - prevd
