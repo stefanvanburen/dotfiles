@@ -163,8 +163,7 @@
 
 ;;; settings for plugins
 
-;; disable gopls, because we're using nvim-lsp
-(set nvim.g.go_gopls_enabled 0)
+; (set nvim.g.go_gopls_enabled 1)
 ;; because we've disabled gopls, use goimports as fixer on save.
 (set nvim.g.go_fmt_command "goimports")
 ;; This has to be set so the entire package is linted (otherwise, staticcheck)
