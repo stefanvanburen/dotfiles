@@ -182,11 +182,14 @@
 (set nvim.g.ale_virtualtext_prefix  "∴ ")
 (set nvim.g.ale_linters {:clojure [:clj-kondo]
                          :go [:gopls :staticcheck]
+                         :javascript [:eslint]
+                         :typescript [:eslint]
                          :python [:flake8 :mypy]
                          :rust [:cargo :analyzer]})
 
 (set nvim.g.ale_fixers {:go [:goimports]
                         :javascript [:prettier :eslint]
+                        :typescript [:prettier :eslint]
                         :python [:black :isort]})
 
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
