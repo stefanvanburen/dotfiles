@@ -115,6 +115,9 @@ require('packer').startup(function(use)
   -- colorscheme
   use {'svanburen/rams.vim', branch = 'lsp' }
 
+  -- sr.ht
+  use 'https://git.sr.ht/~willdurand/srht.vim'
+
 end)
 
 -- initialize aniseed
