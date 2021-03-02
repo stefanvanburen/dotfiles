@@ -221,5 +221,5 @@
 ;; run goimports on save for go files
 (set nvim.g.go_fmt_autosave 1)
 
-;; vim-test x vim-dispatch
-(set nvim.g.test#strategy "neoterm")
+;; vim-test x dispatch
+(set nvim.g.test#strategy "dispatch")
