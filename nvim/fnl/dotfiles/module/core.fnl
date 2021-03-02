@@ -82,9 +82,8 @@
 ;; Don't get rid of hidden buffers
 (opt :hidden true)
 
-;; show incremental substitutions in a preview window
-;; NOTE: trying this out provisionally
-(opt :inccommand "split")
+;; show incremental substitutions inline
+(opt :inccommand "nosplit")
 
 ;; Ignore case while searching
 (opt :ignorecase true)
