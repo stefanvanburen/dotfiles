@@ -102,7 +102,7 @@
 
 ;; tab mappings
 (noremap :n "]r" ":tabnext<cr>")
-(noremap :n "[r" ":tabnprev<cr>")
+(noremap :n "[r" ":tabprev<cr>")
 (noremap :n :<leader>tn ":tabnew<cr>")
 
 ;; Use Q to repeat last macro, rather than going into ex mode
