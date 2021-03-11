@@ -85,7 +85,7 @@ require('packer').startup(function(use)
   use 'justinmk/vim-sneak'
 
   -- Fuzzy find
-  use {'junegunn/fzf', run = function() vim.fn['fzf#install()']() end }
+  use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
 
   -- Commenting
