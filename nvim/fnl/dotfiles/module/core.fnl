@@ -26,6 +26,7 @@
            (autocmd :FileType :fish "set expandtab tabstop=4 shiftwidth=4")
            (autocmd :FileType :yaml "set expandtab tabstop=2 shiftwidth=2")
            (autocmd :FileType :gitcommit "set spell")
+           (autocmd :FileType :sql "set wrap")
            (autocmd :FileType :markdown "set spell wrap conceallevel=2")))
 
 (defn- opt [name value]
