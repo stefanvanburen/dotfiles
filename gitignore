@@ -43,3 +43,8 @@ tags.temp*
 __pycache__
 .pytest_cache
 .mypy_cache
+
+# https://github.com/Olical/nvim-local-fennel
+# local fnl files and the generated lua files
+.lnvim.fnl
+.lnvim.lua
