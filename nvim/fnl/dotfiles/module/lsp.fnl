@@ -65,7 +65,7 @@
 (def- servers
   {:jsonls {}
    :cssls {}
-   :gopls {:cmd ["gopls" "serve"]
+   :gopls {:cmd ["gopls" "--remote=auto"]
            :settings {:gopls {:analyses {:unusedparams true}
                               :staticcheck true}}}
    :rust_analyzer {}
