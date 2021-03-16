@@ -15,19 +15,19 @@
 
 (augroup filetypes
          (do
-           (autocmd :FileType :go "set noexpandtab tabstop=4 shiftwidth=4")
-           (autocmd :FileType :python "set tabstop=4 shiftwidth=4 expandtab")
-           (autocmd :FileType :javascript "set expandtab tabstop=2 shiftwidth=2")
-           (autocmd :FileType :typescript "set tabstop=2 shiftwidth=2 expandtab")
-           (autocmd :FileType :typescriptreact "set tabstop=2 shiftwidth=2 expandtab")
-           (autocmd :FileType :html "set expandtab tabstop=2 shiftwidth=2")
-           (autocmd :FileType :css "set expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
-           (autocmd :FileType :scss "set expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
-           (autocmd :FileType :fish "set expandtab tabstop=4 shiftwidth=4")
-           (autocmd :FileType :yaml "set expandtab tabstop=2 shiftwidth=2")
-           (autocmd :FileType :gitcommit "set spell")
-           (autocmd :FileType :sql "set wrap")
-           (autocmd :FileType :markdown "set spell wrap conceallevel=2")))
+           (autocmd :FileType :go "setlocal noexpandtab tabstop=4 shiftwidth=4")
+           (autocmd :FileType :python "setlocal tabstop=4 shiftwidth=4 expandtab")
+           (autocmd :FileType :javascript "setlocal expandtab tabstop=2 shiftwidth=2")
+           (autocmd :FileType :typescript "setlocal tabstop=2 shiftwidth=2 expandtab")
+           (autocmd :FileType :typescriptreact "setlocal tabstop=2 shiftwidth=2 expandtab")
+           (autocmd :FileType :html "setlocal expandtab tabstop=2 shiftwidth=2")
+           (autocmd :FileType :css "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
+           (autocmd :FileType :scss "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
+           (autocmd :FileType :fish "setlocal expandtab tabstop=4 shiftwidth=4")
+           (autocmd :FileType :yaml "setlocal expandtab tabstop=2 shiftwidth=2")
+           (autocmd :FileType :gitcommit "setlocal spell")
+           (autocmd :FileType :sql "setlocal wrap")
+           (autocmd :FileType :markdown "setlocal spell wrap conceallevel=2")))
 
 (defn- opt [name value]
   (tset vim.o name value))
