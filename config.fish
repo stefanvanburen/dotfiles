@@ -7,6 +7,7 @@ alias j just
 alias mv 'mv -iv'
 alias cp 'cp -iv'
 alias md 'mkdir -vp'
+alias ba 'buku -a'
 
 alias ev 'vim ~/.config/nvim/init.lua'
 alias ef 'vim ~/.config/fish/config.fish'
