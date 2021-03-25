@@ -27,7 +27,7 @@
 ;; Fugitive
 (util.nnoremap :gs "vertical Git")
 (util.nnoremap :gw "Gwrite")
-(util.nnoremap :gc "Gcommit")
+(util.nnoremap :gc "G commit")
 (util.nnoremap :gb "GBrowse")
 (util.nnoremap :gy ".GBrowse!")
 ;; mappings starting with U
