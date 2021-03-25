@@ -48,3 +48,6 @@ __pycache__
 # local fnl files and the generated lua files
 .lnvim.fnl
 .lnvim.lua
+
+# clojure-lsp generated files
+.lsp
