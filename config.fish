@@ -1,20 +1,3 @@
-alias x extract
-alias ls exa
-alias cat bat
-alias vim nvim
-alias c clear
-alias j just
-alias mv 'mv -iv'
-alias cp 'cp -iv'
-alias md 'mkdir -vp'
-alias ba 'buku -a'
-
-alias ev 'vim ~/.config/nvim/init.lua'
-alias ef 'vim ~/.config/fish/config.fish'
-alias eg 'git config --edit --global'
-
-alias gv 'vim +G +only'
-
 set -gx EDITOR nvim
 # NOTE: keep in sync with install.conf.yaml
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
@@ -44,6 +27,9 @@ if status --is-interactive
     abbr --add --global v vim
     abbr --add --global g git
     abbr --add --global tm tmux
+    abbr --add --global x extract
+    abbr --add --global c clear
+    abbr --add --global j just
 
     # jump is bound to `z`
     command -q jump; and source (jump shell --bind=z fish | psub)
