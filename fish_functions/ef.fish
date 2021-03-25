@@ -1,3 +1,3 @@
 function ef --description 'Edit fish config within dotfiles'
-    cd ~/.dotfiles; vim config.fish
+    vim -c "cd ~/.dotfiles" config.fish
 end

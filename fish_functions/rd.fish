@@ -1,3 +1,3 @@
-function rd --description 'Remove directories recursively'
+function rd --wraps=rmdir --description 'Remove directories recursively'
     rmdir -p $argv;
 end

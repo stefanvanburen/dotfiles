@@ -1,3 +1,3 @@
-function ba --wraps='buku -a' --description 'Add a link to buku'
+function ba --wraps=buku --description 'Add a link to buku'
     buku -a $argv;
 end
