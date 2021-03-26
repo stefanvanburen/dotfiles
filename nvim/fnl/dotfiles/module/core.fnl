@@ -136,7 +136,8 @@
 ;; c: no ins-completion-menu messages
 (opt :shortmess "atOIoc")
 
-(opt :completeopt (str.join "," ["menuone" "noinsert" "noselect"]))
+;; for nvim-compe
+(opt :completeopt (str.join "," ["menuone" "noselect"]))
 
 ;; turn on mouse support
 ;; this is useful for resizing windows, using the mouse wheel to scroll, etc
