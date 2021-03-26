@@ -1,3 +1,3 @@
 function ev --description 'Edit neovim config files'
-    vim -c "cd ~/.dotfiles/nvim" init.lua
+    cd ~/.dotfiles/nvim; $EDITOR init.lua; cd -
 end
