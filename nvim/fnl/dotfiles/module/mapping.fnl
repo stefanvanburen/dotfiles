@@ -28,20 +28,9 @@
 (util.nnoremap :gs "vertical Git")
 (util.nnoremap :gw "Gwrite")
 (util.nnoremap :gc "G commit")
+(util.nnoremap :gp "G push")
 (util.nnoremap :gb "GBrowse")
 (util.nnoremap :gy ".GBrowse!")
-;; mappings starting with U
-(let [leader "U"
-      git-map (fn [lhs cmd] (map :n (.. leader lhs) (.. ":Git " cmd) {}))]
-  (map :n leader "<nop>" {})
-  (map :n (.. leader leader) (.. leader :u) {:noremap false})
-  (git-map :p "push")
-  (git-map :s "")
-  (git-map :d "diff")
-  (git-map :B "blame")
-  (git-map :c "commit")
-  (git-map :u "pull")
-  (git-map :g "log"))
 
 ;; vim-better-whitespace
 (util.nnoremap :sw "StripWhitespace")
