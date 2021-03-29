@@ -127,9 +127,6 @@ require('packer').startup(function(use)
   -- Easily search for, substitute, and abbreviate multiple variants of a word
   use 'tpope/vim-abolish'
 
-  -- autocomplete
-  use 'hrsh7th/nvim-compe'
-
   -- colorscheme
   use {'svanburen/rams.vim', branch = 'lsp' }
 
@@ -137,28 +134,3 @@ end)
 
 -- initialize aniseed
 vim.g['aniseed#env'] = "v:true"
-
--- initialize nvim-compe
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
-
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = true;
-  };
-}
