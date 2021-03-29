@@ -46,11 +46,23 @@ require('packer').startup(function(use)
   -- <leader>gm to trigger the window, again to go inside.
   use {'rhysd/git-messenger.vim', opt = true, cmd = {'GitMessenger'} }
 
-  -- language syntax and indent
-  use 'sheerun/vim-polyglot'
-
-  -- TODO: will I use this?
-  -- use 'lervag/vimtex'
+  -- language support
+  use 'blankname/vim-fish'
+  use 'othree/html5.vim'
+  use 'hail2u/vim-css3-syntax'
+  use 'pangloss/vim-javascript'
+  use 'maxmellon/vim-jsx-pretty'
+  use 'HerringtonDarkholme/yats.vim'
+  use 'plasticboy/vim-markdown'
+  use 'cespare/vim-toml'
+  use 'lervag/vimtex'
+  use 'rust-lang/rust.vim'
+  use 'elzr/vim-json'
+  use 'tmux-plugins/vim-tmux'
+  -- up-to-date git filetypes
+  use 'tpope/vim-git'
+  -- Use Olical's fork of fennel.vim
+  use 'Olical/fennel.vim'
 
   use {'fatih/vim-go', run = ':GoInstallBinaries' }
 
