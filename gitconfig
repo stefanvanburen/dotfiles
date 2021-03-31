@@ -130,6 +130,9 @@
 	smtpencryption = ssl
 	smtpserverport = 465
 
+	; always open an editor when using sendemail
+	annotate = yes
+
 [interactive]
 	diffFilter = delta --color-only
 
