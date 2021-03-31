@@ -56,7 +56,7 @@
 	rc = rebase --continue
 	ri = rebase --interactive
 
-	# short status
+	; short status
 	st = status --short
 
 	; For showing stashes
