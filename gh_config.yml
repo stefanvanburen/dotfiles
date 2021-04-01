@@ -2,5 +2,5 @@ aliases:
     prs: pr list
     issues: issue list
     br: repo view --web
-    co: pr checkout
+    co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
     clone: repo clone
