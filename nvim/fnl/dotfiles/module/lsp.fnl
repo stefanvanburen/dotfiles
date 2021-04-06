@@ -63,9 +63,7 @@
       :update_in_insert false})})
 
 (def- servers
-  {:jsonls {}
-   :cssls {}
-   :gopls {:cmd ["gopls" "--remote=auto"]
+  {:gopls {:cmd ["gopls" "--remote=auto"]
            :settings {:gopls {:analyses {:unusedparams true}
                               :staticcheck true}}}
    :rust_analyzer {}
