@@ -96,6 +96,9 @@ require('packer').startup(function(use)
   use 'tpope/vim-dispatch'
   use 'vim-test/vim-test'
 
+  use 'junegunn/goyo.vim'
+  use 'junegunn/limelight.vim'
+
   -- s{char}{char} to search for a set of two characters
   use 'justinmk/vim-sneak'
 

@@ -12,4 +12,8 @@
 
  :_:
  (fn [name ...]
-   `((. nvim.ex ,(tostring name)) ,...))}
+   `((. nvim.ex ,(tostring name)) ,...))
+
+ :viml->fn
+ (fn [name]
+   `(.. "lua require('" *module-name* "')['" ,(tostring name) "']()"))}
