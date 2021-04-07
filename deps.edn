@@ -1,6 +1,6 @@
 {:aliases
- {:repl/nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.8.2"}
-                            cider/cider-nrepl {:mvn/version "0.25.4"}}
+ {:repl/nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.8.3"}
+                            cider/cider-nrepl {:mvn/version "0.25.9"}}
                :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
 
   :repl/rebel-nrepl {:extra-deps {nrepl/nrepl                {:mvn/version "0.8.2"}
