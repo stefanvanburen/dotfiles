@@ -96,6 +96,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-dispatch'
   use 'vim-test/vim-test'
 
+  -- focused writing
   use 'junegunn/goyo.vim'
   use 'junegunn/limelight.vim'
 
