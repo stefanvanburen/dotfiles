@@ -3,14 +3,6 @@
                             cider/cider-nrepl {:mvn/version "0.25.9"}}
                :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
 
-  :repl/rebel-nrepl {:extra-deps {nrepl/nrepl                {:mvn/version "0.8.2"}
-                                  cider/cider-nrepl          {:mvn/version "0.25.4"}
-                                  com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
-                     :main-opts  ["-m" "nrepl.cmdline"
-                                  "--middleware" "[cider.nrepl/cider-middleware]"
-                                  "-i"
-                                  "-f" "rebel-readline.main/-main"]}
-
   :project/outdated {:extra-deps {antq/antq {:mvn/version "RELEASE"}}
                      :main-opts ["-m" "antq.core"]}
 
