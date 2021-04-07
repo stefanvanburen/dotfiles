@@ -99,9 +99,6 @@ require('packer').startup(function(use)
   use 'junegunn/goyo.vim'
   use 'junegunn/limelight.vim'
 
-  -- s{char}{char} to search for a set of two characters
-  use 'justinmk/vim-sneak'
-
   -- Fuzzy find
   use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
