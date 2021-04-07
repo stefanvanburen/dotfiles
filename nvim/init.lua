@@ -81,9 +81,6 @@ require('packer').startup(function(use)
   use {'Olical/conjure', ft = {'clojure', 'fennel'} }
   use {'eraserhd/parinfer-rust', run = 'cargo build --release' }
 
-  -- TODO: research a better way to use conjure with a builtin neovim terminal.
-  use 'kassio/neoterm'
-
   -- typical lsp configurations
   use 'neovim/nvim-lspconfig'
 
