@@ -108,6 +108,9 @@ require('packer').startup(function(use)
   -- Adds unix shell commands
   use 'tpope/vim-eunuch'
 
+  -- adds useful `f` and `t` operators
+  use 'justinmk/vim-sneak'
+
   -- Database access
   use {'tpope/vim-dadbod', opt = true, cmd = {'DB'}}
 
