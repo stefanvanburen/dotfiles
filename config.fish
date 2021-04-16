@@ -4,6 +4,10 @@ set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 # https://github.com/sharkdp/bat#man
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
+# https://github.com/charmbracelet/glamour/tree/master/styles/gallery
+# Light mode works better with my light background
+set -gx GLAMOUR_STYLE light
+
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
 set -gx FZF_DEFAULT_OPTS    '--height 40% --layout=reverse'
 set -gx FZF_CTRL_T_COMMAND  'fd --type file --follow --hidden --exclude .git'
