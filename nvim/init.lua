@@ -130,7 +130,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-abolish'
 
   -- colorscheme
-  use {'svanburen/rams.vim', branch = 'lsp' }
+  use {'stefanvanburen/rams.vim', branch = 'lsp' }
 
 end)
 
