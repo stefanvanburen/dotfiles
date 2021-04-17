@@ -2,7 +2,7 @@
 
 [user]
 	name = Stefan VanBuren
-	email = me@svbn.me
+	email = stefan@vanburen.xyz
 
 [github]
 	user = svanburen
@@ -113,7 +113,7 @@
 
 [sendemail]
 	smtpserver = smtp.migadu.com
-	smtpuser = me@svbn.me
+	smtpuser = stefan@vanburen.xyz
 	; NOT tls, even if this is what should be used
 	smtpencryption = ssl
 	smtpserverport = 465
