@@ -91,7 +91,9 @@
 
 ;; mnemonic: "Start Repl".
 ;; Invokes vim-dispatch to start an nREPL client in the background (in another tab).
-(util.nnoremap :sr "Start! clj -M:repl/nrepl")
+;; Using Dispatch! instead of Start! so we can just make sure it's running in
+;; the background; no need to open another tab.
+(util.nnoremap :sr "Dispatch! clj -M:repl/nrepl")
 
 ;; tab mappings
 (noremap :n "]r" ":tabnext<cr>")
