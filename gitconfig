@@ -121,8 +121,5 @@
 	; always open an editor when using sendemail
 	annotate = yes
 
-[interactive]
-	diffFilter = delta --color-only
-
 [delta]
 	side-by-side = true
