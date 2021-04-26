@@ -89,7 +89,6 @@ require('packer').startup(function(use)
 
   -- testing / build commands
   use 'tpope/vim-dispatch'
-  use 'radenling/vim-dispatch-neovim'
   use 'vim-test/vim-test'
 
   -- focused writing
