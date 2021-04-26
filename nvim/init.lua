@@ -61,8 +61,6 @@ require('packer').startup(function(use)
   use 'tmux-plugins/vim-tmux'
   -- up-to-date git filetypes
   use 'tpope/vim-git'
-  -- Use Olical's fork of fennel.vim
-  use 'Olical/fennel.vim'
 
   use {'fatih/vim-go', run = ':GoInstallBinaries' }
 
