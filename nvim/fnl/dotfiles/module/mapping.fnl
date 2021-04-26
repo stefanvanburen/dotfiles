@@ -1,8 +1,6 @@
 (module dotfiles.module.mapping
-  {require {nvim aniseed.nvim
-            nu aniseed.nvim.util
-            util dotfiles.util
-            core aniseed.core}})
+  {autoload {nvim aniseed.nvim
+             util dotfiles.util}})
 
 ;; alias function
 (def map nvim.set_keymap)

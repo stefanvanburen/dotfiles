@@ -1,6 +1,6 @@
 (module dotfiles.module.core
-  {require {nvim aniseed.nvim
-            str aniseed.string}})
+  {autoload {nvim aniseed.nvim
+             str aniseed.string}})
 
 (let [stl ["%f"
            "%m "

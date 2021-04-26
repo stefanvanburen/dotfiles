@@ -1,6 +1,6 @@
 (module dotfiles.module.core
-  {require {nvim aniseed.nvim
-            str aniseed.string}
+  {autoload {nvim aniseed.nvim
+             str aniseed.string}
    require-macros [dotfiles.macros]})
 
 ;; on resize, resize windows
