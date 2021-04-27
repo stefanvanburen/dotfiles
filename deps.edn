@@ -1,7 +1,10 @@
 {:aliases
  {:repl/nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.8.3"}
-                            cider/cider-nrepl {:mvn/version "0.26.0"}}
-               :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
+                            cider/cider-nrepl {:mvn/version "0.26.0"}
+                            hashp/hashp {:mvn/version "0.2.1"}}
+               :main-opts ["-e" "(require,'hashp.core)"
+                           "-m" "nrepl.cmdline"
+                           "--middleware" "[cider.nrepl/cider-middleware]"]}
 
   :project/outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
                      :main-opts ["-m" "antq.core"]}
