@@ -57,7 +57,6 @@ require('packer').startup(function(use)
   use 'cespare/vim-toml'
   use 'lervag/vimtex'
   use {'rust-lang/rust.vim', ft = { 'rust' } }
-  use 'elzr/vim-json'
   use 'tmux-plugins/vim-tmux'
   -- up-to-date git filetypes
   use 'tpope/vim-git'
