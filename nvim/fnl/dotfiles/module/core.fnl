@@ -39,24 +39,6 @@
   (tset vim.bo name value)
   (opt name value))
 
-
-;;; GOYO
-
-(defn goyoenter []
-  (when (not (str.blank? nvim.env.TMUX))
-    (nvim.command "silent !tmux set status off"))
-  (wopt :scrolloff 999)
-  (nvim.command "Limelight"))
-
-(defn goyoleave []
-  (when (not (str.blank? nvim.env.TMUX))
-    (nvim.command "silent !tmux set status on"))
-  (wopt :scrolloff 5)
-  (nvim.command "Limelight!"))
-
-(autocmd :User :GoyoEnter (viml->fn goyoenter))
-(autocmd :User :GoyoLeave (viml->fn goyoleave))
-
 ;; colorscheme
 (opt :termguicolors true)
 (nvim.ex.colorscheme :rams)

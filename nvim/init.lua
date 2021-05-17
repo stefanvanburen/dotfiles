@@ -17,7 +17,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
 end
 
-vim.cmd [[packadd packer.nvim]]
+vim.api.nvim_command('packadd packer.nvim')
 
 require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
@@ -89,10 +89,6 @@ require('packer').startup(function(use)
   -- testing / build commands
   use 'tpope/vim-dispatch'
   use 'vim-test/vim-test'
-
-  -- focused writing
-  use 'junegunn/goyo.vim'
-  use 'junegunn/limelight.vim'
 
   -- Fuzzy find
   use 'junegunn/fzf'
