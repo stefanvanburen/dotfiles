@@ -81,6 +81,9 @@
 	; use the keychain for git credentials
 	helper = osxkeychain
 
+[delta]
+	side-by-side = true
+
 [diff]
 	; uses mnemonic prefixes rather than the typical "a/" and "b/" shown.
 	mnemonicPrefix = true
@@ -88,14 +91,6 @@
 [init]
 	; initialize repositories with "main" as the default branch
 	defaultBranch = main
-
-[push]
-	; push to the branch with the same name by default
-	default = current
-
-[pull]
-	; prefer rebasing when pulling from remote, rather than merging
-	rebase = true
 
 [merge]
 	tool = fugitive
@@ -107,6 +102,14 @@
 [mergetool "fugitive"]
 	; open neovim and invoke :Git mergetool
 	cmd = nvim -c \"Git mergetool\"
+
+[push]
+	; push to the branch with the same name by default
+	default = current
+
+[pull]
+	; prefer rebasing when pulling from remote, rather than merging
+	rebase = true
 
 [rebase]
 	autosquash = true
@@ -120,6 +123,3 @@
 
 	; always open an editor when using sendemail
 	annotate = yes
-
-[delta]
-	side-by-side = true
