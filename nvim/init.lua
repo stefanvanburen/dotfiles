@@ -89,6 +89,7 @@ require('packer').startup(function(use)
   -- testing / build commands
   use 'tpope/vim-dispatch'
   use 'vim-test/vim-test'
+  use 'radenling/vim-dispatch-neovim'
 
   -- Fuzzy find
   use 'junegunn/fzf'
