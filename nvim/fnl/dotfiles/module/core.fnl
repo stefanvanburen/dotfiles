@@ -213,13 +213,11 @@
 (set nvim.g.sneak#s_next 1)
 
 (set nvim.g.pear_tree_repeatable_expand 0)
+;; disable pear-tree for lispy languages, covered by parinfer
+;; also, TelescopePrompt! - https://github.com/nvim-telescope/telescope.nvim/issues/731#issuecomment-819028282
+(set nvim.g.pear_tree_ft_disabled [:clojure :fennel :TelescopePrompt])
 
 (set nvim.g.netrw_nogx 1)
-
-(set nvim.g.fzf_layout {:window {:width 1.0 :height 0.5 :yoffset 1.0 :border :top}})
-
-;; disable pear-tree for lispy languages, covered by parinfer
-(set nvim.g.pear_tree_ft_disabled [:clojure :fennel])
 
 ;; run goimports on save for go files
 (set nvim.g.go_fmt_autosave 1)
