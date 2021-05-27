@@ -33,10 +33,10 @@
 ;; vim-better-whitespace
 (util.nnoremap :sw "StripWhitespace")
 
-(util.nnoremap :f "Telescope find_files")
-(util.nnoremap :<enter> "Telescope git_files")
-(util.nnoremap :<leader> "Telescope buffers")
-(util.nnoremap :se "Telescope live_grep")
+(util.nnoremap :f "Telescope find_files theme=get_dropdown")
+(util.nnoremap :<enter> "Telescope git_files theme=get_dropdown")
+(util.nnoremap :<leader> "Telescope buffers theme=get_dropdown")
+(util.nnoremap :se "Telescope live_grep theme=get_dropdown")
 
 ;; open-browser.vim
 (nvim.ex.command_
