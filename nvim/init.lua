@@ -55,7 +55,6 @@ require('packer').startup(function(use)
   use 'HerringtonDarkholme/yats.vim'
   use 'plasticboy/vim-markdown'
   use 'cespare/vim-toml'
-  use 'lervag/vimtex'
   use {'rust-lang/rust.vim', ft = { 'rust' } }
   use 'tmux-plugins/vim-tmux'
   -- up-to-date git filetypes
