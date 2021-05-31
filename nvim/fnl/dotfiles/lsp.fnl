@@ -1,6 +1,5 @@
-(module dotfiles.module.lsp
+(module dotfiles.lsp
   {autoload {nvim aniseed.nvim
-             a    aniseed.core
              lsp "lspconfig"}
    ;; for autocmd and augroup
    require-macros [dotfiles.macros]})

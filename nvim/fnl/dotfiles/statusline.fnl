@@ -1,4 +1,4 @@
-(module dotfiles.module.core
+(module dotfiles.statusline
   {autoload {nvim aniseed.nvim
              str aniseed.string}})
 

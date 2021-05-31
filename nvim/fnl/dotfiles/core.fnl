@@ -1,4 +1,4 @@
-(module dotfiles.module.core
+(module dotfiles.core
   {autoload {nvim aniseed.nvim
              str aniseed.string}
    require-macros [dotfiles.macros]})

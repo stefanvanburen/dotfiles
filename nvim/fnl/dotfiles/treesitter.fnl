@@ -1,4 +1,4 @@
-(module dotfiles.module.treesitter
+(module dotfiles.treesitter
   {autoload {treesitter "nvim-treesitter.configs"}})
 
 ((. treesitter :setup)
