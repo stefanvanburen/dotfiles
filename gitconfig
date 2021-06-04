@@ -14,7 +14,7 @@
 	aa = add .
 
 	; mnemonic for branches
-	b = branch
+	b = branch --sort=-committerdate --format="%(committerdate:relative)%09%(refname:short)"
 
 	; mnemonic for browse
 	br = !hub browse
