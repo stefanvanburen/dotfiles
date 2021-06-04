@@ -15,7 +15,7 @@
             (use (a.assoc opts 1 name))))))))
 
 (use
-  :wbthomason/packer.nvim {:opt true}
+  :wbthomason/packer.nvim {}
 
   :rrethy/vim-hexokinase {:run "make hexokinase" :opt true :ft ["css" "scss"]}
 
