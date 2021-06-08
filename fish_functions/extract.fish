@@ -1,9 +1,12 @@
 function extract
-    # largely adapted from https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/extract/extract.plugin.zsh
+    # largely adapted from 
+    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract
 
     # no arguments, write usage
     if test (count $argv) -eq 0
-        echo "Usage: extract [-option] [file ...]\n Options:\n -r, --remove    Remove archive after unpacking." >&2
+        echo "Usage: extract [-option] [file ...]" >&2
+        echo " Options:" >&2
+        echo " -r, --remove    Remove archive after unpacking." >&2
         return 1
     end
 
