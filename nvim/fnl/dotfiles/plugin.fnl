@@ -55,7 +55,7 @@
   ;; up-to-date git filetypes
   :tpope/vim-git {}
 
-  :fatih/vim-go {:run ":GoInstallBinaries"}
+  ; :fatih/vim-go {:run ":GoInstallBinaries"}
 
   ;; profiling startup time
   :dstein64/vim-startuptime {}
