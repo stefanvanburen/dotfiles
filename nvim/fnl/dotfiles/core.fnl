@@ -166,6 +166,9 @@
 ; (set nvim.g.go_gopls_enabled 1)
 ;; because we've disabled gopls, use goimports as fixer on save.
 (set nvim.g.go_fmt_command "goimports")
+;; run goimports on save for go files
+(set nvim.g.go_fmt_autosave 1)
+
 ;; This has to be set so the entire package is linted (otherwise, staticcheck)
 ;; won't grab identifiers declared in other files).
 (set nvim.g.ale_go_staticcheck_lint_package 1)
@@ -218,9 +221,6 @@
 (set nvim.g.pear_tree_ft_disabled [:clojure :fennel :TelescopePrompt])
 
 (set nvim.g.netrw_nogx 1)
-
-;; run goimports on save for go files
-(set nvim.g.go_fmt_autosave 1)
 
 ;; vim-test x dispatch
 (set nvim.g.test#strategy "dispatch")
