@@ -198,7 +198,8 @@
                         :javascriptreact [:prettier :eslint :xo]
                         :typescript [:prettier :eslint :xo]
                         :typescriptreact [:xo]
-                        :python [:black :isort]})
+                        :python [:black :isort]
+                        :cpp [:clang-format]})
 
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.

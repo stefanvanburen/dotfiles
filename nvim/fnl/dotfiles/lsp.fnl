@@ -67,6 +67,7 @@
                               :staticcheck true}}}
    :rust_analyzer {}
    :tsserver {}
+   :clangd {}
    :clojure_lsp {}})
 
 (defn- set-server [s c]
