@@ -33,10 +33,21 @@
 ;; vim-better-whitespace
 (util.nnoremap :sw "StripWhitespace")
 
-(util.nnoremap :f "Telescope find_files")
-(util.nnoremap :<enter> "Telescope git_files")
-(util.nnoremap :<leader> "Telescope buffers")
-(util.nnoremap :se "Telescope live_grep")
+;; fzf
+(nvim.ex.command_
+  "-bang -nargs=* Rg"
+  "call fzf#vim#grep(\""
+  "rg --column --line-number --no-heading --color=always --smart-case --hidden --follow -g '!.git/'"
+  "-- \".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)")
+
+(util.nnoremap :f "Files")
+(util.nnoremap :<enter> "GitFiles")
+(util.nnoremap :<leader> "Buffers")
+(util.nnoremap :se "Rg")
+
+(map :n :<leader><tab> "<plug>(fzf-maps-n)" {})
+(map :x :<leader><tab> "<plug>(fzf-maps-x)" {})
+(map :o :<leader><tab> "<plug>(fzf-maps-o)" {})
 
 ;; open-browser.vim
 (nvim.ex.command_

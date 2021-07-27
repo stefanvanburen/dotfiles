@@ -82,11 +82,9 @@
   :vim-test/vim-test {}
   :radenling/vim-dispatch-neovim {}
 
-  ;; Fuzzy find
-  ;; required by telescope.nvim
-  :nvim-lua/popup.nvim {}
-  :nvim-lua/plenary.nvim {}
-  :nvim-telescope/telescope.nvim {}
+  ;; fuzzy find
+  :junegunn/fzf {}
+  :junegunn/fzf.vim {}
 
   ;; Commenting
   :tpope/vim-commentary {}
