@@ -52,6 +52,7 @@
   :cespare/vim-toml {}
   :rust-lang/rust.vim {:ft ["rust"]}
   :tmux-plugins/vim-tmux {}
+  :hashivim/vim-terraform {}
   ;; up-to-date git filetypes
   :tpope/vim-git {}
 
