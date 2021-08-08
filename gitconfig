@@ -111,9 +111,6 @@
 	; prefer rebasing when pulling from remote, rather than merging
 	rebase = true
 
-[rebase]
-	autosquash = true
-
 [sendemail]
 	smtpserver = smtp.migadu.com
 	smtpuser = stefan@vanburen.xyz
