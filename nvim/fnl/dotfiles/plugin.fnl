@@ -51,6 +51,7 @@
   :plasticboy/vim-markdown {}
   :cespare/vim-toml {}
   :rust-lang/rust.vim {:ft ["rust"]}
+  :ziglang/zig.vim {}
   :tmux-plugins/vim-tmux {}
   :hashivim/vim-terraform {}
   ;; up-to-date git filetypes
