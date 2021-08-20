@@ -1,6 +1,7 @@
 (module dotfiles.mapping
   {autoload {nvim aniseed.nvim
-             util dotfiles.util}})
+             util dotfiles.util}
+   require-macros [dotfiles.macros]})
 
 ;; alias function
 (def map nvim.set_keymap)
@@ -141,3 +142,7 @@
 (map :n :<leader>af ":ALEFix<cr>" {})
 (map :n "[w" "<plug>(ale_previous_wrap)" {})
 (map :n "]w" "<plug>(ale_next_wrap)" {})
+
+(augroup go-mappings
+         (do
+           (autocmd :FileType :go "nnoremap <silent> <buffer> <localleader>fs :GoFillStruct<cr>")))
