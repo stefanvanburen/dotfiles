@@ -26,37 +26,37 @@ font:
   #   family: Rec Mono Linear
   #   style: Bold Italic
 
-  # normal:
-  #   family: Iosevka Fixed SS08
-  #   style: Light
-
-  # bold:
-  #   family: Iosevka Fixed SS08
-  #   style: Regular
-
-  # italic:
-  #   family: Iosevka Fixed SS08
-  #   style: Light Italic
-
-  # bold_italic:
-  #   family: Iosevka Fixed SS08
-  #   style: Regular Italic
-
   normal:
-    family: PragmataPro Mono
+    family: Iosevka Fixed SS08
     style: Regular
 
   bold:
-    family: PragmataPro Mono
-    style: Bold
+    family: Iosevka Fixed SS08
+    style: Medium
 
   italic:
-    family: PragmataPro Mono
-    style: Italic
+    family: Iosevka Fixed SS08
+    style: Regular Italic
 
   bold_italic:
-    family: PragmataPro Mono
-    style: Bold Italic
+    family: Iosevka Fixed SS08
+    style: Medium Italic
+
+  # normal:
+  #   family: PragmataPro Mono
+  #   style: Regular
+
+  # bold:
+  #   family: PragmataPro Mono
+  #   style: Bold
+
+  # italic:
+  #   family: PragmataPro Mono
+  #   style: Italic
+
+  # bold_italic:
+  #   family: PragmataPro Mono
+  #   style: Bold Italic
 
   # set use_thin_strokes to true on retina displays
   # use_thin_strokes: false
