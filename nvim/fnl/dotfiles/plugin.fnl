@@ -74,7 +74,12 @@
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
 
-  :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"}
+  :nvim-treesitter/nvim-treesitter
+  {:run ":TSUpdate"
+   :config (fn []
+             (. (require "nvim-treesitter.configs") :setup)
+             {:ensure_installed "maintained"
+              :highlight {:enabled true}})}
 
   ;; Automatically match parenthesis
   :tmsvg/pear-tree {}
