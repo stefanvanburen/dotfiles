@@ -206,8 +206,6 @@
 (set nvim.g.Hexokinase_highlighters [:virtual])
 (set nvim.g.Hexokinase_ftEnabled [:css :scss])
 
-(set nvim.g.vim_json_syntax_conceal 1)
-
 (set nvim.g.matchup_matchparen_offscreen {})
 
 (set nvim.g.vimtex_compiler_method "tectonic")
