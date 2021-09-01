@@ -208,8 +208,6 @@
 
 (set nvim.g.matchup_matchparen_offscreen {})
 
-(set nvim.g.vimtex_compiler_method "tectonic")
-
 (set nvim.g.sneak#s_next 1)
 
 (set nvim.g.pear_tree_repeatable_expand 0)
