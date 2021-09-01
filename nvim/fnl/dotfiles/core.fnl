@@ -210,8 +210,6 @@
 ;; with the match.
 (set nvim.g.matchup_matchparen_offscreen {})
 
-(set nvim.g.sneak#s_next 1)
-
 (set nvim.g.pear_tree_repeatable_expand 0)
 ;; disable pear-tree for lispy languages, covered by parinfer
 (set nvim.g.pear_tree_ft_disabled [:clojure :fennel])
