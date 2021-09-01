@@ -17,7 +17,9 @@
 (use
   :wbthomason/packer.nvim {}
 
-  :rrethy/vim-hexokinase {:run "make hexokinase" :opt true :ft ["css" "scss"]}
+  :rrethy/vim-hexokinase {:run "make hexokinase"
+                          :opt true
+                          :ft ["css" "scss"]}
 
   ;; directory / file viewer. Largely replaces netrw.
   :justinmk/vim-dirvish {}
