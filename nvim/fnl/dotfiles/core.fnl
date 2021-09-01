@@ -206,6 +206,8 @@
 (set nvim.g.Hexokinase_highlighters [:virtual])
 (set nvim.g.Hexokinase_ftEnabled [:css :scss])
 
+;; Disable matchup's offscreen feature, which usually replaces the statusline
+;; with the match.
 (set nvim.g.matchup_matchparen_offscreen {})
 
 (set nvim.g.sneak#s_next 1)
