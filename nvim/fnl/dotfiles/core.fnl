@@ -164,9 +164,6 @@
 
 ;;; settings for plugins
 
-; (set nvim.g.go_gopls_enabled 1)
-;; because we've disabled gopls, use goimports as fixer on save.
-(set nvim.g.go_fmt_command "goimports")
 ;; run goimports on save for go files
 (set nvim.g.go_fmt_autosave 1)
 
