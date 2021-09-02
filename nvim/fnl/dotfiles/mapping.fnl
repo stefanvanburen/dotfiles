@@ -51,10 +51,6 @@
 (map :o :<leader><tab> "<plug>(fzf-maps-o)" {})
 
 ;; open-browser.vim
-(nvim.ex.command_
-  "-nargs=1 Browse"
-  "OpenBrowser <args>")
-
 (map :n :gx "<plug>(openbrowser-smart-search)" {})
 (map :v :gx "<plug>(openbrowser-smart-search)" {})
 
