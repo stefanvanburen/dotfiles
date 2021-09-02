@@ -22,6 +22,7 @@
   ;; directory / file viewer. Largely replaces netrw.
   :justinmk/vim-dirvish {}
 
+  ;; for `gx`
   :tyru/open-browser.vim {}
 
   ;; Adds git added / modified / deleted in the sidebar (amongst other things)

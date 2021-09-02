@@ -214,6 +214,7 @@
 ;; disable pear-tree for lispy languages, covered by parinfer
 (set nvim.g.pear_tree_ft_disabled [:clojure :fennel])
 
+;; using open-browser.vim for `gx`
 (set nvim.g.netrw_nogx 1)
 
 ;; fzf
