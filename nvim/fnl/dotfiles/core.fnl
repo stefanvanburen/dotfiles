@@ -191,7 +191,7 @@
                          :python [:flake8 :mypy]
                          :rust [:cargo :analyzer]})
 
-(set nvim.g.ale_fixers {:go [:gopls]
+(set nvim.g.ale_fixers {:go []
                         :javascript [:prettier :eslint :xo]
                         :javascriptreact [:prettier :eslint :xo]
                         :typescript [:prettier :eslint :xo]
