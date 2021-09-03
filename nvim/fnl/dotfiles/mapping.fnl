@@ -73,7 +73,7 @@
 (map :v :<tab> :% {})
 
 ;; edit config files
-(util.nnoremap :ev "e $HOME/.config/nvim/init.lua")
+(util.nnoremap :ev "e $HOME/.config/nvim/fnl/dotfiles/core.fnl")
 (util.nnoremap :ef "e $HOME/.config/fish/config.fish")
 (util.nnoremap :eg "e $HOME/.config/git/config")
 
