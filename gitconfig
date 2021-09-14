@@ -113,6 +113,10 @@
 	; prefer rebasing when pulling from remote, rather than merging
 	rebase = true
 
+[rebase]
+	; when rebasing, automatically stash the working directory and pop it when done.
+	autoStash = true
+
 [sendemail]
 	smtpserver = smtp.migadu.com
 	smtpuser = stefan@vanburen.xyz
