@@ -89,6 +89,8 @@
 	mnemonicPrefix = true
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
+	; change the color of "moved" lines of code differently
+	colorMoved = default
 
 [init]
 	; initialize repositories with "main" as the default branch
