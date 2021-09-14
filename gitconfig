@@ -95,6 +95,9 @@
 	defaultBranch = main
 
 [merge]
+	; show both commits, AND the original prior to either commit.
+	; Trying this out.
+	conflictstyle = diff3
 	tool = fugitive
 
 [mergetool]
