@@ -4,7 +4,7 @@
    require-macros [dotfiles.macros]})
 
 ;; on resize, resize windows
-(nvim.ex.autocmd :VimResized   :* ":wincmd =")
+(nvim.ex.autocmd :VimResized :* ":wincmd =")
 
 ;; show yanked text
 (nvim.ex.autocmd :TextYankPost :* "lua require'vim.highlight'.on_yank()")
