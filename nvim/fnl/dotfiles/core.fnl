@@ -181,7 +181,7 @@
 (set nvim.g.ale_fix_on_save 1)
 
 (set nvim.g.ale_virtualtext_cursor 1)
-(set nvim.g.ale_virtualtext_prefix  "∴ ")
+(set nvim.g.ale_virtualtext_prefix "∴ ")
 (set nvim.g.ale_linters {:clojure [:clj-kondo]
                          :go [:gopls :staticcheck]
                          :javascript [:eslint :xo]
