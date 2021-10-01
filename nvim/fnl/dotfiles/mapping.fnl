@@ -110,6 +110,12 @@
 (noremap :n :<C-b> "<C-b>zz")
 (noremap :n :<C-u> "<C-u>zz")
 
+; Redirect changes to the "black hole" register
+; nnoremap c "_c
+; nnoremap C "_C
+(noremap :n :c "\"_c")
+(noremap :n :C "\"_C")
+
 (noremap :n :<leader>/ ":nohlsearch<cr>")
 
 ;; Keep the cursor in place while joining lines
