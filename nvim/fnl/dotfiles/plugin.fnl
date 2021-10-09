@@ -34,6 +34,9 @@
   ;; Better whitespace highlighting / provides :StripWhitespace
   :ntpeters/vim-better-whitespace {}
 
+  ;; Better commit message editing
+  :rhysd/committia.vim {}
+
   ;; git!
   :tpope/vim-fugitive {}
   :tpope/vim-rhubarb {}
