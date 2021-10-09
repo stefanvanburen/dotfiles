@@ -51,3 +51,6 @@ __pycache__
 
 # clojure-lsp generated files
 .lsp
+
+# https://github.com/clj-kondo/clj-kondo cache files
+.clj-kondo
