@@ -39,6 +39,7 @@
 
   ;; git!
   :tpope/vim-fugitive {}
+  ;; GitHub!
   :tpope/vim-rhubarb {}
 
   :w0rp/ale {}
