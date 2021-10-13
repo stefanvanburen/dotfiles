@@ -59,7 +59,19 @@
                      :spacing 1}
       :signs true
       :underline true
-      :update_in_insert false})})
+      :update_in_insert false})
+
+   ;; add a border to hover
+   "textDocument/hover"
+   (vim.lsp.with
+     vim.lsp.handlers.hover
+     {:border "single"})
+
+   ;; add a border to signatureHelp
+   "textDocument/signatureHelp"
+   (vim.lsp.with
+     vim.lsp.handlers.signature_help
+     {:border "single"})})
 
 (def- servers
   {:gopls {:cmd ["gopls" "--remote=auto"]
