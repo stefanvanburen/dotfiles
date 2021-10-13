@@ -78,7 +78,6 @@
 (util.nnoremap :eg "e $HOME/.config/git/config")
 
 (util.nnoremap :w "w")
-(util.nnoremap :q "q")
 (util.nnoremap :cl "close")
 (util.nnoremap :ss "split")
 (util.nnoremap :vs "vsplit")
