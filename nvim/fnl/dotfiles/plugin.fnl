@@ -81,6 +81,9 @@
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
 
+  ;; install LSP servers
+  :kabouzeid/nvim-lspinstall {}
+
   :nvim-treesitter/nvim-treesitter
   {:run ":TSUpdate"
    :config (fn []
