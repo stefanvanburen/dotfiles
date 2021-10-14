@@ -135,7 +135,6 @@
 (opt :splitright true)
 
 ;; cobbled from https://github.com/liuchengxu/vim-better-default
-;; o: disables
 ;; c: no ins-completion-menu messages
 (opt :shortmess "atOIoc")
 
@@ -151,6 +150,10 @@
 (bopt :swapfile false)
 
 ;; Convenience for automatic formatting.
+;;   t - auto-wrap text using textwidth
+;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
+;;   q - allow formatting of comments with `gq`
+;;   j - where it makes sense, remove a comment leader when joining lines
 ;;   r - auto-insert comment leading after <CR> in insert mode
 ;;   o - auto-insert comment leading after O in normal mode
 ;;   n - recognize numbered lists in text
@@ -171,17 +174,21 @@
 ;; won't grab identifiers declared in other files).
 (set nvim.g.ale_go_staticcheck_lint_package 1)
 
+;; disable all linters powered by LSP
+;; instead, this is handled by the built-in neovim LSP client
 (set nvim.g.ale_disable_lsp 1)
+
+;; ale formatting
 (set nvim.g.ale_sign_error "×")
 (set nvim.g.ale_sign_warning "→")
 (set nvim.g.ale_sign_info "→")
 (set nvim.g.ale_echo_msg_format "%linter%: %s")
+(set nvim.g.ale_virtualtext_cursor 1)
+(set nvim.g.ale_virtualtext_prefix "∴ ")
 
 ;; in general, this is the right thing to do
 (set nvim.g.ale_fix_on_save 1)
 
-(set nvim.g.ale_virtualtext_cursor 1)
-(set nvim.g.ale_virtualtext_prefix "∴ ")
 (set nvim.g.ale_linters {:clojure [:clj-kondo]
                          :go [:gopls :staticcheck]
                          :javascript [:eslint :xo]
