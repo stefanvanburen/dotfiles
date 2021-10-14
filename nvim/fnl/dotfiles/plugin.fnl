@@ -78,6 +78,10 @@
   :Olical/conjure {:ft ["clojure" "fennel"]}
   :eraserhd/parinfer-rust {:run "cargo build --release"}
 
+  ;; faster version of filetype.vim
+  ;; sets vim.g.did_load_filetypes in init.lua
+  :nathom/filetype.nvim {}
+
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
 

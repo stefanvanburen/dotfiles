@@ -15,6 +15,10 @@ function ensure (user, repo)
   end
 end
 
+-- Do not source the default filetype.vim
+-- Required by the nathom/filetype.nvim plugin
+vim.g.did_load_filetypes = 1
+
 -- Bootstrap essential plugins required for installing and loading the rest.
 ensure("wbthomason", "packer.nvim")
 ensure("Olical", "aniseed")
