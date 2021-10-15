@@ -2,6 +2,11 @@
     {autoload {a aniseed.core
                packer packer}})
 
+(defn safe-require-plugin-config [name]
+  (let [(ok? val-or-err) (pcall require (.. :dotfiles.plugin. name))]
+    (when (not ok?)
+      (print (.. "dotfiles error: " val-or-err)))))
+
 (defn- use [...]
   "Iterates through the arguments as pairs and calls packer's use function for
   each of them. Works around Fennel not liking mixed associative and sequential
@@ -12,7 +17,9 @@
         (for [i 1 (a.count pkgs) 2]
           (let [name (. pkgs i)
                 opts (. pkgs (+ i 1))]
-            (use (a.assoc opts 1 name))))))))
+            (-?> (. opts :mod) (safe-require-plugin-config))
+            (use (a.assoc opts 1 name)))))))
+  nil)
 
 (use
   :wbthomason/packer.nvim {}
@@ -28,8 +35,9 @@
   :tyru/open-browser.vim {}
 
   ;; Adds git added / modified / deleted in the sidebar (amongst other things)
-  ;; ]c / [c to go to hunks within a file
-  :airblade/vim-gitgutter {}
+  :lewis6991/gitsigns.nvim
+  {:requires [[:nvim-lua/plenary.nvim]]
+   :mod :gitsigns}
 
   ;; Better whitespace highlighting / provides :StripWhitespace
   :ntpeters/vim-better-whitespace {}
