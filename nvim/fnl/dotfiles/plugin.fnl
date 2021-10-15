@@ -93,6 +93,8 @@
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
 
+  :williamboman/nvim-lsp-installer {}
+
   :nvim-treesitter/nvim-treesitter
   {:run ":TSUpdate"
    :config (fn []

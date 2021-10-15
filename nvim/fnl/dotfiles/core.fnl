@@ -191,18 +191,10 @@
 
 (set nvim.g.ale_linters {:clojure [:clj-kondo]
                          :go [:gopls :staticcheck]
-                         :javascript [:eslint :xo]
-                         :javascriptreact [:eslint :xo]
-                         :typescript [:eslint :xo]
-                         :typescriptreact [:eslint :xo]
                          :python [:flake8 :mypy]
                          :rust [:cargo :analyzer]})
 
 (set nvim.g.ale_fixers {:go []
-                        :javascript [:prettier :eslint :xo]
-                        :javascriptreact [:prettier :eslint :xo]
-                        :typescript [:prettier :eslint :xo]
-                        :typescriptreact [:xo]
                         :python [:black :isort]
                         :cpp [:clang-format]})
 

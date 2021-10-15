@@ -12,10 +12,19 @@
   (. client.resolved_capabilities capability))
 
 (defn- on-attach [client bufnr]
+  ; NOTE: Useful for debugging
+  ; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
+  ; (print (vim.inspect client))
+
   ;; Set some keybinds conditional on server capabilities
   (when (or (capable? client :document_formatting)
             (capable? client :document_range_formatting))
     (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>"))
+
+  (when (= client.name "eslint")
+    ;; TODO: when this is run, the buffer doesn't actually get written(?)
+    (augroup eslint-ls
+             (autocmd :BufWritePre :<buffer> "EslintFixAll")))
 
   (when (capable? client :document_highlight)
     (do
@@ -38,6 +47,7 @@
   (nnoremap bufnr "<C-k>"      "<cmd>lua vim.lsp.buf.signature_help()<CR>")
   (nnoremap bufnr "<leader>D"  "<cmd>lua vim.lsp.buf.type_definition()<CR>")
   (nnoremap bufnr "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<CR>")
+  (nnoremap bufnr "<leader>ca" "<cmd>lua vim.lsp.buf.code_action()<CR>")
   (nnoremap bufnr "gr"         "<cmd>lua vim.lsp.buf.references()<CR>")
   (nnoremap bufnr "<leader>e"  "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
   (nnoremap bufnr "[w"         "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
@@ -80,6 +90,9 @@
    :rust_analyzer {}
    :tsserver {}
    :clangd {}
+   ;; https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/eslint.lua
+   ;; TODO: set this up differently so we aren't relying on path
+   :eslint {}
    :clojure_lsp {}})
 
 (defn- set-server [s c]
