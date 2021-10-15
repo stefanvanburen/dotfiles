@@ -1,3 +1,6 @@
+# NOTE: When setting up a new system, make sure to run fish_config
+# and choose "Mono Lace" under colors, to set the terminal colors.
+
 set -gx EDITOR nvim
 # NOTE: keep in sync with install.conf.yaml
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
