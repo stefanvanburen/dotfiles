@@ -85,6 +85,8 @@
   ;; "Vim development plugin for Go"
   :fatih/vim-go {:run ":GoInstallBinaries"}
 
+  :famiu/feline.nvim {:mod :feline}
+
   ;; profiling startup time
   :dstein64/vim-startuptime {}
 
