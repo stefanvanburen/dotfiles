@@ -84,7 +84,7 @@
   :guns/vim-sexp {}
   :tpope/vim-sexp-mappings-for-regular-people {}
   :Olical/conjure {:ft ["clojure" "fennel"]}
-  :eraserhd/parinfer-rust {:run "cargo build --release"}
+  :gpanders/nvim-parinfer {}
 
   ;; faster version of filetype.vim
   ;; sets vim.g.did_load_filetypes in init.lua
