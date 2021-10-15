@@ -120,8 +120,8 @@
   ;; Adds unix shell commands
   :tpope/vim-eunuch {}
 
-  ;; adds useful `f` and `t` operators
-  :justinmk/vim-sneak {}
+  ;; motion plugin, in the vein of clever-f and vim-sneak
+  :ggandor/lightspeed.nvim {}
 
   ;; Database access
   :tpope/vim-dadbod {:opt true :cmd "DB"}

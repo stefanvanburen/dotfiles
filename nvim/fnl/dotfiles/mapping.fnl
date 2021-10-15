@@ -53,12 +53,6 @@
 (map :n :gx "<plug>(openbrowser-smart-search)" {})
 (map :v :gx "<plug>(openbrowser-smart-search)" {})
 
-;; vim-sneak
-(nvim.ex.map :f "<plug>Sneak_f")
-(nvim.ex.map :F "<plug>Sneak_F")
-(nvim.ex.map :t "<plug>Sneak_t")
-(nvim.ex.map :T "<plug>Sneak_T")
-
 ;; always move by visual lines, rather than real lines
 ;; this is useful when 'wrap' is set.
 (noremap :n :j :gj {:silent true})
