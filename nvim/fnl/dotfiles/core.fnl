@@ -192,7 +192,7 @@
 (set nvim.g.ale_linters {:clojure []
                          :go []
                          :python [:flake8 :mypy]
-                         :rust [:cargo :analyzer]})
+                         :rust []})
 
 (set nvim.g.ale_fixers {:go []
                         :python [:black :isort]
