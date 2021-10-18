@@ -7,7 +7,7 @@
 (nvim.ex.autocmd :VimResized :* ":wincmd =")
 
 ;; show yanked text
-(nvim.ex.autocmd :TextYankPost :* "lua require'vim.highlight'.on_yank()")
+(nvim.ex.autocmd :TextYankPost :* "lua vim.highlight.on_yank()")
 
 ;; after writing init.lua, recompile
 (nvim.ex.autocmd :BufWritePost :init.lua "PackerCompile")
