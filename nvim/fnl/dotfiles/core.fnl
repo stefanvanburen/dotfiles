@@ -190,7 +190,7 @@
 (set nvim.g.ale_fix_on_save 1)
 
 (set nvim.g.ale_linters {:clojure []
-                         :go [:staticcheck]
+                         :go []
                          :python [:flake8 :mypy]
                          :rust [:cargo :analyzer]})
 
