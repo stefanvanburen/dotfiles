@@ -84,9 +84,12 @@
      {:border "single"})})
 
 (def- servers
-  {:gopls {:cmd ["gopls" "--remote=auto"]
-           :settings {:gopls {:analyses {:unusedparams true}
-                              :staticcheck true}}}
+  {:gopls
+   ;; NOTE: We do this so that a single gopls server can be used
+   ;; for both language server client and vim-go.
+   {:cmd ["gopls" "--remote=auto"]
+    :settings {:gopls {:analyses {:unusedparams true}
+                       :staticcheck true}}}
    :rust_analyzer {}
    :tsserver {}
    :clangd {}
