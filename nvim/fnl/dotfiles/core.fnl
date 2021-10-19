@@ -202,9 +202,6 @@
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.
 (set nvim.g.dispatch_no_tmux_make 1)
 
-(set nvim.g.Hexokinase_highlighters [:virtual])
-(set nvim.g.Hexokinase_ftEnabled [:css :scss])
-
 ;; Disable matchup's offscreen feature, which usually replaces the statusline
 ;; with the match.
 (set nvim.g.matchup_matchparen_offscreen {})
