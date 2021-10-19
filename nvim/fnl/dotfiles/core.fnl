@@ -26,7 +26,10 @@
            (autocmd :FileType :yaml "setlocal expandtab tabstop=2 shiftwidth=2")
            (autocmd :FileType :gitcommit "setlocal spell")
            (autocmd :FileType :sql "setlocal wrap")
-           (autocmd :FileType :markdown "setlocal spell wrap conceallevel=2")))
+           (autocmd :FileType :markdown "setlocal spell wrap conceallevel=2")
+           ;; treat `justfile`s as makefiles
+           ;; This helps with setting up correct commentstring, etc
+           (autocmd :BufRead :justfile "setf make")))
 
 (defn- opt [name value]
   (tset vim.o name value))
