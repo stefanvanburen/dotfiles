@@ -13,5 +13,5 @@
 # This means that less needs to be installed via homebrew, or this won't work.
 --pager="less -FR"
 
-# Use "gitignore" highlighting for ".ignore" files
---map-syntax .ignore:.gitignore
+# Use "Git Ignore" highlighting for ".ignore" files
+--map-syntax='.ignore:Git Ignore'
