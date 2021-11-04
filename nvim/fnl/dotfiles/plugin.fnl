@@ -110,9 +110,11 @@
   :vim-test/vim-test {}
   :radenling/vim-dispatch-neovim {}
 
-  ;; fuzzy find
-  :junegunn/fzf {}
-  :junegunn/fzf.vim {}
+  ;; Fuzzy find
+  ;; required by telescope.nvim
+  :nvim-lua/popup.nvim {}
+  :nvim-lua/plenary.nvim {}
+  :nvim-telescope/telescope.nvim {}
 
   ;; Commenting
   :tpope/vim-commentary {}
