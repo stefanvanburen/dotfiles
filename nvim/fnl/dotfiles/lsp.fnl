@@ -88,8 +88,7 @@
    ;; NOTE: We do this so that a single gopls server can be used
    ;; for both language server client and vim-go.
    {:cmd ["gopls" "--remote=auto"]
-    :settings {:gopls {:analyses {:unusedparams true}
-                       :staticcheck true}}}
+    :settings {:gopls {:analyses {:unusedparams true}}}}
    :rust_analyzer {}
    :tsserver {}
    :clangd {}
