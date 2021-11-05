@@ -70,12 +70,6 @@
 (util.nnoremap :ss "split")
 (util.nnoremap :vs "vsplit")
 
-;; mnemonic: "Start Repl".
-;; Invokes vim-dispatch to start an nREPL client in the background (in another tab).
-;; Using Dispatch! instead of Start! so we can just make sure it's running in
-;; the background; no need to open another tab.
-(util.nnoremap :sr "Dispatch! clj -M:repl/nrepl")
-
 ;; tab mappings
 (noremap :n "]r" ":tabnext<cr>")
 (noremap :n "[r" ":tabprev<cr>")
