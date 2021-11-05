@@ -216,9 +216,6 @@
 ;; using open-browser.vim for `gx`
 (set nvim.g.netrw_nogx 1)
 
-;; fzf
-(set nvim.g.fzf_layout {:window {:width 1.0 :height 0.5 :yoffset 1.0 :border :top}})
-
 ;; vim-test x dispatch
 (set nvim.g.test#strategy "dispatch")
 
