@@ -211,11 +211,13 @@
 
 (set nvim.g.pear_tree_repeatable_expand 0)
 ;; disable pear-tree for lispy languages, covered by parinfer
-;; also, TelescopePrompt! - https://github.com/nvim-telescope/telescope.nvim/issues/731#issuecomment-819028282
-(set nvim.g.pear_tree_ft_disabled [:clojure :fennel :TelescopePrompt])
+(set nvim.g.pear_tree_ft_disabled [:clojure :fennel])
 
 ;; using open-browser.vim for `gx`
 (set nvim.g.netrw_nogx 1)
+
+;; fzf
+(set nvim.g.fzf_layout {:window {:width 1.0 :height 0.5 :yoffset 1.0 :border :top}})
 
 ;; vim-test x dispatch
 (set nvim.g.test#strategy "dispatch")
