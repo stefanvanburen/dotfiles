@@ -1,5 +1,6 @@
 (module dotfiles.plugin
     {autoload {a aniseed.core
+               nvim aniseed.nvim
                packer packer}})
 
 (defn safe-require-plugin-config [name]
@@ -146,3 +147,57 @@
 
   ;; colorscheme
   :stefanvanburen/rams.vim {})
+
+;;; settings for plugins
+
+;; run goimports on save for go files
+(set nvim.g.go_fmt_autosave 1)
+
+;; This has to be set so the entire package is linted (otherwise, staticcheck)
+;; won't grab identifiers declared in other files).
+(set nvim.g.ale_go_staticcheck_lint_package 1)
+
+;; disable all linters powered by LSP
+;; instead, this is handled by the built-in neovim LSP client
+(set nvim.g.ale_disable_lsp 1)
+
+;; ale formatting
+(set nvim.g.ale_sign_error "×")
+(set nvim.g.ale_sign_warning "→")
+(set nvim.g.ale_sign_info "→")
+(set nvim.g.ale_echo_msg_format "%linter%: %s")
+(set nvim.g.ale_virtualtext_cursor 1)
+(set nvim.g.ale_virtualtext_prefix "∴ ")
+
+;; in general, this is the right thing to do
+(set nvim.g.ale_fix_on_save 1)
+
+(set nvim.g.ale_linters {:clojure []
+                         :go [:staticcheck]
+                         :python [:flake8 :mypy]
+                         :rust []})
+
+(set nvim.g.ale_fixers {:go []
+                        :python [:black :isort]
+                        :cpp [:clang-format]})
+
+;; because I commonly zoom tmux windows, and Dispatch will create a new window
+;; when within tmux, the default setting would unzoom my tmux. Turn it off.
+(set nvim.g.dispatch_no_tmux_make 1)
+
+;; Disable matchup's offscreen feature, which usually replaces the statusline
+;; with the match.
+(set nvim.g.matchup_matchparen_offscreen {})
+
+(set nvim.g.pear_tree_repeatable_expand 0)
+;; disable pear-tree for lispy languages, covered by parinfer
+(set nvim.g.pear_tree_ft_disabled [:clojure :fennel])
+
+;; using open-browser.vim for `gx`
+(set nvim.g.netrw_nogx 1)
+
+;; vim-test x dispatch
+(set nvim.g.test#strategy "dispatch")
+
+;; conjure
+(set nvim.g.conjure#extract#tree_sitter#enabled true)
