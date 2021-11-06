@@ -1,35 +1,6 @@
 (module dotfiles.core
   {autoload {nvim aniseed.nvim
-             str aniseed.string}
-   require-macros [dotfiles.macros]})
-
-;; on resize, resize windows
-(nvim.ex.autocmd :VimResized :* ":wincmd =")
-
-;; show yanked text
-(nvim.ex.autocmd :TextYankPost :* "lua vim.highlight.on_yank()")
-
-;; after writing init.lua, recompile
-(nvim.ex.autocmd :BufWritePost :init.lua "PackerCompile")
-
-(augroup filetypes
-         (do
-           (autocmd :FileType :go "setlocal noexpandtab tabstop=4 shiftwidth=4")
-           (autocmd :FileType :python "setlocal tabstop=4 shiftwidth=4 expandtab")
-           (autocmd :FileType :javascript "setlocal expandtab tabstop=2 shiftwidth=2")
-           (autocmd :FileType :typescript "setlocal tabstop=2 shiftwidth=2 expandtab")
-           (autocmd :FileType :typescriptreact "setlocal tabstop=2 shiftwidth=2 expandtab")
-           (autocmd :FileType :html "setlocal expandtab tabstop=2 shiftwidth=2")
-           (autocmd :FileType :css "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
-           (autocmd :FileType :scss "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
-           (autocmd :FileType :fish "setlocal expandtab tabstop=4 shiftwidth=4")
-           (autocmd :FileType :yaml "setlocal expandtab tabstop=2 shiftwidth=2")
-           (autocmd :FileType :gitcommit "setlocal spell")
-           (autocmd :FileType :sql "setlocal wrap")
-           (autocmd :FileType :markdown "setlocal spell wrap conceallevel=2")
-           ;; treat `justfile`s as makefiles
-           ;; This helps with setting up correct commentstring, etc
-           (autocmd :BufRead :justfile "setf make")))
+             str aniseed.string}})
 
 (defn- opt [name value]
   (tset vim.o name value))
