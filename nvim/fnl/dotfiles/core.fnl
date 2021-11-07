@@ -15,7 +15,6 @@
 
 ;; colorscheme
 (opt :termguicolors true)
-(nvim.ex.colorscheme :rams)
 (opt :background :light)
 
 ;; don't wrap by default

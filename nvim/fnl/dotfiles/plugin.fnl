@@ -147,10 +147,15 @@
   ;; Easily search for, substitute, and abbreviate multiple variants of a word
   :tpope/vim-abolish {}
 
+  ;; colorscheme creation
+  :rktjmp/lush.nvim {}
+
   ;; colorscheme
-  :stefanvanburen/rams.vim {})
+  :stefanvanburen/rams {})
 
 ;;; settings for plugins
+
+(nvim.ex.colorscheme :rams)
 
 ;; run goimports on save for go files
 (set nvim.g.go_fmt_autosave 1)
