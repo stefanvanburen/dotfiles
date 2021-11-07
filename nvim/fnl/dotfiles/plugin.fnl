@@ -196,6 +196,3 @@
 
 ;; vim-test x dispatch
 (set nvim.g.test#strategy "dispatch")
-
-;; conjure
-(set nvim.g.conjure#extract#tree_sitter#enabled true)
