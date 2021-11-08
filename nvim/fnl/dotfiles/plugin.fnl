@@ -35,9 +35,6 @@
   ;; for `gx`
   :tyru/open-browser.vim {}
 
-  ;; for profiling startup time
-  :dstein64/vim-startuptime {}
-
   ;; Adds git added / modified / deleted in the sidebar (amongst other things)
   :lewis6991/gitsigns.nvim
   {:requires [[:nvim-lua/plenary.nvim]]
