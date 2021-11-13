@@ -26,21 +26,39 @@ font:
   #   family: Rec Mono Linear
   #   style: Bold Italic
 
+  # NOTE: We use Iosevka Fixed, because alacritty does not support ligatures.
+  # SS08 is the Pragmata Pro variant.
   normal:
-    family: Iosevka Fixed SS08
-    style: Regular
-
-  bold:
     family: Iosevka Fixed SS08
     style: Medium
 
+  bold:
+    family: Iosevka Fixed SS08
+    style: Bold
+
   italic:
     family: Iosevka Fixed SS08
-    style: Regular Italic
+    style: Medium Italic
 
   bold_italic:
     family: Iosevka Fixed SS08
-    style: Medium Italic
+    style: Bold Italic
+
+  # normal:
+  #   family: Go Mono
+  #   style: Regular
+
+  # bold:
+  #   family: Go Mono
+  #   style: Bold
+
+  # italic:
+  #   family: Go Mono
+  #   style: Regular Italic
+
+  # bold_italic:
+  #   family: Go Mono
+  #   style: Bold Italic
 
   # normal:
   #   family: PragmataPro Mono
