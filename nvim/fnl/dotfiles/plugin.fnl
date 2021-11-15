@@ -182,6 +182,11 @@
                          :rust []})
 
 (set nvim.g.ale_fixers {:go []
+                        ;; eslint is still the best JS linter / fixer, and
+                        ;; doesn't seem to be integrated into any language
+                        ;; servers that I'm aware of - so, ALE for now!
+                        :javascript [:eslint]
+                        :typescript [:eslint]
                         :python [:black :isort]
                         :cpp [:clang-format]})
 
