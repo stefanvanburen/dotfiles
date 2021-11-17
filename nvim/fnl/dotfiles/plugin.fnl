@@ -65,7 +65,6 @@
   :maxmellon/vim-jsx-pretty {}
   :HerringtonDarkholme/yats.vim {}
   :plasticboy/vim-markdown {}
-  :cespare/vim-toml {}
   :rust-lang/rust.vim {:ft ["rust"]}
   :ziglang/zig.vim {}
   :tmux-plugins/vim-tmux {}
