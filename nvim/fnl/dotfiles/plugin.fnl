@@ -51,24 +51,75 @@
   ;; GitHub!
   :tpope/vim-rhubarb {}
 
+  ;; lints and fixes text files.
+  ;; Also provides an LSP integration, but that is turned off in favor of
+  ;; nvim's builtin LSP client.
   :w0rp/ale {}
 
   ;; Allows for viewing git commit messages related to the current line
   ;; <leader>gm to trigger the window, again to go inside.
   :rhysd/git-messenger.vim {}
 
-  ;; language support
+  ;;; language support
+  ;;; neovim has a variety of supported languages, but the ones included in
+  ;;; https://github.com/neovim/neovim/tree/master/runtime/ftplugin are
+  ;;; typically out of date, or don't exist, and so many languages need plugins
+  ;;; to stay up-to-date.
+
+  ;; https://github.com/blankname/vim-fish
+  ;; at one point, this seemed to be the most up to date fork of dag/vim-fish,
+  ;; but now I'm not so sure. Unfortunately there isn't a better one that I
+  ;; know of.
   :blankname/vim-fish {}
+  ;; https://github.com/othree/html5.vim
+  ;; HTML5 and SVG autocomplete and syntax highlighting
   :othree/html5.vim {}
+  ;; https://github.com/hail2u/vim-css3-syntax
+  ;; Unsure if this plugin is _much_ better than the default CSS files, but is
+  ;; well maintained.
+  ;; https://github.com/hail2u/vim-css3-syntax/issues/65
   :hail2u/vim-css3-syntax {}
+  ;; https://github.com/pangloss/vim-javascript
+  ;; "Vastly improved Javascript indentation and syntax support in Vim."
   :pangloss/vim-javascript {}
+  ;; https://github.com/maxmellon/vim-jsx-pretty
+  ;; "JSX and TSX syntax pretty highlighting for vim."
+  ;; Probably not necessary at this point, given that I don't write almost any
+  ;; jsx or tsx.
   :maxmellon/vim-jsx-pretty {}
+  ;; https://github.com/HerringtonDarkholme/yats.vim
+  ;; "Yet Another TypeScript Syntax: The most advanced TypeScript Syntax Highlighting in Vim"
+  ;; Probably unnecessary, but given the pace of development in the typescript
+  ;; language, maybe it is?
   :HerringtonDarkholme/yats.vim {}
+  ;; https://github.com/plasticboy/vim-markdown
+  ;; "Markdown Vim Mode"
+  ;; Not very well maintained.
   :plasticboy/vim-markdown {}
+  ;; https://github.com/rust-lang/rust.vim
+  ;; "Vim configuration for Rust".
+  ;; Most of the features are not something that I'd use, so it would probably
+  ;; be a good idea to look into if the default runtime files are good enough
+  ;; for rust.
   :rust-lang/rust.vim {:ft ["rust"]}
+  ;; https://github.com/ziglang/zig.vim
+  ;; "File detection and syntax highlighting for the zig programming language."
+  ;; I've only toyed with zig, but this plugin seems small enough to be fine.
   :ziglang/zig.vim {}
+  ;; https://github.com/tmux-plugins/vim-tmux
+  ;; "vim plugin for tmux.conf"
+  ;; Simple, useful. Not updated all that often, but probably fine? And I doubt
+  ;; there's a built-in runtime file for .tmux.conf?
   :tmux-plugins/vim-tmux {}
+  ;; https://github.com/hashivim/vim-terraform
+  ;; "This plugin adds a :Terraform command that runs terraform, with tab
+  ;; completion of subcommands. It also sets up *.hcl, *.tf, *.tfvars,
+  ;; .terraformrc and terraform.rc files to be highlighted as HCL and *.tfstate
+  ;; as JSON."
+  ;; Not well maintained, but useful to have simply for the syntax highlighting
+  ;; of terraform files.
   :hashivim/vim-terraform {}
+
   ;; up-to-date git filetypes
   :tpope/vim-git {}
 
