@@ -251,3 +251,6 @@
 
 ;; vim-test x dispatch
 (set nvim.g.test#strategy "dispatch")
+
+;; vim-sexp & vim-sexp-mappings-for-regular-people
+(set nvim.g.sexp_filetypes "clojure,lisp,fennel")
