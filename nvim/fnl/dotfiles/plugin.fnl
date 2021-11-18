@@ -40,6 +40,8 @@
   :ntpeters/vim-better-whitespace {}
 
   ;; Better commit message editing
+  ;; Doesn't seem to currently work, due to filetype.nvim:
+  ;; https://github.com/rhysd/committia.vim/issues/56
   :rhysd/committia.vim {}
 
   ;; git!
