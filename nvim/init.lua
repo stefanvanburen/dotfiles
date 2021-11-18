@@ -19,6 +19,10 @@ end
 -- Required by the nathom/filetype.nvim plugin
 vim.g.did_load_filetypes = 1
 
+-- Disable netrw
+vim.g.loaded_netrw       = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Bootstrap essential plugins required for installing and loading the rest.
 ensure("wbthomason", "packer.nvim")
 ensure("Olical", "aniseed")
