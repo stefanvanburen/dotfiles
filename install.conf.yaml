@@ -13,7 +13,6 @@
     ~/.vimrc: minimal_vimrc
     ~/.config/tmux/tmux.conf: tmux.conf
     ~/.config/nvim: nvim
-    ~/.config/ripgreprc: ripgreprc
     ~/.config/git/config: gitconfig
     ~/.config/git/ignore: gitignore
     ~/.config/fish/config.fish: config.fish
