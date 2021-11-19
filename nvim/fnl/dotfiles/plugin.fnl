@@ -90,10 +90,6 @@
   ;; Probably unnecessary, but given the pace of development in the typescript
   ;; language, maybe it is?
   :HerringtonDarkholme/yats.vim {}
-  ;; https://github.com/plasticboy/vim-markdown
-  ;; "Markdown Vim Mode"
-  ;; Not very well maintained.
-  :plasticboy/vim-markdown {}
   ;; https://github.com/rust-lang/rust.vim
   ;; "Vim configuration for Rust".
   ;; Most of the features are not something that I'd use, so it would probably
