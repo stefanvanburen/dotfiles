@@ -81,8 +81,10 @@
 (opt :lazyredraw false)
 
 ;; Invisible characters
-(wopt :list false)
-(wopt :listchars (str.join "," ["tab:⌁ " "eol:¬" "trail:⣿"]))
+(wopt :list true)
+(wopt :listchars (str.join "," ["tab:→ "
+                                "eol:¬"
+                                "trail:⣿"]))
 
 ;; Don't insert two spaces after punctuation with a join command.
 (opt :joinspaces false)
