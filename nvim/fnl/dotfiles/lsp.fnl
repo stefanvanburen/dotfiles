@@ -50,13 +50,6 @@
   (nnoremap bufnr "]w"         "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
   (nnoremap bufnr "<leader>q"  "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>"))
 
-(defn- set-signs []
-  (let [sign vim.fn.sign_define]
-    (sign "LspDiagnosticsSignError"       {:text "×" :texthl "LspDiagnosticsDefaultError"})
-    (sign "LspDiagnosticsSignWarning"     {:text "‽" :texthl "LspDiagnosticsDefaultWarning"})
-    (sign "LspDiagnosticsSignInformation" {:text "※" :texthl "LspDiagnosticsDefaultInformation"})
-    (sign "LspDiagnosticsSignHint"        {:text "⁖" :texthl "LspDiagnosticsDefaultHint"})))
-
 (def- handlers
   {"textDocument/publishDiagnostics"
    (vim.lsp.with
@@ -90,14 +83,18 @@
    :clangd {}
    :clojure_lsp {}})
 
-(defn- set-server [s c]
-  ((. lsp s :setup)
+(defn- set-server [server config]
+  ((. lsp server :setup)
    (vim.tbl_extend
      "force"
      {:on_attach on-attach
       : handlers
-      :capabilities (or c.capabilities {})}
-     (or c {}))))
+      :capabilities (or config.capabilities {})}
+     (or config {}))))
 
-(set-signs)
+(vim.fn.sign_define "LspDiagnosticsSignError"       {:text "×" :texthl "LspDiagnosticsDefaultError"})
+(vim.fn.sign_define "LspDiagnosticsSignWarning"     {:text "‽" :texthl "LspDiagnosticsDefaultWarning"})
+(vim.fn.sign_define "LspDiagnosticsSignInformation" {:text "※" :texthl "LspDiagnosticsDefaultInformation"})
+(vim.fn.sign_define "LspDiagnosticsSignHint"        {:text "⁖" :texthl "LspDiagnosticsDefaultHint"})
+
 (each [server config (pairs servers)] (set-server server config))
