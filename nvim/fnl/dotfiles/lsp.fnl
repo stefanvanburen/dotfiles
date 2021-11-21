@@ -21,11 +21,6 @@
             (capable? client :document_range_formatting))
     (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>"))
 
-  (when (= client.name "eslint")
-    ;; TODO: when this is run, the buffer doesn't actually get written(?)
-    (augroup eslint-ls
-             (autocmd :BufWritePre :<buffer> "EslintFixAll")))
-
   (when (capable? client :document_highlight)
     (do
       (nvim.ex.augroup (tostring lsp-document-highlight))
@@ -40,6 +35,7 @@
     (set nvim.bo.omnifunc "v:lua.vim.lsp.omnifunc"))
 
   ;; setup mappings
+  ;; See `:help vim.lsp.*` for documentation on any of the below functions
   (nnoremap bufnr "gD"         "<cmd>lua vim.lsp.buf.declaration()<CR>")
   (nnoremap bufnr "gd"         "<cmd>lua vim.lsp.buf.definition()<CR>")
   (nnoremap bufnr "gi"         "<cmd>lua vim.lsp.buf.implementation()<CR>")
@@ -54,7 +50,7 @@
   (nnoremap bufnr "]w"         "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
   (nnoremap bufnr "<leader>q"  "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>"))
 
-(defn set-signs []
+(defn- set-signs []
   (let [sign vim.fn.sign_define]
     (sign "LspDiagnosticsSignError"       {:text "×" :texthl "LspDiagnosticsDefaultError"})
     (sign "LspDiagnosticsSignWarning"     {:text "‽" :texthl "LspDiagnosticsDefaultWarning"})
@@ -92,9 +88,6 @@
    :rust_analyzer {}
    :tsserver {}
    :clangd {}
-   ;; https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/eslint.lua
-   ;; TODO: set this up differently so we aren't relying on path
-   :eslint {}
    :clojure_lsp {}})
 
 (defn- set-server [s c]
