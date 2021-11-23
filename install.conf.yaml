@@ -10,7 +10,6 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.vimrc: minimal_vimrc
     ~/.config/tmux/tmux.conf: tmux.conf
     ~/.config/nvim: nvim
     ~/.config/git/config: gitconfig
