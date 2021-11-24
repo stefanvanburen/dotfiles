@@ -15,9 +15,6 @@ function ensure (user, repo)
   end
 end
 
--- Do not source the default filetype.vim
--- Required by the nathom/filetype.nvim plugin
-vim.g.did_load_filetypes = 1
 
 -- Disable netrw
 vim.g.loaded_netrw       = 1
