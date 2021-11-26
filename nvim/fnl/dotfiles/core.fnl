@@ -14,7 +14,6 @@
   (opt name value))
 
 ;; colorscheme
-(nvim.ex.colorscheme :rams)
 (opt :termguicolors true)
 (opt :background :light)
 
