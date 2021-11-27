@@ -211,19 +211,30 @@
 ;; in general, this is the right thing to do
 (set nvim.g.ale_fix_on_save 1)
 
-(set nvim.g.ale_linters {:clojure []
-                         :go [:staticcheck]
-                         :python [:flake8 :mypy]
-                         :rust []})
+(set nvim.g.ale_linters
+     {;; clojure is handled by clojure-lsp, which bakes in clj-kondo:
+      ;; https://clojure-lsp.io/settings/#clj-kondo
+      :clojure []
+      ;; staticcheck is handled here rather than gopls, because gopls'
+      ;; staticcheck support is only experimental, and currently the lints do
+      ;; not seem to be updated when the file changes.
+      :go [:staticcheck]
+      ;; python, as far as I can tell, does not have great LSP integration. So,
+      ;; for now, everything goes through ALE.
+      :python [:flake8 :mypy]
+      ;; rust is handled by rust-analyzer, which is via the LSP client.
+      :rust []})
 
-(set nvim.g.ale_fixers {:go []
-                        ;; eslint is still the best JS linter / fixer, and
-                        ;; doesn't seem to be integrated into any language
-                        ;; servers that I'm aware of - so, ALE for now!
-                        :javascript [:eslint]
-                        :typescript [:eslint]
-                        :python [:black :isort]
-                        :cpp [:clang-format]})
+(set nvim.g.ale_fixers
+     {;; Handled via `gopls`.
+      :go []
+      ;; eslint is still the best JS linter / fixer, and doesn't seem to be
+      ;; integrated into any language servers that I'm aware of - so, ALE for
+      ;; now!
+      :javascript [:eslint]
+      :typescript [:eslint]
+      ;; Similar story as above - not great LSP integration, so use ALE as a fixer.
+      :python [:black :isort]})
 
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.
