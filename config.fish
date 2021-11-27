@@ -10,9 +10,9 @@ set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx GLAMOUR_STYLE light
 
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
-set -gx FZF_DEFAULT_OPTS    '--height 40% --layout=reverse'
-set -gx FZF_CTRL_T_COMMAND  'fd --type file --follow --hidden --exclude .git'
-set -gx FZF_CTRL_T_OPTS     '--no-height --layout=reverse'
+set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse'
+set -gx FZF_CTRL_T_COMMAND 'fd --type file --follow --hidden --exclude .git'
+set -gx FZF_CTRL_T_OPTS '--no-height --layout=reverse'
 
 # fish_add_path requires fish 3.2.0
 # pipx

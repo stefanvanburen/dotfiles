@@ -11,7 +11,7 @@ function extract
     end
 
     set remove_file 0
-    if test $argv[1] = "-r"; or test $argv[1] = "--remove"
+    if test $argv[1] = -r; or test $argv[1] = --remove
         set remove_file 1
         set --erase argv[1]
     end

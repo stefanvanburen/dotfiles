@@ -1,3 +1,3 @@
 function ls --wraps=exa --description 'Use exa instead of ls'
-    exa $argv;
+    exa $argv
 end
