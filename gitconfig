@@ -87,8 +87,6 @@
 [diff]
 	; uses mnemonic prefixes rather than the typical "a/" and "b/" shown.
 	mnemonicPrefix = true
-	; change the color of "moved" lines of code differently
-	colorMoved = default
 
 [init]
 	; initialize repositories with "main" as the default branch
