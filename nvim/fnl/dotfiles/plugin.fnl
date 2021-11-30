@@ -119,6 +119,8 @@
   ;; profiling startup time
   :dstein64/vim-startuptime {}
 
+  :alok/notational-fzf-vim {}
+
   ;; configuration in fennel
   :Olical/aniseed {}
 
@@ -235,6 +237,8 @@
       :typescript [:eslint]
       ;; Similar story as above - not great LSP integration, so use ALE as a fixer.
       :python [:black :isort]})
+
+(set nvim.g.nv_search_paths ["~/Documents/notes"])
 
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.
