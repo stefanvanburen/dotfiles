@@ -31,7 +31,7 @@
 (util.nnoremap :gy ".GBrowse!")
 
 ;; notational-fzf-vim
-(map :n :<C-l> ":NV<cr>" {:noremap true})
+(map :n :<C-v> ":NV<cr>" {:noremap true})
 
 ;; vim-better-whitespace
 (util.nnoremap :sw "StripWhitespace")
@@ -99,8 +99,6 @@
 ; nnoremap C "_C
 (noremap :n :c "\"_c")
 (noremap :n :C "\"_C")
-
-(noremap :n :<leader>/ ":nohlsearch<cr>")
 
 ;; Keep the cursor in place while joining lines
 (noremap :n :J "mzJ`z")

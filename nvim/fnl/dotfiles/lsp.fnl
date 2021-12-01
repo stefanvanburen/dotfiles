@@ -45,10 +45,9 @@
   (nnoremap bufnr "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<CR>")
   (nnoremap bufnr "<leader>ca" "<cmd>lua vim.lsp.buf.code_action()<CR>")
   (nnoremap bufnr "gr"         "<cmd>lua vim.lsp.buf.references()<CR>")
-  (nnoremap bufnr "<leader>e"  "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
-  (nnoremap bufnr "[w"         "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
-  (nnoremap bufnr "]w"         "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
-  (nnoremap bufnr "<leader>q"  "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>"))
+  (nnoremap bufnr "[w"         "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+  (nnoremap bufnr "]w"         "<cmd>lua vim.diagnostic.goto_next()<CR>")
+  (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<CR>"))
 
 (def- handlers
   {"textDocument/publishDiagnostics"
@@ -92,9 +91,9 @@
       :capabilities (or config.capabilities {})}
      (or config {}))))
 
-(vim.fn.sign_define "LspDiagnosticsSignError"       {:text "×" :texthl "LspDiagnosticsDefaultError"})
-(vim.fn.sign_define "LspDiagnosticsSignWarning"     {:text "‽" :texthl "LspDiagnosticsDefaultWarning"})
-(vim.fn.sign_define "LspDiagnosticsSignInformation" {:text "※" :texthl "LspDiagnosticsDefaultInformation"})
-(vim.fn.sign_define "LspDiagnosticsSignHint"        {:text "⁖" :texthl "LspDiagnosticsDefaultHint"})
+(vim.fn.sign_define "DiagnosticSignError"       {:text "×" :texthl "DiagnosticSignError"})
+(vim.fn.sign_define "DiagnosticSignWarning"     {:text "‽" :texthl "DiagnosticSignWarning"})
+(vim.fn.sign_define "DiagnosticSignInformation" {:text "※" :texthl "DiagnosticSignInformation"})
+(vim.fn.sign_define "DiagnosticSignHint"        {:text "⁖" :texthl "DiagnosticSignHint"})
 
 (each [server config (pairs servers)] (set-server server config))

@@ -59,9 +59,6 @@
 ;; Don't get rid of hidden buffers
 (opt :hidden true)
 
-;; show incremental substitutions inline
-(opt :inccommand "nosplit")
-
 ;; Ignore case while searching
 (opt :ignorecase true)
 ;; ... except when capitals are used
@@ -85,9 +82,6 @@
 (wopt :listchars (str.join "," ["tab:→ "
                                 "eol:¬"
                                 "trail:⣿"]))
-
-;; Don't insert two spaces after punctuation with a join command.
-(opt :joinspaces false)
 
 ;; Don't show the mode on the command line - it's redundant with the status line.
 (opt :showmode false)
