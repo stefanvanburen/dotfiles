@@ -50,16 +50,7 @@
   (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<CR>"))
 
 (def- handlers
-  {"textDocument/publishDiagnostics"
-   (vim.lsp.with
-     vim.lsp.diagnostic.on_publish_diagnostics
-     {:virtual_text {:prefix "∴"
-                     :spacing 1}
-      :signs true
-      :underline true
-      :update_in_insert false})
-
-   ;; add a border to hover
+  {;; add a border to hover
    "textDocument/hover"
    (vim.lsp.with
      vim.lsp.handlers.hover
@@ -95,5 +86,12 @@
 (vim.fn.sign_define "DiagnosticSignWarning"     {:text "‽" :texthl "DiagnosticSignWarning"})
 (vim.fn.sign_define "DiagnosticSignInformation" {:text "※" :texthl "DiagnosticSignInformation"})
 (vim.fn.sign_define "DiagnosticSignHint"        {:text "⁖" :texthl "DiagnosticSignHint"})
+
+(vim.diagnostic.config {:underline true
+                        :virtual_text {:prefix "∴"
+                                       :spacing 1}
+                        :signs true
+                        :update_in_insert false
+                        :severity_sort true})
 
 (each [server config (pairs servers)] (set-server server config))
