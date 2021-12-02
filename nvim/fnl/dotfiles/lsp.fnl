@@ -80,6 +80,7 @@
    :rust_analyzer {}
    :tsserver {}
    :clangd {}
+   :tailwindcss {}
    :clojure_lsp {}})
 
 (defn- set-server [server config]
