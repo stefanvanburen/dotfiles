@@ -29,7 +29,7 @@
       (nvim.ex.autocmd  :CursorHold  :<buffer> "lua vim.lsp.buf.document_highlight()")
       (nvim.ex.autocmd  :CursorMoved :<buffer> "lua vim.lsp.buf.clear_references()")
       ;; Trying this out, tentatively
-      (nvim.ex.autocmd  :CursorHold  :<buffer> "lua vim.diagnostic.open_float(nil, {border = 'rounded'})")
+      (nvim.ex.autocmd  :CursorHold  :<buffer> "lua vim.diagnostic.open_float(nil, {border = 'rounded', focusable = false, source = 'always'})")
       (nvim.ex.augroup  :END)))
 
   ;; set the omnifunc for the buffer
