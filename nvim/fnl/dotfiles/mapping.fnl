@@ -30,9 +30,6 @@
 (util.nnoremap :gb "GBrowse")
 (util.nnoremap :gy ".GBrowse!")
 
-;; notational-fzf-vim
-(map :n :<C-v> ":NV<cr>" {:noremap true})
-
 ;; vim-better-whitespace
 (util.nnoremap :sw "StripWhitespace")
 
