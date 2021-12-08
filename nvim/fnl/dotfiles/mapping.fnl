@@ -17,10 +17,10 @@
 (set nvim.g.maplocalleader ",")
 
 ;; packer
-(util.nnoremap :pc "PackerClean")
-(util.nnoremap :pg "PackerUpdate")
+;; Clean, update and install plugins, then regenerate compiled loader file.
+;; PackerUpdate -> PackerCompile
+;; This is essentially always what we want to run.
 (util.nnoremap :pu "PackerSync")
-(util.nnoremap :pi "PackerInstall")
 
 ;; Fugitive
 (util.nnoremap :gs "vertical Git")
