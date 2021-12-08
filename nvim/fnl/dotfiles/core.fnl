@@ -39,11 +39,13 @@
 
 ;; statusline current ' '
 ;; statusline not current ' '
+;; end of buffer ' ', rather than the default '~'
 ;; vertical empty (escaped space)
 ;; fold: filling foldtext
 ;; diff: deleted lines in diff
 (wopt :fillchars (str.join "," ["stl: "
                                 "stlnc: "
+                                "eob: "
                                 "vert:│"
                                 "fold:·"
                                 "diff:-"]))
