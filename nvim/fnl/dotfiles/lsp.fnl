@@ -1,6 +1,6 @@
 (module dotfiles.lsp
   {autoload {nvim aniseed.nvim
-             lsp "lspconfig"}
+             lspinstaller "nvim-lsp-installer"}
    ;; for autocmd and augroup
    require-macros [dotfiles.macros]})
 
@@ -64,26 +64,6 @@
      vim.lsp.handlers.signature_help
      {:border "single"})})
 
-(def- servers
-  {:gopls
-   ;; NOTE: We do this so that a single gopls server can be used
-   ;; for both language server client and vim-go.
-   {:cmd ["gopls" "--remote=auto"]
-    :settings {:gopls {:analyses {:unusedparams true}}}}
-   :rust_analyzer {}
-   :tsserver {}
-   :clangd {}
-   :clojure_lsp {}})
-
-(defn- set-server [server config]
-  ((. lsp server :setup)
-   (vim.tbl_extend
-     "force"
-     {:on_attach on-attach
-      : handlers
-      :capabilities (or config.capabilities {})}
-     (or config {}))))
-
 (vim.fn.sign_define "DiagnosticSignError"       {:text "×" :texthl "DiagnosticSignError"})
 (vim.fn.sign_define "DiagnosticSignWarning"     {:text "‽" :texthl "DiagnosticSignWarning"})
 (vim.fn.sign_define "DiagnosticSignInformation" {:text "※" :texthl "DiagnosticSignInformation"})
@@ -95,4 +75,7 @@
                         :update_in_insert false
                         :severity_sort true})
 
-(each [server config (pairs servers)] (set-server server config))
+(lspinstaller.on_server_ready
+   (lambda [server]
+     (server:setup {:on_attach on-attach
+                    :handlers handlers})))
