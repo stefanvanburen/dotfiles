@@ -28,21 +28,21 @@ font:
 
   # NOTE: We use Iosevka Fixed, because alacritty does not support ligatures.
   # SS08 is the Pragmata Pro variant.
-  normal:
-    family: Iosevka Fixed SS08
-    style: Medium
+  # normal:
+  #   family: Iosevka Fixed SS08
+  #   style: Medium
 
-  bold:
-    family: Iosevka Fixed SS08
-    style: Bold
+  # bold:
+  #   family: Iosevka Fixed SS08
+  #   style: Bold
 
-  italic:
-    family: Iosevka Fixed SS08
-    style: Medium Italic
+  # italic:
+  #   family: Iosevka Fixed SS08
+  #   style: Medium Italic
 
-  bold_italic:
-    family: Iosevka Fixed SS08
-    style: Bold Italic
+  # bold_italic:
+  #   family: Iosevka Fixed SS08
+  #   style: Bold Italic
 
   # normal:
   #   family: Go Mono
@@ -60,21 +60,21 @@ font:
   #   family: Go Mono
   #   style: Bold Italic
 
-  # normal:
-  #   family: PragmataPro Mono
-  #   style: Regular
+  normal:
+    family: PragmataPro Mono
+    style: Regular
 
-  # bold:
-  #   family: PragmataPro Mono
-  #   style: Bold
+  bold:
+    family: PragmataPro Mono
+    style: Bold
 
-  # italic:
-  #   family: PragmataPro Mono
-  #   style: Italic
+  italic:
+    family: PragmataPro Mono
+    style: Italic
 
-  # bold_italic:
-  #   family: PragmataPro Mono
-  #   style: Bold Italic
+  bold_italic:
+    family: PragmataPro Mono
+    style: Bold Italic
 
   # set use_thin_strokes to true on retina displays
   # use_thin_strokes: false
