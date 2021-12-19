@@ -53,11 +53,8 @@
   (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<CR>"))
 
 (def- handlers
-  {;; add a border to signatureHelp
-   "textDocument/signatureHelp"
-   (vim.lsp.with
-     vim.lsp.handlers.signature_help
-     {:border "single"})})
+  {"textDocument/hover"         (vim.lsp.with vim.lsp.handlers.hover          {:border "single"})
+   "textDocument/signatureHelp" (vim.lsp.with vim.lsp.handlers.signature_help {:border "single"})})
 
 (vim.fn.sign_define "DiagnosticSignError" {:text "×" :texthl "DiagnosticSignError"})
 (vim.fn.sign_define "DiagnosticSignWarn"  {:text "‽" :texthl "DiagnosticSignWarn"})
