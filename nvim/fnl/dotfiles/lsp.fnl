@@ -31,8 +31,6 @@
       (nvim.ex.autocmd_ :* :<buffer>)
       (nvim.ex.autocmd  :CursorHold  :<buffer> "lua vim.lsp.buf.document_highlight()")
       (nvim.ex.autocmd  :CursorMoved :<buffer> "lua vim.lsp.buf.clear_references()")
-      ;; Trying this out, tentatively
-      (nvim.ex.autocmd  :CursorHold  :<buffer> "lua vim.diagnostic.open_float(nil, {border = 'rounded', focusable = false, source = 'always'})")
       (nvim.ex.augroup  :END)))
 
   ;; set the omnifunc for the buffer
@@ -55,13 +53,7 @@
   (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<CR>"))
 
 (def- handlers
-  {;; add a border to hover
-   "textDocument/hover"
-   (vim.lsp.with
-     vim.lsp.handlers.hover
-     {:border "single"})
-
-   ;; add a border to signatureHelp
+  {;; add a border to signatureHelp
    "textDocument/signatureHelp"
    (vim.lsp.with
      vim.lsp.handlers.signature_help
@@ -73,7 +65,7 @@
 (vim.fn.sign_define "DiagnosticSignHint"  {:text "⁖" :texthl "DiagnosticSignHint"})
 
 (vim.diagnostic.config {:underline true
-                        :virtual_text false
+                        :virtual_text {:prefix "▪"}
                         :signs true
                         :update_in_insert false
                         :severity_sort true})
