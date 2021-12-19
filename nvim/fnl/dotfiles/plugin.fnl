@@ -133,13 +133,8 @@
   ;; installation and management of LSP servers
   :williamboman/nvim-lsp-installer {}
 
-  :nvim-treesitter/nvim-treesitter
-  {:run ":TSUpdate"
-   :config (fn []
-             (. (require "nvim-treesitter.configs") :setup)
-             {:ensure_installed "maintained"
-              :autotag {:enable true}
-              :highlight {:enabled true}})}
+  :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
+                                    :mod :treesitter}
 
   ;; Automatically match parenthesis and tags
   :windwp/nvim-autopairs {:mod :autopairs}
