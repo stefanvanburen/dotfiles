@@ -48,6 +48,8 @@
   (nnoremap bufnr "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<CR>")
   (nnoremap bufnr "<leader>ca" "<cmd>lua vim.lsp.buf.code_action()<CR>")
   (nnoremap bufnr "gr"         "<cmd>lua vim.lsp.buf.references()<CR>")
+  ;; See `:help vim.diagnostic.*` for documentation on any of the below functions
+  (nnoremap bufnr "<leader>?"  "<cmd>lua vim.diagnostic.open_float(nil, {border = 'single', focusable = false, source = 'always'})<CR>")
   (nnoremap bufnr "[w"         "<cmd>lua vim.diagnostic.goto_prev()<CR>")
   (nnoremap bufnr "]w"         "<cmd>lua vim.diagnostic.goto_next()<CR>")
   (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<CR>"))
