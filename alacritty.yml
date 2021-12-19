@@ -80,7 +80,7 @@ font:
   # use_thin_strokes: false
   use_thin_strokes: true
 
-  size: 12.0
+  size: 14.0
 
 # https://github.com/alacritty/alacritty/wiki/Color-schemes
 colors:
