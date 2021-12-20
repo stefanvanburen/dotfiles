@@ -1,3 +1,3 @@
-function ls --wraps=exa --description 'Use exa instead of ls'
-    exa $argv
+function ls --wraps=exa --description 'Turn on color for ls'
+    ls --color=auto $argv
 end
