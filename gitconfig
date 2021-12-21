@@ -87,6 +87,9 @@
 [diff]
 	; uses mnemonic prefixes rather than the typical "a/" and "b/" shown.
 	mnemonicPrefix = true
+	; seemingly the best diff algorithm - extends the "patience" algorithm
+	algorithm = histogram
+
 
 [init]
 	; initialize repositories with "main" as the default branch
