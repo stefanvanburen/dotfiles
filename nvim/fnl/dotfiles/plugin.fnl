@@ -225,11 +225,9 @@
 (set nvim.g.ale_fixers
      {;; Handled via `gopls`.
       :go []
-      ;; eslint is still the best JS linter / fixer, and doesn't seem to be
-      ;; integrated into any language servers that I'm aware of - so, ALE for
-      ;; now!
-      :javascript [:eslint]
-      :typescript [:eslint]
+      ;; linting JS/TS is handled by installing the `eslint` language server.
+      :javascript []
+      :typescript []
       ;; Similar story as above - not great LSP integration, so use ALE as a fixer.
       :python [:black :isort]})
 
