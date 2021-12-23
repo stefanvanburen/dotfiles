@@ -212,10 +212,9 @@
      {;; clojure is handled by clojure-lsp, which bakes in clj-kondo:
       ;; https://clojure-lsp.io/settings/#clj-kondo
       :clojure []
-      ;; staticcheck is handled here rather than gopls, because gopls'
-      ;; staticcheck support is only experimental, and currently the lints do
-      ;; not seem to be updated when the file changes.
-      :go [:staticcheck]
+      ;; staticcheck is handled by gopls, experimentally.
+      ;; We'll see if it becomes not experimental in the future.
+      :go []
       ;; python, as far as I can tell, does not have great LSP integration. So,
       ;; for now, everything goes through ALE.
       :python [:flake8 :mypy]
