@@ -1,6 +1,3 @@
-# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
---max-columns=150
---max-columns-preview
-
-# Because who cares about case!?
+# "Searches case insensitively if the pattern is all lowercase. Search case sensitively otherwise."
+# This is really useful in the general case of doing `rg text` and wanting to match case-insensitively on "text".
 --smart-case
