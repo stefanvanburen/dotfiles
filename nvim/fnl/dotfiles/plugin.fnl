@@ -215,6 +215,9 @@
       ;; staticcheck is handled by gopls, experimentally.
       ;; We'll see if it becomes not experimental in the future.
       :go []
+      ;; linting JS/TS is handled by installing the `eslint` language server.
+      :javascript []
+      :typescript []
       ;; python, as far as I can tell, does not have great LSP integration. So,
       ;; for now, everything goes through ALE.
       :python [:flake8 :mypy]
@@ -224,7 +227,7 @@
 (set nvim.g.ale_fixers
      {;; Handled via `gopls`.
       :go []
-      ;; linting JS/TS is handled by installing the `eslint` language server.
+      ;; fixing JS/TS is handled by installing the `eslint` language server.
       :javascript []
       :typescript []
       ;; Similar story as above - not great LSP integration, so use ALE as a fixer.
