@@ -24,7 +24,6 @@
     ~/.clojure/deps.edn: deps.edn
 
 - shell:
-  - chsh -s $(which fish)
   # An explanation of why we have to do this:
   # https://gpanders.com/blog/the-definitive-guide-to-using-tmux-256color-on-macos/
   - [tic tmux-256color.terminfo, Installing tmux .terminfo file]
