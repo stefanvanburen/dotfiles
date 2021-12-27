@@ -2,6 +2,8 @@
 # and choose "Mono Lace" under colors, to set the terminal colors.
 
 set -gx EDITOR nvim
+# NOTE: keep in sync with install.conf.yaml
+set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 # https://github.com/sharkdp/bat#man
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
