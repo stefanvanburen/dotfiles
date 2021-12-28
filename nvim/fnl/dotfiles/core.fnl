@@ -80,7 +80,7 @@
 (opt :lazyredraw false)
 
 ;; Invisible characters
-(wopt :list true)
+(wopt :list false)
 (wopt :listchars (str.join "," ["tab:→ "
                                 "eol:¬"
                                 "trail:⣿"]))
