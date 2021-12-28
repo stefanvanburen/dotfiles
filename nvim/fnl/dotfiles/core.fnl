@@ -3,14 +3,14 @@
              str aniseed.string}})
 
 (defn- opt [name value]
-  (tset vim.o name value))
+  (nvim.set_option name value))
 
 (defn- wopt [name value]
-  (tset vim.wo name value)
+  (nvim.win_set_option 0 name value)
   (opt name value))
 
 (defn- bopt [name value]
-  (tset vim.bo name value)
+  (nvim.buf_set_option 0 name value)
   (opt name value))
 
 ;; colorscheme
