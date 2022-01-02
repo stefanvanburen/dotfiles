@@ -122,6 +122,8 @@
   ;; configuration in fennel
   :Olical/aniseed {}
 
+  :lewis6991/impatient.nvim {}
+
   ;; lisp languages
   :guns/vim-sexp {}
   :tpope/vim-sexp-mappings-for-regular-people {}
