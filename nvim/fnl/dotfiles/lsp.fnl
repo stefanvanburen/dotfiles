@@ -49,7 +49,7 @@
   (nnoremap bufnr "<leader>ca" "<cmd>lua vim.lsp.buf.code_action()<CR>")
   (nnoremap bufnr "gr"         "<cmd>lua vim.lsp.buf.references()<CR>")
   ;; See `:help vim.diagnostic.*` for documentation on any of the below functions
-  (nnoremap bufnr "<leader>?"  "<cmd>lua vim.diagnostic.open_float(nil, {border = 'single', focusable = false, source = 'always'})<CR>")
+  (nnoremap bufnr "<leader>?"  "<cmd>lua vim.diagnostic.open_float()<CR>")
   (nnoremap bufnr "[w"         "<cmd>lua vim.diagnostic.goto_prev()<CR>")
   (nnoremap bufnr "]w"         "<cmd>lua vim.diagnostic.goto_next()<CR>")
   (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<CR>"))
@@ -59,15 +59,14 @@
    "textDocument/signatureHelp" (vim.lsp.with vim.lsp.handlers.signature_help {:border "single"})})
 
 (vim.fn.sign_define "DiagnosticSignError" {:text "×" :texthl "DiagnosticSignError"})
-(vim.fn.sign_define "DiagnosticSignWarn"  {:text "‽" :texthl "DiagnosticSignWarn"})
+(vim.fn.sign_define "DiagnosticSignWarn"  {:text "×" :texthl "DiagnosticSignWarn"})
 (vim.fn.sign_define "DiagnosticSignInfo"  {:text "▪" :texthl "DiagnosticSignInfo"})
-(vim.fn.sign_define "DiagnosticSignHint"  {:text "⁖" :texthl "DiagnosticSignHint"})
+(vim.fn.sign_define "DiagnosticSignHint"  {:text "▪" :texthl "DiagnosticSignHint"})
 
-(vim.diagnostic.config {:underline true
-                        :virtual_text {:prefix "▪"}
-                        :signs true
-                        :update_in_insert false
-                        :severity_sort true})
+(vim.diagnostic.config {:virtual_text {:prefix "▪"}
+                        :float {:border "single"
+                                :focusable false
+                                :source "always"}})
 
 (lspinstaller.on_server_ready
    (lambda [server]
