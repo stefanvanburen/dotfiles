@@ -1,3 +1,17 @@
 # "Searches case insensitively if the pattern is all lowercase. Search case sensitively otherwise."
 # This is really useful in the general case of doing `rg text` and wanting to match case-insensitively on "text".
 --smart-case
+
+# style the match with rams' accent color as the background and rams' white as
+# the foreground, in bold.
+--colors=match:none
+--colors=match:bg:236,49,39
+--colors=match:fg:235,235,235
+--colors=match:style:bold
+
+# remove the styling from line numbers, by default they are green.
+--colors=line:none
+
+# remove the styling from paths, and instead bold them.
+--colors=path:none
+--colors=path:style:bold
