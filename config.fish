@@ -11,10 +11,20 @@ set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # Light mode works better with my light background
 set -gx GLAMOUR_STYLE light
 
-set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
-set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse'
-set -gx FZF_CTRL_T_COMMAND 'fd --type file --follow --hidden --exclude .git'
-set -gx FZF_CTRL_T_OPTS '--no-height --layout=reverse'
+# use `fd` instead of `find` by default with fzf.
+set fzf_default_command 'fd --type file --follow --hidden --exclude .git'
+
+set -gx FZF_DEFAULT_COMMAND $fzf_default_command
+set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
+
+# reverse fzf's layout - by default, the input is at the bottom of the screen - I prefer it at the top.
+# info=inline puts the little number of matches on the same line as the input, rather than on the next line.
+set -gx FZF_DEFAULT_OPTS '--layout=reverse --info=inline'
+set -gx FZF_CTRL_T_OPTS  "--layout=reverse --info=inline --preview 'bat --color=always --line-range :500 {}'"
+# use fzf-tmux by default
+set -gx FZF_TMUX 1
+# Use a tmux popup window
+set -gx FZF_TMUX_OPTS '-p'
 
 # fish_add_path requires fish 3.2.0
 # pipx
