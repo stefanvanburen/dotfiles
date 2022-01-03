@@ -1,0 +1,22 @@
+# configuration for https://beets.io
+#
+# To install `beets` on macOS:
+#
+# $ brew install pipx
+# $ pipx install beets
+# $ pipx inject beets requests # required for spotify and fetchart plugins
+
+# Store music library in ~/Documents/music, which is on iCloud
+directory: ~/Documents/music
+
+# spotify - for metadata matches for the importer
+# https://beets.readthedocs.io/en/stable/plugins/spotify.html
+#
+# fish - for fish shell completions
+# Run `beet fish` once to generate the completions
+# https://beets.readthedocs.io/en/stable/plugins/fish.html
+plugins: spotify fish fetchart embedart
+
+# Disable color in the UI.
+ui:
+  color: no
