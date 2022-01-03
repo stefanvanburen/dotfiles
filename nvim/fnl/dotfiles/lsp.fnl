@@ -73,6 +73,8 @@
      (let [opts {:on_attach on-attach
                  :handlers handlers}]
        (if (= server.name "gopls")
-         (tset opts :settings {:gopls {:staticcheck true}}))
+         (do
+          (tset opts :cmd ["gopls" "-remote=auto"])
+          (tset opts :settings {:gopls {:staticcheck true}})))
 
        (server:setup opts))))
