@@ -11,6 +11,9 @@ set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # Light mode works better with my light background
 set -gx GLAMOUR_STYLE light
 
+# https://github.com/mickael-menu/zk
+set -gx ZK_NOTEBOOK_DIR ~/Documents/notes
+
 # use `fd` instead of `find` by default with fzf.
 set fzf_default_command 'fd --type file --follow --hidden --exclude .git'
 
