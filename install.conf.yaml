@@ -16,13 +16,13 @@
     ~/.config/git/config: gitconfig
     ~/.config/git/ignore: gitignore
     ~/.config/fish/config.fish: config.fish
-    ~/.config/fish/functions: fish_functions
+    ~/.config/fish/functions: fish-functions
     ~/.config/alacritty/alacritty.yml: alacritty.yml
-    ~/.config/bat/config: bat_config
+    ~/.config/bat/config: bat-config
     ~/.config/starship.toml: starship.toml
-    ~/.config/gh/config.yml: gh_config.yml
+    ~/.config/gh/config.yml: gh-config.yml
     ~/.clojure/deps.edn: deps.edn
-    ~/.config/beets/config.yaml: beets_config.yaml
+    ~/.config/beets/config.yaml: beets-config.yaml
     ~/.config/zk: zk
 
 - shell:
