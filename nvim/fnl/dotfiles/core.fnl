@@ -128,7 +128,8 @@
 ;;   r - auto-insert comment leading after <CR> in insert mode
 ;;   o - auto-insert comment leading after O in normal mode
 ;;   n - recognize numbered lists in text
-(bopt :formatoptions "tcqjron")
+;;   p - don't break lines at single spaces that follow periods
+(bopt :formatoptions "tcqjronp")
 
 ;; allows moving the cursor to where there is no actual character
 (opt :virtualedit "all")
