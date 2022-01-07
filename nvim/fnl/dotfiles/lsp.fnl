@@ -34,7 +34,7 @@
 
   ;; set the omnifunc for the buffer
   (when (capable? client :completion)
-    (set nvim.bo.omnifunc "v:lua.vim.lsp.omnifunc"))
+    (nvim.buf_set_option bufnr "omnifunc" "v:lua.vim.lsp.omnifunc"))
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
