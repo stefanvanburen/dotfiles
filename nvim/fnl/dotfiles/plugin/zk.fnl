@@ -26,8 +26,7 @@
   (nnoremap bufnr "]w"         "<cmd>lua vim.diagnostic.goto_next()<CR>")
   (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<CR>")
 
-  ;; TODO: does this need the language server running?
-  ;; presumably yes.
+  ;; This only makes sense from the context of a file managed by `zk`.
   (nvim.buf_set_keymap bufnr :x "<leader>zc" ":'<'>ZkNewFromTitleSelection<CR>" {:noremap true}))
 
 (zk.setup {:picker "fzf"
