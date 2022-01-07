@@ -125,8 +125,6 @@
   :lewis6991/impatient.nvim {}
 
   ;; lisp languages
-  :guns/vim-sexp {}
-  :tpope/vim-sexp-mappings-for-regular-people {}
   :Olical/conjure {:ft ["clojure" "fennel"]}
   :eraserhd/parinfer-rust {:run "cargo build --release"}
 
@@ -254,8 +252,3 @@
 
 ;; vim-test x dispatch
 (set nvim.g.test#strategy "dispatch")
-
-;; vim-sexp & vim-sexp-mappings-for-regular-people
-(set nvim.g.sexp_filetypes "clojure,lisp,fennel")
-;; These mappings conflict with parinfer.
-(set nvim.g.sexp_enable_insert_mode_mappings 0)
