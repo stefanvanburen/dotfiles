@@ -122,3 +122,5 @@
 (map :n :<leader>af ":ALEFix<cr>" {})
 (map :n "[w" "<plug>(ale_previous_wrap)" {})
 (map :n "]w" "<plug>(ale_next_wrap)" {})
+
+(map :n "<leader>/" ":nohlsearch<cr>" {})

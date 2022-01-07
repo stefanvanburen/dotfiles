@@ -29,5 +29,7 @@
   ;; This only makes sense from the context of a file managed by `zk`.
   (nvim.buf_set_keymap bufnr :x "<leader>zc" ":'<'>ZkNewFromTitleSelection<CR>" {:noremap true}))
 
+(nvim.set_keymap :n "<C-l>" ":ZkNotes<CR>" {:noremap true})
+
 (zk.setup {:picker "fzf"
            :lsp {:config {:on_attach on-attach}}})
