@@ -16,13 +16,12 @@
   ; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
   ; (print (vim.inspect client))
 
-  ;; Set some keybinds conditional on server capabilities - prefer range
-  ;; formatting, if available
+  ;; Set some keybinds conditional on server capabilities
   (if (capable? client :document_formatting)
     (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>"))
 
   (if (capable? client :document_range_formatting)
-    (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.range_formatting()<CR>"))
+    (nnoremap bufnr "<leader>rf" "<cmd>lua vim.lsp.buf.range_formatting()<CR>"))
 
   (when (capable? client :document_highlight)
     (do
