@@ -1,6 +1,7 @@
 (module dotfiles.plugin.autopairs
   {autoload {zk zk
-             nvim aniseed.nvim}})
+             nvim aniseed.nvim
+             lsp-compl "lsp_compl"}})
 
 (defn- nnoremap [bufnr from to]
   "Sets a normal mode mapping within a buffer."
@@ -13,6 +14,8 @@
 
   ;; set the omnifunc for the buffer
   (nvim.buf_set_option bufnr "omnifunc" "v:lua.vim.lsp.omnifunc")
+
+  (lsp-compl.attach client bufnr)
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
