@@ -1,7 +1,6 @@
 (module dotfiles.lsp
   {autoload {nvim aniseed.nvim
-             lspinstaller "nvim-lsp-installer"
-             lsp-compl "lsp_compl"}
+             lspinstaller "nvim-lsp-installer"}
    ;; for autocmd and augroup
    require-macros [dotfiles.macros]})
 
@@ -32,8 +31,6 @@
       (nvim.ex.autocmd  :CursorHold  :<buffer> "lua vim.lsp.buf.document_highlight()")
       (nvim.ex.autocmd  :CursorMoved :<buffer> "lua vim.lsp.buf.clear_references()")
       (nvim.ex.augroup  :END)))
-
-  (lsp-compl.attach client bufnr)
 
   ;; set the omnifunc for the buffer
   (when (capable? client :completion)
