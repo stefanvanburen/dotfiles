@@ -50,6 +50,7 @@ if status --is-interactive
     abbr --add --global x extract
     abbr --add --global c clear
     abbr --add --global j just
+    abbr --add --global rd rmdir
 
     # jump is bound to `z`
     command -q jump; and source (jump shell --bind=z fish | psub)
