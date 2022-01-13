@@ -20,6 +20,8 @@
   (nnoremap bufnr "K"          "<cmd>lua vim.lsp.buf.hover()<CR>")
   (nnoremap bufnr "<leader>ca" "<cmd>lua vim.lsp.buf.code_action()<CR>")
   (nnoremap bufnr "gr"         "<cmd>lua vim.lsp.buf.references()<CR>")
+  ;; Open notes linked by the current buffer.)
+  (nnoremap bufnr "<leader>zl" "<Cmd>ZkLinks<CR>")
   ;; See `:help vim.diagnostic.*` for documentation on any of the below functions
   (nnoremap bufnr "<leader>?"  "<cmd>lua vim.diagnostic.open_float()<CR>")
   (nnoremap bufnr "[w"         "<cmd>lua vim.diagnostic.goto_prev()<CR>")
@@ -29,7 +31,15 @@
   ;; This only makes sense from the context of a file managed by `zk`.
   (nvim.buf_set_keymap bufnr :x "<leader>zc" ":'<'>ZkNewFromTitleSelection<CR>" {:noremap true}))
 
-(nvim.set_keymap :n "<C-l>" ":ZkNotes<CR>" {:noremap true})
+(def opts {:noremap true})
+
+;; Create a new note after asking for its title.
+(nvim.set_keymap :n "<leader>zn" "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>" opts)
+
+;; Open notes.
+(nvim.set_keymap :n "<C-l>" "<Cmd>ZkNotes<CR>" opts)
+;; Search for notes matching the current visual selection.
+(nvim.set_keymap :v "<C-l>" ":'<,'>ZkMatch<CR>" opts)
 
 (zk.setup {:picker "fzf"
            :lsp {:config {:on_attach on-attach}}})
