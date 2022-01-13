@@ -179,6 +179,9 @@
   ;; https://github.com/mickael-menu/zk
   :mickael-menu/zk-nvim {:mod :zk}
 
+  ;; better handling for bulleted lists
+  :dkarter/bullets.vim {}
+
   ;; Deal with parentheses, quotes, etc.
   :tpope/vim-surround {}
 
@@ -269,3 +272,5 @@
 (set nvim.g.sexp_filetypes "clojure,lisp,fennel")
 ;; These mappings conflict with parinfer.
 (set nvim.g.sexp_enable_insert_mode_mappings 0)
+
+(set nvim.g.bullets_outline_levels ["std*"])
