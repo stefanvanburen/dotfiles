@@ -21,7 +21,7 @@ Install [homebrew](https://docs.brew.sh/Installation):
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Install `brew bundle`:
+Install [`brew bundle`](https://github.com/Homebrew/homebrew-bundle):
 
 ```commandline
 brew tap homebrew/bundle
