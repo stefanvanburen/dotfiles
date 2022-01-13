@@ -6,7 +6,9 @@
    :autotag {:enable true
              :filetypes [:html]}
    :matchup {:enable true}
-   :highlight {:enable true}
+   :highlight {:enable true
+               ;; for zk
+               :additional_vim_regex_highlighting ["markdown"]}
    :incremental_selection {:enable true
                            :keymaps {:init_selection "gnn"
                                      :node_incremental "grn"
