@@ -9,7 +9,7 @@ language = "en"
 default-title = "Untitled"
 
 # Template used to generate a note's filename, without extension.
-filename = "{{id}}-{{slug title}}"
+filename = "{{title}}"
 
 # The file extension used for the notes.
 extension = "md"
@@ -17,18 +17,6 @@ extension = "md"
 # Template used to generate a note's content.
 # If not an absolute path, it is relative to .zk/templates/
 template = "default.md"
-
-# Configure random ID generation.
-
-# The charset used for random IDs.
-id-charset = "alphanum"
-
-# Length of the generated IDs.
-id-length = 4
-
-# Letter case for the random IDs.
-id-case = "lower"
-
 
 [group.daily]
 # Directories listed here will automatically use this group when creating notes.
