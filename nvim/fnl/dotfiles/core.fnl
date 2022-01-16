@@ -16,6 +16,7 @@
 ;; colorscheme
 (opt :termguicolors true)
 (opt :background :light)
+(nvim.ex.colorscheme :everforest)
 
 ;; don't wrap by default
 (wopt :wrap false)

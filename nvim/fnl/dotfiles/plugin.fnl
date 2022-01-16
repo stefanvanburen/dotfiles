@@ -188,11 +188,10 @@
   :rktjmp/lush.nvim {}
 
   ;; colorscheme
-  :stefanvanburen/rams {})
+  :stefanvanburen/rams {}
+  :sainnhe/everforest {})
 
 ;;; settings for plugins
-
-(nvim.ex.colorscheme :rams)
 
 ;; run goimports on save for go files
 (set nvim.g.go_fmt_autosave 1)
