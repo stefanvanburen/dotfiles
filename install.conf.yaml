@@ -23,7 +23,6 @@
     ~/.config/gh/config.yml: gh-config.yml
     ~/.clojure/deps.edn: deps.edn
     ~/.config/beets/config.yaml: beets-config.yaml
-    ~/.config/zk: zk
 
 - shell:
   # An explanation of why we have to do this:

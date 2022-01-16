@@ -166,9 +166,6 @@
   ;; Database access
   :tpope/vim-dadbod {:opt true :cmd "DB"}
 
-  ;; https://github.com/mickael-menu/zk
-  :mickael-menu/zk-nvim {:mod :zk}
-
   ;; Deal with parentheses, quotes, etc.
   :tpope/vim-surround {}
 
