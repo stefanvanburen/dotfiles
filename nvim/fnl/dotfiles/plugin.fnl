@@ -185,8 +185,7 @@
   :rktjmp/lush.nvim {}
 
   ;; colorscheme
-  :stefanvanburen/rams {}
-  :sainnhe/everforest {})
+  :stefanvanburen/rams {})
 
 ;;; settings for plugins
 
