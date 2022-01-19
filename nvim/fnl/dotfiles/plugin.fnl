@@ -138,9 +138,8 @@
   :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
                                     :mod :treesitter}
 
-  ;; Automatically match parenthesis and tags
-  :windwp/nvim-autopairs {:mod :autopairs}
-  :windwp/nvim-ts-autotag {:mod :autotag}
+  ;; Automatically match parenthesis
+  :tmsvg/pear-tree {}
 
   ;; testing / build commands
   :tpope/vim-dispatch {}
@@ -243,6 +242,10 @@
 ;; Disable matchup's offscreen feature, which usually replaces the statusline
 ;; with the match.
 (set nvim.g.matchup_matchparen_offscreen {})
+
+(set nvim.g.pear_tree_repeatable_expand 0)
+;; disable pear-tree for lispy languages, covered by parinfer
+(set nvim.g.pear_tree_ft_disabled [:clojure :fennel])
 
 ;; using open-browser.vim for `gx`
 (set nvim.g.netrw_nogx 1)

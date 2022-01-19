@@ -3,8 +3,6 @@
 
 (treesitter.setup
   {:ensure_installed "maintained"
-   :autotag {:enable true
-             :filetypes [:html]}
    :matchup {:enable true}
    :highlight {:enable true}
    :incremental_selection {:enable true
