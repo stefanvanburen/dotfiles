@@ -70,7 +70,7 @@
 	verbose = true
 
 [core]
-	; brew install git-delta
+	; https://github.com/dandavison/delta
 	pager = delta --light
 	editor = nvim
 
@@ -79,20 +79,28 @@
 	helper = osxkeychain
 
 [delta]
-	side-by-side = true
+	navigate = true  # use n and N to move between diff sections
 
 [diff]
 	; uses mnemonic prefixes rather than the typical "a/" and "b/" shown.
 	mnemonicPrefix = true
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
+	; recommended by delta
+	colorMoved = default
 
 [init]
 	; initialize repositories with "main" as the default branch
 	defaultBranch = main
 
+[interactive]
+	diffFilter = delta --color-only
+
 [merge]
 	tool = fugitive
+	; recommended by delta
+	; Shows the difference between the two sides, as well as the original.
+	conflictstyle = diff3
 
 [mergetool]
 	; remove all .orig files when using the mergetool
