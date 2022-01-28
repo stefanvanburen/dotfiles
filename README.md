@@ -9,26 +9,26 @@ Run `./install` from this directory to install the symlinks it sets up.
 
 Set the shell for the user to `fish`:
 
-```console
-$ chsh -s $(which fish)
+```sh
+chsh -s $(which fish)
 ```
 
 ### For macOS
 
 Install [homebrew](https://docs.brew.sh/Installation):
 
-```console
-$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Install [`brew bundle`](https://github.com/Homebrew/homebrew-bundle):
 
-```console
-$ brew tap homebrew/bundle
+```sh
+brew tap homebrew/bundle
 ```
 
 Install the base dependencies in the [Brewfile](./Brewfile):
 
-```console
-$ brew bundle install
+```sh
+brew bundle install
 ```
