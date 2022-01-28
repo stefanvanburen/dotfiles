@@ -63,7 +63,7 @@
 	su = submodule
 
 	; To unstage files, etc
-	unstage = reset -q HEAD --
+	unstage = restore --staged
 
 [commit]
 	; At the bottom of the commit message, show a diff of the commit.
