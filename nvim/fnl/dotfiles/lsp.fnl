@@ -18,10 +18,10 @@
 
   ;; Set some keybinds conditional on server capabilities
   (if (capable? client :document_formatting)
-    (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<CR>"))
+    (nnoremap bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<cr>"))
 
   (if (capable? client :document_range_formatting)
-    (nnoremap bufnr "<leader>rf" "<cmd>lua vim.lsp.buf.range_formatting()<CR>"))
+    (nnoremap bufnr "<leader>rf" "<cmd>lua vim.lsp.buf.range_formatting()<cr>"))
 
   (when (capable? client :document_highlight)
     (do
@@ -38,20 +38,20 @@
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
-  (nnoremap bufnr "gD"         "<cmd>lua vim.lsp.buf.declaration()<CR>")
-  (nnoremap bufnr "gd"         "<cmd>lua vim.lsp.buf.definition()<CR>")
-  (nnoremap bufnr "gi"         "<cmd>lua vim.lsp.buf.implementation()<CR>")
-  (nnoremap bufnr "K"          "<cmd>lua vim.lsp.buf.hover()<CR>")
-  (nnoremap bufnr "<C-k>"      "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-  (nnoremap bufnr "<leader>D"  "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-  (nnoremap bufnr "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<CR>")
-  (nnoremap bufnr "<leader>ca" "<cmd>lua vim.lsp.buf.code_action()<CR>")
-  (nnoremap bufnr "gr"         "<cmd>lua vim.lsp.buf.references()<CR>")
+  (nnoremap bufnr "gD"         "<cmd>lua vim.lsp.buf.declaration()<cr>")
+  (nnoremap bufnr "gd"         "<cmd>lua vim.lsp.buf.definition()<cr>")
+  (nnoremap bufnr "gi"         "<cmd>lua vim.lsp.buf.implementation()<cr>")
+  (nnoremap bufnr "K"          "<cmd>lua vim.lsp.buf.hover()<cr>")
+  (nnoremap bufnr "<C-k>"      "<cmd>lua vim.lsp.buf.signature_help()<cr>")
+  (nnoremap bufnr "<leader>D"  "<cmd>lua vim.lsp.buf.type_definition()<cr>")
+  (nnoremap bufnr "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<cr>")
+  (nnoremap bufnr "<leader>ca" "<cmd>lua vim.lsp.buf.code_action()<cr>")
+  (nnoremap bufnr "gr"         "<cmd>lua vim.lsp.buf.references()<cr>")
   ;; See `:help vim.diagnostic.*` for documentation on any of the below functions
-  (nnoremap bufnr "<leader>?"  "<cmd>lua vim.diagnostic.open_float()<CR>")
-  (nnoremap bufnr "[w"         "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-  (nnoremap bufnr "]w"         "<cmd>lua vim.diagnostic.goto_next()<CR>")
-  (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<CR>"))
+  (nnoremap bufnr "<leader>?"  "<cmd>lua vim.diagnostic.open_float()<cr>")
+  (nnoremap bufnr "[w"         "<cmd>lua vim.diagnostic.goto_prev()<cr>")
+  (nnoremap bufnr "]w"         "<cmd>lua vim.diagnostic.goto_next()<cr>")
+  (nnoremap bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<cr>"))
 
 (def- handlers
   {"textDocument/hover"         (vim.lsp.with vim.lsp.handlers.hover          {:border "single"})

@@ -126,7 +126,7 @@
 ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
 ;;   q - allow formatting of comments with `gq`
 ;;   j - where it makes sense, remove a comment leader when joining lines
-;;   r - auto-insert comment leading after <CR> in insert mode
+;;   r - auto-insert comment leading after <cr> in insert mode
 ;;   o - auto-insert comment leading after O in normal mode
 ;;   n - recognize numbered lists in text
 ;;   p - don't break lines at single spaces that follow periods
