@@ -92,6 +92,8 @@
   ;; configuration in fennel
   :Olical/aniseed {}
 
+  :lewis6991/impatient.nvim {}
+
   ;; lisp languages
   :guns/vim-sexp {:ft lisp-filetypes}
   :tpope/vim-sexp-mappings-for-regular-people {:ft lisp-filetypes}
