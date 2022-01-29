@@ -119,9 +119,6 @@
   :vim-test/vim-test {}
   :radenling/vim-dispatch-neovim {}
 
-  ;; Better :marks experience
-  :chentau/marks.nvim {:mod :marks}
-
   ;; fuzzy find
   :junegunn/fzf {}
   :junegunn/fzf.vim {}
