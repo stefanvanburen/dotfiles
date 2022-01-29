@@ -1,6 +1,7 @@
 (module dotfiles.plugin
     {autoload {a aniseed.core
                nvim aniseed.nvim
+               str aniseed.string
                packer packer}})
 
 (defn safe-require-plugin-config [name]
@@ -21,6 +22,8 @@
             (-?> (. opts :mod) (safe-require-plugin-config))
             (use (a.assoc opts 1 name)))))))
   nil)
+
+(def- lisp-filetypes [:clojure :fennel :lisp])
 
 (use
   :wbthomason/packer.nvim {}
@@ -92,10 +95,11 @@
   :lewis6991/impatient.nvim {}
 
   ;; lisp languages
-  :guns/vim-sexp {}
-  :tpope/vim-sexp-mappings-for-regular-people {}
-  :Olical/conjure {:ft ["clojure" "fennel"]}
-  :eraserhd/parinfer-rust {:run "cargo build --release"}
+  :guns/vim-sexp {:ft lisp-filetypes}
+  :tpope/vim-sexp-mappings-for-regular-people {:ft lisp-filetypes}
+  :Olical/conjure {:ft lisp-filetypes}
+  :eraserhd/parinfer-rust {:run "cargo build --release"
+                           :ft lisp-filetypes}
 
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
@@ -168,7 +172,7 @@
 
 (set nvim.g.pear_tree_repeatable_expand 0)
 ;; disable pear-tree for lispy languages, covered by parinfer
-(set nvim.g.pear_tree_ft_disabled [:clojure :fennel])
+(set nvim.g.pear_tree_ft_disabled lisp-filetypes)
 
 ;; using open-browser.vim for `gx`
 (set nvim.g.netrw_nogx 1)
@@ -177,6 +181,6 @@
 (set nvim.g.test#strategy "dispatch")
 
 ;; vim-sexp & vim-sexp-mappings-for-regular-people
-(set nvim.g.sexp_filetypes "clojure,lisp,fennel")
+(set nvim.g.sexp_filetypes (str.join "," lisp-filetypes))
 ;; These mappings conflict with parinfer.
 (set nvim.g.sexp_enable_insert_mode_mappings 0)
