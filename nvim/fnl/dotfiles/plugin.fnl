@@ -92,6 +92,8 @@
   ;; configuration in fennel
   :Olical/aniseed {}
 
+  ;; https://github.com/lewis6991/impatient.nvim
+  ;; > Speed up loading Lua modules in Neovim to improve startup time.
   :lewis6991/impatient.nvim {}
 
   ;; lisp languages
