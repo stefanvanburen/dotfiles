@@ -108,6 +108,7 @@
   ;; installation and management of LSP servers
   :williamboman/nvim-lsp-installer {}
 
+  ;; https://github.com/nvim-treesitter/nvim-treesitter
   :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
                                     :mod :treesitter}
 
