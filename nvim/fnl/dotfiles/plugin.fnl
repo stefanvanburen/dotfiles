@@ -176,3 +176,7 @@
 (set nvim.g.sexp_filetypes (str.join "," lisp-filetypes))
 ;; These mappings conflict with parinfer.
 (set nvim.g.sexp_enable_insert_mode_mappings 0)
+
+;; disable vim-surround's default mappings, replacing most of
+;; them in mapping.fnl, to work with lightspeed.nvim.
+(set nvim.g.surround_no_mappings 1)

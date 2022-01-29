@@ -115,3 +115,15 @@
 (map :n :t<C-g> ":TestVisit<cr>" {:silent true})
 
 (map :n "<leader>/" ":nohlsearch<cr>" {})
+
+;; vim-surround mappings to work with lightspeed.nvim
+(map :n :ds  "<Plug>Dsurround" {})
+(map :n :cs  "<Plug>Csurround" {})
+(map :n :cS  "<Plug>CSurround" {})
+(map :n :ys  "<Plug>Ysurround" {})
+(map :n :yS  "<Plug>YSurround" {})
+(map :n :yss "<Plug>Yssurround" {})
+(map :n :ySs "<Plug>YSsurround" {})
+(map :n :ySS "<Plug>YSsurround" {})
+(map :x :gs  "<Plug>VSurround" {})
+(map :x :gS  "<Plug>VgSurround" {})
