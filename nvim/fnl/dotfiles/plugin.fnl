@@ -81,10 +81,6 @@
   ;; be a good idea to look into if the default runtime files are good enough
   ;; for rust.
   :rust-lang/rust.vim {:ft ["rust"]}
-  ;; https://github.com/ziglang/zig.vim
-  ;; "File detection and syntax highlighting for the zig programming language."
-  ;; I've only toyed with zig, but this plugin seems small enough to be fine.
-  :ziglang/zig.vim {}
   ;; https://github.com/tmux-plugins/vim-tmux
   ;; "vim plugin for tmux.conf"
   ;; Simple, useful. Not updated all that often, but probably fine? And I doubt
