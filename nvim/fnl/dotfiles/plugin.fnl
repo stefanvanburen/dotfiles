@@ -75,11 +75,6 @@
   ;; https://github.com/pangloss/vim-javascript
   ;; "Vastly improved Javascript indentation and syntax support in Vim."
   :pangloss/vim-javascript {}
-  ;; https://github.com/maxmellon/vim-jsx-pretty
-  ;; "JSX and TSX syntax pretty highlighting for vim."
-  ;; Probably not necessary at this point, given that I don't write almost any
-  ;; jsx or tsx.
-  :maxmellon/vim-jsx-pretty {}
   ;; https://github.com/rust-lang/rust.vim
   ;; "Vim configuration for Rust".
   ;; Most of the features are not something that I'd use, so it would probably
