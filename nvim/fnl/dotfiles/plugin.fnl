@@ -44,6 +44,9 @@
   ;; GitHub!
   :tpope/vim-rhubarb {}
 
+  ;; Speed up filetype loading.
+  :nathom/filetype.nvim {}
+
   ;;; language support
   ;;; neovim has a variety of supported languages, but the ones included in
   ;;; https://github.com/neovim/neovim/tree/master/runtime/ftplugin are
