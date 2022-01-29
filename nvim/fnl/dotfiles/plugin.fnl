@@ -80,11 +80,6 @@
   ;; Probably not necessary at this point, given that I don't write almost any
   ;; jsx or tsx.
   :maxmellon/vim-jsx-pretty {}
-  ;; https://github.com/HerringtonDarkholme/yats.vim
-  ;; "Yet Another TypeScript Syntax: The most advanced TypeScript Syntax Highlighting in Vim"
-  ;; Probably unnecessary, but given the pace of development in the typescript
-  ;; language, maybe it is?
-  :HerringtonDarkholme/yats.vim {}
   ;; https://github.com/rust-lang/rust.vim
   ;; "Vim configuration for Rust".
   ;; Most of the features are not something that I'd use, so it would probably
