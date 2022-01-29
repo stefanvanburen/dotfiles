@@ -75,12 +75,6 @@
   ;; https://github.com/pangloss/vim-javascript
   ;; "Vastly improved Javascript indentation and syntax support in Vim."
   :pangloss/vim-javascript {}
-  ;; https://github.com/rust-lang/rust.vim
-  ;; "Vim configuration for Rust".
-  ;; Most of the features are not something that I'd use, so it would probably
-  ;; be a good idea to look into if the default runtime files are good enough
-  ;; for rust.
-  :rust-lang/rust.vim {:ft ["rust"]}
   ;; https://github.com/tmux-plugins/vim-tmux
   ;; "vim plugin for tmux.conf"
   ;; Simple, useful. Not updated all that often, but probably fine? And I doubt
