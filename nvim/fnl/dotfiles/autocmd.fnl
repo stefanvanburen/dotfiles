@@ -1,5 +1,6 @@
 (module dotfiles.autocmd
-  {require-macros [dotfiles.macros]})
+  {autoload {nvim aniseed.nvim} ; needed for macros
+   require-macros [dotfiles.macros]})
 
 ;; on resize, resize windows
 (autocmd :VimResized :* ":wincmd =")
