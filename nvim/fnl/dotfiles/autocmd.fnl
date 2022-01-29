@@ -16,8 +16,6 @@
            (autocmd :FileType :go "setlocal noexpandtab tabstop=4 shiftwidth=4")
            (autocmd :FileType :python "setlocal tabstop=4 shiftwidth=4 expandtab")
            (autocmd :FileType :javascript "setlocal expandtab tabstop=2 shiftwidth=2")
-           (autocmd :FileType :typescript "setlocal tabstop=2 shiftwidth=2 expandtab")
-           (autocmd :FileType :typescriptreact "setlocal tabstop=2 shiftwidth=2 expandtab")
            (autocmd :FileType :html "setlocal expandtab tabstop=2 shiftwidth=2")
            (autocmd :FileType :css "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
            (autocmd :FileType :scss "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
