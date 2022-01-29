@@ -27,8 +27,7 @@
 (util.nnoremap :gw "Gwrite")
 (util.nnoremap :gc "G commit")
 (util.nnoremap :gp "G push")
-(util.nnoremap :gb "GBrowse")
-(util.nnoremap :gy ".GBrowse!")
+(util.nnoremap :gb "G blame")
 
 ;; vim-better-whitespace
 (util.nnoremap :sw "StripWhitespace")
