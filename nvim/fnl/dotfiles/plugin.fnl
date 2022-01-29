@@ -44,11 +44,6 @@
   ;; GitHub!
   :tpope/vim-rhubarb {}
 
-  ;; lints and fixes text files.
-  ;; Also provides an LSP integration, but that is turned off in favor of
-  ;; nvim's builtin LSP client.
-  :w0rp/ale {}
-
   ;; Allows for viewing git commit messages related to the current line
   ;; <leader>gm to trigger the window, again to go inside.
   :rhysd/git-messenger.vim {}
@@ -162,50 +157,6 @@
 
 ;; run goimports on save for go files
 (set nvim.g.go_fmt_autosave 1)
-
-;; This has to be set so the entire package is linted (otherwise, staticcheck)
-;; won't grab identifiers declared in other files).
-(set nvim.g.ale_go_staticcheck_lint_package 1)
-
-;; disable all linters powered by LSP
-;; instead, this is handled by the built-in neovim LSP client
-(set nvim.g.ale_disable_lsp 1)
-
-;; ale formatting
-(set nvim.g.ale_sign_error "×")
-(set nvim.g.ale_sign_warning "→")
-(set nvim.g.ale_sign_info "→")
-(set nvim.g.ale_echo_msg_format "%linter%: %s")
-(set nvim.g.ale_virtualtext_cursor 1)
-(set nvim.g.ale_virtualtext_prefix "∴ ")
-
-;; in general, this is the right thing to do
-(set nvim.g.ale_fix_on_save 1)
-
-(set nvim.g.ale_linters
-     {;; clojure is handled by clojure-lsp, which bakes in clj-kondo:
-      ;; https://clojure-lsp.io/settings/#clj-kondo
-      :clojure []
-      ;; staticcheck is handled by gopls, experimentally.
-      ;; We'll see if it becomes not experimental in the future.
-      :go []
-      ;; linting JS/TS is handled by installing the `eslint` language server.
-      :javascript []
-      :typescript []
-      ;; python, as far as I can tell, does not have great LSP integration. So,
-      ;; for now, everything goes through ALE.
-      :python [:flake8 :mypy]
-      ;; rust is handled by rust-analyzer, which is via the LSP client.
-      :rust []})
-
-(set nvim.g.ale_fixers
-     {;; Handled via `gopls`.
-      :go []
-      ;; fixing JS/TS is handled by installing the `eslint` language server.
-      :javascript []
-      :typescript []
-      ;; Similar story as above - not great LSP integration, so use ALE as a fixer.
-      :python [:black :isort]})
 
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.

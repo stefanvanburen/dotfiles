@@ -117,10 +117,4 @@
 (map :n :t<C-l> ":TestLast<cr>" {:silent true})
 (map :n :t<C-g> ":TestVisit<cr>" {:silent true})
 
-;; ale mappings
-;; NOTE: these mappings should be overridden if attached to an nvim-lsp capable buffer
-(map :n :<leader>af ":ALEFix<cr>" {})
-(map :n "[w" "<plug>(ale_previous_wrap)" {})
-(map :n "]w" "<plug>(ale_next_wrap)" {})
-
 (map :n "<leader>/" ":nohlsearch<cr>" {})
