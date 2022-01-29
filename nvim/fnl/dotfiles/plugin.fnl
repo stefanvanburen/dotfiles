@@ -117,7 +117,6 @@
   ;; testing / build commands
   :tpope/vim-dispatch {}
   :vim-test/vim-test {}
-  :radenling/vim-dispatch-neovim {}
 
   ;; fuzzy find
   :junegunn/fzf {}
