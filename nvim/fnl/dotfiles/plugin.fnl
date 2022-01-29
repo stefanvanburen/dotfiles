@@ -132,9 +132,6 @@
   ;; motion plugin, in the vein of clever-f and vim-sneak
   :ggandor/lightspeed.nvim {}
 
-  ;; Database access
-  :tpope/vim-dadbod {:opt true :cmd "DB"}
-
   ;; Deal with parentheses, quotes, etc.
   :tpope/vim-surround {}
 
