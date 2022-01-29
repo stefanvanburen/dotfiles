@@ -86,14 +86,6 @@
   ;; Simple, useful. Not updated all that often, but probably fine? And I doubt
   ;; there's a built-in runtime file for .tmux.conf?
   :tmux-plugins/vim-tmux {}
-  ;; https://github.com/hashivim/vim-terraform
-  ;; "This plugin adds a :Terraform command that runs terraform, with tab
-  ;; completion of subcommands. It also sets up *.hcl, *.tf, *.tfvars,
-  ;; .terraformrc and terraform.rc files to be highlighted as HCL and *.tfstate
-  ;; as JSON."
-  ;; Not well maintained, but useful to have simply for the syntax highlighting
-  ;; of terraform files.
-  :hashivim/vim-terraform {}
 
   ;; up-to-date git filetypes
   :tpope/vim-git {}
