@@ -47,10 +47,6 @@
   ;; GitHub!
   :tpope/vim-rhubarb {}
 
-  ;; Allows for viewing git commit messages related to the current line
-  ;; <leader>gm to trigger the window, again to go inside.
-  :rhysd/git-messenger.vim {}
-
   ;;; language support
   ;;; neovim has a variety of supported languages, but the ones included in
   ;;; https://github.com/neovim/neovim/tree/master/runtime/ftplugin are
