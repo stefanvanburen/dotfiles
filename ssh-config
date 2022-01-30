@@ -1,0 +1,12 @@
+# vim: set filetype=sshconfig:
+
+# Add additional ssh configurations to ~/.ssh/config.d/
+# https://superuser.com/questions/247564/is-there-a-way-for-one-ssh-config-file-to-include-another-one
+Include config.d/*
+
+# https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+# Don't add a passphrase.
+Host *
+  AddKeysToAgent yes
+  # TODO: Update to ed25519-sk
+  IdentityFile ~/.ssh/id_ed25519

@@ -32,3 +32,5 @@ Install the base dependencies in the [Brewfile](./Brewfile):
 ```sh
 brew bundle install
 ```
+
+Create an ssh key (follow the instructions in [ssh-config](./ssh-config)), and add it to [GitHub](https://github.com/settings/keys) and [sourcehut](https://meta.sr.ht/keys).
