@@ -38,11 +38,13 @@
 (util.nnoremap :<leader> "Buffers")
 (util.nnoremap :se "Rg")
 
-(noremap :n :gx "<Cmd>call jobstart(['open', expand('<cfile>')], {'detach': v:true})<CR>")
-
 (map :n :<leader><tab> "<plug>(fzf-maps-n)" {})
 (map :x :<leader><tab> "<plug>(fzf-maps-x)" {})
 (map :o :<leader><tab> "<plug>(fzf-maps-o)" {})
+
+;; open-browser.vim
+(map :n :gx "<plug>(openbrowser-smart-search)" {})
+(map :v :gx "<plug>(openbrowser-smart-search)" {})
 
 ;; always move by visual lines, rather than real lines
 ;; this is useful when 'wrap' is set.
