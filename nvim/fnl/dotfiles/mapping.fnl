@@ -116,7 +116,7 @@
 (map :n :t<C-l> ":TestLast<cr>" {:silent true})
 (map :n :t<C-g> ":TestVisit<cr>" {:silent true})
 
-(map :n "<leader>/" ":nohlsearch<cr>" {})
+(map :n "<C-l>" ":nohlsearch<cr>" {})
 
 ;; vim-surround mappings to work with lightspeed.nvim
 (map :n :ds  "<Plug>Dsurround" {})
