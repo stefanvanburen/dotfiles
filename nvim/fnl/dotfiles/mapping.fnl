@@ -104,10 +104,10 @@
 (noremap :x :< "<gv")
 (noremap :x :> ">gv")
 
-;; jk escape sequences.
-(noremap :i :jk :<esc>)
-(noremap :c :jk :<c-c>)
-(noremap :t :jk :<c-\><c-n>)
+;; <c-k> escape sequences.
+(noremap :i :<c-k> :<esc>)
+(noremap :c :<c-k> :<c-c>)
+(noremap :t :<c-k> :<c-\><c-n>)
 
 ;; vim-test mappings
 (map :n :t<C-n> ":TestNearest<cr>" {:silent true})
