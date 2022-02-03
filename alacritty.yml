@@ -88,13 +88,16 @@ font:
 colors:
   # Default colors
   primary:
+    # from rams
     background: '0xeeeeee'
     foreground: '0x4d4d4c'
 
-  # from rams.vim
   cursor:
+    # The defaults
     text: CellBackground
-    cursor: '0xee483e'
+    cursor: CellForeground
+    # from rams
+    # cursor: '0xee483e'
 
   # Normal colors
   normal:
