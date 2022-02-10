@@ -29,4 +29,3 @@
   # An explanation of why we have to do this:
   # https://gpanders.com/blog/the-definitive-guide-to-using-tmux-256color-on-macos/
   - [tic tmux-256color.terminfo, Installing tmux .terminfo file]
-  - ["[ -d ~/.tmux ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm", Installing tpm]
