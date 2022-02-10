@@ -18,13 +18,9 @@ set -gx FZF_DEFAULT_COMMAND $fzf_default_command
 set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
 
 # reverse fzf's layout - by default, the input is at the bottom of the screen - I prefer it at the top.
-# info=inline puts the little number of matches on the same line as the input, rather than on the next line.
-set -gx FZF_DEFAULT_OPTS '--layout=reverse --info=inline'
-set -gx FZF_CTRL_T_OPTS  "--layout=reverse --info=inline --preview 'bat --color=always --line-range :500 {}'"
-# use fzf-tmux by default
-set -gx FZF_TMUX 1
-# Use a tmux popup window
-set -gx FZF_TMUX_OPTS '-p'
+# turn off info and color in fzf's output (including the `bat` preview)
+set -gx FZF_DEFAULT_OPTS '--layout=reverse --no-info --no-color'
+set -gx FZF_CTRL_T_OPTS  "--layout=reverse --no-info --no-color --preview 'bat --line-range :500 {}'"
 
 # fish_add_path requires fish 3.2.0
 # pipx
