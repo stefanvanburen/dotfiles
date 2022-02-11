@@ -95,9 +95,9 @@ colors:
   cursor:
     # The defaults
     text: CellBackground
-    cursor: CellForeground
+    # cursor: CellForeground
     # from rams
-    # cursor: '0xee483e'
+    cursor: '0xee483e'
 
   # Normal colors
   normal:
