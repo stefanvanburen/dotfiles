@@ -23,7 +23,7 @@
 
 ;; always show the completion menu, and when it's brought up, don't select
 ;; anything by default.
-(opt :completeopt (str.join "," ["menuone" "preview" "noselect"]))
+(opt :completeopt (str.join "," ["menuone" "noselect"]))
 
 ;; if wrap is set, break on characters in 'breakat' rather than the last
 ;; character that will fit on the screen.
