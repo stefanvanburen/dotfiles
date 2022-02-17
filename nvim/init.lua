@@ -33,7 +33,7 @@ ensure("lewis6991", "impatient.nvim")
 require("impatient")
 
 -- Enable Aniseed's automatic compilation and loading of Fennel source code.
-vim.g["aniseed#env"] = {
+require('aniseed.env').init({
   module = "dotfiles.init",
   compile = true
-}
+})
