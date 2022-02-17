@@ -99,8 +99,7 @@
   :guns/vim-sexp {:ft lisp-filetypes}
   :tpope/vim-sexp-mappings-for-regular-people {:ft lisp-filetypes}
   :Olical/conjure {:ft lisp-filetypes}
-  :eraserhd/parinfer-rust {:run "cargo build --release"
-                           :ft lisp-filetypes}
+  :gpanders/nvim-parinfer {}
 
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
