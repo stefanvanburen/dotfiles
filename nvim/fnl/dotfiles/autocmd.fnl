@@ -27,4 +27,3 @@
            ;; treat `justfile`s as makefiles
            ;; This helps with setting up correct commentstring, etc
            (autocmd :BufRead :justfile "setf make")))
-
