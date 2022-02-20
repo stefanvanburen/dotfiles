@@ -129,3 +129,12 @@
 (map :n :ySS "<Plug>YSsurround" {})
 (map :x :gs  "<Plug>VSurround" {})
 (map :x :gS  "<Plug>VgSurround" {})
+
+(defn aniseed-reload []
+  (each [k _ (pairs package.loaded)]
+    (when (string.match k "^dotfiles%..+")
+      (tset package.loaded k nil)))
+  ((. (require :aniseed.env) :init) {:module :dotfiles.init :compile true}))
+
+(global map_functions {:aniseed_reload aniseed-reload})
+(vim.api.nvim_set_keymap :n :<leader>so "<cmd>lua map_functions.aniseed_reload()<cr>" {})
