@@ -136,5 +136,9 @@
       (tset package.loaded k nil)))
   ((. (require :aniseed.env) :init) {:module :dotfiles.init :compile true}))
 
+;; TODO: swap this call for the following in newer versions of neovim:
+;; (vim.keymap.set :n :<leader>so aniseed-reload)
+;; See: https://github.com/Olical/aniseed/issues/96
+
 (global map_functions {:aniseed_reload aniseed-reload})
 (vim.api.nvim_set_keymap :n :<leader>so "<cmd>lua map_functions.aniseed_reload()<cr>" {})
