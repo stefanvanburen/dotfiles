@@ -98,9 +98,6 @@
 
 [merge]
 	tool = fugitive
-	; recommended by delta
-	; Shows the difference between the two sides, as well as the original.
-	conflictstyle = diff3
 
 [mergetool]
 	; remove all .orig files when using the mergetool
