@@ -28,6 +28,8 @@ style = "black"
 style = "black"
 deleted = "×"
 format = "[$all_status$ahead_behind]($style) "
+# this is still quite slow for not much gain
+disabled = true
 
 [directory]
 style = "black"
