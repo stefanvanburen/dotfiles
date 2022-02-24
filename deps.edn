@@ -1,5 +1,14 @@
+;; ignore the "Non-deterministic" version warnings - we just want to use the
+;; latest in these "tools".
+#_:clj-kondo/ignore
 {:aliases
- {:repl/nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.9.0"}
-                            cider/cider-nrepl {:mvn/version "0.27.4"}}
+ {:repl/nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}
+                            cider/cider-nrepl {:mvn/version "RELEASE"}}
                :main-opts ["-m" "nrepl.cmdline"
-                           "--middleware" "[cider.nrepl/cider-middleware]"]}}}
+                           "--middleware" "[cider.nrepl/cider-middleware]"]}
+  ;; clj -M:check
+  :check {:extra-deps {cljfmt/cljfmt {:mvn/version "RELEASE"}}
+          :main-opts ["-m" "cljfmt.main" "check"]}
+  ;; clj -M:fmt
+  :fmt {:extra-deps {cljfmt/cljfmt {:mvn/version "RELEASE"}}
+        :main-opts ["-m" "cljfmt.main" "fix"]}}}
