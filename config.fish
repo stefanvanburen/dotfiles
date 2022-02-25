@@ -22,6 +22,10 @@ set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
 set -gx FZF_DEFAULT_OPTS '--layout=reverse --no-info --no-color'
 set -gx FZF_CTRL_T_OPTS  "--layout=reverse --no-info --no-color --preview 'bat --line-range :500 {}'"
 
+# In general, try to disable color in the terminal.
+# `fd` supports this; I'm sure others do as well.
+set -gx NO_COLOR
+
 # fish_add_path requires fish 3.2.0
 # pipx
 fish_add_path ~/.local/bin
