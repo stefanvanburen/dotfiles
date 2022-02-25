@@ -156,9 +156,6 @@
 
 ;;; settings for plugins
 
-;; run goimports on save for go files
-(set nvim.g.go_fmt_autosave 1)
-
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.
 (set nvim.g.dispatch_no_tmux_make 1)
