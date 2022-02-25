@@ -74,6 +74,7 @@
        (if (= server.name "gopls")
          (do
           (tset opts :cmd ["gopls" "-remote=auto"])
-          (tset opts :settings {:gopls {:staticcheck true}})))
+          (tset opts :settings {:gopls {:staticcheck true
+                                        :analyses {:unusedparams true}}})))
 
        (server:setup opts))))
