@@ -26,4 +26,6 @@
            (autocmd :FileType :markdown "setlocal spell wrap conceallevel=2 shiftwidth=2")
            ;; treat `justfile`s as makefiles
            ;; This helps with setting up correct commentstring, etc
-           (autocmd :BufRead :justfile "setf make")))
+           (autocmd :BufRead :justfile "setfiletype make")
+           ;; most html files that I deal with nowadays are actually go html templates.
+           (autocmd "BufRead,BufNewFile" :*.html "setfiletype gohtmltmpl")))
