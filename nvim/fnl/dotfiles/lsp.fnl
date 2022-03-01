@@ -1,8 +1,6 @@
 (module dotfiles.lsp
   {autoload {nvim aniseed.nvim
-             lspinstaller "nvim-lsp-installer"}
-   ;; for autocmd and augroup
-   require-macros [dotfiles.macros]})
+             lspinstaller "nvim-lsp-installer"}})
 
 (defn- nnoremap [bufnr from to]
   "Sets a normal mode mapping within a buffer."
