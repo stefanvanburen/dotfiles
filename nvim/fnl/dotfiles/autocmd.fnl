@@ -17,6 +17,7 @@
            (autocmd :FileType :python "setlocal tabstop=4 shiftwidth=4 expandtab")
            (autocmd :FileType :javascript "setlocal expandtab tabstop=2 shiftwidth=2")
            (autocmd :FileType :html "setlocal expandtab tabstop=2 shiftwidth=2")
+           (autocmd :FileType :gohtmltmpl "setlocal expandtab tabstop=2 shiftwidth=2")
            (autocmd :FileType :css "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
            (autocmd :FileType :scss "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
            (autocmd :FileType :fish "setlocal expandtab tabstop=4 shiftwidth=4")
