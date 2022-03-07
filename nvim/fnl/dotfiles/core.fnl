@@ -44,12 +44,16 @@
 ;; vertical empty (escaped space)
 ;; fold: filling foldtext
 ;; diff: deleted lines in diff
-(wopt :fillchars (str.join "," ["stl: "
-                                "stlnc: "
-                                "eob: "
-                                "vert:│"
-                                "fold:·"
-                                "diff:-"]))
+(let [fillchars {:stl   " "
+                 :stlnc " "
+                 :eob   " "
+                 :vert  "│"
+                 :fold  "·"
+                 :diff  "-"}]
+  (wopt :fillchars
+        (str.join ","
+                  (icollect [k v (pairs fillchars)]
+                    (str.join ":" [k v])))))
 
 ;; fold based on syntax cues
 (wopt :foldmethod :syntax)
@@ -79,9 +83,13 @@
 
 ;; Invisible characters
 (wopt :list true)
-(wopt :listchars (str.join "," ["tab:→ "
-                                "eol:¬"
-                                "trail:⣿"]))
+(let [listchars {:tab "→ "
+                 :eol "¬"
+                 :trail "⣿"}]
+  (wopt :listchars
+        (str.join ","
+                  (icollect [k v (pairs listchars)]
+                       (str.join ":" [k v])))))
 
 ;; Don't show the mode on the command line - it's redundant with the status line.
 (opt :showmode false)
