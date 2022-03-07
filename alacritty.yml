@@ -11,8 +11,8 @@ scrolling:
 # Font configuration
 font:
   # I commonly switch between Iosevka Fixed (default and SS08 (PragmataPro)
-  # variant), Go Mono, and PragmataPro Mono (no ligatures), so just them all
-  # here.
+  # variant), Go Mono, PragmataPro Mono (no ligatures) and Berkeley Mono, so
+  # just leave them all here.
 
   # normal:
   #   family: Iosevka Fixed SS08
@@ -62,21 +62,38 @@ font:
   #   family: Go Mono
   #   style: Bold Italic
 
+#   normal:
+#     family: PragmataPro Mono
+#     style: Regular
+
+#   bold:
+#     family: PragmataPro Mono
+#     style: Bold
+
+#   italic:
+#     family: PragmataPro Mono
+#     style: Italic
+
+#   bold_italic:
+#     family: PragmataPro Mono
+#     style: Bold Italic
+
   normal:
-    family: PragmataPro Mono
+    family: Berkeley Mono
     style: Regular
 
   bold:
-    family: PragmataPro Mono
+    family: Berkeley Mono
     style: Bold
 
   italic:
-    family: PragmataPro Mono
+    family: Berkeley Mono
     style: Italic
 
   bold_italic:
-    family: PragmataPro Mono
+    family: Berkeley Mono
     style: Bold Italic
+
 
   # set use_thin_strokes to true on retina displays
   # use_thin_strokes: false
