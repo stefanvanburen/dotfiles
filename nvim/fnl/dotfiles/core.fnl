@@ -112,7 +112,6 @@
 (opt :mouse "a")
 
 ;; always use the system clipboard for operations
-; set clipboard+=unnamedplus
 (opt :clipboard "unnamedplus")
 
 ;; turn off swapfiles - for now, I find these more of a headache than a benefit
