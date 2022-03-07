@@ -59,9 +59,6 @@
 ;; Global substitutions by default.
 (opt :gdefault true)
 
-;; Don't get rid of hidden buffers
-(opt :hidden true)
-
 ;; Ignore case while searching
 (opt :ignorecase true)
 ;; ... except when capitals are used
