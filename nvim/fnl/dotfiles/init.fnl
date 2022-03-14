@@ -1,4 +1,7 @@
-(module dotfiles.init)
+(module dotfiles.init
+  {autoload {nvim aniseed.nvim}})
+
+(nvim.set_option :termguicolors true)
 
 ;; require plugins first
 (require :dotfiles.plugin)
