@@ -100,6 +100,7 @@
   :tpope/vim-sexp-mappings-for-regular-people {:ft lisp-filetypes}
   :Olical/conjure {:ft lisp-filetypes}
   :gpanders/nvim-parinfer {}
+  :clojure-vim/clojure.vim {}
 
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
