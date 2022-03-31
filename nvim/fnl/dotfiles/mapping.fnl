@@ -142,3 +142,7 @@
 
 (global map_functions {:aniseed_reload aniseed-reload})
 (vim.api.nvim_set_keymap :n :<leader>so "<cmd>lua map_functions.aniseed_reload()<cr>" {})
+
+;; gitsigns.nvim
+(map :n "]c" "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'" {:expr true})
+(map :n "[c" "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'" {:expr true})
