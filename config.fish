@@ -26,6 +26,12 @@ set -gx FZF_CTRL_T_OPTS  "--layout=reverse --no-info --no-color --preview 'bat -
 # `fd` supports this; I'm sure others do as well.
 set -gx NO_COLOR
 
+# Homebrew settings
+# Disable fancy colors and analytics
+set -gx HOMEBREW_NO_ANALYTICS 1
+set -gx HOMEBREW_NO_COLOR 1
+set -gx HOMEBREW_NO_EMOJI 1
+
 # fish_add_path requires fish 3.2.0
 # pipx
 fish_add_path ~/.local/bin
