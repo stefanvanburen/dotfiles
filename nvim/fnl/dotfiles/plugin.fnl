@@ -47,6 +47,9 @@
   ;; GitHub!
   :tpope/vim-rhubarb {}
 
+  ;; Dealing with conflict markers
+  :rhysd/conflict-marker.vim {}
+
   ;; Speed up filetype loading.
   :nathom/filetype.nvim {}
 
