@@ -22,6 +22,7 @@
            (autocmd :FileType :scss "setlocal expandtab tabstop=2 shiftwidth=2 iskeyword+=-")
            (autocmd :FileType :fish "setlocal expandtab tabstop=4 shiftwidth=4")
            (autocmd :FileType :yaml "setlocal expandtab tabstop=2 shiftwidth=2")
+           (autocmd :FileType :json "setlocal expandtab tabstop=2 shiftwidth=2")
            (autocmd :FileType :gitcommit "setlocal spell")
            (autocmd :FileType :sql "setlocal wrap")
            (autocmd :FileType :markdown "setlocal spell wrap conceallevel=2 shiftwidth=2")
