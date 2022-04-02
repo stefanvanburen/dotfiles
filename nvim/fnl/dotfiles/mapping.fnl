@@ -1,6 +1,5 @@
 (module dotfiles.mapping
-  {autoload {nvim aniseed.nvim
-             util dotfiles.util}})
+  {autoload {nvim aniseed.nvim}})
 
 ;; alias function
 (def map nvim.set_keymap)
@@ -9,7 +8,17 @@
   "Sets a mapping with {:noremap true}."
   (map mode from to {:noremap true}))
 
-(map :n ";" ":" {:noremap true})
+(defn- nnoremap [from to]
+  "Helper function to add a mapping prefixed with leader to execute a command,
+  typically from a plugin."
+  (map
+    :n
+    (.. "<leader>" from)
+    (.. ":" to "<cr>")
+    {:noremap true}))
+
+;; ; -> :
+(noremap :n ";" ":")
 
 ;; Leader is space key
 (set nvim.g.mapleader " ")
@@ -20,23 +29,23 @@
 ;; Clean, update and install plugins, then regenerate compiled loader file.
 ;; PackerUpdate -> PackerCompile
 ;; This is essentially always what we want to run.
-(util.nnoremap :pu "PackerSync")
+(nnoremap :pu "PackerSync")
 
 ;; Fugitive
-(util.nnoremap :gs "vertical Git")
-(util.nnoremap :gw "Gwrite")
-(util.nnoremap :gc "G commit")
-(util.nnoremap :gp "G push")
-(util.nnoremap :gb "G blame")
+(nnoremap :gs "vertical Git")
+(nnoremap :gw "Gwrite")
+(nnoremap :gc "G commit")
+(nnoremap :gp "G push")
+(nnoremap :gb "G blame")
 
 ;; vim-better-whitespace
-(util.nnoremap :sw "StripWhitespace")
+(nnoremap :sw "StripWhitespace")
 
 ;; fzf - https://github.com/junegunn/fzf.vim
-(util.nnoremap :f "Files")
-(util.nnoremap :<enter> "GitFiles")
-(util.nnoremap :<leader> "Buffers")
-(util.nnoremap :se "Rg")
+(nnoremap :f "Files")
+(nnoremap :<enter> "GitFiles")
+(nnoremap :<leader> "Buffers")
+(nnoremap :se "Rg")
 
 (map :n :<leader><tab> "<plug>(fzf-maps-n)" {})
 (map :x :<leader><tab> "<plug>(fzf-maps-x)" {})
@@ -48,10 +57,10 @@
 
 ;; always move by visual lines, rather than real lines
 ;; this is useful when 'wrap' is set.
-(noremap :n :j :gj {:silent true})
-(noremap :n :k :gk {:silent true})
-(noremap :v :j :gj {:silent true})
-(noremap :v :k :gk {:silent true})
+(noremap :n :j :gj)
+(noremap :n :k :gk)
+(noremap :v :j :gj)
+(noremap :v :k :gk)
 
 ;; Navigate between matching brackets
 ;; These are specifically not `noremap`s because we want to be bound to
@@ -60,14 +69,14 @@
 (map :v :<tab> :% {})
 
 ;; edit config files
-(util.nnoremap :ev "e $HOME/.config/nvim/fnl/dotfiles/core.fnl")
-(util.nnoremap :ef "e $HOME/.config/fish/config.fish")
-(util.nnoremap :eg "e $HOME/.config/git/config")
+(nnoremap :ev "e $HOME/.config/nvim/fnl/dotfiles/core.fnl")
+(nnoremap :ef "e $HOME/.config/fish/config.fish")
+(nnoremap :eg "e $HOME/.config/git/config")
 
-(util.nnoremap :w "w")
-(util.nnoremap :cl "close")
-(util.nnoremap :ss "split")
-(util.nnoremap :vs "vsplit")
+(nnoremap :w "w")
+(nnoremap :cl "close")
+(nnoremap :ss "split")
+(nnoremap :vs "vsplit")
 
 ;; tab mappings
 (noremap :n "]r" ":tabnext<cr>")
