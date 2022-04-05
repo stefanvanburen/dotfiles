@@ -20,10 +20,6 @@ end
 vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Do not source the default filetype.vim
--- Needed for filetype.nvim
-vim.g.did_load_filetypes = 1
-
 -- Bootstrap essential plugins required for installing and loading the rest.
 ensure("wbthomason", "packer.nvim")
 ensure("Olical", "aniseed")
