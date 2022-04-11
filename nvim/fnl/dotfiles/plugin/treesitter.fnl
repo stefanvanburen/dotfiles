@@ -2,6 +2,6 @@
   {autoload {treesitter "nvim-treesitter.configs"}})
 
 (treesitter.setup
-  {:ensure_installed "maintained"
+  {:ensure_installed ["go"] ; TODO: what languages?
    :matchup {:enable true}
    :highlight {:enable true}})
