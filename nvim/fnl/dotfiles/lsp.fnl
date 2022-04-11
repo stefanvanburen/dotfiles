@@ -1,7 +1,6 @@
 (module dotfiles.lsp
   {autoload {nvim aniseed.nvim
-             lspinstaller "nvim-lsp-installer"
-             lsp-compl "lsp_compl"}})
+             lspinstaller "nvim-lsp-installer"}})
 
 (defn- nnoremap [bufnr from to]
   "Sets a normal mode mapping within a buffer."
@@ -14,8 +13,6 @@
   ; NOTE: Useful for debugging
   ; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
   ; (print (vim.inspect client))
-
-  (lsp-compl.attach client bufnr)
 
   ;; Set some keybinds conditional on server capabilities
   (if (capable? client :document_formatting)
