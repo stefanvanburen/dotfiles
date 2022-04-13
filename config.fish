@@ -1,6 +1,3 @@
-# NOTE: When setting up a new system, make sure to run fish_config
-# and choose "Mono Lace" under colors, to set the terminal colors.
-
 set -gx EDITOR nvim
 # NOTE: keep in sync with install.conf.yaml
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
@@ -54,6 +51,9 @@ if status --is-interactive
     abbr --add --global c clear
     abbr --add --global j just
     abbr --add --global rd rmdir
+
+    # set terminal colors
+    fish_config theme choose 'Mono Lace'
 
     # jump is bound to `z`
     command -q jump; and source (jump shell --bind=z fish | psub)
