@@ -24,7 +24,7 @@ set -gx FZF_CTRL_T_OPTS  "--layout=reverse --no-info --no-color --preview 'bat -
 
 # In general, try to disable color in the terminal.
 # `fd` supports this; I'm sure others do as well.
-set -gx NO_COLOR
+set -gx NO_COLOR 1
 
 # Homebrew settings
 # Disable fancy colors and analytics
