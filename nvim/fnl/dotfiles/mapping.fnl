@@ -1,14 +1,9 @@
-(module dotfiles.mapping
-  {autoload {nvim aniseed.nvim}})
+(module dotfiles.mapping)
 
 ;; alias function
-(def map nvim.set_keymap)
+(def map vim.keymap.set)
 
-(defn- noremap [mode from to]
-  "Sets a mapping with {:noremap true}."
-  (map mode from to {:noremap true}))
-
-(defn- nnoremap [from to]
+(defn- leader-map [from to]
   "Helper function to add a mapping prefixed with leader to execute a command,
   typically from a plugin."
   (map
@@ -18,34 +13,34 @@
     {:noremap true}))
 
 ;; ; -> :
-(noremap :n ";" ":")
+(map :n ";" ":")
 
 ;; Leader is space key
-(set nvim.g.mapleader " ")
+(set vim.g.mapleader " ")
 ;; LocalLeader is the comma key
-(set nvim.g.maplocalleader ",")
+(set vim.g.maplocalleader ",")
 
 ;; packer
 ;; Clean, update and install plugins, then regenerate compiled loader file.
 ;; PackerUpdate -> PackerCompile
 ;; This is essentially always what we want to run.
-(nnoremap :pu "PackerSync")
+(leader-map :pu "PackerSync")
 
 ;; Fugitive
-(nnoremap :gs "vertical Git")
-(nnoremap :gw "Gwrite")
-(nnoremap :gc "G commit")
-(nnoremap :gp "G push")
-(nnoremap :gb "G blame")
+(leader-map :gs "vertical Git")
+(leader-map :gw "Gwrite")
+(leader-map :gc "G commit")
+(leader-map :gp "G push")
+(leader-map :gb "G blame")
 
 ;; vim-better-whitespace
-(nnoremap :sw "StripWhitespace")
+(leader-map :sw "StripWhitespace")
 
 ;; fzf - https://github.com/junegunn/fzf.vim
-(nnoremap :f "Files")
-(nnoremap :<enter> "GitFiles")
-(nnoremap :<leader> "Buffers")
-(nnoremap :se "Rg")
+(leader-map :f "Files")
+(leader-map :<enter> "GitFiles")
+(leader-map :<leader> "Buffers")
+(leader-map :se "Rg")
 
 (map :n :<leader><tab> "<plug>(fzf-maps-n)" {})
 (map :x :<leader><tab> "<plug>(fzf-maps-x)" {})
@@ -57,10 +52,10 @@
 
 ;; always move by visual lines, rather than real lines
 ;; this is useful when 'wrap' is set.
-(noremap :n :j :gj)
-(noremap :n :k :gk)
-(noremap :v :j :gj)
-(noremap :v :k :gk)
+(map :n :j :gj)
+(map :n :k :gk)
+(map :v :j :gj)
+(map :v :k :gk)
 
 ;; Navigate between matching brackets
 ;; These are specifically not `noremap`s because we want to be bound to
@@ -69,54 +64,54 @@
 (map :v :<tab> :% {})
 
 ;; edit config files
-(nnoremap :ev "e $HOME/.config/nvim/fnl/dotfiles/core.fnl")
-(nnoremap :ef "e $HOME/.config/fish/config.fish")
-(nnoremap :eg "e $HOME/.config/git/config")
+(leader-map :ev "e $HOME/.config/nvim/fnl/dotfiles/core.fnl")
+(leader-map :ef "e $HOME/.config/fish/config.fish")
+(leader-map :eg "e $HOME/.config/git/config")
 
-(nnoremap :w "w")
-(nnoremap :cl "close")
-(nnoremap :ss "split")
-(nnoremap :vs "vsplit")
+(leader-map :w "w")
+(leader-map :cl "close")
+(leader-map :ss "split")
+(leader-map :vs "vsplit")
 
 ;; tab mappings
-(noremap :n "]r" ":tabnext<cr>")
-(noremap :n "[r" ":tabprev<cr>")
-(noremap :n :<leader>tn ":tabnew<cr>")
+(map :n "]r" ":tabnext<cr>")
+(map :n "[r" ":tabprev<cr>")
+(map :n :<leader>tn ":tabnew<cr>")
 
 ;; Use Q to repeat last macro, rather than going into ex mode
-(noremap :n :Q "@@")
+(map :n :Q "@@")
 
 ;; Swap the behavior of the ^ and 0 operators
 ;; ^ Usually goes to the first non-whitespace character, while 0 goes to the
 ;; first column in the line. ^ is more useful, but harder to hit, so swap it
 ;; with 0
-(noremap :n :0 "^")
-(noremap :n :^ "0")
+(map :n :0 "^")
+(map :n :^ "0")
 
 ;; always center the screen after any movement command
-(noremap :n :<C-d> "<C-d>zz")
-(noremap :n :<C-f> "<C-f>zz")
-(noremap :n :<C-b> "<C-b>zz")
-(noremap :n :<C-u> "<C-u>zz")
+(map :n :<C-d> "<C-d>zz")
+(map :n :<C-f> "<C-f>zz")
+(map :n :<C-b> "<C-b>zz")
+(map :n :<C-u> "<C-u>zz")
 
 ; Redirect changes to the "black hole" register
-; nnoremap c "_c
-; nnoremap C "_C
-(noremap :n :c "\"_c")
-(noremap :n :C "\"_C")
+; leader-map c "_c
+; leader-map C "_C
+(map :n :c "\"_c")
+(map :n :C "\"_C")
 
 ;; Keep the cursor in place while joining lines
-(noremap :n :J "mzJ`z")
+(map :n :J "mzJ`z")
 
 ;; similar to vmap but only for visual mode - NOT select mode
 ;; maintains the currently visual selection between invocations of '<' and '>'
-(noremap :x :< "<gv")
-(noremap :x :> ">gv")
+(map :x :< "<gv")
+(map :x :> ">gv")
 
 ;; <c-k> escape sequences.
-(noremap :i :<c-k> :<esc>)
-(noremap :c :<c-k> :<c-c>)
-(noremap :t :<c-k> :<c-\><c-n>)
+(map :i :<c-k> :<esc>)
+(map :c :<c-k> :<c-c>)
+(map :t :<c-k> :<c-\><c-n>)
 
 ;; vim-test mappings
 (map :n :t<C-n> ":TestNearest<cr>" {:silent true})
@@ -139,18 +134,13 @@
 (map :x :gs  "<Plug>VSurround" {})
 (map :x :gS  "<Plug>VgSurround" {})
 
+;; See: https://github.com/Olical/aniseed/issues/96
 (defn aniseed-reload []
   (each [k _ (pairs package.loaded)]
     (when (string.match k "^dotfiles%..+")
       (tset package.loaded k nil)))
   ((. (require :aniseed.env) :init) {:module :dotfiles.init :compile true}))
-
-;; TODO: swap this call for the following in newer versions of neovim:
-;; (vim.keymap.set :n :<leader>so aniseed-reload)
-;; See: https://github.com/Olical/aniseed/issues/96
-
-(global map_functions {:aniseed_reload aniseed-reload})
-(vim.api.nvim_set_keymap :n :<leader>so "<cmd>lua map_functions.aniseed_reload()<cr>" {})
+(map :n :<leader>so aniseed-reload)
 
 ;; gitsigns.nvim
 (map :n "]c" "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'" {:expr true})
