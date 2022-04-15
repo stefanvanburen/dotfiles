@@ -1,6 +1,5 @@
 (module dotfiles.statusline
-  {autoload {nvim aniseed.nvim
-             str aniseed.string}})
+  {autoload {str aniseed.string}})
 
 (let [stl ["%f"
            "%m "
@@ -8,4 +7,4 @@
            "%="
            "%l,%c "
            "%{&filetype}"]]
-  (set nvim.o.statusline (str.join stl)))
+  (set vim.o.statusline (str.join stl)))

@@ -1,6 +1,5 @@
 (module dotfiles.plugin
     {autoload {a aniseed.core
-               nvim aniseed.nvim
                str aniseed.string
                packer packer}})
 
@@ -162,33 +161,33 @@
 
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.
-(set nvim.g.dispatch_no_tmux_make 1)
+(set vim.g.dispatch_no_tmux_make 1)
 
 ;; Disable matchup's offscreen feature, which usually replaces the statusline
 ;; with the match.
-(set nvim.g.matchup_matchparen_offscreen {})
+(set vim.g.matchup_matchparen_offscreen {})
 
-(set nvim.g.pear_tree_repeatable_expand 0)
+(set vim.g.pear_tree_repeatable_expand 0)
 ;; disable pear-tree for lispy languages, covered by parinfer
-(set nvim.g.pear_tree_ft_disabled lisp-filetypes)
+(set vim.g.pear_tree_ft_disabled lisp-filetypes)
 
 ;; using open-browser.vim for `gx`
-(set nvim.g.netrw_nogx 1)
+(set vim.g.netrw_nogx 1)
 
 ;; vim-test x dispatch
-(set nvim.g.test#strategy "dispatch")
+(set vim.g.test#strategy "dispatch")
 
 ;; vim-sexp & vim-sexp-mappings-for-regular-people
-(set nvim.g.sexp_filetypes (str.join "," lisp-filetypes))
+(set vim.g.sexp_filetypes (str.join "," lisp-filetypes))
 ;; These mappings conflict with parinfer.
-(set nvim.g.sexp_enable_insert_mode_mappings 0)
+(set vim.g.sexp_enable_insert_mode_mappings 0)
 
 ;; disable vim-surround's default mappings, replacing most of
 ;; them in mapping.fnl, to work with lightspeed.nvim.
-(set nvim.g.surround_no_mappings 1)
+(set vim.g.surround_no_mappings 1)
 
 ;; vim-hardtime
 ;; turn on by default
-(set nvim.g.hardtime_default_on 1)
+(set vim.g.hardtime_default_on 1)
 ;; default set, without "-", which is used to activate vim-dirvish
-(set nvim.g.list_of_normal_keys ["h" "j" "k" "l" "+" "<UP>" "<DOWN>" "<LEFT>" "<RIGHT>"])
+(set vim.g.list_of_normal_keys ["h" "j" "k" "l" "+" "<UP>" "<DOWN>" "<LEFT>" "<RIGHT>"])

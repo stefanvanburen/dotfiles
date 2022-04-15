@@ -1,22 +1,21 @@
 (module dotfiles.core
-  {autoload {nvim aniseed.nvim
-             str aniseed.string}})
+  {autoload {str aniseed.string}})
 
 (defn- opt [name value]
-  (nvim.set_option name value))
+  (vim.api.nvim_set_option name value))
 
 (defn- wopt [name value]
-  (nvim.win_set_option 0 name value)
+  (vim.api.nvim_win_set_option 0 name value)
   (opt name value))
 
 (defn- bopt [name value]
-  (nvim.buf_set_option 0 name value)
+  (vim.api.nvim_buf_set_option 0 name value)
   (opt name value))
 
 ;; colorscheme
 (opt :termguicolors true)
 (opt :background :light)
-(nvim.ex.colorscheme :rams)
+(vim.api.nvim_command "colorscheme rams")
 
 ;; don't wrap by default
 (wopt :wrap false)
