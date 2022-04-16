@@ -1,6 +1,8 @@
 (module dotfiles.lsp
-  {autoload {nvim aniseed.nvim
-             lspinstaller "nvim-lsp-installer"}})
+  {autoload {lspinstaller "nvim-lsp-installer"}})
+
+(def- create-autocmd vim.api.nvim_create_autocmd)
+(def- create-augroup vim.api.nvim_create_augroup)
 
 ;; See `:help vim.diagnostic.*` for documentation on any of the below functions
 (vim.keymap.set :n "<leader>?"  vim.diagnostic.open_float)
@@ -28,14 +30,13 @@
     (buffer-map bufnr "<leader>rf" vim.lsp.buf.range_formatting))
 
   (when (capable? client :document_highlight)
-    (do
-      (nvim.ex.augroup (tostring lsp-document-highlight))
-      ;; https://github.com/neovim/nvim-lspconfig/pull/728/files
-      (nvim.ex.autocmd_ :* :<buffer>)
-      (nvim.ex.autocmd  :CursorHold  :<buffer> "lua vim.lsp.buf.document_highlight()")
-      (nvim.ex.autocmd  :CursorMoved :<buffer> "lua vim.lsp.buf.clear_references()")
-      (nvim.ex.augroup  :END)))
-
+    (let [augroup (create-augroup "lsp-document-highlight" {})]
+      (create-autocmd "CursorHold"  {:group augroup
+                                     :buffer bufnr
+                                     :callback vim.lsp.buf.document_highlight})
+      (create-autocmd "CursorMoved" {:group augroup
+                                     :buffer bufnr
+                                     :callback vim.lsp.buf.clear_references})))
   ;; set the omnifunc for the buffer
   (when (capable? client :completion)
     (vim.api.nvim_buf_set_option bufnr "omnifunc" "v:lua.vim.lsp.omnifunc"))
