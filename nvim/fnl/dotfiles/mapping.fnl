@@ -143,7 +143,3 @@
       (tset package.loaded k nil)))
   ((. (require :aniseed.env) :init) {:module :dotfiles.init :compile true}))
 (map :n :<leader>so aniseed-reload)
-
-;; gitsigns.nvim
-(map :n "]c" "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'" {:expr true})
-(map :n "[c" "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'" {:expr true})
