@@ -2,6 +2,12 @@
   {autoload {nvim aniseed.nvim
              lspinstaller "nvim-lsp-installer"}})
 
+;; See `:help vim.diagnostic.*` for documentation on any of the below functions
+(vim.keymap.set :n "<leader>?"  #(vim.diagnostic.open_float))
+(vim.keymap.set :n "[w"         #(vim.diagnostic.goto_prev))
+(vim.keymap.set :n "]w"         #(vim.diagnostic.goto_next))
+(vim.keymap.set :n "<leader>q"  #(vim.diagnostic.setloclist))
+
 (defn- buffer-map [bufnr from to]
   "Sets a normal mode mapping within a buffer."
   (vim.keymap.set :n from to {:buffer bufnr :silent true}))
@@ -16,10 +22,10 @@
 
   ;; Set some keybinds conditional on server capabilities
   (if (capable? client :document_formatting)
-    (buffer-map bufnr "<leader>af" "<cmd>lua vim.lsp.buf.formatting()<cr>"))
+    (buffer-map bufnr "<leader>af" #(vim.lsp.buf.formatting)))
 
   (if (capable? client :document_range_formatting)
-    (buffer-map bufnr "<leader>rf" "<cmd>lua vim.lsp.buf.range_formatting()<cr>"))
+    (buffer-map bufnr "<leader>rf" #(vim.lsp.buf.range_formatting)))
 
   (when (capable? client :document_highlight)
     (do
@@ -36,20 +42,15 @@
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
-  (buffer-map bufnr "gD"         "<cmd>lua vim.lsp.buf.declaration()<cr>")
-  (buffer-map bufnr "gd"         "<cmd>lua vim.lsp.buf.definition()<cr>")
-  (buffer-map bufnr "gi"         "<cmd>lua vim.lsp.buf.implementation()<cr>")
-  (buffer-map bufnr "K"          "<cmd>lua vim.lsp.buf.hover()<cr>")
-  (buffer-map bufnr "<C-k>"      "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-  (buffer-map bufnr "<leader>D"  "<cmd>lua vim.lsp.buf.type_definition()<cr>")
-  (buffer-map bufnr "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<cr>")
-  (buffer-map bufnr "<leader>ca" "<cmd>lua vim.lsp.buf.code_action()<cr>")
-  (buffer-map bufnr "gr"         "<cmd>lua vim.lsp.buf.references()<cr>")
-  ;; See `:help vim.diagnostic.*` for documentation on any of the below functions
-  (buffer-map bufnr "<leader>?"  "<cmd>lua vim.diagnostic.open_float()<cr>")
-  (buffer-map bufnr "[w"         "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-  (buffer-map bufnr "]w"         "<cmd>lua vim.diagnostic.goto_next()<cr>")
-  (buffer-map bufnr "<leader>q"  "<cmd>lua vim.diagnostic.setloclist()<cr>"))
+  (buffer-map bufnr "gD"         #(vim.lsp.buf.declaration))
+  (buffer-map bufnr "gd"         #(vim.lsp.buf.definition))
+  (buffer-map bufnr "gi"         #(vim.lsp.buf.implementation))
+  (buffer-map bufnr "K"          #(vim.lsp.buf.hover))
+  (buffer-map bufnr "<C-k>"      #(vim.lsp.buf.signature_help))
+  (buffer-map bufnr "<leader>D"  #(vim.lsp.buf.type_definition))
+  (buffer-map bufnr "<leader>rn" #(vim.lsp.buf.rename))
+  (buffer-map bufnr "<leader>ca" #(vim.lsp.buf.code_action))
+  (buffer-map bufnr "gr"         #(vim.lsp.buf.references)))
 
 (def- handlers
   {"textDocument/hover"         (vim.lsp.with vim.lsp.handlers.hover          {:border "single"})
