@@ -3,10 +3,10 @@
              lspinstaller "nvim-lsp-installer"}})
 
 ;; See `:help vim.diagnostic.*` for documentation on any of the below functions
-(vim.keymap.set :n "<leader>?"  #(vim.diagnostic.open_float))
-(vim.keymap.set :n "[w"         #(vim.diagnostic.goto_prev))
-(vim.keymap.set :n "]w"         #(vim.diagnostic.goto_next))
-(vim.keymap.set :n "<leader>q"  #(vim.diagnostic.setloclist))
+(vim.keymap.set :n "<leader>?"  vim.diagnostic.open_float)
+(vim.keymap.set :n "[w"         vim.diagnostic.goto_prev)
+(vim.keymap.set :n "]w"         vim.diagnostic.goto_next)
+(vim.keymap.set :n "<leader>q"  vim.diagnostic.setloclist)
 
 (defn- buffer-map [bufnr from to]
   "Sets a normal mode mapping within a buffer."
@@ -22,10 +22,10 @@
 
   ;; Set some keybinds conditional on server capabilities
   (if (capable? client :document_formatting)
-    (buffer-map bufnr "<leader>af" #(vim.lsp.buf.formatting)))
+    (buffer-map bufnr "<leader>af" vim.lsp.buf.formatting))
 
   (if (capable? client :document_range_formatting)
-    (buffer-map bufnr "<leader>rf" #(vim.lsp.buf.range_formatting)))
+    (buffer-map bufnr "<leader>rf" vim.lsp.buf.range_formatting))
 
   (when (capable? client :document_highlight)
     (do
@@ -42,15 +42,15 @@
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
-  (buffer-map bufnr "gD"         #(vim.lsp.buf.declaration))
-  (buffer-map bufnr "gd"         #(vim.lsp.buf.definition))
-  (buffer-map bufnr "gi"         #(vim.lsp.buf.implementation))
-  (buffer-map bufnr "K"          #(vim.lsp.buf.hover))
-  (buffer-map bufnr "<C-k>"      #(vim.lsp.buf.signature_help))
-  (buffer-map bufnr "<leader>D"  #(vim.lsp.buf.type_definition))
-  (buffer-map bufnr "<leader>rn" #(vim.lsp.buf.rename))
-  (buffer-map bufnr "<leader>ca" #(vim.lsp.buf.code_action))
-  (buffer-map bufnr "gr"         #(vim.lsp.buf.references)))
+  (buffer-map bufnr "gD"         vim.lsp.buf.declaration)
+  (buffer-map bufnr "gd"         vim.lsp.buf.definition)
+  (buffer-map bufnr "gi"         vim.lsp.buf.implementation)
+  (buffer-map bufnr "K"          vim.lsp.buf.hover)
+  (buffer-map bufnr "<C-k>"      vim.lsp.buf.signature_help)
+  (buffer-map bufnr "<leader>D"  vim.lsp.buf.type_definition)
+  (buffer-map bufnr "<leader>rn" vim.lsp.buf.rename)
+  (buffer-map bufnr "<leader>ca" vim.lsp.buf.code_action)
+  (buffer-map bufnr "gr"         vim.lsp.buf.references))
 
 (def- handlers
   {"textDocument/hover"         (vim.lsp.with vim.lsp.handlers.hover          {:border "single"})
