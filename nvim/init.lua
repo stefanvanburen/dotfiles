@@ -20,6 +20,10 @@ end
 vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- filetype.vim -> filetype.lua
+vim.g.do_filetype_lua    = 1
+vim.g.did_load_filetypes = 0
+
 -- Bootstrap essential plugins required for installing and loading the rest.
 ensure("wbthomason", "packer.nvim")
 ensure("Olical", "aniseed")
