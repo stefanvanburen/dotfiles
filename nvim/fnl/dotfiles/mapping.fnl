@@ -60,6 +60,8 @@
 ;; Navigate between matching brackets
 ;; These are specifically not `noremap`s because we want to be bound to
 ;; whatever % is (usually a plugin, matchit / matchup).
+;; TODO: look into if this is an issue, given that
+;; vim.keymap.set uses noremap by default.
 (map :n :<tab> :% {})
 (map :v :<tab> :% {})
 
