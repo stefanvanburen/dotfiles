@@ -15,7 +15,7 @@
   (vim.keymap.set :n from to {:buffer bufnr :silent true}))
 
 (defn- capable? [client capability]
-  (. client.resolved_capabilities capability))
+  (. client.server_capabilities capability))
 
 (defn- on-attach [client bufnr]
   ; NOTE: Useful for debugging
@@ -23,13 +23,13 @@
   ; (print (vim.inspect client))
 
   ;; Set some keybinds conditional on server capabilities
-  (if (capable? client :document_formatting)
+  (if (capable? client :documentFormattingProvider)
     (buffer-map bufnr "<leader>af" vim.lsp.buf.formatting))
 
-  (if (capable? client :document_range_formatting)
+  (if (capable? client :documentRangeFormattingProvider)
     (buffer-map bufnr "<leader>rf" vim.lsp.buf.range_formatting))
 
-  (when (capable? client :document_highlight)
+  (when (capable? client :documentHighlightProvider)
     (let [augroup (create-augroup "lsp-document-highlight" {})]
       (create-autocmd "CursorHold"  {:group augroup
                                      :buffer bufnr
@@ -38,7 +38,7 @@
                                      :buffer bufnr
                                      :callback vim.lsp.buf.clear_references})))
   ;; set the omnifunc for the buffer
-  (when (capable? client :completion)
+  (when (capable? client :completionProvider)
     (vim.api.nvim_buf_set_option bufnr "omnifunc" "v:lua.vim.lsp.omnifunc"))
 
   ;; setup mappings
