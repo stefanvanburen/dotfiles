@@ -78,22 +78,37 @@ font:
 #     family: PragmataPro Mono
 #     style: Bold Italic
 
+#   normal:
+#     family: Berkeley Mono
+#     style: Regular
+
+#   bold:
+#     family: Berkeley Mono
+#     style: Bold
+
+#   italic:
+#     family: Berkeley Mono
+#     style: Italic
+
+#   bold_italic:
+#     family: Berkeley Mono
+#     style: Bold Italic
+
   normal:
-    family: Berkeley Mono
+    family: JetBrains Mono
     style: Regular
 
   bold:
-    family: Berkeley Mono
+    family: JetBrains Mono
     style: Bold
 
   italic:
-    family: Berkeley Mono
+    family: JetBrains Mono
     style: Italic
 
   bold_italic:
-    family: Berkeley Mono
+    family: JetBrains Mono
     style: Bold Italic
-
 
   # set use_thin_strokes to true on retina displays
   # use_thin_strokes: false
