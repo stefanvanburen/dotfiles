@@ -127,8 +127,8 @@
   ;; Adds unix shell commands
   :tpope/vim-eunuch {}
 
-  ;; motion plugin, in the vein of clever-f and vim-sneak
-  :ggandor/lightspeed.nvim {}
+  ;; "general-purpose motion plugin for neovim ... streamlined version of lightspeed"
+  :ggandor/leap.nvim {:mod :leap}
 
   ;; Deal with parentheses, quotes, etc.
   :tpope/vim-surround {}
