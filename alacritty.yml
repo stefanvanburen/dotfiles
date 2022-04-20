@@ -11,8 +11,8 @@ scrolling:
 # Font configuration
 font:
   # I commonly switch between Iosevka Fixed (default and SS08 (PragmataPro)
-  # variant), Go Mono, PragmataPro Mono (no ligatures) and Berkeley Mono, so
-  # just leave them all here.
+  # variant), Go Mono, PragmataPro Mono (no ligatures), Berkeley Mono, and
+  # JetBrains Mono so just leave them all here.
 
   # normal:
   #   family: Iosevka Fixed SS08
