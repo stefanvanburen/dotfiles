@@ -20,9 +20,6 @@
 ;; don't wrap by default
 (wopt :wrap false)
 
-;; global statusline
-(opt :laststatus 3)
-
 ;; always show the completion menu, and when it's brought up, don't select
 ;; anything by default.
 (opt :completeopt (str.join "," ["menuone" "noselect"]))
