@@ -1,5 +1,8 @@
 (module dotfiles.lsp
-  {autoload {lspinstaller "nvim-lsp-installer"}})
+  {autoload {lspinstaller "nvim-lsp-installer"
+             lspconfig "lspconfig"}})
+
+(lspinstaller.setup {})
 
 (def- create-autocmd vim.api.nvim_create_autocmd)
 (def- create-augroup vim.api.nvim_create_augroup)
@@ -67,14 +70,11 @@
                                 :focusable false
                                 :source "always"}})
 
-(lspinstaller.on_server_ready
-   (lambda [server]
-     (let [opts {:on_attach on-attach
-                 :handlers handlers}]
-       (if (= server.name "gopls")
-         (do
-          (tset opts :cmd ["gopls" "-remote=auto"])
-          (tset opts :settings {:gopls {:staticcheck true
-                                        :analyses {:unusedparams true}}})))
+(lspconfig.gopls.setup {:on_attach on-attach
+                        :handlers handlers
+                        :cmd ["gopls" "-remote=auto"]
+                        :settings {:gopls {:staticcheck true
+                                           :analyses {:unusedparams true}}}})
 
-       (server:setup opts))))
+(lspconfig.clojure_lsp.setup {:on_attach on-attach
+                              :handlers handlers})
