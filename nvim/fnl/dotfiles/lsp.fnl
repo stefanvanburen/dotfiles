@@ -26,11 +26,14 @@
   ; (print (vim.inspect client))
 
   ;; Set some keybinds conditional on server capabilities
-  (if (capable? client :documentFormattingProvider)
+  (when (capable? client :documentFormattingProvider)
     (buffer-map bufnr "<leader>af" vim.lsp.buf.formatting))
 
-  (if (capable? client :documentRangeFormattingProvider)
+  (when (capable? client :documentRangeFormattingProvider)
     (buffer-map bufnr "<leader>rf" vim.lsp.buf.range_formatting))
+
+  (when (capable? client :hoverProvider)
+    (buffer-map bufnr "K"          vim.lsp.buf.hover))
 
   (when (capable? client :documentHighlightProvider)
     (let [augroup (create-augroup "lsp-document-highlight" {})]
@@ -40,16 +43,18 @@
       (create-autocmd "CursorMoved" {:group augroup
                                      :buffer bufnr
                                      :callback vim.lsp.buf.clear_references})))
-  ;; set the omnifunc for the buffer
+
   (when (capable? client :completionProvider)
     (vim.api.nvim_buf_set_option bufnr "omnifunc" "v:lua.vim.lsp.omnifunc"))
+
+  (when (capable? client :definitionProvider)
+    (vim.api.nvim_buf_set_option bufnr "tagfunc" "v:lua.vim.lsp.tagfunc"))
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
   (buffer-map bufnr "gD"         vim.lsp.buf.declaration)
   (buffer-map bufnr "gd"         vim.lsp.buf.definition)
   (buffer-map bufnr "gi"         vim.lsp.buf.implementation)
-  (buffer-map bufnr "K"          vim.lsp.buf.hover)
   (buffer-map bufnr "<C-k>"      vim.lsp.buf.signature_help)
   (buffer-map bufnr "<leader>D"  vim.lsp.buf.type_definition)
   (buffer-map bufnr "<leader>rn" vim.lsp.buf.rename)
