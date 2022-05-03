@@ -151,6 +151,9 @@
   ;; Heuristically set buffer options
   :tpope/vim-sleuth {}
 
+  ;; formatting and text objects for JSON
+  :tpope/vim-jdaddy {}
+
   ;; colorscheme creation
   :rktjmp/lush.nvim {}
 
