@@ -118,8 +118,7 @@
   :vim-test/vim-test {}
 
   ;; fuzzy find
-  :junegunn/fzf {}
-  :junegunn/fzf.vim {}
+  :ibhagwan/fzf-lua {}
 
   ;; Commenting
   :tpope/vim-commentary {}

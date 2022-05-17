@@ -37,14 +37,10 @@
 (leader-map :sw "StripWhitespace")
 
 ;; fzf - https://github.com/junegunn/fzf.vim
-(leader-map :f "Files")
-(leader-map :<enter> "GitFiles")
-(leader-map :<leader> "Buffers")
-(leader-map :se "Rg")
-
-(map :n :<leader><tab> "<plug>(fzf-maps-n)" {})
-(map :x :<leader><tab> "<plug>(fzf-maps-x)" {})
-(map :o :<leader><tab> "<plug>(fzf-maps-o)" {})
+(leader-map :f "FzfLua files")
+(leader-map :<enter> "FzfLua git_files")
+(leader-map :<leader> "FzfLua buffers")
+(leader-map :se "FzfLua grep_project")
 
 ;; open-browser.vim
 (map :n :gx "<plug>(openbrowser-smart-search)" {})
