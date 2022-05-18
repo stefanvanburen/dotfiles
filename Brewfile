@@ -6,6 +6,8 @@ brew "bat"
 brew "fd"
 # My default shell
 brew "fish"
+# fuzzy finder
+brew "fzf"
 # Interacting with GitHub via the CLI - configured in "gh_config.yml".
 brew "gh"
 # VCS - configured in "gitconfig" and "gitignore".
