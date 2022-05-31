@@ -1,10 +1,7 @@
-(module dotfiles.init)
-
-;; require plugins first
-(require :dotfiles.plugin)
-
-(require :dotfiles.autocmd)
-(require :dotfiles.core)
-(require :dotfiles.mapping)
-(require :dotfiles.lsp)
-(require :dotfiles.statusline)
+(module dotfiles.init
+  {require [dotfiles.plugin ; must require first
+            dotfiles.autocmd
+            dotfiles.core
+            dotfiles.mapping
+            dotfiles.lsp
+            dotfiles.statusline]})
