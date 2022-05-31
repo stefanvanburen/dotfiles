@@ -47,9 +47,6 @@
   ;; GitHub!
   :tpope/vim-rhubarb {}
 
-  ;; Dealing with conflict markers
-  :rhysd/conflict-marker.vim {}
-
   ;;; language support
   ;;; neovim has a variety of supported languages, but the ones included in
   ;;; https://github.com/neovim/neovim/tree/master/runtime/ftplugin are
