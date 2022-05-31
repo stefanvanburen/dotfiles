@@ -25,6 +25,7 @@
 (def- lisp-filetypes [:clojure :fennel :lisp])
 
 (use
+  ;; Let packer manage itself.
   :wbthomason/packer.nvim {}
 
   ;; directory / file viewer. Largely replaces netrw.
