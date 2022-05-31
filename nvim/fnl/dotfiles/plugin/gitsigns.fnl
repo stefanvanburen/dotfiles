@@ -1,5 +1,5 @@
 (module dotfiles.plugin.gitsigns
-  {autoload {gitsigns gitsigns}})
+  {autoload {: gitsigns}})
 
 (defn- on-attach [bufnr]
   (let [gs package.loaded.gitsigns

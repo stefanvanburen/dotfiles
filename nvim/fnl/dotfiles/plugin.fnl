@@ -1,7 +1,7 @@
 (module dotfiles.plugin
     {autoload {a aniseed.core
                str aniseed.string
-               packer packer}})
+               : packer}})
 
 (defn safe-require-plugin-config [name]
   (let [(ok? val-or-err) (pcall require (.. :dotfiles.plugin. name))]
