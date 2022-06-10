@@ -15,7 +15,7 @@
 ;; colorscheme
 (opt :termguicolors true)
 (opt :background :light)
-(vim.api.nvim_command "colorscheme rams")
+(vim.api.nvim_command "colorscheme zenwritten")
 
 ;; don't wrap by default
 (wopt :wrap false)

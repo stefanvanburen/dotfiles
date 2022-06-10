@@ -154,8 +154,9 @@
   ;; colorscheme creation
   :rktjmp/lush.nvim {}
 
-  ;; colorscheme
-  :stefanvanburen/rams {})
+  ;; colorschemes
+  :stefanvanburen/rams {}
+  :mcchrish/zenbones.nvim {})
 
 ;;; settings for plugins
 

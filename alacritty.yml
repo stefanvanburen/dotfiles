@@ -117,41 +117,68 @@ font:
   size: 12.0
 
 # https://github.com/alacritty/alacritty/wiki/Color-schemes
+# colors:
+#   # Default colors
+#   primary:
+#     # from rams
+#     background: '0xeeeeee'
+#     foreground: '0x4d4d4c'
+
+#   cursor:
+#     # The defaults
+#     text: CellBackground
+#     cursor: CellForeground
+#     # from rams
+#     # cursor: '0xee483e'
+
+#   # Normal colors
+#   normal:
+#     black:   '0x4d4d4c'
+#     red:     '0xd7005f'
+#     green:   '0x718c00'
+#     yellow:  '0xd75f00'
+#     blue:    '0x4271ae'
+#     magenta: '0x8959a8'
+#     cyan:    '0x3e999f'
+#     white:   '0xd1d1d1'
+
+#   # Bright colors
+#   bright:
+#     black:   '0x969694'
+#     red:     '0xd7005f'
+#     green:   '0x718c00'
+#     yellow:  '0xd75f00'
+#     blue:    '0x4271ae'
+#     magenta: '0x8959a8'
+#     cyan:    '0x3e999f'
+#     white:   '0xf5f5f5'
+
+# https://github.com/mcchrish/zenbones.nvim/blob/main/extras/alacritty/zenwritten_light.yml
 colors:
-  # Default colors
   primary:
-    # from rams
-    background: '0xeeeeee'
-    foreground: '0x4d4d4c'
-
+    foreground: '#353535'
+    background: '#EEEEEE'
   cursor:
-    # The defaults
-    text: CellBackground
-    cursor: CellForeground
-    # from rams
-    # cursor: '0xee483e'
-
-  # Normal colors
+    cursor: '#353535'
+    text: '#EEEEEE'
   normal:
-    black:   '0x4d4d4c'
-    red:     '0xd7005f'
-    green:   '0x718c00'
-    yellow:  '0xd75f00'
-    blue:    '0x4271ae'
-    magenta: '0x8959a8'
-    cyan:    '0x3e999f'
-    white:   '0xd1d1d1'
-
-  # Bright colors
+    black:   '#EEEEEE'
+    red:     '#A8334C'
+    green:   '#4F6C31'
+    yellow:  '#944927'
+    blue:    '#286486'
+    magenta: '#88507D'
+    cyan:    '#3B8992'
+    white:   '#353535'
   bright:
-    black:   '0x969694'
-    red:     '0xd7005f'
-    green:   '0x718c00'
-    yellow:  '0xd75f00'
-    blue:    '0x4271ae'
-    magenta: '0x8959a8'
-    cyan:    '0x3e999f'
-    white:   '0xf5f5f5'
+    black:   '#C6C3C3'
+    red:     '#94253E'
+    green:   '#3F5A22'
+    yellow:  '#803D1C'
+    blue:    '#1D5573'
+    magenta: '#7B3B70'
+    cyan:    '#2B747C'
+    white:   '#5C5C5C'
 
 # Visual Bell
 # To completely disable the visual bell, set its duration to 0.
