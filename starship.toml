@@ -18,7 +18,7 @@ $character"""
 [character]
 success_symbol = "[;](bold white)"
 error_symbol = "[×](bold red)"
-vicmd_symbol = "[;](bold red)"
+vimcmd_symbol = "[;](bold red)"
 
 [git_branch]
 symbol = ""
