@@ -129,11 +129,3 @@
 (map :n :ySS "<Plug>YSsurround" {})
 (map :x :gs  "<Plug>VSurround" {})
 (map :x :gS  "<Plug>VgSurround" {})
-
-;; See: https://github.com/Olical/aniseed/issues/96
-(defn aniseed-reload []
-  (each [k _ (pairs package.loaded)]
-    (when (string.match k "^dotfiles%..+")
-      (tset package.loaded k nil)))
-  ((. (require :aniseed.env) :init) {:module :dotfiles.init :compile true}))
-(map :n :<leader>so aniseed-reload)
