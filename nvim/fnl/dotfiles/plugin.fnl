@@ -108,6 +108,8 @@
   :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
                                     :mod :treesitter}
 
+  :jose-elias-alvarez/null-ls.nvim {:mod :null-ls}
+
   ;; Automatically match parenthesis
   :tmsvg/pear-tree {}
 
