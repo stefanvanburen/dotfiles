@@ -4,17 +4,14 @@
 #
 # $ brew install pipx
 # $ pipx install beets
-# $ pipx inject beets requests # required for spotify and fetchart plugins
+# $ pipx inject beets requests # required for fetchart plugins
 
 # Store music library in ~/Documents/music, which is on iCloud
 directory: ~/Documents/music
 
-# spotify - for metadata matches for the importer
-# https://beets.readthedocs.io/en/stable/plugins/spotify.html
-#
 # NOTE: do not use the fish plugin, as it seemingly breaks the path completion
 # of `beet import ~/Downloads/...`.
-plugins: spotify fetchart embedart
+plugins: fetchart embedart
 
 # Disable color in the UI.
 ui:
