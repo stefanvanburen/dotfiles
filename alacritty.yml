@@ -1,5 +1,13 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
+import:
+  # To set the font locally, without needing to always commit and override
+  # what's going on on other machines.
+  # Basically:
+  # - Copy the "font" block below, uncommenting the section with the desired font.
+  # - When adding new fonts, add them to the block below.
+  - ~/.config/alacritty/fonts.yml
+
 env:
   TERM: xterm-256color
 
@@ -9,6 +17,7 @@ scrolling:
   history: 0
 
 # Font configuration
+# NOTE: See the comment on "import" above.
 font:
   # I commonly switch between Iosevka Fixed (default and SS08 (PragmataPro)
   # variant), Go Mono, PragmataPro Mono (no ligatures), Berkeley Mono, and
@@ -78,21 +87,21 @@ font:
   #   family: PragmataPro Mono
   #   style: Bold Italic
 
-  normal:
-    family: Berkeley Mono
-    style: Regular
+  # normal:
+  #   family: Berkeley Mono
+  #   style: Regular
 
-  bold:
-    family: Berkeley Mono
-    style: Bold
+  # bold:
+  #   family: Berkeley Mono
+  #   style: Bold
 
-  italic:
-    family: Berkeley Mono
-    style: Italic
+  # italic:
+  #   family: Berkeley Mono
+  #   style: Italic
 
-  bold_italic:
-    family: Berkeley Mono
-    style: Bold Italic
+  # bold_italic:
+  #   family: Berkeley Mono
+  #   style: Bold Italic
 
   # normal:
   #   family: JetBrains Mono
