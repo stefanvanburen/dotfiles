@@ -1,4 +1,5 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 import:
   # To set the font locally, without needing to always commit and override
