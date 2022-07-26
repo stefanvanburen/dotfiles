@@ -31,6 +31,8 @@ brew "ripgrep"
 brew "starship"
 # Terminal multiplexer
 brew "tmux"
+# fonts
+tap "homebrew/cask-fonts"
 
 # [homebrew-bundle's README][^1] designates the example Brewfile as `ruby` in the markdown.
 # [^1]: https://github.com/Homebrew/homebrew-bundle/blob/master/README.md
