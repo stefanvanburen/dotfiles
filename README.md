@@ -40,3 +40,5 @@ Install `fzf` key bindings and fuzzy completion:
 ```sh
 /opt/homebrew/opt/fzf/install # then, follow the prompts
 ```
+
+Set up fonts in alacritty (see [alacritty.yml](./alacritty.yml) for details)
