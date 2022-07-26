@@ -11,6 +11,13 @@ import:
 env:
   TERM: xterm-256color
 
+window:
+  # When specifying "none", the title bar is hidden, which makes it difficult
+  # to move the window.
+  # "buttonless" seems to make it possible to "grab" the window at the top,
+  # which makes it easier to reposition.
+  decorations: buttonless
+
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
