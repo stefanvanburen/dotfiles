@@ -14,6 +14,8 @@ brew "gh"
 brew "git"
 # Better `git diff` output - used as a pager by `git`
 brew "git-delta"
+# Latest version of go - for vim-go tool binaries
+brew "go"
 # jumping around - bound to `z` in fish.
 brew "jump"
 # project-specific commands - abbreviated to `j` in fish.
