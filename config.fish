@@ -66,3 +66,6 @@ end
 # Increase MacOS file limits
 # https://wilsonmar.github.io/maximum-limits/
 ulimit -n 524288
+
+# Set up vi key bindings
+fish_vi_key_bindings
