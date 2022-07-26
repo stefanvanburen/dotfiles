@@ -90,6 +90,12 @@
 	; recommended by delta
 	colorMoved = default
 
+[include]
+	# path relative to this file - so, currently:
+	# ~/.config/git/local_config
+	# This is useful to override the settings in this file if needed.
+	path = local_config
+
 [init]
 	; initialize repositories with "main" as the default branch
 	defaultBranch = main
