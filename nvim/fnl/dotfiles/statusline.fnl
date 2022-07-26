@@ -3,7 +3,7 @@
 
 (let [stl ["%f"
            "%m "
-           " %{FugitiveHead()}"
+           "%{FugitiveHead()}"
            "%="
            "%l,%c "
            "%{&filetype}"]]
