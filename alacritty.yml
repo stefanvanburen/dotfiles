@@ -16,7 +16,10 @@ window:
   # to move the window.
   # "buttonless" seems to make it possible to "grab" the window at the top,
   # which makes it easier to reposition.
-  decorations: buttonless
+  # However, "buttonless" also hides the title bar, which means that when
+  # "grabbing" the top of the window, it'll also overwrite any existing cursor
+  # position, selections, etc.
+  decorations: full
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
