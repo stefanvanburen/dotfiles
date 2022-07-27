@@ -17,7 +17,7 @@
 (defn- capable? [client capability]
   (. client.server_capabilities capability))
 
-(defn- on-attach [client bufnr]
+(defn on-attach [client bufnr]
   ; NOTE: Useful for debugging
   ; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
   ; (print (vim.inspect client))
