@@ -24,6 +24,7 @@ set -gx FZF_CTRL_T_OPTS  "--layout=reverse --no-info --no-color --preview 'bat -
 set -gx NO_COLOR 1
 
 # Homebrew settings
+# https://docs.brew.sh/Manpage#environment
 # Disable fancy colors and analytics
 set -gx HOMEBREW_NO_ANALYTICS 1
 set -gx HOMEBREW_NO_COLOR 1
