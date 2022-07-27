@@ -1,8 +1,5 @@
 (module dotfiles.lsp
-  {autoload {: nvim-lsp-installer
-             : lspconfig}})
-
-(nvim-lsp-installer.setup {})
+  {autoload {: lspconfig}})
 
 (def- create-autocmd vim.api.nvim_create_autocmd)
 (def- create-augroup vim.api.nvim_create_augroup)
