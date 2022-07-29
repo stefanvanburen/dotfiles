@@ -1,6 +1,7 @@
 (module dotfiles.plugin.gitsigns
   {autoload {: gitsigns}})
 
+;; https://github.com/lewis6991/gitsigns.nvim#keymaps
 (defn- on-attach [bufnr]
   (let [gs package.loaded.gitsigns
         map (fn [mode l r ?opts]
