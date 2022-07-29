@@ -1,4 +1,5 @@
-(module dotfiles.mapping)
+(module dotfiles.mapping
+  {autoload {: fzf-lua}})
 
 ;; alias function
 (def map vim.keymap.set)
@@ -37,10 +38,10 @@
 (leader-map :sw "StripWhitespace")
 
 ;; fzf - https://github.com/junegunn/fzf.vim
-(leader-map :f "FzfLua files")
-(leader-map :<enter> "FzfLua git_files")
-(leader-map :<leader> "FzfLua buffers")
-(leader-map :se "FzfLua grep_project")
+(map :n :<leader>f        fzf-lua.files        {})
+(map :n :<leader><enter>  fzf-lua.git_files    {})
+(map :n :<leader><leader> fzf-lua.buffers      {})
+(map :n :<leader>se       fzf-lua.grep_project {})
 
 ;; open-browser.vim
 (map :n :gx "<plug>(openbrowser-smart-search)" {})
