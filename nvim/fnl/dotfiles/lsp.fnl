@@ -4,12 +4,6 @@
 (def- create-autocmd vim.api.nvim_create_autocmd)
 (def- create-augroup vim.api.nvim_create_augroup)
 
-;; See `:help vim.diagnostic.*` for documentation on any of the below functions
-(vim.keymap.set :n "<leader>?"  vim.diagnostic.open_float)
-(vim.keymap.set :n "[w"         vim.diagnostic.goto_prev)
-(vim.keymap.set :n "]w"         vim.diagnostic.goto_next)
-(vim.keymap.set :n "<leader>q"  vim.diagnostic.setloclist)
-
 (defn- buffer-map [bufnr from to]
   "Sets a normal mode mapping within a buffer."
   (vim.keymap.set :n from to {:buffer bufnr :silent true}))

@@ -21,6 +21,12 @@
 ;; LocalLeader is the comma key
 (set vim.g.maplocalleader ",")
 
+;; See `:help vim.diagnostic.*` for documentation on any of the below functions
+(map :n :<leader>? vim.diagnostic.open_float)
+(map :n "[w"       vim.diagnostic.goto_prev)
+(map :n "]w"       vim.diagnostic.goto_next)
+(map :n :<leader>q vim.diagnostic.setloclist)
+
 ;; packer
 ;; Clean, update and install plugins, then regenerate compiled loader file.
 ;; PackerUpdate -> PackerCompile
