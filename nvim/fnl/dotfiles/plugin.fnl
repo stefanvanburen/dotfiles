@@ -39,9 +39,6 @@
   {:requires [[:nvim-lua/plenary.nvim]]
    :mod :gitsigns}
 
-  ;; Better whitespace highlighting / provides :StripWhitespace
-  :ntpeters/vim-better-whitespace {}
-
   ;; git!
   :tpope/vim-fugitive {}
   ;; GitHub!

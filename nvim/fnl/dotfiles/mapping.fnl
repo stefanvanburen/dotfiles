@@ -40,9 +40,6 @@
 (leader-map :gp "G push")
 (leader-map :gb "G blame")
 
-;; vim-better-whitespace
-(leader-map :sw "StripWhitespace")
-
 ;; fzf - https://github.com/junegunn/fzf.vim
 (map :n :<leader>f        fzf-lua.files        {})
 (map :n :<leader><enter>  fzf-lua.git_files    {})
