@@ -55,9 +55,6 @@
   ;; but now I'm not so sure. Unfortunately there isn't a better one that I
   ;; know of.
   :blankname/vim-fish {}
-  ;; https://github.com/othree/html5.vim
-  ;; HTML5 and SVG autocomplete and syntax highlighting
-  :othree/html5.vim {}
   ;; https://github.com/hail2u/vim-css3-syntax
   ;; Unsure if this plugin is _much_ better than the default CSS files, but is
   ;; well maintained.
