@@ -55,11 +55,6 @@
   ;; but now I'm not so sure. Unfortunately there isn't a better one that I
   ;; know of.
   :blankname/vim-fish {}
-  ;; https://github.com/hail2u/vim-css3-syntax
-  ;; Unsure if this plugin is _much_ better than the default CSS files, but is
-  ;; well maintained.
-  ;; https://github.com/hail2u/vim-css3-syntax/issues/65
-  :hail2u/vim-css3-syntax {}
   ;; https://github.com/pangloss/vim-javascript
   ;; "Vastly improved Javascript indentation and syntax support in Vim."
   :pangloss/vim-javascript {}
