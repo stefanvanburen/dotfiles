@@ -55,9 +55,6 @@
   ;; but now I'm not so sure. Unfortunately there isn't a better one that I
   ;; know of.
   :blankname/vim-fish {}
-  ;; https://github.com/pangloss/vim-javascript
-  ;; "Vastly improved Javascript indentation and syntax support in Vim."
-  :pangloss/vim-javascript {}
   ;; https://github.com/tmux-plugins/vim-tmux
   ;; "vim plugin for tmux.conf"
   ;; Simple, useful. Not updated all that often, but probably fine? And I doubt
