@@ -59,6 +59,11 @@
 	; For showing stashes
 	stashes = stash list
 
+	; stash staged
+	; This is useful to stash things unrelated to what's currently being
+	; worked on, for later.
+	ss = stash push --staged
+
 	; mnemonic for submodule
 	su = submodule
 
