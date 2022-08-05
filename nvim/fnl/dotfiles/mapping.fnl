@@ -40,7 +40,7 @@
 (leader-map :gp "G push")
 (leader-map :gb "G blame")
 
-;; fzf - https://github.com/junegunn/fzf.vim
+;; fzf-lua - https://github.com/ibhagwan/fzf-lua
 (map :n :<leader>f        fzf-lua.files        {})
 (map :n :<leader><enter>  fzf-lua.git_files    {})
 (map :n :<leader><leader> fzf-lua.buffers      {})
