@@ -61,9 +61,6 @@
   ;; there's a built-in runtime file for .tmux.conf?
   :tmux-plugins/vim-tmux {}
 
-  ;; up-to-date git filetypes
-  :tpope/vim-git {}
-
   ;; https://github.com/fatih/vim-go
   ;; "Vim development plugin for Go"
   :fatih/vim-go {:run ":GoInstallBinaries"}
