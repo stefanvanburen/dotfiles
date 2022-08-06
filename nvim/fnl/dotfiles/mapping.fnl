@@ -41,10 +41,13 @@
 (leader-map :gb "G blame")
 
 ;; fzf-lua - https://github.com/ibhagwan/fzf-lua
-(map :n :<leader>f        fzf-lua.files        {})
-(map :n :<leader><enter>  fzf-lua.git_files    {})
-(map :n :<leader><leader> fzf-lua.buffers      {})
-(map :n :<leader>se       fzf-lua.grep_project {})
+(map :n :<leader>ff fzf-lua.files)
+(map :n :<leader>fg fzf-lua.git_files)
+(map :n :<leader>fb fzf-lua.buffers)
+(map :n :<leader>fl fzf-lua.grep_project)
+(map :n :<leader>fh fzf-lua.help_tags)
+(map :n :<leader>fr fzf-lua.lsp_references)
+(map :n :<leader>fs fzf-lua.git_stash)
 
 ;; open-browser.vim
 (map :n :gx "<plug>(openbrowser-smart-search)" {})
