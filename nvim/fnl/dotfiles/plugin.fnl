@@ -119,9 +119,6 @@
   ;; Repeat plugin maps
   :tpope/vim-repeat {}
 
-  ;; Break bad vim habits
-  :takac/vim-hardtime {}
-
   ;; Handy bracket ( ] and [ ) mappings
   :tpope/vim-unimpaired {}
 
@@ -172,9 +169,3 @@
 ;; disable vim-surround's default mappings, replacing most of
 ;; them in mapping.fnl, to work with lightspeed.nvim.
 (set vim.g.surround_no_mappings 1)
-
-;; vim-hardtime
-;; turn on by default
-; (set vim.g.hardtime_default_on 1)
-;; default set, without "-", which is used to activate vim-dirvish
-(set vim.g.list_of_normal_keys ["h" "j" "k" "l" "+" "<UP>" "<DOWN>" "<LEFT>" "<RIGHT>"])
