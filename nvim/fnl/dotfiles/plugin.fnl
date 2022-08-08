@@ -94,9 +94,6 @@
 
   :jose-elias-alvarez/null-ls.nvim {:mod :null-ls}
 
-  ;; Automatically match parenthesis
-  :tmsvg/pear-tree {}
-
   ;; testing / build commands
   :tpope/vim-dispatch {}
   :vim-test/vim-test {}
@@ -150,10 +147,6 @@
 ;; Disable matchup's offscreen feature, which usually replaces the statusline
 ;; with the match.
 (set vim.g.matchup_matchparen_offscreen {})
-
-(set vim.g.pear_tree_repeatable_expand 0)
-;; disable pear-tree for lispy languages, covered by parinfer
-(set vim.g.pear_tree_ft_disabled lisp-filetypes)
 
 ;; using open-browser.vim for `gx`
 (set vim.g.netrw_nogx 1)
