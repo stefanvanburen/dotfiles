@@ -69,8 +69,17 @@
 (lspconfig.gopls.setup {:on_attach on-attach
                         :handlers handlers
                         :cmd ["gopls" "-remote=auto"]
+                        ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
                         :settings {:gopls {:staticcheck true
-                                           :analyses {:unusedparams true}}}})
+                                           :analyses {:unusedparams true}
+                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+                                           :hints {:parameterNames true
+                                                   :assignVariableTypes true
+                                                   :compositeLiteralFields true
+                                                   :compositeLiteralTypes true
+                                                   :constantValues true
+                                                   :functionTypeParameters true
+                                                   :rangeVariableTypes true}}}})
 
 (lspconfig.clojure_lsp.setup {:on_attach on-attach
                               :handlers handlers})
