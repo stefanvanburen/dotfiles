@@ -61,10 +61,6 @@
   ;; there's a built-in runtime file for .tmux.conf?
   :tmux-plugins/vim-tmux {}
 
-  ;; https://github.com/fatih/vim-go
-  ;; "Vim development plugin for Go"
-  :fatih/vim-go {:run ":GoInstallBinaries"}
-
   ;; profiling startup time
   :dstein64/vim-startuptime {}
 
