@@ -120,9 +120,6 @@
   ;; Easily search for, substitute, and abbreviate multiple variants of a word
   :tpope/vim-abolish {}
 
-  ;; formatting and text objects for JSON
-  :tpope/vim-jdaddy {}
-
   ;; colorscheme creation
   :rktjmp/lush.nvim {}
 
