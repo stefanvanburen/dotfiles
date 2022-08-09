@@ -111,9 +111,6 @@
   ;; Deal with parentheses, quotes, etc.
   :tpope/vim-surround {}
 
-  ;; Repeat plugin maps
-  :tpope/vim-repeat {}
-
   ;; Handy bracket ( ] and [ ) mappings
   :tpope/vim-unimpaired {}
 
