@@ -76,8 +76,6 @@
   :lewis6991/impatient.nvim {}
 
   ;; lisp languages
-  :guns/vim-sexp {:ft lisp-filetypes}
-  :tpope/vim-sexp-mappings-for-regular-people {:ft lisp-filetypes}
   :Olical/conjure {:ft lisp-filetypes}
   :gpanders/nvim-parinfer {}
   :clojure-vim/clojure.vim {}
@@ -153,11 +151,6 @@
 
 ;; vim-test x dispatch
 (set vim.g.test#strategy "dispatch")
-
-;; vim-sexp & vim-sexp-mappings-for-regular-people
-(set vim.g.sexp_filetypes (str.join "," lisp-filetypes))
-;; These mappings conflict with parinfer.
-(set vim.g.sexp_enable_insert_mode_mappings 0)
 
 ;; disable vim-surround's default mappings, replacing most of
 ;; them in mapping.fnl, to work with lightspeed.nvim.
