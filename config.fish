@@ -10,7 +10,6 @@ set -gx GLAMOUR_STYLE light
 
 # use `fd` instead of `find` by default with fzf.
 set fzf_default_command 'fd --type file --follow --hidden --exclude .git'
-
 set -gx FZF_DEFAULT_COMMAND $fzf_default_command
 set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
 
@@ -53,6 +52,10 @@ if status --is-interactive
     abbr --add --global j just
     abbr --add --global rd rmdir
 
+    # Set up vi key bindings
+    # https://fishshell.com/docs/current/interactive.html#vi-mode-commands
+    set -g fish_key_bindings fish_vi_key_bindings
+
     # set terminal colors
     fish_config theme choose 'Mono Lace'
 
@@ -67,6 +70,3 @@ end
 # Increase MacOS file limits
 # https://wilsonmar.github.io/maximum-limits/
 ulimit -n 524288
-
-# Set up vi key bindings
-fish_vi_key_bindings
