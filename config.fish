@@ -13,6 +13,11 @@ set fzf_default_command 'fd --type file --follow --hidden --exclude .git'
 set -gx FZF_DEFAULT_COMMAND $fzf_default_command
 set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
 
+# use fzf-tmux by default
+set -gx FZF_TMUX 1
+# Use a tmux popup window
+set -gx FZF_TMUX_OPTS '-p'
+
 # reverse fzf's layout - by default, the input is at the bottom of the screen - I prefer it at the top.
 # turn off info and color in fzf's output (including the `bat` preview)
 set -gx FZF_DEFAULT_OPTS '--layout=reverse --no-info --no-color'
