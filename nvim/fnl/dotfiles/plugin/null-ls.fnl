@@ -4,7 +4,5 @@
 
 (null-ls.setup
   {:sources [null-ls.builtins.diagnostics.buf
-             null-ls.builtins.formatting.buf
-             null-ls.builtins.diagnostics.eslint
-             null-ls.builtins.formatting.prettier]
+             null-ls.builtins.formatting.buf]
    :on_attach lsp.on-attach})
