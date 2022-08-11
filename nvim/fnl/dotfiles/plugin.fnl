@@ -61,6 +61,10 @@
   ;; there's a built-in runtime file for .tmux.conf?
   :tmux-plugins/vim-tmux {}
 
+  ;; Run `goimports` on save.
+  :mattn/vim-goimports {:run ":MasonInstall goimports"
+                        :requires [[:williamboman/mason.nvim]]}
+
   ;; profiling startup time
   :dstein64/vim-startuptime {}
 
