@@ -83,6 +83,3 @@
 
 (lspconfig.clojure_lsp.setup {:on_attach on-attach
                               :handlers handlers})
-
-(lspconfig.eslint.setup {:on_attach on-attach
-                         :handlers handlers})
