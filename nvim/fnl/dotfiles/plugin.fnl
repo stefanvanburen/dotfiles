@@ -96,6 +96,8 @@
   :tpope/vim-dispatch {}
   :vim-test/vim-test {}
 
+  :windwp/nvim-autopairs {:mod autopairs}
+
   ;; fuzzy find
   :ibhagwan/fzf-lua {}
 
