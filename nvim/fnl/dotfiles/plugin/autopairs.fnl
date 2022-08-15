@@ -1,4 +1,4 @@
 (module dotfiles.plugin.autopairs
-  {autoload {: autopairs}})
+  {autoload {: nvim-autopairs}})
 
-(autopairs.setup)
+(nvim-autopairs.setup)
