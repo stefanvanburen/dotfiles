@@ -74,6 +74,7 @@
                         :cmd ["gopls" "-remote=auto"]
                         ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
                         :settings {:gopls {:staticcheck true
+                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                                            :analyses {:unusedparams true}
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
                                            :hints {:parameterNames true
