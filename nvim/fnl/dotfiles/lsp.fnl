@@ -1,5 +1,6 @@
 (module dotfiles.lsp
-  {autoload {: lspconfig}})
+  {autoload {: lspconfig
+             compl "lsp_compl"}})
 
 (def- create-autocmd vim.api.nvim_create_autocmd)
 (def- create-augroup vim.api.nvim_create_augroup)
@@ -15,6 +16,8 @@
   ; NOTE: Useful for debugging
   ; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
   ; (print (vim.inspect client))
+
+  (compl.attach client bufnr {})
 
   ;; Set some keybinds conditional on server capabilities
   (when (capable? client :documentFormattingProvider)

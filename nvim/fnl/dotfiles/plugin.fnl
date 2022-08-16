@@ -116,6 +116,9 @@
   ;; Handy bracket ( ] and [ ) mappings
   :tpope/vim-unimpaired {}
 
+  ;; Completion
+  :mfussenegger/nvim-lsp-compl {}
+
   ;; enhanced version of matchit plugin
   :andymass/vim-matchup {}
 
