@@ -60,6 +60,9 @@
   ;; Simple, useful. Not updated all that often, but probably fine? And I doubt
   ;; there's a built-in runtime file for .tmux.conf?
   :tmux-plugins/vim-tmux {}
+  ;; https://github.com/wfxr/protobuf.vim
+  ;; "protobuf with gRPC, grpc-gateway and grpc-swagger support"
+  :wfxr/protobuf.vim {}
 
   ;; Run `goimports` on save.
   :mattn/vim-goimports {:run ":MasonInstall goimports"
