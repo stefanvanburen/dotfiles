@@ -102,7 +102,7 @@
   :windwp/nvim-autopairs {:mod :autopairs}
 
   ;; fuzzy find
-  :ibhagwan/fzf-lua {}
+  :ibhagwan/fzf-lua {:mod :fzf}
 
   ;; Commenting
   :tpope/vim-commentary {}
