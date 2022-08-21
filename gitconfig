@@ -44,8 +44,8 @@
 	p = pull
 	pa = pull --autostash
 
-	; Pushes and sets up tracking to same named branch
-	pu = push -u
+	; mnemonic for push
+	pu = push
 	; Safer version of push --force
 	pf = push --force-with-lease
 
