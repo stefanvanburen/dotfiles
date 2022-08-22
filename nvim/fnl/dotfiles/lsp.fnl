@@ -13,13 +13,13 @@
   (. client.server_capabilities capability))
 
 (defn on-attach [client bufnr]
-  ; NOTE: Useful for debugging
-  ; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
+  ;; NOTE: Useful for debugging
+  ;; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
   ; (print (vim.inspect client))
 
+  ;; https://github.com/mfussenegger/nvim-lsp-compl#configuration
   (compl.attach client bufnr {})
 
-  ;; Set some keybinds conditional on server capabilities
   (when (capable? client :documentFormattingProvider)
     (buffer-map bufnr "<leader>af" vim.lsp.buf.formatting))
 
