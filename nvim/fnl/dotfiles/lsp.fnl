@@ -88,10 +88,5 @@
 (lspconfig.clojure_lsp.setup {:on_attach on-attach
                               :handlers handlers})
 
-(defn- bufls [args]
-  "https://github.com/bufbuild/buf-language-server"
-  (let [client-id (vim.lsp.start_client {:cmd ["bufls" "serve"]})]
-    (vim.lsp.buf_attach_client (. args buf) client-id)))
-
-(vim.api.nvim_create_autocmd "BufEnter" {:pattern "*.proto"
-                                         :callback bufls})
+(lspconfig.bufls.setup {:on_attach on-attach
+                        :handlers handlers})
