@@ -136,7 +136,10 @@
 (bopt :formatoptions "tcqjronp")
 
 ;; allows moving the cursor to where there is no actual character
-(opt :virtualedit "all")
+;; virtualedit=all has a bug when paired with vim.highlight.on_yank
+;; See: https://github.com/neovim/neovim/issues/13317
+;; For now, leave it as the default, "".
+(opt :virtualedit "")
 
 ;; ignore case when completing files / directories in wildmenu
 (opt :wildignorecase true)
