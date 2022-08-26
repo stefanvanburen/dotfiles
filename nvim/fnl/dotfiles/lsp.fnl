@@ -1,6 +1,6 @@
 (module dotfiles.lsp
   {autoload {: lspconfig
-             compl "lsp_compl"}})
+             : lsp_compl}})
 
 (def- create-autocmd vim.api.nvim_create_autocmd)
 (def- create-augroup vim.api.nvim_create_augroup)
@@ -18,7 +18,9 @@
   ; (print (vim.inspect client))
 
   ;; https://github.com/mfussenegger/nvim-lsp-compl#configuration
-  (compl.attach client bufnr {})
+  ;; null-ls typically does not provide completion.
+  (if (not= client.name "null-ls")
+    (lsp_compl.attach client bufnr {}))
 
   (when (capable? client :documentFormattingProvider)
     (buffer-map bufnr "<leader>af" vim.lsp.buf.formatting))
