@@ -38,8 +38,4 @@
   ;; This helps with setting up correct commentstring, etc
   (create-autocmd "BufRead" {:group aufiletypes
                              :pattern "justfile"
-                             :command "setfiletype make"})
-  ;; most html files that I deal with nowadays are actually go html templates.
-  (create-autocmd "BufRead,BufNewFile" {:group aufiletypes
-                                        :pattern "*.html"
-                                        :command "setfiletype gohtmltmpl"}))
+                             :command "setfiletype make"}))
