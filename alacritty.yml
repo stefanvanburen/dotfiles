@@ -130,6 +130,22 @@ font:
   #   family: JetBrains Mono
   #   style: Bold Italic
 
+  # normal:
+  #   family: Triplicate A Code
+  #   style: Regular
+
+  # bold:
+  #   family: Triplicate A Code
+  #   style: Bold
+
+  # italic:
+  #   family: Triplicate A Code
+  #   style: Italic
+
+  # bold_italic:
+  #   family: Triplicate A Code
+  #   style: Bold Italic
+
   # size: 12.0
 
 # https://github.com/alacritty/alacritty/wiki/Color-schemes
