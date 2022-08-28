@@ -25,6 +25,7 @@
                          :fish "expandtab tabstop=4 shiftwidth=4"
                          :yaml "expandtab tabstop=2 shiftwidth=2"
                          :json "expandtab tabstop=2 shiftwidth=2"
+                         :bash "expandtab tabstop=2 shiftwidth=2"
                          :gitcommit "spell"
                          :sql "wrap"
                          :markdown "spell wrap conceallevel=2 shiftwidth=2"})
