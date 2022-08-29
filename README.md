@@ -7,7 +7,7 @@ Run `./install` from this directory to install the symlinks it sets up.
 
 ## Manual Steps (for MacOS)
 
-Install [homebrew](https://docs.brew.sh/Installation):
+Install [Homebrew](https://docs.brew.sh/Installation):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
