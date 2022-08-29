@@ -209,11 +209,6 @@ colors:
     cyan:    '#2B747C'
     white:   '#5C5C5C'
 
-# Visual Bell
-# To completely disable the visual bell, set its duration to 0.
-bell:
-  duration: 0
-
 # Add alt (option) keybindings.
 # This is because otherwise alacritty doesn't know that we want alt (option) to
 # behave as a meta key, and it's useful in fish especially to have these
