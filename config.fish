@@ -9,7 +9,7 @@ set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx GLAMOUR_STYLE light
 
 # use `fd` instead of `find` by default with fzf.
-set fzf_default_command 'fd --type file --follow --hidden --exclude .git'
+set fzf_default_command 'fd --type file --follow --hidden --exclude .git --strip-cwd-prefix'
 set -gx FZF_DEFAULT_COMMAND $fzf_default_command
 set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
 
