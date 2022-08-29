@@ -20,8 +20,6 @@
                          :javascript "expandtab tabstop=2 shiftwidth=2"
                          :html "expandtab tabstop=2 shiftwidth=2"
                          :gohtmltmpl "expandtab tabstop=2 shiftwidth=2"
-                         :css "expandtab tabstop=2 shiftwidth=2 iskeyword+=-"
-                         :scss "expandtab tabstop=2 shiftwidth=2 iskeyword+=-"
                          :fish "expandtab tabstop=4 shiftwidth=4"
                          :yaml "expandtab tabstop=2 shiftwidth=2"
                          :json "expandtab tabstop=2 shiftwidth=2"
