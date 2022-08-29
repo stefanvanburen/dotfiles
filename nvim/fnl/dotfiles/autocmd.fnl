@@ -29,10 +29,10 @@
                          :markdown   {:spell true :wrap true :conceallevel 2 :shiftwidth 2}})
 
 (let [aufiletypes (create-augroup "filetypes" {})]
-  (each [k v (pairs filetype-settings)]
+  (each [filetype settings (pairs filetype-settings)]
     (create-autocmd "FileType" {:group aufiletypes
-                                :pattern k
-                                :callback #(each [name value (pairs v)]
+                                :pattern filetype
+                                :callback #(each [name value (pairs settings)]
                                              (vim.api.nvim_set_option_value name value {:scope "local"}))}))
 
   ;; treat `justfile`s as makefiles
