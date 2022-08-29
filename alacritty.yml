@@ -9,9 +9,6 @@ import:
   # - When adding new fonts, add them to the block below.
   - ~/.config/alacritty/fonts.yml
 
-env:
-  TERM: xterm-256color
-
 window:
   # When specifying "none", the title bar is hidden, which makes it difficult
   # to move the window.
