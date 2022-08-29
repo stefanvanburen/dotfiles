@@ -5,11 +5,18 @@
   {:ensure_installed ["clojure"
                       "css"
                       "fennel"
+                      "fish"
                       "html"
+                      "gitignore"
                       "go"
                       "gomod"
+                      "help"
+                      "javascript"
+                      "json"
                       "markdown"
                       "markdown_inline"
-                      "sql"]
+                      "proto"
+                      "sql"
+                      "yaml"]
    :matchup {:enable true}
    :highlight {:enable true}})
