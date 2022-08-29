@@ -37,4 +37,4 @@
   ;; This helps with setting up correct commentstring, etc
   (create-autocmd "BufRead" {:group aufiletypes
                              :pattern "justfile"
-                             :command "setfiletype make"}))
+                             :callback #(vim.api.nvim_set_option_value "filetype" "make" {:scope "local"})}))
