@@ -15,24 +15,26 @@
                                 :desc "after writing init.lua, recompile"
                                 :command "PackerCompile"})
 
-(def- filetype-settings {:go "noexpandtab tabstop=4 shiftwidth=4"
-                         :python "tabstop=4 shiftwidth=4 expandtab"
-                         :javascript "expandtab tabstop=2 shiftwidth=2"
-                         :html "expandtab tabstop=2 shiftwidth=2"
-                         :gohtmltmpl "expandtab tabstop=2 shiftwidth=2"
-                         :fish "expandtab tabstop=4 shiftwidth=4"
-                         :yaml "expandtab tabstop=2 shiftwidth=2"
-                         :json "expandtab tabstop=2 shiftwidth=2"
-                         :bash "expandtab tabstop=2 shiftwidth=2"
-                         :gitcommit "spell"
-                         :sql "wrap"
-                         :markdown "spell wrap conceallevel=2 shiftwidth=2"})
+(def- filetype-settings {:go         {:expandtab false :shiftwidth 4 :tabstop 4}
+                         :python     {:expandtab true :shiftwidth 4 :tabstop 4}
+                         :javascript {:expandtab true :shiftwidth 2 :tabstop 2}
+                         :html       {:expandtab true :shiftwidth 2 :tabstop 2}
+                         :gohtmltmpl {:expandtab true :shiftwidth 2 :tabstop 2}
+                         :fish       {:expandtab true :shiftwidth 4 :tabstop 4}
+                         :yaml       {:expandtab true :shiftwidth 2 :tabstop 2}
+                         :json       {:expandtab true :shiftwidth 2 :tabstop 2}
+                         :bash       {:expandtab true :shiftwidth 2 :tabstop 2}
+                         :gitcommit  {:spell true}
+                         :sql        {:wrap true :commentstring "-- %s"}
+                         :markdown   {:spell true :wrap true :conceallevel 2 :shiftwidth 2}})
 
 (let [aufiletypes (create-augroup "filetypes" {})]
   (each [k v (pairs filetype-settings)]
     (create-autocmd "FileType" {:group aufiletypes
                                 :pattern k
-                                :command (.. "setlocal " v)}))
+                                :callback #(each [name value (pairs v)]
+                                             (vim.api.nvim_set_option_value name value {:scope "local"}))}))
+
   ;; treat `justfile`s as makefiles
   ;; This helps with setting up correct commentstring, etc
   (create-autocmd "BufRead" {:group aufiletypes
