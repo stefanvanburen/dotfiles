@@ -123,6 +123,8 @@
 [push]
 	; push to the branch with the same name by default
 	default = current
+	; assume --set-upstream on push when no upstream tracking exists for the current branch
+	autoSetupRemote = true
 
 [pull]
 	; prefer rebasing when pulling from remote, rather than merging
