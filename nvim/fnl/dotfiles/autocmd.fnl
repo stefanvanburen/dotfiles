@@ -9,7 +9,7 @@
 
 (create-autocmd "TextYankPost" {:pattern "*"
                                 :desc "show yanked text"
-                                :callback vim.highlight.on_yank})
+                                :callback #(vim.highlight.on_yank)})
 
 (create-autocmd "BufWritePost" {:pattern "init.lua"
                                 :desc "after writing init.lua, recompile"

@@ -29,10 +29,10 @@
     (let [augroup (create-augroup "lsp-document-highlight" {})]
       (create-autocmd "CursorHold"  {:group augroup
                                      :buffer bufnr
-                                     :callback vim.lsp.buf.document_highlight})
+                                     :callback #(vim.lsp.buf.document_highlight)})
       (create-autocmd "CursorMoved" {:group augroup
                                      :buffer bufnr
-                                     :callback vim.lsp.buf.clear_references})))
+                                     :callback #(vim.lsp.buf.clear_references)})))
 
   (when (capable? client :completionProvider)
     (vim.api.nvim_buf_set_option bufnr "omnifunc" "v:lua.vim.lsp.omnifunc"))
