@@ -53,11 +53,9 @@
   ;; but now I'm not so sure. Unfortunately there isn't a better one that I
   ;; know of.
   :blankname/vim-fish {}
-  ;; https://github.com/tmux-plugins/vim-tmux
-  ;; "vim plugin for tmux.conf"
-  ;; Simple, useful. Not updated all that often, but probably fine? And I doubt
-  ;; there's a built-in runtime file for .tmux.conf?
-  :tmux-plugins/vim-tmux {}
+  ;; https://github.com/ericpruitt/tmux.vim
+  ;; "Vim syntax file for tmux configuration files"
+  :ericpruitt/tmux.vim {}
   ;; https://github.com/wfxr/protobuf.vim
   ;; "protobuf with gRPC, grpc-gateway and grpc-swagger support"
   :wfxr/protobuf.vim {}
