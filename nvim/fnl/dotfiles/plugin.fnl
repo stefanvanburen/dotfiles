@@ -59,6 +59,9 @@
   ;; https://github.com/wfxr/protobuf.vim
   ;; "protobuf with gRPC, grpc-gateway and grpc-swagger support"
   :wfxr/protobuf.vim {}
+  ;; https://github.com/lifepillar/pgsql.vim
+  ;; "Vim PostgreSQL syntax plugin"
+  :lifepillar/pgsql.vim {}
 
   ;; Run `goimports` on save.
   :mattn/vim-goimports {:run ":MasonInstall goimports"
@@ -151,3 +154,6 @@
 ;; disable vim-surround's default mappings, replacing most of
 ;; them in mapping.fnl, to work with lightspeed.nvim.
 (set vim.g.surround_no_mappings 1)
+
+;; default *.sql files to postgres filetype
+(set vim.g.sql_type_default "pgsql")
