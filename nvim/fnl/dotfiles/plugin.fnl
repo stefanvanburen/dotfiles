@@ -35,9 +35,7 @@
   :tyru/open-browser.vim {}
 
   ;; Adds git added / modified / deleted in the sidebar (amongst other things)
-  :lewis6991/gitsigns.nvim
-  {:requires [[:nvim-lua/plenary.nvim]]
-   :mod :gitsigns}
+  :lewis6991/gitsigns.nvim {:mod :gitsigns}
 
   ;; git!
   :tpope/vim-fugitive {}
