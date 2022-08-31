@@ -92,7 +92,9 @@
   :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
                                     :mod :treesitter}
 
-  :jose-elias-alvarez/null-ls.nvim {:mod :null-ls}
+  ;; LSP-capabilities for tools that don't support LSP
+  :jose-elias-alvarez/null-ls.nvim {:mod :null-ls
+                                    :requires [[:nvim-lua/plenary.nvim]]}
 
   ;; testing / build commands
   :tpope/vim-dispatch {}
