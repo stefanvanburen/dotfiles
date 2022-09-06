@@ -2,9 +2,6 @@
 
 fish, neovim, tmux, git
 
-I use [dotbot](https://github.com/anishathalye/dotbot) for managing my dotfiles.
-Run `./install` from this directory to install the symlinks it sets up.
-
 ## Manual Steps (for MacOS)
 
 Install [Homebrew](https://docs.brew.sh/Installation):
@@ -19,13 +16,13 @@ Install [`brew bundle`](https://github.com/Homebrew/homebrew-bundle):
 brew tap homebrew/bundle
 ```
 
-Install the base dependencies in the [Brewfile](./Brewfile):
+Install the base dependencies in the [Brewfile](./local/share/Brewfile):
 
 ```sh
-brew bundle install
+brew bundle install --file=~/.local/share/Brewfile
 ```
 
-Create an ssh key (follow the instructions in [ssh-config](./ssh-config)), and add it to [GitHub](https://github.com/settings/keys) and [sourcehut](https://meta.sr.ht/keys).
+Create an ssh key (follow the instructions in [ssh-config](./ssh/config)), and add it to [GitHub](https://github.com/settings/keys) and [sourcehut](https://meta.sr.ht/keys).
 
 Set the shell for the user to `fish`:
 
@@ -41,4 +38,4 @@ Install `fzf` key bindings and fuzzy completion:
 /opt/homebrew/opt/fzf/install # then, follow the prompts
 ```
 
-Set up fonts in Alacritty (see [alacritty.yml](./alacritty.yml) for details)
+Set up fonts in Alacritty (see [alacritty.yml](./config/alacritty/alacritty.yml) for details)
