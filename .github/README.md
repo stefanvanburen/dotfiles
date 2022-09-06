@@ -2,6 +2,16 @@
 
 fish, neovim, tmux, git
 
+## Setup
+
+```console
+cd ~
+git init
+git remote add origin https://github.com/stefanvanburen/dotfiles
+git fetch
+git checkout -f main
+```
+
 ## Manual Steps (for MacOS)
 
 Install [Homebrew](https://docs.brew.sh/Installation):
