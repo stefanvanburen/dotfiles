@@ -22,8 +22,6 @@
             (use (a.assoc opts 1 name)))))))
   nil)
 
-(def- lisp-filetypes [:clojure :fennel :lisp])
-
 (use
   ;; Let packer manage itself.
   :wbthomason/packer.nvim {}
@@ -78,7 +76,7 @@
   :lewis6991/impatient.nvim {}
 
   ;; lisp languages
-  :Olical/conjure {:ft lisp-filetypes}
+  :Olical/conjure {}
   :gpanders/nvim-parinfer {}
   :clojure-vim/clojure.vim {}
 
