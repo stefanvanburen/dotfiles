@@ -4,12 +4,12 @@ fish, neovim, tmux, git
 
 ## Setup
 
-```shell
-cd ~
-git init
-git remote add origin https://github.com/stefanvanburen/dotfiles
-git fetch
-git checkout -f main
+```console
+$ cd ~
+$ git init
+$ git remote add origin https://github.com/stefanvanburen/dotfiles
+$ git fetch
+$ git checkout -f main
 ```
 
 ## Manual Steps (for MacOS)
