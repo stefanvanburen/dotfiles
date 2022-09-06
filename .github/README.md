@@ -4,7 +4,7 @@ fish, neovim, tmux, git
 
 ## Setup
 
-```console
+```shell
 cd ~
 git init
 git remote add origin https://github.com/stefanvanburen/dotfiles
