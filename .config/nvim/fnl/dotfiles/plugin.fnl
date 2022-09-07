@@ -103,10 +103,6 @@
 
   :windwp/nvim-autopairs {:mod :autopairs}
 
-  ;; https://github.com/lewis6991/spellsitter.nvim
-  ;; "Enable Neovim's builtin spellchecker for buffers with tree-sitter highlighting."
-  :lewis6991/spellsitter.nvim {:mod :spellsitter}
-
   ;; fuzzy find
   :ibhagwan/fzf-lua {:mod :fzf}
 
