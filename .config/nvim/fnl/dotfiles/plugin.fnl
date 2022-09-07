@@ -61,6 +61,9 @@
   ;; "Vim PostgreSQL syntax plugin"
   :lifepillar/pgsql.vim {}
 
+  ;; syntax for gotmpl files
+  :mattn/vim-gotmpl {}
+
   ;; Run `goimports` on save.
   :mattn/vim-goimports {:run ":MasonInstall goimports"
                         :requires [[:williamboman/mason.nvim]]}
