@@ -16,20 +16,20 @@ $status\
 $character"""
 
 [character]
-success_symbol = "[;](bold white)"
+success_symbol = "[;](bold black)"
 error_symbol = "[×](bold red)"
 vimcmd_symbol = "[;](bold red)"
 
 [git_branch]
 symbol = ""
-style = "white"
+style = "black"
 
 [git_status]
-style = "white"
+style = "black"
 deleted = "×"
 format = "[$all_status$ahead_behind]($style) "
 # this is still quite slow for not much gain
 disabled = true
 
 [directory]
-style = "white"
+style = "black"
