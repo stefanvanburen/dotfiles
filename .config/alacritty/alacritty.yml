@@ -153,8 +153,8 @@ colors:
   # Default colors
   primary:
     # from rams
-    background: '0xeeeeee'
-    foreground: '0x4d4d4c'
+    background: '0xebebeb'
+    foreground: '0x262b31'
 
   cursor:
     # The defaults
