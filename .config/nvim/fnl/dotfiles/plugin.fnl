@@ -151,7 +151,7 @@
 (set vim.g.test#strategy "dispatch")
 
 ;; disable vim-surround's default mappings, replacing most of
-;; them in mapping.fnl, to work with lightspeed.nvim.
+;; them in mapping.fnl, to work with leap.nvim.
 (set vim.g.surround_no_mappings 1)
 
 ;; default *.sql files to postgres filetype

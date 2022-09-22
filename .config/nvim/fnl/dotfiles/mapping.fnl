@@ -123,7 +123,7 @@
 
 (map :n "<C-l>" ":nohlsearch<cr>" {})
 
-;; vim-surround mappings to work with lightspeed.nvim
+;; vim-surround mappings to work with leap.nvim
 (map :n :ds  "<Plug>Dsurround" {})
 (map :n :cs  "<Plug>Csurround" {})
 (map :n :cS  "<Plug>CSurround" {})
