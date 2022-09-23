@@ -10,6 +10,7 @@ $ git init
 $ git remote add origin https://github.com/stefanvanburen/dotfiles
 $ git fetch
 $ git checkout -f main
+$ git config status.showUntrackedFiles no
 ```
 
 ## Manual Steps (for MacOS)
