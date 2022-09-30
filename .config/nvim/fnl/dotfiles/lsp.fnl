@@ -86,3 +86,6 @@
 
 (lspconfig.bufls.setup {:on_attach on-attach
                         :handlers handlers})
+
+(lspconfig.pylsp.setup {:on_attach on-attach
+                        :handlers handlers})
