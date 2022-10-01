@@ -34,12 +34,6 @@
                                      :buffer bufnr
                                      :callback #(vim.lsp.buf.clear_references)})))
 
-  (when (capable? client :completionProvider)
-    (vim.api.nvim_buf_set_option bufnr "omnifunc" "v:lua.vim.lsp.omnifunc"))
-
-  (when (capable? client :definitionProvider)
-    (vim.api.nvim_buf_set_option bufnr "tagfunc" "v:lua.vim.lsp.tagfunc"))
-
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
   (buffer-map bufnr "gD"         vim.lsp.buf.declaration)
