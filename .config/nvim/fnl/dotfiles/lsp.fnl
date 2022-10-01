@@ -8,24 +8,18 @@
   "Sets a normal mode mapping within a buffer."
   (vim.keymap.set :n from to {:buffer bufnr :silent true}))
 
-(defn- capable? [client capability]
-  (. client.server_capabilities capability))
-
 (defn on-attach [client bufnr]
   ;; NOTE: Useful for debugging
   ;; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
   ; (print (vim.inspect client))
 
-  (when (capable? client :documentFormattingProvider)
-    (buffer-map bufnr "<leader>af" vim.lsp.buf.formatting))
+  (when client.server_capabilities.documentFormattingProvider
+    (buffer-map bufnr "<leader>af" vim.lsp.buf.format))
 
-  (when (capable? client :documentRangeFormattingProvider)
-    (buffer-map bufnr "<leader>rf" vim.lsp.buf.range_formatting))
-
-  (when (capable? client :hoverProvider)
+  (when client.server_capabilities.hoverProvider
     (buffer-map bufnr "K"          vim.lsp.buf.hover))
 
-  (when (capable? client :documentHighlightProvider)
+  (when client.server_capabilities.documentHighlightProvider
     (let [augroup (create-augroup "lsp-document-highlight" {})]
       (create-autocmd "CursorHold"  {:group augroup
                                      :buffer bufnr
