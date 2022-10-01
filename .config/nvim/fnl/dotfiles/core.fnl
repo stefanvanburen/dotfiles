@@ -1,41 +1,30 @@
 (module dotfiles.core
   {autoload {str aniseed.string}})
 
-(defn- opt [name value]
-  (vim.api.nvim_set_option name value))
-
-(defn- wopt [name value]
-  (vim.api.nvim_win_set_option 0 name value)
-  (opt name value))
-
-(defn- bopt [name value]
-  (vim.api.nvim_buf_set_option 0 name value)
-  (opt name value))
-
 ;; colorscheme
-(opt :termguicolors true)
-(opt :background :light)
-(vim.api.nvim_command "colorscheme rams")
+(set vim.o.termguicolors true)
+(set vim.o.background :light)
+(vim.cmd.colorscheme :rams)
 
 ;; don't wrap by default
-(wopt :wrap false)
+(set vim.o.wrap false)
 
 ;; always show the completion menu, and when it's brought up, don't select
 ;; anything by default.
-(opt :completeopt (str.join "," ["menuone" "noselect"]))
+(set vim.o.completeopt (str.join "," ["menuone" "noselect"]))
 
 ;; if wrap is set, break on characters in 'breakat' rather than the last
 ;; character that will fit on the screen.
 ;; This _should_ mean that lines generally break on words
-(wopt :linebreak true)
+(set vim.o.linebreak true)
 ;; on lines that will wrap, they instead 'break' and be visually indented by
 ;; the showbreak character, followed by the indent.
-(wopt :breakindent true)
-(wopt :breakindentopt "shift:2,sbr")
-(opt :showbreak "↳")
+(set vim.o.breakindent true)
+(set vim.o.breakindentopt "shift:2,sbr")
+(set vim.o.showbreak "↳")
 
 ;; when using > and <, round the indent to a multiple of shiftwidth
-(opt :shiftround true)
+(set vim.o.shiftround true)
 
 ;; statusline current ' '
 ;; statusline not current ' '
@@ -49,80 +38,80 @@
                  :vert  "│"
                  :fold  "·"
                  :diff  "-"}]
-  (wopt :fillchars
+  (set vim.o.fillchars
         (str.join ","
                   (icollect [k v (pairs fillchars)]
                     (str.join ":" [k v])))))
 
 ;; fold based on syntax cues
-(wopt :foldmethod :syntax)
+(set vim.o.foldmethod :syntax)
 ;; turn off folding by default
-(wopt :foldenable false)
+(set vim.o.foldenable false)
 
 ;; Global substitutions by default.
-(opt :gdefault true)
+(set vim.o.gdefault true)
 
 ;; Ignore case while searching
-(opt :ignorecase true)
+(set vim.o.ignorecase true)
 ;; ... except when capitals are used
-(opt :smartcase true)
+(set vim.o.smartcase true)
 
 ;; Copy the indent of existing lines when autoindenting
-(opt :copyindent true)
+(set vim.o.copyindent true)
 
 ;; how long to wait in milliseconds before writing to disk
 ;; this is set lower to help plugins like vim-gitgutter update their signs
-(opt :updatetime 100)
+(set vim.o.updatetime 100)
 
 ;; Helps when doing insert-mode completion
-(bopt :infercase true)
+(set vim.o.infercase true)
 
 ;; Don't redraw when using macros.
-(opt :lazyredraw false)
+(set vim.o.lazyredraw false)
 
 ;; Invisible characters
-(wopt :list true)
+(set vim.o.list true)
 (let [listchars {:tab "→ "
                  :eol "¬"
                  :trail "⣿"}]
-  (wopt :listchars
+  (set vim.o.listchars
         (str.join ","
                   (icollect [k v (pairs listchars)]
                        (str.join ":" [k v])))))
 
 ;; Don't show the mode on the command line - it's redundant with the status line.
-(opt :showmode false)
+(set vim.o.showmode false)
 
 ;; line numbers
 ;; setting these both together means that the current line number is the actual
 ;; line number of the file, while the other line numbers are relative.
-(wopt :number true)
-(wopt :relativenumber true)
+(set vim.o.number true)
+(set vim.o.relativenumber true)
 
 ;; maintain an undofile for undoing actions through neovim loads
-(bopt :undofile true)
+(set vim.o.undofile true)
 
 ;; Show matching brackets briefly.
-(opt :showmatch true)
+(set vim.o.showmatch true)
 
 ;; On horizontal split, open the split below.
-(opt :splitbelow true)
+(set vim.o.splitbelow true)
 ;; On vertical split, open the split to the right.
-(opt :splitright true)
+(set vim.o.splitright true)
 
 ;; cobbled from https://github.com/liuchengxu/vim-better-default
 ;; c: no ins-completion-menu messages
-(opt :shortmess "atOIoc")
+(set vim.o.shortmess "atOIoc")
 
 ;; turn on mouse support
 ;; this is useful for resizing windows, using the mouse wheel to scroll, etc
-(opt :mouse "a")
+(set vim.o.mouse "a")
 
 ;; always use the system clipboard for operations
-(opt :clipboard "unnamedplus")
+(set vim.o.clipboard "unnamedplus")
 
 ;; turn off swapfiles - for now, I find these more of a headache than a benefit
-(bopt :swapfile false)
+(set vim.o.swapfile false)
 
 ;; Convenience for automatic formatting.
 ;;   t - auto-wrap text using textwidth
@@ -133,16 +122,16 @@
 ;;   o - auto-insert comment leading after O in normal mode
 ;;   n - recognize numbered lists in text
 ;;   p - don't break lines at single spaces that follow periods
-(bopt :formatoptions "tcqjronp")
+(set vim.o.formatoptions "tcqjronp")
 
 ;; allows moving the cursor to where there is no actual character
 ;; virtualedit=all has a bug when paired with vim.highlight.on_yank
 ;; See: https://github.com/neovim/neovim/issues/13317
 ;; For now, leave it as the default, "".
-(opt :virtualedit "")
+(set vim.o.virtualedit "")
 
 ;; ignore case when completing files / directories in wildmenu
-(opt :wildignorecase true)
+(set vim.o.wildignorecase true)
 
 ;; Enable syntax highlighting in markdown code fences.
 ;; https://github.com/tpope/vim-markdown
