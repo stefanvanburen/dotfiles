@@ -16,7 +16,6 @@
                                 :command "PackerCompile"})
 
 (def- filetype-settings {:go         {:expandtab false :shiftwidth 4 :tabstop 4}
-                         :python     {:expandtab true :shiftwidth 4 :tabstop 4}
                          :javascript {:expandtab true :shiftwidth 2 :tabstop 2}
                          :html       {:expandtab true :shiftwidth 2 :tabstop 2}
                          :gohtmltmpl {:expandtab true :shiftwidth 2 :tabstop 2}
