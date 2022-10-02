@@ -2,6 +2,15 @@
 # This is really useful in the general case of doing `rg text` and wanting to match case-insensitively on "text".
 --smart-case
 
+# Search hidden files
+--hidden
+# exclude .git/*
+--glob=!git/*
+
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=150
+--max-columns-preview
+
 # style the match with an underline
 --colors=match:none
 --colors=match:style:underline
