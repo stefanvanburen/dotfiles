@@ -2,7 +2,7 @@ set -gx EDITOR nvim
 # https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 # https://github.com/sharkdp/bat#man
-set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -gx MANPAGER "nvim +Man!"
 
 # https://github.com/charmbracelet/glamour/tree/master/styles/gallery
 # Light mode works better with my light background
