@@ -1,5 +1,5 @@
 (module dotfiles.lsp
-  {autoload {: lspconfig}})
+  {autoload {str aniseed.string}})
 
 (def- create-autocmd vim.api.nvim_create_autocmd)
 (def- create-augroup vim.api.nvim_create_augroup)
@@ -58,23 +58,59 @@
                                 :focusable false
                                 :source "always"}})
 
-(lspconfig.gopls.setup {:handlers handlers
-                        :cmd ["gopls" "-remote=auto"]
-                        ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-                        :settings {:gopls {:staticcheck true
-                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
-                                           :analyses {:unusedparams true}
-                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-                                           :hints {:parameterNames true
-                                                   :assignVariableTypes true
-                                                   :compositeLiteralFields true
-                                                   :compositeLiteralTypes true
-                                                   :constantValues true
-                                                   :functionTypeParameters true
-                                                   :rangeVariableTypes true}}}})
+(defn- root-dir [files]
+  (vim.fs.dirname (. (vim.fs.find files {:upward true}) 1)))
 
-(lspconfig.clojure_lsp.setup {:handlers handlers})
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
+(create-autocmd
+  :FileType
+  {:pattern (str.join "," ["go" "gomod" "gowork" "gotmpl"])
+   :callback #(vim.lsp.start
+                {:name     "gopls"
+                 :handlers handlers
+                 :cmd      ["gopls" "-remote=auto"]
+                 :root_dir (root-dir ["go.work" "go.mod"])
+                 ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+                 :settings {:gopls {:staticcheck true
+                                    ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
+                                    :analyses {:unusedparams true}
+                                    ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+                                    :hints {:parameterNames true
+                                            :assignVariableTypes true
+                                            :compositeLiteralFields true
+                                            :compositeLiteralTypes true
+                                            :constantValues true
+                                            :functionTypeParameters true
+                                            :rangeVariableTypes true}}}})})
 
-(lspconfig.bufls.setup {:handlers handlers})
 
-(lspconfig.pylsp.setup {:handlers handlers})
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
+(create-autocmd
+  :FileType
+  {:pattern "clojure"
+   :callback #(vim.lsp.start {:name     "clojure-lsp"
+                              :handlers handlers
+                              :cmd      ["clojure-lsp"]
+                              :root_dir (root-dir ["deps.edn" "shadow-cljs.edn"])})})
+
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
+(create-autocmd
+  :FileType
+  {:pattern "proto"
+   :callback #(vim.lsp.start {:name     "buf-language-server"
+                              :handlers handlers
+                              :cmd      ["bufls" "serve"]
+                              :root_dir (root-dir ["buf.work.yaml" "buf.yaml"])})})
+
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
+(create-autocmd
+  :FileType
+  {:pattern "python"
+   :callback #(vim.lsp.start {:name     "python-language-server"
+                              :handlers handlers
+                              :cmd      ["pylsp"]
+                              :root_dir (root-dir ["pyproject.toml"
+                                                   "setup.py"
+                                                   "setup.cfg"
+                                                   "requirements.txt"
+                                                   "Pipfile"])})})
