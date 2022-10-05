@@ -103,10 +103,6 @@
 ;; c: no ins-completion-menu messages
 (set vim.o.shortmess "atOIoc")
 
-;; turn on mouse support
-;; this is useful for resizing windows, using the mouse wheel to scroll, etc
-(set vim.o.mouse "a")
-
 ;; always use the system clipboard for operations
 (set vim.o.clipboard "unnamedplus")
 
