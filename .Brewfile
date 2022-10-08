@@ -25,6 +25,10 @@ brew "just"
 brew "less"
 # $EDITOR
 brew "neovim"
+# install and run python applications in isolated environments
+# used to install and run beets
+# https://github.com/pypa/pipx
+brew "pipx"
 # better searching - used by `fzf` within fish and neovim - configured in "ripgreprc".
 brew "ripgrep"
 # fish prompt - configured in "starship.toml".
