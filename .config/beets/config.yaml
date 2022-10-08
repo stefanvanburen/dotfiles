@@ -1,14 +1,19 @@
 # configuration for https://beets.io
+# https://beets.readthedocs.io/en/stable/reference/config.html
 #
 # To install `beets` on macOS:
 #
 # $ brew install pipx
 # $ pipx install beets
-# $ pipx inject beets requests # required for fetchart plugins
+# $ pipx inject beets requests # required for fetchart plugin
 
 # Store music library in ~/Documents/music, which is on iCloud
 directory: ~/Documents/music
 
+# https://beets.readthedocs.io/en/stable/plugins/index.html
+#
+# https://beets.readthedocs.io/en/stable/plugins/embedart.html
+# https://beets.readthedocs.io/en/stable/plugins/fetchart.html
 # NOTE: do not use the fish plugin, as it seemingly breaks the path completion
 # of `beet import ~/Downloads/...`.
 plugins: fetchart embedart
