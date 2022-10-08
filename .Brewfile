@@ -1,4 +1,4 @@
-# These formula are the absolute base for my macOS development environment.
+# These formula are the absolute base for my macOS environment.
 
 # Better pager - aliased to `cat` in fish.
 brew "bat"
