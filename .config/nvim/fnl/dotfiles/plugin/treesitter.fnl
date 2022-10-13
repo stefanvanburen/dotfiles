@@ -18,5 +18,7 @@
                       "proto"
                       "sql"
                       "yaml"]
-   :matchup {:enable true}
+   ;; when using nvim-parinfer, this errors when uncommenting certain
+   ;; forms. disabling for now.
+   ; :matchup {:enable true}
    :highlight {:enable true}})
