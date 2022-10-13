@@ -27,6 +27,9 @@
 (map :n "]w"       vim.diagnostic.goto_next)
 (map :n :<leader>q vim.diagnostic.setloclist)
 
+;; strip whitespace, retaining cursor position
+(leader-map :sw "%s/\\s\\+$//|norm!``")
+
 ;; packer
 ;; Clean, update and install plugins, then regenerate compiled loader file.
 ;; PackerUpdate -> PackerCompile
