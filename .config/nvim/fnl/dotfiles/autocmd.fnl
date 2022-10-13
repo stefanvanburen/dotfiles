@@ -25,6 +25,7 @@
                          :bash       {:expandtab true :shiftwidth 2 :tabstop 2}
                          :gitcommit  {:spell true}
                          :sql        {:wrap true :commentstring "-- %s"}
+                         :clojure    {:expandtab true :textwidth 80}
                          :markdown   {:spell true :wrap true :conceallevel 2 :shiftwidth 2}})
 
 (let [aufiletypes (create-augroup "filetypes" {})]
