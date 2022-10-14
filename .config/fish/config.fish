@@ -28,6 +28,9 @@ set -gx FZF_CTRL_T_OPTS  "--layout=reverse --no-info --no-color --preview 'bat -
 # https://no-color.org
 set -gx NO_COLOR 1
 
+# https://github.com/mickael-menu/zk
+set -gx ZK_NOTEBOOK_DIR ~/Documents/notes
+
 # Homebrew settings
 # https://docs.brew.sh/Manpage#environment
 # Disable fancy colors and analytics

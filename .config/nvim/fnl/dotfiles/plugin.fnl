@@ -128,6 +128,8 @@
   ;; colorscheme creation
   :rktjmp/lush.nvim {}
 
+  :mickael-menu/zk-nvim {:mod :zk}
+
   ;; colorschemes
   :stefanvanburen/rams {}
   :mcchrish/zenbones.nvim {})
