@@ -83,7 +83,9 @@
   :gpanders/nvim-parinfer {}
   :clojure-vim/clojure.vim {}
 
-  ;; installation and management of tooling
+  ;; typical lsp configurations
+  :neovim/nvim-lspconfig {}
+  ;; installation and management of LSP servers
   :williamboman/mason.nvim {:requires [[:williamboman/mason-lspconfig.nvim]]
                             :mod :mason}
 
