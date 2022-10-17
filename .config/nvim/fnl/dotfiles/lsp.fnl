@@ -58,6 +58,7 @@
                                 :focusable false
                                 :source "always"}})
 
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
 (lspconfig.gopls.setup {:handlers handlers
                         :cmd ["gopls" "-remote=auto"]
                         ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
@@ -73,8 +74,11 @@
                                                    :functionTypeParameters true
                                                    :rangeVariableTypes true}}}})
 
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
 (lspconfig.clojure_lsp.setup {:handlers handlers})
 
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
 (lspconfig.bufls.setup {:handlers handlers})
 
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
 (lspconfig.pylsp.setup {:handlers handlers})
