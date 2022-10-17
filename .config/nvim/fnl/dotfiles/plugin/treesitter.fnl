@@ -20,5 +20,5 @@
                       "yaml"]
    ;; when using nvim-parinfer, this errors when uncommenting certain
    ;; forms. disabling for now.
-   ; :matchup {:enable true}
+   :matchup {:enable false}
    :highlight {:enable true}})
