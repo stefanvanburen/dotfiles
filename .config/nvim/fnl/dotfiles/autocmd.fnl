@@ -15,21 +15,22 @@
                                 :desc "after writing init.lua, recompile"
                                 :command "PackerCompile"})
 
-(def- filetype-settings {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
-                         :javascript      {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :javascriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :typescript      {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :typescriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :html            {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :gohtmltmpl      {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :fish            {:expandtab true  :shiftwidth 4 :tabstop 4}
-                         :yaml            {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :json            {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :bash            {:expandtab true  :shiftwidth 2 :tabstop 2}
-                         :gitcommit       {:spell true}
-                         :sql             {:wrap true :commentstring "-- %s"}
-                         :clojure         {:expandtab true :textwidth 80}
-                         :markdown        {:spell true :wrap true :conceallevel 2 :shiftwidth 2}})
+(def- filetype-settings
+  {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
+   :javascript      {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :javascriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :typescript      {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :typescriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :html            {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :gohtmltmpl      {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :fish            {:expandtab true  :shiftwidth 4 :tabstop 4}
+   :yaml            {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :json            {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :bash            {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :gitcommit       {:spell true}
+   :sql             {:wrap true :commentstring "-- %s"}
+   :clojure         {:expandtab true :textwidth 80}
+   :markdown        {:spell true :wrap true :conceallevel 2 :shiftwidth 2}})
 
 (let [aufiletypes (create-augroup "filetypes" {})]
   (each [filetype settings (pairs filetype-settings)]
