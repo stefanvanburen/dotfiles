@@ -64,10 +64,6 @@
   ;; syntax for gotmpl files
   :mattn/vim-gotmpl {}
 
-  ;; Run `goimports` on save.
-  :mattn/vim-goimports {:run ":MasonInstall goimports"
-                        :requires [[:williamboman/mason.nvim]]}
-
   ;; profiling startup time
   :dstein64/vim-startuptime {}
 

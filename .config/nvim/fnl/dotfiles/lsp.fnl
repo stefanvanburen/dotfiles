@@ -8,6 +8,25 @@
   "Sets a normal mode mapping within a buffer."
   (vim.keymap.set :n from to {:buffer bufnr :silent true}))
 
+(defn organize-imports [wait-ms]
+  (local params (vim.lsp.util.make_range_params))
+  (set params.context {:only ["source.organizeImports"]})
+  (local result (vim.lsp.buf_request_sync 0 "textDocument/codeAction" params wait-ms))
+  (when (not= result nil)
+    (each [_ res (pairs result)]
+      (when (and (not= res nil)
+                 (not= res.result nil))
+        (each [_ r (pairs res.result)]
+          (if r.edit
+            (vim.lsp.util.apply_workspace_edit r.edit "UTF-8")
+            (vim.lsp.buf.execute_command r.command)))))))
+
+(create-autocmd "BufWritePre" {:pattern :*.go
+                               :callback #(organize-imports 1000)})
+
+(create-autocmd "BufWritePre" {:pattern :*
+                               :callback #(vim.lsp.buf.format)})
+
 (defn on-attach [{: buf
                   :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
