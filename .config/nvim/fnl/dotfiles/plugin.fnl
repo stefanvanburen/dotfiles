@@ -74,7 +74,6 @@
   ;; lisp languages
   :Olical/conjure {}
   :gpanders/nvim-parinfer {}
-  :clojure-vim/clojure.vim {}
 
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
