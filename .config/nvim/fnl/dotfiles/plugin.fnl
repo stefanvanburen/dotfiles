@@ -54,9 +54,6 @@
   ;; https://github.com/ericpruitt/tmux.vim
   ;; "Vim syntax file for tmux configuration files"
   :ericpruitt/tmux.vim {}
-  ;; https://github.com/wfxr/protobuf.vim
-  ;; "protobuf with gRPC, grpc-gateway and grpc-swagger support"
-  :wfxr/protobuf.vim {}
   ;; https://github.com/lifepillar/pgsql.vim
   ;; "Vim PostgreSQL syntax plugin"
   :lifepillar/pgsql.vim {}
