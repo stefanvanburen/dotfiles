@@ -35,8 +35,6 @@ brew "ripgrep"
 brew "starship"
 # Terminal multiplexer
 brew "tmux"
-# notes
-brew "zk"
 # fonts
 tap "homebrew/cask-fonts"
 
