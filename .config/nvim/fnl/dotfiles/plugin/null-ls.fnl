@@ -7,4 +7,5 @@
              null-ls.builtins.formatting.buf
              null-ls.builtins.diagnostics.stylelint
              null-ls.builtins.diagnostics.shellcheck
-             null-ls.builtins.formatting.shfmt]})
+             null-ls.builtins.formatting.shfmt
+             null-ls.builtins.diagnostics.vale]})
