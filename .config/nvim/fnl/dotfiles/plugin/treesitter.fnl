@@ -2,23 +2,23 @@
   {autoload {treesitter "nvim-treesitter.configs"}})
 
 (treesitter.setup
-  {:ensure_installed ["clojure"
-                      "comment" ; parse comments
-                      "css"
-                      "fennel"
-                      "fish"
-                      "html"
-                      "gitignore"
-                      "go"
-                      "gomod"
-                      "help"
-                      "javascript"
-                      "json"
-                      "markdown"
-                      "markdown_inline"
-                      "proto"
-                      "sql"
-                      "yaml"]
+  {:ensure_installed [:clojure
+                      :comment ; parse comments
+                      :css
+                      :fennel
+                      :fish
+                      :html
+                      :gitignore
+                      :go
+                      :gomod
+                      :help
+                      :javascript
+                      :json
+                      :markdown
+                      :markdown_inline
+                      :proto
+                      :sql
+                      :yaml]
    ;; when using nvim-parinfer, this errors when uncommenting certain
    ;; forms. disabling for now.
    :matchup {:enable false}
