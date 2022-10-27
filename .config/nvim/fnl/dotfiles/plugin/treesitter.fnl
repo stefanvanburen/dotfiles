@@ -3,6 +3,7 @@
 
 (treesitter.setup
   {:ensure_installed ["clojure"
+                      "comment" ; parse comments
                       "css"
                       "fennel"
                       "fish"
