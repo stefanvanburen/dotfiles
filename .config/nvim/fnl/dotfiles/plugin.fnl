@@ -52,10 +52,10 @@
   ;; know of.
   :blankname/vim-fish {}
   ;; https://github.com/ericpruitt/tmux.vim
-  ;; "Vim syntax file for tmux configuration files"
+  ;; > Vim syntax file for tmux configuration files
   :ericpruitt/tmux.vim {}
   ;; https://github.com/lifepillar/pgsql.vim
-  ;; "Vim PostgreSQL syntax plugin"
+  ;; > Vim PostgreSQL syntax plugin
   :lifepillar/pgsql.vim {}
 
   ;; syntax for gotmpl files
@@ -104,8 +104,10 @@
   ;; Adds unix shell commands
   :tpope/vim-eunuch {}
 
-  ;; "general-purpose motion plugin for neovim ... streamlined version of lightspeed"
+  ;; > general-purpose motion plugin for neovim ... streamlined version of lightspeed
   :ggandor/leap.nvim {:mod :leap}
+  ;; > f/F/t/T motions on steroids, building on the Leap interface.
+  :ggandor/flit.nvim {:mod :flit}
 
   ;; Deal with parentheses, quotes, etc.
   :tpope/vim-surround {}
