@@ -107,3 +107,6 @@
 
 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
 (lspconfig.eslint.setup {:handlers handlers})
+
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#marksman
+(lspconfig.marksman.setup {:handlers handlers})
