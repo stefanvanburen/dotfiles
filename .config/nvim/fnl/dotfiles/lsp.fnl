@@ -21,16 +21,17 @@
             (vim.lsp.util.apply_workspace_edit r.edit "UTF-8")
             (vim.lsp.buf.execute_command r.command)))))))
 
-(create-autocmd "BufWritePre" {:pattern :*.go
-                               :callback #(organize-imports 1000)})
-
 (defn on-attach [{: buf
                   :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
 
   ;; NOTE: Useful for debugging
   ;; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
-  ; (print (vim.inspect client))
+  (print (vim.inspect client))
+
+  (when (= (. client name) "gopls")
+    (create-autocmd "BufWritePre" {:buffer buf
+                                   :callback #(organize-imports 1000)}))
 
   (when client.server_capabilities.documentFormattingProvider
     (buffer-map buf "<leader>af" vim.lsp.buf.format)
