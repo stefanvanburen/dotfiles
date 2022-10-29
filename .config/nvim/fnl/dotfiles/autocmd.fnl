@@ -22,6 +22,7 @@
    :typescript      {:expandtab true  :shiftwidth 2 :tabstop 2}
    :typescriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
    :html            {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :css             {:expandtab true  :shiftwidth 2 :tabstop 2}
    :gohtmltmpl      {:expandtab true  :shiftwidth 2 :tabstop 2}
    :fish            {:expandtab true  :shiftwidth 4 :tabstop 4}
    :yaml            {:expandtab true  :shiftwidth 2 :tabstop 2}
