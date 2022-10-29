@@ -24,9 +24,6 @@
 (create-autocmd "BufWritePre" {:pattern :*.go
                                :callback #(organize-imports 1000)})
 
-(create-autocmd "BufWritePre" {:pattern :*
-                               :callback #(vim.lsp.buf.format)})
-
 (defn on-attach [{: buf
                   :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
@@ -36,7 +33,9 @@
   ; (print (vim.inspect client))
 
   (when client.server_capabilities.documentFormattingProvider
-    (buffer-map buf "<leader>af" vim.lsp.buf.format))
+    (buffer-map buf "<leader>af" vim.lsp.buf.format)
+    (create-autocmd "BufWritePre" {:buffer buf
+                                   :callback #(vim.lsp.buf.format)}))
 
   (when client.server_capabilities.hoverProvider
     (buffer-map buf "K"          vim.lsp.buf.hover))
