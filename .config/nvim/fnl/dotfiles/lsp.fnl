@@ -27,9 +27,9 @@
 
   ;; NOTE: Useful for debugging
   ;; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
-  ; (print (vim.inspect client))
+  ; (vim.pretty_print client)
 
-  (when (= (. client name) "gopls")
+  (when (= client.name "gopls")
     (create-autocmd "BufWritePre" {:buffer buf
                                    :callback #(organize-imports 1000)}))
 
