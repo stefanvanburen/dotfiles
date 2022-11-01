@@ -34,12 +34,12 @@
                                    :callback #(organize-imports 1000)}))
 
   (when client.server_capabilities.documentFormattingProvider
-    (buffer-map buf "<leader>af" vim.lsp.buf.format)
+    (buffer-map buf :<leader>af vim.lsp.buf.format)
     (create-autocmd "BufWritePre" {:buffer buf
                                    :callback #(vim.lsp.buf.format)}))
 
   (when client.server_capabilities.hoverProvider
-    (buffer-map buf "K"          vim.lsp.buf.hover))
+    (buffer-map buf :K vim.lsp.buf.hover))
 
   (when client.server_capabilities.documentHighlightProvider
     (let [augroup (create-augroup "lsp-document-highlight" {})]
@@ -52,14 +52,14 @@
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
-  (buffer-map buf "gD"         vim.lsp.buf.declaration)
-  (buffer-map buf "gd"         vim.lsp.buf.definition)
-  (buffer-map buf "gi"         vim.lsp.buf.implementation)
-  (buffer-map buf "<C-k>"      vim.lsp.buf.signature_help)
-  (buffer-map buf "<leader>D"  vim.lsp.buf.type_definition)
-  (buffer-map buf "<leader>rn" vim.lsp.buf.rename)
-  (buffer-map buf "<leader>ca" vim.lsp.buf.code_action)
-  (buffer-map buf "gr"         vim.lsp.buf.references))
+  (buffer-map buf :gD         vim.lsp.buf.declaration)
+  (buffer-map buf :gd         vim.lsp.buf.definition)
+  (buffer-map buf :gi         vim.lsp.buf.implementation)
+  (buffer-map buf :gr         vim.lsp.buf.references)
+  (buffer-map buf :<C-k>      vim.lsp.buf.signature_help)
+  (buffer-map buf :<leader>D  vim.lsp.buf.type_definition)
+  (buffer-map buf :<leader>rn vim.lsp.buf.rename)
+  (buffer-map buf :<leader>ca vim.lsp.buf.code_action))
 
 (create-autocmd :LspAttach {:callback on-attach})
 
