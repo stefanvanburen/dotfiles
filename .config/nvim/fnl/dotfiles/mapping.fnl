@@ -5,13 +5,8 @@
 (def map vim.keymap.set)
 
 (defn- leader-map [from to]
-  "Helper function to add a mapping prefixed with leader to execute a command,
-  typically from a plugin."
-  (map
-    :n
-    (.. "<leader>" from)
-    (.. ":" to "<cr>")
-    {:noremap true}))
+  "Helper function to add a mapping prefixed with leader to execute a command"
+  (map :n (.. "<leader>" from) (.. ":" to "<cr>")))
 
 ;; ; -> :
 (map :n ";" ":")
