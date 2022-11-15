@@ -4,6 +4,8 @@
 .config/gh/hosts.yml
 # not in version control to allow for local differences
 .config/alacritty/fonts.yml
+# clojure tools, not pinned / tracked
+.config/clojure/tools
 
 # contains sensitive information
 .netrc
@@ -20,6 +22,11 @@
 .ssh
 .terminfo
 .viminfo
+.python_history
+.sqlite_history
+
+# macOS file
+.CFUserTextEncoding
 
 # generated / local fish files
 .config/fish/functions
@@ -31,6 +38,7 @@
 .Trash
 
 # macOS default directories
+Applications/
 Desktop/
 Documents/
 Downloads/
