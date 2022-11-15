@@ -15,7 +15,7 @@ $ git config status.showUntrackedFiles no
 
 ## Manual Steps (for MacOS)
 
-Install [Homebrew](https://docs.brew.sh/Installation):
+[Install Homebrew](https://docs.brew.sh/Installation):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -30,10 +30,10 @@ brew tap homebrew/bundle
 Install the base dependencies in the [Brewfile](./local/share/Brewfile):
 
 ```sh
-brew bundle install --file=~/.local/share/Brewfile
+brew bundle install --file=~/.Brewfile
 ```
 
-Create an ssh key (follow the instructions in [ssh-config](./ssh/config)), and add it to [GitHub](https://github.com/settings/keys) and [sourcehut](https://meta.sr.ht/keys).
+Create an ssh key (follow the instructions in [ssh-config](../.ssh/config)), and add it to [GitHub](https://github.com/settings/keys) and [sourcehut](https://meta.sr.ht/keys).
 
 Set the shell for the user to `fish`:
 
