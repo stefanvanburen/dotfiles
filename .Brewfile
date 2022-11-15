@@ -6,6 +6,9 @@ brew "bat"
 brew "fd"
 # My default shell
 brew "fish"
+# Plugin manager for `fish`
+# https://github.com/jorgebucaran/fisher
+brew "fisher"
 # fuzzy finder
 brew "fzf"
 # Interacting with GitHub via the CLI - configured in "gh_config.yml".
@@ -31,8 +34,6 @@ brew "neovim"
 brew "pipx"
 # better searching - used by `fzf` within fish and neovim - configured in "ripgreprc".
 brew "ripgrep"
-# fish prompt - configured in "starship.toml".
-brew "starship"
 # Terminal multiplexer
 brew "tmux"
 # fonts

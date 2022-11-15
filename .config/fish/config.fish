@@ -75,7 +75,9 @@ if status --is-interactive
     # jump is bound to `z`
     command -q jump; and source (jump shell --bind=z fish | psub)
 
-    command -q starship; and starship init fish | source
+    # https://github.com/jorgebucaran/hydro
+    set -g hydro_multiline true
+    set -g hydro_symbol_prompt ";"
 
     command -q direnv; and direnv hook fish | source
 end
