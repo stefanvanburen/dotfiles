@@ -63,8 +63,8 @@
 (map :v :<tab> :% {:remap true})
 
 ;; edit config files
-(map :n :ed #(fzf-lua.git_files {:cwd "~"}))
-(map :n :ev #(fzf-lua.files     {:cwd "~/.config/nvim"}))
+(map :n :<leader>ed #(fzf-lua.git_files {:cwd "~"}))
+(map :n :<leader>ev #(fzf-lua.files     {:cwd "~/.config/nvim"}))
 (leader-map :ef "e $HOME/.config/fish/config.fish")
 (leader-map :eg "e $HOME/.config/git/config")
 
