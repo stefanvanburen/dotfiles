@@ -33,7 +33,7 @@
   ;; https://github.com/mfussenegger/nvim-lsp-compl#configuration
   ;; null-ls typically does not provide completion.
   (if (not= client.name "null-ls")
-    (lsp_compl.attach client bufnr {}))
+    (lsp_compl.attach client buf))
 
   (when (= client.name "gopls")
     (create-autocmd "BufWritePre" {:buffer buf
