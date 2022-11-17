@@ -21,8 +21,8 @@ set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
 
 # use fzf-tmux by default
 set -gx FZF_TMUX 1
-# Use a tmux popup window
-set -gx FZF_TMUX_OPTS '-p'
+# Use a tmux popup window, using 80% of the tmux window
+set -gx FZF_TMUX_OPTS '-p 80%'
 
 # reverse fzf's layout - by default, the input is at the bottom of the screen - I prefer it at the top.
 # turn off info and color in fzf's output (including the `bat` preview)
