@@ -43,12 +43,13 @@
 
   (when client.server_capabilities.documentHighlightProvider
     (let [augroup (create-augroup "lsp-document-highlight" {})]
+      ;; TODO: Something is definitely off with this; it takes a long time 
       (create-autocmd "CursorHold"  {:group augroup
                                      :buffer buf
-                                     :callback #(vim.lsp.buf.document_highlight)})
+                                     :callback vim.lsp.buf.document_highlight})
       (create-autocmd "CursorMoved" {:group augroup
                                      :buffer buf
-                                     :callback #(vim.lsp.buf.clear_references)})))
+                                     :callback vim.lsp.buf.clear_references})))
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
