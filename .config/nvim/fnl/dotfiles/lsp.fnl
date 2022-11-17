@@ -1,5 +1,6 @@
 (module dotfiles.lsp
-  {autoload {: lspconfig}})
+  {autoload {: lspconfig
+             : lsp_compl}})
 
 (def- create-autocmd vim.api.nvim_create_autocmd)
 (def- create-augroup vim.api.nvim_create_augroup)
@@ -28,6 +29,11 @@
   ;; NOTE: Useful for debugging
   ;; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
   ; (vim.pretty_print client)
+
+  ;; https://github.com/mfussenegger/nvim-lsp-compl#configuration
+  ;; null-ls typically does not provide completion.
+  (if (not= client.name "null-ls")
+    (lsp_compl.attach client bufnr {}))
 
   (when (= client.name "gopls")
     (create-autocmd "BufWritePre" {:buffer buf
