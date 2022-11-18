@@ -4,7 +4,7 @@
 ;; colorscheme
 (set vim.o.termguicolors true)
 (set vim.o.background :light)
-(vim.cmd.colorscheme :zenwritten)
+(vim.cmd.colorscheme :rams)
 
 ;; don't wrap by default
 (set vim.o.wrap false)
