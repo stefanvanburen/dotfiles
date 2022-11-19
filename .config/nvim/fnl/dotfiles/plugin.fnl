@@ -1,14 +1,13 @@
 (module dotfiles.plugin
     {autoload {a aniseed.core
-               str aniseed.string
                : packer}})
 
-(defn safe-require-plugin-config [name]
+(fn safe-require-plugin-config [name]
   (let [(ok? val-or-err) (pcall require (.. :dotfiles.plugin. name))]
     (when (not ok?)
       (print (.. "dotfiles error: " val-or-err)))))
 
-(defn- use [...]
+(fn use [...]
   "Iterates through the arguments as pairs and calls packer's use function for
   each of them. Works around Fennel not liking mixed associative and sequential
   tables as well."

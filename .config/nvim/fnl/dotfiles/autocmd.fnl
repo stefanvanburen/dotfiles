@@ -1,7 +1,7 @@
 (module dotfiles.autocmd)
 
-(def- create-autocmd vim.api.nvim_create_autocmd)
-(def- create-augroup vim.api.nvim_create_augroup)
+(local create-autocmd vim.api.nvim_create_autocmd)
+(local create-augroup vim.api.nvim_create_augroup)
 
 (create-autocmd "VimResized" {:pattern "*"
                               :desc "on resize, resize windows"
@@ -15,7 +15,7 @@
                                 :desc "after writing init.lua, recompile"
                                 :command "PackerCompile"})
 
-(def- filetype-settings
+(local filetype-settings
   {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
    :javascript      {:expandtab true  :shiftwidth 2 :tabstop 2}
    :javascriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}

@@ -2,9 +2,9 @@
   {autoload {: fzf-lua}})
 
 ;; alias function
-(def map vim.keymap.set)
+(local map vim.keymap.set)
 
-(defn- leader-map [from to]
+(fn leader-map [from to]
   "Helper function to add a mapping prefixed with leader to execute a command"
   (map :n (.. "<leader>" from) (.. ":" to "<cr>")))
 
@@ -22,7 +22,7 @@
 (map :n "]w"       vim.diagnostic.goto_next)
 (map :n :<leader>q vim.diagnostic.setloclist)
 
-(defn trim-trailing-whitespace []
+(fn trim-trailing-whitespace []
   (let [view (vim.fn.winsaveview)]
     (vim.api.nvim_command "silent! undojoin")
     (vim.api.nvim_command "silent keepjumps keeppatterns %s/\\s\\+$//e")

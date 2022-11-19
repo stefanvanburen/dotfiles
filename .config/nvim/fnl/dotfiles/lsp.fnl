@@ -2,14 +2,14 @@
   {autoload {: lspconfig
              : lsp_compl}})
 
-(def- create-autocmd vim.api.nvim_create_autocmd)
-(def- create-augroup vim.api.nvim_create_augroup)
+(local create-autocmd vim.api.nvim_create_autocmd)
+(local create-augroup vim.api.nvim_create_augroup)
 
-(defn- buffer-map [bufnr from to]
+(fn buffer-map [bufnr from to]
   "Sets a normal mode mapping within a buffer."
   (vim.keymap.set :n from to {:buffer bufnr :silent true}))
 
-(defn organize-imports [wait-ms]
+(fn organize-imports [wait-ms]
   (local params (vim.lsp.util.make_range_params))
   (set params.context {:only ["source.organizeImports"]})
   (local result (vim.lsp.buf_request_sync 0 "textDocument/codeAction" params wait-ms))
@@ -22,8 +22,8 @@
             (vim.lsp.util.apply_workspace_edit r.edit "UTF-8")
             (vim.lsp.buf.execute_command r.command)))))))
 
-(defn on-attach [{: buf
-                  :data {: client_id}}]
+(fn on-attach [{: buf
+                :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
 
   ;; NOTE: Useful for debugging
@@ -70,10 +70,6 @@
 
 (create-autocmd :LspAttach {:callback on-attach})
 
-(def- handlers
-  {"textDocument/hover"         (vim.lsp.with vim.lsp.handlers.hover          {:border "single"})
-   "textDocument/signatureHelp" (vim.lsp.with vim.lsp.handlers.signature_help {:border "single"})})
-
 (vim.fn.sign_define "DiagnosticSignError" {:text "×" :texthl "DiagnosticSignError"})
 (vim.fn.sign_define "DiagnosticSignWarn"  {:text "!" :texthl "DiagnosticSignWarn"})
 (vim.fn.sign_define "DiagnosticSignInfo"  {:text "i" :texthl "DiagnosticSignInfo"})
@@ -83,6 +79,9 @@
                         :float {:border "single"
                                 :focusable false
                                 :source "always"}})
+
+(local handlers {"textDocument/hover"         (vim.lsp.with vim.lsp.handlers.hover          {:border "single"})
+                 "textDocument/signatureHelp" (vim.lsp.with vim.lsp.handlers.signature_help {:border "single"})})
 
 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
 (lspconfig.gopls.setup {:handlers handlers
