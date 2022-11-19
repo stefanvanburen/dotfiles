@@ -1,5 +1,4 @@
-(module dotfiles.core
-  {autoload {str aniseed.string}})
+(module dotfiles.core)
 
 ;; colorscheme
 (set vim.o.termguicolors true)
@@ -11,7 +10,7 @@
 
 ;; always show the completion menu, and when it's brought up, don't select
 ;; anything by default.
-(set vim.o.completeopt (str.join "," ["menuone" "noselect"]))
+(set vim.o.completeopt "menuone,noselect")
 
 ;; if wrap is set, break on characters in 'breakat' rather than the last
 ;; character that will fit on the screen.
@@ -26,22 +25,8 @@
 ;; when using > and <, round the indent to a multiple of shiftwidth
 (set vim.o.shiftround true)
 
-;; statusline current ' '
-;; statusline not current ' '
-;; end of buffer ' ', rather than the default '~'
-;; vertical empty (escaped space)
-;; fold: filling foldtext
-;; diff: deleted lines in diff
-(let [fillchars {:stl   " "
-                 :stlnc " "
-                 :eob   " "
-                 :vert  "│"
-                 :fold  "·"
-                 :diff  "-"}]
-  (set vim.o.fillchars
-        (str.join ","
-                  (icollect [k v (pairs fillchars)]
-                    (str.join ":" [k v])))))
+;; defaults, other than end of buffer ' ', rather than the default '~'
+(set vim.o.fillchars "eob: ,")
 
 ;; fold based on syntax cues
 (set vim.o.foldmethod :syntax)
@@ -71,13 +56,7 @@
 
 ;; Invisible characters
 (set vim.o.list true)
-(let [listchars {:tab "→ "
-                 :eol "¬"
-                 :trail "⣿"}]
-  (set vim.o.listchars
-        (str.join ","
-                  (icollect [k v (pairs listchars)]
-                       (str.join ":" [k v])))))
+(set vim.o.listchars "tab:→ ,eol:¬,trail:⣿")
 
 ;; Don't show the mode on the command line - it's redundant with the status line.
 (set vim.o.showmode false)
@@ -136,3 +115,14 @@
 ;; https://github.com/BurntSushi/ripgrep/issues/425
 (set vim.o.grepprg "rg --vimgrep --no-heading --smart-case")
 (set vim.o.grepformat "%f:%l:%c:%m,%f:%l:%m")
+
+(set vim.o.inccomand :split)
+
+;; %f: relative path to current file
+;; %m: modified flag
+;; %{FugitiveHead()}: git head branch
+;; %=: separation
+;; %l: line number
+;; %c: column number
+;; %{&filetype}: filetype
+(set vim.o.statusline "%f%m %{FugitiveHead()}%=%l,%c %{&filetype}")

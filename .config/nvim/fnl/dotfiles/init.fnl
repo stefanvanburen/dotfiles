@@ -3,5 +3,4 @@
             dotfiles.autocmd
             dotfiles.core
             dotfiles.mapping
-            dotfiles.lsp
-            dotfiles.statusline]})
+            dotfiles.lsp]})
