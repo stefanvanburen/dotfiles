@@ -22,8 +22,13 @@
 (map :n "]w"       vim.diagnostic.goto_next)
 (map :n :<leader>q vim.diagnostic.setloclist)
 
-;; strip whitespace, retaining cursor position
-(leader-map :sw "%s/\\s\\+$//|norm!``")
+(defn trim-trailing-whitespace []
+  (let [view (vim.fn.winsaveview)]
+    (vim.api.nvim_command "silent! undojoin")
+    (vim.api.nvim_command "silent keepjumps keeppatterns %s/\\s\\+$//e")
+    (vim.fn.winrestview view)))
+
+(map :n :<leader>sw trim-trailing-whitespace)
 
 ;; packer
 ;; Clean, update and install plugins, then regenerate compiled loader file.
