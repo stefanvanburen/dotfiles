@@ -77,9 +77,9 @@
 
   ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
-  ;; installation and management of LSP servers
-  :williamboman/mason.nvim {:requires [[:williamboman/mason-lspconfig.nvim]]
-                            :mod :mason}
+  ;; installation and management of neovim tooling
+  :williamboman/mason.nvim {:mod :mason}
+  :williamboman/mason-lspconfig.nvim {:mod :mason-lspconfig}
 
   ;; https://github.com/nvim-treesitter/nvim-treesitter
   :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"

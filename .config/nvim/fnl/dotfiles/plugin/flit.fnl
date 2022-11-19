@@ -1,4 +1,5 @@
-(module dotfiles.plugin.flit
-  {autoload {: flit}})
+(module dotfiles.plugin.flit)
 
-(flit.setup)
+(let [(ok? flit) (pcall require :flit)]
+  (when ok?
+    (flit.setup)))

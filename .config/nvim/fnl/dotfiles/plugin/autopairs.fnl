@@ -1,4 +1,5 @@
-(module dotfiles.plugin.autopairs
-  {autoload {: nvim-autopairs}})
+(module dotfiles.plugin.autopairs)
 
-(nvim-autopairs.setup)
+(let [(ok? autopairs) (pcall require :nvim-autopairs)]
+  (when ok?
+    (autopairs.setup)))

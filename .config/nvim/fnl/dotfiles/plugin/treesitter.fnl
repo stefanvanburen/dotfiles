@@ -1,8 +1,11 @@
-(module dotfiles.plugin.treesitter
-  {autoload {treesitter "nvim-treesitter.configs"}})
+(module dotfiles.plugin.treesitter)
 
-(treesitter.setup
-  {:ensure_installed [:clojure
+(local config
+  ;; when using nvim-parinfer, this errors when uncommenting certain
+  ;; forms. disabling for now.
+  {:matchup {:enable false}
+   :highlight {:enable true}
+   :ensure_installed [:clojure
                       :comment ; parse comments
                       :css
                       :fennel
@@ -18,8 +21,8 @@
                       :markdown_inline
                       :proto
                       :sql
-                      :yaml]
-   ;; when using nvim-parinfer, this errors when uncommenting certain
-   ;; forms. disabling for now.
-   :matchup {:enable false}
-   :highlight {:enable true}})
+                      :yaml]})
+
+(let [(ok? treesitter) (pcall require "nvim-treesitter.configs")]
+  (when ok?
+    (treesitter.setup config)))

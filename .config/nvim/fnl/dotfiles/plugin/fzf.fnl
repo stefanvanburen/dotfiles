@@ -1,7 +1,8 @@
-(module dotfiles.plugin.fzf
-  {autoload {: fzf-lua}})
+(module dotfiles.plugin.fzf)
 
-;; https://github.com/ibhagwan/fzf-lua#neovim-api
-(fzf-lua.register_ui_select)
-;; https://github.com/ibhagwan/fzf-lua#default-options
-(fzf-lua.setup {:winopts {:border :single}})
+(let [(ok? fzf-lua) (pcall require :fzf-lua)]
+  (when ok?
+    ;; https://github.com/ibhagwan/fzf-lua#neovim-api
+    (fzf-lua.register_ui_select)
+    ;; https://github.com/ibhagwan/fzf-lua#default-options
+    (fzf-lua.setup {:winopts {:border :single}})))

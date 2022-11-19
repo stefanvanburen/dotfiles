@@ -1,4 +1,5 @@
-(module dotfiles.plugin.leap
-  {autoload {: leap}})
+(module dotfiles.plugin.leap)
 
-(leap.add_default_mappings)
+(let [(ok? leap) (pcall require :leap)]
+  (when ok?
+    (leap.add_default_mappings)))

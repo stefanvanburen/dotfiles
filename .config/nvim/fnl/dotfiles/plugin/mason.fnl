@@ -1,6 +1,5 @@
-(module dotfiles.plugin.mason
-  {autoload {: mason
-             : mason-lspconfig}})
+(module dotfiles.plugin.mason)
 
-(mason.setup)
-(mason-lspconfig.setup)
+(let [(ok? mason) (pcall require :mason)]
+  (when ok?
+    (mason.setup)))

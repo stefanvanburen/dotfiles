@@ -1,5 +1,4 @@
-(module dotfiles.plugin.gitsigns
-  {autoload {: gitsigns}})
+(module dotfiles.plugin.gitsigns)
 
 ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
 (defn- on-attach [bufnr]
@@ -41,7 +40,8 @@
     ;; Text object
     (map ["o" "x"] "ih" ":<C-U>Gitsigns select_hunk<CR>")))
 
-
-(gitsigns.setup
-  {:attach_to_untracked false
-   :on_attach on-attach})
+(let [(ok? gitsigns) (pcall require :gitsigns)]
+  (when ok?
+    (gitsigns.setup
+      {:attach_to_untracked false
+       :on_attach on-attach})))
