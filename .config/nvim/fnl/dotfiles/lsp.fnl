@@ -93,20 +93,18 @@
                                                    :functionTypeParameters true
                                                    :rangeVariableTypes true}}}})
 
-;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
-(lspconfig.clojure_lsp.setup {:handlers handlers})
+(local servers [;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
+                lspconfig.clojure_lsp
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
+                lspconfig.bufls
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
+                lspconfig.pylsp
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+                lspconfig.tsserver
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
+                lspconfig.eslint
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#marksman
+                lspconfig.marksman])
 
-;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
-(lspconfig.bufls.setup {:handlers handlers})
-
-;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
-(lspconfig.pylsp.setup {:handlers handlers})
-
-;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
-(lspconfig.tsserver.setup {:handlers handlers})
-
-;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
-(lspconfig.eslint.setup {:handlers handlers})
-
-;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#marksman
-(lspconfig.marksman.setup {:handlers handlers})
+(each [_ lsp-server (ipairs servers)]
+  (lsp-server.setup {:handlers handlers}))
