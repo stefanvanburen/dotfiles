@@ -30,26 +30,25 @@
   ; (vim.pretty_print client)
 
   (when (= client.name "gopls")
-    (create-autocmd "BufWritePre" {:buffer buf
-                                   :callback #(organize-imports 1000)}))
+    (create-autocmd :BufWritePre {:buffer buf
+                                  :callback #(organize-imports 1000)}))
 
   (when client.server_capabilities.documentFormattingProvider
     (buffer-map buf :<leader>af vim.lsp.buf.format)
-    (create-autocmd "BufWritePre" {:buffer buf
-                                   :callback #(vim.lsp.buf.format)}))
+    (create-autocmd :BufWritePre {:buffer buf
+                                  :callback #(vim.lsp.buf.format)}))
 
   (when client.server_capabilities.hoverProvider
     (buffer-map buf :K vim.lsp.buf.hover))
 
   (when client.server_capabilities.documentHighlightProvider
-    (let [augroup (create-augroup "lsp-document-highlight" {})]
-      ;; TODO: Something is definitely off with this; it takes a long time 
-      (create-autocmd "CursorHold"  {:group augroup
-                                     :buffer buf
-                                     :callback vim.lsp.buf.document_highlight})
-      (create-autocmd "CursorMoved" {:group augroup
-                                     :buffer buf
-                                     :callback vim.lsp.buf.clear_references})))
+    (let [augroup-id (create-augroup "lsp-document-highlight" {:clear false})]
+      (create-autocmd [:CursorHold :CursorHoldI]  {:group augroup-id
+                                                   :buffer buf
+                                                   :callback vim.lsp.buf.document_highlight})
+      (create-autocmd :CursorMoved {:group augroup-id
+                                    :buffer buf
+                                    :callback vim.lsp.buf.clear_references})))
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
