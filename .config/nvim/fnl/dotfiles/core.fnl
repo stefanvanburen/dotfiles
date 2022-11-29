@@ -126,3 +126,9 @@
 ;; %c: column number
 ;; %{&filetype}: filetype
 (set vim.o.statusline "%f%m %{FugitiveHead()}%=%l,%c %{&filetype}")
+
+;; By default, mousemodel=popup_setpos, which opens a popup window with some
+;; useless options on right click.
+;; The mouse is occasionally useful for certain things, so rather than
+;; disabling it altogether, tweak this setting to remove the popup behavior.
+(set vim.o.mousemodel :extend)
