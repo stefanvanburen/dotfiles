@@ -48,6 +48,9 @@ Music/
 Pictures/
 Public/
 
+# created by `brew bundle --global`
+.Brewfile.lock.json
+
 # Default go directory, for installed binaries and pkg downloads
 go/
 # Directory for code
