@@ -1,0 +1,35 @@
+# https://starship.rs/config
+
+# basically, trim down all the language / tool versions
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$line_break\
+$battery\
+$time\
+$status\
+$character"""
+
+[character]
+success_symbol = "[;](bold black)"
+error_symbol = "[×](bold red)"
+vimcmd_symbol = "[;](bold red)"
+
+[git_branch]
+symbol = ""
+style = "black"
+
+[git_status]
+style = "black"
+deleted = "×"
+format = "[$all_status$ahead_behind]($style) "
+# this is still quite slow for not much gain
+disabled = true
+
+[directory]
+style = "black"
