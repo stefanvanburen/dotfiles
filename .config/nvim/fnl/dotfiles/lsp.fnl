@@ -43,9 +43,9 @@
 
   (when client.server_capabilities.documentHighlightProvider
     (let [augroup-id (create-augroup "lsp-document-highlight" {:clear false})]
-      (create-autocmd [:CursorHold :CursorHoldI]  {:group augroup-id
-                                                   :buffer buf
-                                                   :callback vim.lsp.buf.document_highlight})
+      (create-autocmd :CursorHold  {:group augroup-id
+                                    :buffer buf
+                                    :callback vim.lsp.buf.document_highlight})
       (create-autocmd :CursorMoved {:group augroup-id
                                     :buffer buf
                                     :callback vim.lsp.buf.clear_references})))
