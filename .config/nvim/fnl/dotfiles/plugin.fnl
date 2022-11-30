@@ -50,9 +50,6 @@
   ;; but now I'm not so sure. Unfortunately there isn't a better one that I
   ;; know of.
   :blankname/vim-fish {}
-  ;; https://github.com/lifepillar/pgsql.vim
-  ;; > Vim PostgreSQL syntax plugin
-  :lifepillar/pgsql.vim {}
 
   ;; syntax for gotmpl files
   :mattn/vim-gotmpl {}
