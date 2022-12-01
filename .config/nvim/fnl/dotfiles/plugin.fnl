@@ -45,12 +45,6 @@
   ;;; typically out of date, or don't exist, and so many languages need plugins
   ;;; to stay up-to-date.
 
-  ;; https://github.com/blankname/vim-fish
-  ;; at one point, this seemed to be the most up to date fork of dag/vim-fish,
-  ;; but now I'm not so sure. Unfortunately there isn't a better one that I
-  ;; know of.
-  :blankname/vim-fish {}
-
   ;; syntax for gotmpl files
   :mattn/vim-gotmpl {}
 
