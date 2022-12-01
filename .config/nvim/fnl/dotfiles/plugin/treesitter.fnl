@@ -1,10 +1,7 @@
 (module dotfiles.plugin.treesitter)
 
 (local config
-  ;; when using nvim-parinfer, this errors when uncommenting certain
-  ;; forms. disabling for now.
-  {:matchup {:enable false}
-   :highlight {:enable true}
+  {:highlight {:enable true}
    :ensure_installed [:clojure
                       :comment ; parse comments
                       :css

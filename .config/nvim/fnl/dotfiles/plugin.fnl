@@ -108,9 +108,6 @@
   ;; Handy bracket ( ] and [ ) mappings
   :tpope/vim-unimpaired {}
 
-  ;; enhanced version of matchit plugin
-  :andymass/vim-matchup {}
-
   ;; Easily search for, substitute, and abbreviate multiple variants of a word
   :tpope/vim-abolish {}
 
@@ -126,10 +123,6 @@
 ;; because I commonly zoom tmux windows, and Dispatch will create a new window
 ;; when within tmux, the default setting would unzoom my tmux. Turn it off.
 (set vim.g.dispatch_no_tmux_make 1)
-
-;; Disable matchup's offscreen feature, which usually replaces the statusline
-;; with the match.
-(set vim.g.matchup_matchparen_offscreen {})
 
 ;; using open-browser.vim for `gx`
 (set vim.g.netrw_nogx 1)

@@ -62,8 +62,7 @@
 (map [:n :v] :k #(if (not= vim.v.count 0) :k :gk) {:expr true})
 
 ;; Navigate between matching brackets
-;; These specifically `remap` because we want to be bound to whatever % is
-;; (usually a plugin, matchit / matchup).
+;; These specifically `remap` because we want to be bound to whatever % is.
 (map :n :<tab> :% {:remap true})
 (map :v :<tab> :% {:remap true})
 
