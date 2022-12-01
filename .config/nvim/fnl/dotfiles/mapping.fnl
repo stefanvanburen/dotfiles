@@ -1,5 +1,6 @@
 (module dotfiles.mapping
-  {autoload {: fzf-lua}})
+  {autoload {: fzf-lua
+             : packer}})
 
 ;; alias function
 (local map vim.keymap.set)
@@ -30,11 +31,9 @@
 
 (map :n :<leader>sw trim-trailing-whitespace)
 
-;; packer
 ;; Clean, update and install plugins, then regenerate compiled loader file.
-;; PackerUpdate -> PackerCompile
 ;; This is essentially always what we want to run.
-(leader-map :pu "PackerSync")
+(map :n :<leader>pu packer.sync)
 
 ;; Fugitive
 (leader-map :gs "vertical Git")
