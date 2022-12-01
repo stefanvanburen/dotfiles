@@ -39,12 +39,6 @@
   ;; GitHub!
   :tpope/vim-rhubarb {}
 
-  ;;; language support
-  ;;; neovim has a variety of supported languages, but the ones included in
-  ;;; https://github.com/neovim/neovim/tree/master/runtime/ftplugin are
-  ;;; typically out of date, or don't exist, and so many languages need plugins
-  ;;; to stay up-to-date.
-
   ;; syntax for gotmpl files
   :mattn/vim-gotmpl {}
 
