@@ -124,3 +124,6 @@
 ;; disable vim-surround's default mappings, replacing most of
 ;; them in mapping.fnl, to work with leap.nvim.
 (set vim.g.surround_no_mappings 1)
+
+;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
+(set vim.g.fugitive_legacy_commands 0)
