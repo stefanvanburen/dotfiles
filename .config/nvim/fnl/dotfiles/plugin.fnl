@@ -124,6 +124,3 @@
 ;; disable vim-surround's default mappings, replacing most of
 ;; them in mapping.fnl, to work with leap.nvim.
 (set vim.g.surround_no_mappings 1)
-
-;; default *.sql files to postgres filetype
-(set vim.g.sql_type_default "pgsql")
