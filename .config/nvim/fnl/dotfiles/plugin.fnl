@@ -99,6 +99,9 @@
   ;; Easily search for, substitute, and abbreviate multiple variants of a word
   :tpope/vim-abolish {}
 
+  ;; Repeat plugin actions
+  :tpope/vim-repeat {}
+
   ;; colorscheme creation
   :rktjmp/lush.nvim {}
 
