@@ -112,6 +112,7 @@
   ;; colorschemes
   :stefanvanburen/rams {}
   "https://git.sr.ht/~p00f/alabaster.nvim" {}
+  :jaredgorski/Mies.vim {}
   :mcchrish/zenbones.nvim {})
 
 ;;; settings for plugins
