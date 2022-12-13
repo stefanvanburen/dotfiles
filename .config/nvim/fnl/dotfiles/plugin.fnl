@@ -13,12 +13,16 @@
   tables as well."
   (let [pkgs [...]]
     (packer.startup
-      (fn [use]
-        (for [i 1 (a.count pkgs) 2]
-          (let [name (. pkgs i)
-                opts (. pkgs (+ i 1))]
-            (-?> (. opts :mod) (safe-require-plugin-config))
-            (use (a.assoc opts 1 name)))))))
+      {1 (fn [use]
+           (for [i 1 (a.count pkgs) 2]
+             (let [name (. pkgs i)
+                   opts (. pkgs (+ i 1))]
+               (-?> (. opts :mod) (safe-require-plugin-config))
+               (use (a.assoc opts 1 name)))))
+       :config {:display {:open_fn (fn []
+                                    ((. (require :packer.util)
+                                        :float)
+                                     {:border :single}))}}}))
   nil)
 
 (use
