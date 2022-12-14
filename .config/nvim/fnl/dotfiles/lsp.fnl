@@ -80,7 +80,10 @@
 (lspconfig.gopls.setup {:handlers handlers
                         :cmd ["gopls" "-remote=auto"]
                         ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-                        :settings {:gopls {:staticcheck true
+                        :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
+                                           :staticcheck true
+                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#vulncheck-enum
+                                           :vulncheck "Imports"
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                                            :analyses {:unusedparams true}
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
