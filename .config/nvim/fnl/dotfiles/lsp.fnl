@@ -85,7 +85,11 @@
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#vulncheck-enum
                                            :vulncheck "Imports"
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
-                                           :analyses {:unusedparams true}
+                                           ;; Most of these analyzers are enabled by default.
+                                           :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
+                                                      :unusedparams true
+                                                      ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#shadow
+                                                      :shadow true}
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
                                            :hints {:parameterNames true
                                                    :assignVariableTypes true
