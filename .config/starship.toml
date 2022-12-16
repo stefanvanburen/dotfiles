@@ -9,6 +9,7 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$python\
 $line_break\
 $battery\
 $time\
@@ -32,4 +33,7 @@ format = "[$all_status$ahead_behind]($style) "
 disabled = true
 
 [directory]
+style = "black"
+
+[python]
 style = "black"
