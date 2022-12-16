@@ -78,7 +78,7 @@
   :tpope/vim-dispatch {}
   :vim-test/vim-test {}
 
-  :windwp/nvim-autopairs {:mod :autopairs}
+  :echasnovski/mini.nvim {:mod :mini}
 
   ;; fuzzy find
   :ibhagwan/fzf-lua {:mod :fzf}
