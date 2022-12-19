@@ -16,7 +16,7 @@ directory: ~/Documents/music
 # https://beets.readthedocs.io/en/stable/plugins/fetchart.html
 # NOTE: do not use the fish plugin, as it seemingly breaks the path completion
 # of `beet import ~/Downloads/...`.
-plugins: fetchart embedart
+plugins: fetchart embedart info
 
 # Disable color in the UI.
 ui:
