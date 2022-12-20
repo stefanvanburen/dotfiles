@@ -44,9 +44,9 @@
 
   ;; treat `justfile`s as makefiles
   ;; This helps with setting up correct commentstring, etc
-  (create-autocmd "BufNewFile,BufRead" {:group aufiletypes
-                                        :pattern "justfile"
-                                        :callback #(vim.api.nvim_set_option_value "filetype" "make" {:scope "local"})})
-  (create-autocmd "BufNewFile,BufRead" {:group aufiletypes
-                                        :pattern "*.star"
-                                        :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})}))
+  (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
+                                          :pattern "justfile"
+                                          :callback #(vim.api.nvim_set_option_value "filetype" "make" {:scope "local"})})
+  (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
+                                          :pattern "*.star"
+                                          :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})}))
