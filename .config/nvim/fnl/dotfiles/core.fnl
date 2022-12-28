@@ -64,8 +64,8 @@
 ;; line numbers
 ;; setting these both together means that the current line number is the actual
 ;; line number of the file, while the other line numbers are relative.
-(set vim.o.number true)
-(set vim.o.relativenumber true)
+; (set vim.o.number true)
+; (set vim.o.relativenumber true)
 
 ;; maintain an undofile for undoing actions through neovim loads
 (set vim.o.undofile true)
