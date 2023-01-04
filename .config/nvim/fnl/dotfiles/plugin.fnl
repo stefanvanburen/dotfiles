@@ -26,39 +26,39 @@
   nil)
 
 (use
-  :wbthomason/packer.nvim {} ; Let packer manage itself.
-  :justinmk/vim-dirvish {}
-  :tyru/open-browser.vim {}
-  :lewis6991/gitsigns.nvim {:mod :gitsigns}
-  :tpope/vim-fugitive {}
-  :tpope/vim-rhubarb {}
-  :mattn/vim-gotmpl {}
-  :dstein64/vim-startuptime {}
-  :Olical/aniseed {}
-  :lewis6991/impatient.nvim {}
-  :Olical/conjure {}
-  :gpanders/nvim-parinfer {}
-  :neovim/nvim-lspconfig {}
-  :williamboman/mason.nvim {:mod :mason}
-  :williamboman/mason-lspconfig.nvim {:mod :mason-lspconfig}
-  :nvim-treesitter/nvim-treesitter {:run ":TSUpdate" :mod :treesitter}
-  :jose-elias-alvarez/null-ls.nvim {:mod :null-ls :requires [[:nvim-lua/plenary.nvim]]}
-  :tpope/vim-dispatch {}
-  :vim-test/vim-test {}
-  :echasnovski/mini.nvim {:mod :mini}
-  :ibhagwan/fzf-lua {:mod :fzf}
-  :tpope/vim-commentary {}
-  :tpope/vim-eunuch {}
-  :ggandor/leap.nvim {:mod :leap}
-  :tpope/vim-surround {}
-  :tpope/vim-unimpaired {}
-  :tpope/vim-abolish {}
-  :tpope/vim-repeat {}
-  :rktjmp/lush.nvim {}
-  :stefanvanburen/rams {}
+  "https://github.com/wbthomason/packer.nvim" {} ; Let packer manage itself.
+  "https://github.com/justinmk/vim-dirvish" {}
+  "https://github.com/tyru/open-browser.vim" {}
+  "https://github.com/lewis6991/gitsigns.nvim" {:mod :gitsigns}
+  "https://github.com/tpope/vim-fugitive" {}
+  "https://github.com/tpope/vim-rhubarb" {}
+  "https://github.com/mattn/vim-gotmpl" {}
+  "https://github.com/dstein64/vim-startuptime" {}
+  "https://github.com/Olical/aniseed" {}
+  "https://github.com/lewis6991/impatient.nvim" {}
+  "https://github.com/Olical/conjure" {}
+  "https://github.com/gpanders/nvim-parinfer" {}
+  "https://github.com/neovim/nvim-lspconfig" {}
+  "https://github.com/williamboman/mason.nvim" {:mod :mason}
+  "https://github.com/williamboman/mason-lspconfig.nvim" {:mod :mason-lspconfig}
+  "https://github.com/nvim-treesitter/nvim-treesitter" {:run ":TSUpdate" :mod :treesitter}
+  "https://github.com/jose-elias-alvarez/null-ls.nvim" {:mod :null-ls :requires [[:nvim-lua/plenary.nvim]]}
+  "https://github.com/tpope/vim-dispatch" {}
+  "https://github.com/vim-test/vim-test" {}
+  "https://github.com/echasnovski/mini.nvim" {:mod :mini}
+  "https://github.com/ibhagwan/fzf-lua" {:mod :fzf}
+  "https://github.com/tpope/vim-commentary" {}
+  "https://github.com/tpope/vim-eunuch" {}
+  "https://github.com/ggandor/leap.nvim" {:mod :leap}
+  "https://github.com/tpope/vim-surround" {}
+  "https://github.com/tpope/vim-unimpaired" {}
+  "https://github.com/tpope/vim-abolish" {}
+  "https://github.com/tpope/vim-repeat" {}
+  "https://github.com/rktjmp/lush.nvim" {}
+  "https://github.com/stefanvanburen/rams" {}
   "https://git.sr.ht/~p00f/alabaster.nvim" {}
-  :jaredgorski/Mies.vim {}
-  :mcchrish/zenbones.nvim {})
+  "https://github.com/jaredgorski/Mies.vim" {}
+  "https://github.com/mcchrish/zenbones.nvim" {})
 
 ;;; settings for plugins
 
