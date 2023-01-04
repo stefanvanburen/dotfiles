@@ -26,90 +26,35 @@
   nil)
 
 (use
-  ;; Let packer manage itself.
-  :wbthomason/packer.nvim {}
-
-  ;; directory / file viewer. Largely replaces netrw.
+  :wbthomason/packer.nvim {} ; Let packer manage itself.
   :justinmk/vim-dirvish {}
-
-  ;; for `gx`, and `:GBrowse`
   :tyru/open-browser.vim {}
-
-  ;; Adds git added / modified / deleted in the sidebar (amongst other things)
   :lewis6991/gitsigns.nvim {:mod :gitsigns}
-
-  ;; git!
   :tpope/vim-fugitive {}
-  ;; GitHub!
   :tpope/vim-rhubarb {}
-
-  ;; syntax for gotmpl files
   :mattn/vim-gotmpl {}
-
-  ;; profiling startup time
   :dstein64/vim-startuptime {}
-
-  ;; configuration in fennel
   :Olical/aniseed {}
-
-  ;; https://github.com/lewis6991/impatient.nvim
-  ;; > Speed up loading Lua modules in Neovim to improve startup time.
   :lewis6991/impatient.nvim {}
-
-  ;; lisp languages
   :Olical/conjure {}
   :gpanders/nvim-parinfer {}
-
-  ;; typical lsp configurations
   :neovim/nvim-lspconfig {}
-  ;; installation and management of neovim tooling
   :williamboman/mason.nvim {:mod :mason}
   :williamboman/mason-lspconfig.nvim {:mod :mason-lspconfig}
-
-  ;; https://github.com/nvim-treesitter/nvim-treesitter
-  :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
-                                    :mod :treesitter}
-
-  ;; LSP-capabilities for tools that don't support LSP
-  :jose-elias-alvarez/null-ls.nvim {:mod :null-ls
-                                    :requires [[:nvim-lua/plenary.nvim]]}
-
-  ;; testing / build commands
+  :nvim-treesitter/nvim-treesitter {:run ":TSUpdate" :mod :treesitter}
+  :jose-elias-alvarez/null-ls.nvim {:mod :null-ls :requires [[:nvim-lua/plenary.nvim]]}
   :tpope/vim-dispatch {}
   :vim-test/vim-test {}
-
   :echasnovski/mini.nvim {:mod :mini}
-
-  ;; fuzzy find
   :ibhagwan/fzf-lua {:mod :fzf}
-
-  ;; Commenting
   :tpope/vim-commentary {}
-
-  ;; Adds unix shell commands
   :tpope/vim-eunuch {}
-
-  ;; > general-purpose motion plugin for neovim ... streamlined version of lightspeed
   :ggandor/leap.nvim {:mod :leap}
-  ;; > f/F/t/T motions on steroids, building on the Leap interface.
-  :ggandor/flit.nvim {:mod :flit}
-
-  ;; Deal with parentheses, quotes, etc.
   :tpope/vim-surround {}
-
-  ;; Handy bracket ( ] and [ ) mappings
   :tpope/vim-unimpaired {}
-
-  ;; Easily search for, substitute, and abbreviate multiple variants of a word
   :tpope/vim-abolish {}
-
-  ;; Repeat plugin actions
   :tpope/vim-repeat {}
-
-  ;; colorscheme creation
   :rktjmp/lush.nvim {}
-
-  ;; colorschemes
   :stefanvanburen/rams {}
   "https://git.sr.ht/~p00f/alabaster.nvim" {}
   :jaredgorski/Mies.vim {}
