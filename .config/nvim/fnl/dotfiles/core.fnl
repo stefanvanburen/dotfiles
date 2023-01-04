@@ -6,7 +6,7 @@
 (vim.cmd.colorscheme :rams)
 
 ;; don't wrap by default
-(set vim.o.wrap false)
+; (set vim.o.wrap false)
 
 ;; always show the completion menu, and when it's brought up, don't select
 ;; anything by default.
