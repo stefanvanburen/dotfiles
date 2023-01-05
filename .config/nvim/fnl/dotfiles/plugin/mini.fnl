@@ -1,9 +1,9 @@
 (module dotfiles.plugin.mini)
 
-(let [(ok? pairs) (pcall require :mini.pairs)]
+(let [(ok? mini-pairs) (pcall require :mini.pairs)]
   (when ok?
-    (pairs.setup)))
+    (mini-pairs.setup)))
 
-(let [(ok? trailspace) (pcall require :mini.trailspace)]
+(let [(ok? mini-trailspace) (pcall require :mini.trailspace)]
   (when ok?
-    (trailspace.setup)))
+    (mini-trailspace.setup)))
