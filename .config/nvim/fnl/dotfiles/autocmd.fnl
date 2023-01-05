@@ -11,10 +11,6 @@
                                 :desc "show yanked text"
                                 :callback #(vim.highlight.on_yank)})
 
-(create-autocmd "BufWritePost" {:pattern "init.lua"
-                                :desc "after writing init.lua, recompile"
-                                :command "PackerCompile"})
-
 (local filetype-settings
   {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
    :javascript      {:expandtab true  :shiftwidth 2 :tabstop 2}

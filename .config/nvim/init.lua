@@ -1,32 +1,34 @@
 -- init dot lua
 
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local pack_path = fn.stdpath("data") .. "/site/pack"
-local fmt = string.format
-
-function ensure (user, repo)
-  -- Ensures a given github.com/USER/REPO is cloned in the pack/packer/start directory.
-  local install_path = fmt("%s/packer/start/%s", pack_path, repo)
-  if fn.empty(fn.glob(install_path)) > 0 then
-    execute(fmt("!git clone https://github.com/%s/%s %s", user, repo, install_path))
-    execute(fmt("packadd %s", repo))
-  end
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
+-- Bootstrap Aniseed
+local aniseedpath = vim.fn.stdpath("data") .. "/lazy/aniseed"
+if not vim.loop.fs_stat(aniseedpath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "https://github.com/Olical/aniseed.git",
+    aniseedpath,
+  })
+end
+vim.opt.rtp:prepend(aniseedpath)
 
 -- Disable netrw
 vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
-
--- Bootstrap essential plugins required for installing and loading the rest.
-ensure("wbthomason", "packer.nvim")
-ensure("Olical", "aniseed")
-ensure("lewis6991", "impatient.nvim")
-
--- Load impatient which pre-compiles and caches Lua modules.
-require("impatient")
 
 -- Enable Aniseed's automatic compilation and loading of Fennel source code.
 require('aniseed.env').init({

@@ -1,65 +1,76 @@
 (module dotfiles.plugin
-    {autoload {a aniseed.core
-               : packer}})
+    {autoload {: lazy}})
 
-(fn safe-require-plugin-config [name]
-  (let [(ok? val-or-err) (pcall require (.. :dotfiles.plugin. name))]
-    (when (not ok?)
-      (print (.. "dotfiles error: " val-or-err)))))
-
-(fn use [...]
-  "Iterates through the arguments as pairs and calls packer's use function for
-  each of them. Works around Fennel not liking mixed associative and sequential
-  tables as well."
-  (let [pkgs [...]]
-    (packer.startup
-      {1 (fn [use]
-           (for [i 1 (a.count pkgs) 2]
-             (let [name (. pkgs i)
-                   opts (. pkgs (+ i 1))]
-               (-?> (. opts :mod) (safe-require-plugin-config))
-               (use (a.assoc opts 1 name)))))
-       :config {:display {:open_fn (fn []
-                                    ((. (require :packer.util)
-                                        :float)
-                                     {:border :single}))}}}))
-  nil)
-
-(use
-  "https://github.com/wbthomason/packer.nvim" {} ; Let packer manage itself.
-  "https://github.com/justinmk/vim-dirvish" {}
-  "https://github.com/tyru/open-browser.vim" {}
-  "https://github.com/lewis6991/gitsigns.nvim" {:mod :gitsigns}
-  "https://github.com/tpope/vim-fugitive" {}
-  "https://github.com/tpope/vim-rhubarb" {}
-  "https://github.com/mattn/vim-gotmpl" {}
-  "https://github.com/dstein64/vim-startuptime" {}
-  "https://github.com/Olical/aniseed" {}
-  "https://github.com/lewis6991/impatient.nvim" {}
-  "https://github.com/Olical/conjure" {}
-  "https://github.com/gpanders/nvim-parinfer" {}
-  "https://github.com/nvim-lua/plenary.nvim" {}
-  "https://github.com/neovim/nvim-lspconfig" {}
-  "https://github.com/williamboman/mason.nvim" {:mod :mason}
-  "https://github.com/williamboman/mason-lspconfig.nvim" {:mod :mason-lspconfig}
-  "https://github.com/nvim-treesitter/nvim-treesitter" {:run ":TSUpdate" :mod :treesitter}
-  "https://github.com/jose-elias-alvarez/null-ls.nvim" {:mod :null-ls}
-  "https://github.com/tpope/vim-dispatch" {}
-  "https://github.com/vim-test/vim-test" {}
-  "https://github.com/echasnovski/mini.nvim" {:mod :mini}
-  "https://github.com/ibhagwan/fzf-lua" {:mod :fzf}
-  "https://github.com/tpope/vim-commentary" {}
-  "https://github.com/tpope/vim-eunuch" {}
-  "https://github.com/ggandor/leap.nvim" {:mod :leap}
-  "https://github.com/tpope/vim-surround" {}
-  "https://github.com/tpope/vim-unimpaired" {}
-  "https://github.com/tpope/vim-abolish" {}
-  "https://github.com/tpope/vim-repeat" {}
-  "https://github.com/rktjmp/lush.nvim" {}
-  "https://github.com/stefanvanburen/rams" {}
-  "https://git.sr.ht/~p00f/alabaster.nvim" {}
-  "https://github.com/jaredgorski/Mies.vim" {}
-  "https://github.com/mcchrish/zenbones.nvim" {})
+(lazy.setup
+  [{:url "https://github.com/justinmk/vim-dirvish"}
+   {:url "https://github.com/tyru/open-browser.vim"}
+   {:url "https://github.com/lewis6991/gitsigns.nvim" :config true}
+   {:url "https://github.com/tpope/vim-fugitive"}
+   {:url "https://github.com/tpope/vim-rhubarb"}
+   {:url "https://github.com/mattn/vim-gotmpl"}
+   {:url "https://github.com/dstein64/vim-startuptime"}
+   {:url "https://github.com/Olical/aniseed"}
+   {:url "https://github.com/Olical/conjure"}
+   {:url "https://github.com/gpanders/nvim-parinfer"}
+   {:url "https://github.com/nvim-lua/plenary.nvim"}
+   {:url "https://github.com/neovim/nvim-lspconfig"}
+   {:url "https://github.com/williamboman/mason.nvim" :config true}
+   {:url "https://github.com/williamboman/mason-lspconfig.nvim" :config true}
+   {:url "https://github.com/nvim-treesitter/nvim-treesitter"
+    :build "TSUpdate"
+    :config {:highlight {:enable true}
+             :ensure_installed [:clojure
+                                :comment ; parse comments
+                                :css
+                                :fennel
+                                :fish
+                                :html
+                                :gitignore
+                                :go
+                                :gomod
+                                :help
+                                :javascript
+                                :json
+                                :markdown
+                                :markdown_inline
+                                :proto
+                                :sql
+                                :yaml]}}
+   {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
+    :config (fn []
+              (let [null-ls (require :null-ls)]
+                (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
+                                          null-ls.builtins.formatting.buf
+                                          null-ls.builtins.diagnostics.stylelint
+                                          null-ls.builtins.diagnostics.shellcheck
+                                          null-ls.builtins.formatting.shfmt]})))}
+   {:url "https://github.com/tpope/vim-dispatch"}
+   {:url "https://github.com/vim-test/vim-test"}
+   {:url "https://github.com/echasnovski/mini.nvim"
+    :config (fn []
+              (let [mini-pairs (require :mini.pairs)
+                    mini-trailspace (require :mini.trailspace)]
+                (mini-pairs.setup)
+                (mini-trailspace.setup)))}
+   {:url "https://github.com/ibhagwan/fzf-lua"
+    :config {:winopts {:border :single}
+             :global_git_icons false
+             :global_file_icons false}}
+   {:url "https://github.com/tpope/vim-commentary"}
+   {:url "https://github.com/tpope/vim-eunuch"}
+   {:url "https://github.com/ggandor/leap.nvim"
+    :config (fn []
+              (let [leap (require :leap)]
+                (leap.add_default_mappings)))}
+   {:url "https://github.com/tpope/vim-surround"}
+   {:url "https://github.com/tpope/vim-unimpaired"}
+   {:url "https://github.com/tpope/vim-abolish"}
+   {:url "https://github.com/tpope/vim-repeat"}
+   {:url "https://github.com/rktjmp/lush.nvim"}
+   {:url "https://github.com/stefanvanburen/rams"}
+   {:url "https://git.sr.ht/~p00f/alabaster.nvim"}
+   {:url "https://github.com/jaredgorski/Mies.vim"}
+   {:url "https://github.com/mcchrish/zenbones.nvim"}])
 
 ;;; settings for plugins
 
