@@ -38,11 +38,12 @@
   "https://github.com/lewis6991/impatient.nvim" {}
   "https://github.com/Olical/conjure" {}
   "https://github.com/gpanders/nvim-parinfer" {}
+  "https://github.com/nvim-lua/plenary.nvim" {}
   "https://github.com/neovim/nvim-lspconfig" {}
   "https://github.com/williamboman/mason.nvim" {:mod :mason}
   "https://github.com/williamboman/mason-lspconfig.nvim" {:mod :mason-lspconfig}
   "https://github.com/nvim-treesitter/nvim-treesitter" {:run ":TSUpdate" :mod :treesitter}
-  "https://github.com/jose-elias-alvarez/null-ls.nvim" {:mod :null-ls :requires [[:nvim-lua/plenary.nvim]]}
+  "https://github.com/jose-elias-alvarez/null-ls.nvim" {:mod :null-ls}
   "https://github.com/tpope/vim-dispatch" {}
   "https://github.com/vim-test/vim-test" {}
   "https://github.com/echasnovski/mini.nvim" {:mod :mini}
