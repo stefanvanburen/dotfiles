@@ -19,7 +19,6 @@
   "plenary.nvim": { "branch": "master", "commit": "bb444796dc5746d969f0718913a31c8075741e36" },
   "rams": { "branch": "main", "commit": "3fafc6177143f7a47813f49c38a6265d337e7055" },
   "vim-abolish": { "branch": "master", "commit": "3f0c8faadf0c5b68bcf40785c1c42e3731bfa522" },
-  "vim-commentary": { "branch": "master", "commit": "e87cd90dc09c2a203e13af9704bd0ef79303d755" },
   "vim-dirvish": { "branch": "master", "commit": "6233243f0caa71d27d27ea102540a88bce8eb6ea" },
   "vim-dispatch": { "branch": "master", "commit": "00e77d90452e3c710014b26dc61ea919bc895e92" },
   "vim-eunuch": { "branch": "master", "commit": "291ef1f8c8996ca7715df1032a35a27b12d7b5cf" },

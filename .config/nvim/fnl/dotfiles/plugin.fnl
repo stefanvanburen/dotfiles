@@ -49,14 +49,15 @@
    {:url "https://github.com/echasnovski/mini.nvim"
     :config (fn []
               (let [mini-pairs (require :mini.pairs)
-                    mini-trailspace (require :mini.trailspace)]
+                    mini-trailspace (require :mini.trailspace)
+                    mini-comment (require :mini.comment)]
                 (mini-pairs.setup)
-                (mini-trailspace.setup)))}
+                (mini-trailspace.setup)
+                (mini-comment.setup)))}
    {:url "https://github.com/ibhagwan/fzf-lua"
     :config {:winopts {:border :single}
              :global_git_icons false
              :global_file_icons false}}
-   {:url "https://github.com/tpope/vim-commentary"}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/ggandor/leap.nvim"
     :config (fn []
