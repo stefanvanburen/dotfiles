@@ -4,7 +4,49 @@
 (lazy.setup
   [{:url "https://github.com/justinmk/vim-dirvish"}
    {:url "https://github.com/tyru/open-browser.vim"}
-   {:url "https://github.com/lewis6991/gitsigns.nvim" :config true}
+   {:url "https://github.com/lewis6991/gitsigns.nvim"
+    :config
+    (fn []
+      (let [gitsigns (require :gitsigns)]
+        (gitsigns.setup
+          {:attach_to_untracked false
+           :on_attach
+           ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
+           (fn [bufnr]
+            (let [map (fn [mode l r ?opts]
+                        (let [opts (or ?opts {})]
+                          (set opts.buffer bufnr)
+                          (vim.keymap.set mode l r opts)))]
+              ;; Navigation
+              (map "n" "]c" (fn []
+                              (if (= vim.wo.diff true)
+                                "]c"
+                                (do
+                                  (vim.schedule #(gitsigns.next_hunk))
+                                  "<Ignore>")))
+                    {:expr true})
+              (map "n" "[c" (fn []
+                              (if (= vim.wo.diff true)
+                                "[c"
+                                (do
+                                  (vim.schedule #(gitsigns.prev_hunk))
+                                  "<Ignore>")))
+                    {:expr true})
+              ;; Actions
+              (map ["n" "v"] "<leader>hs" ":Gitsigns stage_hunk<CR>")
+              (map ["n" "v"] "<leader>hr" ":Gitsigns reset_hunk<CR>")
+              (map "n" "<leader>hS" gitsigns.stage_buffer)
+              (map "n" "<leader>hR" gitsigns.reset_buffer)
+              (map "n" "<leader>hu" gitsigns.undo_stage_hunk)
+              (map "n" "<leader>hp" gitsigns.preview_hunk)
+              (map "n" "<leader>hb" #(gitsigns.blame_line {:full true}))
+              (map "n" "<leader>tb" gitsigns.toggle_current_line_blame)
+              (map "n" "<leader>hd" gitsigns.diffthis)
+              (map "n" "<leader>hD" #(gitsigns.diffthis "~"))
+              (map "n" "<leader>td" gitsigns.toggle_deleted)
+              ;; Text object
+              (map ["o" "x"] "ih" ":<C-U>Gitsigns select_hunk<CR>")))})))}
+
    {:url "https://github.com/tpope/vim-fugitive"}
    {:url "https://github.com/tpope/vim-rhubarb"}
    {:url "https://github.com/mattn/vim-gotmpl"}
