@@ -17,7 +17,7 @@
    {:url "https://github.com/williamboman/mason.nvim" :config true}
    {:url "https://github.com/williamboman/mason-lspconfig.nvim" :config true}
    {:url "https://github.com/nvim-treesitter/nvim-treesitter"
-    :build "TSUpdate"
+    :build ":TSUpdate"
     :config {:highlight {:enable true}
              :ensure_installed [:clojure
                                 :comment ; parse comments
