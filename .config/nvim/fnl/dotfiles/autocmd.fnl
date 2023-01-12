@@ -46,6 +46,10 @@
   (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
                                           :pattern "justfile"
                                           :callback #(vim.api.nvim_set_option_value "filetype" "make" {:scope "local"})})
+  ;; treat mdx files as markdown
+  (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
+                                          :pattern "*.mdx"
+                                          :callback #(vim.api.nvim_set_option_value "filetype" "markdown" {:scope "local"})})
   (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
                                           :pattern "*.star"
                                           :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})}))
