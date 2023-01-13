@@ -32,7 +32,7 @@
    :gitcommit       {:spell true}
    :sql             {:wrap true :commentstring "-- %s"}
    :clojure         {:expandtab true :textwidth 80}
-   :markdown        {:spell true :wrap true :conceallevel 2 :shiftwidth 2}})
+   :markdown        {:spell true :wrap true :conceallevel 0 :shiftwidth 2}})
 
 (let [aufiletypes (create-augroup "filetypes" {})]
   (each [filetype settings (pairs filetype-settings)]
