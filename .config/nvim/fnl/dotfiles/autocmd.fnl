@@ -24,7 +24,10 @@
    :yaml            {:expandtab true  :shiftwidth 2 :tabstop 2}
    :json            {:expandtab true  :shiftwidth 2 :tabstop 2}
    :bash            {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :python          {:expandtab true  :shiftwidth 4 :tabstop 4}
+   :python          {:expandtab true
+                     :shiftwidth 4
+                     :textwidth 88 ; match `black`
+                     :tabstop 4}
    :starlark        {:expandtab true  :shiftwidth 4 :tabstop 4 :commentstring "# %s"}
    :gitcommit       {:spell true}
    :sql             {:wrap true :commentstring "-- %s"}
