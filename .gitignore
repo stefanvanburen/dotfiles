@@ -7,6 +7,11 @@
 # clojure tools, not pinned / tracked
 .config/clojure/tools
 
+# ignoring the entire aerc directory for now - accounts is a sensitive file,
+# but/and I also don't have particular bindings or UI treatments I care for -
+# everything is stock. So just ignore all the generated settings (for now!).
+.config/aerc
+
 # contains sensitive information
 .netrc
 # npm configuration - can contain sensitive information
