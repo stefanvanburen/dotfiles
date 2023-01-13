@@ -101,8 +101,8 @@
                 lspconfig.clojure_lsp
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
                 lspconfig.bufls
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
-                lspconfig.pylsp
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
+                lspconfig.ruff_lsp ; for python, instead of pylsp - seems strictly better?
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
                 lspconfig.tsserver
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
