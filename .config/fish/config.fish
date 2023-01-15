@@ -47,6 +47,8 @@ set -gx HOMEBREW_NO_EMOJI 1
 # fish_add_path requires fish 3.2.0
 # pipx
 fish_add_path ~/.local/bin
+# homebrew
+fish_add_path /opt/homebrew/bin
 # rust
 fish_add_path ~/.cargo/bin
 # go
