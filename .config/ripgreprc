@@ -11,7 +11,10 @@
 --max-columns=150
 --max-columns-preview
 
-# style the match with an underline
+# override NO_COLOR, because I've set the colors below.
+--color=always
+
+# style the match with an underline.
 --colors=match:none
 --colors=match:style:underline
 
