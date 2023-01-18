@@ -1,4 +1,2 @@
-# override the built-in fish greeting with nothing
-function fish_greeting
-
+function fish_greeting --description 'Override the built-in fish greeting with nothing'
 end
