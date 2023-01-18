@@ -113,7 +113,6 @@
    {:url "https://github.com/rktjmp/lush.nvim"}
    {:url "https://github.com/stefanvanburen/rams"}
    {:url "https://git.sr.ht/~p00f/alabaster.nvim"}
-   {:url "https://github.com/jaredgorski/Mies.vim"}
    {:url "https://github.com/mcchrish/zenbones.nvim"}])
 
 ;;; settings for plugins
