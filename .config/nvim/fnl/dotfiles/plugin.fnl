@@ -3,6 +3,7 @@
 
 (lazy.setup
   [{:url "https://github.com/justinmk/vim-dirvish"}
+   ;; required by vim-fugitive
    {:url "https://github.com/tyru/open-browser.vim"}
    {:url "https://github.com/lewis6991/gitsigns.nvim"
     :config
