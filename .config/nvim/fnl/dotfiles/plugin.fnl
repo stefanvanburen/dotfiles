@@ -84,8 +84,6 @@
                                          null-ls.builtins.diagnostics.stylelint
                                          null-ls.builtins.diagnostics.shellcheck
                                          null-ls.builtins.formatting.shfmt]}))}
-   {:url "https://github.com/tpope/vim-dispatch"}
-   {:url "https://github.com/vim-test/vim-test"}
    {:url "https://github.com/echasnovski/mini.nvim"
     :config #(let [mini-pairs (require :mini.pairs)
                    mini-trailspace (require :mini.trailspace)
@@ -112,15 +110,8 @@
 
 ;;; settings for plugins
 
-;; because I commonly zoom tmux windows, and Dispatch will create a new window
-;; when within tmux, the default setting would unzoom my tmux. Turn it off.
-(set vim.g.dispatch_no_tmux_make 1)
-
 ;; using open-browser.vim for `gx`
 (set vim.g.netrw_nogx 1)
-
-;; vim-test x dispatch
-(set vim.g.test#strategy "dispatch")
 
 ;; disable vim-surround's default mappings, replacing most of
 ;; them in mapping.fnl, to work with leap.nvim.

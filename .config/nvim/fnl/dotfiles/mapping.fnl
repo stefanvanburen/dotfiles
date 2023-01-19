@@ -111,13 +111,6 @@
 (map :c :<c-k> :<c-c>)
 (map :t :<c-k> :<c-\><c-n>)
 
-;; vim-test mappings
-(map :n :t<C-n> ":TestNearest<cr>" {:silent true})
-(map :n :t<C-f> ":TestFile<cr>" {:silent true})
-(map :n :t<C-s> ":TestSuite<cr>" {:silent true})
-(map :n :t<C-l> ":TestLast<cr>" {:silent true})
-(map :n :t<C-g> ":TestVisit<cr>" {:silent true})
-
 (map :n "<C-l>" ":nohlsearch<cr>" {})
 
 ;; vim-surround mappings to work with leap.nvim
