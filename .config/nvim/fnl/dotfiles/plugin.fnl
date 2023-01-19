@@ -6,46 +6,45 @@
    {:url "https://github.com/tyru/open-browser.vim"}
    {:url "https://github.com/lewis6991/gitsigns.nvim"
     :config
-    (fn []
-      (let [gitsigns (require :gitsigns)]
-        (gitsigns.setup
-          {:attach_to_untracked false
-           :on_attach
-           ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
-           (fn [bufnr]
-            (let [map (fn [mode l r ?opts]
-                        (let [opts (or ?opts {})]
-                          (set opts.buffer bufnr)
-                          (vim.keymap.set mode l r opts)))]
-              ;; Navigation
-              (map "n" "]c" (fn []
-                              (if (= vim.wo.diff true)
-                                "]c"
-                                (do
-                                  (vim.schedule #(gitsigns.next_hunk))
-                                  "<Ignore>")))
-                    {:expr true})
-              (map "n" "[c" (fn []
-                              (if (= vim.wo.diff true)
-                                "[c"
-                                (do
-                                  (vim.schedule #(gitsigns.prev_hunk))
-                                  "<Ignore>")))
-                    {:expr true})
-              ;; Actions
-              (map ["n" "v"] "<leader>hs" ":Gitsigns stage_hunk<CR>")
-              (map ["n" "v"] "<leader>hr" ":Gitsigns reset_hunk<CR>")
-              (map "n" "<leader>hS" gitsigns.stage_buffer)
-              (map "n" "<leader>hR" gitsigns.reset_buffer)
-              (map "n" "<leader>hu" gitsigns.undo_stage_hunk)
-              (map "n" "<leader>hp" gitsigns.preview_hunk)
-              (map "n" "<leader>hb" #(gitsigns.blame_line {:full true}))
-              (map "n" "<leader>tb" gitsigns.toggle_current_line_blame)
-              (map "n" "<leader>hd" gitsigns.diffthis)
-              (map "n" "<leader>hD" #(gitsigns.diffthis "~"))
-              (map "n" "<leader>td" gitsigns.toggle_deleted)
-              ;; Text object
-              (map ["o" "x"] "ih" ":<C-U>Gitsigns select_hunk<CR>")))})))}
+    #(let [gitsigns (require :gitsigns)]
+       (gitsigns.setup
+         {:attach_to_untracked false
+          :on_attach
+          ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
+          (fn [bufnr]
+           (let [map (fn [mode l r ?opts]
+                       (let [opts (or ?opts {})]
+                         (set opts.buffer bufnr)
+                         (vim.keymap.set mode l r opts)))]
+             ;; Navigation
+             (map "n" "]c" (fn []
+                             (if (= vim.wo.diff true)
+                               "]c"
+                               (do
+                                 (vim.schedule #(gitsigns.next_hunk))
+                                 "<Ignore>")))
+                   {:expr true})
+             (map "n" "[c" (fn []
+                             (if (= vim.wo.diff true)
+                               "[c"
+                               (do
+                                 (vim.schedule #(gitsigns.prev_hunk))
+                                 "<Ignore>")))
+                   {:expr true})
+             ;; Actions
+             (map ["n" "v"] "<leader>hs" ":Gitsigns stage_hunk<CR>")
+             (map ["n" "v"] "<leader>hr" ":Gitsigns reset_hunk<CR>")
+             (map "n" "<leader>hS" gitsigns.stage_buffer)
+             (map "n" "<leader>hR" gitsigns.reset_buffer)
+             (map "n" "<leader>hu" gitsigns.undo_stage_hunk)
+             (map "n" "<leader>hp" gitsigns.preview_hunk)
+             (map "n" "<leader>hb" #(gitsigns.blame_line {:full true}))
+             (map "n" "<leader>tb" gitsigns.toggle_current_line_blame)
+             (map "n" "<leader>hd" gitsigns.diffthis)
+             (map "n" "<leader>hD" #(gitsigns.diffthis "~"))
+             (map "n" "<leader>td" gitsigns.toggle_deleted)
+             ;; Text object
+             (map ["o" "x"] "ih" ":<C-U>Gitsigns select_hunk<CR>")))}))}
 
    {:url "https://github.com/tpope/vim-fugitive"}
    {:url "https://github.com/tpope/vim-rhubarb"}
@@ -79,32 +78,29 @@
                                 :sql
                                 :yaml]}}
    {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
-    :config (fn []
-              (let [null-ls (require :null-ls)]
-                (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
-                                          null-ls.builtins.formatting.buf
-                                          null-ls.builtins.diagnostics.stylelint
-                                          null-ls.builtins.diagnostics.shellcheck
-                                          null-ls.builtins.formatting.shfmt]})))}
+    :config #(let [null-ls (require :null-ls)]
+               (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
+                                         null-ls.builtins.formatting.buf
+                                         null-ls.builtins.diagnostics.stylelint
+                                         null-ls.builtins.diagnostics.shellcheck
+                                         null-ls.builtins.formatting.shfmt]}))}
    {:url "https://github.com/tpope/vim-dispatch"}
    {:url "https://github.com/vim-test/vim-test"}
    {:url "https://github.com/echasnovski/mini.nvim"
-    :config (fn []
-              (let [mini-pairs (require :mini.pairs)
-                    mini-trailspace (require :mini.trailspace)
-                    mini-comment (require :mini.comment)]
+    :config #(let [mini-pairs (require :mini.pairs)
+                   mini-trailspace (require :mini.trailspace)
+                   mini-comment (require :mini.comment)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
-                (mini-comment.setup)))}
+                (mini-comment.setup))}
    {:url "https://github.com/ibhagwan/fzf-lua"
     :config {:winopts {:border :single}
              :global_git_icons false
              :global_file_icons false}}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/ggandor/leap.nvim"
-    :config (fn []
-              (let [leap (require :leap)]
-                (leap.add_default_mappings)))}
+    :config #(let [leap (require :leap)]
+               (leap.add_default_mappings))}
    {:url "https://github.com/tpope/vim-surround"}
    {:url "https://github.com/tpope/vim-unimpaired"}
    {:url "https://github.com/tpope/vim-abolish"}
