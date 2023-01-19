@@ -102,7 +102,11 @@
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
                 lspconfig.bufls
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
-                lspconfig.ruff_lsp ; for python, instead of pylsp - seems strictly better?
+                lspconfig.ruff_lsp
+                ;; pipx install python-lsp-server ; https://github.com/python-lsp/python-lsp-server
+                ;; pipx inject python-lsp-server pylsp-mypy ; https://github.com/python-lsp/pylsp-mypy
+                ;; pipx inject python-lsp-server python-lsp-black ; https://github.com/python-lsp/python-lsp-black
+                lspconfig.pylsp
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
                 lspconfig.tsserver
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
