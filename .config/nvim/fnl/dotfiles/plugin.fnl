@@ -110,9 +110,6 @@
 
 ;;; settings for plugins
 
-;; using open-browser.vim for `gx`
-(set vim.g.netrw_nogx 1)
-
 ;; disable vim-surround's default mappings, replacing most of
 ;; them in mapping.fnl, to work with leap.nvim.
 (set vim.g.surround_no_mappings 1)
