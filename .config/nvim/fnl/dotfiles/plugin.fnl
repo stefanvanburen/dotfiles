@@ -50,7 +50,6 @@
    {:url "https://github.com/tpope/vim-fugitive"}
    {:url "https://github.com/tpope/vim-rhubarb"}
    {:url "https://github.com/mattn/vim-gotmpl"}
-   {:url "https://github.com/dstein64/vim-startuptime"}
    {:url "https://github.com/Olical/aniseed"}
    {:url "https://github.com/Olical/conjure"}
    {:url "https://github.com/gpanders/nvim-parinfer"}
