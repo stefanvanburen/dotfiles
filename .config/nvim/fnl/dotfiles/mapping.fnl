@@ -47,8 +47,7 @@
 (map :n :<leader>fs fzf-lua.git_stash)
 
 ;; open-browser.vim
-(map :n :gx "<plug>(openbrowser-open)" {})
-(map :v :gx "<plug>(openbrowser-open)" {})
+(map [:n :v] :gx "<plug>(openbrowser-open)" {})
 
 ;; move by visual lines instead of real lines, except when a count is provided,
 ;; which helps when targetting a specific line with `relativenumber`.
