@@ -27,6 +27,8 @@
 .ssh
 .terminfo
 .viminfo
+.bash_history
+.clojure_history
 .python_history
 .sqlite_history
 
