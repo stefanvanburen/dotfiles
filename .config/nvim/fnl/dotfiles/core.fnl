@@ -51,9 +51,6 @@
 ;; Helps when doing insert-mode completion
 (set vim.o.infercase true)
 
-;; Don't redraw when using macros.
-(set vim.o.lazyredraw false)
-
 ;; Invisible characters
 (set vim.o.list true)
 (set vim.o.listchars "tab:→ ,eol:¬,trail:⣿")
