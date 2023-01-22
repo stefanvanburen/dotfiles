@@ -104,8 +104,6 @@
 (set vim.o.grepprg "rg --vimgrep --no-heading --smart-case")
 (set vim.o.grepformat "%f:%l:%c:%m,%f:%l:%m")
 
-(set vim.o.inccomand :split)
-
 ;; %f: relative path to current file
 ;; %m: modified flag
 ;; %{FugitiveHead()}: git head branch
