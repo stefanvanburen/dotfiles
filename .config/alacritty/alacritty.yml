@@ -160,28 +160,6 @@ colors:
     # from rams
     cursor: '0xee483e'
 
-#   # Normal colors
-#   normal:
-#     black:   '0x4d4d4c'
-#     red:     '0xd7005f'
-#     green:   '0x718c00'
-#     yellow:  '0xd75f00'
-#     blue:    '0x4271ae'
-#     magenta: '0x8959a8'
-#     cyan:    '0x3e999f'
-#     white:   '0xd1d1d1'
-
-#   # Bright colors
-#   bright:
-#     black:   '0x969694'
-#     red:     '0xd7005f'
-#     green:   '0x718c00'
-#     yellow:  '0xd75f00'
-#     blue:    '0x4271ae'
-#     magenta: '0x8959a8'
-#     cyan:    '0x3e999f'
-#     white:   '0xf5f5f5'
-
 # https://github.com/mcchrish/zenbones.nvim/blob/main/extras/alacritty/zenwritten_light.yml
 # colors:
 #   primary:
