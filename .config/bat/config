@@ -1,8 +1,5 @@
 # NOTE: bat _must_ have less installed via homebrew to function
 
-# Disable colors
---color=never
-
 # Show line numbers, Git modifications and file header (but no grid)
 --style="numbers,changes,header"
 

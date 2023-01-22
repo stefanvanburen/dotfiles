@@ -32,11 +32,6 @@ set fzf_colors '--color=fg:#0f0d0d,bg:#ebebeb,hl:#ee473f,fg+:#0f0d0d,bg+:#d1d1d1
 set -gx FZF_DEFAULT_OPTS "--layout=reverse --no-info $fzf_colors"
 set -gx FZF_CTRL_T_OPTS  "--layout=reverse --no-info $fzf_colors --preview 'bat --line-range :500 {}'"
 
-# In general, try to disable color in the terminal.
-# `fd` supports this; I'm sure others do as well.
-# https://no-color.org
-set -gx NO_COLOR 1
-
 # Homebrew settings
 # https://docs.brew.sh/Manpage#environment
 # Disable fancy colors and analytics
