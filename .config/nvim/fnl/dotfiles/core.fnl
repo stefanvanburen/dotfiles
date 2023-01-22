@@ -5,9 +5,6 @@
 (set vim.o.background :light)
 (vim.cmd.colorscheme :rams)
 
-;; don't wrap by default
-; (set vim.o.wrap false)
-
 ;; always show the completion menu, and when it's brought up, don't select
 ;; anything by default.
 (set vim.o.completeopt "menuone,noselect")
@@ -57,12 +54,6 @@
 
 ;; Don't show the mode on the command line - it's redundant with the status line.
 (set vim.o.showmode false)
-
-;; line numbers
-;; setting these both together means that the current line number is the actual
-;; line number of the file, while the other line numbers are relative.
-; (set vim.o.number true)
-; (set vim.o.relativenumber true)
 
 ;; maintain an undofile for undoing actions through neovim loads
 (set vim.o.undofile true)
