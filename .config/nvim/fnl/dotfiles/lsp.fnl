@@ -63,16 +63,6 @@
 
 (create-autocmd :LspAttach {:callback on-attach})
 
-(vim.fn.sign_define "DiagnosticSignError" {:text "×" :texthl "DiagnosticSignError"})
-(vim.fn.sign_define "DiagnosticSignWarn"  {:text "!" :texthl "DiagnosticSignWarn"})
-(vim.fn.sign_define "DiagnosticSignInfo"  {:text "i" :texthl "DiagnosticSignInfo"})
-(vim.fn.sign_define "DiagnosticSignHint"  {:text "?" :texthl "DiagnosticSignHint"})
-
-(vim.diagnostic.config {:virtual_text {:prefix "▪"}
-                        :float {:border "single"
-                                :focusable false
-                                :source "always"}})
-
 (local handlers {"textDocument/hover"         (vim.lsp.with vim.lsp.handlers.hover          {:border "single"})
                  "textDocument/signatureHelp" (vim.lsp.with vim.lsp.handlers.signature_help {:border "single"})})
 

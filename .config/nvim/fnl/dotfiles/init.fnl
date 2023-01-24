@@ -3,4 +3,5 @@
             dotfiles.autocmd
             dotfiles.core
             dotfiles.mapping
+            dotfiles.diagnostic
             dotfiles.lsp]})
