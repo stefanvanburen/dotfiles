@@ -26,11 +26,8 @@ set -gx FZF_TMUX_OPTS '-p 80%'
 
 # rams-themed colors
 set fzf_colors '--color=fg:#0f0d0d,bg:#ebebeb,hl:#ee473f,fg+:#0f0d0d,bg+:#d1d1d1,hl+:#ee473f,info:#000000,prompt:#000000,pointer:#ee473f,marker:#000000,spinner:#000000,header:#000000'
-
-# reverse fzf's layout - by default, the input is at the bottom of the screen - I prefer it at the top.
-# turn off info in fzf's output (including the `bat` preview)
-set -gx FZF_DEFAULT_OPTS "--layout=reverse --no-info $fzf_colors"
-set -gx FZF_CTRL_T_OPTS  "--layout=reverse --no-info $fzf_colors --preview 'bat --line-range :500 {}'"
+set -gx FZF_DEFAULT_OPTS "$fzf_colors"
+set -gx FZF_CTRL_T_OPTS  "$fzf_colors --preview 'bat --line-range :500 {}'"
 
 # Homebrew settings
 # https://docs.brew.sh/Manpage#environment
