@@ -67,6 +67,7 @@ if status --is-interactive
     set -g fish_key_bindings fish_vi_key_bindings
 
     # set terminal colors
+    # https://fishshell.com/docs/current/cmds/fish_config.html
     fish_config theme choose 'Mono Lace'
 
     # jump is bound to `z`
