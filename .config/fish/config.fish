@@ -72,8 +72,10 @@ if status --is-interactive
     # jump is bound to `z`
     command -q jump; and source (jump shell --bind=z fish | psub)
 
+    # https://starship.rs/#fish
     command -q starship; and starship init fish | source
 
+    # https://direnv.net/docs/hook.html#fish
     command -q direnv; and direnv hook fish | source
 end
 
