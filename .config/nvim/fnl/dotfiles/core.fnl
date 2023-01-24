@@ -57,10 +57,6 @@
 ;; On vertical split, open the split to the right.
 (set vim.o.splitright true)
 
-;; cobbled from https://github.com/liuchengxu/vim-better-default
-;; c: no ins-completion-menu messages
-(set vim.o.shortmess "atOIoc")
-
 ;; always use the system clipboard for operations
 (set vim.o.clipboard "unnamedplus")
 
