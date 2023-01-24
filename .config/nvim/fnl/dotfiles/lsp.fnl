@@ -67,8 +67,6 @@
                         ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
                         :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
                                            :staticcheck true
-                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#vulncheck-enum
-                                           :vulncheck "Imports"
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                                            ;; Most of these analyzers are enabled by default.
                                            :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
