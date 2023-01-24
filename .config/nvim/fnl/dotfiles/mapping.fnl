@@ -56,8 +56,7 @@
 
 ;; Navigate between matching brackets
 ;; These specifically `remap` because we want to be bound to whatever % is.
-(map :n :<tab> :% {:remap true})
-(map :v :<tab> :% {:remap true})
+(map [:n :v] :<tab> :% {:remap true})
 
 ;; edit config files
 (map :n :<leader>ed #(fzf-lua.git_files {:cwd "~"}))
