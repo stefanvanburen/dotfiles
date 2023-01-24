@@ -41,8 +41,7 @@
 ;; Copy the indent of existing lines when autoindenting
 (set vim.o.copyindent true)
 
-;; how long to wait in milliseconds before writing to disk
-;; this is set lower to help plugins like vim-gitgutter update their signs
+;; Set lower for the CursorHold autocmd, so that LSP's document highlighting is useful.
 (set vim.o.updatetime 100)
 
 ;; Helps when doing insert-mode completion
