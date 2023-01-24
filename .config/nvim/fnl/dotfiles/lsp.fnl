@@ -70,15 +70,7 @@
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                                            ;; Most of these analyzers are enabled by default.
                                            :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
-                                                      :unusedparams true}
-                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-                                           :hints {:parameterNames true
-                                                   :assignVariableTypes true
-                                                   :compositeLiteralFields true
-                                                   :compositeLiteralTypes true
-                                                   :constantValues true
-                                                   :functionTypeParameters true
-                                                   :rangeVariableTypes true}}}})
+                                                      :unusedparams true}}}})
 
 (local servers [;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
                 lspconfig.clojure_lsp
