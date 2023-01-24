@@ -4,11 +4,9 @@
 (local create-augroup vim.api.nvim_create_augroup)
 
 (create-autocmd :VimResized {:pattern "*"
-                             :desc "on resize, resize windows"
                              :command ":wincmd ="})
 
 (create-autocmd :TextYankPost {:pattern "*"
-                               :desc "show yanked text"
                                :callback #(vim.highlight.on_yank)})
 
 (local filetype-settings
