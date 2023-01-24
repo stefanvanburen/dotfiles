@@ -46,8 +46,9 @@
              (map "n" "<leader>td" gitsigns.toggle_deleted)
              ;; Text object
              (map ["o" "x"] "ih" ":<C-U>Gitsigns select_hunk<CR>")))}))}
-
-   {:url "https://github.com/tpope/vim-fugitive"}
+   {:url "https://github.com/tpope/vim-fugitive"
+    ;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
+    :config #(set vim.g.fugitive_legacy_commands 0)}
    {:url "https://github.com/tpope/vim-rhubarb"}
    {:url "https://github.com/mattn/vim-gotmpl"}
    {:url "https://github.com/Olical/aniseed"}
@@ -100,7 +101,10 @@
    {:url "https://github.com/ggandor/leap.nvim"
     :config #(let [leap (require :leap)]
                (leap.add_default_mappings))}
-   {:url "https://github.com/tpope/vim-surround"}
+   {:url "https://github.com/tpope/vim-surround"
+    ;; disable vim-surround's default mappings, replacing most of
+    ;; them in mapping.fnl, to work with leap.nvim.
+    :config #(set vim.g.surround_no_mappings 1)}
    {:url "https://github.com/tpope/vim-unimpaired"}
    {:url "https://github.com/tpope/vim-abolish"}
    {:url "https://github.com/tpope/vim-repeat"}
@@ -108,12 +112,3 @@
    {:url "https://github.com/stefanvanburen/rams"}
    {:url "https://git.sr.ht/~p00f/alabaster.nvim"}
    {:url "https://github.com/mcchrish/zenbones.nvim"}])
-
-;;; settings for plugins
-
-;; disable vim-surround's default mappings, replacing most of
-;; them in mapping.fnl, to work with leap.nvim.
-(set vim.g.surround_no_mappings 1)
-
-;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
-(set vim.g.fugitive_legacy_commands 0)
