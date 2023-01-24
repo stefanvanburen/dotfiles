@@ -87,12 +87,6 @@
 ;;   p - don't break lines at single spaces that follow periods
 (set vim.o.formatoptions "tcqjronp")
 
-;; allows moving the cursor to where there is no actual character
-;; virtualedit=all has a bug when paired with vim.highlight.on_yank
-;; See: https://github.com/neovim/neovim/issues/13317
-;; For now, leave it as the default, "".
-(set vim.o.virtualedit "")
-
 ;; ignore case when completing files / directories in wildmenu
 (set vim.o.wildignorecase true)
 
