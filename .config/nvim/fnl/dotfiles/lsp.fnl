@@ -21,10 +21,6 @@
                 :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
 
-  ;; NOTE: Useful for debugging
-  ;; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
-  ; (vim.pretty_print client)
-
   (fn buffer-map [from to]
     (vim.keymap.set :n from to {:buffer buf :silent true}))
 
