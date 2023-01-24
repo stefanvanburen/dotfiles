@@ -3,11 +3,9 @@
 (local create-autocmd vim.api.nvim_create_autocmd)
 (local create-augroup vim.api.nvim_create_augroup)
 
-(create-autocmd :VimResized {:pattern "*"
-                             :command ":wincmd ="})
+(create-autocmd :VimResized {:command ":wincmd ="})
 
-(create-autocmd :TextYankPost {:pattern "*"
-                               :callback #(vim.highlight.on_yank)})
+(create-autocmd :TextYankPost {:callback #(vim.highlight.on_yank)})
 
 (local filetype-settings
   {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
