@@ -7,7 +7,7 @@ set -qx XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.local/state
 set -gx EDITOR nvim
 # https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
-# https://github.com/sharkdp/bat#man
+# neovim's man plugin - see :h ft-man-plugin
 set -gx MANPAGER "nvim +Man!"
 
 # https://github.com/charmbracelet/glamour/tree/master/styles/gallery
