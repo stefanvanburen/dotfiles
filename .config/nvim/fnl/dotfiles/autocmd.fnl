@@ -3,13 +3,13 @@
 (local create-autocmd vim.api.nvim_create_autocmd)
 (local create-augroup vim.api.nvim_create_augroup)
 
-(create-autocmd "VimResized" {:pattern "*"
-                              :desc "on resize, resize windows"
-                              :command ":wincmd ="})
+(create-autocmd :VimResized {:pattern "*"
+                             :desc "on resize, resize windows"
+                             :command ":wincmd ="})
 
-(create-autocmd "TextYankPost" {:pattern "*"
-                                :desc "show yanked text"
-                                :callback #(vim.highlight.on_yank)})
+(create-autocmd :TextYankPost {:pattern "*"
+                               :desc "show yanked text"
+                               :callback #(vim.highlight.on_yank)})
 
 (local filetype-settings
   {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
@@ -33,10 +33,10 @@
 
 (let [aufiletypes (create-augroup "filetypes" {})]
   (each [filetype settings (pairs filetype-settings)]
-    (create-autocmd "FileType" {:group aufiletypes
-                                :pattern filetype
-                                :callback #(each [name value (pairs settings)]
-                                             (vim.api.nvim_set_option_value name value {:scope "local"}))}))
+    (create-autocmd :FileType {:group aufiletypes
+                               :pattern filetype
+                               :callback #(each [name value (pairs settings)]
+                                            (vim.api.nvim_set_option_value name value {:scope "local"}))}))
 
   ;; treat `justfile`s as makefiles
   ;; This helps with setting up correct commentstring, etc
