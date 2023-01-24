@@ -25,11 +25,6 @@
 ;; defaults, other than end of buffer ' ', rather than the default '~'
 (set vim.o.fillchars "eob: ,")
 
-;; fold based on syntax cues
-(set vim.o.foldmethod :syntax)
-;; turn off folding by default
-(set vim.o.foldenable false)
-
 ;; Global substitutions by default.
 (set vim.o.gdefault true)
 
