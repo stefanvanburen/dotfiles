@@ -4,10 +4,6 @@
 (local create-autocmd vim.api.nvim_create_autocmd)
 (local create-augroup vim.api.nvim_create_augroup)
 
-(fn buffer-map [bufnr from to]
-  "Sets a normal mode mapping within a buffer."
-  (vim.keymap.set :n from to {:buffer bufnr :silent true}))
-
 (fn organize-imports [wait-ms]
   (local params (vim.lsp.util.make_range_params))
   (set params.context {:only ["source.organizeImports"]})
@@ -29,17 +25,20 @@
   ;; https://github.com/nanotee/nvim-lua-guide#the-vim-namespace
   ; (vim.pretty_print client)
 
+  (fn buffer-map [from to]
+    (vim.keymap.set :n from to {:buffer buf :silent true}))
+
   (when (= client.name "gopls")
     (create-autocmd :BufWritePre {:buffer buf
                                   :callback #(organize-imports 1000)}))
 
   (when client.server_capabilities.documentFormattingProvider
-    (buffer-map buf :<leader>af vim.lsp.buf.format)
+    (buffer-map :<leader>af vim.lsp.buf.format)
     (create-autocmd :BufWritePre {:buffer buf
                                   :callback #(vim.lsp.buf.format)}))
 
   (when client.server_capabilities.hoverProvider
-    (buffer-map buf :K vim.lsp.buf.hover))
+    (buffer-map :K vim.lsp.buf.hover))
 
   (when client.server_capabilities.documentHighlightProvider
     (let [augroup-id (create-augroup "lsp-document-highlight" {:clear false})]
@@ -52,14 +51,14 @@
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
-  (buffer-map buf :gD         vim.lsp.buf.declaration)
-  (buffer-map buf :gd         vim.lsp.buf.definition)
-  (buffer-map buf :gi         vim.lsp.buf.implementation)
-  (buffer-map buf :gr         vim.lsp.buf.references)
-  (buffer-map buf :<C-k>      vim.lsp.buf.signature_help)
-  (buffer-map buf :<leader>D  vim.lsp.buf.type_definition)
-  (buffer-map buf :<leader>rn vim.lsp.buf.rename)
-  (buffer-map buf :<leader>ca vim.lsp.buf.code_action))
+  (buffer-map :gD         vim.lsp.buf.declaration)
+  (buffer-map :gd         vim.lsp.buf.definition)
+  (buffer-map :gi         vim.lsp.buf.implementation)
+  (buffer-map :gr         vim.lsp.buf.references)
+  (buffer-map :<C-k>      vim.lsp.buf.signature_help)
+  (buffer-map :<leader>D  vim.lsp.buf.type_definition)
+  (buffer-map :<leader>rn vim.lsp.buf.rename)
+  (buffer-map :<leader>ca vim.lsp.buf.code_action))
 
 (create-autocmd :LspAttach {:callback on-attach})
 
