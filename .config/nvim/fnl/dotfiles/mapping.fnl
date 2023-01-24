@@ -90,9 +90,7 @@
 (map :n :<C-b> "<C-b>zz")
 (map :n :<C-u> "<C-u>zz")
 
-; Redirect changes to the "black hole" register
-; leader-map c "_c
-; leader-map C "_C
+;; Redirect changes to the "black hole" register
 (map :n :c "\"_c")
 (map :n :C "\"_C")
 
