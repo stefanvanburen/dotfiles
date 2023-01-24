@@ -97,8 +97,6 @@
 	mnemonicPrefix = true
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
-	; recommended by delta
-	colorMoved = default
 
 [include]
 	# path relative to this file - so, currently:
