@@ -57,9 +57,6 @@
 ;; maintain an undofile for undoing actions through neovim loads
 (set vim.o.undofile true)
 
-;; Show matching brackets briefly.
-(set vim.o.showmatch true)
-
 ;; On horizontal split, open the split below.
 (set vim.o.splitbelow true)
 ;; On vertical split, open the split to the right.
