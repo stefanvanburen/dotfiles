@@ -60,25 +60,25 @@
    {:url "https://github.com/williamboman/mason-lspconfig.nvim" :config true}
    {:url "https://github.com/nvim-treesitter/nvim-treesitter"
     :build ":TSUpdate"
-    :config {:highlight {:enable true}
-             :ensure_installed [:clojure
-                                :comment ; parse comments
-                                :css
-                                :fennel
-                                :fish
-                                :html
-                                :gitignore
-                                :go
-                                :gomod
-                                :help
-                                :javascript
-                                :json
-                                :markdown
-                                :markdown_inline
-                                :proto
-                                :python
-                                :sql
-                                :yaml]}}
+    :opts {:highlight {:enable true}
+           :ensure_installed [:clojure
+                              :comment ; parse comments
+                              :css
+                              :fennel
+                              :fish
+                              :html
+                              :gitignore
+                              :go
+                              :gomod
+                              :help
+                              :javascript
+                              :json
+                              :markdown
+                              :markdown_inline
+                              :proto
+                              :python
+                              :sql
+                              :yaml]}}
    {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
     :config #(let [null-ls (require :null-ls)]
                (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
@@ -94,9 +94,9 @@
                 (mini-trailspace.setup)
                 (mini-comment.setup))}
    {:url "https://github.com/ibhagwan/fzf-lua"
-    :config {:winopts {:border :single}
-             :global_git_icons false
-             :global_file_icons false}}
+    :opts {:winopts {:border :single}
+           :global_git_icons false
+           :global_file_icons false}}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/ggandor/leap.nvim"
     :config #(let [leap (require :leap)]
