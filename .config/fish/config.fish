@@ -50,6 +50,7 @@ if status --is-interactive
     abbr --add --global - prevd
     abbr --add --global v vim
     abbr --add --global g git
+    abbr --add --global b buf
     abbr --add --global tm tmux
     abbr --add --global m make
     abbr --add --global x extract
