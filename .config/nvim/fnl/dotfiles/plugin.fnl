@@ -2,7 +2,7 @@
     {autoload {: lazy}})
 
 (lazy.setup
-  [{:url "https://github.com/justinmk/vim-dirvish"}
+  [{:url "https://github.com/lewis6991/brodir.nvim"}
    ;; required by vim-fugitive
    {:url "https://github.com/tyru/open-browser.vim"}
    {:url "https://github.com/lewis6991/gitsigns.nvim"
