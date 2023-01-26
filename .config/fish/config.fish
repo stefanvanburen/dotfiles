@@ -19,11 +19,6 @@ set fzf_default_command 'fd --type file --follow --hidden --exclude .git --strip
 set -gx FZF_DEFAULT_COMMAND $fzf_default_command
 set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
 
-# use fzf-tmux by default
-set -gx FZF_TMUX 1
-# Use a tmux popup window, using 80% of the tmux window
-set -gx FZF_TMUX_OPTS '-p 80%'
-
 # rams-themed colors
 set fzf_colors '--color=fg:#0f0d0d,bg:#ebebeb,hl:#ee473f,fg+:#0f0d0d,bg+:#d1d1d1,hl+:#ee473f,info:#000000,prompt:#000000,pointer:#ee473f,marker:#000000,spinner:#000000,header:#000000'
 set -gx FZF_DEFAULT_OPTS "$fzf_colors"
