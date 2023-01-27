@@ -60,25 +60,30 @@
    {:url "https://github.com/williamboman/mason-lspconfig.nvim" :config true}
    {:url "https://github.com/nvim-treesitter/nvim-treesitter"
     :build ":TSUpdate"
-    :opts {:highlight {:enable true}
-           :ensure_installed [:clojure
-                              :comment ; parse comments
-                              :css
-                              :fennel
-                              :fish
-                              :html
-                              :gitignore
-                              :go
-                              :gomod
-                              :help
-                              :javascript
-                              :json
-                              :markdown
-                              :markdown_inline
-                              :proto
-                              :python
-                              :sql
-                              :yaml]}}
+    :config #(let [treesitter (require "nvim-treesitter.configs")]
+              (treesitter.setup
+                {:highlight {:enable true}
+                 :ensure_installed
+                 [:c ; must be installed
+                  :clojure
+                  :comment ; parse comments
+                  :css
+                  :fennel
+                  :fish
+                  :html
+                  :gitignore
+                  :go
+                  :gomod
+                  :help ; must be installed
+                  :javascript
+                  :json
+                  :markdown
+                  :markdown_inline
+                  :proto
+                  :python
+                  :sql
+                  :vim ; must be installed
+                  :yaml]}))}
    {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
     :config #(let [null-ls (require :null-ls)]
                (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
