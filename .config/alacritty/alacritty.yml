@@ -19,6 +19,11 @@ window:
   # position, selections, etc.
   decorations: full
 
+  # Disallow applications changing the title - leave it as the default, "Alacritty".
+  # I never use the title, so just leave it unchanged.
+  # If I ever change the decorations setting above, can remove this.
+  dynamic_title: false
+
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
