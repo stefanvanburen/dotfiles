@@ -1,6 +1,11 @@
 (module dotfiles.mapping
   {autoload {: fzf-lua}})
 
+;; Leader is space key
+(set vim.g.mapleader " ")
+;; LocalLeader is the comma key
+(set vim.g.maplocalleader ",")
+
 ;; alias function
 (local map vim.keymap.set)
 
@@ -10,11 +15,6 @@
 
 ;; ; -> :
 (map :n ";" ":")
-
-;; Leader is space key
-(set vim.g.mapleader " ")
-;; LocalLeader is the comma key
-(set vim.g.maplocalleader ",")
 
 ;; See `:help vim.diagnostic.*` for documentation on any of the below functions
 (map :n :<leader>? vim.diagnostic.open_float)
