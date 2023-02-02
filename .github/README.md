@@ -33,8 +33,6 @@ Install the base dependencies in the [Brewfile](./local/share/Brewfile):
 brew bundle install --file=~/.Brewfile
 ```
 
-Create an ssh key (follow the instructions in [ssh-config](../.ssh/config)), and add it to [GitHub](https://github.com/settings/keys) and [sourcehut](https://meta.sr.ht/keys).
-
 Set the shell for the user to `fish`:
 
 ```sh
