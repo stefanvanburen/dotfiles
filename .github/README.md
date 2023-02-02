@@ -50,3 +50,9 @@ Install `fzf` key bindings and fuzzy completion:
 ```
 
 Set up fonts in Alacritty (see [alacritty.yml](./config/alacritty/alacritty.yml) for details)
+
+Disable the annoying <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> shortcut to bring up the dictionary on macOS, so that [Dash.app](https://kapeli.com/dash) can use it:
+
+```sh
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 70 '<dict><key>enabled</key><false/></dict>'
+```
