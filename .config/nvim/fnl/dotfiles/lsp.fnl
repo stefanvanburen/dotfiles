@@ -85,9 +85,7 @@
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
                 lspconfig.tsserver
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
-                lspconfig.eslint
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#marksman
-                lspconfig.marksman])
+                lspconfig.eslint])
 
 (each [_ lsp-server (ipairs servers)]
   (lsp-server.setup {:handlers handlers}))
