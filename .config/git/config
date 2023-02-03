@@ -79,7 +79,6 @@
 [core]
 	; https://github.com/dandavison/delta
 	pager = delta
-	editor = nvim
 
 [credential]
 	; use the keychain for git credentials
