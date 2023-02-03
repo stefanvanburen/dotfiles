@@ -1,5 +1,3 @@
-; vim: set noexpandtab filetype=gitconfig:
-
 [user]
 	name = Stefan VanBuren
 	email = stefan@vanburen.xyz
