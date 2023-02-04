@@ -33,8 +33,10 @@ brew "pipx"
 brew "ripgrep"
 # fish prompt - configured in "starship.toml".
 brew "starship"
-# Terminal multiplexer
-brew "tmux"
+
+# terminal
+cask "kitty"
+
 # fonts
 tap "homebrew/cask-fonts"
 
