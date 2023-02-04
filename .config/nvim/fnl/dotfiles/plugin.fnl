@@ -51,6 +51,7 @@
     :config #(set vim.g.fugitive_legacy_commands 0)}
    {:url "https://github.com/tpope/vim-rhubarb"}
    {:url "https://github.com/mattn/vim-gotmpl"}
+   {:url "https://github.com/fladson/vim-kitty"}
    {:url "https://github.com/Olical/aniseed"}
    {:url "https://github.com/Olical/conjure"}
    {:url "https://github.com/gpanders/nvim-parinfer"}
