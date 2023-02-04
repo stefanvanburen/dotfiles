@@ -10,9 +10,6 @@
 # ignore my own pre-commit hooks
 .pre-commit-config.yaml
 
-# ignore some clojure repl files
-.nrepl-port
-
 # macOS
 *.DS_Store
 
@@ -21,8 +18,16 @@ __pycache__
 .pytest_cache
 .mypy_cache
 
+# clojure
 # clojure-lsp generated files
 .lsp
-
 # https://github.com/clj-kondo/clj-kondo cache files
 .clj-kondo
+# classpath cache
+# https://clojure.org/reference/deps_and_cli
+# > The next several steps of this execution can be skipped if we have already
+# > computed the classpath and cached it. Classpath and the runtime basis files
+# > are cached in the current directory under .cpcache/.
+.cpcache
+# created by nrepl
+.nrepl-port
