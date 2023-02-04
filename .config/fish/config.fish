@@ -67,7 +67,8 @@ if status --is-interactive
     fish_config theme choose 'Mono Lace'
 
     # jump is bound to `z`
-    command -q jump; and source (jump shell --bind=z fish | psub)
+    # https://github.com/gsamokovarov/jump#fish
+    command -q jump; and jump shell --bind=z fish | source
 
     # https://starship.rs/#fish
     command -q starship; and starship init fish | source
