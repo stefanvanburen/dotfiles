@@ -1,5 +1,8 @@
 # NOTE: bat _must_ have less installed via homebrew to function
 
+# The most reasonable of the bat themes
+--theme="GitHub"
+
 # Show line numbers, Git modifications and file header (but no grid)
 --style="numbers,changes,header"
 
