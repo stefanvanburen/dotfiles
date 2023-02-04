@@ -1,10 +1,14 @@
+# https://github.com/sharkdp/bat#configuration-file
 # NOTE: bat _must_ have less installed via homebrew to function
 
 # The most reasonable of the bat themes
+# https://github.com/sharkdp/bat#highlighting-theme
 --theme="GitHub"
 
 # Show line numbers, Git modifications and file header (but no grid)
+# https://github.com/sharkdp/bat#output-style
 --style="numbers,changes,header"
 
 # Use "Git Ignore" highlighting for ".ignore" files
+# https://github.com/sharkdp/bat#adding-or-changing-file-type-associations
 --map-syntax='.ignore:Git Ignore'
