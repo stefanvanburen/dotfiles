@@ -7,10 +7,6 @@
 # exclude .git/*
 --glob=!.git/*
 
-# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
---max-columns=150
---max-columns-preview
-
 # style the match with an underline.
 --colors=match:none
 --colors=match:style:underline
