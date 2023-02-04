@@ -27,7 +27,7 @@ Install [`brew bundle`](https://github.com/Homebrew/homebrew-bundle):
 brew tap homebrew/bundle
 ```
 
-Install the base dependencies in the [Brewfile](./local/share/Brewfile):
+Install the base dependencies in the [Brewfile](./.Brewfile):
 
 ```sh
 brew bundle install --file=~/.Brewfile
