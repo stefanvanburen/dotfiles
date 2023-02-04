@@ -11,30 +11,7 @@
 .pre-commit-config.yaml
 
 # ignore some clojure repl files
-.cpcache
-.rebel_readline_history
 .nrepl-port
-
-# ignore swap files
-*.swp
-
-# ignore TODO files
-TODO
-
-# ignore NOTES files
-NOTES
-
-# neo(vim)
-# session files
-Session.vim
-
-# history files for netrw; rarely occurs but annoying when they do
-.netrwhist
-
-# ignore tags files
-tags
-tags.lock
-tags.temp*
 
 # macOS
 *.DS_Store
@@ -43,11 +20,6 @@ tags.temp*
 __pycache__
 .pytest_cache
 .mypy_cache
-
-# https://github.com/Olical/nvim-local-fennel
-# local fnl files and the generated lua files
-.lnvim.fnl
-.lnvim.lua
 
 # clojure-lsp generated files
 .lsp
