@@ -1,3 +1,5 @@
+# https://fishshell.com/docs/current/#configuration
+
 # https://xdgbasedirectoryspecification.com
 set -qx XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
 set -qx XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.local/share
