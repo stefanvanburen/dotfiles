@@ -69,6 +69,9 @@
 	; mnemonic for submodule
 	su = submodule
 
+	; mnemonic for switch
+	sw = switch
+
 	; To unstage files, etc
 	unstage = restore --staged
 
