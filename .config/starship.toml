@@ -30,3 +30,20 @@ disabled = true
 # https://starship.rs/config/#command-duration
 [cmd_duration]
 disabled = true
+
+# https://starship.rs/config/#google-cloud-gcloud
+[gcloud]
+disabled = true
+
+# https://starship.rs/config/#go
+[golang]
+disabled = true
+
+# https://starship.rs/config/#buf
+[buf]
+disabled = true
+
+# https://starship.rs/config/#jobs
+[jobs]
+# This might be useful, but something is always starting a job in kitty?
+disabled = true
