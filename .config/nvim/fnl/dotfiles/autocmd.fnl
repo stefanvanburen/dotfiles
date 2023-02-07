@@ -25,6 +25,7 @@
    :gitcommit       {:spell true}
    :sql             {:wrap true :commentstring "-- %s"}
    :clojure         {:expandtab true :textwidth 80}
+   :proto           {:commentstring "// %s"}
    :markdown        {:spell true :wrap true :conceallevel 0 :shiftwidth 2}})
 
 (let [aufiletypes (create-augroup "filetypes" {})]
