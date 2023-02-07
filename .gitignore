@@ -3,7 +3,7 @@
 # contains sensitive oauth token
 .config/gh/hosts.yml
 # not in version control to allow for local differences
-.config/alacritty/fonts.yml
+.config/kitty/font.conf
 # clojure tools, not pinned / tracked
 .config/clojure/tools
 
@@ -28,9 +28,12 @@
 .terminfo
 .viminfo
 .bash_history
+.zsh_history
 .clojure_history
 .python_history
 .sqlite_history
+# kitty uses less as a pager
+.lesshst
 
 # macOS file
 .CFUserTextEncoding
