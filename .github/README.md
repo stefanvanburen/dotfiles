@@ -41,10 +41,10 @@ Set the shell for the user to `fish`:
 chsh -s $(which fish)
 ```
 
-Install `fzf` key bindings and fuzzy completion:
+Install `fzf` key bindings and fuzzy completion for fish:
 
 ```sh
-/opt/homebrew/opt/fzf/install # then, follow the prompts
+/opt/homebrew/opt/fzf/install --no-bash --no-zsh --key-bindings --completion --no-update-rc
 ```
 
 Set up fonts in Kitty (see [kitty.conf](./config/kitty/kitty.conf) for details)
