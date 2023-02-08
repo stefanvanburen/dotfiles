@@ -65,7 +65,13 @@
               (treesitter.setup
                 {:highlight {:enable true}
                  :ensure_installed
-                 [:c ; must be installed
+                 [;; These four are required to be installed.
+                  ;; See https://github.com/nvim-treesitter/nvim-treesitter/issues/3970#issuecomment-1377126359
+                  :c
+                  :lua
+                  :vim
+                  :help
+
                   :clojure
                   :comment ; parse comments
                   :css
@@ -75,7 +81,6 @@
                   :gitignore
                   :go
                   :gomod
-                  :help ; must be installed
                   :javascript
                   :json
                   :markdown
@@ -83,7 +88,6 @@
                   :proto
                   :python
                   :sql
-                  :vim ; must be installed
                   :yaml]}))}
    {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
     :config #(let [null-ls (require :null-ls)]
