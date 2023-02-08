@@ -85,7 +85,9 @@
                   :json
                   :markdown
                   :markdown_inline
-                  :proto
+                  ;; https://github.com/mitchellh/tree-sitter-proto
+                  ;; Not very well maintained - regular highlighting looks fine for now, disabling.
+                  ; :proto
                   :python
                   :sql
                   :yaml]}))}
