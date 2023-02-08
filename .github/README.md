@@ -1,6 +1,6 @@
 # dotfiles
 
-fish, neovim, tmux, git
+fish, neovim, kitty, macOS
 
 ## Setup
 
@@ -47,7 +47,7 @@ Install `fzf` key bindings and fuzzy completion:
 /opt/homebrew/opt/fzf/install # then, follow the prompts
 ```
 
-Set up fonts in Alacritty (see [alacritty.yml](./config/alacritty/alacritty.yml) for details)
+Set up fonts in Kitty (see [kitty.conf](./config/kitty/kitty.conf) for details)
 
 Disable the annoying <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> shortcut to bring up the dictionary on macOS, so that [Dash.app](https://kapeli.com/dash) can use it:
 
