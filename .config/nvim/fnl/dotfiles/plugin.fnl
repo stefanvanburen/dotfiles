@@ -63,7 +63,11 @@
     :build ":TSUpdate"
     :config #(let [treesitter (require "nvim-treesitter.configs")]
               (treesitter.setup
-                {:highlight {:enable true}
+                {;; https://github.com/nvim-treesitter/nvim-treesitter#highlight
+                 :highlight {:enable true}
+                 ;; Add support for treesitter indentation using the `=` operator.
+                 ;; https://github.com/nvim-treesitter/nvim-treesitter#indentation
+                 :indent {:enable true}
                  :ensure_installed
                  [;; These four are required to be installed.
                   ;; See https://github.com/nvim-treesitter/nvim-treesitter/issues/3970#issuecomment-1377126359
