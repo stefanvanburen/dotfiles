@@ -33,7 +33,6 @@ set -gx HOMEBREW_NO_ANALYTICS 1
 set -gx HOMEBREW_NO_COLOR 1
 set -gx HOMEBREW_NO_EMOJI 1
 
-# fish_add_path requires fish 3.2.0
 # pipx
 fish_add_path ~/.local/bin
 # homebrew
