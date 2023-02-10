@@ -99,6 +99,7 @@
     :config #(let [null-ls (require :null-ls)]
                (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
                                          null-ls.builtins.formatting.buf
+                                         null-ls.builtins.diagnostics.markdownlint_cli2
                                          null-ls.builtins.diagnostics.stylelint
                                          null-ls.builtins.diagnostics.shellcheck
                                          null-ls.builtins.formatting.shfmt]}))}
