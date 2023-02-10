@@ -42,8 +42,6 @@ fish_add_path /opt/homebrew/bin
 fish_add_path ~/.cargo/bin
 # go
 fish_add_path ~/go/bin
-# my scripts
-fish_add_path ~/bin
 
 if status --is-interactive
     # `man abbr`
