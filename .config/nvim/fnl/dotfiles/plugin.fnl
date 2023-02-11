@@ -69,32 +69,64 @@
                  ;; https://github.com/nvim-treesitter/nvim-treesitter#indentation
                  :indent {:enable true}
                  :ensure_installed
-                 [;; These four are required to be installed.
-                  ;; See https://github.com/nvim-treesitter/nvim-treesitter/issues/3970#issuecomment-1377126359
+                 [;;; These four are required to be installed.
+                  ;;; See https://github.com/nvim-treesitter/nvim-treesitter/issues/3970#issuecomment-1377126359
+                  ;; https://github.com/tree-sitter/tree-sitter-c
                   :c
+                  ;; https://github.com/MunifTanjim/tree-sitter-lua
                   :lua
+                  ;; https://github.com/vigoux/tree-sitter-viml
                   :vim
+                  ;; https://github.com/neovim/tree-sitter-vimdoc
                   :help
 
+                  ;; https://github.com/sogaiu/tree-sitter-clojure
                   :clojure
-                  :comment ; parse comments
+                  ;; https://github.com/stsewd/tree-sitter-comment
+                  ;; parses comments
+                  :comment
+                  ;; https://github.com/tree-sitter/tree-sitter-css
                   :css
+                  ;; https://github.com/the-mikedavis/tree-sitter-diff
+                  :diff
+                  ;; https://github.com/travonted/tree-sitter-fennel
                   :fennel
+                  ;; https://github.com/ram02z/tree-sitter-fish
                   :fish
+                  ;; https://github.com/tree-sitter/tree-sitter-html
                   :html
-                  :gitignore
+                  ;; https://github.com/gbprod/tree-sitter-gitcommit
+                  :gitcommit
+                  ;; https://github.com/the-mikedavis/tree-sitter-git-rebase
+                  :git_rebase
+                  ;; https://github.com/ObserverOfTime/tree-sitter-gitattributes
+                  :gitattributes
+                  ;; https://github.com/tree-sitter/tree-sitter-go
                   :go
+                  ;; https://github.com/camdencheek/tree-sitter-go-mod
                   :gomod
+                  ;; https://github.com/tree-sitter/tree-sitter-javascript
                   :javascript
+                  ;; https://github.com/tree-sitter/tree-sitter-json
                   :json
+                  ;; https://github.com/alemuller/tree-sitter-make
+                  :make
+                  ;; https://github.com/MDeiml/tree-sitter-markdown
                   :markdown
                   :markdown_inline
                   ;; https://github.com/mitchellh/tree-sitter-proto
                   ;; Not very well maintained - regular highlighting looks fine for now, disabling.
                   ; :proto
+                  ;; https://github.com/tree-sitter/tree-sitter-python
                   :python
+                  ;; https://github.com/derekstride/tree-sitter-sql
                   :sql
-                  :yaml]}))}
+                  ;; https://github.com/ikatyang/tree-sitter-toml
+                  :toml
+                  ;; https://github.com/ikatyang/tree-sitter-yaml
+                  :yaml
+                  ;; https://github.com/maxxnino/tree-sitter-zig
+                  :zig]}))}
    {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
     :config #(let [null-ls (require :null-ls)]
                (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
