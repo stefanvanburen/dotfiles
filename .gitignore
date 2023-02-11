@@ -38,8 +38,11 @@
 # macOS file
 .CFUserTextEncoding
 
+# fzf adds fzf_key_bindings and updates fish_user_key_bindings as a part of
+# installation; leave these to that.
+.config/fish/functions/fish_user_key_bindings.fish
+.config/fish/functions/fzf_key_bindings.fish
 # generated / local fish files
-.config/fish/functions
 .config/fish/fish_variables
 .config/fish/conf.d
 .config/fish/completions
