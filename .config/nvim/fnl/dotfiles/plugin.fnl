@@ -141,10 +141,15 @@
    {:url "https://github.com/echasnovski/mini.nvim"
     :config #(let [mini-pairs (require :mini.pairs)
                    mini-trailspace (require :mini.trailspace)
-                   mini-comment (require :mini.comment)]
+                   mini-comment (require :mini.comment)
+                   mini-surround (require :mini.surround)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
-                (mini-comment.setup))}
+                (mini-comment.setup)
+                (mini-surround.setup
+                  {:mappings {:add     :ys
+                              :delete  :ds
+                              :replace :cs}}))}
    {:url "https://github.com/ibhagwan/fzf-lua"
     :opts {:winopts {:border :single}
            :global_git_icons false
@@ -155,10 +160,6 @@
    {:url "https://github.com/ggandor/leap.nvim"
     :config #(let [leap (require :leap)]
                (leap.add_default_mappings))}
-   {:url "https://github.com/tpope/vim-surround"
-    ;; disable vim-surround's default mappings, replacing most of
-    ;; them in mapping.fnl, to work with leap.nvim.
-    :config #(set vim.g.surround_no_mappings 1)}
    {:url "https://github.com/tpope/vim-unimpaired"}
    {:url "https://github.com/tpope/vim-abolish"}
    {:url "https://github.com/tpope/vim-repeat"}
