@@ -69,6 +69,8 @@
                  ;; Add support for treesitter indentation using the `=` operator.
                  ;; https://github.com/nvim-treesitter/nvim-treesitter#indentation
                  :indent {:enable true}
+                 ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
+                 :matchup {:enable true}
                  :ensure_installed
                  [;;; These four are required to be installed.
                   ;;; See https://github.com/nvim-treesitter/nvim-treesitter/issues/3970#issuecomment-1377126359
@@ -148,6 +150,8 @@
            :global_git_icons false
            :global_file_icons false}}
    {:url "https://github.com/tpope/vim-eunuch"}
+   {:url "https://github.com/andymass/vim-matchup"
+    :config #(set vim.g.matchup_matchparen_offscreen {})}
    {:url "https://github.com/ggandor/leap.nvim"
     :config #(let [leap (require :leap)]
                (leap.add_default_mappings))}
