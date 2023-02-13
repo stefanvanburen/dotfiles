@@ -147,7 +147,8 @@
                 (mini-trailspace.setup)
                 (mini-comment.setup)
                 (mini-surround.setup
-                  {:mappings {:add     :ys
+                  {:mappings {;; TODO: this conflicts with `y` for yank in visual mode
+                              ;; :add     :ys
                               :delete  :ds
                               :replace :cs}}))}
    {:url "https://github.com/ibhagwan/fzf-lua"
