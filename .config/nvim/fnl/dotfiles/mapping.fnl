@@ -64,6 +64,7 @@
 (map :n :<leader>ev #(fzf-lua.files     {:cwd "~/.config/nvim"}))
 (leader-map :ef "e $HOME/.config/fish/config.fish")
 (leader-map :eg "e $HOME/.config/git/config")
+(leader-map :ek "e $HOME/.config/kitty/kitty.conf")
 
 (leader-map :w "w")
 (leader-map :cl "close")
