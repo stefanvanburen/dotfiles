@@ -9,10 +9,6 @@
 ;; alias function
 (local map vim.keymap.set)
 
-(fn leader-map [from to]
-  "Helper function to add a mapping prefixed with leader to execute a command"
-  (map :n (.. "<leader>" from) (.. ":" to "<cr>")))
-
 ;; ; -> :
 (map :n ";" ":")
 
@@ -31,11 +27,11 @@
 (map :n :<leader>sw trim-trailing-whitespace)
 
 ;; Fugitive
-(leader-map :gs "vertical Git")
-(leader-map :gw "Gwrite")
-(leader-map :gc "G commit")
-(leader-map :gp "G push")
-(leader-map :gb "G blame")
+(map :n :<leader>gs #(vim.cmd {:cmd "Git" :mods {:vertical true}}))
+(map :n :<leader>gw #(vim.cmd {:cmd "Gwrite"}))
+(map :n :<leader>gc #(vim.cmd {:cmd "Git" :args ["commit"]}))
+(map :n :<leader>gp #(vim.cmd {:cmd "Git" :args ["push"]}))
+(map :n :<leader>gb #(vim.cmd {:cmd "Git" :args ["blame"]}))
 
 ;; fzf-lua - https://github.com/ibhagwan/fzf-lua
 (map :n :<leader>ff fzf-lua.files)
@@ -62,14 +58,14 @@
 ;; edit config files
 (map :n :<leader>ed #(fzf-lua.git_files {:cwd "~"}))
 (map :n :<leader>ev #(fzf-lua.files     {:cwd "~/.config/nvim"}))
-(leader-map :ef "e $HOME/.config/fish/config.fish")
-(leader-map :eg "e $HOME/.config/git/config")
-(leader-map :ek "e $HOME/.config/kitty/kitty.conf")
+(map :n :<leader>ef #(vim.cmd {:cmd "edit" :args ["$HOME/.config/fish/config.fish"]}))
+(map :n :<leader>eg #(vim.cmd {:cmd "edit" :args ["$HOME/.config/git/config"]}))
+(map :n :<leader>ek #(vim.cmd {:cmd "edit" :args ["$HOME/.config/kitty/kitty.conf"]}))
 
-(leader-map :w "w")
-(leader-map :cl "close")
-(leader-map :ss "split")
-(leader-map :vs "vsplit")
+(map :n :<leader>w  #(vim.cmd {:cmd "write"}))
+(map :n :<leader>cl #(vim.cmd {:cmd "close"}))
+(map :n :<leader>ss #(vim.cmd {:cmd "split"}))
+(map :n :<leader>vs #(vim.cmd {:cmd "vsplit"}))
 
 ;; tab mappings
 (map :n "]r" ":tabnext<cr>")
