@@ -6,6 +6,5 @@
 (vim.fn.sign_define :DiagnosticSignHint  {:text :? :texthl :DiagnosticSignHint})
 
 (vim.diagnostic.config {:virtual_text {:prefix :▪}
-                        :float {:border :single
-                                :focusable false
+                        :float {:focusable false
                                 :source :always}})

@@ -58,9 +58,6 @@
 
 (create-autocmd :LspAttach {:callback on-attach})
 
-(local handlers {"textDocument/hover"         (vim.lsp.with vim.lsp.handlers.hover          {:border "single"})
-                 "textDocument/signatureHelp" (vim.lsp.with vim.lsp.handlers.signature_help {:border "single"})})
-
 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
 (lspconfig.gopls.setup {:handlers handlers
                         :cmd ["gopls" "-remote=auto"]
