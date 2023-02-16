@@ -66,9 +66,6 @@
               (treesitter.setup
                 {;; https://github.com/nvim-treesitter/nvim-treesitter#highlight
                  :highlight {:enable true}
-                 ;; Add support for treesitter indentation using the `=` operator.
-                 ;; https://github.com/nvim-treesitter/nvim-treesitter#indentation
-                 :indent {:enable true}
                  ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
                  :matchup {:enable true}
                  :ensure_installed
