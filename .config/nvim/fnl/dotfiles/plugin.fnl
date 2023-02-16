@@ -56,6 +56,15 @@
    {:url "https://github.com/Olical/aniseed"}
    {:url "https://github.com/Olical/conjure"}
    {:url "https://github.com/gpanders/nvim-parinfer"}
+   {:url "https://github.com/vim-test/vim-test"
+    :dependencies [{:url "https://github.com/tpope/vim-dispatch"}]
+    :config #(do
+               (set vim.g.test#strategy :dispatch)
+               (vim.keymap.set :n :<C-t>n ":TestNearest<cr>")
+               (vim.keymap.set :n :<C-t>f ":TestFile<cr>")
+               (vim.keymap.set :n :<C-t>s ":TestSuite<cr>")
+               (vim.keymap.set :n :<C-t>l ":TestLast<cr>")
+               (vim.keymap.set :n :<C-t>v ":TestVisit<cr>"))}
    {:url "https://github.com/nvim-lua/plenary.nvim"}
    {:url "https://github.com/neovim/nvim-lspconfig"}
    {:url "https://github.com/williamboman/mason.nvim" :config true}
