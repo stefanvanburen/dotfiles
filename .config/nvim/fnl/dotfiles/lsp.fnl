@@ -30,8 +30,10 @@
 
   (when client.server_capabilities.documentFormattingProvider
     (buffer-map :<leader>af vim.lsp.buf.format)
-    (create-autocmd :BufWritePre {:buffer buf
-                                  :callback #(vim.lsp.buf.format)}))
+    ;; Don't auto-format with null-ls
+    (when (not= client.name "null-ls")
+      (create-autocmd :BufWritePre {:buffer buf
+                                    :callback #(vim.lsp.buf.format)})))
 
   (when client.server_capabilities.hoverProvider
     (buffer-map :K vim.lsp.buf.hover))
