@@ -176,8 +176,4 @@
    {:url "https://github.com/tpope/vim-abolish"}
    {:url "https://github.com/tpope/vim-repeat"}
    {:url "https://github.com/rktjmp/lush.nvim"}
-   {:url "https://github.com/stefanvanburen/rams"}
-   {:url "https://git.sr.ht/~p00f/alabaster.nvim"}
-   {:url "https://github.com/mcchrish/zenbones.nvim"
-    ;; https://github.com/mcchrish/zenbones.nvim/blob/main/doc/zenbones.md#configuration
-    :config #(set vim.g.zenwritten_italic_comments false)}])
+   {:url "https://github.com/stefanvanburen/rams"}])
