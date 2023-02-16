@@ -176,4 +176,6 @@
    {:url "https://github.com/tpope/vim-abolish"}
    {:url "https://github.com/tpope/vim-repeat"}
    {:url "https://github.com/rktjmp/lush.nvim"}
-   {:url "https://github.com/stefanvanburen/rams"}])
+   {:url "https://github.com/stefanvanburen/rams"}]
+ ;; on startup, if doing installation, try to load rams
+ {:install {:colorscheme [:rams]}})
