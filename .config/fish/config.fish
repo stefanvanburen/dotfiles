@@ -32,6 +32,8 @@ set -gx FZF_CTRL_T_OPTS  "$fzf_colors --preview 'bat --line-range :500 {}'"
 set -gx HOMEBREW_NO_ANALYTICS 1
 set -gx HOMEBREW_NO_COLOR 1
 set -gx HOMEBREW_NO_EMOJI 1
+# Use `bat` for `brew cat`
+set -gx HOMEBREW_BAT 1
 
 # pipx
 fish_add_path ~/.local/bin
