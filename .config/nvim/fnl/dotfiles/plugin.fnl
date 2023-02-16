@@ -137,7 +137,7 @@
                                          null-ls.builtins.diagnostics.markdownlint_cli2
                                          null-ls.builtins.diagnostics.stylelint
                                          null-ls.builtins.diagnostics.shellcheck
-                                         null-ls.builtins.formatting.shfmt]}))}
+                                         ,]}))}
    {:url "https://github.com/echasnovski/mini.nvim"
     :config #(let [mini-pairs (require :mini.pairs)
                    mini-trailspace (require :mini.trailspace)
