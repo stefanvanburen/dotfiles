@@ -1,9 +1,6 @@
 (module dotfiles.core)
 
-;; colorscheme
 (set vim.o.termguicolors true)
-(set vim.o.background :light)
-(vim.cmd.colorscheme :rams)
 
 ;; if wrap is set, break on characters in 'breakat' rather than the last
 ;; character that will fit on the screen.

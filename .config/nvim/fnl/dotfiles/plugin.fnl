@@ -176,6 +176,11 @@
    {:url "https://github.com/tpope/vim-abolish"}
    {:url "https://github.com/tpope/vim-repeat"}
    {:url "https://github.com/rktjmp/lush.nvim"}
-   {:url "https://github.com/stefanvanburen/rams"}]
+   {:url "https://github.com/stefanvanburen/rams"
+    :lazy false
+    :priority 1000
+    :config #(do
+               (set vim.o.background :light)
+               (vim.cmd.colorscheme :rams))}]
  ;; on startup, if doing installation, try to load rams
  {:install {:colorscheme [:rams]}})
