@@ -15,7 +15,8 @@
    :typescriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
    :html            {:expandtab true  :shiftwidth 2 :tabstop 2}
    :css             {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :gohtmltmpl      {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :gohtmltmpl      {:expandtab true  :shiftwidth 2 :tabstop 2 :commentstring "{{/* %s */}}"}
+   :gotexttmpl      {:expandtab true  :shiftwidth 2 :tabstop 2 :commentstring "{{/* %s */}}"}
    :fish            {:expandtab true  :shiftwidth 4 :tabstop 4 :commentstring "# %s"}
    :yaml            {:expandtab true  :shiftwidth 2 :tabstop 2}
    :json            {:expandtab true  :shiftwidth 2 :tabstop 2}
