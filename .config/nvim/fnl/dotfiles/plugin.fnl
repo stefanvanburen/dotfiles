@@ -172,7 +172,6 @@
     :dependencies [{:url "https://github.com/tpope/vim-repeat"}]
     :config #(let [leap (require :leap)]
                (leap.add_default_mappings))}
-   {:url "https://github.com/tpope/vim-unimpaired"}
    {:url "https://github.com/tpope/vim-abolish"}
    {:url "https://github.com/tpope/vim-repeat"}
    {:url "https://github.com/rktjmp/lush.nvim"}
