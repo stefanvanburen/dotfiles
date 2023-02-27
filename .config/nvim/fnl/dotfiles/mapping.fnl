@@ -1,11 +1,6 @@
 (module dotfiles.mapping
   {autoload {: fzf-lua}})
 
-;; Leader is space key
-(set vim.g.mapleader " ")
-;; LocalLeader is the comma key
-(set vim.g.maplocalleader ",")
-
 ;; alias function
 (local map vim.keymap.set)
 
@@ -17,14 +12,6 @@
 (map :n "[w"       vim.diagnostic.goto_prev)
 (map :n "]w"       vim.diagnostic.goto_next)
 (map :n :<leader>q vim.diagnostic.setloclist)
-
-(fn trim-trailing-whitespace []
-  (let [view (vim.fn.winsaveview)]
-    (vim.api.nvim_command "silent! undojoin")
-    (vim.api.nvim_command "silent keepjumps keeppatterns %s/\\s\\+$//e")
-    (vim.fn.winrestview view)))
-
-(map :n :<leader>sw trim-trailing-whitespace)
 
 ;; Fugitive
 (map :n :<leader>gs #(vim.cmd {:cmd "Git" :mods {:vertical true}}))

@@ -149,6 +149,7 @@
                    mini-surround (require :mini.surround)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
+                (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
                 (mini-comment.setup)
                 (mini-surround.setup
                   {:mappings {:add            :gza

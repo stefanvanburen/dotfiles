@@ -1,5 +1,10 @@
 (module dotfiles.core)
 
+;; Leader is space key
+(set vim.g.mapleader " ")
+;; LocalLeader is the comma key
+(set vim.g.maplocalleader ",")
+
 (set vim.o.termguicolors true)
 
 ;; if wrap is set, break on characters in 'breakat' rather than the last
