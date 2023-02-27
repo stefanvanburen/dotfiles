@@ -13,39 +13,27 @@
           :on_attach
           ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
           (fn [bufnr]
-           (let [map (fn [mode l r ?opts]
-                       (let [opts (or ?opts {})]
-                         (set opts.buffer bufnr)
-                         (vim.keymap.set mode l r opts)))]
-             ;; Navigation
-             (map "n" "]c" (fn []
-                             (if (= vim.wo.diff true)
-                               "]c"
-                               (do
-                                 (vim.schedule #(gitsigns.next_hunk))
-                                 "<Ignore>")))
-                   {:expr true})
-             (map "n" "[c" (fn []
-                             (if (= vim.wo.diff true)
-                               "[c"
-                               (do
-                                 (vim.schedule #(gitsigns.prev_hunk))
-                                 "<Ignore>")))
-                   {:expr true})
-             ;; Actions
-             (map ["n" "v"] "<leader>hs" gitsigns.stage_hunk)
-             (map ["n" "v"] "<leader>hr" gitsigns.reset_hunk)
-             (map "n" "<leader>hS" gitsigns.stage_buffer)
-             (map "n" "<leader>hR" gitsigns.reset_buffer)
-             (map "n" "<leader>hu" gitsigns.undo_stage_hunk)
-             (map "n" "<leader>hp" gitsigns.preview_hunk)
-             (map "n" "<leader>hb" #(gitsigns.blame_line {:full true}))
-             (map "n" "<leader>tb" gitsigns.toggle_current_line_blame)
-             (map "n" "<leader>hd" gitsigns.diffthis)
-             (map "n" "<leader>hD" #(gitsigns.diffthis "~"))
-             (map "n" "<leader>td" gitsigns.toggle_deleted)
-             ;; Text object
-             (map ["o" "x"] "ih" ":<C-U>Gitsigns select_hunk<CR>")))}))}
+           (fn map [mode l r ?opts]
+              (let [opts (or ?opts {})]
+                (set opts.buffer bufnr)
+                (vim.keymap.set mode l r opts)))
+           ;; Navigation
+           (map :n "]c" #(gitsigns.next_hunk))
+           (map :n "[c" #(gitsigns.prev_hunk))
+           ;; Actions
+           (map [:n :v] :<leader>hs gitsigns.stage_hunk)
+           (map [:n :v] :<leader>hr gitsigns.reset_hunk)
+           (map :n :<leader>hS gitsigns.stage_buffer)
+           (map :n :<leader>hR gitsigns.reset_buffer)
+           (map :n :<leader>hu gitsigns.undo_stage_hunk)
+           (map :n :<leader>hp gitsigns.preview_hunk)
+           (map :n :<leader>hb #(gitsigns.blame_line {:full true}))
+           (map :n :<leader>tb gitsigns.toggle_current_line_blame)
+           (map :n :<leader>hd gitsigns.diffthis)
+           (map :n :<leader>hD #(gitsigns.diffthis "~"))
+           (map :n :<leader>td gitsigns.toggle_deleted)
+           ;; Text object
+           (map [:o :x] :ih ":<C-U>Gitsigns select_hunk<CR>"))}))}
    {:url "https://github.com/tpope/vim-fugitive"
     ;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
     :config #(set vim.g.fugitive_legacy_commands 0)}
