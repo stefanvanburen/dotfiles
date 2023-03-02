@@ -4,6 +4,10 @@
 .config/gh/hosts.yml
 # not in version control to allow for local differences
 .config/kitty/font.conf
+.config/kitty/themes.conf
+# written to by fish's set_kitty_theme function's invocation of `kitty +kitten themes`
+.config/kitty/themes.conf.bak
+.config/kitty/current-theme.conf
 # clojure tools, not pinned / tracked
 .config/clojure/tools
 
