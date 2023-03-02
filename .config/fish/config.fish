@@ -37,8 +37,6 @@ set -gx HOMEBREW_BAT 1
 
 # pipx
 fish_add_path ~/.local/bin
-# homebrew
-fish_add_path /opt/homebrew/bin
 # rust
 fish_add_path ~/.cargo/bin
 # go
@@ -63,6 +61,10 @@ if status --is-interactive
     # set terminal colors
     # https://fishshell.com/docs/current/cmds/fish_config.html
     fish_config theme choose 'Mono Lace'
+
+    # Setup homebrew environment (PATH-related variables)
+    # This must be before any command checking, as it sets up the PATH.
+    eval (/opt/homebrew/bin/brew shellenv)
 
     # jump is bound to `z`
     # https://github.com/gsamokovarov/jump#fish
