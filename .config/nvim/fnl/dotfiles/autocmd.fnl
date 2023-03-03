@@ -37,6 +37,11 @@
                                :callback #(each [name value (pairs settings)]
                                             (vim.api.nvim_set_option_value name value {:scope "local"}))}))
 
+  ;; treat `justfile`s as makefiles
+  ;; This helps with setting up correct commentstring, etc
+  (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
+                                          :pattern "justfile"
+                                          :callback #(vim.api.nvim_set_option_value "filetype" "make" {:scope "local"})})
   ;; treat mdx files as markdown
   (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
                                           :pattern "*.mdx"
