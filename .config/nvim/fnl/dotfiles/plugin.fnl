@@ -166,15 +166,11 @@
     :enabled true
     :lazy false
     :priority 1000
-    :config #(do
-               (set vim.o.background :light)
-               (vim.cmd.colorscheme :alabaster))}
+    :config #(vim.cmd.colorscheme :alabaster)}
    {:url "https://github.com/stefanvanburen/rams"
     :enabled false
     :lazy false
     :priority 1000
-    :config #(do
-               (set vim.o.background :light)
-               (vim.cmd.colorscheme :rams))}]
+    :config #(vim.cmd.colorscheme :rams)}]
  ;; on startup, if doing installation, try to load colorschemes
  {:install {:colorscheme [:rams :alabaster]}})
