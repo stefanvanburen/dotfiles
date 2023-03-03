@@ -94,7 +94,8 @@
                   ;; https://github.com/tree-sitter/tree-sitter-html
                   :html
                   ;; https://github.com/gbprod/tree-sitter-gitcommit
-                  :gitcommit
+                  ; Seems unsupported in alabaster.nvim
+                  ; :gitcommit
                   ;; https://github.com/the-mikedavis/tree-sitter-git-rebase
                   :git_rebase
                   ;; https://github.com/ObserverOfTime/tree-sitter-gitattributes
