@@ -21,8 +21,15 @@ set fzf_default_command 'fd --type file --follow --hidden --exclude .git --strip
 set -gx FZF_DEFAULT_COMMAND $fzf_default_command
 set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
 
-# rams-themed colors
-set fzf_colors '--color=fg:#0f0d0d,bg:#ebebeb,hl:#ee473f,fg+:#0f0d0d,bg+:#d1d1d1,hl+:#ee473f,info:#000000,prompt:#000000,pointer:#ee473f,marker:#000000,spinner:#000000,header:#000000'
+# alabaster light
+set -l color00 "#f7f7f7"
+set -l color01 "#bfdbfe"
+set -l color02 "#000000"
+set -l color03 "#0083b2"
+set -l color04 "#007acc"
+set -l color05 "#cb9000"
+
+set -l fzf_colors "--color=bg+:$color01,bg:$color00,spinner:$color04,hl:$color05,border:$color01 --color=fg:$color02,header:$color05,info:$color03,pointer:$color04 --color=marker:$color04,fg+:$color02,prompt:$color03,hl+:$color05"
 set -gx FZF_DEFAULT_OPTS "$fzf_colors"
 set -gx FZF_CTRL_T_OPTS  "$fzf_colors --preview 'bat --line-range :500 {}'"
 

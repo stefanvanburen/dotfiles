@@ -162,11 +162,19 @@
    {:url "https://github.com/tpope/vim-abolish"}
    {:url "https://github.com/tpope/vim-repeat"}
    {:url "https://github.com/rktjmp/lush.nvim"}
+   {:url "https://git.sr.ht/~p00f/alabaster.nvim"
+    :enabled true
+    :lazy false
+    :priority 1000
+    :config #(do
+               (set vim.o.background :light)
+               (vim.cmd.colorscheme :alabaster))}
    {:url "https://github.com/stefanvanburen/rams"
+    :enabled false
     :lazy false
     :priority 1000
     :config #(do
                (set vim.o.background :light)
                (vim.cmd.colorscheme :rams))}]
- ;; on startup, if doing installation, try to load rams
- {:install {:colorscheme [:rams]}})
+ ;; on startup, if doing installation, try to load colorschemes
+ {:install {:colorscheme [:rams :alabaster]}})

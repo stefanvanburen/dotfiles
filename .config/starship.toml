@@ -2,18 +2,18 @@
 
 # https://starship.rs/config/#character
 [character]
-success_symbol = "[;](bold white)"
+success_symbol = "[;](bold black)"
 error_symbol = "[×](bold red)"
 vimcmd_symbol = "[;](bold red)"
 
 # https://starship.rs/config/#git-branch
 [git_branch]
 symbol = ""
-style = "white"
+style = "black"
 
 # https://starship.rs/config/#git-status
 [git_status]
-style = "white"
+style = "black"
 deleted = "×"
 format = "[$all_status$ahead_behind]($style) "
 # this is still quite slow for not much gain
@@ -21,7 +21,7 @@ disabled = true
 
 # https://starship.rs/config/#directory
 [directory]
-style = "white"
+style = "black"
 
 # https://starship.rs/config/#package-version
 [package]
