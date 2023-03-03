@@ -1,5 +1,6 @@
 (module dotfiles.lsp
-  {autoload {: lspconfig}})
+  {autoload {: lspconfig
+             : lsp_compl}})
 
 (local create-autocmd vim.api.nvim_create_autocmd)
 (local create-augroup vim.api.nvim_create_augroup)
@@ -20,6 +21,11 @@
 (fn on-attach [{: buf
                 :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
+
+  ;; https://github.com/mfussenegger/nvim-lsp-compl#configuration
+  ;; null-ls typically does not provide completion.
+  (if (not= client.name "null-ls")
+    (lsp_compl.attach client buf))
 
   (fn buffer-map [from to]
     (vim.keymap.set :n from to {:buffer buf :silent true}))
