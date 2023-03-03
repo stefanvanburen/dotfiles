@@ -5,19 +5,6 @@
 (local create-autocmd vim.api.nvim_create_autocmd)
 (local create-augroup vim.api.nvim_create_augroup)
 
-(fn organize-imports [wait-ms]
-  (local params (vim.lsp.util.make_range_params))
-  (set params.context {:only ["source.organizeImports"]})
-  (local result (vim.lsp.buf_request_sync 0 "textDocument/codeAction" params wait-ms))
-  (when (not= result nil)
-    (each [_ res (pairs result)]
-      (when (and (not= res nil)
-                 (not= res.result nil))
-        (each [_ r (pairs res.result)]
-          (if r.edit
-            (vim.lsp.util.apply_workspace_edit r.edit "UTF-8")
-            (vim.lsp.buf.execute_command r.command)))))))
-
 (fn on-attach [{: buf
                 :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
@@ -32,7 +19,8 @@
 
   (when (= client.name "gopls")
     (create-autocmd :BufWritePre {:buffer buf
-                                  :callback #(organize-imports 1000)}))
+                                  :callback #(vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
+                                                                       :apply true})}))
 
   (when client.server_capabilities.documentFormattingProvider
     (buffer-map :<leader>af vim.lsp.buf.format)
