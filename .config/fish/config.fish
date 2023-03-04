@@ -19,7 +19,7 @@ set -gx GLAMOUR_STYLE light
 # use `fd` instead of `find` by default with fzf.
 set fzf_default_command 'fd --type file --follow --hidden --exclude .git --strip-cwd-prefix'
 set -gx FZF_DEFAULT_COMMAND $fzf_default_command
-set -gx FZF_CTRL_T_COMMAND  $fzf_default_command
+set -gx FZF_CTRL_T_COMMAND $fzf_default_command
 
 # alabaster light
 set -l color00 "#f7f7f7"
@@ -31,7 +31,7 @@ set -l color05 "#cb9000"
 
 set -l fzf_colors "--color=bg+:$color01,bg:$color00,spinner:$color04,hl:$color05,border:$color01 --color=fg:$color02,header:$color05,info:$color03,pointer:$color04 --color=marker:$color04,fg+:$color02,prompt:$color03,hl+:$color05"
 set -gx FZF_DEFAULT_OPTS "$fzf_colors"
-set -gx FZF_CTRL_T_OPTS  "$fzf_colors --preview 'bat --line-range :500 {}'"
+set -gx FZF_CTRL_T_OPTS "$fzf_colors --preview 'bat --line-range :500 {}'"
 
 # Homebrew settings
 # https://docs.brew.sh/Manpage#environment
