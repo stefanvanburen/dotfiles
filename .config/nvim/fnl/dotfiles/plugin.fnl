@@ -128,6 +128,8 @@
     :config #(let [null-ls (require :null-ls)]
                (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
                                          null-ls.builtins.formatting.buf
+                                         null-ls.builtins.diagnostics.fish
+                                         null-ls.builtins.formatting.fish_indent
                                          null-ls.builtins.diagnostics.shellcheck
                                          null-ls.builtins.formatting.shfmt]}))}
    {:url "https://github.com/echasnovski/mini.nvim"
