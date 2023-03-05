@@ -48,4 +48,10 @@
                                           :callback #(vim.api.nvim_set_option_value "filetype" "markdown" {:scope "local"})})
   (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
                                           :pattern "*.star"
-                                          :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})}))
+                                          :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})})
+  (create-autocmd :FileType {:group aufiletypes
+                             :pattern :fennel
+                             ;; For fennel files, remove ':' and '.' from 'iskeyword'
+                             ;; Original from: https://github.com/Olical/aniseed/blob/master/ftplugin/fennel.vim#L14
+                             ;; See: https://github.com/bakpakin/fennel.vim/issues/9
+                             :callback #(vim.api.nvim_set_option_value "iskeyword" "!,$,%,#,*,+,-,/,<,=,>,?,_,a-z,A-Z,48-57,128-247,124,94" {:scope "local"})}))
