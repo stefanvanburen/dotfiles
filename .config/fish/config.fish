@@ -77,9 +77,6 @@ if status --is-interactive
     # https://github.com/gsamokovarov/jump#fish
     command -q jump; and jump shell --bind=z fish | source
 
-    # https://starship.rs/#fish
-    command -q starship; and starship init fish | source
-
     # https://direnv.net/docs/hook.html#fish
     command -q direnv; and direnv hook fish | source
 end

@@ -31,8 +31,6 @@ brew "neovim"
 brew "pipx"
 # better searching - used by `fzf` within fish and neovim - configured in "ripgreprc".
 brew "ripgrep"
-# fish prompt - configured in "starship.toml".
-brew "starship"
 
 # terminal
 cask "kitty"
