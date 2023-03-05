@@ -5,6 +5,10 @@
 ;; LocalLeader is the comma key
 (set vim.g.maplocalleader ",")
 
+;; Show the menu even if only one option is available, and don't select
+;; anything by default.
+(set vim.o.completeopt "menuone,noselect")
+
 ;; colors
 (set vim.o.background :light)
 (set vim.o.termguicolors true)
