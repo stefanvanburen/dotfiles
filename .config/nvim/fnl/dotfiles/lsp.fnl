@@ -11,8 +11,8 @@
 
   ;; https://github.com/mfussenegger/nvim-lsp-compl#configuration
   ;; null-ls typically does not provide completion.
-  (if (not= client.name "null-ls")
-    (lsp_compl.attach client buf))
+  (when (not= client.name "null-ls")
+    (lsp_compl.attach client buf {}))
 
   (fn buffer-map [from to]
     (vim.keymap.set :n from to {:buffer buf :silent true}))
