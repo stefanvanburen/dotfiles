@@ -4,6 +4,16 @@
 (local create-autocmd vim.api.nvim_create_autocmd)
 (local create-augroup vim.api.nvim_create_augroup)
 
+(fn organize-imports []
+  (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
+                            :apply true}))
+
+(fn format [client]
+  (do
+    (vim.lsp.buf.format)
+    (when (= client.name "gopls")
+      (organize-imports))))
+
 (fn on-attach [{: buf
                 :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
@@ -11,17 +21,12 @@
   (fn buffer-map [from to]
     (vim.keymap.set :n from to {:buffer buf :silent true}))
 
-  (when (= client.name "gopls")
-    (create-autocmd :BufWritePre {:buffer buf
-                                  :callback #(vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
-                                                                       :apply true})}))
-
   (when client.server_capabilities.documentFormattingProvider
-    (buffer-map :<leader>af vim.lsp.buf.format)
+    (buffer-map :<leader>af #(format client))
     ;; Don't auto-format with null-ls
     (when (not= client.name "null-ls")
       (create-autocmd :BufWritePre {:buffer buf
-                                    :callback #(vim.lsp.buf.format)})))
+                                    :callback #(format client)})))
 
   (when client.server_capabilities.hoverProvider
     (buffer-map :K vim.lsp.buf.hover))
