@@ -133,9 +133,13 @@
                                          null-ls.builtins.diagnostics.shellcheck
                                          null-ls.builtins.formatting.shfmt]}))}
    {:url "https://github.com/echasnovski/mini.nvim"
-    :config #(let [mini-pairs (require :mini.pairs)
+    :config #(let [;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pairs.md
+                   mini-pairs (require :mini.pairs)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-trailspace.md
                    mini-trailspace (require :mini.trailspace)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-comment.md
                    mini-comment (require :mini.comment)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
                    mini-surround (require :mini.surround)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
