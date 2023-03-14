@@ -80,7 +80,7 @@
 	; At the bottom of the commit message, show a diff of the commit.
 	verbose = true
 	; Sign commits with my ssh key
-	; gpgsign = true
+	gpgsign = true
 
 [core]
 	; https://github.com/dandavison/delta
