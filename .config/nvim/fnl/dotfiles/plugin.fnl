@@ -140,7 +140,7 @@
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
-                (mini-comment.setup)
+                (mini-comment.setup {:options {:ignore_blank_line true}})
                 (mini-surround.setup
                   {:mappings {:add            :gza
                               :delete         :gzd
