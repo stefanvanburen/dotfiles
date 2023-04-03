@@ -74,7 +74,7 @@
                   ;; https://github.com/vigoux/tree-sitter-viml
                   :vim
                   ;; https://github.com/neovim/tree-sitter-vimdoc
-                  :help
+                  :vimdoc
 
                   ;; https://github.com/sogaiu/tree-sitter-clojure
                   :clojure
