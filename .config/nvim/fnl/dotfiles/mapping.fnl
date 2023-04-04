@@ -1,5 +1,4 @@
-(module dotfiles.mapping
-  {autoload {: fzf-lua}})
+(module dotfiles.mapping)
 
 ;; alias function
 (local map vim.keymap.set)
@@ -20,15 +19,6 @@
 (map :n :<leader>gp #(vim.cmd {:cmd "Git" :args ["push"]}))
 (map :n :<leader>gb #(vim.cmd {:cmd "Git" :args ["blame"]}))
 
-;; fzf-lua - https://github.com/ibhagwan/fzf-lua
-(map :n :<leader>ff fzf-lua.files)
-(map :n :<leader>fg fzf-lua.git_files)
-(map :n :<leader>fb fzf-lua.buffers)
-(map :n :<leader>fl fzf-lua.grep_project)
-(map :n :<leader>fh fzf-lua.help_tags)
-(map :n :<leader>fr fzf-lua.lsp_references)
-(map :n :<leader>fs fzf-lua.git_stash)
-
 ;; open-browser.vim
 (map [:n :v] :gx "<plug>(openbrowser-open)" {})
 
@@ -43,8 +33,6 @@
 (map [:n :v] :<tab> :% {:remap true})
 
 ;; edit config files
-(map :n :<leader>ed #(fzf-lua.git_files {:cwd "~"}))
-(map :n :<leader>ev #(fzf-lua.files     {:cwd "~/.config/nvim"}))
 (map :n :<leader>ef #(vim.cmd {:cmd "edit" :args ["$HOME/.config/fish/config.fish"]}))
 (map :n :<leader>eg #(vim.cmd {:cmd "edit" :args ["$HOME/.config/git/config"]}))
 (map :n :<leader>ek #(vim.cmd {:cmd "edit" :args ["$HOME/.config/kitty/kitty.conf"]}))

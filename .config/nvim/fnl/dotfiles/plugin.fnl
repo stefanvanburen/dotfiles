@@ -154,9 +154,19 @@
                               :replace        :gzr
                               :update_n_lines :gzn}}))}
    {:url "https://github.com/ibhagwan/fzf-lua"
-    :opts {:winopts {:border :single}
-           :global_git_icons false
-           :global_file_icons false}}
+    :config #(let [fzf-lua (require :fzf-lua)]
+               (fzf-lua.setup {:winopts {:border :single}
+                               :global_git_icons false
+                               :global_file_icons false})
+               (vim.keymap.set :n :<leader>ff fzf-lua.files)
+               (vim.keymap.set :n :<leader>fg fzf-lua.git_files)
+               (vim.keymap.set :n :<leader>fb fzf-lua.buffers)
+               (vim.keymap.set :n :<leader>fl fzf-lua.grep_project)
+               (vim.keymap.set :n :<leader>fh fzf-lua.help_tags)
+               (vim.keymap.set :n :<leader>fr fzf-lua.lsp_references)
+               (vim.keymap.set :n :<leader>fs fzf-lua.git_stash)
+               (vim.keymap.set :n :<leader>ed #(fzf-lua.git_files {:cwd "~"}))
+               (vim.keymap.set :n :<leader>ev #(fzf-lua.files     {:cwd "~/.config/nvim"})))}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/andymass/vim-matchup"
     :config #(set vim.g.matchup_matchparen_offscreen {})}
