@@ -81,10 +81,6 @@
 ;; ignore case when completing files / directories in wildmenu
 (set vim.o.wildignorecase true)
 
-;; Enable syntax highlighting in markdown code fences.
-;; https://github.com/tpope/vim-markdown
-(set vim.g.markdown_fenced_languages ["go"])
-
 ;; %f: relative path to current file
 ;; %m: modified flag
 ;; %{FugitiveHead()}: git head branch
