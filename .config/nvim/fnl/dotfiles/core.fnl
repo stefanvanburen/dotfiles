@@ -85,10 +85,6 @@
 ;; https://github.com/tpope/vim-markdown
 (set vim.g.markdown_fenced_languages ["go"])
 
-;; https://github.com/BurntSushi/ripgrep/issues/425
-(set vim.o.grepprg "rg --vimgrep --no-heading --smart-case")
-(set vim.o.grepformat "%f:%l:%c:%m,%f:%l:%m")
-
 ;; %f: relative path to current file
 ;; %m: modified flag
 ;; %{FugitiveHead()}: git head branch
