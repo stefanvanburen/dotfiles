@@ -9,10 +9,10 @@
 
 (local filetype-settings
   {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
-   :javascript      {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :javascriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :typescript      {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :typescriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
+   :javascript      {:expandtab true  :shiftwidth 4 :tabstop 4}
+   :javascriptreact {:expandtab true  :shiftwidth 4 :tabstop 4}
+   :typescript      {:expandtab true  :shiftwidth 4 :tabstop 4}
+   :typescriptreact {:expandtab true  :shiftwidth 4 :tabstop 4}
    :html            {:expandtab true  :shiftwidth 2 :tabstop 2}
    :css             {:expandtab true  :shiftwidth 2 :tabstop 2}
    :gohtmltmpl      {:expandtab true  :shiftwidth 2 :tabstop 2 :commentstring "{{/* %s */}}"}
