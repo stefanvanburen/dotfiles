@@ -157,7 +157,20 @@
     :config #(let [fzf-lua (require :fzf-lua)]
                (fzf-lua.setup {:winopts {:border :single}
                                :global_git_icons false
-                               :global_file_icons false})
+                               :global_file_icons false
+                               :fzf_colors {:fg [:fg :CursorLine]
+                                            :bg [:bg :Normal]
+                                            :hl [:fg :Comment]
+                                            "fg+" [:fg :Normal]
+                                            "bg+" [:bg :CursorLine]
+                                            "hl+" [:fg :Statement]
+                                            :info [:fg :PreProc]
+                                            :prompt [:fg :Conditional]
+                                            :pointer [:fg :Exception]
+                                            :marker [:fg :Keyword]
+                                            :spinner [:fg :Label]
+                                            :header [:fg :Comment]
+                                            :gutter [:bg :Normal]}})
                (vim.keymap.set :n :<leader>ff fzf-lua.files)
                (vim.keymap.set :n :<leader>fg fzf-lua.git_files)
                (vim.keymap.set :n :<leader>fb fzf-lua.buffers)
@@ -179,7 +192,7 @@
    {:url "https://github.com/tpope/vim-repeat"}
    {:url "https://github.com/rktjmp/lush.nvim"}
    {:url "https://git.sr.ht/~p00f/alabaster.nvim"
-    :enabled true
+    :enabled false
     :lazy false
     :priority 1000
     :config #(vim.cmd.colorscheme :alabaster)}
@@ -187,6 +200,11 @@
     :enabled false
     :lazy false
     :priority 1000
-    :config #(vim.cmd.colorscheme :rams)}]
+    :config #(vim.cmd.colorscheme :rams)}
+   {:url "https://github.com/mcchrish/zenbones.nvim"
+    :enabled true
+    :lazy false
+    :priority 1000
+    :config #(vim.cmd.colorscheme :zenwritten)}]
  ;; on startup, if doing installation, try to load colorschemes
- {:install {:colorscheme [:rams :alabaster]}})
+ {:install {:colorscheme [:zenwritten :rams :alabaster]}})
