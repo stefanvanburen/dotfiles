@@ -126,10 +126,13 @@
                   :zig]}))}
    {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
     :config #(let [null-ls (require :null-ls)]
-               (null-ls.setup {:sources [null-ls.builtins.diagnostics.buf
+               (null-ls.setup {:debug false
+                               :sources [null-ls.builtins.diagnostics.buf
                                          null-ls.builtins.formatting.buf
                                          null-ls.builtins.diagnostics.fish
                                          null-ls.builtins.formatting.fish_indent
+                                         null-ls.builtins.diagnostics.ktlint
+                                         null-ls.builtins.formatting.ktlint
                                          null-ls.builtins.diagnostics.shellcheck
                                          null-ls.builtins.formatting.shfmt]}))}
    {:url "https://github.com/echasnovski/mini.nvim"
