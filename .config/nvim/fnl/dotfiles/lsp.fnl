@@ -10,7 +10,7 @@
 
 (fn format [client]
   (do
-    (vim.lsp.buf.format {:timeout_ms 2000})
+    (vim.lsp.buf.format)
     (when (= client.name "gopls")
       (organize-imports))))
 
