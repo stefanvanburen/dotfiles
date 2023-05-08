@@ -63,7 +63,7 @@ if status --is-interactive
 
     # Setup homebrew environment (PATH-related variables)
     # This must be before any command checking, as it sets up the PATH.
-    eval (/opt/homebrew/bin/brew shellenv)
+    eval (/opt/homebrew/bin/brew shellenv fish)
 
     # jump is bound to `z`
     # https://github.com/gsamokovarov/jump#fish
