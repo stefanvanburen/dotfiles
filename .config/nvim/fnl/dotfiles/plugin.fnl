@@ -148,11 +148,14 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-comment.md
                    mini-comment (require :mini.comment)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
-                   mini-surround (require :mini.surround)]
+                   mini-surround (require :mini.surround)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-hues.txt
+                   mini-hues (require :mini.hues)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
                 (mini-comment.setup {:options {:ignore_blank_line true}})
+                (vim.cmd.colorscheme :randomhue)
                 (mini-surround.setup
                   {:mappings {:add            :gza
                               :delete         :gzd
@@ -210,9 +213,9 @@
     :priority 1000
     :config #(vim.cmd.colorscheme :rams)}
    {:url "https://github.com/mcchrish/zenbones.nvim"
-    :enabled true
+    :enabled false
     :lazy false
     :priority 1000
     :config #(vim.cmd.colorscheme :zenwritten)}]
  ;; on startup, if doing installation, try to load colorschemes
- {:install {:colorscheme [:zenwritten :rams :alabaster]}})
+ {:install {:colorscheme [:randomhue :zenwritten :rams :alabaster]}})
