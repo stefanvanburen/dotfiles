@@ -1,7 +1,5 @@
 # local configuration for git, referenced in .config/git/config
 .config/git/local_config
-# contains sensitive oauth token
-.config/gh/hosts.yml
 # not in version control to allow for local differences
 .config/kitty/font.conf
 .config/kitty/themes.conf
