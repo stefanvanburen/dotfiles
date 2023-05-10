@@ -1,5 +1,6 @@
 (module dotfiles.lsp
-  {autoload {: lspconfig}})
+  {autoload {: lspconfig
+             : schemastore}})
 
 (local create-autocmd vim.api.nvim_create_autocmd)
 (local create-augroup vim.api.nvim_create_augroup)
@@ -54,8 +55,7 @@
 (create-autocmd :LspAttach {:callback on-attach})
 
 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
-(lspconfig.gopls.setup {:handlers handlers
-                        :cmd ["gopls" "-remote=auto"]
+(lspconfig.gopls.setup {:cmd ["gopls" "-remote=auto"]
                         ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
                         :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
                                            :staticcheck true
@@ -63,6 +63,11 @@
                                            ;; Most of these analyzers are enabled by default.
                                            :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
                                                       :unusedparams true}}}})
+
+(lspconfig.jsonls.setup {:settings {:json {:schemas (schemastore.json.schemas)
+                                           :validate {:enable true}}}})
+
+(lspconfig.yamlls.setup {:settings {:yaml {:schemas (schemastore.yaml.schemas)}}})
 
 (local servers [;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
                 lspconfig.clojure_lsp
@@ -83,4 +88,4 @@
                 lspconfig.sourcekit])
 
 (each [_ lsp-server (ipairs servers)]
-  (lsp-server.setup {:handlers handlers}))
+  (lsp-server.setup {}))

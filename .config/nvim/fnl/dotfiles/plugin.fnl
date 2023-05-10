@@ -58,6 +58,7 @@
                (vim.keymap.set :n :<C-t>v ":TestVisit<cr>"))}
    {:url "https://github.com/nvim-lua/plenary.nvim"}
    {:url "https://github.com/neovim/nvim-lspconfig"}
+   {:url "https://github.com/b0o/SchemaStore.nvim"}
    {:url "https://github.com/williamboman/mason.nvim" :config true}
    {:url "https://github.com/williamboman/mason-lspconfig.nvim" :config true}
    {:url "https://github.com/nvim-treesitter/nvim-treesitter"
