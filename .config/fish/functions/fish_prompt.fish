@@ -35,10 +35,11 @@ function fish_prompt
 
     set -l cwd $cyan(basename (prompt_pwd))
 
-    set -l repo_info
+    set -l repo_color "$normal"
+    set -l repo_info "$repo_color"
     if _is_git_repo
         set -l repo_branch $red(_git_branch_name)
-        set repo_info "$repo_branch"
+        set repo_info "$repo_color$repo_branch"
     end
 
     printf '\f\r%s %s\f\r%s ' $cwd $repo_info $arrow
