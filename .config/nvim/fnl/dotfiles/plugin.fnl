@@ -45,7 +45,8 @@
    {:url "https://github.com/fladson/vim-kitty"}
    {:url "https://github.com/Olical/aniseed"}
    {:url "https://github.com/Olical/conjure"
-    :config #(set vim.g.conjure#highlight#enabled true)}
+    :config #(do (set vim.g.conjure#highlight#enabled true)
+                 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true))}
    {:url "https://github.com/gpanders/nvim-parinfer"}
    {:url "https://github.com/vim-test/vim-test"
     :dependencies [{:url "https://github.com/tpope/vim-dispatch"}]
