@@ -72,7 +72,3 @@ if status --is-interactive
     # https://direnv.net/docs/hook.html#fish
     command -q direnv; and direnv hook fish | source
 end
-
-# Increase MacOS file limits
-# https://wilsonmar.github.io/maximum-limits/
-ulimit -n 524288
