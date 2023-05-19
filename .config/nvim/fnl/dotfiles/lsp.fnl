@@ -85,7 +85,9 @@
                 lspconfig.eslint
                 ;; Swift LSP: https://github.com/apple/sourcekit-lsp
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sourcekit
-                lspconfig.sourcekit])
+                lspconfig.sourcekit
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
+                lspconfig.bashls])
 
 (each [_ lsp-server (ipairs servers)]
   (lsp-server.setup {}))
