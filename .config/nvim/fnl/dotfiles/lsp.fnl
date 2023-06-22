@@ -29,6 +29,10 @@
       (create-autocmd :BufWritePre {:buffer buf
                                     :callback #(format client)})))
 
+  ;; requires neovim nightly
+  (when client.server_capabilities.inlayHintProvider
+    (vim.lsp.buf.inlay_hint buf true))
+
   (when client.server_capabilities.hoverProvider
     (buffer-map :K vim.lsp.buf.hover))
 
@@ -62,7 +66,15 @@
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                                            ;; Most of these analyzers are enabled by default.
                                            :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
-                                                      :unusedparams true}}}})
+                                                      :unusedparams true}
+                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+                                           :hints {:parameterNames true
+                                                   :assignVariableTypes true
+                                                   :compositeLiteralFields true
+                                                   :compositeLiteralTypes true
+                                                   :constantValues true
+                                                   :functionTypeParameters true
+                                                   :rangeVariableTypes true}}}})
 
 (lspconfig.jsonls.setup {:settings {:json {:schemas (schemastore.json.schemas)
                                            :validate {:enable true}}}})
