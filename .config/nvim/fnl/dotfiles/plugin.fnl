@@ -8,6 +8,7 @@
                (copilot.setup {:suggestion {:auto_trigger false}}))}
    ;; required by vim-fugitive
    {:url "https://github.com/tyru/open-browser.vim"}
+   {:url "https://github.com/lewis6991/fileline.nvim"}
    {:url "https://github.com/lewis6991/gitsigns.nvim"
     :config
     #(let [gitsigns (require :gitsigns)]
