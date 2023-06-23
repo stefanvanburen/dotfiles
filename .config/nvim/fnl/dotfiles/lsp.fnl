@@ -73,12 +73,12 @@
                                                       :nilness true}
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
                                            :hints {:parameterNames true
-                                                   :assignVariableTypes true
-                                                   :compositeLiteralFields true
-                                                   :compositeLiteralTypes true
-                                                   :constantValues true
-                                                   :functionTypeParameters true
-                                                   :rangeVariableTypes true}}}})
+                                                   :assignVariableTypes false
+                                                   :compositeLiteralFields false
+                                                   :compositeLiteralTypes false
+                                                   :constantValues false
+                                                   :functionTypeParameters false
+                                                   :rangeVariableTypes false}}}})
 
 (lspconfig.jsonls.setup {:settings {:json {:schemas (schemastore.json.schemas)
                                            :validate {:enable true}}}})
