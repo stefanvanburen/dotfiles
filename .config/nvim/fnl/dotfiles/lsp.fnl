@@ -66,7 +66,11 @@
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                                            ;; Most of these analyzers are enabled by default.
                                            :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
-                                                      :unusedparams true}
+                                                      :unusedparams true
+                                                      ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedwrite
+                                                      :unusedwrite true
+                                                      ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#nilness
+                                                      :nilness true}
                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
                                            :hints {:parameterNames true
                                                    :assignVariableTypes true
