@@ -151,7 +151,7 @@
                    mini-comment (require :mini.comment)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
                    mini-surround (require :mini.surround)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-hues.txt
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-hues.md
                    mini-hues (require :mini.hues)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
