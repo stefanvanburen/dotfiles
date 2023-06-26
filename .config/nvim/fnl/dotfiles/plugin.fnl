@@ -2,7 +2,8 @@
     {autoload {: lazy}})
 
 (lazy.setup
-  [{:url "https://github.com/justinmk/vim-dirvish"}
+  [
+   ; {:url "https://github.com/justinmk/vim-dirvish"}
    {:url "https://github.com/zbirenbaum/copilot.lua"
     :config #(let [copilot (require "copilot")]
                (copilot.setup {:suggestion {:auto_trigger false}}))}
@@ -151,10 +152,15 @@
                    mini-comment (require :mini.comment)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
                    mini-surround (require :mini.surround)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-files.md
+                   mini-files (require :mini.files)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-hues.md
                    mini-hues (require :mini.hues)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
+                (mini-files.setup {})
+                ;; open in the directory of the current file
+                (vim.keymap.set :n :- #(mini-files.open (vim.api.nvim_buf_get_name 0) false))
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
                 (mini-comment.setup {:options {:ignore_blank_line true}})
                 ; (vim.cmd.colorscheme :randomhue)
