@@ -157,7 +157,7 @@
                 (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
                 (mini-comment.setup {:options {:ignore_blank_line true}})
-                (vim.cmd.colorscheme :randomhue)
+                ; (vim.cmd.colorscheme :randomhue)
                 (mini-surround.setup
                   {:mappings {:add            :gza
                               :delete         :gzd
@@ -215,7 +215,7 @@
     :priority 1000
     :config #(vim.cmd.colorscheme :rams)}
    {:url "https://github.com/mcchrish/zenbones.nvim"
-    :enabled false
+    :enabled true
     :lazy false
     :priority 1000
     :config #(vim.cmd.colorscheme :zenwritten)}]
