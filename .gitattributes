@@ -1,0 +1,5 @@
+# Fix the syntax highlighting for these files in the GitHub UI.
+# https://github.com/github-linguist/linguist/blob/master/docs/overrides.md#using-gitattributes
+# https://github.com/github-linguist/linguist/blob/master/lib/linguist/languages.yml
+/.config/git/config linguist-language=gitconfig
+/.config/git/ignore linguist-language=gitignore
