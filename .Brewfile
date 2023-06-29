@@ -2,12 +2,12 @@
 
 # Better pager - aliased to `cat` in fish.
 brew "bat"
-# Find files - used by `fzf` within fish and neovim.
+# Find files - used by `zf` in fish.
 brew "fd"
+# Required for fzf-lua in nvim.
+brew "fzf"
 # My default shell
 brew "fish"
-# fuzzy finder
-brew "fzf"
 # Interacting with GitHub via the CLI - configured in "gh_config.yml".
 brew "gh"
 # VCS - configured in "gitconfig" and "gitignore".
@@ -31,8 +31,10 @@ brew "neovim"
 # used to install and run beets
 # https://github.com/pypa/pipx
 brew "pipx"
-# better searching - used by `fzf` within fish and neovim - configured in "ripgreprc".
+# better searching - configured in "ripgreprc".
 brew "ripgrep"
+# Fuzzy finding, used in fish.
+brew "zf"
 
 # terminal
 cask "kitty"

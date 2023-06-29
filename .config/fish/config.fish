@@ -16,15 +16,6 @@ set -gx MANPAGER "nvim +Man!"
 # Light mode works better with my light background
 set -gx GLAMOUR_STYLE light
 
-# use `fd` instead of `find` by default with fzf.
-set fzf_default_command 'fd --type file --follow --hidden --exclude .git --strip-cwd-prefix'
-set -gx FZF_DEFAULT_COMMAND $fzf_default_command
-set -gx FZF_CTRL_T_COMMAND $fzf_default_command
-
-set -l fzf_colors "--color=light"
-set -gx FZF_DEFAULT_OPTS "$fzf_colors"
-set -gx FZF_CTRL_T_OPTS "$fzf_colors --preview 'bat --line-range :500 {}'"
-
 # Homebrew settings
 # https://docs.brew.sh/Manpage#environment
 # Disable fancy colors and analytics
@@ -40,6 +31,23 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.cargo/bin
 # go
 fish_add_path ~/go/bin
+
+function zf_file --description 'Use zf to select a file'
+    fd -t f | zf | while read -l r; set result $result $r; end
+    if [ -z "$result" ]
+      commandline -f repaint
+      return
+    else
+      # Remove last token from commandline.
+      commandline -t ""
+    end
+    for i in $result
+      commandline -it -- $prefix
+      commandline -it -- (string escape $i)
+      commandline -it -- ' '
+    end
+    commandline -f repaint
+end
 
 if status --is-interactive
     # `man abbr`
@@ -71,4 +79,10 @@ if status --is-interactive
 
     # https://direnv.net/docs/hook.html#fish
     command -q direnv; and direnv hook fish | source
+
+    bind \cr history-pager
+    bind -M insert \cr history-pager
+
+    bind \ct zf_file
+    bind -M insert \ct zf_file
 end
