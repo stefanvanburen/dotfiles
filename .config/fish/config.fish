@@ -33,7 +33,7 @@ fish_add_path ~/.cargo/bin
 fish_add_path ~/go/bin
 
 function zf_file --description 'Use zf to select a file'
-    fd -t f | zf | while read -l r; set result $result $r; end
+    fd --type file --follow --hidden --exclude .git --strip-cwd-prefix | zf | while read -l r; set result $result $r; end
     if [ -z "$result" ]
       commandline -f repaint
       return
