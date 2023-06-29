@@ -140,8 +140,6 @@
                                          null-ls.builtins.formatting.buf
                                          null-ls.builtins.diagnostics.fish
                                          null-ls.builtins.formatting.fish_indent
-                                         null-ls.builtins.diagnostics.ktlint
-                                         null-ls.builtins.formatting.ktlint
                                          null_ls.builtins.formatting.prettier
                                          null-ls.builtins.formatting.shfmt]}))}
    {:url "https://github.com/echasnovski/mini.nvim"
