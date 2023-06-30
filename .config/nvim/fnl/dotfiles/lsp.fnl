@@ -31,7 +31,7 @@
 
   ;; requires neovim nightly
   (when client.server_capabilities.inlayHintProvider
-    (vim.lsp.buf.inlay_hint buf true))
+    (vim.lsp.inlay_hint buf true))
 
   (when client.server_capabilities.hoverProvider
     (buffer-map :K vim.lsp.buf.hover))
