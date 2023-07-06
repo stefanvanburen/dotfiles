@@ -220,9 +220,15 @@
     :priority 1000
     :config #(vim.cmd.colorscheme :rams)}
    {:url "https://github.com/mcchrish/zenbones.nvim"
+    :enabled false
+    :lazy false
+    :priority 1000
+    :config #(vim.cmd.colorscheme :zenwritten)}
+   {:url "https://github.com/rose-pine/neovim"
+    :name "rose-pine"
     :enabled true
     :lazy false
     :priority 1000
-    :config #(vim.cmd.colorscheme :zenwritten)}]
+    :config #(vim.cmd.colorscheme :rose-pine)}]
  ;; on startup, if doing installation, try to load colorschemes
- {:install {:colorscheme [:randomhue :zenwritten :rams :alabaster]}})
+ {:install {:colorscheme [:randomhue :zenwritten :rams :alabaster :rose-pine]}})
