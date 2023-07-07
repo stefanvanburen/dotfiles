@@ -46,6 +46,7 @@
    {:url "https://github.com/tpope/vim-rhubarb"}
    {:url "https://github.com/mattn/vim-gotmpl"}
    {:url "https://github.com/fladson/vim-kitty"}
+   {:url "https://github.com/janet-lang/janet.vim"}
    {:url "https://github.com/Olical/aniseed"}
    {:url "https://github.com/Olical/conjure"
     :config #(do (set vim.g.conjure#highlight#enabled true)
