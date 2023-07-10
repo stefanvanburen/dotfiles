@@ -1,0 +1,3 @@
+# vim: set filetype=gitignore:
+# Keep this in sync with ./.gitattributes
+**/*.lua

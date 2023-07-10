@@ -1,0 +1,2 @@
+# Keep this in sync with ./.ignore
+**/*.lua linguist-generated
