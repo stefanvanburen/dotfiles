@@ -140,7 +140,6 @@
    {:url "https://github.com/fladson/vim-kitty"}
    {:url "https://github.com/janet-lang/janet.vim"}
    {:url "https://github.com/Olical/nfnl"
-    :config true
     :ft :fennel}
    {:url "https://github.com/Olical/conjure"
     :config #(do (set vim.g.conjure#highlight#enabled true)
