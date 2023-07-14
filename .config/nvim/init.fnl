@@ -154,7 +154,6 @@
                (vim.keymap.set :n :<C-t>s ":TestSuite<cr>")
                (vim.keymap.set :n :<C-t>l ":TestLast<cr>")
                (vim.keymap.set :n :<C-t>v ":TestVisit<cr>"))}
-   {:url "https://github.com/nvim-lua/plenary.nvim"}
    {:url "https://github.com/neovim/nvim-lspconfig"}
    {:url "https://github.com/b0o/SchemaStore.nvim"}
    {:url "https://github.com/williamboman/mason.nvim"
@@ -231,6 +230,7 @@
                   ;; https://github.com/maxxnino/tree-sitter-zig
                   :zig]}))}
    {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
+    :dependencies [{:url "https://github.com/nvim-lua/plenary.nvim"}]
     :config #(let [null-ls (require :null-ls)]
                (null-ls.setup {:debug false
                                :sources [null-ls.builtins.diagnostics.buf
