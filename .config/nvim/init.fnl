@@ -229,16 +229,6 @@
                   :yaml
                   ;; https://github.com/maxxnino/tree-sitter-zig
                   :zig]}))}
-   {:url "https://github.com/jose-elias-alvarez/null-ls.nvim"
-    :dependencies [{:url "https://github.com/nvim-lua/plenary.nvim"}]
-    :config #(let [null-ls (require :null-ls)]
-               (null-ls.setup {:debug false
-                               :sources [null-ls.builtins.diagnostics.buf
-                                         null-ls.builtins.formatting.buf
-                                         null-ls.builtins.diagnostics.fish
-                                         null-ls.builtins.formatting.fish_indent
-                                         null_ls.builtins.formatting.prettier
-                                         null-ls.builtins.formatting.shfmt]}))}
    {:url "https://github.com/echasnovski/mini.nvim"
     :config #(let [;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pairs.md
                    mini-pairs (require :mini.pairs)
@@ -488,10 +478,8 @@
 
   (when client.server_capabilities.documentFormattingProvider
     (buffer-map :<leader>af #(format client))
-    ;; Don't auto-format with null-ls
     ;; TODO: Disable tsserver's formatting overall.
-    ;; TODO: Determine why null-ls needs to be disabled.
-    (when (and (not= client.name "tsserver") (not= client.name "null-ls"))
+    (when (not= client.name "tsserver")
       (create-autocmd :BufWritePre {:buffer buf
                                     :callback #(format client)})))
 
