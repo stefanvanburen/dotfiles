@@ -1,3 +1,3 @@
 function ev --description 'Edit neovim config file'
-    $EDITOR ~/.config/nvim/init.fnl
+    cd ~/.config/nvim; and $EDITOR init.fnl; cd -
 end
