@@ -2,6 +2,11 @@
 ;; TODO: Add download
 (vim.opt.rtp:prepend lazypath)
 
+;; Don't load netrw - using dirvish instead.
+;; :h netrw-noload
+(set vim.g.loaded_netrw 1)
+(set vim.g.loaded_netrwPlugin 1)
+
 ;; Leader is space key
 (set vim.g.mapleader " ")
 ;; LocalLeader is the comma key
