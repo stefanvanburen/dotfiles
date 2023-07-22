@@ -21,3 +21,8 @@ plugins: fetchart embedart info
 # Disable color in the UI.
 ui:
   color: no
+
+fetchart:
+  cautious: true
+  cover_names: front back
+  sources: itunes *
