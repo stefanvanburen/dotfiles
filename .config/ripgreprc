@@ -2,6 +2,11 @@
 # This is really useful in the general case of doing `rg text` and wanting to match case-insensitively on "text".
 --smart-case
 
+# Don't allow matches within long lines to write the entire line to the terminal.
+--max-columns=150
+# rather than omit the match exceeding --max-columns, show a preview.
+--max-columns-preview
+
 # Search hidden files
 --hidden
 # exclude .git/*
