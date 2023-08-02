@@ -96,6 +96,7 @@
 ;; %c: column number
 ;; %{&filetype}: filetype
 (set vim.o.statusline "%f%m %{FugitiveHead()}%=%l,%c %{&filetype}")
+
 (local lazy (require :lazy))
 
 (lazy.setup
@@ -144,8 +145,7 @@
    {:url "https://github.com/mattn/vim-gotmpl"}
    {:url "https://github.com/fladson/vim-kitty"}
    {:url "https://github.com/janet-lang/janet.vim"}
-   {:url "https://github.com/Olical/nfnl"
-    :ft :fennel}
+   {:url "https://github.com/Olical/nfnl"}
    {:url "https://github.com/Olical/conjure"
     :config #(do (set vim.g.conjure#highlight#enabled true)
                  (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true))}
