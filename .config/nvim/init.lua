@@ -119,68 +119,64 @@ local function _13_()
   local function _14_()
     return fzf_lua.git_files({cwd = "~"})
   end
-  vim.keymap.set("n", "<leader>ed", _14_)
-  local function _15_()
-    return fzf_lua.files({cwd = "~/.config/nvim"})
-  end
-  return vim.keymap.set("n", "<leader>ev", _15_)
+  return vim.keymap.set("n", "<leader>ed", _14_)
 end
-local function _16_()
+local function _15_()
   vim.g.matchup_matchparen_offscreen = {}
   return nil
 end
-local function _17_()
+local function _16_()
   local leap = require("leap")
   return leap.add_default_mappings()
 end
-local function _18_()
+local function _17_()
   return vim.cmd.colorscheme("alabaster")
 end
-local function _19_()
+local function _18_()
   return vim.cmd.colorscheme("rams")
 end
-local function _20_()
+local function _19_()
   return vim.cmd.colorscheme("zenwritten")
 end
-local function _21_()
+local function _20_()
   return vim.cmd.colorscheme("rose-pine")
 end
-lazy.setup({{url = "https://github.com/justinmk/vim-dirvish"}, {url = "https://github.com/zbirenbaum/copilot.lua", config = _1_, enabled = false}, {url = "https://github.com/tyru/open-browser.vim"}, {url = "https://github.com/lewis6991/fileline.nvim"}, {url = "https://github.com/lewis6991/gitsigns.nvim", config = _2_}, {url = "https://github.com/tpope/vim-fugitive", config = _8_}, {url = "https://github.com/tpope/vim-rhubarb"}, {url = "https://github.com/mattn/vim-gotmpl"}, {url = "https://github.com/fladson/vim-kitty"}, {url = "https://github.com/janet-lang/janet.vim"}, {url = "https://github.com/Olical/nfnl"}, {url = "https://github.com/Olical/conjure", config = _9_}, {url = "https://github.com/gpanders/nvim-parinfer"}, {url = "https://github.com/vim-test/vim-test", dependencies = {{url = "https://github.com/tpope/vim-dispatch"}}, config = _10_}, {url = "https://github.com/neovim/nvim-lspconfig"}, {url = "https://github.com/b0o/SchemaStore.nvim"}, {url = "https://github.com/williamboman/mason.nvim", config = true, build = ":MasonUpdate"}, {url = "https://github.com/williamboman/mason-lspconfig.nvim", config = true}, {url = "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = _11_}, {url = "https://github.com/echasnovski/mini.nvim", config = _12_}, {url = "https://github.com/ibhagwan/fzf-lua", config = _13_}, {url = "https://github.com/tpope/vim-eunuch"}, {url = "https://github.com/andymass/vim-matchup", config = _16_}, {url = "https://github.com/ggandor/leap.nvim", dependencies = {{url = "https://github.com/tpope/vim-repeat"}}, config = _17_}, {url = "https://github.com/tpope/vim-abolish"}, {url = "https://github.com/tpope/vim-repeat"}, {url = "https://github.com/rktjmp/lush.nvim"}, {url = "https://git.sr.ht/~p00f/alabaster.nvim", lazy = true, priority = 1000, config = _18_}, {url = "https://github.com/stefanvanburen/rams", lazy = true, priority = 1000, config = _19_}, {url = "https://github.com/mcchrish/zenbones.nvim", priority = 1000, config = _20_, lazy = false}, {url = "https://github.com/rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000, config = _21_}}, {install = {colorscheme = {"randomhue", "zenwritten", "rams", "alabaster", "rose-pine"}}})
+lazy.setup({{url = "https://github.com/justinmk/vim-dirvish"}, {url = "https://github.com/zbirenbaum/copilot.lua", config = _1_, enabled = false}, {url = "https://github.com/tyru/open-browser.vim"}, {url = "https://github.com/lewis6991/fileline.nvim"}, {url = "https://github.com/lewis6991/gitsigns.nvim", config = _2_}, {url = "https://github.com/tpope/vim-fugitive", config = _8_}, {url = "https://github.com/tpope/vim-rhubarb"}, {url = "https://github.com/mattn/vim-gotmpl"}, {url = "https://github.com/fladson/vim-kitty"}, {url = "https://github.com/janet-lang/janet.vim"}, {url = "https://github.com/Olical/nfnl"}, {url = "https://github.com/Olical/conjure", config = _9_}, {url = "https://github.com/gpanders/nvim-parinfer"}, {url = "https://github.com/vim-test/vim-test", dependencies = {{url = "https://github.com/tpope/vim-dispatch"}}, config = _10_}, {url = "https://github.com/neovim/nvim-lspconfig"}, {url = "https://github.com/b0o/SchemaStore.nvim"}, {url = "https://github.com/williamboman/mason.nvim", config = true, build = ":MasonUpdate"}, {url = "https://github.com/williamboman/mason-lspconfig.nvim", config = true}, {url = "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = _11_}, {url = "https://github.com/echasnovski/mini.nvim", config = _12_}, {url = "https://github.com/ibhagwan/fzf-lua", config = _13_}, {url = "https://github.com/tpope/vim-eunuch"}, {url = "https://github.com/andymass/vim-matchup", config = _15_}, {url = "https://github.com/ggandor/leap.nvim", dependencies = {{url = "https://github.com/tpope/vim-repeat"}}, config = _16_}, {url = "https://github.com/tpope/vim-abolish"}, {url = "https://github.com/tpope/vim-repeat"}, {url = "https://github.com/rktjmp/lush.nvim"}, {url = "https://git.sr.ht/~p00f/alabaster.nvim", lazy = true, priority = 1000, config = _17_}, {url = "https://github.com/stefanvanburen/rams", lazy = true, priority = 1000, config = _18_}, {url = "https://github.com/mcchrish/zenbones.nvim", priority = 1000, config = _19_, lazy = false}, {url = "https://github.com/rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000, config = _20_}}, {install = {colorscheme = {"randomhue", "zenwritten", "rams", "alabaster", "rose-pine"}}})
 local create_autocmd = vim.api.nvim_create_autocmd
 local create_augroup = vim.api.nvim_create_augroup
 create_autocmd("VimResized", {command = ":wincmd ="})
-local function _22_()
+local function _21_()
   return vim.highlight.on_yank()
 end
-create_autocmd("TextYankPost", {callback = _22_})
+create_autocmd("TextYankPost", {callback = _21_})
 local filetype_settings = {go = {shiftwidth = 4, tabstop = 4, expandtab = false}, javascript = {expandtab = true, shiftwidth = 2, tabstop = 2}, javascriptreact = {expandtab = true, shiftwidth = 2, tabstop = 2}, typescript = {expandtab = true, shiftwidth = 2, tabstop = 2}, typescriptreact = {expandtab = true, shiftwidth = 2, tabstop = 2}, html = {expandtab = true, shiftwidth = 2, tabstop = 2}, css = {expandtab = true, shiftwidth = 2, tabstop = 2}, gohtmltmpl = {expandtab = true, shiftwidth = 2, tabstop = 2, commentstring = "{{/* %s */}}"}, gotexttmpl = {expandtab = true, shiftwidth = 2, tabstop = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, tabstop = 4, commentstring = "# %s"}, yaml = {expandtab = true, shiftwidth = 2, tabstop = 2}, svg = {expandtab = true, shiftwidth = 2, tabstop = 2}, json = {expandtab = true, shiftwidth = 2, tabstop = 2}, bash = {expandtab = true, shiftwidth = 2, tabstop = 2}, python = {expandtab = true, shiftwidth = 4, tabstop = 4}, xml = {expandtab = true, shiftwidth = 4, tabstop = 4}, starlark = {expandtab = true, shiftwidth = 4, tabstop = 4, commentstring = "# %s"}, gitcommit = {spell = true}, sql = {wrap = true, commentstring = "-- %s"}, clojure = {expandtab = true, textwidth = 80}, proto = {commentstring = "// %s"}, kotlin = {commentstring = "// %s"}, markdown = {spell = true, wrap = true, conceallevel = 0, shiftwidth = 2}}
 do
   local aufiletypes = create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
-    local function _23_()
+    local function _22_()
       for name, value in pairs(settings) do
         vim.api.nvim_set_option_value(name, value, {scope = "local"})
       end
       return nil
     end
-    create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _23_})
+    create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _22_})
   end
-  local function _24_()
+  local function _23_()
     return vim.api.nvim_set_option_value("filetype", "make", {scope = "local"})
   end
-  create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "justfile", callback = _24_})
-  local function _25_()
+  create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "justfile", callback = _23_})
+  local function _24_()
     return vim.api.nvim_set_option_value("filetype", "markdown", {scope = "local"})
   end
-  create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.mdx", callback = _25_})
-  local function _26_()
+  create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.mdx", callback = _24_})
+  local function _25_()
     return vim.api.nvim_set_option_value("filetype", "starlark", {scope = "local"})
   end
-  create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.star", callback = _26_})
-  local function _27_()
+  create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.star", callback = _25_})
+  local function _26_()
     return vim.api.nvim_set_option_value("iskeyword", "!,$,%,#,*,+,-,/,<,=,>,?,_,a-z,A-Z,48-57,128-247,124,94", {scope = "local"})
   end
-  create_autocmd("FileType", {group = aufiletypes, pattern = "fennel", callback = _27_})
+  create_autocmd("FileType", {group = aufiletypes, pattern = "fennel", callback = _26_})
 end
 local map = vim.keymap.set
 map("n", ";", ":")
@@ -188,56 +184,60 @@ map("n", "<leader>?", vim.diagnostic.open_float)
 map("n", "[w", vim.diagnostic.goto_prev)
 map("n", "]w", vim.diagnostic.goto_next)
 map("n", "<leader>q", vim.diagnostic.setloclist)
-local function _28_()
+local function _27_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _28_)
-local function _29_()
+map("n", "<leader>gs", _27_)
+local function _28_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _29_)
-local function _30_()
+map("n", "<leader>gw", _28_)
+local function _29_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _30_)
-local function _31_()
+map("n", "<leader>gc", _29_)
+local function _30_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _31_)
-local function _32_()
+map("n", "<leader>gp", _30_)
+local function _31_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _32_)
+map("n", "<leader>gb", _31_)
 map({"n", "v"}, "gx", "<plug>(openbrowser-open)", {})
-local function _33_()
+local function _32_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _33_, {expr = true})
-local function _35_()
+map({"n", "v"}, "j", _32_, {expr = true})
+local function _34_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _35_, {expr = true})
+map({"n", "v"}, "k", _34_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
-local function _37_()
+local function _36_()
   return vim.cmd({cmd = "edit", args = {"$HOME/.config/fish/config.fish"}})
 end
-map("n", "<leader>ef", _37_)
-local function _38_()
+map("n", "<leader>ef", _36_)
+local function _37_()
   return vim.cmd({cmd = "edit", args = {"$HOME/.config/git/config"}})
 end
-map("n", "<leader>eg", _38_)
-local function _39_()
+map("n", "<leader>eg", _37_)
+local function _38_()
   return vim.cmd({cmd = "edit", args = {"$HOME/.config/kitty/kitty.conf"}})
 end
-map("n", "<leader>ek", _39_)
+map("n", "<leader>ek", _38_)
+local function _39_()
+  return vim.cmd({cmd = "edit", args = {"~/.config/nvim/init.fnl"}})
+end
+map("n", "<leader>ev", _39_)
 local function _40_()
   return vim.cmd({cmd = "write"})
 end
@@ -335,7 +335,7 @@ local function on_attach(_45_)
   return buffer_map("<leader>ca", vim.lsp.buf.code_action)
 end
 create_autocmd0("LspAttach", {callback = on_attach})
-lspconfig.gopls.setup({cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, compositeLiteralTypes = false, assignVariableTypes = false, constantValues = false, functionTypeParameters = false, rangeVariableTypes = false, compositeLiteralFields = false}}}})
+lspconfig.gopls.setup({cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, functionTypeParameters = false, rangeVariableTypes = false, compositeLiteralFields = false, compositeLiteralTypes = false, assignVariableTypes = false, constantValues = false}}}})
 lspconfig.jsonls.setup({settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}})
 lspconfig.yamlls.setup({settings = {yaml = {schemas = schemastore.yaml.schemas()}}})
 local servers = {lspconfig.clojure_lsp, lspconfig.bufls, lspconfig.ruff_lsp, lspconfig.pylsp, lspconfig.tsserver, lspconfig.eslint, lspconfig.sourcekit, lspconfig.bashls, lspconfig.rust_analyzer}
