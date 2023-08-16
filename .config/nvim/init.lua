@@ -1,4 +1,4 @@
--- [nfnl] Compiled from  by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] Compiled from init.fnl by https://github.com/Olical/nfnl, do not edit.
 local lazypath = (vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
 do end (vim.opt.rtp):prepend(lazypath)
 vim.g.loaded_netrw = 1
