@@ -1,3 +1,2 @@
 # vim: set filetype=gitignore:
-# Keep the list of ignored paths in sync with ./.gitattributes
-**/*.lua
+init.lua

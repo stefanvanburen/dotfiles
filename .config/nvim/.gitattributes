@@ -1,7 +1,2 @@
-# Keep the list of ignored paths in sync with ./.ignore.
-
-# Ignore these files in diffs.
-# https://www.git-scm.com/docs/gitattributes#_marking_files_as_binary
-/**/*.lua -diff
 # Mark the files as generated on GitHub.
-/**/*.lua linguist-generated
+/init.lua linguist-generated
