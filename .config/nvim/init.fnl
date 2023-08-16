@@ -195,6 +195,8 @@
                   :css
                   ;; https://github.com/the-mikedavis/tree-sitter-diff
                   :diff
+                  ;; https://github.com/camdencheek/tree-sitter-dockerfile
+                  :dockerfile
                   ;; https://github.com/travonted/tree-sitter-fennel
                   :fennel
                   ;; https://github.com/ram02z/tree-sitter-fish
