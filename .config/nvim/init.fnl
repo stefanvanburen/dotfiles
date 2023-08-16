@@ -559,7 +559,9 @@
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sourcekit
                 lspconfig.sourcekit
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
-                lspconfig.bashls])
+                lspconfig.bashls
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+                lspconfig.rust_analyzer])
 
 (each [_ lsp-server (ipairs servers)]
   (lsp-server.setup {}))
