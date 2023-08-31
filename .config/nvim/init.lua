@@ -311,7 +311,7 @@ local function on_attach(_45_)
     end
   else
   end
-  if client.server_capabilities.inlayHintProvider then
+  if (client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint) then
     vim.lsp.inlay_hint(buf, true)
   else
   end

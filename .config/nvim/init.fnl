@@ -486,7 +486,9 @@
                                     :callback #(format client)})))
 
   ;; requires neovim nightly
-  (when client.server_capabilities.inlayHintProvider
+  (when (and
+          client.server_capabilities.inlayHintProvider
+          vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint buf true))
 
   (when client.server_capabilities.hoverProvider
