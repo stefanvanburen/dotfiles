@@ -2,6 +2,8 @@
 
 # Better pager - aliased to `cat` in fish.
 brew "bat"
+# Maintained version of `exa`, a replacement for `ls`.
+brew "eza"
 # Find files - used by `zf` in fish.
 brew "fd"
 # Required for fzf-lua in nvim.
