@@ -2,6 +2,8 @@
 ;; TODO: Add download
 (vim.opt.rtp:prepend lazypath)
 
+;;; Settings
+
 ;; Don't load netrw - using dirvish instead.
 ;; :h netrw-noload
 (set vim.g.loaded_netrw 1)
@@ -96,6 +98,8 @@
 ;; %c: column number
 ;; %{&filetype}: filetype
 (set vim.o.statusline "%f%m %{FugitiveHead()}%=%l,%c %{&filetype}")
+
+;;; Plugins
 
 (local lazy (require :lazy))
 
@@ -373,6 +377,9 @@
                              ;; Original from: https://github.com/Olical/aniseed/blob/master/ftplugin/fennel.vim#L14
                              ;; See: https://github.com/bakpakin/fennel.vim/issues/9
                              :callback #(vim.api.nvim_set_option_value "iskeyword" "!,$,%,#,*,+,-,/,<,=,>,?,_,a-z,A-Z,48-57,128-247,124,94" {:scope "local"})}))
+
+;;; Mappings
+
 ;; alias function
 (local map vim.keymap.set)
 
@@ -455,6 +462,9 @@
 (map :t :<c-k> :<c-\><c-n>)
 
 (map :n "<C-l>" ":nohlsearch<cr>" {})
+
+;;; LSP
+
 (local lspconfig (require :lspconfig))
 (local schemastore (require :schemastore))
 
