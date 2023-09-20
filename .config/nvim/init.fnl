@@ -208,8 +208,7 @@
                   ;; https://github.com/tree-sitter/tree-sitter-html
                   :html
                   ;; https://github.com/gbprod/tree-sitter-gitcommit
-                  ; Seems unsupported in alabaster.nvim
-                  ; :gitcommit
+                  :gitcommit
                   ;; https://github.com/the-mikedavis/tree-sitter-git-rebase
                   :git_rebase
                   ;; https://github.com/ObserverOfTime/tree-sitter-gitattributes
