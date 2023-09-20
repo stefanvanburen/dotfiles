@@ -226,9 +226,8 @@
                   ;; https://github.com/MDeiml/tree-sitter-markdown
                   :markdown
                   :markdown_inline
-                  ;; https://github.com/mitchellh/tree-sitter-proto
-                  ;; Not very well maintained - regular highlighting looks fine for now, disabling.
-                  ; :proto
+                  ;; https://github.com/treywood/tree-sitter-proto
+                  :proto
                   ;; https://github.com/tree-sitter/tree-sitter-python
                   :python
                   ;; https://github.com/derekstride/tree-sitter-sql
