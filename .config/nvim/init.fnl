@@ -321,6 +321,8 @@
 (local create-autocmd vim.api.nvim_create_autocmd)
 (local create-augroup vim.api.nvim_create_augroup)
 
+;;; Autocommands and FileType settings
+
 (create-autocmd :VimResized {:command ":wincmd ="})
 
 (create-autocmd :TextYankPost {:callback #(vim.highlight.on_yank)})
