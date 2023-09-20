@@ -148,6 +148,7 @@
    {:url "https://github.com/tpope/vim-rhubarb"}
    {:url "https://github.com/mattn/vim-gotmpl"}
    {:url "https://github.com/fladson/vim-kitty"}
+   {:url "https://github.com/NoahTheDuke/vim-just"}
    {:url "https://github.com/janet-lang/janet.vim"}
    {:url "https://github.com/Olical/nfnl"}
    {:url "https://github.com/Olical/conjure"
@@ -359,11 +360,6 @@
                                :callback #(each [name value (pairs settings)]
                                             (vim.api.nvim_set_option_value name value {:scope "local"}))}))
 
-  ;; treat `justfile`s as makefiles
-  ;; This helps with setting up correct commentstring, etc
-  (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
-                                          :pattern "justfile"
-                                          :callback #(vim.api.nvim_set_option_value "filetype" "make" {:scope "local"})})
   ;; treat mdx files as markdown
   (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
                                           :pattern "*.mdx"
