@@ -313,7 +313,7 @@
     :priority 1000
     :config #(vim.cmd.colorscheme :zenwritten)}
    {:url "https://github.com/rose-pine/neovim"
-    :name "rose-pine"
+    :name :rose-pine
     :lazy true
     :priority 1000
     :config #(vim.cmd.colorscheme :rose-pine)}]
