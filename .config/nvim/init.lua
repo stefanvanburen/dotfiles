@@ -204,7 +204,7 @@ local function _31_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
 map("n", "<leader>gb", _31_)
-map({"n", "v"}, "gx", "<plug>(openbrowser-open)", {})
+map({"n", "v"}, "gx", "<plug>(openbrowser-smart-search)", {})
 local function _32_()
   if (vim.v.count ~= 0) then
     return "j"
@@ -335,7 +335,7 @@ local function on_attach(_45_)
   return buffer_map("<leader>ca", vim.lsp.buf.code_action)
 end
 create_autocmd0("LspAttach", {callback = on_attach})
-lspconfig.gopls.setup({cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, compositeLiteralFields = false, compositeLiteralTypes = false, assignVariableTypes = false, constantValues = false, functionTypeParameters = false, rangeVariableTypes = false}}}})
+lspconfig.gopls.setup({cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, rangeVariableTypes = false, compositeLiteralFields = false, compositeLiteralTypes = false, assignVariableTypes = false, constantValues = false, functionTypeParameters = false}}}})
 lspconfig.jsonls.setup({settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}})
 lspconfig.yamlls.setup({settings = {yaml = {schemas = schemastore.yaml.schemas()}}})
 local servers = {lspconfig.clojure_lsp, lspconfig.bufls, lspconfig.ruff_lsp, lspconfig.pylsp, lspconfig.tsserver, lspconfig.eslint, lspconfig.bashls, lspconfig.rust_analyzer}

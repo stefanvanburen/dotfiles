@@ -399,7 +399,7 @@
 (map :n :<leader>gb #(vim.cmd {:cmd "Git" :args ["blame"]}))
 
 ;; open-browser.vim
-(map [:n :v] :gx "<plug>(openbrowser-open)" {})
+(map [:n :v] :gx "<plug>(openbrowser-smart-search)" {})
 
 ;; move by visual lines instead of real lines, except when a count is provided,
 ;; which helps when targetting a specific line with `relativenumber`.
