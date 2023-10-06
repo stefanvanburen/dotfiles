@@ -174,6 +174,7 @@
                (vim.keymap.set :n :<C-t>l ":TestLast<cr>")
                (vim.keymap.set :n :<C-t>v ":TestVisit<cr>"))}
    {:url "https://github.com/neovim/nvim-lspconfig"}
+   {:url "https://github.com/mfussenegger/nvim-lsp-compl"}
    {:url "https://github.com/b0o/SchemaStore.nvim"}
    {:url "https://github.com/williamboman/mason.nvim"
     :config true
@@ -483,6 +484,9 @@
 (fn on-attach [{: buf
                 :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
+
+  (let [lsp-compl (require :lsp_compl)]
+    (lsp-compl.attach client buf {}))
 
   (fn buffer-map [from to]
     (vim.keymap.set :n from to {:buffer buf :silent true}))
