@@ -15,6 +15,12 @@
 (set vim.g.loaded_netrw 1)
 (set vim.g.loaded_netrwPlugin 1)
 
+;; Disable providers - unused.
+(set vim.g.loaded_python3_provider 0)
+(set vim.g.loaded_ruby_provider 0)
+(set vim.g.loaded_node_provider 0)
+(set vim.g.loaded_perl_provider 0)
+
 ;; Leader is space key
 (set vim.g.mapleader " ")
 ;; LocalLeader is the comma key
