@@ -561,7 +561,9 @@
 (lspconfig.jsonls.setup {:settings {:json {:schemas (schemastore.json.schemas)
                                            :validate {:enable true}}}})
 
-(lspconfig.yamlls.setup {:settings {:yaml {:schemas (schemastore.yaml.schemas)}}})
+(lspconfig.yamlls.setup {:settings {:yaml {:schemas (schemastore.yaml.schemas)
+                                           :schemaStore {:enable false
+                                                         :url ""}}}})
 
 (local servers [;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
                 lspconfig.clojure_lsp
