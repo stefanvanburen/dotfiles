@@ -335,10 +335,11 @@
     :config #(vim.cmd.colorscheme :rose-pine)}]
  ;; on startup, if doing installation, try to load colorschemes
  {:install {:colorscheme [:randomhue :zenwritten :rams :alabaster :rose-pine]}})
-(local create-autocmd vim.api.nvim_create_autocmd)
-(local create-augroup vim.api.nvim_create_augroup)
 
 ;;; Autocommands and FileType settings
+
+(local create-autocmd vim.api.nvim_create_autocmd)
+(local create-augroup vim.api.nvim_create_augroup)
 
 (create-autocmd :VimResized {:command ":wincmd ="})
 
