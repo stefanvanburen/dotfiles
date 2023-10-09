@@ -182,6 +182,11 @@
    {:url "https://github.com/neovim/nvim-lspconfig"}
    {:url "https://github.com/mfussenegger/nvim-lsp-compl"}
    {:url "https://github.com/b0o/SchemaStore.nvim"}
+   {:url "https://github.com/mfussenegger/nvim-lint"
+    :config #(let [lint (require :lint)]
+               ;; https://github.com/mfussenegger/nvim-lint#available-linters
+               (set lint.linters_by_ft {:proto [:buf_lint]})
+               (vim.api.nvim_create_autocmd :BufWritePost {:callback #(lint.try_lint)}))}
    {:url "https://github.com/williamboman/mason.nvim"
     :config true
     :build ":MasonUpdate"}
