@@ -343,12 +343,9 @@
 
 ;;; Autocommands and FileType settings
 
-(local create-autocmd vim.api.nvim_create_autocmd)
-(local create-augroup vim.api.nvim_create_augroup)
+(vim.api.nvim_create_autocmd :VimResized {:command ":wincmd ="})
 
-(create-autocmd :VimResized {:command ":wincmd ="})
-
-(create-autocmd :TextYankPost {:callback #(vim.highlight.on_yank)})
+(vim.api.nvim_create_autocmd :TextYankPost {:callback #(vim.highlight.on_yank)})
 
 (local filetype-settings
   {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
@@ -375,20 +372,20 @@
    :kotlin          {:commentstring "// %s"}
    :markdown        {:spell true :wrap true :conceallevel 0 :shiftwidth 2}})
 
-(let [aufiletypes (create-augroup "filetypes" {})]
+(let [aufiletypes (vim.api.nvim_create_augroup "filetypes" {})]
   (each [filetype settings (pairs filetype-settings)]
-    (create-autocmd :FileType {:group aufiletypes
-                               :pattern filetype
-                               :callback #(each [name value (pairs settings)]
-                                            (vim.api.nvim_set_option_value name value {:scope "local"}))}))
+    (vim.api.nvim_create_autocmd :FileType {:group aufiletypes
+                                            :pattern filetype
+                                            :callback #(each [name value (pairs settings)]
+                                                         (vim.api.nvim_set_option_value name value {:scope "local"}))}))
 
   ;; treat mdx files as markdown
-  (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
-                                          :pattern "*.mdx"
-                                          :callback #(vim.api.nvim_set_option_value "filetype" "markdown" {:scope "local"})})
-  (create-autocmd [:BufNewFile :BufRead] {:group aufiletypes
-                                          :pattern "*.star"
-                                          :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})}))
+  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead] {:group aufiletypes
+                                                       :pattern "*.mdx"
+                                                       :callback #(vim.api.nvim_set_option_value "filetype" "markdown" {:scope "local"})})
+  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead] {:group aufiletypes
+                                                       :pattern "*.star"
+                                                       :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})}))
 
 ;;; Mappings
 
@@ -477,12 +474,6 @@
 
 ;;; LSP
 
-(local lspconfig (require :lspconfig))
-(local schemastore (require :schemastore))
-
-(local create-autocmd vim.api.nvim_create_autocmd)
-(local create-augroup vim.api.nvim_create_augroup)
-
 (fn organize-imports []
   (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
                             :apply true}))
@@ -507,8 +498,8 @@
     (buffer-map :<leader>af #(format client))
     ;; TODO: Disable tsserver's formatting overall.
     (when (not= client.name "tsserver")
-      (create-autocmd :BufWritePre {:buffer buf
-                                    :callback #(format client)})))
+      (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf
+                                                 :callback #(format client)})))
 
   ;; requires neovim nightly
   (when (and
@@ -520,13 +511,13 @@
     (buffer-map :K vim.lsp.buf.hover))
 
   (when client.server_capabilities.documentHighlightProvider
-    (let [augroup-id (create-augroup "lsp-document-highlight" {:clear false})]
-      (create-autocmd :CursorHold  {:group augroup-id
-                                    :buffer buf
-                                    :callback vim.lsp.buf.document_highlight})
-      (create-autocmd :CursorMoved {:group augroup-id
-                                    :buffer buf
-                                    :callback vim.lsp.buf.clear_references})))
+    (let [augroup-id (vim.api.nvim_create_augroup "lsp-document-highlight" {:clear false})]
+      (vim.api.nvim_create_autocmd :CursorHold  {:group augroup-id
+                                                 :buffer buf
+                                                 :callback vim.lsp.buf.document_highlight})
+      (vim.api.nvim_create_autocmd :CursorMoved {:group augroup-id
+                                                 :buffer buf
+                                                 :callback vim.lsp.buf.clear_references})))
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
@@ -539,7 +530,9 @@
   (buffer-map :<leader>rn vim.lsp.buf.rename)
   (buffer-map :<leader>ca vim.lsp.buf.code_action))
 
-(create-autocmd :LspAttach {:callback on-attach})
+(vim.api.nvim_create_autocmd :LspAttach {:callback on-attach})
+
+(local lspconfig (require :lspconfig))
 
 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
 (lspconfig.gopls.setup {:cmd ["gopls" "-remote=auto"]
@@ -562,6 +555,8 @@
                                                    :constantValues false
                                                    :functionTypeParameters false
                                                    :rangeVariableTypes false}}}})
+
+(local schemastore (require :schemastore))
 
 (lspconfig.jsonls.setup {:settings {:json {:schemas (schemastore.json.schemas)
                                            :validate {:enable true}}}})

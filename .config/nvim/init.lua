@@ -128,7 +128,7 @@ local function _16_()
 end
 local function _17_()
   local fzf_lua = require("fzf-lua")
-  fzf_lua.setup({winopts = {border = "single"}, fzf_colors = {fg = {"fg", "CursorLine"}, bg = {"bg", "Normal"}, hl = {"fg", "Comment"}, ["fg+"] = {"fg", "Normal"}, ["bg+"] = {"bg", "CursorLine"}, ["hl+"] = {"fg", "Statement"}, info = {"fg", "PreProc"}, prompt = {"fg", "Conditional"}, pointer = {"fg", "Exception"}, marker = {"fg", "Keyword"}, spinner = {"fg", "Label"}, header = {"fg", "Comment"}, gutter = {"bg", "Normal"}}, global_file_icons = false, global_git_icons = false})
+  fzf_lua.setup({winopts = {border = "single"}, fzf_colors = {fg = {"fg", "CursorLine"}, bg = {"bg", "Normal"}, hl = {"fg", "Comment"}, ["fg+"] = {"fg", "Normal"}, ["bg+"] = {"bg", "CursorLine"}, ["hl+"] = {"fg", "Statement"}, info = {"fg", "PreProc"}, prompt = {"fg", "Conditional"}, pointer = {"fg", "Exception"}, marker = {"fg", "Keyword"}, spinner = {"fg", "Label"}, header = {"fg", "Comment"}, gutter = {"bg", "Normal"}}, global_git_icons = false, global_file_icons = false})
   vim.keymap.set("n", "<leader>ff", fzf_lua.files)
   vim.keymap.set("n", "<leader>fg", fzf_lua.git_files)
   vim.keymap.set("n", "<leader>fb", fzf_lua.buffers)
@@ -162,16 +162,14 @@ local function _24_()
   return vim.cmd.colorscheme("rose-pine")
 end
 lazy.setup({{url = "https://github.com/justinmk/vim-dirvish"}, {url = "https://github.com/justinmk/vim-gtfo", config = _2_}, {url = "https://github.com/zbirenbaum/copilot.lua", config = _3_, enabled = false}, {url = "https://github.com/tyru/open-browser.vim"}, {url = "https://github.com/lewis6991/fileline.nvim"}, {url = "https://github.com/lewis6991/gitsigns.nvim", config = _4_}, {url = "https://github.com/tpope/vim-fugitive", config = _10_}, {url = "https://github.com/tpope/vim-rhubarb"}, {url = "https://github.com/mattn/vim-gotmpl"}, {url = "https://github.com/fladson/vim-kitty"}, {url = "https://github.com/NoahTheDuke/vim-just"}, {url = "https://github.com/jaawerth/fennel.vim"}, {url = "https://github.com/janet-lang/janet.vim"}, {url = "https://github.com/Olical/nfnl"}, {url = "https://github.com/Olical/conjure", config = _11_}, {url = "https://github.com/gpanders/nvim-parinfer"}, {url = "https://github.com/vim-test/vim-test", dependencies = {{url = "https://github.com/tpope/vim-dispatch"}}, config = _12_}, {url = "https://github.com/neovim/nvim-lspconfig"}, {url = "https://github.com/mfussenegger/nvim-lsp-compl"}, {url = "https://github.com/b0o/SchemaStore.nvim"}, {url = "https://github.com/mfussenegger/nvim-lint", config = _13_}, {url = "https://github.com/williamboman/mason.nvim", config = true, build = ":MasonUpdate"}, {url = "https://github.com/williamboman/mason-lspconfig.nvim", config = true}, {url = "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = _15_}, {url = "https://github.com/echasnovski/mini.nvim", config = _16_}, {url = "https://github.com/ibhagwan/fzf-lua", config = _17_}, {url = "https://github.com/tpope/vim-eunuch"}, {url = "https://github.com/andymass/vim-matchup", config = _19_}, {url = "https://github.com/ggandor/leap.nvim", dependencies = {{url = "https://github.com/tpope/vim-repeat"}}, config = _20_}, {url = "https://github.com/tpope/vim-abolish"}, {url = "https://github.com/tpope/vim-repeat"}, {url = "https://github.com/rktjmp/lush.nvim"}, {url = "https://git.sr.ht/~p00f/alabaster.nvim", lazy = true, priority = 1000, config = _21_}, {url = "https://github.com/stefanvanburen/rams", priority = 1000, config = _22_, lazy = false}, {url = "https://github.com/mcchrish/zenbones.nvim", lazy = true, priority = 1000, config = _23_}, {url = "https://github.com/rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000, config = _24_}}, {install = {colorscheme = {"randomhue", "zenwritten", "rams", "alabaster", "rose-pine"}}})
-local create_autocmd = vim.api.nvim_create_autocmd
-local create_augroup = vim.api.nvim_create_augroup
-create_autocmd("VimResized", {command = ":wincmd ="})
+vim.api.nvim_create_autocmd("VimResized", {command = ":wincmd ="})
 local function _25_()
   return vim.highlight.on_yank()
 end
-create_autocmd("TextYankPost", {callback = _25_})
+vim.api.nvim_create_autocmd("TextYankPost", {callback = _25_})
 local filetype_settings = {go = {shiftwidth = 4, tabstop = 4, expandtab = false}, javascript = {expandtab = true, shiftwidth = 2, tabstop = 2}, javascriptreact = {expandtab = true, shiftwidth = 2, tabstop = 2}, typescript = {expandtab = true, shiftwidth = 2, tabstop = 2}, typescriptreact = {expandtab = true, shiftwidth = 2, tabstop = 2}, html = {expandtab = true, shiftwidth = 2, tabstop = 2}, css = {expandtab = true, shiftwidth = 2, tabstop = 2}, gohtmltmpl = {expandtab = true, shiftwidth = 2, tabstop = 2, commentstring = "{{/* %s */}}"}, gotexttmpl = {expandtab = true, shiftwidth = 2, tabstop = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, tabstop = 4, commentstring = "# %s"}, yaml = {expandtab = true, shiftwidth = 2, tabstop = 2}, svg = {expandtab = true, shiftwidth = 2, tabstop = 2}, json = {expandtab = true, shiftwidth = 2, tabstop = 2}, bash = {expandtab = true, shiftwidth = 2, tabstop = 2}, python = {expandtab = true, shiftwidth = 4, tabstop = 4}, xml = {expandtab = true, shiftwidth = 4, tabstop = 4}, starlark = {expandtab = true, shiftwidth = 4, tabstop = 4, commentstring = "# %s"}, gitcommit = {spell = true}, sql = {wrap = true, commentstring = "-- %s"}, clojure = {expandtab = true, textwidth = 80}, proto = {commentstring = "// %s"}, kotlin = {commentstring = "// %s"}, markdown = {spell = true, wrap = true, conceallevel = 0, shiftwidth = 2}}
 do
-  local aufiletypes = create_augroup("filetypes", {})
+  local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
     local function _26_()
       for name, value in pairs(settings) do
@@ -179,16 +177,16 @@ do
       end
       return nil
     end
-    create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _26_})
+    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _26_})
   end
   local function _27_()
     return vim.api.nvim_set_option_value("filetype", "markdown", {scope = "local"})
   end
-  create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.mdx", callback = _27_})
+  vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.mdx", callback = _27_})
   local function _28_()
     return vim.api.nvim_set_option_value("filetype", "starlark", {scope = "local"})
   end
-  create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.star", callback = _28_})
+  vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.star", callback = _28_})
 end
 local map = vim.keymap.set
 map("n", ";", ":")
@@ -285,10 +283,6 @@ map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
 map("n", "<C-l>", ":nohlsearch<cr>", {})
-local lspconfig = require("lspconfig")
-local schemastore = require("schemastore")
-local create_autocmd0 = vim.api.nvim_create_autocmd
-local create_augroup0 = vim.api.nvim_create_augroup
 local function organize_imports()
   return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
 end
@@ -322,7 +316,7 @@ local function on_attach(_47_)
       local function _51_()
         return format(client)
       end
-      create_autocmd0("BufWritePre", {buffer = buf, callback = _51_})
+      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _51_})
     else
     end
   else
@@ -336,9 +330,9 @@ local function on_attach(_47_)
   else
   end
   if client.server_capabilities.documentHighlightProvider then
-    local augroup_id = create_augroup0("lsp-document-highlight", {clear = false})
-    create_autocmd0("CursorHold", {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
-    create_autocmd0("CursorMoved", {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
+    local augroup_id = vim.api.nvim_create_augroup("lsp-document-highlight", {clear = false})
+    vim.api.nvim_create_autocmd("CursorHold", {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
+    vim.api.nvim_create_autocmd("CursorMoved", {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
   else
   end
   buffer_map("gD", vim.lsp.buf.declaration)
@@ -350,8 +344,10 @@ local function on_attach(_47_)
   buffer_map("<leader>rn", vim.lsp.buf.rename)
   return buffer_map("<leader>ca", vim.lsp.buf.code_action)
 end
-create_autocmd0("LspAttach", {callback = on_attach})
-lspconfig.gopls.setup({cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, compositeLiteralTypes = false, assignVariableTypes = false, constantValues = false, functionTypeParameters = false, rangeVariableTypes = false, compositeLiteralFields = false}}}})
+vim.api.nvim_create_autocmd("LspAttach", {callback = on_attach})
+local lspconfig = require("lspconfig")
+lspconfig.gopls.setup({cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, rangeVariableTypes = false, compositeLiteralFields = false, compositeLiteralTypes = false, assignVariableTypes = false, constantValues = false, functionTypeParameters = false}}}})
+local schemastore = require("schemastore")
 lspconfig.jsonls.setup({settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}})
 lspconfig.yamlls.setup({settings = {yaml = {schemas = schemastore.yaml.schemas()}}})
 local servers = {lspconfig.clojure_lsp, lspconfig.bufls, lspconfig.ruff_lsp, lspconfig.pylsp, lspconfig.tsserver, lspconfig.eslint, lspconfig.bashls, lspconfig.rust_analyzer}
