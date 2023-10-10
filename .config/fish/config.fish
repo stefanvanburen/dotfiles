@@ -24,6 +24,10 @@ set -gx HOMEBREW_NO_EMOJI 1
 # Use `bat` for `brew cat`
 set -gx HOMEBREW_BAT 1
 
+# Don't write .pyc files.
+# https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
+set -gx PYTHONDONTWRITEBYTECODE 1
+
 # pipx
 fish_add_path ~/.local/bin
 # rust
