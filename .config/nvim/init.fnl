@@ -182,6 +182,10 @@
    {:url "https://github.com/neovim/nvim-lspconfig"}
    {:url "https://github.com/mfussenegger/nvim-lsp-compl"}
    {:url "https://github.com/b0o/SchemaStore.nvim"}
+   {:url "https://github.com/stevearc/conform.nvim"
+    :opts {:formatters_by_ft {:proto [:buf]}
+           :format_on_save {:timeout_ms 500
+                            :lsp_fallback true}}}
    {:url "https://github.com/mfussenegger/nvim-lint"
     :config #(let [lint (require :lint)]
                ;; https://github.com/mfussenegger/nvim-lint#available-linters
