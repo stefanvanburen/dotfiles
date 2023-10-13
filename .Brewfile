@@ -6,8 +6,6 @@ brew "bat"
 brew "eza"
 # Find files - used by `zf` in fish.
 brew "fd"
-# Required for fzf-lua in nvim.
-brew "fzf"
 # My default shell
 brew "fish"
 # Interacting with GitHub via the CLI - configured in "gh_config.yml".

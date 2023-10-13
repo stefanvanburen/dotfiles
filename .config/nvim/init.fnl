@@ -274,7 +274,9 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
                    mini-surround (require :mini.surround)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-hues.md
-                   mini-hues (require :mini.hues)]
+                   mini-hues (require :mini.hues)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pick.md
+                   mini-pick (require :mini.pick)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
@@ -287,33 +289,13 @@
                               :find_left      :gzF
                               :highlight      :gzh
                               :replace        :gzr
-                              :update_n_lines :gzn}}))}
-   {:url "https://github.com/ibhagwan/fzf-lua"
-    :config #(let [fzf-lua (require :fzf-lua)]
-               (fzf-lua.setup {:winopts {:border :single}
-                               :global_git_icons false
-                               :global_file_icons false
-                               :fzf_colors {:fg [:fg :CursorLine]
-                                            :bg [:bg :Normal]
-                                            :hl [:fg :Comment]
-                                            "fg+" [:fg :Normal]
-                                            "bg+" [:bg :CursorLine]
-                                            "hl+" [:fg :Statement]
-                                            :info [:fg :PreProc]
-                                            :prompt [:fg :Conditional]
-                                            :pointer [:fg :Exception]
-                                            :marker [:fg :Keyword]
-                                            :spinner [:fg :Label]
-                                            :header [:fg :Comment]
-                                            :gutter [:bg :Normal]}})
-               (vim.keymap.set :n :<leader>ff fzf-lua.files)
-               (vim.keymap.set :n :<leader>fg fzf-lua.git_files)
-               (vim.keymap.set :n :<leader>fb fzf-lua.buffers)
-               (vim.keymap.set :n :<leader>fl fzf-lua.grep_project)
-               (vim.keymap.set :n :<leader>fh fzf-lua.help_tags)
-               (vim.keymap.set :n :<leader>fr fzf-lua.lsp_references)
-               (vim.keymap.set :n :<leader>fs fzf-lua.git_stash)
-               (vim.keymap.set :n :<leader>ed #(fzf-lua.git_files {:cwd "~"})))}
+                              :update_n_lines :gzn}})
+                (mini-pick.setup)
+                (vim.keymap.set :n :<leader>ff mini-pick.builtin.files)
+                (vim.keymap.set :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
+                (vim.keymap.set :n :<leader>fb mini-pick.builtin.buffers)
+                (vim.keymap.set :n :<leader>fl mini-pick.builtin.grep_live)
+                (vim.keymap.set :n :<leader>fh mini-pick.builtin.help))}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/andymass/vim-matchup"
     :config #(set vim.g.matchup_matchparen_offscreen {})}
