@@ -296,6 +296,8 @@
                 (vim.keymap.set :n :<leader>fb mini-pick.builtin.buffers)
                 (vim.keymap.set :n :<leader>fl mini-pick.builtin.grep_live)
                 (vim.keymap.set :n :<leader>fh mini-pick.builtin.help))}
+   {:url "https://github.com/mfussenegger/nvim-overfly"
+    :dependencies [{:url "https://github.com/mfussenegger/nvim-qwahl"}]}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/andymass/vim-matchup"
     :config #(set vim.g.matchup_matchparen_offscreen {})}
@@ -380,12 +382,6 @@
 
 ;; ; -> :
 (map :n ";" ":")
-
-;; See `:help vim.diagnostic.*` for documentation on any of the below functions
-(map :n :<leader>? vim.diagnostic.open_float)
-(map :n "[w"       vim.diagnostic.goto_prev)
-(map :n "]w"       vim.diagnostic.goto_next)
-(map :n :<leader>q vim.diagnostic.setloclist)
 
 ;; Fugitive
 (map :n :<leader>gs #(vim.cmd {:cmd "Git" :mods {:vertical true}}))
