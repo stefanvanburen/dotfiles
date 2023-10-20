@@ -383,6 +383,8 @@
 ;; ; -> :
 (map :n ";" ":")
 
+(map :n :<leader>? vim.diagnostic.open_float)
+
 ;; Fugitive
 (map :n :<leader>gs #(vim.cmd {:cmd "Git" :mods {:vertical true}}))
 (map :n :<leader>gw #(vim.cmd {:cmd "Gwrite"}))

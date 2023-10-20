@@ -185,6 +185,7 @@ do
 end
 local map = vim.keymap.set
 map("n", ";", ":")
+map("n", "<leader>?", vim.diagnostic.open_float)
 local function _28_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
