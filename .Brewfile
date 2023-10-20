@@ -8,9 +8,9 @@ brew "eza"
 brew "fd"
 # My default shell
 brew "fish"
-# Interacting with GitHub via the CLI - configured in "gh_config.yml".
+# Interacting with GitHub via the CLI - configured in ~/.config/gh/config.yml.
 brew "gh"
-# VCS - configured in "gitconfig" and "gitignore".
+# VCS - configured in ~/.config/git/config and ~/.config/git/ignore.
 brew "git"
 # Better `git diff` output - used as a pager by `git`
 brew "git-delta"
@@ -31,7 +31,7 @@ brew "neovim"
 # used to install and run beets
 # https://github.com/pypa/pipx
 brew "pipx"
-# better searching - configured in "ripgreprc".
+# better searching - configured in ~/.config/ripgreprc.
 brew "ripgrep"
 # Fuzzy finding, used in fish.
 brew "zf"
