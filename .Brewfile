@@ -22,8 +22,6 @@ brew "gum"
 brew "jump"
 # project-specific commands - abbreviated to `j` in fish.
 brew "just"
-# (unfortunately) required for copilot.lua
-brew "node"
 # macOS has a version of `less`, but the default version is fairly old.
 # Installing this version enhances `bat`s paging capabilities.
 brew "less"

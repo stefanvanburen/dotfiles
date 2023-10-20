@@ -120,10 +120,6 @@
    {:url "https://github.com/justinmk/vim-dirvish"}
    {:url "https://github.com/justinmk/vim-gtfo"
     :config #(set vim.g.gtfo#terminals {:mac :kitty})}
-   {:url "https://github.com/zbirenbaum/copilot.lua"
-    :config #(let [copilot (require "copilot")]
-               (copilot.setup {:suggestion {:auto_trigger false}}))
-    :enabled false}
    ;; required by vim-fugitive
    {:url "https://github.com/tyru/open-browser.vim"}
    {:url "https://github.com/lewis6991/fileline.nvim"}
