@@ -547,10 +547,13 @@
 
 (local servers [;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
                 lspconfig.clojure_lsp
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cssls
+                lspconfig.cssls
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
                 lspconfig.bufls
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
                 lspconfig.ruff_lsp
+                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
                 ;; pipx install python-lsp-server ; https://github.com/python-lsp/python-lsp-server
                 ;; pipx inject python-lsp-server pylsp-mypy ; https://github.com/python-lsp/pylsp-mypy
                 ;; pipx inject python-lsp-server python-lsp-black ; https://github.com/python-lsp/python-lsp-black
@@ -561,6 +564,8 @@
                 lspconfig.eslint
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
                 lspconfig.bashls
+                ;; LSP for TOML.
+                lspconfig.taplo
                 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
                 lspconfig.rust_analyzer])
 
