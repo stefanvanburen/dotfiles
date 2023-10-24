@@ -319,8 +319,8 @@ local function on_attach(_45_)
   end
   if client.server_capabilities.documentHighlightProvider then
     local augroup_id = vim.api.nvim_create_augroup("lsp-document-highlight", {clear = false})
-    vim.api.nvim_create_autocmd("CursorHold", {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
-    vim.api.nvim_create_autocmd("CursorMoved", {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
+    vim.api.nvim_create_autocmd({"CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
+    vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
   else
   end
   buffer_map("gD", vim.lsp.buf.declaration)
@@ -335,7 +335,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {callback = on_attach})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
-local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, compositeLiteralFields = false, compositeLiteralTypes = false, rangeVariableTypes = false, functionTypeParameters = false, assignVariableTypes = false, constantValues = false}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff_lsp] = {}, [lspconfig.pylsp] = {}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.rust_analyzer] = {}}
+local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, assignVariableTypes = false, constantValues = false, compositeLiteralFields = false, compositeLiteralTypes = false, rangeVariableTypes = false, functionTypeParameters = false}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff_lsp] = {}, [lspconfig.pylsp] = {}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.rust_analyzer] = {}}
 for server, settings in pairs(server_settings) do
   server.setup(settings)
 end

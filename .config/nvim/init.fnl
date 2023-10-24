@@ -493,12 +493,16 @@
 
   (when client.server_capabilities.documentHighlightProvider
     (let [augroup-id (vim.api.nvim_create_augroup "lsp-document-highlight" {:clear false})]
-      (vim.api.nvim_create_autocmd :CursorHold  {:group augroup-id
-                                                 :buffer buf
-                                                 :callback vim.lsp.buf.document_highlight})
-      (vim.api.nvim_create_autocmd :CursorMoved {:group augroup-id
-                                                 :buffer buf
-                                                 :callback vim.lsp.buf.clear_references})))
+      (vim.api.nvim_create_autocmd
+        [:CursorHold :InsertLeave]
+        {:group augroup-id
+         :buffer buf
+         :callback vim.lsp.buf.document_highlight})
+      (vim.api.nvim_create_autocmd
+        [:CursorMoved :InsertEnter]
+        {:group augroup-id
+         :buffer buf
+         :callback vim.lsp.buf.clear_references})))
 
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
