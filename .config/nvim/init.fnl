@@ -573,4 +573,4 @@
                         lspconfig.rust_analyzer {}})
 
 (each [server settings (pairs server-settings)]
-  (lsp-server.setup settings))
+  (server.setup settings))
