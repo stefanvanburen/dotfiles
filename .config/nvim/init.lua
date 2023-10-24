@@ -271,7 +271,7 @@ map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
 map("n", "<C-l>", ":nohlsearch<cr>")
-local function on_attach(_44_)
+local function _47_(_44_)
   local _arg_45_ = _44_
   local buf = _arg_45_["buf"]
   local _arg_46_ = _arg_45_["data"]
@@ -293,15 +293,15 @@ local function on_attach(_44_)
     return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
   end
   if client.server_capabilities.documentFormattingProvider then
-    local function _48_()
+    local function _49_()
       return format(client)
     end
-    buffer_map("<leader>af", _48_)
+    buffer_map("<leader>af", _49_)
     if (client.name ~= "tsserver") then
-      local function _49_()
+      local function _50_()
         return format(client)
       end
-      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _49_})
+      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _50_})
     else
     end
   else
@@ -329,7 +329,7 @@ local function on_attach(_44_)
   buffer_map("<leader>rn", vim.lsp.buf.rename)
   return buffer_map("<leader>ca", vim.lsp.buf.code_action)
 end
-vim.api.nvim_create_autocmd("LspAttach", {callback = on_attach})
+vim.api.nvim_create_autocmd("LspAttach", {callback = _47_})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
 local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, assignVariableTypes = false, constantValues = false, compositeLiteralFields = false, compositeLiteralTypes = false, rangeVariableTypes = false, functionTypeParameters = false}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff_lsp] = {}, [lspconfig.pylsp] = {}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.rust_analyzer] = {}}

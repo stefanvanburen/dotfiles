@@ -455,64 +455,64 @@
 
 ;;; LSP
 
-(fn on-attach [{: buf
-                :data {: client_id}}]
-  (local client (vim.lsp.get_client_by_id client_id))
+(vim.api.nvim_create_autocmd
+  :LspAttach
+  {:callback
+   (fn [{: buf :data {: client_id}}]
+     (local client (vim.lsp.get_client_by_id client_id))
 
-  (fn format []
-    (do
-      (vim.lsp.buf.format {:timeout_ms 2000})
-      (when (= client.name "gopls")
-        (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
-                                  :apply true}))))
+     (fn format []
+       (do
+         (vim.lsp.buf.format {:timeout_ms 2000})
+         (when (= client.name "gopls")
+           (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
+                                     :apply true}))))
 
-  (let [lsp-compl (require :lsp_compl)]
-    (lsp-compl.attach client buf {:trigger_on_delete true}))
+     (let [lsp-compl (require :lsp_compl)]
+       (lsp-compl.attach client buf {:trigger_on_delete true}))
 
-  (fn buffer-map [from to]
-    (vim.keymap.set :n from to {:buffer buf :silent true}))
+     (fn buffer-map [from to]
+       (vim.keymap.set :n from to {:buffer buf :silent true}))
 
-  (when client.server_capabilities.documentFormattingProvider
-    (buffer-map :<leader>af #(format client))
-    ;; TODO: Disable tsserver's formatting overall.
-    (when (not= client.name "tsserver")
-      (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf
-                                                 :callback #(format client)})))
+     (when client.server_capabilities.documentFormattingProvider
+       (buffer-map :<leader>af #(format client))
+       ;; TODO: Disable tsserver's formatting overall.
+       (when (not= client.name "tsserver")
+         (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf
+                                                    :callback #(format client)})))
 
-  ;; requires neovim nightly
-  (when (and
-          client.server_capabilities.inlayHintProvider
-          vim.lsp.inlay_hint)
-    (vim.lsp.inlay_hint buf true))
+     ;; requires neovim nightly
+     (when (and
+             client.server_capabilities.inlayHintProvider
+             vim.lsp.inlay_hint)
+       (vim.lsp.inlay_hint buf true))
 
-  (when client.server_capabilities.hoverProvider
-    (buffer-map :K vim.lsp.buf.hover))
+     (when client.server_capabilities.hoverProvider
+       (buffer-map :K vim.lsp.buf.hover))
 
-  (when client.server_capabilities.documentHighlightProvider
-    (let [augroup-id (vim.api.nvim_create_augroup "lsp-document-highlight" {:clear false})]
-      (vim.api.nvim_create_autocmd
-        [:CursorHold :InsertLeave]
-        {:group augroup-id
-         :buffer buf
-         :callback vim.lsp.buf.document_highlight})
-      (vim.api.nvim_create_autocmd
-        [:CursorMoved :InsertEnter]
-        {:group augroup-id
-         :buffer buf
-         :callback vim.lsp.buf.clear_references})))
+     (when client.server_capabilities.documentHighlightProvider
+       (let [augroup-id (vim.api.nvim_create_augroup "lsp-document-highlight" {:clear false})]
+         (vim.api.nvim_create_autocmd
+           [:CursorHold :InsertLeave]
+           {:group augroup-id
+            :buffer buf
+            :callback vim.lsp.buf.document_highlight})
+         (vim.api.nvim_create_autocmd
+           [:CursorMoved :InsertEnter]
+           {:group augroup-id
+            :buffer buf
+            :callback vim.lsp.buf.clear_references})))
 
-  ;; setup mappings
-  ;; See `:help vim.lsp.*` for documentation on any of the below functions
-  (buffer-map :gD         vim.lsp.buf.declaration)
-  (buffer-map :gd         vim.lsp.buf.definition)
-  (buffer-map :gi         vim.lsp.buf.implementation)
-  (buffer-map :gr         vim.lsp.buf.references)
-  (buffer-map :<C-k>      vim.lsp.buf.signature_help)
-  (buffer-map :<leader>D  vim.lsp.buf.type_definition)
-  (buffer-map :<leader>rn vim.lsp.buf.rename)
-  (buffer-map :<leader>ca vim.lsp.buf.code_action))
-
-(vim.api.nvim_create_autocmd :LspAttach {:callback on-attach})
+     ;; setup mappings
+     ;; See `:help vim.lsp.*` for documentation on any of the below functions
+     (buffer-map :gD         vim.lsp.buf.declaration)
+     (buffer-map :gd         vim.lsp.buf.definition)
+     (buffer-map :gi         vim.lsp.buf.implementation)
+     (buffer-map :gr         vim.lsp.buf.references)
+     (buffer-map :<C-k>      vim.lsp.buf.signature_help)
+     (buffer-map :<leader>D  vim.lsp.buf.type_definition)
+     (buffer-map :<leader>rn vim.lsp.buf.rename)
+     (buffer-map :<leader>ca vim.lsp.buf.code_action))})
 
 (local lspconfig   (require :lspconfig))
 (local schemastore (require :schemastore))
