@@ -516,7 +516,7 @@
 (local lspconfig   (require :lspconfig))
 (local schemastore (require :schemastore))
 
-(local server-settings [;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
+(local server-settings {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
                         lspconfig.gopls.setup {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
                                                :cmd ["gopls" "-remote=auto"]
                                                ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
@@ -570,7 +570,7 @@
                         ;; LSP for TOML.
                         lspconfig.taplo {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-                        lspconfig.rust_analyzer {}])
+                        lspconfig.rust_analyzer {}})
 
 (each [server settings (pairs server-settings)]
   (lsp-server.setup settings))
