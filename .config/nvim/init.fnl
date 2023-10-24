@@ -179,7 +179,8 @@
    {:url "https://github.com/mfussenegger/nvim-lsp-compl"}
    {:url "https://github.com/b0o/SchemaStore.nvim"}
    {:url "https://github.com/stevearc/conform.nvim"
-    :opts {:formatters_by_ft {:proto [:buf]}
+    :opts {:formatters_by_ft {:proto [:buf]
+                              :just [:just]}
            :format_on_save {:timeout_ms 500
                             :lsp_fallback true}}}
    {:url "https://github.com/mfussenegger/nvim-lint"
