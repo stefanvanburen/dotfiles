@@ -463,8 +463,8 @@
     (do
       (vim.lsp.buf.format {:timeout_ms 2000})
       (when (= client.name "gopls")
-        (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]
-                                            :apply true}}))))
+        (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
+                                  :apply true}))))
 
   (let [lsp-compl (require :lsp_compl)]
     (lsp-compl.attach client buf {:trigger_on_delete true}))

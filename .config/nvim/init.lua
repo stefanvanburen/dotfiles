@@ -280,7 +280,7 @@ local function on_attach(_44_)
   local function format()
     vim.lsp.buf.format({timeout_ms = 2000})
     if (client.name == "gopls") then
-      return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}, apply = true}})
+      return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     else
       return nil
     end
