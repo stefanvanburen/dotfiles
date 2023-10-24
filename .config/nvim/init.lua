@@ -271,23 +271,20 @@ map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
 map("n", "<C-l>", ":nohlsearch<cr>", {})
-local function organize_imports()
-  return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
-end
-local function format(client)
-  vim.lsp.buf.format({timeout_ms = 2000})
-  if (client.name == "gopls") then
-    return organize_imports()
-  else
-    return nil
-  end
-end
-local function on_attach(_45_)
-  local _arg_46_ = _45_
-  local buf = _arg_46_["buf"]
-  local _arg_47_ = _arg_46_["data"]
-  local client_id = _arg_47_["client_id"]
+local function on_attach(_44_)
+  local _arg_45_ = _44_
+  local buf = _arg_45_["buf"]
+  local _arg_46_ = _arg_45_["data"]
+  local client_id = _arg_46_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
+  local function format()
+    vim.lsp.buf.format({timeout_ms = 2000})
+    if (client.name == "gopls") then
+      return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}, apply = true}})
+    else
+      return nil
+    end
+  end
   do
     local lsp_compl = require("lsp_compl")
     lsp_compl.attach(client, buf, {trigger_on_delete = true})

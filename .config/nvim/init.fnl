@@ -455,19 +455,16 @@
 
 ;;; LSP
 
-(fn organize-imports []
-  (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
-                            :apply true}))
-
-(fn format [client]
-  (do
-    (vim.lsp.buf.format {:timeout_ms 2000})
-    (when (= client.name "gopls")
-      (organize-imports))))
-
 (fn on-attach [{: buf
                 :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
+
+  (fn format []
+    (do
+      (vim.lsp.buf.format {:timeout_ms 2000})
+      (when (= client.name "gopls")
+        (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]
+                                            :apply true}}))))
 
   (let [lsp-compl (require :lsp_compl)]
     (lsp-compl.attach client buf {:trigger_on_delete true}))
