@@ -270,7 +270,7 @@ map("x", ">", ">gv")
 map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
-map("n", "<C-l>", ":nohlsearch<cr>", {})
+map("n", "<C-l>", ":nohlsearch<cr>")
 local function on_attach(_44_)
   local _arg_45_ = _44_
   local buf = _arg_45_["buf"]

@@ -451,7 +451,7 @@
 (map :c :<c-k> :<c-c>)
 (map :t :<c-k> :<c-\><c-n>)
 
-(map :n "<C-l>" ":nohlsearch<cr>" {})
+(map :n "<C-l>" ":nohlsearch<cr>")
 
 ;;; LSP
 
