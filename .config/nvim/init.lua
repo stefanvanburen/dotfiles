@@ -290,7 +290,7 @@ local function on_attach(_45_)
   local client = vim.lsp.get_client_by_id(client_id)
   do
     local lsp_compl = require("lsp_compl")
-    lsp_compl.attach(client, buf, {})
+    lsp_compl.attach(client, buf, {trigger_on_delete = true})
   end
   local function buffer_map(from, to)
     return vim.keymap.set("n", from, to, {buffer = buf, silent = true})

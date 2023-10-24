@@ -470,7 +470,7 @@
   (local client (vim.lsp.get_client_by_id client_id))
 
   (let [lsp-compl (require :lsp_compl)]
-    (lsp-compl.attach client buf {}))
+    (lsp-compl.attach client buf {:trigger_on_delete true}))
 
   (fn buffer-map [from to]
     (vim.keymap.set :n from to {:buffer buf :silent true}))
