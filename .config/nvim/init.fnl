@@ -513,63 +513,64 @@
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback on-attach})
 
-(local lspconfig (require :lspconfig))
-
-;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
-(lspconfig.gopls.setup {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
-                        :cmd ["gopls" "-remote=auto"]
-                        ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-                        :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
-                                           :staticcheck true
-                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
-                                           ;; Most of these analyzers are enabled by default.
-                                           :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
-                                                      :unusedparams true
-                                                      ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedwrite
-                                                      :unusedwrite true
-                                                      ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#nilness
-                                                      :nilness true}
-                                           ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-                                           :hints {:parameterNames true
-                                                   :assignVariableTypes false
-                                                   :compositeLiteralFields false
-                                                   :compositeLiteralTypes false
-                                                   :constantValues false
-                                                   :functionTypeParameters false
-                                                   :rangeVariableTypes false}}}})
-
+(local lspconfig   (require :lspconfig))
 (local schemastore (require :schemastore))
 
-(lspconfig.jsonls.setup {:settings {:json {:schemas (schemastore.json.schemas)
-                                           :validate {:enable true}}}})
+(local server-settings [;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
+                        lspconfig.gopls.setup {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
+                                               :cmd ["gopls" "-remote=auto"]
+                                               ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+                                               :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
+                                                                  :staticcheck true
+                                                                  ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
+                                                                  ;; Most of these analyzers are enabled by default.
+                                                                  :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
+                                                                             :unusedparams true
+                                                                             ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedwrite
+                                                                             :unusedwrite true
+                                                                             ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#nilness
+                                                                             :nilness true}
+                                                                  ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+                                                                  :hints {:parameterNames true
+                                                                          :assignVariableTypes false
+                                                                          :compositeLiteralFields false
+                                                                          :compositeLiteralTypes false
+                                                                          :constantValues false
+                                                                          :functionTypeParameters false
+                                                                          :rangeVariableTypes false}}}}
 
-(lspconfig.yamlls.setup {:settings {:yaml {:schemas (schemastore.yaml.schemas)
-                                           :schemaStore {:enable false
-                                                         :url ""}}}})
+                        ;;; https://github.com/b0o/SchemaStore.nvim#usage
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
+                        lspconfig.jsonls.setup {:settings {:json {:schemas (schemastore.json.schemas)
+                                                                  :validate {:enable true}}}}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
+                        lspconfig.yamlls.setup {:settings {:yaml {:schemas (schemastore.yaml.schemas)
+                                                                  :schemaStore {:enable false
+                                                                                :url ""}}}}
 
-(local servers [;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
-                lspconfig.clojure_lsp
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cssls
-                lspconfig.cssls
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
-                lspconfig.bufls
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
-                lspconfig.ruff_lsp
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
-                ;; pipx install python-lsp-server ; https://github.com/python-lsp/python-lsp-server
-                ;; pipx inject python-lsp-server pylsp-mypy ; https://github.com/python-lsp/pylsp-mypy
-                ;; pipx inject python-lsp-server python-lsp-black ; https://github.com/python-lsp/python-lsp-black
-                lspconfig.pylsp
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
-                lspconfig.tsserver
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
-                lspconfig.eslint
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
-                lspconfig.bashls
-                ;; LSP for TOML.
-                lspconfig.taplo
-                ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-                lspconfig.rust_analyzer])
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
+                        lspconfig.clojure_lsp {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cssls
+                        lspconfig.cssls {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
+                        lspconfig.bufls {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
+                        lspconfig.ruff_lsp {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
+                        ;; pipx install python-lsp-server ; https://github.com/python-lsp/python-lsp-server
+                        ;; pipx inject python-lsp-server pylsp-mypy ; https://github.com/python-lsp/pylsp-mypy
+                        ;; pipx inject python-lsp-server python-lsp-black ; https://github.com/python-lsp/python-lsp-black
+                        lspconfig.pylsp {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+                        lspconfig.tsserver {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
+                        lspconfig.eslint {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
+                        lspconfig.bashls {}
+                        ;; LSP for TOML.
+                        lspconfig.taplo {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+                        lspconfig.rust_analyzer {}])
 
-(each [_ lsp-server (ipairs servers)]
-  (lsp-server.setup {}))
+(each [server settings (pairs server-settings)]
+  (lsp-server.setup settings))

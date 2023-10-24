@@ -334,12 +334,9 @@ local function on_attach(_45_)
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = on_attach})
 local lspconfig = require("lspconfig")
-lspconfig.gopls.setup({cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, assignVariableTypes = false, constantValues = false, functionTypeParameters = false, rangeVariableTypes = false, compositeLiteralFields = false, compositeLiteralTypes = false}}}})
 local schemastore = require("schemastore")
-lspconfig.jsonls.setup({settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}})
-lspconfig.yamlls.setup({settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}})
-local servers = {lspconfig.clojure_lsp, lspconfig.cssls, lspconfig.bufls, lspconfig.ruff_lsp, lspconfig.pylsp, lspconfig.tsserver, lspconfig.eslint, lspconfig.bashls, lspconfig.taplo, lspconfig.rust_analyzer}
-for _, lsp_server in ipairs(servers) do
-  lsp_server.setup({})
+local server_settings = {lspconfig.gopls.setup, {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {parameterNames = true, assignVariableTypes = false, constantValues = false, functionTypeParameters = false, rangeVariableTypes = false, compositeLiteralFields = false, compositeLiteralTypes = false}}}}, lspconfig.jsonls.setup, {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, lspconfig.yamlls.setup, {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, lspconfig.clojure_lsp, {}, lspconfig.cssls, {}, lspconfig.bufls, {}, lspconfig.ruff_lsp, {}, lspconfig.pylsp, {}, lspconfig.tsserver, {}, lspconfig.eslint, {}, lspconfig.bashls, {}, lspconfig.taplo, {}, lspconfig.rust_analyzer, {}}
+for server, settings in pairs(server_settings) do
+  __fnl_global__lsp_2dserver.setup(settings)
 end
 return nil
