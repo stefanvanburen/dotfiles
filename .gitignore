@@ -69,6 +69,11 @@ Pictures/
 Public/
 
 # created by `brew bundle --global`
+#
+# > As it can contain local environment information that varies between
+# > systems, it's not worth committing to version control on multi-user
+# > repositories.
+# https://github.com/homebrew/homebrew-bundle#versions-and-lockfiles
 .Brewfile.lock.json
 
 # Default go directory, for installed binaries and pkg downloads
