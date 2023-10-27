@@ -21,12 +21,6 @@ $ git config status.showUntrackedFiles no
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Install [`brew bundle`](https://github.com/Homebrew/homebrew-bundle):
-
-```sh
-brew tap homebrew/bundle
-```
-
 Install the base dependencies in the [Brewfile](./.Brewfile):
 
 ```sh
