@@ -41,7 +41,7 @@ Set the shell for the user to `fish`:
 chsh -s $(which fish)
 ```
 
-Set up fonts in Kitty (see [kitty.conf](./config/kitty/kitty.conf) for details)
+Set up fonts in Kitty (see [kitty.conf](/.config/kitty/kitty.conf) for details)
 
 Disable the annoying <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> shortcut to bring up the dictionary on macOS, so that [Dash.app](https://kapeli.com/dash) can use it:
 
