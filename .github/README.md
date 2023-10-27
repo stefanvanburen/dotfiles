@@ -1,6 +1,6 @@
 # dotfiles
 
-fish, neovim, kitty, macOS
+[fish](https://fishshell.com), [neovim](https://neovim.io), [kitty](https://sw.kovidgoyal.net/kitty/), [macOS](https://www.apple.com/macos/)
 
 ## Setup
 
