@@ -33,7 +33,7 @@ Install the base dependencies in the [Brewfile](./.Brewfile):
 brew bundle install --global
 ```
 
-Set the shell for the user to `fish`:
+[Set the default shell for the user to `fish`](https://fishshell.com/docs/current/index.html#default-shell):
 
 ```sh
 # NOTE: Should ensure that "$(command -v fish)" is in /etc/shells
