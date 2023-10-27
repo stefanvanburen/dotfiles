@@ -30,7 +30,7 @@ brew tap homebrew/bundle
 Install the base dependencies in the [Brewfile](./.Brewfile):
 
 ```sh
-brew bundle install --file=~/.Brewfile
+brew bundle install --global
 ```
 
 Set the shell for the user to `fish`:
