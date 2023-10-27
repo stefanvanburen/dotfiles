@@ -36,9 +36,9 @@ brew bundle install --file=~/.Brewfile
 Set the shell for the user to `fish`:
 
 ```sh
-# NOTE: Should ensure that "$(which fish)" is in /etc/shells
+# NOTE: Should ensure that "$(command -v fish)" is in /etc/shells
 # See: https://github.com/fish-shell/fish-shell/issues/989
-chsh -s $(which fish)
+chsh -s $(command -v fish)
 ```
 
 Set up fonts in Kitty (see [kitty.conf](/.config/kitty/kitty.conf) for details)
