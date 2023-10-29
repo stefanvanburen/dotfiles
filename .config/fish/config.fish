@@ -59,7 +59,6 @@ if status --is-interactive
     abbr --add --global g git
     abbr --add --global b buf
     abbr --add --global m make
-    abbr --add --global x extract
     abbr --add --global c clear
     abbr --add --global j just
     abbr --add --global rd rmdir
