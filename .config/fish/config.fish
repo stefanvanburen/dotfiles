@@ -54,14 +54,14 @@ end
 
 if status --is-interactive
     # `man abbr`
-    abbr --add --global - prevd
-    abbr --add --global v vim
-    abbr --add --global g git
-    abbr --add --global b buf
-    abbr --add --global m make
-    abbr --add --global c clear
-    abbr --add --global j just
-    abbr --add --global rd rmdir
+    abbr --add - prevd
+    abbr --add v vim
+    abbr --add g git
+    abbr --add b buf
+    abbr --add m make
+    abbr --add c clear
+    abbr --add j just
+    abbr --add rd rmdir
 
     # Set up vi key bindings
     # https://fishshell.com/docs/current/interactive.html#vi-mode-commands
