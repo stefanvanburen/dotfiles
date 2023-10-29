@@ -86,11 +86,6 @@
 	; https://github.com/dandavison/delta
 	pager = delta
 
-[credential]
-	; use the keychain for git credentials
-	; TODO: is this needed?
-	; helper = osxkeychain
-
 [delta]
 	navigate = true  # use n and N to move between diff sections
 	side-by-side = true
