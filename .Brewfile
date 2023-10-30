@@ -12,8 +12,6 @@ brew "fish"
 brew "gh"
 # VCS - configured in ~/.config/git/config and ~/.config/git/ignore.
 brew "git"
-# Better `git diff` output - used as a pager by `git`
-brew "git-delta"
 # Latest version of go - for tool binaries
 brew "go"
 # Used by gh in ~/.config/gh/config.yml.
