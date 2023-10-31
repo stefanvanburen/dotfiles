@@ -33,18 +33,20 @@ fish_add_path ~/.cargo/bin
 fish_add_path ~/go/bin
 
 function zf_file --description 'Use zf to select a file'
-    fd --type file --follow --hidden --exclude .git --strip-cwd-prefix | zf | while read -l r; set result $result $r; end
+    fd --type file --follow --hidden --exclude .git --strip-cwd-prefix | zf | while read -l r
+        set result $result $r
+    end
     if [ -z "$result" ]
-      commandline -f repaint
-      return
+        commandline -f repaint
+        return
     else
-      # Remove last token from commandline.
-      commandline -t ""
+        # Remove last token from commandline.
+        commandline -t ""
     end
     for i in $result
-      commandline -it -- $prefix
-      commandline -it -- (string escape $i)
-      commandline -it -- ' '
+        commandline -it -- $prefix
+        commandline -it -- (string escape $i)
+        commandline -it -- ' '
     end
     commandline -f repaint
 end
