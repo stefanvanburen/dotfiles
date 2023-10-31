@@ -546,7 +546,7 @@
                                                                        ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#nilness
                                                                        :nilness true}
                                                             ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-                                                            :hints {:parameterNames true
+                                                            :hints {:parameterNames false
                                                                     :assignVariableTypes false
                                                                     :compositeLiteralFields false
                                                                     :compositeLiteralTypes false
