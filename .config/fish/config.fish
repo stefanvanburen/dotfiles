@@ -18,9 +18,6 @@ set -gx GLAMOUR_STYLE light
 
 # Homebrew settings
 # https://docs.brew.sh/Manpage#environment
-# Disable fancy colors
-set -gx HOMEBREW_NO_COLOR 1
-set -gx HOMEBREW_NO_EMOJI 1
 # Use `bat` for `brew cat`
 set -gx HOMEBREW_BAT 1
 
