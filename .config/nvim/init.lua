@@ -271,6 +271,11 @@ map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
 map("n", "<C-l>", ":nohlsearch<cr>")
+vim.fn.sign_define("DiagnosticSignError", {text = "\195\151", texthl = "DiagnosticSignError"})
+vim.fn.sign_define("DiagnosticSignWarn", {text = "!", texthl = "DiagnosticSignWarn"})
+vim.fn.sign_define("DiagnosticSignInfo", {text = "i", texthl = "DiagnosticSignInfo"})
+vim.fn.sign_define("DiagnosticSignHint", {text = "?", texthl = "DiagnosticSignHint"})
+vim.diagnostic.config({virtual_text = {prefix = "\226\150\170"}, float = {border = "single", source = "always", focusable = false}})
 local function _47_(_44_)
   local _arg_45_ = _44_
   local buf = _arg_45_["buf"]
