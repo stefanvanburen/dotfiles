@@ -352,10 +352,10 @@
    :python          {:expandtab true  :shiftwidth 4 :tabstop 4}
    :xml             {:expandtab true  :shiftwidth 4 :tabstop 4}
    :starlark        {:expandtab true  :shiftwidth 4 :tabstop 4 :commentstring "# %s"}
+   :proto           {:expandtab true  :shiftwidth 2 :tabstop 2 :commentstring "// %s" :cindent true}
    :gitcommit       {:spell true}
    :sql             {:wrap true :commentstring "-- %s"}
    :clojure         {:expandtab true :textwidth 80}
-   :proto           {:commentstring "// %s"}
    :kotlin          {:commentstring "// %s"}
    :markdown        {:spell true :wrap true :conceallevel 0 :shiftwidth 2}})
 
