@@ -101,12 +101,13 @@
 
 ;; %f: relative path to current file
 ;; %m: modified flag
-;; %{FugitiveHead()}: git head branch
+;; %{get(b:,'gitsigns_head')}: git head branch
+;; %{get(b:,'gitsigns_status')}: added / removed / changed indicator
 ;; %=: separation
 ;; %l: line number
 ;; %c: column number
 ;; %{&filetype}: filetype
-(set vim.o.statusline "%f%m %{FugitiveHead()}%=%l,%c %{&filetype}")
+(set vim.o.statusline "%f%m %{get(b:,'gitsigns_head')} %{get(b:,'gitsigns_status')}%=%l,%c %{&filetype}")
 
 ;;; Plugins
 
