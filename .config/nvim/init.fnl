@@ -333,7 +333,7 @@
 (vim.api.nvim_create_autocmd :TextYankPost {:callback #(vim.highlight.on_yank)})
 
 (local filetype-settings
-  {:go              {:expandtab false :shiftwidth 4}
+  {:go              {:expandtab false}
    :javascript      {:expandtab true  :shiftwidth 2}
    :javascriptreact {:expandtab true  :shiftwidth 2}
    :typescript      {:expandtab true  :shiftwidth 2}
