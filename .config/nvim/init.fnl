@@ -332,24 +332,24 @@
 (vim.api.nvim_create_autocmd :TextYankPost {:callback #(vim.highlight.on_yank)})
 
 (local filetype-settings
-  {:go              {:expandtab false :shiftwidth 4 :tabstop 4}
-   :javascript      {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :javascriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :typescript      {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :typescriptreact {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :html            {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :css             {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :gohtmltmpl      {:expandtab true  :shiftwidth 2 :tabstop 2 :commentstring "{{/* %s */}}"}
-   :gotexttmpl      {:expandtab true  :shiftwidth 2 :tabstop 2 :commentstring "{{/* %s */}}"}
-   :fish            {:expandtab true  :shiftwidth 4 :tabstop 4 :commentstring "# %s"}
-   :yaml            {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :svg             {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :json            {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :bash            {:expandtab true  :shiftwidth 2 :tabstop 2}
-   :python          {:expandtab true  :shiftwidth 4 :tabstop 4}
-   :xml             {:expandtab true  :shiftwidth 4 :tabstop 4}
-   :starlark        {:expandtab true  :shiftwidth 4 :tabstop 4 :commentstring "# %s"}
-   :proto           {:expandtab true  :shiftwidth 2 :tabstop 2 :commentstring "// %s" :cindent true}
+  {:go              {:expandtab false :shiftwidth 4}
+   :javascript      {:expandtab true  :shiftwidth 2}
+   :javascriptreact {:expandtab true  :shiftwidth 2}
+   :typescript      {:expandtab true  :shiftwidth 2}
+   :typescriptreact {:expandtab true  :shiftwidth 2}
+   :html            {:expandtab true  :shiftwidth 2}
+   :css             {:expandtab true  :shiftwidth 2}
+   :gohtmltmpl      {:expandtab true  :shiftwidth 2 :commentstring "{{/* %s */}}"}
+   :gotexttmpl      {:expandtab true  :shiftwidth 2 :commentstring "{{/* %s */}}"}
+   :fish            {:expandtab true  :shiftwidth 4 :commentstring "# %s"}
+   :yaml            {:expandtab true  :shiftwidth 2}
+   :svg             {:expandtab true  :shiftwidth 2}
+   :json            {:expandtab true  :shiftwidth 2}
+   :bash            {:expandtab true  :shiftwidth 2}
+   :python          {:expandtab true  :shiftwidth 4}
+   :xml             {:expandtab true  :shiftwidth 4}
+   :starlark        {:expandtab true  :shiftwidth 4 :commentstring "# %s"}
+   :proto           {:expandtab true  :shiftwidth 2 :commentstring "// %s" :cindent true}
    :gitcommit       {:spell true}
    :sql             {:wrap true :commentstring "-- %s"}
    :clojure         {:expandtab true :textwidth 80}
