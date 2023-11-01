@@ -21,7 +21,6 @@ vim.o.breakindent = true
 vim.o.breakindentopt = "shift:2,sbr"
 vim.o.showbreak = "\226\134\179"
 vim.o.shiftround = true
-vim.o.fillchars = "eob: ,"
 vim.o.gdefault = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -337,7 +336,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {callback = _47_})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
-local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {constantValues = false, compositeLiteralFields = false, compositeLiteralTypes = false, parameterNames = false, rangeVariableTypes = false, functionTypeParameters = false, assignVariableTypes = false}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff_lsp] = {}, [lspconfig.pylsp] = {settings = {pylsp = {plugins = {pycodestyle = {enabled = false}, pyflakes = {enabled = false}}}}}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.rust_analyzer] = {}}
+local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, analyses = {unusedparams = true, unusedwrite = true, nilness = true}, hints = {compositeLiteralFields = false, compositeLiteralTypes = false, parameterNames = false, rangeVariableTypes = false, functionTypeParameters = false, assignVariableTypes = false, constantValues = false}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff_lsp] = {}, [lspconfig.pylsp] = {settings = {pylsp = {plugins = {pycodestyle = {enabled = false}, pyflakes = {enabled = false}}}}}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.rust_analyzer] = {}}
 for server, settings in pairs(server_settings) do
   server.setup(settings)
 end

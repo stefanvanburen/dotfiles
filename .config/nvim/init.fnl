@@ -47,9 +47,6 @@
 ;; when using > and <, round the indent to a multiple of shiftwidth
 (set vim.o.shiftround true)
 
-;; defaults, other than end of buffer ' ', rather than the default '~'
-(set vim.o.fillchars "eob: ,")
-
 ;; Global substitutions by default.
 (set vim.o.gdefault true)
 
