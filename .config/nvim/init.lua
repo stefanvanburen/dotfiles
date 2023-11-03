@@ -36,7 +36,6 @@ vim.o.clipboard = "unnamedplus"
 vim.o.swapfile = false
 vim.o.formatoptions = "tcqjronp"
 vim.o.wildignorecase = true
-vim.o.statusline = "%f%m %{get(b:,'gitsigns_head')} %{get(b:,'gitsigns_status')}%=%l,%c %{&filetype}"
 local lazy = require("lazy")
 local function _2_()
   vim.g["gtfo#terminals"] = {mac = "kitty"}
@@ -115,8 +114,10 @@ local function _15_()
   local mini_surround = require("mini.surround")
   local mini_hues = require("mini.hues")
   local mini_pick = require("mini.pick")
+  local mini_statusline = require("mini.statusline")
   mini_pairs.setup()
   mini_trailspace.setup()
+  mini_statusline.setup()
   vim.keymap.set("n", "<leader>sw", mini_trailspace.trim)
   mini_comment.setup({options = {ignore_blank_line = true}})
   mini_surround.setup({mappings = {add = "gza", delete = "gzd", find = "gzf", find_left = "gzF", highlight = "gzh", replace = "gzr", update_n_lines = "gzn"}})

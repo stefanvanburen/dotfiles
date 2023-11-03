@@ -98,16 +98,6 @@
 ;; ignore case when completing files / directories in wildmenu
 (set vim.o.wildignorecase true)
 
-;; %f: relative path to current file
-;; %m: modified flag
-;; %{get(b:,'gitsigns_head')}: git head branch
-;; %{get(b:,'gitsigns_status')}: added / removed / changed indicator
-;; %=: separation
-;; %l: line number
-;; %c: column number
-;; %{&filetype}: filetype
-(set vim.o.statusline "%f%m %{get(b:,'gitsigns_head')} %{get(b:,'gitsigns_status')}%=%l,%c %{&filetype}")
-
 ;;; Plugins
 
 (local lazy (require :lazy))
@@ -272,9 +262,12 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-hues.md
                    mini-hues (require :mini.hues)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pick.md
-                   mini-pick (require :mini.pick)]
+                   mini-pick (require :mini.pick)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-statusline.md
+                   mini-statusline (require :mini.statusline)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
+                (mini-statusline.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
                 (mini-comment.setup {:options {:ignore_blank_line true}})
                 ; (vim.cmd.colorscheme :randomhue)
