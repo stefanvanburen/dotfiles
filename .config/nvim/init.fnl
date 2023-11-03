@@ -146,6 +146,7 @@
    {:url "https://github.com/mattn/vim-gotmpl"}
    {:url "https://github.com/fladson/vim-kitty"}
    {:url "https://github.com/NoahTheDuke/vim-just"}
+   {:url "https://github.com/raimon49/requirements.txt.vim"}
    {:url "https://github.com/jaawerth/fennel.vim"}
    {:url "https://github.com/janet-lang/janet.vim"}
    {:url "https://github.com/Olical/nfnl"}
