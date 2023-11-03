@@ -307,12 +307,12 @@
     :priority 1000
     :config #(vim.cmd.colorscheme :rams)}
    {:url "https://github.com/mcchrish/zenbones.nvim"
-    :lazy false
+    :lazy true
     :priority 1000
     :config #(vim.cmd.colorscheme :zenwritten)}
    {:url "https://github.com/rose-pine/neovim"
     :name :rose-pine
-    :lazy true
+    :lazy false
     :priority 1000
     :config #(vim.cmd.colorscheme :rose-pine)}]
  ;; on startup, if doing installation, try to load colorschemes

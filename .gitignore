@@ -44,6 +44,8 @@
 .config/fish/fish_variables
 .config/fish/conf.d
 .config/fish/completions
+# written by fisher when downloading themes
+.config/fish/themes
 
 # nvim files
 # https://github.com/folke/lazy.nvim#-lockfile-lazy-lockjson

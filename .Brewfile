@@ -8,6 +8,8 @@ brew "eza"
 brew "fd"
 # My default shell
 brew "fish"
+# A plugin manager for fish.
+brew "fisher"
 # Interacting with GitHub via the CLI - configured in ~/.config/gh/config.yml.
 brew "gh"
 # VCS - configured in ~/.config/git/config and ~/.config/git/ignore.

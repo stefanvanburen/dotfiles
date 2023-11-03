@@ -68,7 +68,8 @@ if status --is-interactive
 
     # set terminal colors
     # https://fishshell.com/docs/current/cmds/fish_config.html
-    fish_config theme choose 'Mono Lace'
+    # https://github.com/rose-pine/fish
+    fish_config theme choose "Rosé Pine"
 
     # Setup homebrew environment (PATH-related variables)
     # This must be before any command checking, as it sets up the PATH.
