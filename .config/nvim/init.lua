@@ -14,7 +14,6 @@ vim.g.loaded_perl_provider = 0
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.o.completeopt = "menuone,noselect"
-vim.o.background = "light"
 vim.o.termguicolors = true
 vim.o.linebreak = true
 vim.o.breakindent = true

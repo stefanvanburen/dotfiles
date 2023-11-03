@@ -31,7 +31,6 @@
 (set vim.o.completeopt "menuone,noselect")
 
 ;; colors
-(set vim.o.background :light)
 (set vim.o.termguicolors true)
 
 ;; if wrap is set, break on characters in 'breakat' rather than the last
