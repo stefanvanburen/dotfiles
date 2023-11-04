@@ -65,7 +65,7 @@
 
 ;; Invisible characters
 (set vim.o.list true)
-(set vim.o.listchars "tab:→ ,eol:¬,trail:⣿")
+(set vim.o.listchars "tab:⇥ ,eol:¬,trail:⣿")
 
 ;; Don't show the mode on the command line - it's redundant with the status line.
 (set vim.o.showmode false)
