@@ -265,7 +265,9 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pick.md
                    mini-pick (require :mini.pick)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-statusline.md
-                   mini-statusline (require :mini.statusline)]
+                   mini-statusline (require :mini.statusline)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-extra.md
+                   mini-extra (require :mini.extra)]
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
                 (mini-statusline.setup)
@@ -285,7 +287,9 @@
                 (vim.keymap.set :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
                 (vim.keymap.set :n :<leader>fb mini-pick.builtin.buffers)
                 (vim.keymap.set :n :<leader>fl mini-pick.builtin.grep_live)
-                (vim.keymap.set :n :<leader>fh mini-pick.builtin.help))}
+                (vim.keymap.set :n :<leader>fh mini-pick.builtin.help)
+                (vim.keymap.set :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
+                (vim.keymap.set :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references})))}
    {:url "https://github.com/mfussenegger/nvim-overfly"
     :dependencies [{:url "https://github.com/mfussenegger/nvim-qwahl"}]}
    {:url "https://github.com/tpope/vim-eunuch"}
