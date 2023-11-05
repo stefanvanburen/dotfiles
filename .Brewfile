@@ -1,7 +1,5 @@
 # These formula are the absolute base for my macOS environment.
 
-# Better pager - aliased to `cat` in fish.
-brew "bat"
 # Maintained version of `exa`, a replacement for `ls`.
 brew "eza"
 # Find files - used by `zf` in fish.
@@ -22,9 +20,6 @@ brew "gum"
 brew "jump"
 # project-specific commands - abbreviated to `j` in fish.
 brew "just"
-# macOS has a version of `less`, but the default version is fairly old.
-# Installing this version enhances `bat`s paging capabilities.
-brew "less"
 # $EDITOR
 brew "neovim"
 # install and run python applications in isolated environments
