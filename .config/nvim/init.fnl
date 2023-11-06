@@ -164,7 +164,6 @@
                (vim.keymap.set :n :<C-t>l ":TestLast<cr>")
                (vim.keymap.set :n :<C-t>v ":TestVisit<cr>"))}
    {:url "https://github.com/neovim/nvim-lspconfig"}
-   {:url "https://github.com/mfussenegger/nvim-lsp-compl"}
    {:url "https://github.com/b0o/SchemaStore.nvim"}
    {:url "https://github.com/stevearc/conform.nvim"
     :opts {:formatters_by_ft {:proto [:buf]
@@ -268,11 +267,14 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-statusline.md
                    mini-statusline (require :mini.statusline)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-extra.md
-                   mini-extra (require :mini.extra)]
+                   mini-extra (require :mini.extra)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-completion.md
+                   mini-completion (require :mini.completion)]
                 (mini-pairs.setup)
-                (mini-trailspace.setup)
                 (mini-statusline.setup)
+                (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
+                (mini-completion.setup)
                 (mini-comment.setup {:options {:ignore_blank_line true}})
                 ; (vim.cmd.colorscheme :randomhue)
                 (mini-surround.setup
@@ -477,9 +479,6 @@
          (when (= client.name "gopls")
            (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
                                      :apply true}))))
-
-     (let [lsp-compl (require :lsp_compl)]
-       (lsp-compl.attach client buf {:trigger_on_delete true}))
 
      (fn buffer-map [from to]
        (vim.keymap.set :n from to {:buffer buf :silent true}))
