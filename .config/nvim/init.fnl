@@ -170,6 +170,7 @@
     :opts {:formatters_by_ft {:proto [:buf]
                               :just [:just]
                               :fish [:fish_indent]
+                              :json [:prettier]
                               :typescriptreact [:prettier]}
            :format_on_save {:timeout_ms 500
                             :lsp_fallback true}}}
