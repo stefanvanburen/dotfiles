@@ -269,12 +269,15 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-extra.md
                    mini-extra (require :mini.extra)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-completion.md
-                   mini-completion (require :mini.completion)]
+                   mini-completion (require :mini.completion)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
+                   mini-bracketed (require :mini.bracketed)]
                 (mini-pairs.setup)
                 (mini-statusline.setup)
                 (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
                 (mini-completion.setup)
+                (mini-bracketed.setup)
                 (mini-comment.setup {:options {:ignore_blank_line true}})
                 ; (vim.cmd.colorscheme :randomhue)
                 (mini-surround.setup
@@ -293,8 +296,6 @@
                 (vim.keymap.set :n :<leader>fh mini-pick.builtin.help)
                 (vim.keymap.set :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
                 (vim.keymap.set :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references})))}
-   {:url "https://github.com/mfussenegger/nvim-overfly"
-    :dependencies [{:url "https://github.com/mfussenegger/nvim-qwahl"}]}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/andymass/vim-matchup"
     :config #(set vim.g.matchup_matchparen_offscreen {})}
