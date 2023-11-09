@@ -24,6 +24,8 @@
 .local
 .npm
 .docker
+.cargo
+.rustup
 .terminfo
 .jump
 .ssh
