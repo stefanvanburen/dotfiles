@@ -577,6 +577,9 @@
                         lspconfig.bashls {}
                         ;; LSP for TOML.
                         lspconfig.taplo {}
+                        ;; LSP for Lua.
+                        lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
+                                                           :workspace {:library (vim.api.nvim_get_runtime_file "" true)}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
                         lspconfig.rust_analyzer {}})
 
