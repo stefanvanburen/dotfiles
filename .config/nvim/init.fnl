@@ -314,6 +314,7 @@
    {:url "https://github.com/stefanvanburen/rams"
     :lazy true
     :priority 1000
+    :dependencies [{:url "https://github.com/stefanvanburen/rams"}]
     :config #(vim.cmd.colorscheme :rams)}
    {:url "https://github.com/mcchrish/zenbones.nvim"
     :lazy true
