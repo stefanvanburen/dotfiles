@@ -579,6 +579,8 @@
                         ;; LSP for Lua.
                         lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
                                                            :workspace {:library (vim.api.nvim_get_runtime_file "" true)}}}}
+                        lspconfig.fennel_language_server {:settings {:fennel {:diagnostics {:globals [:vim :jit :comment]}
+                                                                              :workspace {:library (vim.api.nvim_list_runtime_paths)}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
                         lspconfig.rust_analyzer {}})
 
