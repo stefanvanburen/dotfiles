@@ -243,6 +243,8 @@
                   :proto
                   ;; https://github.com/tree-sitter/tree-sitter-python
                   :python
+                  ;; https://github.com/ObserverOfTime/tree-sitter-requirements
+                  :requirements
                   ;; https://github.com/derekstride/tree-sitter-sql
                   :sql
                   ;; https://github.com/ikatyang/tree-sitter-toml
