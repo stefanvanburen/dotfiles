@@ -17,18 +17,13 @@ function change_background --argument mode_setting
     end
 
     # change fish
-    switch $mode
-        case dark
-            fish_config theme save 'Rosé Pine'
-        case light
-            fish_config theme save 'Rosé Pine Dawn'
-    end
+    fish_config theme save 'fish default'
 
     # change kitty
     switch $mode
         case dark
-            kitty +kitten themes --reload-in=all --config-file-name=themes.conf 'Rosé Pine'
+            kitty +kitten themes --reload-in=all --config-file-name=themes.conf zenwritten_dark
         case light
-            kitty +kitten themes --reload-in=all --config-file-name=themes.conf 'Rosé Pine Dawn'
+            kitty +kitten themes --reload-in=all --config-file-name=themes.conf zenwritten_light
     end
 end
