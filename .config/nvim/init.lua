@@ -105,7 +105,7 @@ local function _12_()
 end
 local function _14_()
   local treesitter = require("nvim-treesitter.configs")
-  return treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "dockerfile", "fennel", "fish", "html", "gitcommit", "git_rebase", "gitattributes", "go", "gomod", "javascript", "json", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "toml", "yaml", "zig"}})
+  return treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "dockerfile", "fennel", "fish", "html", "gitcommit", "git_rebase", "gitattributes", "go", "gomod", "javascript", "json", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "ssh_config", "sql", "toml", "yaml", "zig"}})
 end
 local function _15_()
   local mini_pairs = require("mini.pairs")

@@ -245,6 +245,8 @@
                   :python
                   ;; https://github.com/ObserverOfTime/tree-sitter-requirements
                   :requirements
+                  ;; https://github.com/ObserverOfTime/tree-sitter-ssh-config
+                  :ssh_config
                   ;; https://github.com/derekstride/tree-sitter-sql
                   :sql
                   ;; https://github.com/ikatyang/tree-sitter-toml
