@@ -400,7 +400,7 @@
 (map [:n :v] :gx "<plug>(openbrowser-smart-search)" {})
 
 ;; move by visual lines instead of real lines, except when a count is provided,
-;; which helps when targetting a specific line with `relativenumber`.
+;; which helps when targeting a specific line with `relativenumber`.
 (map [:n :v] :j #(if (not= vim.v.count 0) :j :gj) {:expr true})
 (map [:n :v] :k #(if (not= vim.v.count 0) :k :gk) {:expr true})
 
