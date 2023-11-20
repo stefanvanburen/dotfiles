@@ -97,7 +97,7 @@ local function _11_()
 end
 local function _12_()
   local lint = require("lint")
-  lint.linters_by_ft = {proto = {"buf_lint"}}
+  lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}}
   local function _13_()
     return lint.try_lint()
   end

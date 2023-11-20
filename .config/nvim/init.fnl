@@ -176,7 +176,8 @@
    {:url "https://github.com/mfussenegger/nvim-lint"
     :config #(let [lint (require :lint)]
                ;; https://github.com/mfussenegger/nvim-lint#available-linters
-               (set lint.linters_by_ft {:proto [:buf_lint]})
+               (set lint.linters_by_ft {:proto [:buf_lint]
+                                        :fish [:fish]})
                (vim.api.nvim_create_autocmd :BufWritePost {:callback #(lint.try_lint)}))}
    {:url "https://github.com/williamboman/mason.nvim"
     :config true
