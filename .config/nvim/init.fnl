@@ -151,8 +151,10 @@
    {:url "https://github.com/janet-lang/janet.vim"}
    {:url "https://github.com/Olical/nfnl"}
    {:url "https://github.com/Olical/conjure"
+    :branch :develop
     :config #(do (set vim.g.conjure#highlight#enabled true)
-                 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true))}
+                 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
+                 (set vim.g.conjure#filetype#janet :conjure.client.janet.stdio))}
    {:url "https://github.com/gpanders/nvim-parinfer"}
    {:url "https://github.com/vim-test/vim-test"
     :dependencies [{:url "https://github.com/tpope/vim-dispatch"}]
