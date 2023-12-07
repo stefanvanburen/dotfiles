@@ -52,8 +52,8 @@
 	rc = rebase --continue
 	ri = rebase --interactive
 
-	; short status
-	st = status --short
+	; status
+	st = status
 
 	; For showing stashes
 	stashes = stash list
@@ -135,3 +135,6 @@
 
 	; always open an editor when using sendemail
 	annotate = yes
+[status]
+	short = true
+	branch = true
