@@ -1,3 +1,4 @@
+version: "1"
 aliases:
     prs: pr list
     issues: issue list
