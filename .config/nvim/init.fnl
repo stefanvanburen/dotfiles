@@ -172,7 +172,8 @@
                               :just [:just]
                               :fish [:fish_indent]
                               :json [:prettier]
-                              :typescriptreact [:prettier]}
+                              :typescriptreact [:prettier]
+                              :sql [:pg_format]}
            :format_on_save {:timeout_ms 500
                             :lsp_fallback true}}}
    {:url "https://github.com/mfussenegger/nvim-lint"
