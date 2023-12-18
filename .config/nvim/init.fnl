@@ -313,7 +313,6 @@
     :config #(let [leap (require :leap)]
                (leap.add_default_mappings))}
    {:url "https://github.com/tpope/vim-abolish"}
-   {:url "https://github.com/tpope/vim-repeat"}
    {:url "https://github.com/rktjmp/paperplanes.nvim"}
    {:url "https://github.com/rktjmp/lush.nvim"}
    {:url "https://git.sr.ht/~p00f/alabaster.nvim"
