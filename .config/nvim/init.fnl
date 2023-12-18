@@ -30,9 +30,6 @@
 ;; anything by default.
 (set vim.o.completeopt "menuone,noselect")
 
-;; colors
-(set vim.o.termguicolors true)
-
 ;; if wrap is set, break on characters in 'breakat' rather than the last
 ;; character that will fit on the screen.
 ;; This _should_ mean that lines generally break on words
@@ -325,7 +322,7 @@
     :dependencies [{:url "https://github.com/stefanvanburen/rams"}]
     :config #(vim.cmd.colorscheme :rams)}
    {:url "https://github.com/mcchrish/zenbones.nvim"
-    :lazy false
+    :lazy true
     :priority 1000
     :config #(vim.cmd.colorscheme :zenwritten)}
    {:url "https://github.com/rose-pine/neovim"
@@ -507,7 +504,7 @@
      (when (and
              client.server_capabilities.inlayHintProvider
              vim.lsp.inlay_hint)
-       (vim.lsp.inlay_hint buf true))
+       (vim.lsp.inlay_hint.enable buf true))
 
      (when client.server_capabilities.hoverProvider
        (buffer-map :K vim.lsp.buf.hover))
