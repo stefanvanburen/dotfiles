@@ -380,7 +380,10 @@
                                                        :callback #(vim.api.nvim_set_option_value "filetype" "markdown" {:scope "local"})})
   (vim.api.nvim_create_autocmd [:BufNewFile :BufRead] {:group aufiletypes
                                                        :pattern "*.star"
-                                                       :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})}))
+                                                       :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})})
+  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead] {:group aufiletypes
+                                                       :pattern "*.tpl"
+                                                       :callback #(vim.api.nvim_set_option_value "filetype" "gotmpl" {:scope "local"})}))
 
 ;;; Mappings
 

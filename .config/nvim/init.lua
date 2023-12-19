@@ -191,80 +191,84 @@ do
     return vim.api.nvim_set_option_value("filetype", "starlark", {scope = "local"})
   end
   vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.star", callback = _28_})
+  local function _29_()
+    return vim.api.nvim_set_option_value("filetype", "gotmpl", {scope = "local"})
+  end
+  vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.tpl", callback = _29_})
 end
 local map = vim.keymap.set
 map("n", ";", ":")
 map("n", "<leader>?", vim.diagnostic.open_float)
-local function _29_()
+local function _30_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _29_)
-local function _30_()
+map("n", "<leader>gs", _30_)
+local function _31_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _30_)
-local function _31_()
+map("n", "<leader>gw", _31_)
+local function _32_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _31_)
-local function _32_()
+map("n", "<leader>gc", _32_)
+local function _33_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _32_)
-local function _33_()
+map("n", "<leader>gp", _33_)
+local function _34_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _33_)
+map("n", "<leader>gb", _34_)
 map({"n", "v"}, "gx", "<plug>(openbrowser-smart-search)", {})
-local function _34_()
+local function _35_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _34_, {expr = true})
-local function _36_()
+map({"n", "v"}, "j", _35_, {expr = true})
+local function _37_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _36_, {expr = true})
+map({"n", "v"}, "k", _37_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
-local function _38_()
+local function _39_()
   return vim.cmd({cmd = "edit", args = {"$HOME/.config/fish/config.fish"}})
 end
-map("n", "<leader>ef", _38_)
-local function _39_()
+map("n", "<leader>ef", _39_)
+local function _40_()
   return vim.cmd({cmd = "edit", args = {"$HOME/.config/git/config"}})
 end
-map("n", "<leader>eg", _39_)
-local function _40_()
+map("n", "<leader>eg", _40_)
+local function _41_()
   return vim.cmd({cmd = "edit", args = {"$HOME/.config/kitty/kitty.conf"}})
 end
-map("n", "<leader>ek", _40_)
-local function _41_()
+map("n", "<leader>ek", _41_)
+local function _42_()
   return vim.cmd({cmd = "edit", args = {"~/.config/nvim/init.fnl"}})
 end
-map("n", "<leader>ev", _41_)
-local function _42_()
+map("n", "<leader>ev", _42_)
+local function _43_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _42_)
-local function _43_()
+map("n", "<leader>w", _43_)
+local function _44_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _43_)
-local function _44_()
+map("n", "<leader>cl", _44_)
+local function _45_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _44_)
-local function _45_()
+map("n", "<leader>ss", _45_)
+local function _46_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _45_)
+map("n", "<leader>vs", _46_)
 map("n", "]r", ":tabnext<cr>")
 map("n", "[r", ":tabprev<cr>")
 map("n", "<leader>tn", ":tabnew<cr>")
@@ -289,11 +293,11 @@ vim.fn.sign_define("DiagnosticSignWarn", {text = "!", texthl = "DiagnosticSignWa
 vim.fn.sign_define("DiagnosticSignInfo", {text = "\226\156\179\239\184\142", texthl = "DiagnosticSignInfo"})
 vim.fn.sign_define("DiagnosticSignHint", {text = "?", texthl = "DiagnosticSignHint"})
 vim.diagnostic.config({virtual_text = {prefix = "\226\150\170"}, float = {border = "single", source = "always", focusable = false}})
-local function _49_(_46_)
-  local _arg_47_ = _46_
-  local buf = _arg_47_["buf"]
-  local _arg_48_ = _arg_47_["data"]
-  local client_id = _arg_48_["client_id"]
+local function _50_(_47_)
+  local _arg_48_ = _47_
+  local buf = _arg_48_["buf"]
+  local _arg_49_ = _arg_48_["data"]
+  local client_id = _arg_49_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   local function format()
     vim.lsp.buf.format({timeout_ms = 2000})
@@ -307,15 +311,15 @@ local function _49_(_46_)
     return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
   end
   if client.server_capabilities.documentFormattingProvider then
-    local function _51_()
+    local function _52_()
       return format(client)
     end
-    buffer_map("<leader>af", _51_)
+    buffer_map("<leader>af", _52_)
     if (client.name ~= "tsserver") then
-      local function _52_()
+      local function _53_()
         return format(client)
       end
-      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _52_})
+      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _53_})
     else
     end
   else
@@ -343,7 +347,7 @@ local function _49_(_46_)
   buffer_map("<leader>rn", vim.lsp.buf.rename)
   return buffer_map("<leader>ca", vim.lsp.buf.code_action)
 end
-vim.api.nvim_create_autocmd("LspAttach", {callback = _49_})
+vim.api.nvim_create_autocmd("LspAttach", {callback = _50_})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
 local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, linkTarget = "godocs.io", analyses = {unusedparams = true, unusedwrite = true, nilness = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff_lsp] = {}, [lspconfig.pylsp] = {settings = {pylsp = {plugins = {pycodestyle = {enabled = false}, pyflakes = {enabled = false}}}}}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.api.nvim_list_runtime_paths()}}}}, [lspconfig.rust_analyzer] = {}}
