@@ -10,7 +10,7 @@
 
 ;;; Settings
 
-;; Don't load netrw - using dirvish instead.
+;; Don't load netrw - using mini.files instead.
 ;; :h netrw-noload
 (set vim.g.loaded_netrw 1)
 (set vim.g.loaded_netrwPlugin 1)
@@ -71,7 +71,6 @@
 
 (lazy.setup
   [
-   {:url "https://github.com/justinmk/vim-dirvish"}
    {:url "https://github.com/justinmk/vim-gtfo"
     :config #(set vim.g.gtfo#terminals {:mac :kitty})}
    ;; required by vim-fugitive
@@ -248,7 +247,9 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
                    mini-bracketed (require :mini.bracketed)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-basics.md
-                   mini-basics (require :mini.basics)]
+                   mini-basics (require :mini.basics)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-files.md
+                   mini-files (require :mini.files)]
                 (mini-pairs.setup)
                 (mini-statusline.setup)
                 (mini-trailspace.setup)
@@ -256,6 +257,8 @@
                 (mini-completion.setup)
                 (mini-bracketed.setup)
                 (mini-basics.setup)
+                (mini-files.setup {:mappings {:go_in_plus :<CR>}})
+                (vim.keymap.set :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
                 (mini-comment.setup {:options {:ignore_blank_line true}})
                 ; (vim.cmd.colorscheme :randomhue)
                 (mini-surround.setup
