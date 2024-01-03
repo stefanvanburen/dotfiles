@@ -11,26 +11,15 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
-vim.g.mapleader = " "
 vim.g.maplocalleader = ","
-vim.o.completeopt = "menuone,noselect"
-vim.o.linebreak = true
-vim.o.breakindent = true
 vim.o.breakindentopt = "shift:2,sbr"
 vim.o.showbreak = "\226\134\179"
 vim.o.shiftround = true
 vim.o.gdefault = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
 vim.o.copyindent = true
 vim.o.updatetime = 100
-vim.o.infercase = true
 vim.o.list = true
 vim.o.listchars = "tab:\226\135\165 ,eol:\194\172,trail:\226\163\191"
-vim.o.showmode = false
-vim.o.undofile = true
-vim.o.splitbelow = true
-vim.o.splitright = true
 vim.o.clipboard = "unnamedplus"
 vim.o.swapfile = false
 vim.o.formatoptions = "tcqjronp"
@@ -118,12 +107,14 @@ local function _15_()
   local mini_extra = require("mini.extra")
   local mini_completion = require("mini.completion")
   local mini_bracketed = require("mini.bracketed")
+  local mini_basics = require("mini.basics")
   mini_pairs.setup()
   mini_statusline.setup()
   mini_trailspace.setup()
   vim.keymap.set("n", "<leader>sw", mini_trailspace.trim)
   mini_completion.setup()
   mini_bracketed.setup()
+  mini_basics.setup()
   mini_comment.setup({options = {ignore_blank_line = true}})
   mini_surround.setup({mappings = {add = "gza", delete = "gzd", find = "gzf", find_left = "gzF", highlight = "gzh", replace = "gzr", update_n_lines = "gzn"}})
   mini_pick.setup()

@@ -21,22 +21,11 @@
 (set vim.g.loaded_node_provider 0)
 (set vim.g.loaded_perl_provider 0)
 
-;; Leader is space key
-(set vim.g.mapleader " ")
 ;; LocalLeader is the comma key
 (set vim.g.maplocalleader ",")
 
-;; Show the menu even if only one option is available, and don't select
-;; anything by default.
-(set vim.o.completeopt "menuone,noselect")
-
-;; if wrap is set, break on characters in 'breakat' rather than the last
-;; character that will fit on the screen.
-;; This _should_ mean that lines generally break on words
-(set vim.o.linebreak true)
 ;; on lines that will wrap, they instead 'break' and be visually indented by
 ;; the showbreak character, followed by the indent.
-(set vim.o.breakindent true)
 (set vim.o.breakindentopt "shift:2,sbr")
 (set vim.o.showbreak "↳")
 
@@ -46,34 +35,15 @@
 ;; Global substitutions by default.
 (set vim.o.gdefault true)
 
-;; Ignore case while searching
-(set vim.o.ignorecase true)
-;; ... except when capitals are used
-(set vim.o.smartcase true)
-
 ;; Copy the indent of existing lines when autoindenting
 (set vim.o.copyindent true)
 
 ;; Set lower for the CursorHold autocmd, so that LSP's document highlighting is useful.
 (set vim.o.updatetime 100)
 
-;; Helps when doing insert-mode completion
-(set vim.o.infercase true)
-
 ;; Invisible characters
 (set vim.o.list true)
 (set vim.o.listchars "tab:⇥ ,eol:¬,trail:⣿")
-
-;; Don't show the mode on the command line - it's redundant with the status line.
-(set vim.o.showmode false)
-
-;; maintain an undofile for undoing actions through neovim loads
-(set vim.o.undofile true)
-
-;; On horizontal split, open the split below.
-(set vim.o.splitbelow true)
-;; On vertical split, open the split to the right.
-(set vim.o.splitright true)
 
 ;; always use the system clipboard for operations
 (set vim.o.clipboard "unnamedplus")
@@ -276,13 +246,16 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-completion.md
                    mini-completion (require :mini.completion)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
-                   mini-bracketed (require :mini.bracketed)]
+                   mini-bracketed (require :mini.bracketed)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-basics.md
+                   mini-basics (require :mini.basics)]
                 (mini-pairs.setup)
                 (mini-statusline.setup)
                 (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
                 (mini-completion.setup)
                 (mini-bracketed.setup)
+                (mini-basics.setup)
                 (mini-comment.setup {:options {:ignore_blank_line true}})
                 ; (vim.cmd.colorscheme :randomhue)
                 (mini-surround.setup
