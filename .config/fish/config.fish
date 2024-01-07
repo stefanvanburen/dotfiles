@@ -1,10 +1,10 @@
 # https://fishshell.com/docs/current/#configuration
 
 # https://xdgbasedirectoryspecification.com
-set -qx XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
-set -qx XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.local/share
-set -qx XDG_CACHE_HOME; or set -Ux XDG_CACHE_HOME $HOME/.cache
-set -qx XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.local/state
+set -gx XDG_CONFIG_HOME $HOME/.config
+set -gx XDG_DATA_HOME $HOME/.local/share
+set -gx XDG_CACHE_HOME $HOME/.cache
+set -gx XDG_STATE_HOME $HOME/.local/state
 
 set -gx EDITOR nvim
 # https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
