@@ -249,7 +249,10 @@
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-basics.md
                    mini-basics (require :mini.basics)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-files.md
-                   mini-files (require :mini.files)]
+                   mini-files (require :mini.files)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-notify.md
+                   mini-notify (require :mini.notify)]
+                (mini-notify.setup)
                 (mini-pairs.setup)
                 (mini-statusline.setup)
                 (mini-trailspace.setup)
