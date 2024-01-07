@@ -402,11 +402,6 @@
 (map :n :<leader>ss #(vim.cmd {:cmd "split"}))
 (map :n :<leader>vs #(vim.cmd {:cmd "vsplit"}))
 
-;; tab mappings
-(map :n "]r" ":tabnext<cr>")
-(map :n "[r" ":tabprev<cr>")
-(map :n :<leader>tn ":tabnew<cr>")
-
 ;; Use Q to repeat last macro, rather than going into ex mode
 (map :n :Q "@@")
 
