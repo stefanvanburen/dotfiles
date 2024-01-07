@@ -238,10 +238,10 @@
                    mini-hues (require :mini.hues)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pick.md
                    mini-pick (require :mini.pick)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-statusline.md
-                   mini-statusline (require :mini.statusline)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-extra.md
                    mini-extra (require :mini.extra)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-statusline.md
+                   mini-statusline (require :mini.statusline)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-completion.md
                    mini-completion (require :mini.completion)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
@@ -252,18 +252,10 @@
                    mini-files (require :mini.files)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-notify.md
                    mini-notify (require :mini.notify)]
-                (mini-notify.setup)
                 (mini-pairs.setup)
-                (mini-statusline.setup)
                 (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
-                (mini-completion.setup)
-                (mini-bracketed.setup)
-                (mini-basics.setup)
-                (mini-files.setup {:mappings {:go_in_plus :<CR>}})
-                (vim.keymap.set :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
                 (mini-comment.setup {:options {:ignore_blank_line true}})
-                ; (vim.cmd.colorscheme :randomhue)
                 (mini-surround.setup
                   {:mappings {:add            :gza
                               :delete         :gzd
@@ -272,6 +264,7 @@
                               :highlight      :gzh
                               :replace        :gzr
                               :update_n_lines :gzn}})
+                (vim.cmd.colorscheme :randomhue)
                 (mini-pick.setup)
                 (vim.keymap.set :n :<leader>ff mini-pick.builtin.files)
                 (vim.keymap.set :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
@@ -279,7 +272,14 @@
                 (vim.keymap.set :n :<leader>fl mini-pick.builtin.grep_live)
                 (vim.keymap.set :n :<leader>fh mini-pick.builtin.help)
                 (vim.keymap.set :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
-                (vim.keymap.set :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references})))}
+                (vim.keymap.set :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
+                (mini-statusline.setup)
+                (mini-completion.setup)
+                (mini-bracketed.setup)
+                (mini-basics.setup)
+                (mini-files.setup {:mappings {:go_in_plus :<CR>}})
+                (vim.keymap.set :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
+                (mini-notify.setup))}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/andymass/vim-matchup"
     :config #(set vim.g.matchup_matchparen_offscreen {})}
