@@ -226,7 +226,9 @@
                   ;; https://github.com/maxxnino/tree-sitter-zig
                   :zig]}))}
    {:url "https://github.com/echasnovski/mini.nvim"
-    :config #(let [;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pairs.md
+    :config #(let [;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-basics.md
+                   mini-basics (require :mini.basics)
+                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pairs.md
                    mini-pairs (require :mini.pairs)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-trailspace.md
                    mini-trailspace (require :mini.trailspace)
@@ -246,12 +248,12 @@
                    mini-completion (require :mini.completion)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
                    mini-bracketed (require :mini.bracketed)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-basics.md
-                   mini-basics (require :mini.basics)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-files.md
                    mini-files (require :mini.files)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-notify.md
                    mini-notify (require :mini.notify)]
+                ;; mini-basics should be first, to set up mappings like <Leader>
+                (mini-basics.setup)
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
                 (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
@@ -276,7 +278,6 @@
                 (mini-statusline.setup)
                 (mini-completion.setup)
                 (mini-bracketed.setup)
-                (mini-basics.setup)
                 (mini-files.setup {:mappings {:go_in_plus :<CR>}})
                 (vim.keymap.set :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
                 (mini-notify.setup))}
