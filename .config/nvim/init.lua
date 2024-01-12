@@ -268,6 +268,10 @@ local function _47_()
   return vim.cmd({cmd = "vsplit"})
 end
 map("n", "<leader>vs", _47_)
+local function _48_()
+  return vim.cmd({cmd = "tabnew"})
+end
+map("n", "<leader>tn", _48_)
 map("n", "Q", "@@")
 map("n", "0", "^")
 map("n", "^", "0")
@@ -289,11 +293,11 @@ vim.fn.sign_define("DiagnosticSignWarn", {text = "!", texthl = "DiagnosticSignWa
 vim.fn.sign_define("DiagnosticSignInfo", {text = "\226\156\179\239\184\142", texthl = "DiagnosticSignInfo"})
 vim.fn.sign_define("DiagnosticSignHint", {text = "?", texthl = "DiagnosticSignHint"})
 vim.diagnostic.config({virtual_text = {prefix = "\226\150\170"}, float = {border = "single", source = "always", focusable = false}})
-local function _51_(_48_)
-  local _arg_49_ = _48_
-  local buf = _arg_49_["buf"]
-  local _arg_50_ = _arg_49_["data"]
-  local client_id = _arg_50_["client_id"]
+local function _52_(_49_)
+  local _arg_50_ = _49_
+  local buf = _arg_50_["buf"]
+  local _arg_51_ = _arg_50_["data"]
+  local client_id = _arg_51_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   local function format()
     vim.lsp.buf.format({timeout_ms = 2000})
@@ -307,15 +311,15 @@ local function _51_(_48_)
     return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
   end
   if client.server_capabilities.documentFormattingProvider then
-    local function _53_()
+    local function _54_()
       return format(client)
     end
-    buffer_map("<leader>af", _53_)
+    buffer_map("<leader>af", _54_)
     if (client.name ~= "tsserver") then
-      local function _54_()
+      local function _55_()
         return format(client)
       end
-      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _54_})
+      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _55_})
     else
     end
   else
@@ -343,7 +347,7 @@ local function _51_(_48_)
   buffer_map("<leader>rn", vim.lsp.buf.rename)
   return buffer_map("<leader>ca", vim.lsp.buf.code_action)
 end
-vim.api.nvim_create_autocmd("LspAttach", {callback = _51_})
+vim.api.nvim_create_autocmd("LspAttach", {callback = _52_})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
 local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, linkTarget = "godocs.io", analyses = {unusedparams = true, unusedwrite = true, nilness = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff_lsp] = {}, [lspconfig.pylsp] = {settings = {pylsp = {plugins = {pycodestyle = {enabled = false}, pyflakes = {enabled = false}}}}}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.api.nvim_list_runtime_paths()}}}}, [lspconfig.rust_analyzer] = {}}
