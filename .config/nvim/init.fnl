@@ -8,6 +8,8 @@
                   lazypath]))
 (vim.opt.rtp:prepend lazypath)
 
+(local map vim.keymap.set)
+
 ;;; Settings
 
 ;; Don't load netrw - using mini.files instead.
@@ -84,27 +86,27 @@
           :on_attach
           ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
           (fn [bufnr]
-           (fn map [mode l r ?opts]
+           (fn buffer-map [mode l r ?opts]
               (let [opts (or ?opts {})]
                 (set opts.buffer bufnr)
-                (vim.keymap.set mode l r opts)))
+                (map mode l r opts)))
            ;; Navigation
-           (map :n "]c" #(gitsigns.next_hunk))
-           (map :n "[c" #(gitsigns.prev_hunk))
+           (buffer-map :n "]c" #(gitsigns.next_hunk))
+           (buffer-map :n "[c" #(gitsigns.prev_hunk))
            ;; Actions
-           (map [:n :v] :<leader>hs gitsigns.stage_hunk)
-           (map [:n :v] :<leader>hr gitsigns.reset_hunk)
-           (map :n :<leader>hS gitsigns.stage_buffer)
-           (map :n :<leader>hR gitsigns.reset_buffer)
-           (map :n :<leader>hu gitsigns.undo_stage_hunk)
-           (map :n :<leader>hp gitsigns.preview_hunk)
-           (map :n :<leader>hb #(gitsigns.blame_line {:full true}))
-           (map :n :<leader>tb gitsigns.toggle_current_line_blame)
-           (map :n :<leader>hd gitsigns.diffthis)
-           (map :n :<leader>hD #(gitsigns.diffthis "~"))
-           (map :n :<leader>td gitsigns.toggle_deleted)
+           (buffer-map [:n :v] :<leader>hs gitsigns.stage_hunk)
+           (buffer-map [:n :v] :<leader>hr gitsigns.reset_hunk)
+           (buffer-map :n :<leader>hS gitsigns.stage_buffer)
+           (buffer-map :n :<leader>hR gitsigns.reset_buffer)
+           (buffer-map :n :<leader>hu gitsigns.undo_stage_hunk)
+           (buffer-map :n :<leader>hp gitsigns.preview_hunk)
+           (buffer-map :n :<leader>hb #(gitsigns.blame_line {:full true}))
+           (buffer-map :n :<leader>tb gitsigns.toggle_current_line_blame)
+           (buffer-map :n :<leader>hd gitsigns.diffthis)
+           (buffer-map :n :<leader>hD #(gitsigns.diffthis "~"))
+           (buffer-map :n :<leader>td gitsigns.toggle_deleted)
            ;; Text object
-           (map [:o :x] :ih ":<C-U>Gitsigns select_hunk<CR>"))}))}
+           (buffer-map [:o :x] :ih ":<C-U>Gitsigns select_hunk<CR>"))}))}
    {:url "https://github.com/tpope/vim-fugitive"
     ;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
     :config #(set vim.g.fugitive_legacy_commands 0)}
@@ -126,11 +128,11 @@
     :dependencies [{:url "https://github.com/tpope/vim-dispatch"}]
     :config #(do
                (set vim.g.test#strategy :dispatch)
-               (vim.keymap.set :n :<C-t>n ":TestNearest<cr>")
-               (vim.keymap.set :n :<C-t>f ":TestFile<cr>")
-               (vim.keymap.set :n :<C-t>s ":TestSuite<cr>")
-               (vim.keymap.set :n :<C-t>l ":TestLast<cr>")
-               (vim.keymap.set :n :<C-t>v ":TestVisit<cr>"))}
+               (map :n :<C-t>n ":TestNearest<cr>")
+               (map :n :<C-t>f ":TestFile<cr>")
+               (map :n :<C-t>s ":TestSuite<cr>")
+               (map :n :<C-t>l ":TestLast<cr>")
+               (map :n :<C-t>v ":TestVisit<cr>"))}
    {:url "https://github.com/neovim/nvim-lspconfig"}
    {:url "https://github.com/b0o/SchemaStore.nvim"}
    {:url "https://github.com/stevearc/conform.nvim"
@@ -255,7 +257,7 @@
                 (mini-basics.setup)
                 (mini-pairs.setup)
                 (mini-trailspace.setup)
-                (vim.keymap.set :n :<leader>sw mini-trailspace.trim)
+                (map :n :<leader>sw mini-trailspace.trim)
                 (mini-comment.setup {:options {:ignore_blank_line true}})
                 (mini-surround.setup
                   {:mappings {:add            :gza
@@ -267,18 +269,18 @@
                               :update_n_lines :gzn}})
                 (vim.cmd.colorscheme :randomhue)
                 (mini-pick.setup)
-                (vim.keymap.set :n :<leader>ff mini-pick.builtin.files)
-                (vim.keymap.set :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
-                (vim.keymap.set :n :<leader>fb mini-pick.builtin.buffers)
-                (vim.keymap.set :n :<leader>fl mini-pick.builtin.grep_live)
-                (vim.keymap.set :n :<leader>fh mini-pick.builtin.help)
-                (vim.keymap.set :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
-                (vim.keymap.set :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
+                (map :n :<leader>ff mini-pick.builtin.files)
+                (map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
+                (map :n :<leader>fb mini-pick.builtin.buffers)
+                (map :n :<leader>fl mini-pick.builtin.grep_live)
+                (map :n :<leader>fh mini-pick.builtin.help)
+                (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
+                (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
                 (mini-statusline.setup)
                 (mini-completion.setup)
                 (mini-bracketed.setup)
                 (mini-files.setup {:mappings {:go_in_plus :<CR>}})
-                (vim.keymap.set :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
+                (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
                 (mini-notify.setup))}
    {:url "https://github.com/tpope/vim-eunuch"}
    {:url "https://github.com/andymass/vim-matchup"
@@ -362,9 +364,6 @@
                                                        :callback #(vim.api.nvim_set_option_value "filetype" "gotmpl" {:scope "local"})}))
 
 ;;; Mappings
-
-;; alias function
-(local map vim.keymap.set)
 
 ;; ; -> :
 (map :n ";" ":")

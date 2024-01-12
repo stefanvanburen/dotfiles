@@ -5,6 +5,7 @@ if not vim.loop.fs_stat(lazypath) then
 else
 end
 do end (vim.opt.rtp):prepend(lazypath)
+local map = vim.keymap.set
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_python3_provider = 0
@@ -32,37 +33,37 @@ end
 local function _3_()
   local gitsigns = require("gitsigns")
   local function _4_(bufnr)
-    local function map(mode, l, r, _3fopts)
+    local function buffer_map(mode, l, r, _3fopts)
       local opts = (_3fopts or {})
       opts.buffer = bufnr
-      return vim.keymap.set(mode, l, r, opts)
+      return map(mode, l, r, opts)
     end
     local function _5_()
       return gitsigns.next_hunk()
     end
-    map("n", "]c", _5_)
+    buffer_map("n", "]c", _5_)
     local function _6_()
       return gitsigns.prev_hunk()
     end
-    map("n", "[c", _6_)
-    map({"n", "v"}, "<leader>hs", gitsigns.stage_hunk)
-    map({"n", "v"}, "<leader>hr", gitsigns.reset_hunk)
-    map("n", "<leader>hS", gitsigns.stage_buffer)
-    map("n", "<leader>hR", gitsigns.reset_buffer)
-    map("n", "<leader>hu", gitsigns.undo_stage_hunk)
-    map("n", "<leader>hp", gitsigns.preview_hunk)
+    buffer_map("n", "[c", _6_)
+    buffer_map({"n", "v"}, "<leader>hs", gitsigns.stage_hunk)
+    buffer_map({"n", "v"}, "<leader>hr", gitsigns.reset_hunk)
+    buffer_map("n", "<leader>hS", gitsigns.stage_buffer)
+    buffer_map("n", "<leader>hR", gitsigns.reset_buffer)
+    buffer_map("n", "<leader>hu", gitsigns.undo_stage_hunk)
+    buffer_map("n", "<leader>hp", gitsigns.preview_hunk)
     local function _7_()
       return gitsigns.blame_line({full = true})
     end
-    map("n", "<leader>hb", _7_)
-    map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-    map("n", "<leader>hd", gitsigns.diffthis)
+    buffer_map("n", "<leader>hb", _7_)
+    buffer_map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
+    buffer_map("n", "<leader>hd", gitsigns.diffthis)
     local function _8_()
       return gitsigns.diffthis("~")
     end
-    map("n", "<leader>hD", _8_)
-    map("n", "<leader>td", gitsigns.toggle_deleted)
-    return map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+    buffer_map("n", "<leader>hD", _8_)
+    buffer_map("n", "<leader>td", gitsigns.toggle_deleted)
+    return buffer_map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
   end
   return gitsigns.setup({on_attach = _4_, attach_to_untracked = false})
 end
@@ -78,11 +79,11 @@ local function _10_()
 end
 local function _11_()
   vim.g["test#strategy"] = "dispatch"
-  vim.keymap.set("n", "<C-t>n", ":TestNearest<cr>")
-  vim.keymap.set("n", "<C-t>f", ":TestFile<cr>")
-  vim.keymap.set("n", "<C-t>s", ":TestSuite<cr>")
-  vim.keymap.set("n", "<C-t>l", ":TestLast<cr>")
-  return vim.keymap.set("n", "<C-t>v", ":TestVisit<cr>")
+  map("n", "<C-t>n", ":TestNearest<cr>")
+  map("n", "<C-t>f", ":TestFile<cr>")
+  map("n", "<C-t>s", ":TestSuite<cr>")
+  map("n", "<C-t>l", ":TestLast<cr>")
+  return map("n", "<C-t>v", ":TestVisit<cr>")
 end
 local function _12_()
   local lint = require("lint")
@@ -113,27 +114,27 @@ local function _15_()
   mini_basics.setup()
   mini_pairs.setup()
   mini_trailspace.setup()
-  vim.keymap.set("n", "<leader>sw", mini_trailspace.trim)
+  map("n", "<leader>sw", mini_trailspace.trim)
   mini_comment.setup({options = {ignore_blank_line = true}})
   mini_surround.setup({mappings = {add = "gza", delete = "gzd", find = "gzf", find_left = "gzF", highlight = "gzh", replace = "gzr", update_n_lines = "gzn"}})
   vim.cmd.colorscheme("randomhue")
   mini_pick.setup()
-  vim.keymap.set("n", "<leader>ff", mini_pick.builtin.files)
+  map("n", "<leader>ff", mini_pick.builtin.files)
   local function _16_()
     return mini_pick.builtin.files({tool = "git"})
   end
-  vim.keymap.set("n", "<leader>fg", _16_)
-  vim.keymap.set("n", "<leader>fb", mini_pick.builtin.buffers)
-  vim.keymap.set("n", "<leader>fl", mini_pick.builtin.grep_live)
-  vim.keymap.set("n", "<leader>fh", mini_pick.builtin.help)
+  map("n", "<leader>fg", _16_)
+  map("n", "<leader>fb", mini_pick.builtin.buffers)
+  map("n", "<leader>fl", mini_pick.builtin.grep_live)
+  map("n", "<leader>fh", mini_pick.builtin.help)
   local function _17_()
     return mini_extra.pickers.lsp({scope = "document_symbol"})
   end
-  vim.keymap.set("n", "<leader>fs", _17_)
+  map("n", "<leader>fs", _17_)
   local function _18_()
     return mini_extra.pickers.lsp({scope = "references"})
   end
-  vim.keymap.set("n", "<leader>fr", _18_)
+  map("n", "<leader>fr", _18_)
   mini_statusline.setup()
   mini_completion.setup()
   mini_bracketed.setup()
@@ -141,7 +142,7 @@ local function _15_()
   local function _19_()
     return mini_files.open(vim.api.nvim_buf_get_name(0))
   end
-  vim.keymap.set("n", "-", _19_)
+  map("n", "-", _19_)
   return mini_notify.setup()
 end
 local function _20_()
@@ -195,7 +196,6 @@ do
   end
   vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = "*.tpl", callback = _30_})
 end
-local map = vim.keymap.set
 map("n", ";", ":")
 map("n", "<leader>?", vim.diagnostic.open_float)
 local function _31_()
