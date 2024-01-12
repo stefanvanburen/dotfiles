@@ -6,9 +6,10 @@ set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_STATE_HOME $HOME/.local/state
 
-set -gx EDITOR nvim
 # https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
+
+set -gx EDITOR nvim
 # neovim's man plugin - see :h ft-man-plugin
 set -gx MANPAGER "nvim +Man!"
 
