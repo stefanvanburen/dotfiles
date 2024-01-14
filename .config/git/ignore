@@ -17,7 +17,6 @@
 __pycache__
 .pytest_cache
 .mypy_cache
-.pyenv
 
 # clojure
 # clojure-lsp generated files

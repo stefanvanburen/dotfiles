@@ -73,9 +73,6 @@ if status --is-interactive
     # https://direnv.net/docs/hook.html#fish
     command -q direnv; and direnv hook fish | source
 
-    # https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
-    command -q pyenv; and pyenv init - | source
-
     bind \cr history-pager
     bind -M insert \cr history-pager
 

@@ -24,8 +24,6 @@ brew "neovim"
 # used to install and run beets
 # https://github.com/pypa/pipx
 brew "pipx"
-# Managing python versions
-brew "pyenv"
 # better searching - configured in ~/.config/ripgreprc.
 brew "ripgrep"
 # Fuzzy finding, used in fish.
