@@ -135,6 +135,7 @@
 
 	; always open an editor when using sendemail
 	annotate = yes
+
 [status]
 	short = true
 	branch = true
