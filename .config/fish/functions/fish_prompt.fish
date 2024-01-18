@@ -3,9 +3,9 @@ function fish_prompt
 
     printf '\n%s%s\n' (prompt_pwd) (fish_git_prompt)
 
-    set --function prompt_character ";"
+    set --function prompt_character '$'
     if test $last_status -ne 0
-        set --function prompt_character "!"
+        set --function prompt_character '!'
         set_color --bold red
     end
 
