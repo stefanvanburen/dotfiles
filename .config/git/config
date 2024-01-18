@@ -39,10 +39,6 @@
 	; mnemonic for mergetool
 	mt = mergetool
 
-	; mnemonic for pull
-	p = pull
-	pa = pull --autostash
-
 	; mnemonic for push
 	pu = push
 	; Safer version of push --force
@@ -62,9 +58,6 @@
 	; This is useful to stash things unrelated to what's currently being
 	; worked on, for later.
 	ss = stash push --staged
-
-	; mnemonic for submodule
-	su = submodule
 
 	; mnemonic for switch
 	sw = switch
