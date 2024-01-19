@@ -236,8 +236,6 @@
                    mini-comment (require :mini.comment)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
                    mini-surround (require :mini.surround)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-hues.md
-                   mini-hues (require :mini.hues)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pick.md
                    mini-pick (require :mini.pick)
                    ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-extra.md
@@ -266,7 +264,6 @@
                               :highlight      :gzh
                               :replace        :gzr
                               :update_n_lines :gzn}})
-                (vim.cmd.colorscheme :randomhue)
                 (mini-pick.setup)
                 (map :n :<leader>ff mini-pick.builtin.files)
                 (map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
@@ -297,7 +294,7 @@
     :dependencies [{:url "https://github.com/stefanvanburen/rams"}]
     :config #(vim.cmd.colorscheme :rams)}
    {:url "https://github.com/mcchrish/zenbones.nvim"
-    :lazy true
+    :lazy false
     :priority 1000
     :config #(vim.cmd.colorscheme :zenwritten)}
    {:url "https://github.com/rose-pine/neovim"
