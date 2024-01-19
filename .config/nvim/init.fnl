@@ -389,7 +389,7 @@
 (map :n :<leader>ef #(vim.cmd {:cmd "edit" :args ["$HOME/.config/fish/config.fish"]}))
 (map :n :<leader>eg #(vim.cmd {:cmd "edit" :args ["$HOME/.config/git/config"]}))
 (map :n :<leader>ek #(vim.cmd {:cmd "edit" :args ["$HOME/.config/kitty/kitty.conf"]}))
-(map :n :<leader>ev #(vim.cmd {:cmd "edit" :args ["~/.config/nvim/init.fnl"]}))
+(map :n :<leader>ev #(vim.cmd {:cmd "edit" :args ["$HOME/.config/nvim/init.fnl"]}))
 
 (map :n :<leader>w  #(vim.cmd {:cmd "write"}))
 (map :n :<leader>cl #(vim.cmd {:cmd "close"}))

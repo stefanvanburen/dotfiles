@@ -245,7 +245,7 @@ local function _41_()
 end
 map("n", "<leader>ek", _41_)
 local function _42_()
-  return vim.cmd({cmd = "edit", args = {"~/.config/nvim/init.fnl"}})
+  return vim.cmd({cmd = "edit", args = {"$HOME/.config/nvim/init.fnl"}})
 end
 map("n", "<leader>ev", _42_)
 local function _43_()
