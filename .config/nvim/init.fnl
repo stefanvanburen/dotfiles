@@ -82,8 +82,7 @@
     :config
     #(let [gitsigns (require :gitsigns)]
        (gitsigns.setup
-         {:attach_to_untracked false
-          :on_attach
+         {:on_attach
           ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
           (fn [bufnr]
            (fn buffer-map [mode l r ?opts]

@@ -65,7 +65,7 @@ local function _3_()
     buffer_map("n", "<leader>td", gitsigns.toggle_deleted)
     return buffer_map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
   end
-  return gitsigns.setup({on_attach = _4_, attach_to_untracked = false})
+  return gitsigns.setup({on_attach = _4_})
 end
 local function _9_()
   vim.g.fugitive_legacy_commands = 0
