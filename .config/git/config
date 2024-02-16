@@ -111,10 +111,6 @@
 	; assume --set-upstream on push when no upstream tracking exists for the current branch
 	autoSetupRemote = true
 
-[pull]
-	; prefer rebasing when pulling from remote, rather than merging
-	rebase = true
-
 [rebase]
 	; when rebasing, automatically stash the working directory and pop it when done.
 	autoStash = true
