@@ -77,9 +77,10 @@
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
 
+; 1Password commit signing
+; See: https://developer.1password.com/docs/ssh/git-commit-signing/
 [gpg]
 	format = ssh
-
 [gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
