@@ -73,6 +73,7 @@ local function _9_()
 end
 local function _10_()
   vim.g["conjure#highlight#enabled"] = true
+  vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "python"}
   vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
   vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
   return nil

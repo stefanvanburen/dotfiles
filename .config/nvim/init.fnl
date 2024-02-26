@@ -119,6 +119,7 @@
    {:url "https://github.com/Olical/nfnl"}
    {:url "https://github.com/Olical/conjure"
     :config #(do (set vim.g.conjure#highlight#enabled true)
+                 (set vim.g.conjure#filetypes [:clojure :fennel :janet :python])
                  (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
                  (set vim.g.conjure#filetype#janet :conjure.client.janet.stdio))}
    {:url "https://github.com/gpanders/nvim-parinfer"}
