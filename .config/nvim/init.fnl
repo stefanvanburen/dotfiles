@@ -1,12 +1,15 @@
-(local lazypath (.. (vim.fn.stdpath "data") "/lazy/lazy.nvim"))
-(when (not (vim.loop.fs_stat lazypath))
+(local path-package (.. (vim.fn.stdpath "data") "/site/"))
+(local mini-path (.. path-package "pack/deps/start/mini.nvim"))
+(when (not (vim.loop.fs_stat mini-path))
   (vim.fn.system ["git"
                   "clone"
                   "--filter=blob:none"
-                  "https://github.com/folke/lazy.nvim.git"
-                  "--branch=stable"
-                  lazypath]))
-(vim.opt.rtp:prepend lazypath)
+                  "https://github.com/echasnovski/mini.nvim"
+                  mini-path])
+  (vim.cmd "packadd mini.nvim | helptags ALL"))
+
+(local deps (require :mini.deps))
+(deps.setup {:path {:package path-package}})
 
 (local map vim.keymap.set)
 
@@ -54,7 +57,7 @@
 (set vim.o.swapfile false)
 
 ;; Convenience for automatic formatting.
-;;   t - auto-wrap text using textwidth
+;;   t - auto-wrap text ussdfing textwidth
 ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
 ;;   q - allow formatting of comments with `gq`
 ;;   j - where it makes sense, remove a comment leader when joining lines
@@ -69,244 +72,184 @@
 
 ;;; Plugins
 
-(local lazy (require :lazy))
+(deps.add :justinmk/vim-gtfo)
+(set vim.g.gtfo#terminals {:mac :kitty})
 
-(lazy.setup
-  [
-   {:url "https://github.com/justinmk/vim-gtfo"
-    :config #(set vim.g.gtfo#terminals {:mac :kitty})}
-   ;; required by vim-fugitive
-   {:url "https://github.com/tyru/open-browser.vim"}
-   {:url "https://github.com/lewis6991/fileline.nvim"}
-   {:url "https://github.com/lewis6991/gitsigns.nvim"
-    :config
-    #(let [gitsigns (require :gitsigns)]
-       (gitsigns.setup
-         {:on_attach
-          ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
-          (fn [bufnr]
-           (fn buffer-map [mode l r ?opts]
-              (let [opts (or ?opts {})]
-                (set opts.buffer bufnr)
-                (map mode l r opts)))
-           ;; Navigation
-           (buffer-map :n "]c" #(gitsigns.next_hunk))
-           (buffer-map :n "[c" #(gitsigns.prev_hunk))
-           ;; Actions
-           (buffer-map [:n :v] :<leader>hs gitsigns.stage_hunk)
-           (buffer-map [:n :v] :<leader>hr gitsigns.reset_hunk)
-           (buffer-map :n :<leader>hS gitsigns.stage_buffer)
-           (buffer-map :n :<leader>hR gitsigns.reset_buffer)
-           (buffer-map :n :<leader>hu gitsigns.undo_stage_hunk)
-           (buffer-map :n :<leader>hp gitsigns.preview_hunk)
-           (buffer-map :n :<leader>hb #(gitsigns.blame_line {:full true}))
-           (buffer-map :n :<leader>tb gitsigns.toggle_current_line_blame)
-           (buffer-map :n :<leader>hd gitsigns.diffthis)
-           (buffer-map :n :<leader>hD #(gitsigns.diffthis "~"))
-           (buffer-map :n :<leader>td gitsigns.toggle_deleted)
-           ;; Text object
-           (buffer-map [:o :x] :ih ":<C-U>Gitsigns select_hunk<CR>"))}))}
-   {:url "https://github.com/tpope/vim-fugitive"
-    ;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
-    :config #(set vim.g.fugitive_legacy_commands 0)}
-   {:url "https://github.com/tpope/vim-rhubarb"}
-   {:url "https://github.com/mattn/vim-gotmpl"}
-   {:url "https://github.com/fladson/vim-kitty"}
-   {:url "https://github.com/NoahTheDuke/vim-just"}
-   {:url "https://github.com/raimon49/requirements.txt.vim"}
-   {:url "https://github.com/jaawerth/fennel.vim"}
-   {:url "https://github.com/janet-lang/janet.vim"}
-   {:url "https://github.com/Olical/nfnl"}
-   {:url "https://github.com/Olical/conjure"
-    :config #(do (set vim.g.conjure#highlight#enabled true)
-                 (set vim.g.conjure#filetypes [:clojure :fennel :janet :python])
-                 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
-                 (set vim.g.conjure#filetype#janet :conjure.client.janet.stdio))}
-   {:url "https://github.com/gpanders/nvim-parinfer"}
-   {:url "https://github.com/vim-test/vim-test"
-    :dependencies [{:url "https://github.com/tpope/vim-dispatch"}]
-    :config #(do
-               (set vim.g.test#strategy :dispatch)
-               (map :n :<C-t>n ":TestNearest<cr>")
-               (map :n :<C-t>f ":TestFile<cr>")
-               (map :n :<C-t>s ":TestSuite<cr>")
-               (map :n :<C-t>l ":TestLast<cr>")
-               (map :n :<C-t>v ":TestVisit<cr>"))}
-   {:url "https://github.com/neovim/nvim-lspconfig"}
-   {:url "https://github.com/b0o/SchemaStore.nvim"}
-   {:url "https://github.com/stevearc/conform.nvim"
-    :opts {:formatters_by_ft {:proto [:buf]
+(deps.add :tyru/open-browser.vim)
+
+(deps.add :lewis6991/fileline.nvim)
+
+(deps.add :lewis6991/gitsigns.nvim)
+(local gitsigns (require :gitsigns))
+(gitsigns.setup
+  {:on_attach
+   ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
+   (fn [bufnr]
+     (fn buffer-map [mode l r ?opts]
+       (let [opts (or ?opts {})]
+         (set opts.buffer bufnr)
+         (map mode l r opts)))
+     ;; Navigation
+     (buffer-map :n "]c" #(gitsigns.next_hunk))
+     (buffer-map :n "[c" #(gitsigns.prev_hunk))
+     ;; Actions
+     (buffer-map [:n :v] :<leader>hs gitsigns.stage_hunk)
+     (buffer-map [:n :v] :<leader>hr gitsigns.reset_hunk)
+     (buffer-map :n :<leader>hS gitsigns.stage_buffer)
+     (buffer-map :n :<leader>hR gitsigns.reset_buffer)
+     (buffer-map :n :<leader>hu gitsigns.undo_stage_hunk)
+     (buffer-map :n :<leader>hp gitsigns.preview_hunk)
+     (buffer-map :n :<leader>hb #(gitsigns.blame_line {:full true}))
+     (buffer-map :n :<leader>tb gitsigns.toggle_current_line_blame)
+     (buffer-map :n :<leader>hd gitsigns.diffthis)
+     (buffer-map :n :<leader>hD #(gitsigns.diffthis "~"))
+     (buffer-map :n :<leader>td gitsigns.toggle_deleted)
+     ;; Text object
+     (buffer-map [:o :x] :ih ":<C-U>Gitsigns select_hunk<CR>"))})
+
+(deps.add :tpope/vim-fugitive)
+;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
+(set vim.g.fugitive_legacy_commands 0)
+
+(deps.add :tpope/vim-rhubarb)
+
+;; Filetype-specific plugins
+(deps.add :mattn/vim-gotmpl)
+(deps.add :fladson/vim-kitty)
+(deps.add :NoahTheDuke/vim-just)
+(deps.add :raimon49/requirements.txt.vim)
+(deps.add :jaawerth/fennel.vim)
+(deps.add :janet-lang/janet.vim)
+
+(deps.add :Olical/nfnl)
+
+(deps.add :Olical/conjure)
+(set vim.g.conjure#highlight#enabled true)
+(set vim.g.conjure#filetypes [:clojure :fennel :janet :python])
+(set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
+(set vim.g.conjure#filetype#janet :conjure.client.janet.stdio)
+
+(deps.add :gpanders/nvim-parinfer)
+
+;; Dependency of vim-test
+(deps.add :tpope/vim-dispatch)
+(deps.add :vim-test/vim-test)
+(set vim.g.test#strategy :dispatch)
+(map :n :<C-t>n ":TestNearest<cr>")
+(map :n :<C-t>f ":TestFile<cr>")
+(map :n :<C-t>s ":TestSuite<cr>")
+(map :n :<C-t>l ":TestLast<cr>")
+(map :n :<C-t>v ":TestVisit<cr>")
+
+(deps.add :neovim/nvim-lspconfig)
+
+(deps.add :b0o/SchemaStore.nvim)
+
+(deps.add :stevearc/conform.nvim)
+(local conform (require :conform))
+(conform.setup {:formatters_by_ft {:proto [:buf]}
                               :just [:just]
                               :fish [:fish_indent]
                               :json [:prettier]
-                              :typescriptreact [:prettier]}
-           :format_on_save {:timeout_ms 500
-                            :lsp_fallback true}}}
-   {:url "https://github.com/mfussenegger/nvim-lint"
-    :config #(let [lint (require :lint)]
-               ;; https://github.com/mfussenegger/nvim-lint#available-linters
-               (set lint.linters_by_ft {:proto [:buf_lint]
-                                        :fish [:fish]})
-               (vim.api.nvim_create_autocmd :BufWritePost {:callback #(lint.try_lint)}))}
-   {:url "https://github.com/williamboman/mason.nvim"
-    :config true
-    :build ":MasonUpdate"}
-   {:url "https://github.com/williamboman/mason-lspconfig.nvim"
-    :config true}
-   {:url "https://github.com/nvim-treesitter/nvim-treesitter"
-    :build ":TSUpdate"
-    :config #(let [treesitter (require "nvim-treesitter.configs")]
-              (treesitter.setup
-                {;; https://github.com/nvim-treesitter/nvim-treesitter#highlight
-                 :highlight {:enable true}
-                 ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
-                 :matchup {:enable true}
-                 :ensure_installed
-                 [;;; These four are required to be installed.
-                  ;;; See https://github.com/nvim-treesitter/nvim-treesitter/issues/3970#issuecomment-1377126359
-                  ;; https://github.com/tree-sitter/tree-sitter-c
-                  :c
-                  ;; https://github.com/MunifTanjim/tree-sitter-lua
-                  :lua
-                  ;; https://github.com/vigoux/tree-sitter-viml
-                  :vim
-                  ;; https://github.com/neovim/tree-sitter-vimdoc
-                  :vimdoc
+                              :typescriptreact [:prettier]
+                :format_on_save {:timeout_ms 500
+                                 :lsp_fallback true}})
 
-                  ;; https://github.com/sogaiu/tree-sitter-clojure
-                  :clojure
-                  ;; https://github.com/stsewd/tree-sitter-comment
-                  ;; parses comments
-                  :comment
-                  ;; https://github.com/tree-sitter/tree-sitter-css
-                  :css
-                  ;; https://github.com/the-mikedavis/tree-sitter-diff
-                  :diff
-                  ;; https://github.com/camdencheek/tree-sitter-dockerfile
-                  :dockerfile
-                  ;; https://github.com/travonted/tree-sitter-fennel
-                  :fennel
-                  ;; https://github.com/ram02z/tree-sitter-fish
-                  :fish
-                  ;; https://github.com/tree-sitter/tree-sitter-html
-                  :html
-                  ;; https://github.com/gbprod/tree-sitter-gitcommit
-                  :gitcommit
-                  ;; https://github.com/the-mikedavis/tree-sitter-git-rebase
-                  :git_rebase
-                  ;; https://github.com/ObserverOfTime/tree-sitter-gitattributes
-                  :gitattributes
-                  ;; https://github.com/tree-sitter/tree-sitter-go
-                  :go
-                  ;; https://github.com/camdencheek/tree-sitter-go-mod
-                  :gomod
-                  ;; https://github.com/tree-sitter/tree-sitter-javascript
-                  :javascript
-                  ;; https://github.com/tree-sitter/tree-sitter-json
-                  :json
-                  ;; https://github.com/alemuller/tree-sitter-make
-                  :make
-                  ;; https://github.com/MDeiml/tree-sitter-markdown
-                  :markdown
-                  :markdown_inline
-                  ;; https://github.com/treywood/tree-sitter-proto
-                  :proto
-                  ;; https://github.com/tree-sitter/tree-sitter-python
-                  :python
-                  ;; https://github.com/ObserverOfTime/tree-sitter-requirements
-                  :requirements
-                  ;; https://github.com/ObserverOfTime/tree-sitter-ssh-config
-                  :ssh_config
-                  ;; https://github.com/derekstride/tree-sitter-sql
-                  :sql
-                  ;; https://github.com/ikatyang/tree-sitter-toml
-                  :toml
-                  ;; https://github.com/ikatyang/tree-sitter-yaml
-                  :yaml
-                  ;; https://github.com/maxxnino/tree-sitter-zig
-                  :zig]}))}
-   {:url "https://github.com/echasnovski/mini.nvim"
-    :config #(let [;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-basics.md
-                   mini-basics (require :mini.basics)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pairs.md
-                   mini-pairs (require :mini.pairs)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-trailspace.md
-                   mini-trailspace (require :mini.trailspace)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-comment.md
-                   mini-comment (require :mini.comment)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
-                   mini-surround (require :mini.surround)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-hues.md
-                   mini-hues (require :mini.hues)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pick.md
-                   mini-pick (require :mini.pick)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-extra.md
-                   mini-extra (require :mini.extra)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-statusline.md
-                   mini-statusline (require :mini.statusline)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-completion.md
-                   mini-completion (require :mini.completion)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
-                   mini-bracketed (require :mini.bracketed)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-files.md
-                   mini-files (require :mini.files)
-                   ;; https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-notify.md
-                   mini-notify (require :mini.notify)]
-                ;; mini-basics should be first, to set up mappings like <Leader>
-                (mini-basics.setup)
-                (mini-pairs.setup)
-                (mini-trailspace.setup)
-                (map :n :<leader>sw mini-trailspace.trim)
-                (mini-comment.setup {:options {:ignore_blank_line true}})
-                (mini-surround.setup
-                  {:mappings {:add            :gza
-                              :delete         :gzd
-                              :find           :gzf
-                              :find_left      :gzF
-                              :highlight      :gzh
-                              :replace        :gzr
-                              :update_n_lines :gzn}})
-                (vim.cmd.colorscheme :randomhue)
-                (mini-pick.setup)
-                (map :n :<leader>ff mini-pick.builtin.files)
-                (map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
-                (map :n :<leader>fb mini-pick.builtin.buffers)
-                (map :n :<leader>fl mini-pick.builtin.grep_live)
-                (map :n :<leader>fh mini-pick.builtin.help)
-                (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
-                (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
-                (mini-statusline.setup)
-                (mini-completion.setup)
-                (mini-bracketed.setup)
-                (mini-files.setup {:mappings {:go_in_plus :<CR>}})
-                (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
-                (mini-notify.setup))}
-   {:url "https://github.com/tpope/vim-eunuch"}
-   {:url "https://github.com/andymass/vim-matchup"
-    :config #(set vim.g.matchup_matchparen_offscreen {})}
-   {:url "https://github.com/tpope/vim-abolish"}
-   {:url "https://github.com/rktjmp/paperplanes.nvim"}
-   {:url "https://github.com/rktjmp/lush.nvim"}
-   {:url "https://git.sr.ht/~p00f/alabaster.nvim"
-    :lazy true
-    :priority 1000
-    :config #(vim.cmd.colorscheme :alabaster)}
-   {:url "https://github.com/stefanvanburen/rams"
-    :lazy true
-    :priority 1000
-    :dependencies [{:url "https://github.com/stefanvanburen/rams"}]
-    :config #(vim.cmd.colorscheme :rams)}
-   {:url "https://github.com/mcchrish/zenbones.nvim"
-    :lazy true
-    :priority 1000
-    :config #(vim.cmd.colorscheme :zenwritten)}
-   {:url "https://github.com/rose-pine/neovim"
-    :name :rose-pine
-    :lazy true
-    :priority 1000
-    :config #(vim.cmd.colorscheme :rose-pine)}]
- ;; on startup, if doing installation, try to load colorschemes
- {:install {:colorscheme [:randomhue :zenwritten :rams :alabaster :rose-pine]}})
+(deps.add :mfussenegger/nvim-lint)
+(local nvim-lint (require :lint))
+;; https://github.com/mfussenegger/nvim-lint#available-linters
+(set nvim-lint.linters_by_ft {:proto [:buf_lint]
+                              :fish [:fish]})
+(vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)})
+
+(deps.add {:source :williamboman/mason.nvim
+           :hooks {:post_checkout (fn [] (vim.cmd ":MasonUpdate"))}})
+(local mason (require :mason))
+(mason.setup)
+
+(deps.add :williamboman/mason-lspconfig.nvim)
+(local mason-lspconfig (require :mason-lspconfig))
+(mason-lspconfig.setup)
+
+(deps.add {:source :nvim-treesitter/nvim-treesitter
+           :hooks {:post_checkout (fn [] (vim.cmd ":TSUpdate"))}})
+(local treesitter (require :nvim-treesitter.configs))
+(treesitter.setup {;:highlight {:enable true}
+                   ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
+                   :matchup {:enable true}
+                   :ensure_installed [:c :lua :vim :vimdoc :clojure :comment :css :diff :dockerfile :fennel :fish :html
+                                      :gitcommit :git_rebase :gitattributes :go :gomod :javascript :json :make
+                                      :markdown :markdown_inline :proto :python :requirements :ssh_config
+                                      :sql :toml :yaml :zig]})
+
+(deps.add :echasnovski/mini.nvim)
+
+;; mini-basics should be first, to set up mappings like <Leader>
+(local mini-basics (require :mini.basics))
+(mini-basics.setup)
+
+(local mini-pairs (require :mini.pairs))
+(mini-pairs.setup)
+
+(local mini-trailspace (require :mini.trailspace))
+(mini-trailspace.setup)
+(map :n :<leader>sw mini-trailspace.trim)
+
+(local mini-comment (require :mini.comment))
+(mini-comment.setup {:options {:ignore_blank_line true}})
+
+(local mini-surround (require :mini.surround))
+(mini-surround.setup {:mappings {:add            :gza
+                                 :delete         :gzd
+                                 :find           :gzf
+                                 :find_left      :gzF
+                                 :highlight      :gzh
+                                 :replace        :gzr
+                                 :update_n_lines :gzn}})
+
+(local mini-hues (require :mini.hues))
+(vim.cmd.colorscheme :randomhue)
+
+(local mini-pick (require :mini.pick))
+(mini-pick.setup)
+(map :n :<leader>ff mini-pick.builtin.files)
+(map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
+(map :n :<leader>fb mini-pick.builtin.buffers)
+(map :n :<leader>fl mini-pick.builtin.grep_live)
+(map :n :<leader>fh mini-pick.builtin.help)
+
+(local mini-extra (require :mini.extra))
+(map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
+(map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
+
+(local mini-statusline (require :mini.statusline))
+(mini-statusline.setup)
+
+(local mini-completion (require :mini.completion))
+(mini-completion.setup)
+
+(local mini-bracketed (require :mini.bracketed))
+(mini-bracketed.setup)
+
+(local mini-files (require :mini.files))
+(mini-files.setup {:mappings {:go_in_plus :<CR>}})
+(map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
+
+(local mini-notify (require :mini.notify))
+(mini-notify.setup)
+
+(deps.add :tpope/vim-eunuch)
+(deps.add :andymass/vim-matchup)
+(set vim.g.matchup_matchparen_offscreen {})
+(deps.add :tpope/vim-abolish)
+(deps.add :rktjmp/paperplanes.nvim)
+(deps.add :rktjmp/lush.nvim)
+
+;; Colorschemes
+(deps.add {:source "https://git.sr.ht/~p00f/alabaster.nvim"})
+(deps.add :stefanvanburen/rams)
+(deps.add :mcchrish/zenbones.nvim)
+(deps.add :rose-pine/neovim)
 
 ;;; Autocommands and FileType settings
 
