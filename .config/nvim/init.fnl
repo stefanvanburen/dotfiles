@@ -174,9 +174,10 @@
 (deps.add {:source :nvim-treesitter/nvim-treesitter
            :hooks {:post_checkout (fn [] (vim.cmd ":TSUpdate"))}})
 (local treesitter (require :nvim-treesitter.configs))
-(treesitter.setup {;:highlight {:enable true}
+(treesitter.setup {:highlight {:enable true}
                    ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
-                   :matchup {:enable true}
+                   :matchup {:enable true
+                             :disable [:fennel]}
                    :ensure_installed [:c :lua :vim :vimdoc :clojure :comment :css :diff :dockerfile :fennel :fish :html
                                       :gitcommit :git_rebase :gitattributes :go :gomod :javascript :json :make
                                       :markdown :markdown_inline :proto :python :requirements :ssh_config

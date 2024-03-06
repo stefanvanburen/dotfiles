@@ -118,7 +118,7 @@ local function _9_()
 end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _9_}})
 local treesitter = require("nvim-treesitter.configs")
-treesitter.setup({matchup = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "dockerfile", "fennel", "fish", "html", "gitcommit", "git_rebase", "gitattributes", "go", "gomod", "javascript", "json", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "ssh_config", "sql", "toml", "yaml", "zig"}})
+treesitter.setup({highlight = {enable = true}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "dockerfile", "fennel", "fish", "html", "gitcommit", "git_rebase", "gitattributes", "go", "gomod", "javascript", "json", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "ssh_config", "sql", "toml", "yaml", "zig"}})
 deps.add("echasnovski/mini.nvim")
 local mini_basics = require("mini.basics")
 mini_basics.setup()
