@@ -174,7 +174,8 @@
 (deps.add {:source :nvim-treesitter/nvim-treesitter
            :hooks {:post_checkout (fn [] (vim.cmd ":TSUpdate"))}})
 (local treesitter (require :nvim-treesitter.configs))
-(treesitter.setup {:highlight {:enable true}
+(treesitter.setup {:highlight {:enable true
+                               :disable [:fennel]}
                    ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
                    :matchup {:enable true
                              :disable [:fennel]}
