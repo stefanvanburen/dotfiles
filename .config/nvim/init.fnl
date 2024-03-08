@@ -149,6 +149,7 @@
 (local conform (require :conform))
 (conform.setup {:formatters_by_ft {:proto [:buf]
                                    :just [:just]
+                                   :fennel [:fnlfmt]
                                    :fish [:fish_indent]
                                    :json [:prettier]
                                    :typescriptreact [:prettier]}

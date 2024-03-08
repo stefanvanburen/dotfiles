@@ -96,7 +96,7 @@ deps.add("neovim/nvim-lspconfig")
 deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
 local conform = require("conform")
-conform.setup({formatters_by_ft = {proto = {"buf"}, just = {"just"}, fish = {"fish_indent"}, json = {"prettier"}, typescriptreact = {"prettier"}}, format_on_save = {timeout_ms = 500, lsp_fallback = true}})
+conform.setup({formatters_by_ft = {proto = {"buf"}, just = {"just"}, fennel = {"fnlfmt"}, fish = {"fish_indent"}, json = {"prettier"}, typescriptreact = {"prettier"}}, format_on_save = {timeout_ms = 500, lsp_fallback = true}})
 deps.add("mfussenegger/nvim-lint")
 local nvim_lint = require("lint")
 nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}}
