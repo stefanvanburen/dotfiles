@@ -1,8 +1,8 @@
-(local path-package (.. (vim.fn.stdpath "data") "/site/"))
-(local mini-path (.. path-package "pack/deps/start/mini.nvim"))
+(local path-package (.. (vim.fn.stdpath :data) :/site/))
+(local mini-path (.. path-package :pack/deps/start/mini.nvim))
 (when (not (vim.loop.fs_stat mini-path))
-  (vim.fn.system ["git"
-                  "clone"
+  (vim.fn.system [:git
+                  :clone
                   "--filter=blob:none"
                   "https://github.com/echasnovski/mini.nvim"
                   mini-path])
@@ -51,7 +51,7 @@
 (set vim.o.listchars "tab:⇥ ,eol:¬,trail:⣿")
 
 ;; always use the system clipboard for operations
-(set vim.o.clipboard "unnamedplus")
+(set vim.o.clipboard :unnamedplus)
 
 ;; turn off swapfiles - for now, I find these more of a headache than a benefit
 (set vim.o.swapfile false)
@@ -65,7 +65,7 @@
 ;;   o - auto-insert comment leading after O in normal mode
 ;;   n - recognize numbered lists in text
 ;;   p - don't break lines at single spaces that follow periods
-(set vim.o.formatoptions "tcqjronp")
+(set vim.o.formatoptions :tcqjronp)
 
 ;; ignore case when completing files / directories in wildmenu
 (set vim.o.wildignorecase true)
@@ -81,31 +81,37 @@
 
 (deps.add :lewis6991/gitsigns.nvim)
 (local gitsigns (require :gitsigns))
-(gitsigns.setup
-  {:on_attach
-   ;; https://github.com/lewis6991/gitsigns.nvim#keymaps
-   (fn [bufnr]
-     (fn buffer-map [mode l r ?opts]
-       (let [opts (or ?opts {})]
-         (set opts.buffer bufnr)
-         (map mode l r opts)))
-     ;; Navigation
-     (buffer-map :n "]c" #(gitsigns.next_hunk))
-     (buffer-map :n "[c" #(gitsigns.prev_hunk))
-     ;; Actions
-     (buffer-map [:n :v] :<leader>hs gitsigns.stage_hunk)
-     (buffer-map [:n :v] :<leader>hr gitsigns.reset_hunk)
-     (buffer-map :n :<leader>hS gitsigns.stage_buffer)
-     (buffer-map :n :<leader>hR gitsigns.reset_buffer)
-     (buffer-map :n :<leader>hu gitsigns.undo_stage_hunk)
-     (buffer-map :n :<leader>hp gitsigns.preview_hunk)
-     (buffer-map :n :<leader>hb #(gitsigns.blame_line {:full true}))
-     (buffer-map :n :<leader>tb gitsigns.toggle_current_line_blame)
-     (buffer-map :n :<leader>hd gitsigns.diffthis)
-     (buffer-map :n :<leader>hD #(gitsigns.diffthis "~"))
-     (buffer-map :n :<leader>td gitsigns.toggle_deleted)
-     ;; Text object
-     (buffer-map [:o :x] :ih ":<C-U>Gitsigns select_hunk<CR>"))})
+(gitsigns.setup {:on_attach (fn [bufnr]
+                              (fn buffer-map [mode l r ?opts]
+                                (let [opts (or ?opts {})]
+                                  (set opts.buffer bufnr)
+                                  (map mode l r opts)))
+
+                              ;; Navigation
+                              (buffer-map :n "]c" #(gitsigns.next_hunk))
+                              (buffer-map :n "[c" #(gitsigns.prev_hunk))
+                              ;; Actions
+                              (buffer-map [:n :v] :<leader>hs
+                                          gitsigns.stage_hunk)
+                              (buffer-map [:n :v] :<leader>hr
+                                          gitsigns.reset_hunk)
+                              (buffer-map :n :<leader>hS gitsigns.stage_buffer)
+                              (buffer-map :n :<leader>hR gitsigns.reset_buffer)
+                              (buffer-map :n :<leader>hu
+                                          gitsigns.undo_stage_hunk)
+                              (buffer-map :n :<leader>hp gitsigns.preview_hunk)
+                              (buffer-map :n :<leader>hb
+                                          #(gitsigns.blame_line {:full true}))
+                              (buffer-map :n :<leader>tb
+                                          gitsigns.toggle_current_line_blame)
+                              (buffer-map :n :<leader>hd gitsigns.diffthis)
+                              (buffer-map :n :<leader>hD
+                                          #(gitsigns.diffthis "~"))
+                              (buffer-map :n :<leader>td
+                                          gitsigns.toggle_deleted)
+                              ;; Text object
+                              (buffer-map [:o :x] :ih
+                                          ":<C-U>Gitsigns select_hunk<CR>"))})
 
 (deps.add :tpope/vim-fugitive)
 ;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
@@ -153,18 +159,18 @@
                                    :fish [:fish_indent]
                                    :json [:prettier]
                                    :typescriptreact [:prettier]}
-                :format_on_save {:timeout_ms 500
-                                 :lsp_fallback true}})
+                :format_on_save {:timeout_ms 500 :lsp_fallback true}})
 
 (deps.add :mfussenegger/nvim-lint)
 (local nvim-lint (require :lint))
 ;; https://github.com/mfussenegger/nvim-lint#available-linters
-(set nvim-lint.linters_by_ft {:proto [:buf_lint]
-                              :fish [:fish]})
+(set nvim-lint.linters_by_ft {:proto [:buf_lint] :fish [:fish]})
+
 (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)})
 
 (deps.add {:source :williamboman/mason.nvim
            :hooks {:post_checkout (fn [] (vim.cmd ":MasonUpdate"))}})
+
 (local mason (require :mason))
 (mason.setup)
 
@@ -174,16 +180,41 @@
 
 (deps.add {:source :nvim-treesitter/nvim-treesitter
            :hooks {:post_checkout (fn [] (vim.cmd ":TSUpdate"))}})
+
 (local treesitter (require :nvim-treesitter.configs))
-(treesitter.setup {:highlight {:enable true
-                               :disable [:fennel]}
+(treesitter.setup {:highlight {:enable true :disable [:fennel]}
                    ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
-                   :matchup {:enable true
-                             :disable [:fennel]}
-                   :ensure_installed [:c :lua :vim :vimdoc :clojure :comment :css :diff :dockerfile :fennel :fish :html
-                                      :gitcommit :git_rebase :gitattributes :go :gomod :javascript :json :make
-                                      :markdown :markdown_inline :proto :python :requirements :ssh_config
-                                      :sql :toml :yaml :zig]})
+                   :matchup {:enable true :disable [:fennel]}
+                   :ensure_installed [:c
+                                      :lua
+                                      :vim
+                                      :vimdoc
+                                      :clojure
+                                      :comment
+                                      :css
+                                      :diff
+                                      :dockerfile
+                                      :fennel
+                                      :fish
+                                      :html
+                                      :gitcommit
+                                      :git_rebase
+                                      :gitattributes
+                                      :go
+                                      :gomod
+                                      :javascript
+                                      :json
+                                      :make
+                                      :markdown
+                                      :markdown_inline
+                                      :proto
+                                      :python
+                                      :requirements
+                                      :ssh_config
+                                      :sql
+                                      :toml
+                                      :yaml
+                                      :zig]})
 
 (deps.add :echasnovski/mini.nvim)
 
@@ -202,12 +233,12 @@
 (mini-comment.setup {:options {:ignore_blank_line true}})
 
 (local mini-surround (require :mini.surround))
-(mini-surround.setup {:mappings {:add            :gza
-                                 :delete         :gzd
-                                 :find           :gzf
-                                 :find_left      :gzF
-                                 :highlight      :gzh
-                                 :replace        :gzr
+(mini-surround.setup {:mappings {:add :gza
+                                 :delete :gzd
+                                 :find :gzf
+                                 :find_left :gzF
+                                 :highlight :gzh
+                                 :replace :gzr
                                  :update_n_lines :gzn}})
 
 (local mini-hues (require :mini.hues))
@@ -260,48 +291,72 @@
 
 (vim.api.nvim_create_autocmd :TextYankPost {:callback #(vim.highlight.on_yank)})
 
-(local filetype-settings
-  {:go              {:expandtab false}
-   :javascript      {:expandtab true  :shiftwidth 2}
-   :javascriptreact {:expandtab true  :shiftwidth 2}
-   :typescript      {:expandtab true  :shiftwidth 2}
-   :typescriptreact {:expandtab true  :shiftwidth 2}
-   :html            {:expandtab true  :shiftwidth 2}
-   :css             {:expandtab true  :shiftwidth 2}
-   :gohtmltmpl      {:expandtab true  :shiftwidth 2 :commentstring "{{/* %s */}}"}
-   :gotexttmpl      {:expandtab true  :shiftwidth 2 :commentstring "{{/* %s */}}"}
-   :fish            {:expandtab true  :shiftwidth 4 :commentstring "# %s"}
-   :yaml            {:expandtab true  :shiftwidth 2}
-   :svg             {:expandtab true  :shiftwidth 2}
-   :json            {:expandtab true  :shiftwidth 2}
-   :bash            {:expandtab true  :shiftwidth 2}
-   :python          {:expandtab true  :shiftwidth 4}
-   :xml             {:expandtab true  :shiftwidth 4}
-   :starlark        {:expandtab true  :shiftwidth 4 :commentstring "# %s"}
-   :proto           {:expandtab true  :shiftwidth 2 :commentstring "// %s" :cindent true}
-   :gitcommit       {:spell true}
-   :sql             {:wrap true :commentstring "-- %s"}
-   :clojure         {:expandtab true :textwidth 80}
-   :kotlin          {:commentstring "// %s"}
-   :markdown        {:spell true :wrap true :conceallevel 0 :shiftwidth 2}})
+(local filetype-settings {:go {:expandtab false}
+                          :javascript {:expandtab true :shiftwidth 2}
+                          :javascriptreact {:expandtab true :shiftwidth 2}
+                          :typescript {:expandtab true :shiftwidth 2}
+                          :typescriptreact {:expandtab true :shiftwidth 2}
+                          :html {:expandtab true :shiftwidth 2}
+                          :css {:expandtab true :shiftwidth 2}
+                          :gohtmltmpl {:expandtab true
+                                       :shiftwidth 2
+                                       :commentstring "{{/* %s */}}"}
+                          :gotexttmpl {:expandtab true
+                                       :shiftwidth 2
+                                       :commentstring "{{/* %s */}}"}
+                          :fish {:expandtab true
+                                 :shiftwidth 4
+                                 :commentstring "# %s"}
+                          :yaml {:expandtab true :shiftwidth 2}
+                          :svg {:expandtab true :shiftwidth 2}
+                          :json {:expandtab true :shiftwidth 2}
+                          :bash {:expandtab true :shiftwidth 2}
+                          :python {:expandtab true :shiftwidth 4}
+                          :xml {:expandtab true :shiftwidth 4}
+                          :starlark {:expandtab true
+                                     :shiftwidth 4
+                                     :commentstring "# %s"}
+                          :proto {:expandtab true
+                                  :shiftwidth 2
+                                  :commentstring "// %s"
+                                  :cindent true}
+                          :gitcommit {:spell true}
+                          :sql {:wrap true :commentstring "-- %s"}
+                          :clojure {:expandtab true :textwidth 80}
+                          :kotlin {:commentstring "// %s"}
+                          :markdown {:spell true
+                                     :wrap true
+                                     :conceallevel 0
+                                     :shiftwidth 2}})
 
-(let [aufiletypes (vim.api.nvim_create_augroup "filetypes" {})]
+(let [aufiletypes (vim.api.nvim_create_augroup :filetypes {})]
   (each [filetype settings (pairs filetype-settings)]
-    (vim.api.nvim_create_autocmd :FileType {:group aufiletypes
-                                            :pattern filetype
-                                            :callback #(each [name value (pairs settings)]
-                                                         (vim.api.nvim_set_option_value name value {:scope "local"}))}))
-
+    (vim.api.nvim_create_autocmd :FileType
+                                 {:group aufiletypes
+                                  :pattern filetype
+                                  :callback #(each [name value (pairs settings)]
+                                               (vim.api.nvim_set_option_value name
+                                                                              value
+                                                                              {:scope :local}))}))
   ;; treat mdx files as markdown
-  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead] {:group aufiletypes
-                                                       :pattern "*.mdx"
-                                                       :callback #(vim.api.nvim_set_option_value "filetype" "markdown" {:scope "local"})})
-  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead] {:group aufiletypes
-                                                       :pattern "*.star"
-                                                       :callback #(vim.api.nvim_set_option_value "filetype" "starlark" {:scope "local"})})
-  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead] {:group aufiletypes
-                                                       :pattern "*.tpl"
-                                                       :callback #(vim.api.nvim_set_option_value "filetype" "gotmpl" {:scope "local"})}))
+  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
+                               {:group aufiletypes
+                                :pattern :*.mdx
+                                :callback #(vim.api.nvim_set_option_value :filetype
+                                                                          :markdown
+                                                                          {:scope :local})})
+  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
+                               {:group aufiletypes
+                                :pattern :*.star
+                                :callback #(vim.api.nvim_set_option_value :filetype
+                                                                          :starlark
+                                                                          {:scope :local})})
+  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
+                               {:group aufiletypes
+                                :pattern :*.tpl
+                                :callback #(vim.api.nvim_set_option_value :filetype
+                                                                          :gotmpl
+                                                                          {:scope :local})}))
 
 ;;; Mappings
 
@@ -311,11 +366,11 @@
 (map :n :<leader>? vim.diagnostic.open_float)
 
 ;; Fugitive
-(map :n :<leader>gs #(vim.cmd {:cmd "Git" :mods {:vertical true}}))
-(map :n :<leader>gw #(vim.cmd {:cmd "Gwrite"}))
-(map :n :<leader>gc #(vim.cmd {:cmd "Git" :args ["commit"]}))
-(map :n :<leader>gp #(vim.cmd {:cmd "Git" :args ["push"]}))
-(map :n :<leader>gb #(vim.cmd {:cmd "Git" :args ["blame"]}))
+(map :n :<leader>gs #(vim.cmd {:cmd :Git :mods {:vertical true}}))
+(map :n :<leader>gw #(vim.cmd {:cmd :Gwrite}))
+(map :n :<leader>gc #(vim.cmd {:cmd :Git :args [:commit]}))
+(map :n :<leader>gp #(vim.cmd {:cmd :Git :args [:push]}))
+(map :n :<leader>gb #(vim.cmd {:cmd :Git :args [:blame]}))
 
 ;; open-browser.vim
 (map [:n :v] :gx "<plug>(openbrowser-smart-search)" {})
@@ -328,19 +383,22 @@
 ;; Navigate between matching brackets
 ;; These specifically `remap` because we want to be bound to whatever % is
 ;; (currently vim-matchup).
-(map [:n :v] :<tab> :% {:remap true})
+(map [:n :v] :<tab> "%" {:remap true})
 
 ;; edit config files
-(map :n :<leader>ef #(vim.cmd {:cmd "edit" :args ["$HOME/.config/fish/config.fish"]}))
-(map :n :<leader>eg #(vim.cmd {:cmd "edit" :args ["$HOME/.config/git/config"]}))
-(map :n :<leader>ek #(vim.cmd {:cmd "edit" :args ["$HOME/.config/kitty/kitty.conf"]}))
-(map :n :<leader>ev #(vim.cmd {:cmd "edit" :args ["$HOME/.config/nvim/init.fnl"]}))
+(map :n :<leader>ef
+     #(vim.cmd {:cmd :edit :args [:$HOME/.config/fish/config.fish]}))
+(map :n :<leader>eg #(vim.cmd {:cmd :edit :args [:$HOME/.config/git/config]}))
+(map :n :<leader>ek
+     #(vim.cmd {:cmd :edit :args [:$HOME/.config/kitty/kitty.conf]}))
+(map :n :<leader>ev
+     #(vim.cmd {:cmd :edit :args [:$HOME/.config/nvim/init.fnl]}))
 
-(map :n :<leader>w  #(vim.cmd {:cmd "write"}))
-(map :n :<leader>cl #(vim.cmd {:cmd "close"}))
-(map :n :<leader>ss #(vim.cmd {:cmd "split"}))
-(map :n :<leader>vs #(vim.cmd {:cmd "vsplit"}))
-(map :n :<leader>tn #(vim.cmd {:cmd "tabnew"}))
+(map :n :<leader>w #(vim.cmd {:cmd :write}))
+(map :n :<leader>cl #(vim.cmd {:cmd :close}))
+(map :n :<leader>ss #(vim.cmd {:cmd :split}))
+(map :n :<leader>vs #(vim.cmd {:cmd :vsplit}))
+(map :n :<leader>tn #(vim.cmd {:cmd :tabnew}))
 
 ;; Use Q to repeat last macro, rather than going into ex mode
 (map :n :Q "@@")
@@ -350,13 +408,13 @@
 ;; first column in the line. ^ is more useful, but harder to hit, so swap it
 ;; with 0
 (map :n :0 "^")
-(map :n :^ "0")
+(map :n "^" :0)
 
 ;; always center the screen after any movement command
-(map :n :<C-d> "<C-d>zz")
-(map :n :<C-f> "<C-f>zz")
-(map :n :<C-b> "<C-b>zz")
-(map :n :<C-u> "<C-u>zz")
+(map :n :<C-d> :<C-d>zz)
+(map :n :<C-f> :<C-f>zz)
+(map :n :<C-b> :<C-b>zz)
+(map :n :<C-u> :<C-u>zz)
 
 ;; Redirect changes to the "black hole" register
 (map :n :c "\"_c")
@@ -367,92 +425,101 @@
 
 ;; similar to vmap but only for visual mode - NOT select mode
 ;; maintains the currently visual selection between invocations of '<' and '>'
-(map :x :< "<gv")
-(map :x :> ">gv")
+(map :x "<" :<gv)
+(map :x ">" :>gv)
 
 ;; <c-k> escape sequences.
 (map :i :<c-k> :<esc>)
 (map :c :<c-k> :<c-c>)
-(map :t :<c-k> :<c-\><c-n>)
+(map :t :<c-k> "<c-\\><c-n>")
 
-(map :n "<C-l>" ":nohlsearch<cr>")
+(map :n :<C-l> ":nohlsearch<cr>")
 
 ;;; Diagnostics
 
-(vim.fn.sign_define :DiagnosticSignError {:text :× :texthl :DiagnosticSignError})
-(vim.fn.sign_define :DiagnosticSignWarn  {:text :! :texthl :DiagnosticSignWarn})
-(vim.fn.sign_define :DiagnosticSignInfo  {:text :✳︎ :texthl :DiagnosticSignInfo})
-(vim.fn.sign_define :DiagnosticSignHint  {:text :? :texthl :DiagnosticSignHint})
+(vim.fn.sign_define :DiagnosticSignError
+                    {:text "×" :texthl :DiagnosticSignError})
+(vim.fn.sign_define :DiagnosticSignWarn {:text "!" :texthl :DiagnosticSignWarn})
+(vim.fn.sign_define :DiagnosticSignInfo
+                    {:text "✳︎" :texthl :DiagnosticSignInfo})
+(vim.fn.sign_define :DiagnosticSignHint {:text "?" :texthl :DiagnosticSignHint})
 
-(vim.diagnostic.config {:virtual_text {:prefix :▪}
+(vim.diagnostic.config {:virtual_text {:prefix "▪"}
                         :float {:border :single
                                 :focusable false
                                 :source :always}})
 
 ;;; LSP
 
-(vim.api.nvim_create_autocmd
-  :LspAttach
-  {:callback
-   (fn [{: buf :data {: client_id}}]
-     (local client (vim.lsp.get_client_by_id client_id))
+(vim.api.nvim_create_autocmd :LspAttach
+                             {:callback (fn [{: buf :data {: client_id}}]
+                                          (local client
+                                                 (vim.lsp.get_client_by_id client_id))
 
-     (fn format []
-       (do
-         (vim.lsp.buf.format {:timeout_ms 2000})
-         (when (= client.name "gopls")
-           (vim.lsp.buf.code_action {:context {:only ["source.organizeImports"]}
-                                     :apply true}))))
+                                          (fn format []
+                                            (do
+                                              (vim.lsp.buf.format {:timeout_ms 2000})
+                                              (when (= client.name :gopls)
+                                                (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
+                                                                          :apply true}))))
 
-     (fn buffer-map [from to]
-       (vim.keymap.set :n from to {:buffer buf :silent true}))
+                                          (fn buffer-map [from to]
+                                            (vim.keymap.set :n from to
+                                                            {:buffer buf
+                                                             :silent true}))
 
-     (when client.server_capabilities.documentFormattingProvider
-       (buffer-map :<leader>af #(format client))
-       ;; TODO: Disable tsserver's formatting overall.
-       (when (not= client.name "tsserver")
-         (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf
-                                                    :callback #(format client)})))
+                                          (when client.server_capabilities.documentFormattingProvider
+                                            (buffer-map :<leader>af
+                                                        #(format client))
+                                            ;; TODO: Disable tsserver's formatting overall.
+                                            (when (not= client.name :tsserver)
+                                              (vim.api.nvim_create_autocmd :BufWritePre
+                                                                           {:buffer buf
+                                                                            :callback #(format client)})))
+                                          ;; requires neovim nightly
+                                          (when (and client.server_capabilities.inlayHintProvider
+                                                     vim.lsp.inlay_hint)
+                                            (vim.lsp.inlay_hint.enable buf true))
+                                          (when client.server_capabilities.hoverProvider
+                                            (buffer-map :K vim.lsp.buf.hover))
+                                          (when client.server_capabilities.documentHighlightProvider
+                                            (let [augroup-id (vim.api.nvim_create_augroup :lsp-document-highlight
+                                                                                          {:clear false})]
+                                              (vim.api.nvim_create_autocmd [:CursorHold
+                                                                            :InsertLeave]
+                                                                           {:group augroup-id
+                                                                            :buffer buf
+                                                                            :callback vim.lsp.buf.document_highlight})
+                                              (vim.api.nvim_create_autocmd [:CursorMoved
+                                                                            :InsertEnter]
+                                                                           {:group augroup-id
+                                                                            :buffer buf
+                                                                            :callback vim.lsp.buf.clear_references})))
+                                          ;; setup mappings
+                                          ;; See `:help vim.lsp.*` for documentation on any of the below functions
+                                          (buffer-map :gD
+                                                      vim.lsp.buf.declaration)
+                                          (buffer-map :gd
+                                                      vim.lsp.buf.definition)
+                                          (buffer-map :gi
+                                                      vim.lsp.buf.implementation)
+                                          (buffer-map :gr
+                                                      vim.lsp.buf.references)
+                                          (buffer-map :<C-k>
+                                                      vim.lsp.buf.signature_help)
+                                          (buffer-map :<leader>D
+                                                      vim.lsp.buf.type_definition)
+                                          (buffer-map :<leader>rn
+                                                      vim.lsp.buf.rename)
+                                          (buffer-map :<leader>ca
+                                                      vim.lsp.buf.code_action))})
 
-     ;; requires neovim nightly
-     (when (and
-             client.server_capabilities.inlayHintProvider
-             vim.lsp.inlay_hint)
-       (vim.lsp.inlay_hint.enable buf true))
-
-     (when client.server_capabilities.hoverProvider
-       (buffer-map :K vim.lsp.buf.hover))
-
-     (when client.server_capabilities.documentHighlightProvider
-       (let [augroup-id (vim.api.nvim_create_augroup "lsp-document-highlight" {:clear false})]
-         (vim.api.nvim_create_autocmd
-           [:CursorHold :InsertLeave]
-           {:group augroup-id
-            :buffer buf
-            :callback vim.lsp.buf.document_highlight})
-         (vim.api.nvim_create_autocmd
-           [:CursorMoved :InsertEnter]
-           {:group augroup-id
-            :buffer buf
-            :callback vim.lsp.buf.clear_references})))
-
-     ;; setup mappings
-     ;; See `:help vim.lsp.*` for documentation on any of the below functions
-     (buffer-map :gD         vim.lsp.buf.declaration)
-     (buffer-map :gd         vim.lsp.buf.definition)
-     (buffer-map :gi         vim.lsp.buf.implementation)
-     (buffer-map :gr         vim.lsp.buf.references)
-     (buffer-map :<C-k>      vim.lsp.buf.signature_help)
-     (buffer-map :<leader>D  vim.lsp.buf.type_definition)
-     (buffer-map :<leader>rn vim.lsp.buf.rename)
-     (buffer-map :<leader>ca vim.lsp.buf.code_action))})
-
-(local lspconfig   (require :lspconfig))
+(local lspconfig (require :lspconfig))
 (local schemastore (require :schemastore))
 
 (local server-settings {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
                         lspconfig.gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
-                                         :cmd ["gopls" "-remote=auto"]
+                                         :cmd [:gopls :-remote=auto]
                                          ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
                                          :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
                                                             :staticcheck true
@@ -466,7 +533,6 @@
                                                                        :unusedwrite true
                                                                        ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#useany
                                                                        :useany true}}}}
-
                         ;;; https://github.com/b0o/SchemaStore.nvim#usage
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
                         lspconfig.jsonls {:settings {:json {:schemas (schemastore.json.schemas)
@@ -475,7 +541,6 @@
                         lspconfig.yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
                                                             :schemaStore {:enable false
                                                                           :url ""}}}}
-
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
                         lspconfig.clojure_lsp {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cssls
@@ -489,7 +554,7 @@
                         ;; pipx inject python-lsp-server pylsp-mypy ; https://github.com/python-lsp/pylsp-mypy
                         ;; https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
                         lspconfig.pylsp {:settings {:pylsp {:plugins {:pycodestyle {:enabled false}
-                                                                      :pyflakes    {:enabled false}}}}}
+                                                                      :pyflakes {:enabled false}}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
                         lspconfig.tsserver {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
@@ -506,3 +571,4 @@
 
 (each [server settings (pairs server-settings)]
   (server.setup settings))
+
