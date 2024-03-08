@@ -147,11 +147,11 @@
 
 (deps.add :stevearc/conform.nvim)
 (local conform (require :conform))
-(conform.setup {:formatters_by_ft {:proto [:buf]}
-                              :just [:just]
-                              :fish [:fish_indent]
-                              :json [:prettier]
-                              :typescriptreact [:prettier]
+(conform.setup {:formatters_by_ft {:proto [:buf]
+                                   :just [:just]
+                                   :fish [:fish_indent]
+                                   :json [:prettier]
+                                   :typescriptreact [:prettier]}
                 :format_on_save {:timeout_ms 500
                                  :lsp_fallback true}})
 
