@@ -244,6 +244,9 @@
 (local mini-hues (require :mini.hues))
 (vim.cmd.colorscheme :randomhue)
 
+(local mini-indentscope (require :mini.indentscope))
+(mini-indentscope.setup)
+
 (local mini-pick (require :mini.pick))
 (mini-pick.setup)
 (map :n :<leader>ff mini-pick.builtin.files)
@@ -388,9 +391,11 @@
 ;; edit config files
 (map :n :<leader>ef
      #(vim.cmd {:cmd :edit :args [:$HOME/.config/fish/config.fish]}))
+
 (map :n :<leader>eg #(vim.cmd {:cmd :edit :args [:$HOME/.config/git/config]}))
 (map :n :<leader>ek
      #(vim.cmd {:cmd :edit :args [:$HOME/.config/kitty/kitty.conf]}))
+
 (map :n :<leader>ev
      #(vim.cmd {:cmd :edit :args [:$HOME/.config/nvim/init.fnl]}))
 
@@ -439,9 +444,11 @@
 
 (vim.fn.sign_define :DiagnosticSignError
                     {:text "×" :texthl :DiagnosticSignError})
+
 (vim.fn.sign_define :DiagnosticSignWarn {:text "!" :texthl :DiagnosticSignWarn})
 (vim.fn.sign_define :DiagnosticSignInfo
                     {:text "✳︎" :texthl :DiagnosticSignInfo})
+
 (vim.fn.sign_define :DiagnosticSignHint {:text "?" :texthl :DiagnosticSignHint})
 
 (vim.diagnostic.config {:virtual_text {:prefix "▪"}
