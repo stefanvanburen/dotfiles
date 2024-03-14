@@ -21,31 +21,17 @@ set -gx GLAMOUR_STYLE light
 # https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
 set -gx PYTHONDONTWRITEBYTECODE 1
 
+set -l fzf_colors "--color=light"
+set -gx FZF_DEFAULT_OPTS "$fzf_colors"
+set -gx FZF_CTRL_T_OPTS "$fzf_colors"
+# set -gx FZF_CTRL_T_OPTS "$fzf_colors --preview 'bat --line-range :500 {}'"
+
 # pipx
 fish_add_path ~/.local/bin
 # rust
 fish_add_path ~/.cargo/bin
 # go
 fish_add_path ~/go/bin
-
-function zf_file --description 'Use zf to select a file'
-    fd --type file --follow --hidden --exclude .git --strip-cwd-prefix | zf | while read -l r
-        set result $result $r
-    end
-    if [ -z "$result" ]
-        commandline -f repaint
-        return
-    else
-        # Remove last token from commandline.
-        commandline -t ""
-    end
-    for i in $result
-        commandline -it -- $prefix
-        commandline -it -- (string escape $i)
-        commandline -it -- ' '
-    end
-    commandline -f repaint
-end
 
 if status --is-interactive
     # `man abbr`
@@ -73,9 +59,5 @@ if status --is-interactive
     # https://direnv.net/docs/hook.html#fish
     command -q direnv; and direnv hook fish | source
 
-    bind \cr history-pager
-    bind -M insert \cr history-pager
-
-    bind \ct zf_file
-    bind -M insert \ct zf_file
+    fzf --fish | source
 end
