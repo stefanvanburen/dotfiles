@@ -6,6 +6,10 @@
 [github]
 	user = stefanvanburen
 
+[add.interactive]
+	# for delta
+	useBuiltin = false
+
 [alias]
 	; mnemonic for add
 	a = add
@@ -71,6 +75,16 @@
 	; Sign commits with my ssh key
 	gpgsign = true
 
+[core]
+	; https://github.com/dandavison/delta
+	pager = delta
+
+[delta]
+	hyperlinks = true
+	navigate = true  # use n and N to move between diff sections
+	side-by-side = true
+	light = true
+
 [diff]
 	; Remove "a/" and "b/" prefix from source and destination
 	noprefix = true
@@ -93,6 +107,9 @@
 [init]
 	; initialize repositories with "main" as the default branch
 	defaultBranch = main
+
+[interactive]
+	diffFilter = delta --color-only
 
 [merge]
 	tool = fugitive
