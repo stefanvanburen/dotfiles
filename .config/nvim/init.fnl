@@ -164,7 +164,9 @@
 (deps.add :mfussenegger/nvim-lint)
 (local nvim-lint (require :lint))
 ;; https://github.com/mfussenegger/nvim-lint#available-linters
-(set nvim-lint.linters_by_ft {:proto [:buf_lint] :fish [:fish]})
+(set nvim-lint.linters_by_ft {:proto [:buf_lint]
+                              :fish [:fish]
+                              :go [:golangcilint]})
 
 (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)})
 
