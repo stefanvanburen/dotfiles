@@ -290,8 +290,6 @@
 
 ;;; Autocommands and FileType settings
 
-(vim.api.nvim_create_autocmd :VimResized {:command ":wincmd ="})
-
 (local filetype-settings {:go {:expandtab false}
                           :javascript {:expandtab true :shiftwidth 2}
                           :javascriptreact {:expandtab true :shiftwidth 2}
