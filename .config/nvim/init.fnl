@@ -331,14 +331,6 @@
                                      :conceallevel 0
                                      :shiftwidth 2}})
 
-(fn extension->filetype [group extension filetype]
-  (vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
-                               {: group
-                                :pattern (.. "*." extension)
-                                :callback #(vim.api.nvim_set_option_value :filetype
-                                                                          filetype
-                                                                          {:scope :local})}))
-
 (let [aufiletypes (vim.api.nvim_create_augroup :filetypes {})]
   (each [filetype settings (pairs filetype-settings)]
     (vim.api.nvim_create_autocmd :FileType
@@ -348,9 +340,19 @@
                                                (vim.api.nvim_set_option_value name
                                                                               value
                                                                               {:scope :local}))}))
-  (extension->filetype [aufiletypes :mdx :markdown])
-  (extension->filetype [aufiletypes :star :starlark])
-  (extension->filetype [aufiletypes :tpl :gotmpl]))
+
+  (fn extension->filetype [extension filetype]
+    (vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
+                                 {:group aufiletypes
+                                  :pattern (.. "*." (tostring extension))
+                                  :callback #(vim.api.nvim_set_option_value :filetype
+                                                                            filetype
+                                                                            {:scope :local})}))
+
+  (extension->filetype :mdx :markdown)
+  (extension->filetype :star :starlark)
+  (extension->filetype :tpl :gotmpl)
+  (extension->filetype :txtpb :textproto))
 
 ;;; Mappings
 
