@@ -28,7 +28,7 @@ set -gx PYTHONDONTWRITEBYTECODE 1
 
 set -l fzf_colors "--color=light"
 set -gx FZF_DEFAULT_OPTS "$fzf_colors"
-set -gx FZF_CTRL_T_OPTS "$fzf_colors --preview 'bat --line-range :500 {}'"
+set -gx FZF_CTRL_T_OPTS "$fzf_colors --preview 'bat --color always --number {}'"
 
 # pipx
 fish_add_path ~/.local/bin
