@@ -200,12 +200,12 @@
                                       :dockerfile
                                       :fennel
                                       :fish
-                                      :html
-                                      :gitcommit
                                       :git_rebase
                                       :gitattributes
+                                      :gitcommit
                                       :go
                                       :gomod
+                                      :html
                                       :javascript
                                       :json
                                       :make
@@ -214,8 +214,8 @@
                                       :proto
                                       :python
                                       :requirements
-                                      :ssh_config
                                       :sql
+                                      :ssh_config
                                       :textproto
                                       :toml
                                       :yaml
