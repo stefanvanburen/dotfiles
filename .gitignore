@@ -17,6 +17,7 @@
 # contains sensitive information
 /.netrc
 # npm configuration - can contain sensitive information
+# See https://docs.npmjs.com/cli/v10/configuring-npm/npmrc#auth-related-configuration
 /.npmrc
 
 # data files for various programs
