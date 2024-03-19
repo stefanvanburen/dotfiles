@@ -216,6 +216,7 @@
                                       :requirements
                                       :ssh_config
                                       :sql
+                                      :textproto
                                       :toml
                                       :yaml
                                       :zig]})
