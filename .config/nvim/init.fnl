@@ -287,7 +287,6 @@
 (deps.add :rktjmp/lush.nvim)
 
 ;; Colorschemes
-(deps.add "https://git.sr.ht/~p00f/alabaster.nvim")
 (deps.add :stefanvanburen/rams)
 (deps.add :mcchrish/zenbones.nvim)
 (deps.add :rose-pine/neovim)

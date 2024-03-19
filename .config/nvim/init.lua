@@ -174,7 +174,6 @@ vim.g.matchup_matchparen_offscreen = {}
 deps.add("tpope/vim-abolish")
 deps.add("rktjmp/paperplanes.nvim")
 deps.add("rktjmp/lush.nvim")
-deps.add("https://git.sr.ht/~p00f/alabaster.nvim")
 deps.add("stefanvanburen/rams")
 deps.add("mcchrish/zenbones.nvim")
 deps.add("rose-pine/neovim")
