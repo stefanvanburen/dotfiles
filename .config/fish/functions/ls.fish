@@ -1,3 +1,3 @@
-function ls --wraps=eza --description 'Use eza instead of ls'
-    eza $argv
+function ls --wraps=eza --description 'Use eza (with hyperlinks) instead of ls'
+    eza --hyperlink $argv
 end
