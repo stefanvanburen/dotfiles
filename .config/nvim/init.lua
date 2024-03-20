@@ -118,7 +118,7 @@ local function _9_()
 end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _9_}})
 local treesitter = require("nvim-treesitter.configs")
-treesitter.setup({highlight = {enable = true, disable = {"fennel"}}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "dockerfile", "fennel", "fish", "html", "gitcommit", "git_rebase", "gitattributes", "go", "gomod", "javascript", "json", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "ssh_config", "sql", "toml", "yaml", "zig"}})
+treesitter.setup({highlight = {enable = true, disable = {"fennel"}}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "html", "javascript", "json", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "yaml", "zig"}})
 deps.add("echasnovski/mini.nvim")
 local mini_basics = require("mini.basics")
 mini_basics.setup()
@@ -179,27 +179,27 @@ deps.add("mcchrish/zenbones.nvim")
 deps.add("rose-pine/neovim")
 vim.api.nvim_create_autocmd("VimResized", {command = ":wincmd ="})
 local filetype_settings = {go = {expandtab = false}, javascript = {expandtab = true, shiftwidth = 2}, javascriptreact = {expandtab = true, shiftwidth = 2}, typescript = {expandtab = true, shiftwidth = 2}, typescriptreact = {expandtab = true, shiftwidth = 2}, html = {expandtab = true, shiftwidth = 2}, css = {expandtab = true, shiftwidth = 2}, gohtmltmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotexttmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = {expandtab = true, shiftwidth = 2}, svg = {expandtab = true, shiftwidth = 2}, json = {expandtab = true, shiftwidth = 2}, bash = {expandtab = true, shiftwidth = 2}, python = {expandtab = true, shiftwidth = 4}, xml = {expandtab = true, shiftwidth = 4}, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, sql = {wrap = true, commentstring = "-- %s"}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, markdown = {spell = true, wrap = true, conceallevel = 0, shiftwidth = 2}}
-local function extension__3efiletype(augroup, extension, filetype)
-  local function _14_()
-    return vim.api.nvim_set_option_value("filetype", filetype, {scope = "local"})
-  end
-  return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = augroup, pattern = ("*." .. tostring(extension)), callback = _14_})
-end
 do
   local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
-    local function _15_()
+    local function _14_()
       for name, value in pairs(settings) do
         vim.api.nvim_set_option_value(name, value, {scope = "local"})
       end
       return nil
     end
-    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _15_})
+    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _14_})
   end
-  extension__3efiletype(aufiletypes, "mdx", "markdown")
-  extension__3efiletype(aufiletypes, "star", "starlark")
-  extension__3efiletype(aufiletypes, "tpl", "gotmpl")
-  extension__3efiletype(aufiletypes, "txtpb", "textproto")
+  local function extension__3efiletype(extension, filetype)
+    local function _15_()
+      return vim.api.nvim_set_option_value("filetype", filetype, {scope = "local"})
+    end
+    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _15_})
+  end
+  extension__3efiletype("mdx", "markdown")
+  extension__3efiletype("star", "starlark")
+  extension__3efiletype("tpl", "gotmpl")
+  extension__3efiletype("txtpb", "textproto")
 end
 map("n", ";", ":")
 map("n", "<leader>?", vim.diagnostic.open_float)
