@@ -37,6 +37,10 @@ fish_add_path ~/.cargo/bin
 # go
 fish_add_path ~/go/bin
 
+# Setup homebrew environment (PATH-related variables)
+# This must be before any command checking, as it sets up the PATH.
+eval (/opt/homebrew/bin/brew shellenv)
+
 if status --is-interactive
     # `man abbr`
     abbr --add - prevd
@@ -51,10 +55,6 @@ if status --is-interactive
     # Set up vi key bindings
     # https://fishshell.com/docs/current/interactive.html#vi-mode-commands
     set -g fish_key_bindings fish_vi_key_bindings
-
-    # Setup homebrew environment (PATH-related variables)
-    # This must be before any command checking, as it sets up the PATH.
-    eval (/opt/homebrew/bin/brew shellenv)
 
     # jump is bound to `z`
     # https://github.com/gsamokovarov/jump#fish
