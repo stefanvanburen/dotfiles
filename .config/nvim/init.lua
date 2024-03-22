@@ -298,7 +298,7 @@ vim.fn.sign_define("DiagnosticSignWarn", {text = "!", texthl = "DiagnosticSignWa
 vim.fn.sign_define("DiagnosticSignInfo", {text = "\226\156\179\239\184\142", texthl = "DiagnosticSignInfo"})
 vim.fn.sign_define("DiagnosticSignHint", {text = "?", texthl = "DiagnosticSignHint"})
 vim.diagnostic.config({virtual_text = {prefix = "\226\150\170"}, float = {border = "single", source = "always", focusable = false}})
-local function _37_(_34_)
+local function lsp_attach(_34_)
   local _arg_35_ = _34_
   local buf = _arg_35_["buf"]
   local _arg_36_ = _arg_35_["data"]
@@ -316,15 +316,15 @@ local function _37_(_34_)
     return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
   end
   if client.server_capabilities.documentFormattingProvider then
-    local function _39_()
+    local function _38_()
       return format(client)
     end
-    buffer_map("<leader>af", _39_)
+    buffer_map("<leader>af", _38_)
     if (client.name ~= "tsserver") then
-      local function _40_()
+      local function _39_()
         return format(client)
       end
-      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _40_})
+      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _39_})
     else
     end
   else
@@ -352,7 +352,7 @@ local function _37_(_34_)
   buffer_map("<leader>rn", vim.lsp.buf.rename)
   return buffer_map("<leader>ca", vim.lsp.buf.code_action)
 end
-vim.api.nvim_create_autocmd("LspAttach", {callback = _37_})
+vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
 local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, linkTarget = "godocs.io", analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff_lsp] = {}, [lspconfig.pylsp] = {settings = {pylsp = {plugins = {pycodestyle = {enabled = false}, pyflakes = {enabled = false}}}}}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.api.nvim_list_runtime_paths()}}}}, [lspconfig.rust_analyzer] = {}}
