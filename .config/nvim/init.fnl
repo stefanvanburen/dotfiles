@@ -81,37 +81,31 @@
 
 (deps.add :lewis6991/gitsigns.nvim)
 (local gitsigns (require :gitsigns))
-(gitsigns.setup {:on_attach (fn [bufnr]
-                              (fn buffer-map [mode l r ?opts]
-                                (let [opts (or ?opts {})]
-                                  (set opts.buffer bufnr)
-                                  (map mode l r opts)))
+(let [on-attach (fn [bufnr]
+                  (fn buffer-map [mode l r ?opts]
+                    (let [opts (or ?opts {})]
+                      (set opts.buffer bufnr)
+                      (map mode l r opts)))
 
-                              ;; Navigation
-                              (buffer-map :n "]c" #(gitsigns.next_hunk))
-                              (buffer-map :n "[c" #(gitsigns.prev_hunk))
-                              ;; Actions
-                              (buffer-map [:n :v] :<leader>hs
-                                          gitsigns.stage_hunk)
-                              (buffer-map [:n :v] :<leader>hr
-                                          gitsigns.reset_hunk)
-                              (buffer-map :n :<leader>hS gitsigns.stage_buffer)
-                              (buffer-map :n :<leader>hR gitsigns.reset_buffer)
-                              (buffer-map :n :<leader>hu
-                                          gitsigns.undo_stage_hunk)
-                              (buffer-map :n :<leader>hp gitsigns.preview_hunk)
-                              (buffer-map :n :<leader>hb
-                                          #(gitsigns.blame_line {:full true}))
-                              (buffer-map :n :<leader>tb
-                                          gitsigns.toggle_current_line_blame)
-                              (buffer-map :n :<leader>hd gitsigns.diffthis)
-                              (buffer-map :n :<leader>hD
-                                          #(gitsigns.diffthis "~"))
-                              (buffer-map :n :<leader>td
-                                          gitsigns.toggle_deleted)
-                              ;; Text object
-                              (buffer-map [:o :x] :ih
-                                          ":<C-U>Gitsigns select_hunk<CR>"))})
+                  ;; Navigation
+                  (buffer-map :n "]c" #(gitsigns.next_hunk))
+                  (buffer-map :n "[c" #(gitsigns.prev_hunk))
+                  ;; Actions
+                  (buffer-map [:n :v] :<leader>hs gitsigns.stage_hunk)
+                  (buffer-map [:n :v] :<leader>hr gitsigns.reset_hunk)
+                  (buffer-map :n :<leader>hS gitsigns.stage_buffer)
+                  (buffer-map :n :<leader>hR gitsigns.reset_buffer)
+                  (buffer-map :n :<leader>hu gitsigns.undo_stage_hunk)
+                  (buffer-map :n :<leader>hp gitsigns.preview_hunk)
+                  (buffer-map :n :<leader>hb
+                              #(gitsigns.blame_line {:full true}))
+                  (buffer-map :n :<leader>tb gitsigns.toggle_current_line_blame)
+                  (buffer-map :n :<leader>hd gitsigns.diffthis)
+                  (buffer-map :n :<leader>hD #(gitsigns.diffthis "~"))
+                  (buffer-map :n :<leader>td gitsigns.toggle_deleted)
+                  ;; Text object
+                  (buffer-map [:o :x] :ih ":<C-U>Gitsigns select_hunk<CR>"))]
+  (gitsigns.setup {:on_attach on-attach}))
 
 (deps.add :tpope/vim-fugitive)
 ;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
@@ -197,6 +191,7 @@
                                       :comment
                                       :css
                                       :diff
+                                      :djot
                                       :dockerfile
                                       :fennel
                                       :fish
