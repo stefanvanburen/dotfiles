@@ -208,6 +208,7 @@
                                       :html
                                       :javascript
                                       :json
+                                      :just
                                       :make
                                       :markdown
                                       :markdown_inline
