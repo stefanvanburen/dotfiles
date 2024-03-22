@@ -552,6 +552,8 @@
                         lspconfig.bashls {}
                         ;; LSP for TOML.
                         lspconfig.taplo {}
+                        ;; Dockerfiles
+                        lspconfig.dockerls {}
                         ;; LSP for Lua.
                         lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
                                                            :workspace {:library (vim.api.nvim_list_runtime_paths)}}}}
