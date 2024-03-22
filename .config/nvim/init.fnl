@@ -381,15 +381,11 @@
 (map [:n :v] :<tab> "%" {:remap true})
 
 ;; edit config files
-(map :n :<leader>ef
-     #(vim.cmd {:cmd :edit :args [:$HOME/.config/fish/config.fish]}))
-
-(map :n :<leader>eg #(vim.cmd {:cmd :edit :args [:$HOME/.config/git/config]}))
-(map :n :<leader>ek
-     #(vim.cmd {:cmd :edit :args [:$HOME/.config/kitty/kitty.conf]}))
-
-(map :n :<leader>ev
-     #(vim.cmd {:cmd :edit :args [:$HOME/.config/nvim/init.fnl]}))
+(each [keymap file (pairs {:<leader>ef :$HOME/.config/fish/config
+                           :<leader>eg :$HOME/.config/git/config
+                           :<leader>ek :$HOME/.config/kitty/kitty.conf
+                           :<leader>ev :$HOME/.config/nvim/init.fnl})]
+  (map :n keymap #(vim.cmd {:cmd :edit :args [file]})))
 
 (map :n :<leader>w #(vim.cmd {:cmd :write}))
 (map :n :<leader>cl #(vim.cmd {:cmd :close}))
@@ -434,12 +430,11 @@
 
 ;;; Diagnostics
 
-(let [signs {:DiagnosticSignError "×"
-             :DiagnosticSignWarn "!"
-             :DiagnosticSignInfo "✳︎"
-             :DiagnosticSignHint "?"}]
-  (each [sign text (pairs signs)]
-    (vim.fn.sign_define sign {: text :texthl sign})))
+(each [sign text (pairs {:DiagnosticSignError "×"
+                         :DiagnosticSignWarn "!"
+                         :DiagnosticSignInfo "✳︎"
+                         :DiagnosticSignHint "?"})]
+  (vim.fn.sign_define sign {: text :texthl sign}))
 
 (vim.diagnostic.config {:virtual_text {:prefix "▪"}
                         :float {:border :single

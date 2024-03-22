@@ -245,42 +245,32 @@ local function _23_()
 end
 map({"n", "v"}, "k", _23_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
-local function _25_()
-  return vim.cmd({cmd = "edit", args = {"$HOME/.config/fish/config.fish"}})
+for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
+  local function _25_()
+    return vim.cmd({cmd = "edit", args = {file}})
+  end
+  map("n", keymap, _25_)
 end
-map("n", "<leader>ef", _25_)
 local function _26_()
-  return vim.cmd({cmd = "edit", args = {"$HOME/.config/git/config"}})
-end
-map("n", "<leader>eg", _26_)
-local function _27_()
-  return vim.cmd({cmd = "edit", args = {"$HOME/.config/kitty/kitty.conf"}})
-end
-map("n", "<leader>ek", _27_)
-local function _28_()
-  return vim.cmd({cmd = "edit", args = {"$HOME/.config/nvim/init.fnl"}})
-end
-map("n", "<leader>ev", _28_)
-local function _29_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _29_)
-local function _30_()
+map("n", "<leader>w", _26_)
+local function _27_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _30_)
-local function _31_()
+map("n", "<leader>cl", _27_)
+local function _28_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _31_)
-local function _32_()
+map("n", "<leader>ss", _28_)
+local function _29_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _32_)
-local function _33_()
+map("n", "<leader>vs", _29_)
+local function _30_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _33_)
+map("n", "<leader>tn", _30_)
 map("n", "Q", "@@")
 map("n", "0", "^")
 map("n", "^", "0")
@@ -297,18 +287,15 @@ map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
 map("n", "<C-l>", ":nohlsearch<cr>")
-do
-  local signs = {DiagnosticSignError = "\195\151", DiagnosticSignWarn = "!", DiagnosticSignInfo = "\226\156\179\239\184\142", DiagnosticSignHint = "?"}
-  for sign, text in pairs(signs) do
-    vim.fn.sign_define(sign, {text = text, texthl = sign})
-  end
+for sign, text in pairs({DiagnosticSignError = "\195\151", DiagnosticSignWarn = "!", DiagnosticSignInfo = "\226\156\179\239\184\142", DiagnosticSignHint = "?"}) do
+  vim.fn.sign_define(sign, {text = text, texthl = sign})
 end
 vim.diagnostic.config({virtual_text = {prefix = "\226\150\170"}, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_34_)
-  local _arg_35_ = _34_
-  local buf = _arg_35_["buf"]
-  local _arg_36_ = _arg_35_["data"]
-  local client_id = _arg_36_["client_id"]
+local function lsp_attach(_31_)
+  local _arg_32_ = _31_
+  local buf = _arg_32_["buf"]
+  local _arg_33_ = _arg_32_["data"]
+  local client_id = _arg_33_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   local function format()
     vim.lsp.buf.format({timeout_ms = 2000})
@@ -322,15 +309,15 @@ local function lsp_attach(_34_)
     return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
   end
   if client.server_capabilities.documentFormattingProvider then
-    local function _38_()
+    local function _35_()
       return format(client)
     end
-    buffer_map("<leader>af", _38_)
+    buffer_map("<leader>af", _35_)
     if (client.name ~= "tsserver") then
-      local function _39_()
+      local function _36_()
         return format(client)
       end
-      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _39_})
+      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _36_})
     else
     end
   else
