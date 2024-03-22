@@ -529,8 +529,8 @@
                         lspconfig.cssls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
                         lspconfig.bufls {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
-                        lspconfig.ruff_lsp {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff
+                        lspconfig.ruff {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
                         ;; pipx install python-lsp-server ; https://github.com/python-lsp/python-lsp-server
                         ;; pipx inject python-lsp-server pylsp-mypy ; https://github.com/python-lsp/pylsp-mypy
