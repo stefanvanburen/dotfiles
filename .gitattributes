@@ -3,3 +3,4 @@
 # https://github.com/github-linguist/linguist/blob/master/lib/linguist/languages.yml
 /.config/git/config linguist-language=gitconfig
 /.config/git/ignore linguist-language=gitignore
+/.ssh/config linguist-language=SSH-Config
