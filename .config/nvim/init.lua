@@ -107,11 +107,11 @@ deps.add("mfussenegger/nvim-lint")
 do
   local nvim_lint = require("lint")
   nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}, go = {"golangcilint"}, janet = {"janet"}, fennel = {"fennel"}}
+  local function _7_()
+    return nvim_lint.try_lint()
+  end
+  vim.api.nvim_create_autocmd("BufWritePost", {callback = _7_})
 end
-local function _7_()
-  return __fnl_global__nvim_2dlint.try_lint()
-end
-vim.api.nvim_create_autocmd("BufWritePost", {callback = _7_})
 local function _8_()
   return vim.cmd(":MasonUpdate")
 end

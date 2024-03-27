@@ -163,9 +163,8 @@
         :fish [:fish]
         :go [:golangcilint]
         :janet [:janet]
-        :fennel [:fennel]}))
-
-(vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)})
+        :fennel [:fennel]})
+  (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)}))
 
 (deps.add {:source :williamboman/mason.nvim
            :hooks {:post_checkout (fn [] (vim.cmd ":MasonUpdate"))}})
