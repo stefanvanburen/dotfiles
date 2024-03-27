@@ -348,10 +348,11 @@
                                                                             filetype
                                                                             {:scope :local})}))
 
-  (extension->filetype :mdx :markdown)
-  (extension->filetype :star :starlark)
-  (extension->filetype :tpl :gotmpl)
-  (extension->filetype :txtpb :textproto))
+  (each [extension filetype {:mdx :markdown
+                             :star :starlark
+                             :tpl :gotmpl
+                             :txtpb :textproto}]
+    (extension->filetype extension filetype)))
 
 ;;; Mappings
 

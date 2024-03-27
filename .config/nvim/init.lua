@@ -238,10 +238,9 @@ do
     end
     return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _15_})
   end
-  extension__3efiletype("mdx", "markdown")
-  extension__3efiletype("star", "starlark")
-  extension__3efiletype("tpl", "gotmpl")
-  extension__3efiletype("txtpb", "textproto")
+  for extension, filetype in {mdx = "markdown", star = "starlark", tpl = "gotmpl", txtpb = "textproto"} do
+    extension__3efiletype(extension, filetype)
+  end
 end
 map("n", ";", ":")
 map("n", "<leader>?", vim.diagnostic.open_float)
