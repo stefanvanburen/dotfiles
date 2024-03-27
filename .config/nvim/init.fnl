@@ -80,8 +80,8 @@
 (deps.add :lewis6991/fileline.nvim)
 
 (deps.add :lewis6991/gitsigns.nvim)
-(local gitsigns (require :gitsigns))
-(let [on-attach (fn [bufnr]
+(let [gitsigns (require :gitsigns)
+      on-attach (fn [bufnr]
                   (fn buffer-map [mode l r ?opts]
                     (let [opts (or ?opts {})]
                       (set opts.buffer bufnr)
@@ -146,135 +146,136 @@
 (deps.add :b0o/SchemaStore.nvim)
 
 (deps.add :stevearc/conform.nvim)
-(local conform (require :conform))
-(conform.setup {:formatters_by_ft {:proto [:buf]
-                                   :just [:just]
-                                   :fennel [:fnlfmt]
-                                   :fish [:fish_indent]
-                                   :json [:prettier]
-                                   :typescriptreact [:prettier]}
-                :format_on_save {:timeout_ms 500 :lsp_fallback true}})
+(let [conform (require :conform)]
+  (conform.setup {:formatters_by_ft {:proto [:buf]
+                                     :just [:just]
+                                     :fennel [:fnlfmt]
+                                     :fish [:fish_indent]
+                                     :json [:prettier]
+                                     :typescriptreact [:prettier]}
+                  :format_on_save {:timeout_ms 500 :lsp_fallback true}}))
 
 (deps.add :mfussenegger/nvim-lint)
-(local nvim-lint (require :lint))
-;; https://github.com/mfussenegger/nvim-lint#available-linters
-(set nvim-lint.linters_by_ft {:proto [:buf_lint]
-                              :fish [:fish]
-                              :go [:golangcilint]
-                              :janet [:janet]
-                              :fennel [:fennel]})
+(let [nvim-lint (require :lint)]
+  ;; https://github.com/mfussenegger/nvim-lint#available-linters
+  (set nvim-lint.linters_by_ft
+       {:proto [:buf_lint]
+        :fish [:fish]
+        :go [:golangcilint]
+        :janet [:janet]
+        :fennel [:fennel]}))
 
 (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)})
 
 (deps.add {:source :williamboman/mason.nvim
            :hooks {:post_checkout (fn [] (vim.cmd ":MasonUpdate"))}})
 
-(local mason (require :mason))
-(mason.setup)
+(let [mason (require :mason)]
+  (mason.setup))
 
 (deps.add :williamboman/mason-lspconfig.nvim)
-(local mason-lspconfig (require :mason-lspconfig))
-(mason-lspconfig.setup)
+(let [mason-lspconfig (require :mason-lspconfig)]
+  (mason-lspconfig.setup))
 
 (deps.add {:source :nvim-treesitter/nvim-treesitter
            :hooks {:post_checkout (fn [] (vim.cmd ":TSUpdate"))}})
 
-(local treesitter (require :nvim-treesitter.configs))
-(treesitter.setup {:highlight {:enable true :disable [:fennel]}
-                   ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
-                   :matchup {:enable true :disable [:fennel]}
-                   :ensure_installed [:c
-                                      :lua
-                                      :vim
-                                      :vimdoc
-                                      :clojure
-                                      :comment
-                                      :css
-                                      :diff
-                                      :djot
-                                      :dockerfile
-                                      :fennel
-                                      :fish
-                                      :git_rebase
-                                      :gitattributes
-                                      :gitcommit
-                                      :go
-                                      :gomod
-                                      :html
-                                      :javascript
-                                      :json
-                                      :just
-                                      :make
-                                      :markdown
-                                      :markdown_inline
-                                      :proto
-                                      :python
-                                      :requirements
-                                      :sql
-                                      :ssh_config
-                                      :textproto
-                                      :toml
-                                      :yaml
-                                      :zig]})
+(let [treesitter (require :nvim-treesitter.configs)]
+  (treesitter.setup {:highlight {:enable true :disable [:fennel]}
+                     ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
+                     :matchup {:enable true :disable [:fennel]}
+                     :ensure_installed [:c
+                                        :lua
+                                        :vim
+                                        :vimdoc
+                                        :clojure
+                                        :comment
+                                        :css
+                                        :diff
+                                        :djot
+                                        :dockerfile
+                                        :fennel
+                                        :fish
+                                        :git_rebase
+                                        :gitattributes
+                                        :gitcommit
+                                        :go
+                                        :gomod
+                                        :html
+                                        :javascript
+                                        :json
+                                        :just
+                                        :make
+                                        :markdown
+                                        :markdown_inline
+                                        :proto
+                                        :python
+                                        :requirements
+                                        :sql
+                                        :ssh_config
+                                        :textproto
+                                        :toml
+                                        :yaml
+                                        :zig]}))
 
 (deps.add :echasnovski/mini.nvim)
 
 ;; mini-basics should be first, to set up mappings like <Leader>
-(local mini-basics (require :mini.basics))
-(mini-basics.setup)
+(let [mini-basics (require :mini.basics)]
+  (mini-basics.setup))
 
-(local mini-pairs (require :mini.pairs))
-(mini-pairs.setup)
+(let [mini-pairs (require :mini.pairs)]
+  (mini-pairs.setup))
 
-(local mini-trailspace (require :mini.trailspace))
-(mini-trailspace.setup)
-(map :n :<leader>sw mini-trailspace.trim)
+(let [mini-trailspace (require :mini.trailspace)]
+  (mini-trailspace.setup)
+  (map :n :<leader>sw mini-trailspace.trim))
 
-(local mini-comment (require :mini.comment))
-(mini-comment.setup {:options {:ignore_blank_line true}})
+(let [mini-comment (require :mini.comment)]
+  (mini-comment.setup {:options {:ignore_blank_line true}}))
 
-(local mini-surround (require :mini.surround))
-(mini-surround.setup {:mappings {:add :gza
-                                 :delete :gzd
-                                 :find :gzf
-                                 :find_left :gzF
-                                 :highlight :gzh
-                                 :replace :gzr
-                                 :update_n_lines :gzn}})
+(let [mini-surround (require :mini.surround)]
+  (mini-surround.setup {:mappings {:add :gza
+                                   :delete :gzd
+                                   :find :gzf
+                                   :find_left :gzF
+                                   :highlight :gzh
+                                   :replace :gzr
+                                   :update_n_lines :gzn}}))
 
-(local mini-hues (require :mini.hues))
-(vim.cmd.colorscheme :randomhue)
+(let [mini-hues (require :mini.hues)]
+  (vim.cmd.colorscheme :randomhue))
 
-(local mini-indentscope (require :mini.indentscope))
-(mini-indentscope.setup)
+(let [mini-indentscope (require :mini.indentscope)]
+  (mini-indentscope.setup))
 
-(local mini-pick (require :mini.pick))
-(mini-pick.setup)
-(map :n :<leader>ff mini-pick.builtin.files)
-(map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
-(map :n :<leader>fb mini-pick.builtin.buffers)
-(map :n :<leader>fl mini-pick.builtin.grep_live)
-(map :n :<leader>fh mini-pick.builtin.help)
+(let [mini-pick (require :mini.pick)]
+  (mini-pick.setup)
+  (map :n :<leader>ff mini-pick.builtin.files)
+  (map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
+  (map :n :<leader>fb mini-pick.builtin.buffers)
+  (map :n :<leader>fl mini-pick.builtin.grep_live)
+  (map :n :<leader>fh mini-pick.builtin.help))
 
-(local mini-extra (require :mini.extra))
-(map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
-(map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
+(let [mini-extra (require :mini.extra)]
+  (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
+  (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references})))
 
-(local mini-statusline (require :mini.statusline))
-(mini-statusline.setup)
+(let [mini-statusline (require :mini.statusline)]
+  (mini-statusline.setup))
 
-(local mini-completion (require :mini.completion))
-(mini-completion.setup)
+(let [mini-completion (require :mini.completion)]
+  (mini-completion.setup))
 
-(local mini-bracketed (require :mini.bracketed))
-(mini-bracketed.setup)
+(let [mini-bracketed (require :mini.bracketed)]
+  (mini-bracketed.setup))
 
-(local mini-files (require :mini.files))
-(mini-files.setup {:mappings {:go_in_plus :<CR>}})
-(map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0)))
+(let [mini-files (require :mini.files)]
+  (mini-files.setup {:mappings {:go_in_plus :<CR>}})
+  (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0))))
 
-(local mini-notify (require :mini.notify))
-(mini-notify.setup)
+(let [mini-notify (require :mini.notify)]
+  (mini-notify.setup))
 
 (deps.add :tpope/vim-eunuch)
 (deps.add :andymass/vim-matchup)

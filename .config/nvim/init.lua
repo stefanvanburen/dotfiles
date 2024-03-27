@@ -33,8 +33,8 @@ vim.g["gtfo#terminals"] = {mac = "kitty"}
 deps.add("tyru/open-browser.vim")
 deps.add("lewis6991/fileline.nvim")
 deps.add("lewis6991/gitsigns.nvim")
-local gitsigns = require("gitsigns")
 do
+  local gitsigns = require("gitsigns")
   local on_attach
   local function _2_(bufnr)
     local function buffer_map(mode, l, r, _3fopts)
@@ -99,79 +99,117 @@ map("n", "<C-t>v", ":TestVisit<cr>")
 deps.add("neovim/nvim-lspconfig")
 deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
-local conform = require("conform")
-conform.setup({formatters_by_ft = {proto = {"buf"}, just = {"just"}, fennel = {"fnlfmt"}, fish = {"fish_indent"}, json = {"prettier"}, typescriptreact = {"prettier"}}, format_on_save = {timeout_ms = 500, lsp_fallback = true}})
+do
+  local conform = require("conform")
+  conform.setup({formatters_by_ft = {proto = {"buf"}, just = {"just"}, fennel = {"fnlfmt"}, fish = {"fish_indent"}, json = {"prettier"}, typescriptreact = {"prettier"}}, format_on_save = {timeout_ms = 500, lsp_fallback = true}})
+end
 deps.add("mfussenegger/nvim-lint")
-local nvim_lint = require("lint")
-nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}, go = {"golangcilint"}, janet = {"janet"}, fennel = {"fennel"}}
+do
+  local nvim_lint = require("lint")
+  nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}, go = {"golangcilint"}, janet = {"janet"}, fennel = {"fennel"}}
+end
 local function _7_()
-  return nvim_lint.try_lint()
+  return __fnl_global__nvim_2dlint.try_lint()
 end
 vim.api.nvim_create_autocmd("BufWritePost", {callback = _7_})
 local function _8_()
   return vim.cmd(":MasonUpdate")
 end
 deps.add({source = "williamboman/mason.nvim", hooks = {post_checkout = _8_}})
-local mason = require("mason")
-mason.setup()
+do
+  local mason = require("mason")
+  mason.setup()
+end
 deps.add("williamboman/mason-lspconfig.nvim")
-local mason_lspconfig = require("mason-lspconfig")
-mason_lspconfig.setup()
+do
+  local mason_lspconfig = require("mason-lspconfig")
+  mason_lspconfig.setup()
+end
 local function _9_()
   return vim.cmd(":TSUpdate")
 end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _9_}})
-local treesitter = require("nvim-treesitter.configs")
-treesitter.setup({highlight = {enable = true, disable = {"fennel"}}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "yaml", "zig"}})
+do
+  local treesitter = require("nvim-treesitter.configs")
+  treesitter.setup({highlight = {enable = true, disable = {"fennel"}}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "yaml", "zig"}})
+end
 deps.add("echasnovski/mini.nvim")
-local mini_basics = require("mini.basics")
-mini_basics.setup()
-local mini_pairs = require("mini.pairs")
-mini_pairs.setup()
-local mini_trailspace = require("mini.trailspace")
-mini_trailspace.setup()
-map("n", "<leader>sw", mini_trailspace.trim)
-local mini_comment = require("mini.comment")
-mini_comment.setup({options = {ignore_blank_line = true}})
-local mini_surround = require("mini.surround")
-mini_surround.setup({mappings = {add = "gza", delete = "gzd", find = "gzf", find_left = "gzF", highlight = "gzh", replace = "gzr", update_n_lines = "gzn"}})
-local mini_hues = require("mini.hues")
-vim.cmd.colorscheme("randomhue")
-local mini_indentscope = require("mini.indentscope")
-mini_indentscope.setup()
-local mini_pick = require("mini.pick")
-mini_pick.setup()
-map("n", "<leader>ff", mini_pick.builtin.files)
-local function _10_()
-  return mini_pick.builtin.files({tool = "git"})
+do
+  local mini_basics = require("mini.basics")
+  mini_basics.setup()
 end
-map("n", "<leader>fg", _10_)
-map("n", "<leader>fb", mini_pick.builtin.buffers)
-map("n", "<leader>fl", mini_pick.builtin.grep_live)
-map("n", "<leader>fh", mini_pick.builtin.help)
-local mini_extra = require("mini.extra")
-local function _11_()
-  return mini_extra.pickers.lsp({scope = "document_symbol"})
+do
+  local mini_pairs = require("mini.pairs")
+  mini_pairs.setup()
 end
-map("n", "<leader>fs", _11_)
-local function _12_()
-  return mini_extra.pickers.lsp({scope = "references"})
+do
+  local mini_trailspace = require("mini.trailspace")
+  mini_trailspace.setup()
+  map("n", "<leader>sw", mini_trailspace.trim)
 end
-map("n", "<leader>fr", _12_)
-local mini_statusline = require("mini.statusline")
-mini_statusline.setup()
-local mini_completion = require("mini.completion")
-mini_completion.setup()
-local mini_bracketed = require("mini.bracketed")
-mini_bracketed.setup()
-local mini_files = require("mini.files")
-mini_files.setup({mappings = {go_in_plus = "<CR>"}})
-local function _13_()
-  return mini_files.open(vim.api.nvim_buf_get_name(0))
+do
+  local mini_comment = require("mini.comment")
+  mini_comment.setup({options = {ignore_blank_line = true}})
 end
-map("n", "-", _13_)
-local mini_notify = require("mini.notify")
-mini_notify.setup()
+do
+  local mini_surround = require("mini.surround")
+  mini_surround.setup({mappings = {add = "gza", delete = "gzd", find = "gzf", find_left = "gzF", highlight = "gzh", replace = "gzr", update_n_lines = "gzn"}})
+end
+do
+  local mini_hues = require("mini.hues")
+  vim.cmd.colorscheme("randomhue")
+end
+do
+  local mini_indentscope = require("mini.indentscope")
+  mini_indentscope.setup()
+end
+do
+  local mini_pick = require("mini.pick")
+  mini_pick.setup()
+  map("n", "<leader>ff", mini_pick.builtin.files)
+  local function _10_()
+    return mini_pick.builtin.files({tool = "git"})
+  end
+  map("n", "<leader>fg", _10_)
+  map("n", "<leader>fb", mini_pick.builtin.buffers)
+  map("n", "<leader>fl", mini_pick.builtin.grep_live)
+  map("n", "<leader>fh", mini_pick.builtin.help)
+end
+do
+  local mini_extra = require("mini.extra")
+  local function _11_()
+    return mini_extra.pickers.lsp({scope = "document_symbol"})
+  end
+  map("n", "<leader>fs", _11_)
+  local function _12_()
+    return mini_extra.pickers.lsp({scope = "references"})
+  end
+  map("n", "<leader>fr", _12_)
+end
+do
+  local mini_statusline = require("mini.statusline")
+  mini_statusline.setup()
+end
+do
+  local mini_completion = require("mini.completion")
+  mini_completion.setup()
+end
+do
+  local mini_bracketed = require("mini.bracketed")
+  mini_bracketed.setup()
+end
+do
+  local mini_files = require("mini.files")
+  mini_files.setup({mappings = {go_in_plus = "<CR>"}})
+  local function _13_()
+    return mini_files.open(vim.api.nvim_buf_get_name(0))
+  end
+  map("n", "-", _13_)
+end
+do
+  local mini_notify = require("mini.notify")
+  mini_notify.setup()
+end
 deps.add("tpope/vim-eunuch")
 deps.add("andymass/vim-matchup")
 vim.g.matchup_matchparen_offscreen = {}
