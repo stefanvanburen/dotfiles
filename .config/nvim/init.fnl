@@ -447,21 +447,20 @@
   (local client (vim.lsp.get_client_by_id client_id))
 
   (fn format []
-    (do
-      (vim.lsp.buf.format {:timeout_ms 2000})
-      (when (= client.name :gopls)
-        (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
-                                  :apply true}))))
+    (vim.lsp.buf.format {:timeout_ms 2000})
+    (when (= client.name :gopls)
+      (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
+                                :apply true})))
 
   (fn buffer-map [from to]
     (vim.keymap.set :n from to {:buffer buf :silent true}))
 
   (when client.server_capabilities.documentFormattingProvider
-    (buffer-map :<leader>af #(format client))
+    (buffer-map :<leader>af #(format))
     ;; TODO: Disable tsserver's formatting overall.
     (when (not= client.name :tsserver)
       (vim.api.nvim_create_autocmd :BufWritePre
-                                   {:buffer buf :callback #(format client)})))
+                                   {:buffer buf :callback #(format)})))
   ;; requires neovim nightly
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable buf true))

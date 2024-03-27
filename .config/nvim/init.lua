@@ -348,12 +348,12 @@ local function lsp_attach(_31_)
   end
   if client.server_capabilities.documentFormattingProvider then
     local function _35_()
-      return format(client)
+      return format()
     end
     buffer_map("<leader>af", _35_)
     if (client.name ~= "tsserver") then
       local function _36_()
-        return format(client)
+        return format()
       end
       vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = _36_})
     else
