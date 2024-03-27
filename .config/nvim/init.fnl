@@ -88,8 +88,8 @@
                       (map mode l r opts)))
 
                   ;; Navigation
-                  (buffer-map :n "]c" #(gitsigns.next_hunk))
-                  (buffer-map :n "[c" #(gitsigns.prev_hunk))
+                  (buffer-map :n "]c" gitsigns.next_hunk)
+                  (buffer-map :n "[c" gitsigns.prev_hunk)
                   ;; Actions
                   (buffer-map [:n :v] :<leader>hs gitsigns.stage_hunk)
                   (buffer-map [:n :v] :<leader>hr gitsigns.reset_hunk)
@@ -457,11 +457,10 @@
     (vim.keymap.set :n from to {:buffer buf :silent true}))
 
   (when client.server_capabilities.documentFormattingProvider
-    (buffer-map :<leader>af #(format))
+    (buffer-map :<leader>af format)
     ;; TODO: Disable tsserver's formatting overall.
     (when (not= client.name :tsserver)
-      (vim.api.nvim_create_autocmd :BufWritePre
-                                   {:buffer buf :callback #(format)})))
+      (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format})))
   ;; requires neovim nightly
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable buf true))
