@@ -8,8 +8,6 @@ brew "eza"
 brew "fd"
 # My default shell
 brew "fish"
-# Fuzzy finding, for fish.
-brew "fzf"
 # Interacting with GitHub via the CLI - configured in ~/.config/gh/config.yml.
 brew "gh"
 # VCS - configured in ~/.config/git/config and ~/.config/git/ignore.
@@ -35,6 +33,8 @@ brew "neovim"
 brew "pipx"
 # better searching - configured in ~/.config/ripgreprc.
 brew "ripgrep"
+# Fuzzy finding, used in fish.
+brew "zf"
 
 # terminal
 cask "kitty"
