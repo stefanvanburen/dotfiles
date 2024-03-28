@@ -152,6 +152,7 @@
                                      :fennel [:fnlfmt]
                                      :fish [:fish_indent]
                                      :json [:prettier]
+                                     :swift [:swift_format]
                                      :typescriptreact [:prettier]}
                   :format_on_save {:timeout_ms 500 :lsp_fallback true}}))
 
@@ -322,6 +323,7 @@
                                   :commentstring "// %s"
                                   :cindent true}
                           :gitcommit {:spell true}
+                          :swift {:commentstring "// %s"}
                           :sql {:wrap true :commentstring "-- %s"}
                           :clojure {:expandtab true :textwidth 80}
                           :kotlin {:commentstring "// %s"}
@@ -541,6 +543,9 @@
                         lspconfig.taplo {}
                         ;; Dockerfiles
                         lspconfig.dockerls {}
+                        ;; LSP for Swift.
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sourcekit
+                        lspconfig.sourcekit {}
                         ;; LSP for Lua.
                         lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
                                                            :workspace {:library (vim.api.nvim_list_runtime_paths)}}}}
