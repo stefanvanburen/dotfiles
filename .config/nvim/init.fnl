@@ -243,9 +243,6 @@
                                    :replace :gzr
                                    :update_n_lines :gzn}}))
 
-(let [mini-hues (require :mini.hues)]
-  (vim.cmd.colorscheme :randomhue))
-
 (let [mini-indentscope (require :mini.indentscope)]
   (mini-indentscope.setup))
 
@@ -288,6 +285,8 @@
 (deps.add :stefanvanburen/rams)
 (deps.add :mcchrish/zenbones.nvim)
 (deps.add :rose-pine/neovim)
+(deps.add :lunacookies/vim-plan9)
+(vim.cmd.colorscheme :plan9)
 
 ;;; Autocommands and FileType settings
 
