@@ -5,7 +5,6 @@ function fish_prompt
 
     set --function prompt_character '$'
     if test $last_status -ne 0
-        set --function prompt_character '!'
         set_color --bold red
     end
 
