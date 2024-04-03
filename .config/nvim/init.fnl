@@ -286,7 +286,8 @@
 (deps.add :mcchrish/zenbones.nvim)
 (deps.add :rose-pine/neovim)
 (deps.add :lunacookies/vim-plan9)
-(vim.cmd.colorscheme :plan9)
+(deps.add "https://git.sr.ht/~p00f/moduster.nvim")
+(vim.cmd.colorscheme :moduster)
 
 ;;; Autocommands and FileType settings
 
