@@ -331,12 +331,6 @@ local function lsp_attach(_26_)
     buffer_map("K", vim.lsp.buf.hover)
   else
   end
-  if client.server_capabilities.documentHighlightProvider then
-    local augroup_id = vim.api.nvim_create_augroup("lsp-document-highlight", {clear = false})
-    vim.api.nvim_create_autocmd({"CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
-    vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
-  else
-  end
   buffer_map("gD", vim.lsp.buf.declaration)
   buffer_map("gd", vim.lsp.buf.definition)
   buffer_map("gi", vim.lsp.buf.implementation)

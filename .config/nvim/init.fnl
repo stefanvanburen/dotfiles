@@ -449,17 +449,6 @@
     (vim.lsp.inlay_hint.enable buf true))
   (when client.server_capabilities.hoverProvider
     (buffer-map :K vim.lsp.buf.hover))
-  (when client.server_capabilities.documentHighlightProvider
-    (let [augroup-id (vim.api.nvim_create_augroup :lsp-document-highlight
-                                                  {:clear false})]
-      (vim.api.nvim_create_autocmd [:CursorHold :InsertLeave]
-                                   {:group augroup-id
-                                    :buffer buf
-                                    :callback vim.lsp.buf.document_highlight})
-      (vim.api.nvim_create_autocmd [:CursorMoved :InsertEnter]
-                                   {:group augroup-id
-                                    :buffer buf
-                                    :callback vim.lsp.buf.clear_references})))
   ;; setup mappings
   ;; See `:help vim.lsp.*` for documentation on any of the below functions
   (buffer-map :gD vim.lsp.buf.declaration)
