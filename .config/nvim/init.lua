@@ -172,7 +172,7 @@ do
 end
 deps.add("tpope/vim-eunuch")
 deps.add("andymass/vim-matchup")
-vim.g.matchup_matchparen_offscreen = {}
+vim.g.matchup_matchparen_offscreen = {method = "popup"}
 deps.add("tpope/vim-abolish")
 deps.add("rktjmp/paperplanes.nvim")
 deps.add("rktjmp/lush.nvim")
