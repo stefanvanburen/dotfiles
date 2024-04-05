@@ -21,7 +21,6 @@ vim.o.showbreak = "\226\134\179"
 vim.o.shiftround = true
 vim.o.gdefault = true
 vim.o.copyindent = true
-vim.o.updatetime = 100
 vim.o.list = true
 vim.o.listchars = "tab:\226\135\165 ,eol:\194\172,trail:\226\163\191"
 vim.o.clipboard = "unnamedplus"

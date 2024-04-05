@@ -43,9 +43,6 @@
 ;; Copy the indent of existing lines when autoindenting
 (set vim.o.copyindent true)
 
-;; Set lower for the CursorHold autocmd, so that LSP's document highlighting is useful.
-(set vim.o.updatetime 100)
-
 ;; Invisible characters
 (set vim.o.list true)
 (set vim.o.listchars "tab:⇥ ,eol:¬,trail:⣿")
