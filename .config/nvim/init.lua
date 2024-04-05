@@ -107,6 +107,10 @@ do
   mini_splitjoin.setup()
 end
 do
+  local mini_cursorword = require("mini.cursorword")
+  mini_cursorword.setup()
+end
+do
   local mini_trailspace = require("mini.trailspace")
   mini_trailspace.setup()
   map("n", "<leader>sw", mini_trailspace.trim)
