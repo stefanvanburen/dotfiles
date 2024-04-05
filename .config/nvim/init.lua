@@ -103,6 +103,10 @@ do
   mini_pairs.setup()
 end
 do
+  local mini_splitjoin = require("mini.splitjoin")
+  mini_splitjoin.setup()
+end
+do
   local mini_trailspace = require("mini.trailspace")
   mini_trailspace.setup()
   map("n", "<leader>sw", mini_trailspace.trim)

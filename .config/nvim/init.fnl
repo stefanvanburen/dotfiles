@@ -199,6 +199,9 @@
 (let [mini-pairs (require :mini.pairs)]
   (mini-pairs.setup))
 
+(let [mini-splitjoin (require :mini.splitjoin)]
+  (mini-splitjoin.setup))
+
 (let [mini-trailspace (require :mini.trailspace)]
   (mini-trailspace.setup)
   (map :n :<leader>sw mini-trailspace.trim))
