@@ -510,6 +510,9 @@
                         lspconfig.taplo {}
                         ;; Dockerfiles
                         lspconfig.dockerls {}
+                        ;; https://sr.ht/~xerool/fennel-ls/
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fennel_ls
+                        lspconfig.fennel_ls {:settings {:fennel-ls {:extra-globals :vim}}}
                         ;; LSP for Swift.
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sourcekit
                         lspconfig.sourcekit {}
