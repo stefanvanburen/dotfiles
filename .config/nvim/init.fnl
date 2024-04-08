@@ -121,6 +121,7 @@
                                      :fennel [:fnlfmt]
                                      :fish [:fish_indent]
                                      :json [:prettier]
+                                     :sql [:pg_format]
                                      :swift [:swift_format]
                                      :typescriptreact [:prettier]}
                   :format_on_save {:timeout_ms 500 :lsp_fallback true}}))
