@@ -116,11 +116,11 @@
 
 (deps.add :stevearc/conform.nvim)
 (let [conform (require :conform)]
-  (conform.setup {:formatters_by_ft {:proto [:buf]
-                                     :just [:just]
-                                     :fennel [:fnlfmt]
+  (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
                                      :json [:prettier]
+                                     :just [:just]
+                                     :proto [:buf]
                                      :sql [:pg_format]
                                      :swift [:swift_format]
                                      :typescriptreact [:prettier]}
