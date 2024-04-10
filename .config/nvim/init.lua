@@ -115,10 +115,6 @@ do
   map("n", "<leader>sw", mini_trailspace.trim)
 end
 do
-  local mini_comment = require("mini.comment")
-  mini_comment.setup({options = {ignore_blank_line = true}})
-end
-do
   local mini_surround = require("mini.surround")
   mini_surround.setup({mappings = {add = "gza", delete = "gzd", find = "gzf", find_left = "gzF", highlight = "gzh", replace = "gzr", update_n_lines = "gzn"}})
 end

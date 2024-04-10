@@ -207,9 +207,6 @@
   (mini-trailspace.setup)
   (map :n :<leader>sw mini-trailspace.trim))
 
-(let [mini-comment (require :mini.comment)]
-  (mini-comment.setup {:options {:ignore_blank_line true}}))
-
 (let [mini-surround (require :mini.surround)]
   (mini-surround.setup {:mappings {:add :gza
                                    :delete :gzd
