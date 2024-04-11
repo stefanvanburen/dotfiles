@@ -207,6 +207,9 @@ do
     extension__3efiletype(extension, filetype)
   end
 end
+for pattern, skeleton_file in pairs({Makefile = "Makefile"}) do
+  vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
+end
 map("n", ";", ":")
 map("n", "<leader>?", vim.diagnostic.open_float)
 local function _11_()

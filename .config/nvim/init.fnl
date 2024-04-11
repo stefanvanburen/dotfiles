@@ -332,6 +332,14 @@
                                     :txtpb :textproto})]
     (extension->filetype extension filetype)))
 
+;; Skeleton files.
+;; :h skeleton
+(each [pattern skeleton-file (pairs {:Makefile :Makefile})]
+  (vim.api.nvim_create_autocmd [:BufNewFile]
+                               {: pattern
+                                :command (.. "0r ~/.config/nvim/skeletons/"
+                                             skeleton-file)}))
+
 ;;; Mappings
 
 ;; ; -> :
