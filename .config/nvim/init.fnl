@@ -328,8 +328,7 @@
 
   (each [extension filetype (pairs {:mdx :markdown
                                     :star :starlark
-                                    :tpl :gotmpl
-                                    :txtpb :textproto})]
+                                    :tpl :gotmpl})]
     (extension->filetype extension filetype)))
 
 ;; Skeleton files.

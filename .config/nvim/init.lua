@@ -203,7 +203,7 @@ do
     end
     return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _10_})
   end
-  for extension, filetype in pairs({mdx = "markdown", star = "starlark", tpl = "gotmpl", txtpb = "textproto"}) do
+  for extension, filetype in pairs({mdx = "markdown", star = "starlark", tpl = "gotmpl"}) do
     extension__3efiletype(extension, filetype)
   end
 end
