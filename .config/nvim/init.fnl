@@ -54,7 +54,7 @@
 (set vim.o.swapfile false)
 
 ;; Convenience for automatic formatting.
-;;   t - auto-wrap text ussdfing textwidth
+;;   t - auto-wrap text using textwidth
 ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
 ;;   q - allow formatting of comments with `gq`
 ;;   j - where it makes sense, remove a comment leader when joining lines
