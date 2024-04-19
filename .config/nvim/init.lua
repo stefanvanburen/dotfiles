@@ -321,7 +321,7 @@ local function lsp_attach(_26_)
   else
   end
   if (client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint) then
-    vim.lsp.inlay_hint.enable(buf, true)
+    vim.lsp.inlay_hint.enable(true, {bufnr = buf})
   else
   end
   if client.server_capabilities.hoverProvider then

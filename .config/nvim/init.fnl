@@ -447,7 +447,7 @@
       (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format})))
   ;; requires neovim nightly
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
-    (vim.lsp.inlay_hint.enable buf true))
+    (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when client.server_capabilities.hoverProvider
     (buffer-map :K vim.lsp.buf.hover))
   ;; setup mappings
