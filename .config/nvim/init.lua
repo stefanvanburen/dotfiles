@@ -46,8 +46,7 @@ vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "python"}
 vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
 vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
 deps.add("gpanders/nvim-parinfer")
-deps.add("tpope/vim-dispatch")
-deps.add("vim-test/vim-test")
+deps.add("vim-test/vim-test", {depends = {"tpope/vim-dispatch"}})
 vim.g["test#strategy"] = "dispatch"
 map("n", "<C-t>n", ":TestNearest<cr>")
 map("n", "<C-t>f", ":TestFile<cr>")
