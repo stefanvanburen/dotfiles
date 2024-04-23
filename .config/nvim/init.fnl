@@ -50,6 +50,9 @@
 ;; always use the system clipboard for operations
 (set vim.o.clipboard :unnamedplus)
 
+;; use `rg` as grepprg.
+(set vim.o.grepprg "rg --vimgrep --hidden $*")
+
 ;; turn off swapfiles - for now, I find these more of a headache than a benefit
 (set vim.o.swapfile false)
 
