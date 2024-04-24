@@ -471,11 +471,22 @@
 (local server-settings {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
                         lspconfig.gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
                                          :cmd [:gopls :-remote=auto]
+                                         ;; The default, plus gohtmltmpl and gotexttmpl.
+                                         :filetypes [:go
+                                                     :gomod
+                                                     :gowork
+                                                     :gotmpl
+                                                     :gohtmltmpl
+                                                     :gotexttmpl]
                                          ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
                                          :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
                                                             :staticcheck true
                                                             ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#linktarget-string
                                                             :linkTarget :godocs.io
+                                                            ;; See https://github.com/golang/tools/blob/master/gopls/doc/features.md#template-files
+                                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#templateextensions-string
+                                                            :templateExtensions [:tpl
+                                                                                 :tmpl]
                                                             ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                                                             ;; Most of these analyzers are enabled by default.
                                                             :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
