@@ -440,7 +440,6 @@
     (vim.keymap.set :n from to {:buffer buf :silent true}))
 
   (when client.server_capabilities.documentFormattingProvider
-    (buffer-map :<leader>af format)
     ;; TODO: Disable tsserver's formatting overall.
     (when (not= client.name :tsserver)
       (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format})))

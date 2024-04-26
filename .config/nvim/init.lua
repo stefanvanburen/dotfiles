@@ -309,7 +309,6 @@ local function lsp_attach(_26_)
     return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
   end
   if client.server_capabilities.documentFormattingProvider then
-    buffer_map("<leader>af", format)
     if (client.name ~= "tsserver") then
       vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = format})
     else
