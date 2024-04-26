@@ -440,9 +440,7 @@
     (vim.keymap.set :n from to {:buffer buf :silent true}))
 
   (when client.server_capabilities.documentFormattingProvider
-    ;; TODO: Disable tsserver's formatting overall.
-    (when (not= client.name :tsserver)
-      (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format})))
+    (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format}))
   ;; requires neovim nightly
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))

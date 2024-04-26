@@ -309,10 +309,7 @@ local function lsp_attach(_26_)
     return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
   end
   if client.server_capabilities.documentFormattingProvider then
-    if (client.name ~= "tsserver") then
-      vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = format})
-    else
-    end
+    vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = format})
   else
   end
   if (client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint) then
