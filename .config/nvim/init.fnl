@@ -444,12 +444,9 @@
   ;; requires neovim nightly
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
-  ;; setup mappings
-  ;; See `:help vim.lsp.*` for documentation on any of the below functions
   (buffer-map :gD vim.lsp.buf.declaration)
   (buffer-map :gd vim.lsp.buf.definition)
   (buffer-map :gi vim.lsp.buf.implementation)
-  (buffer-map :<C-k> vim.lsp.buf.signature_help)
   (buffer-map :<leader>D vim.lsp.buf.type_definition))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})

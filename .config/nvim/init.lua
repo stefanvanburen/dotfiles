@@ -319,7 +319,6 @@ local function lsp_attach(_26_)
   buffer_map("gD", vim.lsp.buf.declaration)
   buffer_map("gd", vim.lsp.buf.definition)
   buffer_map("gi", vim.lsp.buf.implementation)
-  buffer_map("<C-k>", vim.lsp.buf.signature_help)
   return buffer_map("<leader>D", vim.lsp.buf.type_definition)
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
