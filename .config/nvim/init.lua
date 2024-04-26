@@ -325,10 +325,6 @@ local function lsp_attach(_26_)
     vim.lsp.inlay_hint.enable(true, {bufnr = buf})
   else
   end
-  if client.server_capabilities.hoverProvider then
-    buffer_map("K", vim.lsp.buf.hover)
-  else
-  end
   buffer_map("gD", vim.lsp.buf.declaration)
   buffer_map("gd", vim.lsp.buf.definition)
   buffer_map("gi", vim.lsp.buf.implementation)
