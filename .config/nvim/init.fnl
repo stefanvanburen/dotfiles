@@ -106,11 +106,6 @@
 (deps.add :tpope/vim-dispatch)
 (deps.add :vim-test/vim-test)
 (set vim.g.test#strategy :dispatch)
-(map :n :<C-t>n ":TestNearest<cr>")
-(map :n :<C-t>f ":TestFile<cr>")
-(map :n :<C-t>s ":TestSuite<cr>")
-(map :n :<C-t>l ":TestLast<cr>")
-(map :n :<C-t>v ":TestVisit<cr>")
 
 (deps.add :neovim/nvim-lspconfig)
 
