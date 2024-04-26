@@ -305,9 +305,6 @@ local function lsp_attach(_26_)
       return nil
     end
   end
-  local function buffer_map(from, to)
-    return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
-  end
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = format})
   else
@@ -315,6 +312,9 @@ local function lsp_attach(_26_)
   if (client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint) then
     vim.lsp.inlay_hint.enable(true, {bufnr = buf})
   else
+  end
+  local function buffer_map(from, to)
+    return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
   end
   buffer_map("gD", vim.lsp.buf.declaration)
   buffer_map("gd", vim.lsp.buf.definition)

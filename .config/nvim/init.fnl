@@ -436,14 +436,15 @@
       (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
                                 :apply true})))
 
-  (fn buffer-map [from to]
-    (vim.keymap.set :n from to {:buffer buf :silent true}))
-
   (when client.server_capabilities.documentFormattingProvider
     (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format}))
   ;; requires neovim nightly
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
+
+  (fn buffer-map [from to]
+    (vim.keymap.set :n from to {:buffer buf :silent true}))
+
   (buffer-map :gD vim.lsp.buf.declaration)
   (buffer-map :gd vim.lsp.buf.definition)
   (buffer-map :gi vim.lsp.buf.implementation)
