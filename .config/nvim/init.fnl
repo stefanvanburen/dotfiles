@@ -498,12 +498,6 @@
                         lspconfig.bufls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff
                         lspconfig.ruff {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
-                        ;; pipx install python-lsp-server ; https://github.com/python-lsp/python-lsp-server
-                        ;; pipx inject python-lsp-server pylsp-mypy ; https://github.com/python-lsp/pylsp-mypy
-                        ;; https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-                        lspconfig.pylsp {:settings {:pylsp {:plugins {:pycodestyle {:enabled false}
-                                                                      :pyflakes {:enabled false}}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
                         lspconfig.tsserver {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
