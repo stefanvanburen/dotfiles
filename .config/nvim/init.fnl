@@ -422,7 +422,8 @@
                          :DiagnosticSignHint "?"})]
   (vim.fn.sign_define sign {: text :texthl sign}))
 
-(vim.diagnostic.config {:virtual_text {:prefix "▪"}
+(vim.diagnostic.config {:virtual_text false
+                        :underline true
                         :float {:border :single
                                 :focusable false
                                 :source :always}})

@@ -294,7 +294,7 @@ map("n", "<C-l>", ":nohlsearch<cr>")
 for sign, text in pairs({DiagnosticSignError = "\195\151", DiagnosticSignWarn = "!", DiagnosticSignInfo = "\226\156\179\239\184\142", DiagnosticSignHint = "?"}) do
   vim.fn.sign_define(sign, {text = text, texthl = sign})
 end
-vim.diagnostic.config({virtual_text = {prefix = "\226\150\170"}, float = {border = "single", source = "always", focusable = false}})
+vim.diagnostic.config({underline = true, float = {border = "single", source = "always", focusable = false}, virtual_text = false})
 local function lsp_attach(_27_)
   local _arg_28_ = _27_
   local buf = _arg_28_["buf"]
