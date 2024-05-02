@@ -45,6 +45,9 @@
 (set vim.o.list true)
 (set vim.o.listchars "tab:⇥ ,eol:¬,trail:⣿")
 
+;; Override default grepprg to use default ripgrep settings
+(set vim.o.grepprg "rg --vimgrep")
+
 ;; always use the system clipboard for operations
 (set vim.o.clipboard :unnamedplus)
 
