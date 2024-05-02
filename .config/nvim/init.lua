@@ -8,7 +8,6 @@ else
 end
 local deps = require("mini.deps")
 deps.setup({path = {package = path_package}})
-local map = vim.keymap.set
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_python3_provider = 0
@@ -27,70 +26,12 @@ vim.o.clipboard = "unnamedplus"
 vim.o.swapfile = false
 vim.o.formatoptions = "tcqjronp"
 vim.o.wildignorecase = true
-deps.add("justinmk/vim-gtfo")
-vim.g["gtfo#terminals"] = {mac = "kitty"}
-deps.add("tyru/open-browser.vim")
-deps.add("lewis6991/fileline.nvim")
-deps.add("tpope/vim-fugitive")
-vim.g.fugitive_legacy_commands = 0
-deps.add("tpope/vim-rhubarb")
-deps.add("mattn/vim-gotmpl")
-deps.add("fladson/vim-kitty")
-deps.add("NoahTheDuke/vim-just")
-deps.add("jaawerth/fennel.vim")
-deps.add("janet-lang/janet.vim")
-deps.add("Olical/nfnl")
-deps.add("Olical/conjure")
-vim.g["conjure#highlight#enabled"] = true
-vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "python"}
-vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
-vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
-deps.add("gpanders/nvim-parinfer")
-deps.add("tpope/vim-dispatch")
-deps.add("vim-test/vim-test")
-vim.g["test#strategy"] = "dispatch"
-deps.add("neovim/nvim-lspconfig")
-deps.add("b0o/SchemaStore.nvim")
-deps.add("stevearc/conform.nvim")
-do
-  local conform = require("conform")
-  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {"gci"}, json = {"prettier"}, just = {"just"}, proto = {"buf"}, sql = {"pg_format"}, swift = {"swift_format"}, typescriptreact = {"prettier"}}, format_on_save = {timeout_ms = 500, lsp_fallback = true}})
-end
-deps.add("mfussenegger/nvim-lint")
-do
-  local nvim_lint = require("lint")
-  nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}, go = {"golangcilint"}, janet = {"janet"}, fennel = {"fennel"}}
-  local function _2_()
-    return nvim_lint.try_lint()
-  end
-  vim.api.nvim_create_autocmd("BufWritePost", {callback = _2_})
-end
-local function _3_()
-  return vim.cmd(":MasonUpdate")
-end
-deps.add({source = "williamboman/mason.nvim", hooks = {post_checkout = _3_}})
-do
-  local mason = require("mason")
-  mason.setup()
-end
-deps.add("williamboman/mason-lspconfig.nvim")
-do
-  local mason_lspconfig = require("mason-lspconfig")
-  mason_lspconfig.setup()
-end
-local function _4_()
-  return vim.cmd(":TSUpdate")
-end
-deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _4_}})
-do
-  local treesitter = require("nvim-treesitter.configs")
-  treesitter.setup({highlight = {enable = true, disable = {"fennel"}}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "yaml", "zig"}})
-end
 deps.add("echasnovski/mini.nvim")
 do
   local mini_basics = require("mini.basics")
   mini_basics.setup()
 end
+local map = vim.keymap.set
 do
   local mini_pairs = require("mini.pairs")
   mini_pairs.setup()
@@ -120,24 +61,24 @@ do
   local mini_pick = require("mini.pick")
   mini_pick.setup()
   map("n", "<leader>ff", mini_pick.builtin.files)
-  local function _5_()
+  local function _2_()
     return mini_pick.builtin.files({tool = "git"})
   end
-  map("n", "<leader>fg", _5_)
+  map("n", "<leader>fg", _2_)
   map("n", "<leader>fb", mini_pick.builtin.buffers)
   map("n", "<leader>fl", mini_pick.builtin.grep_live)
   map("n", "<leader>fh", mini_pick.builtin.help)
 end
 do
   local mini_extra = require("mini.extra")
-  local function _6_()
+  local function _3_()
     return mini_extra.pickers.lsp({scope = "document_symbol"})
   end
-  map("n", "<leader>fs", _6_)
-  local function _7_()
+  map("n", "<leader>fs", _3_)
+  local function _4_()
     return mini_extra.pickers.lsp({scope = "references"})
   end
-  map("n", "<leader>fr", _7_)
+  map("n", "<leader>fr", _4_)
 end
 do
   local mini_statusline = require("mini.statusline")
@@ -154,10 +95,10 @@ end
 do
   local mini_files = require("mini.files")
   mini_files.setup({mappings = {go_in_plus = "<CR>"}})
-  local function _8_()
+  local function _5_()
     return mini_files.open(vim.api.nvim_buf_get_name(0))
   end
-  map("n", "-", _8_)
+  map("n", "-", _5_)
 end
 do
   local mini_notify = require("mini.notify")
@@ -173,6 +114,73 @@ vim.g.matchup_matchparen_offscreen = {method = "popup"}
 deps.add("tpope/vim-abolish")
 deps.add("rktjmp/paperplanes.nvim")
 deps.add("rktjmp/lush.nvim")
+deps.add("justinmk/vim-gtfo")
+vim.g["gtfo#terminals"] = {mac = "kitty"}
+deps.add("tyru/open-browser.vim")
+deps.add("lewis6991/fileline.nvim")
+deps.add("tpope/vim-fugitive")
+vim.g.fugitive_legacy_commands = 0
+deps.add("tpope/vim-rhubarb")
+deps.add("mattn/vim-gotmpl")
+deps.add("fladson/vim-kitty")
+deps.add("NoahTheDuke/vim-just")
+deps.add("jaawerth/fennel.vim")
+deps.add("janet-lang/janet.vim")
+deps.add("Olical/nfnl")
+deps.add("Olical/conjure")
+vim.g["conjure#highlight#enabled"] = true
+vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "python"}
+vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
+vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
+deps.add("gpanders/nvim-parinfer")
+deps.add("tpope/vim-dispatch")
+deps.add("vim-test/vim-test")
+vim.g["test#strategy"] = "dispatch"
+local function _6_()
+  return vim.cmd({cmd = "TestNearest"})
+end
+map("n", "<leader>tn", _6_)
+local function _7_()
+  return vim.cmd({cmd = "TestFile"})
+end
+map("n", "<leader>tf", _7_)
+deps.add("neovim/nvim-lspconfig")
+deps.add("b0o/SchemaStore.nvim")
+deps.add("stevearc/conform.nvim")
+do
+  local conform = require("conform")
+  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {"gci"}, json = {"prettier"}, just = {"just"}, proto = {"buf"}, sql = {"pg_format"}, swift = {"swift_format"}, typescriptreact = {"prettier"}}, format_on_save = {timeout_ms = 500, lsp_fallback = true}})
+end
+deps.add("mfussenegger/nvim-lint")
+do
+  local nvim_lint = require("lint")
+  nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}, go = {"golangcilint"}, janet = {"janet"}, fennel = {"fennel"}}
+  local function _8_()
+    return nvim_lint.try_lint()
+  end
+  vim.api.nvim_create_autocmd("BufWritePost", {callback = _8_})
+end
+local function _9_()
+  return vim.cmd(":MasonUpdate")
+end
+deps.add({source = "williamboman/mason.nvim", hooks = {post_checkout = _9_}})
+do
+  local mason = require("mason")
+  mason.setup()
+end
+deps.add("williamboman/mason-lspconfig.nvim")
+do
+  local mason_lspconfig = require("mason-lspconfig")
+  mason_lspconfig.setup()
+end
+local function _10_()
+  return vim.cmd(":TSUpdate")
+end
+deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _10_}})
+do
+  local treesitter = require("nvim-treesitter.configs")
+  treesitter.setup({highlight = {enable = true, disable = {"fennel"}}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "yaml", "zig"}})
+end
 deps.add("stefanvanburen/rams")
 deps.add("mcchrish/zenbones.nvim")
 deps.add("rose-pine/neovim")
@@ -183,19 +191,19 @@ local filetype_settings = {go = {expandtab = false}, javascript = {expandtab = t
 do
   local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
-    local function _9_()
+    local function _11_()
       for name, value in pairs(settings) do
         vim.api.nvim_set_option_value(name, value, {scope = "local"})
       end
       return nil
     end
-    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _9_})
+    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _11_})
   end
   local function extension__3efiletype(extension, filetype)
-    local function _10_()
+    local function _12_()
       return vim.api.nvim_set_option_value("filetype", filetype, {scope = "local"})
     end
-    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _10_})
+    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _12_})
   end
   for extension, filetype in pairs({mdx = "markdown", star = "starlark", tpl = "gotmpl"}) do
     extension__3efiletype(extension, filetype)
@@ -206,70 +214,66 @@ for pattern, skeleton_file in pairs({Makefile = "Makefile"}) do
 end
 map("n", ";", ":")
 map("n", "<leader>?", vim.diagnostic.open_float)
-local function _11_()
+local function _13_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _11_)
-local function _12_()
+map("n", "<leader>gs", _13_)
+local function _14_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _12_)
-local function _13_()
+map("n", "<leader>gw", _14_)
+local function _15_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _13_)
-local function _14_()
+map("n", "<leader>gc", _15_)
+local function _16_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _14_)
-local function _15_()
+map("n", "<leader>gp", _16_)
+local function _17_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _15_)
+map("n", "<leader>gb", _17_)
 map({"n", "v"}, "gx", "<plug>(openbrowser-smart-search)", {})
-local function _16_()
+local function _18_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _16_, {expr = true})
-local function _18_()
+map({"n", "v"}, "j", _18_, {expr = true})
+local function _20_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _18_, {expr = true})
+map({"n", "v"}, "k", _20_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
-  local function _20_()
+  local function _22_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _20_)
+  map("n", keymap, _22_)
 end
-local function _21_()
+local function _23_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _21_)
-local function _22_()
+map("n", "<leader>w", _23_)
+local function _24_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _22_)
-local function _23_()
+map("n", "<leader>cl", _24_)
+local function _25_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _23_)
-local function _24_()
+map("n", "<leader>ss", _25_)
+local function _26_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _24_)
-local function _25_()
-  return vim.cmd({cmd = "tabnew"})
-end
-map("n", "<leader>tn", _25_)
+map("n", "<leader>vs", _26_)
 map("n", "Q", "@@")
 map("n", "0", "^")
 map("n", "^", "0")
@@ -290,11 +294,11 @@ for sign, text in pairs({DiagnosticSignError = "\195\151", DiagnosticSignWarn = 
   vim.fn.sign_define(sign, {text = text, texthl = sign})
 end
 vim.diagnostic.config({virtual_text = {prefix = "\226\150\170"}, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_26_)
-  local _arg_27_ = _26_
-  local buf = _arg_27_["buf"]
-  local _arg_28_ = _arg_27_["data"]
-  local client_id = _arg_28_["client_id"]
+local function lsp_attach(_27_)
+  local _arg_28_ = _27_
+  local buf = _arg_28_["buf"]
+  local _arg_29_ = _arg_28_["data"]
+  local client_id = _arg_29_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   local function format()
     vim.lsp.buf.format({timeout_ms = 2000})
@@ -323,7 +327,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
-local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, filetypes = {"go", "gomod", "gowork", "gotmpl", "gohtmltmpl", "gotexttmpl"}, settings = {gopls = {staticcheck = true, linkTarget = "godocs.io", templateExtensions = {"tpl", "tmpl"}, analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.bufls] = {}, [lspconfig.ruff] = {}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.dockerls] = {}, [lspconfig.fennel_ls] = {settings = {["fennel-ls"] = {["extra-globals"] = "vim"}}}, [lspconfig.sourcekit] = {}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.api.nvim_list_runtime_paths()}}}}, [lspconfig.rust_analyzer] = {}}
+local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, filetypes = {"go", "gomod", "gowork", "gotmpl", "gohtmltmpl", "gotexttmpl"}, settings = {gopls = {staticcheck = true, linkTarget = "godocs.io", templateExtensions = {"tpl", "tmpl"}, analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.ruff] = {}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.dockerls] = {}, [lspconfig.fennel_ls] = {settings = {["fennel-ls"] = {["extra-globals"] = "vim"}}}, [lspconfig.sourcekit] = {}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.api.nvim_list_runtime_paths()}}}}, [lspconfig.rust_analyzer] = {}}
 for server, settings in pairs(server_settings) do
   server.setup(settings)
 end

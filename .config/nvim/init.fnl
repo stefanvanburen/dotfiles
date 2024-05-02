@@ -11,8 +11,6 @@
 (local deps (require :mini.deps))
 (deps.setup {:path {:package path-package}})
 
-(local map vim.keymap.set)
-
 ;;; Settings
 
 ;; Don't load netrw - using mini.files instead.
@@ -69,6 +67,79 @@
 
 ;;; Plugins
 
+(deps.add :echasnovski/mini.nvim)
+
+;; mini-basics should be first, to set up mappings like <Leader>
+(let [mini-basics (require :mini.basics)]
+  (mini-basics.setup))
+
+;; <leader> mappings shouldn't be set up until now.
+(local map vim.keymap.set)
+
+(let [mini-pairs (require :mini.pairs)]
+  (mini-pairs.setup))
+
+(let [mini-splitjoin (require :mini.splitjoin)]
+  (mini-splitjoin.setup))
+
+(let [mini-cursorword (require :mini.cursorword)]
+  (mini-cursorword.setup))
+
+(let [mini-trailspace (require :mini.trailspace)]
+  (mini-trailspace.setup)
+  (map :n :<leader>sw mini-trailspace.trim))
+
+(let [mini-surround (require :mini.surround)]
+  (mini-surround.setup {:mappings {:add :gza
+                                   :delete :gzd
+                                   :find :gzf
+                                   :find_left :gzF
+                                   :highlight :gzh
+                                   :replace :gzr
+                                   :update_n_lines :gzn}}))
+
+(let [mini-indentscope (require :mini.indentscope)]
+  (mini-indentscope.setup))
+
+(let [mini-pick (require :mini.pick)]
+  (mini-pick.setup)
+  (map :n :<leader>ff mini-pick.builtin.files)
+  (map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
+  (map :n :<leader>fb mini-pick.builtin.buffers)
+  (map :n :<leader>fl mini-pick.builtin.grep_live)
+  (map :n :<leader>fh mini-pick.builtin.help))
+
+(let [mini-extra (require :mini.extra)]
+  (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
+  (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references})))
+
+(let [mini-statusline (require :mini.statusline)]
+  (mini-statusline.setup))
+
+(let [mini-completion (require :mini.completion)]
+  (mini-completion.setup))
+
+(let [mini-bracketed (require :mini.bracketed)]
+  (mini-bracketed.setup))
+
+(let [mini-files (require :mini.files)]
+  (mini-files.setup {:mappings {:go_in_plus :<CR>}})
+  (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0))))
+
+(let [mini-notify (require :mini.notify)]
+  (mini-notify.setup))
+
+(let [mini-diff (require :mini.diff)]
+  (mini-diff.setup {:view {:signs {:add "┃" :change "┃" :delete "▁"}
+                           :style :sign}}))
+
+(deps.add :tpope/vim-eunuch)
+(deps.add :andymass/vim-matchup)
+(set vim.g.matchup_matchparen_offscreen {:method :popup})
+(deps.add :tpope/vim-abolish)
+(deps.add :rktjmp/paperplanes.nvim)
+(deps.add :rktjmp/lush.nvim)
+
 (deps.add :justinmk/vim-gtfo)
 (set vim.g.gtfo#terminals {:mac :kitty})
 
@@ -103,6 +174,8 @@
 (deps.add :tpope/vim-dispatch)
 (deps.add :vim-test/vim-test)
 (set vim.g.test#strategy :dispatch)
+(map :n :<leader>tn #(vim.cmd {:cmd :TestNearest}))
+(map :n :<leader>tf #(vim.cmd {:cmd :TestFile}))
 
 (deps.add :neovim/nvim-lspconfig)
 
@@ -182,76 +255,6 @@
                                         :toml
                                         :yaml
                                         :zig]}))
-
-(deps.add :echasnovski/mini.nvim)
-
-;; mini-basics should be first, to set up mappings like <Leader>
-(let [mini-basics (require :mini.basics)]
-  (mini-basics.setup))
-
-(let [mini-pairs (require :mini.pairs)]
-  (mini-pairs.setup))
-
-(let [mini-splitjoin (require :mini.splitjoin)]
-  (mini-splitjoin.setup))
-
-(let [mini-cursorword (require :mini.cursorword)]
-  (mini-cursorword.setup))
-
-(let [mini-trailspace (require :mini.trailspace)]
-  (mini-trailspace.setup)
-  (map :n :<leader>sw mini-trailspace.trim))
-
-(let [mini-surround (require :mini.surround)]
-  (mini-surround.setup {:mappings {:add :gza
-                                   :delete :gzd
-                                   :find :gzf
-                                   :find_left :gzF
-                                   :highlight :gzh
-                                   :replace :gzr
-                                   :update_n_lines :gzn}}))
-
-(let [mini-indentscope (require :mini.indentscope)]
-  (mini-indentscope.setup))
-
-(let [mini-pick (require :mini.pick)]
-  (mini-pick.setup)
-  (map :n :<leader>ff mini-pick.builtin.files)
-  (map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
-  (map :n :<leader>fb mini-pick.builtin.buffers)
-  (map :n :<leader>fl mini-pick.builtin.grep_live)
-  (map :n :<leader>fh mini-pick.builtin.help))
-
-(let [mini-extra (require :mini.extra)]
-  (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
-  (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references})))
-
-(let [mini-statusline (require :mini.statusline)]
-  (mini-statusline.setup))
-
-(let [mini-completion (require :mini.completion)]
-  (mini-completion.setup))
-
-(let [mini-bracketed (require :mini.bracketed)]
-  (mini-bracketed.setup))
-
-(let [mini-files (require :mini.files)]
-  (mini-files.setup {:mappings {:go_in_plus :<CR>}})
-  (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0))))
-
-(let [mini-notify (require :mini.notify)]
-  (mini-notify.setup))
-
-(let [mini-diff (require :mini.diff)]
-  (mini-diff.setup {:view {:signs {:add "┃" :change "┃" :delete "▁"}
-                           :style :sign}}))
-
-(deps.add :tpope/vim-eunuch)
-(deps.add :andymass/vim-matchup)
-(set vim.g.matchup_matchparen_offscreen {:method :popup})
-(deps.add :tpope/vim-abolish)
-(deps.add :rktjmp/paperplanes.nvim)
-(deps.add :rktjmp/lush.nvim)
 
 ;; Colorschemes
 (deps.add :stefanvanburen/rams)
@@ -372,7 +375,6 @@
 (map :n :<leader>cl #(vim.cmd {:cmd :close}))
 (map :n :<leader>ss #(vim.cmd {:cmd :split}))
 (map :n :<leader>vs #(vim.cmd {:cmd :vsplit}))
-(map :n :<leader>tn #(vim.cmd {:cmd :tabnew}))
 
 ;; Use Q to repeat last macro, rather than going into ex mode
 (map :n :Q "@@")
@@ -491,8 +493,6 @@
                         lspconfig.clojure_lsp {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cssls
                         lspconfig.cssls {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
-                        lspconfig.bufls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff
                         lspconfig.ruff {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
