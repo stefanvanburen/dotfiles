@@ -52,7 +52,10 @@ do
 end
 do
   local mini_surround = require("mini.surround")
-  mini_surround.setup({mappings = {add = "gza", delete = "gzd", find = "gzf", find_left = "gzF", highlight = "gzh", replace = "gzr", update_n_lines = "gzn"}})
+  mini_surround.setup({mappings = {add = "ys", delete = "ds", find = "", find_left = "", highlight = "", replace = "cs", update_n_lines = "", suffix_last = "", suffix_next = ""}, search_method = "cover_or_next"})
+  vim.keymap.del("x", "ys")
+  map("x", "S", ":<C-U>lua MiniSurround.add('visual')<CR>", {silent = true})
+  map("n", "yss", "ys_", {remap = true})
 end
 do
   local mini_indentscope = require("mini.indentscope")

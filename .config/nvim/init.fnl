@@ -93,13 +93,20 @@
   (map :n :<leader>sw mini-trailspace.trim))
 
 (let [mini-surround (require :mini.surround)]
-  (mini-surround.setup {:mappings {:add :gza
-                                   :delete :gzd
-                                   :find :gzf
-                                   :find_left :gzF
-                                   :highlight :gzh
-                                   :replace :gzr
-                                   :update_n_lines :gzn}}))
+  ;; vim-surround mappings - :help MiniSurround-vim-surround-config
+  (mini-surround.setup {:mappings {:add :ys
+                                   :delete :ds
+                                   :find ""
+                                   :find_left ""
+                                   :highlight ""
+                                   :replace :cs
+                                   :update_n_lines ""
+                                   :suffix_last ""
+                                   :suffix_next ""}
+                        :search_method :cover_or_next})
+  (vim.keymap.del :x :ys)
+  (map :x :S ":<C-U>lua MiniSurround.add('visual')<CR>" {:silent true})
+  (map :n :yss :ys_ {:remap true}))
 
 (let [mini-indentscope (require :mini.indentscope)]
   (mini-indentscope.setup))
