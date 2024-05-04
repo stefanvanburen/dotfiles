@@ -174,9 +174,11 @@
 
 (deps.add :Olical/conjure)
 (set vim.g.conjure#highlight#enabled true)
-(set vim.g.conjure#filetypes [:clojure :fennel :janet :python])
+(set vim.g.conjure#filetypes [:clojure :fennel :janet :python :rust])
 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
 (set vim.g.conjure#filetype#janet :conjure.client.janet.stdio)
+(set vim.g.conjure#mapping#doc_word false)
+; ;; let g:conjure#mapping#doc_word = v:false
 
 (deps.add :gpanders/nvim-parinfer)
 

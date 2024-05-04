@@ -133,9 +133,10 @@ deps.add("janet-lang/janet.vim")
 deps.add("Olical/nfnl")
 deps.add("Olical/conjure")
 vim.g["conjure#highlight#enabled"] = true
-vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "python"}
+vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "python", "rust"}
 vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
 vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
+vim.g["conjure#mapping#doc_word"] = false
 deps.add("gpanders/nvim-parinfer")
 deps.add("tpope/vim-dispatch")
 deps.add("vim-test/vim-test")
