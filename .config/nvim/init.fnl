@@ -178,7 +178,6 @@
 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
 (set vim.g.conjure#filetype#janet :conjure.client.janet.stdio)
 (set vim.g.conjure#mapping#doc_word false)
-; ;; let g:conjure#mapping#doc_word = v:false
 
 (deps.add :gpanders/nvim-parinfer)
 
