@@ -460,7 +460,10 @@
   (buffer-map :gD vim.lsp.buf.declaration)
   (buffer-map :gd vim.lsp.buf.definition)
   (buffer-map :gi vim.lsp.buf.implementation)
-  (buffer-map :<leader>D vim.lsp.buf.type_definition))
+  (buffer-map :gr vim.lsp.buf.references)
+  (buffer-map :<leader>D vim.lsp.buf.type_definition)
+  (buffer-map :<leader>rn vim.lsp.buf.rename)
+  (buffer-map :<leader>ca vim.lsp.buf.code_action))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})
 
