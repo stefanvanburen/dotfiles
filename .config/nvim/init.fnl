@@ -272,7 +272,7 @@
 (deps.add :mcchrish/zenbones.nvim)
 (deps.add :rose-pine/neovim)
 (deps.add :lunacookies/vim-plan9)
-(vim.cmd.colorscheme :plan9)
+(vim.cmd.colorscheme :zenwritten)
 
 ;;; Autocommands and FileType settings
 
