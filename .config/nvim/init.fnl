@@ -196,7 +196,6 @@
 (let [conform (require :conform)]
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
-                                     :go [:gci]
                                      :json [:prettier]
                                      :just [:just]
                                      :proto [:buf]
