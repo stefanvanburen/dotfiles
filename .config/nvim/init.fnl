@@ -450,7 +450,6 @@
 
   (when client.server_capabilities.documentFormattingProvider
     (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format}))
-  ;; requires neovim nightly
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
 
