@@ -163,6 +163,8 @@
 
 (deps.add :tpope/vim-rhubarb)
 
+(deps.add :tpope/vim-dadbod)
+
 ;; Filetype-specific plugins
 (deps.add :mattn/vim-gotmpl)
 (deps.add :fladson/vim-kitty)
