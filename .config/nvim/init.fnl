@@ -27,6 +27,9 @@
 ;; LocalLeader is the comma key
 (set vim.g.maplocalleader ",")
 
+;; Setup folding.
+(set vim.o.foldmethod :expr)
+
 ;; on lines that will wrap, they instead 'break' and be visually indented by
 ;; the showbreak character, followed by the indent.
 (set vim.o.breakindentopt "shift:2,sbr")
@@ -229,6 +232,7 @@
            :hooks {:post_checkout (fn [] (vim.cmd ":TSUpdate"))}})
 
 (let [treesitter (require :nvim-treesitter.configs)]
+  (set vim.o.foldexpr "nvim_treesitter#foldexpr()")
   (treesitter.setup {:highlight {:enable true :disable [:fennel]}
                      ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
                      :matchup {:enable true :disable [:fennel]}

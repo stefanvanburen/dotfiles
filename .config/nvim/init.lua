@@ -15,6 +15,7 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.maplocalleader = ","
+vim.o.foldmethod = "expr"
 vim.o.breakindentopt = "shift:2,sbr"
 vim.o.showbreak = "\226\134\179"
 vim.o.shiftround = true
@@ -182,6 +183,7 @@ local function _10_()
   return vim.cmd(":TSUpdate")
 end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _10_}})
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 do
   local treesitter = require("nvim-treesitter.configs")
   treesitter.setup({highlight = {enable = true, disable = {"fennel"}}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "yaml", "zig"}})
