@@ -1,0 +1,13 @@
+urls-source "feedbin"
+feedbin-login "stefan@vanburen.xyz"
+feedbin-passwordeval "op item get feedbin --fields password"
+
+# a simple newsbeuter color scheme.
+
+color listnormal        white black
+color listnormal_unread white blue
+color listfocus         black white bold
+color listfocus_unread  black white bold
+color info              black white bold
+color background        white black
+color article           white black
