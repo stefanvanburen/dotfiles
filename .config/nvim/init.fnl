@@ -27,49 +27,44 @@
 ;; LocalLeader is the comma key
 (set vim.g.maplocalleader ",")
 
-;; Setup folding.
-(set vim.o.foldmethod :expr)
-
-;; on lines that will wrap, they instead 'break' and be visually indented by
-;; the showbreak character, followed by the indent.
-(set vim.o.breakindentopt "shift:2,sbr")
-(set vim.o.showbreak "↳")
-
-;; when using > and <, round the indent to a multiple of shiftwidth
-(set vim.o.shiftround true)
-
-;; Global substitutions by default.
-(set vim.o.gdefault true)
-
-;; Copy the indent of existing lines when autoindenting
-(set vim.o.copyindent true)
-
-;; Invisible characters
-(set vim.o.list true)
-(set vim.o.listchars "tab:⇥ ,eol:¬,trail:⣿")
-
-;; Override default grepprg to use default ripgrep settings
-(set vim.o.grepprg "rg --vimgrep")
-
-;; always use the system clipboard for operations
-(set vim.o.clipboard :unnamedplus)
-
-;; turn off swapfiles - for now, I find these more of a headache than a benefit
-(set vim.o.swapfile false)
-
-;; Convenience for automatic formatting.
-;;   t - auto-wrap text using textwidth
-;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
-;;   q - allow formatting of comments with `gq`
-;;   j - where it makes sense, remove a comment leader when joining lines
-;;   r - auto-insert comment leading after <cr> in insert mode
-;;   o - auto-insert comment leading after O in normal mode
-;;   n - recognize numbered lists in text
-;;   p - don't break lines at single spaces that follow periods
-(set vim.o.formatoptions :tcqjronp)
-
-;; ignore case when completing files / directories in wildmenu
-(set vim.o.wildignorecase true)
+(let [opts {;; setup folding
+            :foldmethod :expr
+            ;; on lines that will wrap, they instead 'break' and be visually indented by
+            ;; the showbreak character, followed by the indent.
+            :breakindentopt {:shift 2
+                             :sbr true}
+            :showbreak "↳"
+            ;; when using > and <, round the indent to a multiple of shiftwidth
+            :shiftround true
+            ;; Global substitutions by defualt.
+            :gdefault true
+            ;; Copy the indent of existing lines when autoindenting.
+            :copyindent
+            ;; Invisible characters.
+            :list true
+            :listchars {:tab "⇥ "
+                        :eol "¬"
+                        :trail "⣿"}
+            ;; Override default grepprg to use default ripgrep settings
+            :grepprg "rg --vimgrep"
+            ;; always use the system clipboard for operations
+            :clipboard :unnamedplus
+            ;; turn off swapfiles - for now, I find these more of a headache than a benefit
+            :swapfile false
+            ;; Convenience for automatic formatting.
+            ;;   t - auto-wrap text using textwidth
+            ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
+            ;;   q - allow formatting of comments with `gq`
+            ;;   j - where it makes sense, remove a comment leader when joining lines
+            ;;   r - auto-insert comment leading after <cr> in insert mode
+            ;;   o - auto-insert comment leading after O in normal mode
+            ;;   n - recognize numbered lists in text
+            ;;   p - don't break lines at single spaces that follow periods
+            :formatoptions :tcqjronp
+            ;; ignore case when completing files / directories in wildmenu
+            :wildignorecase true}]
+  (each [opt val (pairs opts)]
+    (tset vim.opt opt val)))
 
 ;;; Plugins
 
