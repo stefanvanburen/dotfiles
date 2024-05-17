@@ -153,8 +153,6 @@
 (deps.add :justinmk/vim-gtfo)
 (set vim.g.gtfo#terminals {:mac :kitty})
 
-(deps.add :tyru/open-browser.vim)
-
 (deps.add :lewis6991/fileline.nvim)
 
 (deps.add :tpope/vim-fugitive)
@@ -362,9 +360,6 @@
 (map :n :<leader>gc #(vim.cmd {:cmd :Git :args [:commit]}))
 (map :n :<leader>gp #(vim.cmd {:cmd :Git :args [:push]}))
 (map :n :<leader>gb #(vim.cmd {:cmd :Git :args [:blame]}))
-
-;; open-browser.vim
-(map [:n :v] :gx "<plug>(openbrowser-smart-search)" {})
 
 ;; move by visual lines instead of real lines, except when a count is provided,
 ;; which helps when targeting a specific line with `relativenumber`.
