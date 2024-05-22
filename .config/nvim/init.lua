@@ -10,6 +10,10 @@ local deps = require("mini.deps")
 deps.setup({path = {package = path_package}})
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+local function _2_(opts)
+  return vim.ui.open(opts.fargs[1])
+end
+vim.api.nvim_create_user_command("Browse", _2_, {nargs = 1})
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
@@ -18,11 +22,11 @@ vim.g.maplocalleader = ","
 do
   local opts = {foldmethod = "indent", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", formatoptions = "tcqjronp", wildignorecase = true, swapfile = false}
   for opt, val in pairs(opts) do
-    local _2_ = type(val)
-    if (_2_ == "table") then
+    local _3_ = type(val)
+    if (_3_ == "table") then
       vim.opt[opt] = val
     elseif true then
-      local _ = _2_
+      local _ = _3_
       vim.o[opt] = val
     else
     end
@@ -66,24 +70,24 @@ do
   local mini_pick = require("mini.pick")
   mini_pick.setup()
   map("n", "<leader>ff", mini_pick.builtin.files)
-  local function _4_()
+  local function _5_()
     return mini_pick.builtin.files({tool = "git"})
   end
-  map("n", "<leader>fg", _4_)
+  map("n", "<leader>fg", _5_)
   map("n", "<leader>fb", mini_pick.builtin.buffers)
   map("n", "<leader>fl", mini_pick.builtin.grep_live)
   map("n", "<leader>fh", mini_pick.builtin.help)
 end
 do
   local mini_extra = require("mini.extra")
-  local function _5_()
+  local function _6_()
     return mini_extra.pickers.lsp({scope = "document_symbol"})
   end
-  map("n", "<leader>fs", _5_)
-  local function _6_()
+  map("n", "<leader>fs", _6_)
+  local function _7_()
     return mini_extra.pickers.lsp({scope = "references"})
   end
-  map("n", "<leader>fr", _6_)
+  map("n", "<leader>fr", _7_)
 end
 do
   local mini_statusline = require("mini.statusline")
@@ -100,10 +104,10 @@ end
 do
   local mini_files = require("mini.files")
   mini_files.setup({mappings = {go_in_plus = "<CR>"}})
-  local function _7_()
+  local function _8_()
     return mini_files.open(vim.api.nvim_buf_get_name(0))
   end
-  map("n", "-", _7_)
+  map("n", "-", _8_)
 end
 do
   local mini_notify = require("mini.notify")
@@ -142,14 +146,14 @@ deps.add("gpanders/nvim-parinfer")
 deps.add("tpope/vim-dispatch")
 deps.add("vim-test/vim-test")
 vim.g["test#strategy"] = "dispatch"
-local function _8_()
+local function _9_()
   return vim.cmd({cmd = "TestNearest"})
 end
-map("n", "<leader>tn", _8_)
-local function _9_()
+map("n", "<leader>tn", _9_)
+local function _10_()
   return vim.cmd({cmd = "TestFile"})
 end
-map("n", "<leader>tf", _9_)
+map("n", "<leader>tf", _10_)
 deps.add("neovim/nvim-lspconfig")
 deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
@@ -161,15 +165,15 @@ deps.add("mfussenegger/nvim-lint")
 do
   local nvim_lint = require("lint")
   nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}, go = {"golangcilint"}, janet = {"janet"}, fennel = {"fennel"}}
-  local function _10_()
+  local function _11_()
     return nvim_lint.try_lint()
   end
-  vim.api.nvim_create_autocmd("BufWritePost", {callback = _10_})
+  vim.api.nvim_create_autocmd("BufWritePost", {callback = _11_})
 end
-local function _11_()
+local function _12_()
   return vim.cmd(":MasonUpdate")
 end
-deps.add({source = "williamboman/mason.nvim", hooks = {post_checkout = _11_}})
+deps.add({source = "williamboman/mason.nvim", hooks = {post_checkout = _12_}})
 do
   local mason = require("mason")
   mason.setup()
@@ -179,10 +183,10 @@ do
   local mason_lspconfig = require("mason-lspconfig")
   mason_lspconfig.setup()
 end
-local function _12_()
+local function _13_()
   return vim.cmd(":TSUpdate")
 end
-deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _12_}})
+deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _13_}})
 do
   local treesitter = require("nvim-treesitter.configs")
   vim.o.foldexpr = "nvim_treesitter#foldexpr()"
@@ -199,19 +203,19 @@ local filetype_settings = {go = {expandtab = false}, javascript = {expandtab = t
 do
   local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
-    local function _13_()
+    local function _14_()
       for name, value in pairs(settings) do
         vim.api.nvim_set_option_value(name, value, {scope = "local"})
       end
       return nil
     end
-    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _13_})
+    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _14_})
   end
   local function extension__3efiletype(extension, filetype)
-    local function _14_()
+    local function _15_()
       return vim.api.nvim_set_option_value("filetype", filetype, {scope = "local"})
     end
-    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _14_})
+    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _15_})
   end
   for extension, filetype in pairs({mdx = "markdown", star = "starlark", tpl = "gotmpl"}) do
     extension__3efiletype(extension, filetype)
@@ -222,65 +226,65 @@ for pattern, skeleton_file in pairs({Makefile = "Makefile"}) do
 end
 map("n", ";", ":")
 map("n", "<leader>?", vim.diagnostic.open_float)
-local function _15_()
+local function _16_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _15_)
-local function _16_()
+map("n", "<leader>gs", _16_)
+local function _17_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _16_)
-local function _17_()
+map("n", "<leader>gw", _17_)
+local function _18_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _17_)
-local function _18_()
+map("n", "<leader>gc", _18_)
+local function _19_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _18_)
-local function _19_()
+map("n", "<leader>gp", _19_)
+local function _20_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _19_)
-local function _20_()
+map("n", "<leader>gb", _20_)
+local function _21_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _20_, {expr = true})
-local function _22_()
+map({"n", "v"}, "j", _21_, {expr = true})
+local function _23_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _22_, {expr = true})
+map({"n", "v"}, "k", _23_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
-  local function _24_()
+  local function _25_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _24_)
+  map("n", keymap, _25_)
 end
-local function _25_()
+local function _26_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _25_)
-local function _26_()
+map("n", "<leader>w", _26_)
+local function _27_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _26_)
-local function _27_()
+map("n", "<leader>cl", _27_)
+local function _28_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _27_)
-local function _28_()
+map("n", "<leader>ss", _28_)
+local function _29_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _28_)
+map("n", "<leader>vs", _29_)
 map("n", "Q", "@@")
 map("n", "0", "^")
 map("n", "^", "0")
@@ -301,11 +305,11 @@ for sign, text in pairs({DiagnosticSignError = "\195\151", DiagnosticSignWarn = 
   vim.fn.sign_define(sign, {text = text, texthl = sign})
 end
 vim.diagnostic.config({virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_29_)
-  local _arg_30_ = _29_
-  local buf = _arg_30_["buf"]
-  local _arg_31_ = _arg_30_["data"]
-  local client_id = _arg_31_["client_id"]
+local function lsp_attach(_30_)
+  local _arg_31_ = _30_
+  local buf = _arg_31_["buf"]
+  local _arg_32_ = _arg_31_["data"]
+  local client_id = _arg_32_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   local function format()
     vim.lsp.buf.format({timeout_ms = 2000})

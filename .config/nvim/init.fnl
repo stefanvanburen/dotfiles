@@ -18,6 +18,11 @@
 (set vim.g.loaded_netrw 1)
 (set vim.g.loaded_netrwPlugin 1)
 
+;; Define :Browse for vim-fugitive's :GBrowse.
+(vim.api.nvim_create_user_command :Browse
+                                  (fn [opts] (vim.ui.open (. opts.fargs 1)))
+                                  {:nargs 1})
+
 ;; Disable providers - unused.
 (set vim.g.loaded_python3_provider 0)
 (set vim.g.loaded_ruby_provider 0)
