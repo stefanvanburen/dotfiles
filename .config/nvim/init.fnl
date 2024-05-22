@@ -451,15 +451,16 @@
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
 
   (fn buffer-map [from to]
-    (vim.keymap.set :n from to {:buffer buf :silent true}))
+    (map :n from to {:buffer buf}))
 
   (buffer-map :gD vim.lsp.buf.declaration)
   (buffer-map :gd vim.lsp.buf.definition)
   (buffer-map :gi vim.lsp.buf.implementation)
-  (buffer-map :gr vim.lsp.buf.references)
-  (buffer-map :<leader>D vim.lsp.buf.type_definition)
-  (buffer-map :<leader>rn vim.lsp.buf.rename)
-  (buffer-map :<leader>ca vim.lsp.buf.code_action))
+  (buffer-map :grr vim.lsp.buf.references)
+  (buffer-map :grt vim.lsp.buf.type_definition)
+  (buffer-map :grn vim.lsp.buf.rename)
+  (map [:n :x] :gra vim.lsp.buf.code_action {:buffer buf})
+  (map :i :<C-s> vim.lsp.buf.signature_help {:buffer buf}))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})
 

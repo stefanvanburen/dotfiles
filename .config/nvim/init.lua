@@ -324,15 +324,16 @@ local function lsp_attach(_29_)
   else
   end
   local function buffer_map(from, to)
-    return vim.keymap.set("n", from, to, {buffer = buf, silent = true})
+    return map("n", from, to, {buffer = buf})
   end
   buffer_map("gD", vim.lsp.buf.declaration)
   buffer_map("gd", vim.lsp.buf.definition)
   buffer_map("gi", vim.lsp.buf.implementation)
-  buffer_map("gr", vim.lsp.buf.references)
-  buffer_map("<leader>D", vim.lsp.buf.type_definition)
-  buffer_map("<leader>rn", vim.lsp.buf.rename)
-  return buffer_map("<leader>ca", vim.lsp.buf.code_action)
+  buffer_map("grr", vim.lsp.buf.references)
+  buffer_map("grt", vim.lsp.buf.type_definition)
+  buffer_map("grn", vim.lsp.buf.rename)
+  map({"n", "x"}, "gra", vim.lsp.buf.code_action, {buffer = buf})
+  return map("i", "<C-s>", vim.lsp.buf.signature_help, {buffer = buf})
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local lspconfig = require("lspconfig")
