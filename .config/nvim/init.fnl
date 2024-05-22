@@ -28,23 +28,20 @@
 (set vim.g.maplocalleader ",")
 
 (let [opts {;; setup folding
-            :foldmethod :expr
+            :foldmethod :indent
             ;; on lines that will wrap, they instead 'break' and be visually indented by
             ;; the showbreak character, followed by the indent.
-            :breakindentopt {:shift 2
-                             :sbr true}
+            :breakindentopt {:shift 2 :sbr true}
             :showbreak "↳"
             ;; when using > and <, round the indent to a multiple of shiftwidth
             :shiftround true
             ;; Global substitutions by defualt.
             :gdefault true
             ;; Copy the indent of existing lines when autoindenting.
-            :copyindent
+            :copyindent true
             ;; Invisible characters.
             :list true
-            :listchars {:tab "⇥ "
-                        :eol "¬"
-                        :trail "⣿"}
+            :listchars {:tab "⇥ " :eol "¬" :trail "⣿"}
             ;; Override default grepprg to use default ripgrep settings
             :grepprg "rg --vimgrep"
             ;; always use the system clipboard for operations
@@ -64,7 +61,12 @@
             ;; ignore case when completing files / directories in wildmenu
             :wildignorecase true}]
   (each [opt val (pairs opts)]
-    (tset vim.opt opt val)))
+    (case (type val)
+      ;; vim.opt for table values, vim.o for everything else.
+      :table
+      (tset vim.opt opt val)
+      _
+      (tset vim.o opt val))))
 
 ;;; Plugins
 
@@ -228,6 +230,7 @@
 
 (let [treesitter (require :nvim-treesitter.configs)]
   (set vim.o.foldexpr "nvim_treesitter#foldexpr()")
+  (set vim.o.foldmethod :expr)
   (treesitter.setup {:highlight {:enable true :disable [:fennel]}
                      ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
                      :matchup {:enable true :disable [:fennel]}
@@ -425,7 +428,7 @@
                          :DiagnosticSignHint "?"})]
   (vim.fn.sign_define sign {: text :texthl sign}))
 
-(vim.diagnostic.config {:virtual_text false
+(vim.diagnostic.config {:virtual_text {:severity {:min vim.diagnostic.severity.WARN}}
                         :underline true
                         :float {:border :single
                                 :focusable false
