@@ -10,6 +10,7 @@ set bin $HOME/.local/bin
 
 # Go environment variables
 # $ go help environment
+set -gx GOPATH $XDG_CACHE_HOME/gopath
 set -gx GOBIN $bin
 set -gx GOCACHE $XDG_CACHE_HOME/gocache
 set -gx GOMODCACHE $XDG_CACHE_HOME/gomodcache
