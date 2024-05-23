@@ -225,7 +225,6 @@ for pattern, skeleton_file in pairs({Makefile = "Makefile"}) do
   vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
 map("n", ";", ":")
-map("n", "<leader>?", vim.diagnostic.open_float)
 local function _16_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
