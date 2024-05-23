@@ -5,6 +5,14 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_STATE_HOME $HOME/.local/state
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+set bin $HOME/.local/bin
+
+# Go environment variables
+# $ go help environment
+set -gx GOBIN $bin
+set -gx GOCACHE $XDG_CACHE_HOME/gocache
+set -gx GOMODCACHE $XDG_CACHE_HOME/gomodcache
 
 # https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
@@ -21,12 +29,10 @@ set -gx GLAMOUR_STYLE light
 # https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
 set -gx PYTHONDONTWRITEBYTECODE 1
 
-# pipx
-fish_add_path ~/.local/bin
+# pipx / go
+fish_add_path $bin
 # rust
 fish_add_path ~/.cargo/bin
-# go
-fish_add_path ~/go/bin
 
 # Setup homebrew environment (PATH-related variables)
 # This must be before any command checking, as it sets up the PATH.
