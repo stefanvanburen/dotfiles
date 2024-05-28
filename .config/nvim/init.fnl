@@ -244,6 +244,7 @@
                                         :lua
                                         :vim
                                         :vimdoc
+                                        :query
                                         :clojure
                                         :comment
                                         :css
