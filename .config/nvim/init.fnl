@@ -256,6 +256,8 @@
                                         :gitcommit
                                         :go
                                         :gomod
+                                        :gosum
+                                        :gotmpl
                                         :html
                                         :javascript
                                         :json
