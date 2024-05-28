@@ -379,7 +379,7 @@
 (map [:n :v] :<tab> "%" {:remap true})
 
 ;; edit config files
-(each [keymap file (pairs {:<leader>ef :$HOME/.config/fish/config
+(each [keymap file (pairs {:<leader>ef :$HOME/.config/fish/config.fish
                            :<leader>eg :$HOME/.config/git/config
                            :<leader>ek :$HOME/.config/kitty/kitty.conf
                            :<leader>ev :$HOME/.config/nvim/init.fnl})]

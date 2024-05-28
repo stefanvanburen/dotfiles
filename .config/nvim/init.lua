@@ -262,7 +262,7 @@ local function _23_()
 end
 map({"n", "v"}, "k", _23_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
-for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
+for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
   local function _25_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
