@@ -272,6 +272,7 @@
                                         :ssh_config
                                         :textproto
                                         :toml
+                                        :xml
                                         :yaml
                                         :zig]}))
 
