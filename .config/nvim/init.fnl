@@ -201,13 +201,14 @@
 (let [conform (require :conform)]
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
+                                     :go [:goimports]
                                      :json [:prettier]
                                      :just [:just]
                                      :proto [:buf]
                                      :sql [:pg_format]
                                      :swift [:swift_format]
                                      :typescriptreact [:prettier]}
-                  :format_on_save {:timeout_ms 500 :lsp_fallback true}}))
+                  :format_on_save {:timeout_ms 2000 :lsp_fallback true}}))
 
 (deps.add :mfussenegger/nvim-lint)
 (let [nvim-lint (require :lint)]
@@ -444,15 +445,6 @@
 
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
-
-  (fn format []
-    (vim.lsp.buf.format {:timeout_ms 2000})
-    (when (= client.name :gopls)
-      (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
-                                :apply true})))
-
-  (when client.server_capabilities.documentFormattingProvider
-    (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format}))
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
 
