@@ -1,2 +1,2 @@
 # vim: set filetype=gitignore:
-init.lua
+/init.lua
