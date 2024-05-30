@@ -202,6 +202,7 @@
 
 (deps.add :stevearc/conform.nvim)
 (let [conform (require :conform)]
+  ;; https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
                                      :go [:goimports]
