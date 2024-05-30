@@ -205,8 +205,7 @@
                                      :fish [:fish_indent]
                                      :go [:goimports]
                                      :just [:just]
-                                     :proto [:buf]
-                                     :swift [:swift_format]}
+                                     :proto [:buf]}
                   :format_on_save {:timeout_ms 2000 :lsp_fallback true}}))
 
 (deps.add :mfussenegger/nvim-lint)
@@ -318,7 +317,6 @@
                                   :commentstring "// %s"
                                   :cindent true}
                           :gitcommit {:spell true}
-                          :swift {:commentstring "// %s"}
                           :sql {:wrap true :commentstring "-- %s"}
                           :clojure {:expandtab true :textwidth 80}
                           :kotlin {:commentstring "// %s"}
@@ -519,9 +517,6 @@
                         ;; https://sr.ht/~xerool/fennel-ls/
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fennel_ls
                         lspconfig.fennel_ls {:settings {:fennel-ls {:extra-globals :vim}}}
-                        ;; LSP for Swift.
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sourcekit
-                        lspconfig.sourcekit {}
                         ;; LSP for Lua.
                         lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
                                                            :workspace {:library (vim.api.nvim_list_runtime_paths)}}}}
