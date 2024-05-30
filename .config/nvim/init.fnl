@@ -189,10 +189,8 @@
 
 (deps.add :gpanders/nvim-parinfer)
 
-;; Dependency of vim-test
-(deps.add :tpope/vim-dispatch)
 (deps.add :vim-test/vim-test)
-(set vim.g.test#strategy :dispatch)
+(set vim.g.test#strategy :neovim_sticky)
 (map :n :<leader>tn #(vim.cmd {:cmd :TestNearest}))
 (map :n :<leader>tf #(vim.cmd {:cmd :TestFile}))
 

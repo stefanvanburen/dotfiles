@@ -144,9 +144,8 @@ vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
 vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
 vim.g["conjure#mapping#doc_word"] = false
 deps.add("gpanders/nvim-parinfer")
-deps.add("tpope/vim-dispatch")
 deps.add("vim-test/vim-test")
-vim.g["test#strategy"] = "dispatch"
+vim.g["test#strategy"] = "neovim_sticky"
 local function _9_()
   return vim.cmd({cmd = "TestNearest"})
 end
