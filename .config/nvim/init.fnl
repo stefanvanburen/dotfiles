@@ -204,12 +204,9 @@
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
                                      :go [:goimports]
-                                     :json [:prettier]
                                      :just [:just]
                                      :proto [:buf]
-                                     :sql [:pg_format]
-                                     :swift [:swift_format]
-                                     :typescriptreact [:prettier]}
+                                     :swift [:swift_format]}
                   :format_on_save {:timeout_ms 2000 :lsp_fallback true}}))
 
 (deps.add :mfussenegger/nvim-lint)
