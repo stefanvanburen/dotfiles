@@ -511,13 +511,16 @@
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
                         lspconfig.bashls {}
                         ;; LSP for TOML.
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#taplo
                         lspconfig.taplo {}
                         ;; Dockerfiles
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#dockerls
                         lspconfig.dockerls {}
                         ;; https://sr.ht/~xerool/fennel-ls/
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fennel_ls
                         lspconfig.fennel_ls {:settings {:fennel-ls {:extra-globals :vim}}}
                         ;; LSP for Lua.
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
                         lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
                                                            :workspace {:library (vim.api.nvim_list_runtime_paths)}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
