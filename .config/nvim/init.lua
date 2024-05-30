@@ -10,6 +10,7 @@ local deps = require("mini.deps")
 deps.setup({path = {package = path_package}})
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.o.exrc = true
 local function _2_(opts)
   return vim.ui.open(opts.fargs[1])
 end

@@ -18,6 +18,9 @@
 (set vim.g.loaded_netrw 1)
 (set vim.g.loaded_netrwPlugin 1)
 
+;; Enable exrc to load .nvim.lua files.
+(set vim.o.exrc true)
+
 ;; Define :Browse for vim-fugitive's :GBrowse.
 (vim.api.nvim_create_user_command :Browse
                                   (fn [opts] (vim.ui.open (. opts.fargs 1)))
