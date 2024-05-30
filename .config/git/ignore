@@ -31,3 +31,12 @@ __pycache__
 .cpcache
 # created by nrepl
 .nrepl-port
+
+# Project-local neovim configuration.
+# Technically, .nvim.lua can be shared with other neovim users that also enable
+# `.exrc`, but there are so many other ways to share configuration
+# (.editorconfig, etc.).
+# https://github.com/olical/nfnl?tab=readme-ov-file#directory-local-neovim-configuration-in-fennel
+.nfnl.fnl
+.nvim.fnl
+.nvim.lua
