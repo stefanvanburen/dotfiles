@@ -21,7 +21,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.maplocalleader = ","
 do
-  local opts = {foldmethod = "indent", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", formatoptions = "tcqjronp", wildignorecase = true, swapfile = false}
+  local opts = {foldmethod = "indent", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", formatoptions = "tcqjronp", updatetime = 300, wildignorecase = true, swapfile = false}
   for opt, val in pairs(opts) do
     local _3_ = type(val)
     if (_3_ == "table") then
@@ -46,10 +46,6 @@ end
 do
   local mini_splitjoin = require("mini.splitjoin")
   mini_splitjoin.setup()
-end
-do
-  local mini_cursorword = require("mini.cursorword")
-  mini_cursorword.setup()
 end
 do
   local mini_trailspace = require("mini.trailspace")
@@ -313,6 +309,12 @@ local function lsp_attach(_30_)
   local client = vim.lsp.get_client_by_id(client_id)
   if (client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint) then
     vim.lsp.inlay_hint.enable(true, {bufnr = buf})
+  else
+  end
+  if client.server_capabilities.documentHighlightProvider then
+    local augroup_id = vim.api.nvim_create_augroup("lsp-document-highlight", {clear = false})
+    vim.api.nvim_create_autocmd({"CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
+    vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
   else
   end
   local function buffer_map(from, to)

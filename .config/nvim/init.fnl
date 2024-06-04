@@ -66,6 +66,8 @@
             ;;   n - recognize numbered lists in text
             ;;   p - don't break lines at single spaces that follow periods
             :formatoptions :tcqjronp
+            ;; Tied to CursorHold, which makes LSP document highlighting reasonable.
+            :updatetime 300
             ;; ignore case when completing files / directories in wildmenu
             :wildignorecase true}]
   (each [opt val (pairs opts)]
@@ -92,9 +94,6 @@
 
 (let [mini-splitjoin (require :mini.splitjoin)]
   (mini-splitjoin.setup))
-
-(let [mini-cursorword (require :mini.cursorword)]
-  (mini-cursorword.setup))
 
 (let [mini-trailspace (require :mini.trailspace)]
   (mini-trailspace.setup)
@@ -447,6 +446,17 @@
   (local client (vim.lsp.get_client_by_id client_id))
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
+  (when client.server_capabilities.documentHighlightProvider
+    (let [augroup-id (vim.api.nvim_create_augroup :lsp-document-highlight
+                                                  {:clear false})]
+      (vim.api.nvim_create_autocmd [:CursorHold :InsertLeave]
+                                   {:group augroup-id
+                                    :buffer buf
+                                    :callback vim.lsp.buf.document_highlight})
+      (vim.api.nvim_create_autocmd [:CursorMoved :InsertEnter]
+                                   {:group augroup-id
+                                    :buffer buf
+                                    :callback vim.lsp.buf.clear_references})))
 
   (fn buffer-map [from to]
     (map :n from to {:buffer buf}))
