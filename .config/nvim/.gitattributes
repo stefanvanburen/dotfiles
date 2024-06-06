@@ -1,2 +1,9 @@
+# https://github.com/github-linguist/linguist/blob/master/docs/overrides.md#using-gitattributes
+
 # Mark the files as generated on GitHub.
 /init.lua linguist-generated
+
+# Mark all of the skeleton files as "documentation".
+# Really, they're just ways for me to quickly initialize or remember how to use
+# a certain filetype.
+/skeletons/* linguist-documentation
