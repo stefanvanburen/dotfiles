@@ -351,7 +351,9 @@
 
 ;; Skeleton files.
 ;; :h skeleton
-(each [pattern skeleton-file (pairs {:Makefile :Makefile})]
+(each [pattern skeleton-file (pairs {:Makefile :Makefile
+                                     :buf.yaml :buf.yaml
+                                     :buf.gen.yaml :buf.gen.yaml})]
   (vim.api.nvim_create_autocmd [:BufNewFile]
                                {: pattern
                                 :command (.. "0r ~/.config/nvim/skeletons/"
