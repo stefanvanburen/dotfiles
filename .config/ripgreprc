@@ -15,17 +15,6 @@
 # exclude .git/*
 --glob=!.git/*
 
-# style the match with an underline.
---colors=match:none
---colors=match:style:underline
-
-# remove the styling from line numbers, by default they are green.
---colors=line:none
-
-# remove the styling from paths, and instead bold them.
---colors=path:none
---colors=path:style:bold
-
 # proto: shorter version of `--type protobuf`
 --type-add
 proto:*.proto
