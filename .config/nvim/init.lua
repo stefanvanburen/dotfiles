@@ -218,7 +218,7 @@ do
     extension__3efiletype(extension, filetype)
   end
 end
-for pattern, skeleton_file in pairs({Makefile = "Makefile", ["buf.yaml"] = "buf.yaml", ["buf.gen.yaml"] = "buf.gen.yaml"}) do
+for pattern, skeleton_file in pairs({Makefile = "Makefile", ["buf.yaml"] = "buf.yaml", [".nfnl.fnl"] = ".nfnl.fnl", ["buf.gen.yaml"] = "buf.gen.yaml"}) do
   vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
 map("n", ";", ":")

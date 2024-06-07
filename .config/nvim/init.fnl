@@ -353,6 +353,7 @@
 ;; :h skeleton
 (each [pattern skeleton-file (pairs {:Makefile :Makefile
                                      :buf.yaml :buf.yaml
+                                     :.nfnl.fnl :.nfnl.fnl
                                      :buf.gen.yaml :buf.gen.yaml})]
   (vim.api.nvim_create_autocmd [:BufNewFile]
                                {: pattern
