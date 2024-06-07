@@ -211,11 +211,7 @@
 (let [nvim-lint (require :lint)]
   ;; https://github.com/mfussenegger/nvim-lint#available-linters
   (set nvim-lint.linters_by_ft
-       {:proto [:buf_lint]
-        :fish [:fish]
-        :go [:golangcilint]
-        :janet [:janet]
-        :fennel [:fennel]})
+       {:proto [:buf_lint] :fish [:fish] :janet [:janet] :fennel [:fennel]})
   (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)}))
 
 (deps.add {:source :williamboman/mason.nvim
