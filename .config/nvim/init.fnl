@@ -290,6 +290,8 @@
                           :typescriptreact {:expandtab true :shiftwidth 2}
                           :html {:expandtab true :shiftwidth 2}
                           :css {:expandtab true :shiftwidth 2}
+                          ;; C#
+                          :cs {:commentstring "// %s"}
                           :gohtmltmpl {:expandtab true
                                        :shiftwidth 2
                                        :commentstring "{{/* %s */}}"}
@@ -525,6 +527,9 @@
                         ;; LSP for TOML.
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#taplo
                         lspconfig.taplo {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#omnisharp
+                        ;; NOTE: Download omnisharp with mason.
+                        lspconfig.omnisharp {:cmd [:omnisharp]}
                         ;; Dockerfiles
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#dockerls
                         lspconfig.dockerls {}
