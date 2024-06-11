@@ -33,6 +33,10 @@ do
     end
   end
 end
+local function _5_()
+  return vim.api.nvim_set_option_value("filetype", "helm", {scope = "local"})
+end
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {pattern = "*/templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml", callback = _5_})
 deps.add("echasnovski/mini.nvim")
 do
   local mini_basics = require("mini.basics")
@@ -67,24 +71,24 @@ do
   local mini_pick = require("mini.pick")
   mini_pick.setup()
   map("n", "<leader>ff", mini_pick.builtin.files)
-  local function _5_()
+  local function _6_()
     return mini_pick.builtin.files({tool = "git"})
   end
-  map("n", "<leader>fg", _5_)
+  map("n", "<leader>fg", _6_)
   map("n", "<leader>fb", mini_pick.builtin.buffers)
   map("n", "<leader>fl", mini_pick.builtin.grep_live)
   map("n", "<leader>fh", mini_pick.builtin.help)
 end
 do
   local mini_extra = require("mini.extra")
-  local function _6_()
+  local function _7_()
     return mini_extra.pickers.lsp({scope = "document_symbol"})
   end
-  map("n", "<leader>fs", _6_)
-  local function _7_()
+  map("n", "<leader>fs", _7_)
+  local function _8_()
     return mini_extra.pickers.lsp({scope = "references"})
   end
-  map("n", "<leader>fr", _7_)
+  map("n", "<leader>fr", _8_)
 end
 do
   local mini_statusline = require("mini.statusline")
@@ -101,10 +105,10 @@ end
 do
   local mini_files = require("mini.files")
   mini_files.setup({mappings = {go_in_plus = "<CR>"}})
-  local function _8_()
+  local function _9_()
     return mini_files.open(vim.api.nvim_buf_get_name(0))
   end
-  map("n", "-", _8_)
+  map("n", "-", _9_)
 end
 do
   local mini_notify = require("mini.notify")
@@ -132,6 +136,7 @@ deps.add("fladson/vim-kitty")
 deps.add("NoahTheDuke/vim-just")
 deps.add("jaawerth/fennel.vim")
 deps.add("janet-lang/janet.vim")
+deps.add("towolf/vim-helm")
 deps.add("Olical/nfnl")
 deps.add("Olical/conjure")
 vim.g["conjure#highlight#enabled"] = true
@@ -142,14 +147,14 @@ vim.g["conjure#mapping#doc_word"] = false
 deps.add("gpanders/nvim-parinfer")
 deps.add("vim-test/vim-test")
 vim.g["test#strategy"] = "neovim_sticky"
-local function _9_()
+local function _10_()
   return vim.cmd({cmd = "TestNearest"})
 end
-map("n", "<leader>tn", _9_)
-local function _10_()
+map("n", "<leader>tn", _10_)
+local function _11_()
   return vim.cmd({cmd = "TestFile"})
 end
-map("n", "<leader>tf", _10_)
+map("n", "<leader>tf", _11_)
 deps.add("neovim/nvim-lspconfig")
 deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
@@ -161,15 +166,15 @@ deps.add("mfussenegger/nvim-lint")
 do
   local nvim_lint = require("lint")
   nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}, janet = {"janet"}, fennel = {"fennel"}}
-  local function _11_()
+  local function _12_()
     return nvim_lint.try_lint()
   end
-  vim.api.nvim_create_autocmd("BufWritePost", {callback = _11_})
+  vim.api.nvim_create_autocmd("BufWritePost", {callback = _12_})
 end
-local function _12_()
+local function _13_()
   return vim.cmd(":MasonUpdate")
 end
-deps.add({source = "williamboman/mason.nvim", hooks = {post_checkout = _12_}})
+deps.add({source = "williamboman/mason.nvim", hooks = {post_checkout = _13_}})
 do
   local mason = require("mason")
   mason.setup()
@@ -179,10 +184,10 @@ do
   local mason_lspconfig = require("mason-lspconfig")
   mason_lspconfig.setup()
 end
-local function _13_()
+local function _14_()
   return vim.cmd(":TSUpdate")
 end
-deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _13_}})
+deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _14_}})
 do
   local treesitter = require("nvim-treesitter.configs")
   vim.o.foldexpr = "nvim_treesitter#foldexpr()"
@@ -200,19 +205,19 @@ local filetype_settings = {go = {expandtab = false}, javascript = {expandtab = t
 do
   local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
-    local function _14_()
+    local function _15_()
       for name, value in pairs(settings) do
         vim.api.nvim_set_option_value(name, value, {scope = "local"})
       end
       return nil
     end
-    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _14_})
+    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _15_})
   end
   local function extension__3efiletype(extension, filetype)
-    local function _15_()
+    local function _16_()
       return vim.api.nvim_set_option_value("filetype", filetype, {scope = "local"})
     end
-    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _15_})
+    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _16_})
   end
   for extension, filetype in pairs({mdx = "markdown", star = "starlark", tpl = "gotexttmpl", gotext = "gotexttmpl"}) do
     extension__3efiletype(extension, filetype)
@@ -222,65 +227,65 @@ for pattern, skeleton_file in pairs({["buf.yaml"] = "buf.yaml", ["buf.gen.yaml"]
   vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
 map("n", ";", ":")
-local function _16_()
+local function _17_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _16_)
-local function _17_()
+map("n", "<leader>gs", _17_)
+local function _18_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _17_)
-local function _18_()
+map("n", "<leader>gw", _18_)
+local function _19_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _18_)
-local function _19_()
+map("n", "<leader>gc", _19_)
+local function _20_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _19_)
-local function _20_()
+map("n", "<leader>gp", _20_)
+local function _21_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _20_)
-local function _21_()
+map("n", "<leader>gb", _21_)
+local function _22_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _21_, {expr = true})
-local function _23_()
+map({"n", "v"}, "j", _22_, {expr = true})
+local function _24_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _23_, {expr = true})
+map({"n", "v"}, "k", _24_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
-  local function _25_()
+  local function _26_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _25_)
+  map("n", keymap, _26_)
 end
-local function _26_()
+local function _27_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _26_)
-local function _27_()
+map("n", "<leader>w", _27_)
+local function _28_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _27_)
-local function _28_()
+map("n", "<leader>cl", _28_)
+local function _29_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _28_)
-local function _29_()
+map("n", "<leader>ss", _29_)
+local function _30_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _29_)
+map("n", "<leader>vs", _30_)
 map("n", "Q", "@@")
 map("n", "0", "^")
 map("n", "^", "0")
@@ -301,11 +306,11 @@ for sign, text in pairs({DiagnosticSignError = "\195\151", DiagnosticSignWarn = 
   vim.fn.sign_define(sign, {text = text, texthl = sign})
 end
 vim.diagnostic.config({virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_30_)
-  local _arg_31_ = _30_
-  local buf = _arg_31_["buf"]
-  local _arg_32_ = _arg_31_["data"]
-  local client_id = _arg_32_["client_id"]
+local function lsp_attach(_31_)
+  local _arg_32_ = _31_
+  local buf = _arg_32_["buf"]
+  local _arg_33_ = _arg_32_["data"]
+  local client_id = _arg_33_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   if (client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint) then
     vim.lsp.inlay_hint.enable(true, {bufnr = buf})
@@ -332,7 +337,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
-local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, filetypes = {"go", "gomod", "gowork", "gotmpl", "gohtmltmpl", "gotexttmpl"}, settings = {gopls = {staticcheck = true, linkTarget = "godocs.io", templateExtensions = {"tpl", "tmpl"}, analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.ruff] = {}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.omnisharp] = {cmd = {"omnisharp"}}, [lspconfig.dockerls] = {}, [lspconfig.fennel_ls] = {settings = {["fennel-ls"] = {["extra-globals"] = "vim"}}}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.api.nvim_list_runtime_paths()}}}}, [lspconfig.rust_analyzer] = {}}
+local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, filetypes = {"go", "gomod", "gowork", "gotmpl", "gohtmltmpl", "gotexttmpl"}, settings = {gopls = {staticcheck = true, linkTarget = "godocs.io", templateExtensions = {"tpl", "tmpl"}, analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.ruff] = {}, [lspconfig.tsserver] = {}, [lspconfig.eslint] = {}, [lspconfig.helm_ls] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.omnisharp] = {cmd = {"omnisharp"}}, [lspconfig.dockerls] = {}, [lspconfig.fennel_ls] = {settings = {["fennel-ls"] = {["extra-globals"] = "vim"}}}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.api.nvim_list_runtime_paths()}}}}, [lspconfig.rust_analyzer] = {}}
 for server, settings in pairs(server_settings) do
   server.setup(settings)
 end

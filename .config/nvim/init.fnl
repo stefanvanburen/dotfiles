@@ -78,6 +78,14 @@
       _
       (tset vim.o opt val))))
 
+;; Filetype support for helm.
+;; This needs to be done first.
+(vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
+                             {:pattern "*/templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml"
+                              :callback #(vim.api.nvim_set_option_value :filetype
+                                                                        :helm
+                                                                        {:scope :local})})
+
 ;;; Plugins
 
 (deps.add :echasnovski/mini.nvim)
@@ -176,6 +184,7 @@
 (deps.add :NoahTheDuke/vim-just)
 (deps.add :jaawerth/fennel.vim)
 (deps.add :janet-lang/janet.vim)
+(deps.add :towolf/vim-helm)
 
 (deps.add :Olical/nfnl)
 
@@ -522,6 +531,8 @@
                         lspconfig.tsserver {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
                         lspconfig.eslint {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#helm_ls
+                        lspconfig.helm_ls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
                         lspconfig.bashls {}
                         ;; LSP for TOML.
