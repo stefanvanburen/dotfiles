@@ -213,11 +213,17 @@ do
     end
     vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _15_})
   end
-  local function extension__3efiletype(extension, filetype)
+  local function pattern__3efiletype(pattern, filetype)
     local function _16_()
       return vim.api.nvim_set_option_value("filetype", filetype, {scope = "local"})
     end
-    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = ("*." .. tostring(extension)), callback = _16_})
+    return vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {group = aufiletypes, pattern = pattern, callback = _16_})
+  end
+  for pattern, filetype in pairs({[".ignore"] = "gitignore"}) do
+    pattern__3efiletype(pattern, filetype)
+  end
+  local function extension__3efiletype(extension, filetype)
+    return pattern__3efiletype(("*." .. tostring(extension)), filetype)
   end
   for extension, filetype in pairs({mdx = "markdown", star = "starlark", tpl = "gotexttmpl", gotext = "gotexttmpl"}) do
     extension__3efiletype(extension, filetype)

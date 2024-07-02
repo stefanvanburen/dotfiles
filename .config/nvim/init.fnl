@@ -342,13 +342,19 @@
                                                                               value
                                                                               {:scope :local}))}))
 
-  (fn extension->filetype [extension filetype]
+  (fn pattern->filetype [pattern filetype]
     (vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
                                  {:group aufiletypes
-                                  :pattern (.. "*." (tostring extension))
+                                  : pattern
                                   :callback #(vim.api.nvim_set_option_value :filetype
                                                                             filetype
                                                                             {:scope :local})}))
+
+  (each [pattern filetype (pairs {:.ignore :gitignore})]
+    (pattern->filetype pattern filetype))
+
+  (fn extension->filetype [extension filetype]
+    (pattern->filetype (.. "*." (tostring extension)) filetype))
 
   (each [extension filetype (pairs {:mdx :markdown
                                     :star :starlark
