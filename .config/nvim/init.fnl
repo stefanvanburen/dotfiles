@@ -158,6 +158,9 @@
   (mini-diff.setup {:view {:signs {:add "┃" :change "┃" :delete "▁"}
                            :style :sign}}))
 
+(let [mini-icons (require :mini.icons)]
+  (mini-icons.setup {:style :ascii}))
+
 (deps.add :tpope/vim-eunuch)
 (deps.add :andymass/vim-matchup)
 (set vim.g.matchup_matchparen_offscreen {:method :popup})

@@ -118,6 +118,10 @@ do
   local mini_diff = require("mini.diff")
   mini_diff.setup({view = {signs = {add = "\226\148\131", change = "\226\148\131", delete = "\226\150\129"}, style = "sign"}})
 end
+do
+  local mini_icons = require("mini.icons")
+  mini_icons.setup({style = "ascii"})
+end
 deps.add("tpope/vim-eunuch")
 deps.add("andymass/vim-matchup")
 vim.g.matchup_matchparen_offscreen = {method = "popup"}
