@@ -134,6 +134,7 @@ deps.add("lewis6991/fileline.nvim")
 deps.add("tpope/vim-fugitive")
 vim.g.fugitive_legacy_commands = 0
 deps.add("tpope/vim-rhubarb")
+deps.add("https://git.sr.ht/~willdurand/srht.vim")
 deps.add("tpope/vim-dadbod")
 deps.add("mattn/vim-gotmpl")
 deps.add("fladson/vim-kitty")

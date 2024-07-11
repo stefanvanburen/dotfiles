@@ -176,8 +176,8 @@
 (deps.add :tpope/vim-fugitive)
 ;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
 (set vim.g.fugitive_legacy_commands 0)
-
 (deps.add :tpope/vim-rhubarb)
+(deps.add "https://git.sr.ht/~willdurand/srht.vim")
 
 (deps.add :tpope/vim-dadbod)
 
