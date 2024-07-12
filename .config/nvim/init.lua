@@ -155,7 +155,7 @@ vim.g["test#strategy"] = "neovim_sticky"
 local function _10_()
   return vim.cmd({cmd = "TestNearest"})
 end
-map("n", "<leader>tn", _10_)
+map("n", "<leader>tt", _10_)
 local function _11_()
   return vim.cmd({cmd = "TestFile"})
 end
@@ -312,6 +312,18 @@ map("x", ">", ">gv")
 map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
+local function _31_()
+  return vim.cmd({cmd = "tabnew"})
+end
+map("n", "<leader>tn", _31_)
+local function _32_()
+  return vim.cmd({cmd = "tabnext"})
+end
+map("n", "]r", _32_)
+local function _33_()
+  return vim.cmd({cmd = "tabprev"})
+end
+map("n", "[r", _33_)
 map("n", "<C-l>", ":nohlsearch<cr>")
 for sign, text in pairs({DiagnosticSignError = "\195\151", DiagnosticSignWarn = "!", DiagnosticSignInfo = "\226\156\179\239\184\142", DiagnosticSignHint = "?"}) do
   vim.fn.sign_define(sign, {text = text, texthl = sign})

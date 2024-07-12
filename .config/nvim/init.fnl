@@ -202,7 +202,7 @@
 
 (deps.add :vim-test/vim-test)
 (set vim.g.test#strategy :neovim_sticky)
-(map :n :<leader>tn #(vim.cmd {:cmd :TestNearest}))
+(map :n :<leader>tt #(vim.cmd {:cmd :TestNearest}))
 (map :n :<leader>tf #(vim.cmd {:cmd :TestFile}))
 
 (deps.add :neovim/nvim-lspconfig)
@@ -443,6 +443,11 @@
 (map :i :<c-k> :<esc>)
 (map :c :<c-k> :<c-c>)
 (map :t :<c-k> "<c-\\><c-n>")
+
+;; tab commands.
+(map :n :<leader>tn #(vim.cmd {:cmd :tabnew}))
+(map :n "]r" #(vim.cmd {:cmd :tabnext}))
+(map :n "[r" #(vim.cmd {:cmd :tabprev}))
 
 (map :n :<C-l> ":nohlsearch<cr>")
 
