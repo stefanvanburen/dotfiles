@@ -214,7 +214,6 @@
   ;; https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
-                                     :go [:goimports]
                                      :just [:just]
                                      :proto [:buf]}
                   :format_on_save {:timeout_ms 2000 :lsp_format :fallback}}))
@@ -469,6 +468,15 @@
 
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
+
+  (fn format []
+    (vim.lsp.buf.format {:timeout_ms 2000})
+    (when (= client.name :gopls)
+      (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
+                                :apply true})))
+
+  (when client.server_capabilities.documentFormattingProvider
+    (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback format}))
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when client.server_capabilities.documentHighlightProvider
