@@ -545,6 +545,8 @@
                                                                           :url ""}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp
                         lspconfig.clojure_lsp {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#janet_lsp
+                        lspconfig.janet_lsp {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cssls
                         lspconfig.cssls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff
