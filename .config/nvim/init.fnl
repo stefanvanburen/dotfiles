@@ -288,7 +288,7 @@
 
 (vim.api.nvim_create_autocmd :VimResized {:command ":wincmd ="})
 
-(local filetype-settings {:go {:expandtab false}
+(local filetype-settings {:go {:expandtab false :textwidth 120}
                           :javascript {:expandtab true :shiftwidth 2}
                           :javascriptreact {:expandtab true :shiftwidth 2}
                           :typescript {:expandtab true :shiftwidth 2}
@@ -320,6 +320,7 @@
                                   :commentstring "// %s"
                                   :cindent true}
                           :gitcommit {:spell true}
+                          :fennel {:commentstring ";; %s"}
                           :sql {:wrap true :commentstring "-- %s"}
                           :clojure {:expandtab true :textwidth 80}
                           :kotlin {:commentstring "// %s"}
