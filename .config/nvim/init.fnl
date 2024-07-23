@@ -180,7 +180,6 @@
 (deps.add :mattn/vim-gotmpl)
 (deps.add :fladson/vim-kitty)
 (deps.add :NoahTheDuke/vim-just)
-(deps.add :jaawerth/fennel.vim)
 (deps.add :janet-lang/janet.vim)
 (deps.add :towolf/vim-helm)
 
