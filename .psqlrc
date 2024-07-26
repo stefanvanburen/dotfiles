@@ -1,3 +1,5 @@
+-- https://www.postgresql.org/docs/current/app-psql.html
+
 -- Outline table borders and separators using Unicode characters
 \pset linestyle unicode
 
