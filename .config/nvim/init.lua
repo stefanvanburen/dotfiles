@@ -22,10 +22,9 @@ do
     local _2_ = type(val)
     if (_2_ == "table") then
       vim.opt[opt] = val
-    elseif true then
+    else
       local _ = _2_
       vim.o[opt] = val
-    else
     end
   end
 end
@@ -192,7 +191,7 @@ do
   local treesitter = require("nvim-treesitter.configs")
   vim.o.foldexpr = "nvim_treesitter#foldexpr()"
   vim.o.foldmethod = "expr"
-  treesitter.setup({highlight = {enable = true, disable = {"fennel"}}, matchup = {enable = true, disable = {"fennel"}}, ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "xml", "yaml", "zig"}})
+  treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "xml", "yaml", "zig"}})
 end
 deps.add("stefanvanburen/rams")
 deps.add("mcchrish/zenbones.nvim")
@@ -325,10 +324,9 @@ for sign, text in pairs({DiagnosticSignError = "\195\151", DiagnosticSignWarn = 
 end
 vim.diagnostic.config({virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
 local function lsp_attach(_33_)
-  local _arg_34_ = _33_
-  local buf = _arg_34_["buf"]
-  local _arg_35_ = _arg_34_["data"]
-  local client_id = _arg_35_["client_id"]
+  local buf = _33_["buf"]
+  local _arg_34_ = _33_["data"]
+  local client_id = _arg_34_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   local function format()
     vim.lsp.buf.format({timeout_ms = 2000})

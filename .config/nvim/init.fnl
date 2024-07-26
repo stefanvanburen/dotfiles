@@ -235,9 +235,9 @@
 (let [treesitter (require :nvim-treesitter.configs)]
   (set vim.o.foldexpr "nvim_treesitter#foldexpr()")
   (set vim.o.foldmethod :expr)
-  (treesitter.setup {:highlight {:enable true :disable [:fennel]}
+  (treesitter.setup {:highlight {:enable true}
                      ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
-                     :matchup {:enable true :disable [:fennel]}
+                     :matchup {:enable true}
                      :ensure_installed [:c
                                         :lua
                                         :vim
