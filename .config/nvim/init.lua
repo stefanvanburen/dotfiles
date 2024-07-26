@@ -131,6 +131,7 @@ vim.g.fugitive_legacy_commands = 0
 deps.add("tpope/vim-rhubarb")
 deps.add("https://git.sr.ht/~willdurand/srht.vim")
 deps.add("tpope/vim-dadbod")
+deps.add("tpope/vim-dispatch")
 deps.add("mattn/vim-gotmpl")
 deps.add("fladson/vim-kitty")
 deps.add("NoahTheDuke/vim-just")

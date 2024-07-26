@@ -175,6 +175,8 @@
 (deps.add "https://git.sr.ht/~willdurand/srht.vim")
 
 (deps.add :tpope/vim-dadbod)
+;; vim-dispatch is a dependency of vim-dadbod.
+(deps.add :tpope/vim-dispatch)
 
 ;; Filetype-specific plugins
 (deps.add :mattn/vim-gotmpl)
