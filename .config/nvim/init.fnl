@@ -75,11 +75,7 @@
 
 ;; Filetype support for helm.
 ;; This needs to be done first.
-(vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
-                             {:pattern "*/templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml"
-                              :callback #(vim.api.nvim_set_option_value :filetype
-                                                                        :helm
-                                                                        {:scope :local})})
+(vim.filetype.add {:pattern {"*/templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml" :helm}})
 
 ;;; Plugins
 
@@ -339,27 +335,13 @@
                                   :callback #(each [name value (pairs settings)]
                                                (vim.api.nvim_set_option_value name
                                                                               value
-                                                                              {:scope :local}))}))
+                                                                              {:scope :local}))})))
 
-  (fn pattern->filetype [pattern filetype]
-    (vim.api.nvim_create_autocmd [:BufNewFile :BufRead]
-                                 {:group aufiletypes
-                                  : pattern
-                                  :callback #(vim.api.nvim_set_option_value :filetype
-                                                                            filetype
-                                                                            {:scope :local})}))
-
-  (each [pattern filetype (pairs {:.ignore :gitignore})]
-    (pattern->filetype pattern filetype))
-
-  (fn extension->filetype [extension filetype]
-    (pattern->filetype (.. "*." (tostring extension)) filetype))
-
-  (each [extension filetype (pairs {:mdx :markdown
-                                    :star :starlark
-                                    :tpl :gotexttmpl
-                                    :gotext :gotexttmpl})]
-    (extension->filetype extension filetype)))
+(vim.filetype.add {:extension {:mdx :markdown
+                               :star :starlark
+                               :tpl :gotexttmpl
+                               :gotext :gotexttmpl}
+                   :filename {:.ignore :gitignore}})
 
 ;; Skeleton files.
 ;; :h skeleton
