@@ -546,7 +546,7 @@
                         lspconfig.omnisharp {:cmd [:omnisharp]}
                         ;; Dockerfiles
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#dockerls
-                        lspconfig.dockerls {}
+                        lspconfig.dockerls {:settings {:docker {:languageserver {:formatter {:ignoreMultilineInstructions true}}}}}
                         ;; https://sr.ht/~xerool/fennel-ls/
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fennel_ls
                         lspconfig.fennel_ls {:settings {:fennel-ls {:extra-globals :vim}}}
