@@ -28,7 +28,6 @@ do
     end
   end
 end
-vim.filetype.add({pattern = {["*/templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml"] = "helm"}})
 deps.add("echasnovski/mini.nvim")
 do
   local mini_basics = require("mini.basics")

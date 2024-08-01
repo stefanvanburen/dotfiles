@@ -73,10 +73,6 @@
       _
       (tset vim.o opt val))))
 
-;; Filetype support for helm.
-;; This needs to be done first.
-(vim.filetype.add {:pattern {"*/templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml" :helm}})
-
 ;;; Plugins
 
 (deps.add :echasnovski/mini.nvim)
