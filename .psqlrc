@@ -10,7 +10,9 @@
 \set ECHO_HIDDEN on
 
 -- Create a prompt with host, database name, date, and time
-\set PROMPT1 '%m@%/ %`date "+%Y-%m-%d %H:%M:%S"` '
+\set PROMPT1 '%m@%/ %`date "+%Y-%m-%d %H:%M:%S"` $ '
+
+\set COMP_KEYWORD_CASE upper
 
 -- Use expanded display automatically in small terminals.
 \x auto
