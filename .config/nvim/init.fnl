@@ -18,9 +18,6 @@
 (set vim.g.loaded_netrw 1)
 (set vim.g.loaded_netrwPlugin 1)
 
-;; Enable exrc to load .nvim.lua files.
-(set vim.o.exrc true)
-
 ;; Disable providers - unused.
 (set vim.g.loaded_python3_provider 0)
 (set vim.g.loaded_ruby_provider 0)
@@ -51,6 +48,8 @@
             :clipboard :unnamedplus
             ;; turn off swapfiles - for now, I find these more of a headache than a benefit
             :swapfile false
+            ;; Enable exrc to load .nvim.lua files.
+            :exrc true
             ;; Convenience for automatic formatting.
             ;;   t - auto-wrap text using textwidth
             ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
@@ -61,6 +60,8 @@
             ;;   n - recognize numbered lists in text
             ;;   p - don't break lines at single spaces that follow periods
             :formatoptions :tcqjronp
+            ;; Set the title of the window.
+            :title true
             ;; Tied to CursorHold, which makes LSP document highlighting reasonable.
             :updatetime 300
             ;; ignore case when completing files / directories in wildmenu

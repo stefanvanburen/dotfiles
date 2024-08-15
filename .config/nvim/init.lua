@@ -10,14 +10,13 @@ local deps = require("mini.deps")
 deps.setup({path = {package = path_package}})
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.o.exrc = true
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.maplocalleader = ","
 do
-  local opts = {foldmethod = "indent", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", formatoptions = "tcqjronp", updatetime = 300, wildignorecase = true, swapfile = false}
+  local opts = {foldmethod = "indent", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, formatoptions = "tcqjronp", title = true, updatetime = 300, wildignorecase = true, swapfile = false}
   for opt, val in pairs(opts) do
     local _2_ = type(val)
     if (_2_ == "table") then
