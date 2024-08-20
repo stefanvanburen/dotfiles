@@ -154,9 +154,6 @@
 (set vim.g.matchup_matchparen_offscreen {:method :popup})
 (deps.add :tpope/vim-abolish)
 (deps.add :rktjmp/paperplanes.nvim)
-(let [paperplanes (require :paperplanes)]
-  (paperplanes.setup {:provider :sr.ht}))
-
 (deps.add :rktjmp/lush.nvim)
 
 (deps.add :justinmk/vim-gtfo)
