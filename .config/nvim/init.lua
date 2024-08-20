@@ -117,6 +117,10 @@ deps.add("andymass/vim-matchup")
 vim.g.matchup_matchparen_offscreen = {method = "popup"}
 deps.add("tpope/vim-abolish")
 deps.add("rktjmp/paperplanes.nvim")
+do
+  local paperplanes = require("paperplanes")
+  paperplanes.setup({provider = "sr.ht"})
+end
 deps.add("rktjmp/lush.nvim")
 deps.add("justinmk/vim-gtfo")
 vim.g["gtfo#terminals"] = {mac = "kitty"}
