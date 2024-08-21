@@ -30,7 +30,7 @@ set -gx GLAMOUR_STYLE light
 # https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
 set -gx PYTHONDONTWRITEBYTECODE 1
 
-# pipx / go
+# uv tools / go
 fish_add_path $bin
 # rust
 fish_add_path ~/.cargo/bin
