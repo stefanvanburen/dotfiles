@@ -155,7 +155,7 @@ deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
 do
   local conform = require("conform")
-  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, just = {"just"}, proto = {"buf"}}, format_on_save = {timeout_ms = 2000, lsp_format = "fallback"}})
+  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {"goimports"}, just = {"just"}, proto = {"buf"}}, format_on_save = {timeout_ms = 2000, lsp_format = "fallback"}})
 end
 deps.add("mfussenegger/nvim-lint")
 do
@@ -310,18 +310,6 @@ local function lsp_attach(_31_)
   local _arg_32_ = _31_["data"]
   local client_id = _arg_32_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
-  local function format()
-    vim.lsp.buf.format({timeout_ms = 2000})
-    if (client.name == "gopls") then
-      return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
-    else
-      return nil
-    end
-  end
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = format})
-  else
-  end
   if (client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint) then
     vim.lsp.inlay_hint.enable(true, {bufnr = buf})
   else
