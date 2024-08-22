@@ -278,7 +278,7 @@
 (deps.add :rose-pine/neovim)
 (deps.add :lunacookies/vim-plan9)
 (deps.add :miikanissi/modus-themes.nvim)
-(vim.cmd.colorscheme :plan9)
+(vim.cmd.colorscheme :modus_operandi)
 
 ;;; Autocommands and FileType settings
 
