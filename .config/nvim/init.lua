@@ -187,7 +187,13 @@ do
   local treesitter = require("nvim-treesitter.configs")
   vim.o.foldexpr = "nvim_treesitter#foldexpr()"
   vim.o.foldmethod = "expr"
-  treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "xml", "yaml", "zig"}})
+  treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "html", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "xml", "yaml", "zig"}})
+end
+do
+  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession"}}
+  for filetype, langs in pairs(filetype_to_langs) do
+    vim.treesitter.language.register(filetype, langs)
+  end
 end
 deps.add("stefanvanburen/rams")
 deps.add("mcchrish/zenbones.nvim")

@@ -239,6 +239,8 @@
                                         :vim
                                         :vimdoc
                                         :query
+                                        :bash
+                                        :c_sharp
                                         :clojure
                                         :comment
                                         :css
@@ -271,6 +273,10 @@
                                         :xml
                                         :yaml
                                         :zig]}))
+
+(let [filetype-to-langs {:c_sharp [:csharp] :bash [:shellsession]}]
+  (each [filetype langs (pairs filetype-to-langs)]
+    (vim.treesitter.language.register filetype langs)))
 
 ;; Colorschemes
 (deps.add :stefanvanburen/rams)
