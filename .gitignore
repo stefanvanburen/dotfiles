@@ -77,3 +77,6 @@
 /go/
 # Directory for code
 /src/
+
+# uv self-update
+/.config/uv/uv-receipt.json
