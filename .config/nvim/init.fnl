@@ -247,6 +247,7 @@
                                         :diff
                                         :djot
                                         :dockerfile
+                                        :editorconfig
                                         :fennel
                                         :fish
                                         :git_rebase
