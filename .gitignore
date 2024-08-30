@@ -6,6 +6,8 @@
 # written to by fish's set_kitty_theme function's invocation of `kitty +kitten themes`
 /.config/kitty/themes.conf.bak
 /.config/kitty/current-theme.conf
+# kitty writes this file when it modifies kitty.conf; ignore it
+/.config/kitty/kitty.conf.bak
 # clojure tools, not pinned / tracked
 /.config/clojure/tools
 
