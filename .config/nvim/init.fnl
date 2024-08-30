@@ -206,7 +206,7 @@
                                      :go [:goimports]
                                      :just [:just]
                                      :proto [:buf]}
-                  :format_on_save {:timeout_ms 2000 :lsp_format :fallback}}))
+                  :format_on_save {:timeout_ms 5000 :lsp_format :fallback}}))
 
 (deps.add :mfussenegger/nvim-lint)
 (let [nvim-lint (require :lint)]
