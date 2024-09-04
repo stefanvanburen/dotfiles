@@ -203,7 +203,8 @@
   ;; https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
-                                     :go [:goimports]
+                                     ;; Go has a custom setup in the LSP section that enables goimports-like functionality.
+                                     :go {:lsp_fallback :never}
                                      :just [:just]
                                      :proto [:buf]}
                   :format_on_save {:timeout_ms 5000 :lsp_format :fallback}}))
@@ -452,6 +453,17 @@
 
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
+
+  (fn goimports []
+    ;; https://github.com/golang/tools/blob/master/gopls/doc/vim.md#imports-and-formatting
+    (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
+                              :apply true})
+    (vim.lsp.buf.format))
+
+  ;; Only enable formatting for gopls.
+  (when (and client.server_capabilities.documentFormattingProvider
+             (= client.name :gopls))
+    (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback goimports}))
   (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when client.server_capabilities.documentHighlightProvider
@@ -555,4 +567,3 @@
 
 (each [server settings (pairs server-settings)]
   (server.setup settings))
-
