@@ -538,8 +538,8 @@
                         lspconfig.cssls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff
                         lspconfig.ruff {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
-                        lspconfig.tsserver {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ts_ls
+                        lspconfig.ts_ls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
                         lspconfig.eslint {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#helm_ls
