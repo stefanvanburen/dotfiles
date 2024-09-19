@@ -65,7 +65,9 @@
             ;; Tied to CursorHold, which makes LSP document highlighting reasonable.
             :updatetime 300
             ;; ignore case when completing files / directories in wildmenu
-            :wildignorecase true}]
+            :wildignorecase true
+            ;; Show partial off-screen results in a preview window.
+            :inccommand :split}]
   (each [opt val (pairs opts)]
     (case (type val)
       ;; vim.opt for table values, vim.o for everything else.
