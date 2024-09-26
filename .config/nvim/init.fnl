@@ -237,6 +237,7 @@
   (treesitter.setup {:highlight {:enable true}
                      ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
                      :matchup {:enable true}
+                     :incremental_selection {:enable true}
                      :ensure_installed [:c
                                         :lua
                                         :vim
