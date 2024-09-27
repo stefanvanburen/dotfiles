@@ -190,7 +190,7 @@ do
   treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, incremental_selection = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "html", "java", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "textproto", "toml", "xml", "yaml", "zig"}})
 end
 do
-  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession"}}
+  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession"}, proto = {"protobuf"}}
   for filetype, langs in pairs(filetype_to_langs) do
     vim.treesitter.language.register(filetype, langs)
   end
