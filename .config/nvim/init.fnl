@@ -262,6 +262,7 @@
                                         :gosum
                                         :gotmpl
                                         :html
+                                        :java
                                         :javascript
                                         :json
                                         :just
