@@ -96,7 +96,7 @@ do
   local mini_files = require("mini.files")
   mini_files.setup({mappings = {go_in_plus = "<CR>"}})
   local function _7_()
-    return mini_files.open(vim.api.nvim_buf_get_name(0))
+    return mini_files.open(vim.api.nvim_buf_get_name(0), false)
   end
   map("n", "-", _7_)
 end

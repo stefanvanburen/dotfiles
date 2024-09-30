@@ -139,7 +139,7 @@
 
 (let [mini-files (require :mini.files)]
   (mini-files.setup {:mappings {:go_in_plus :<CR>}})
-  (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0))))
+  (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0) false)))
 
 (let [mini-notify (require :mini.notify)]
   (mini-notify.setup))
