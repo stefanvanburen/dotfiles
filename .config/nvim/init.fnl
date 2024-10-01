@@ -475,7 +475,7 @@
   (when client.server_capabilities.documentHighlightProvider
     (let [augroup-id (vim.api.nvim_create_augroup :lsp-document-highlight
                                                   {:clear false})]
-      (vim.api.nvim_create_autocmd [:CursorHold :InsertLeave]
+      (vim.api.nvim_create_autocmd [:CursorHold :CursorHoldI :InsertLeave]
                                    {:group augroup-id
                                     :buffer buf
                                     :callback vim.lsp.buf.document_highlight})

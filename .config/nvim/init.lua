@@ -330,7 +330,7 @@ local function lsp_attach(_31_)
   end
   if client.server_capabilities.documentHighlightProvider then
     local augroup_id = vim.api.nvim_create_augroup("lsp-document-highlight", {clear = false})
-    vim.api.nvim_create_autocmd({"CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
+    vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
     vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
   else
   end
