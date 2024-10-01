@@ -573,8 +573,7 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls
         ;; NOTE: This hijacks the builtin `bufls` configuration for
         ;; nvim-lspconfig in order to run the new `buf beta lsp`, which has similar options.
-        lspconfig.bufls {:cmd [:buf :beta :lsp]
-                         ;; Find the root from the current-directory (unclear if this is necessarily correct...)
+        lspconfig.bufls {:cmd [:buf :beta :lsp :--log-format :json]
                          :root_dir #(vim.fs.root 0 [:buf.yaml :.git])}})
 
 (each [server settings (pairs server-settings)]
