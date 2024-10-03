@@ -567,7 +567,8 @@
         ;; LSP for Lua.
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
         lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
-                                           :workspace {:library (vim.api.nvim_list_runtime_paths)}}}}
+                                           :workspace {:checkThirdParty false
+                                                       :library vim.env.VIMRUNTIME}}}}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
         lspconfig.rust_analyzer {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bufls
