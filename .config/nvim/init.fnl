@@ -274,6 +274,7 @@
                                         :requirements
                                         :sql
                                         :ssh_config
+                                        :starlark
                                         :textproto
                                         :toml
                                         :xml
