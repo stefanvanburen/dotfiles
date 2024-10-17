@@ -471,12 +471,12 @@
     (vim.lsp.buf.format))
 
   ;; Only enable formatting for gopls.
-  (when (and client.server_capabilities.documentFormattingProvider
+  (when (and (client.supports_method :textDocument/formatting)
              (= client.name :gopls))
     (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback goimports}))
-  (when (and client.server_capabilities.inlayHintProvider vim.lsp.inlay_hint)
+  (when (client.supports_method :textDocument/inlayHint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
-  (when client.server_capabilities.documentHighlightProvider
+  (when (client.supports_method :textDocument/documentHighlight)
     (let [augroup-id (vim.api.nvim_create_augroup :lsp-document-highlight
                                                   {:clear false})]
       (vim.api.nvim_create_autocmd [:CursorHold :CursorHoldI :InsertLeave]
