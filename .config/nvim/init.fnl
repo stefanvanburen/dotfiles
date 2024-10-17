@@ -332,7 +332,10 @@
                                   :cindent true}
                           :gitcommit {:spell true}
                           :fennel {:commentstring ";; %s"}
-                          :sql {:wrap true :commentstring "-- %s"}
+                          :sql {:wrap true
+                                :commentstring "-- %s"
+                                :expandtab true
+                                :shiftwidth 4}
                           :clojure {:expandtab true :textwidth 80}
                           :kotlin {:commentstring "// %s"}
                           :markdown {:spell true
