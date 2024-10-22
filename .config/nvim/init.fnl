@@ -358,6 +358,7 @@
                                :tpl :gotexttmpl
                                :gotext :gotexttmpl}
                    :filename {:.ignore :gitignore
+                              :.dockerignore :gitignore
                               :buf.lock :yaml
                               :uv.lock :toml}})
 

@@ -215,7 +215,7 @@ do
     vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _13_})
   end
 end
-vim.filetype.add({extension = {mdx = "markdown", star = "starlark", tpl = "gotexttmpl", gotext = "gotexttmpl"}, filename = {[".ignore"] = "gitignore", ["buf.lock"] = "yaml", ["uv.lock"] = "toml"}})
+vim.filetype.add({extension = {mdx = "markdown", star = "starlark", tpl = "gotexttmpl", gotext = "gotexttmpl"}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.lock"] = "yaml", ["uv.lock"] = "toml"}})
 for pattern, skeleton_file in pairs({["buf.yaml"] = "buf.yaml", ["buf.gen.yaml"] = "buf.gen.yaml", Makefile = "Makefile", [".nfnl.fnl"] = ".nfnl.fnl", ["*.proto"] = "proto.proto"}) do
   vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
