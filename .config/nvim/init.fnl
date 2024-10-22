@@ -357,7 +357,9 @@
                                :star :starlark
                                :tpl :gotexttmpl
                                :gotext :gotexttmpl}
-                   :filename {:.ignore :gitignore :buf.lock :yaml}})
+                   :filename {:.ignore :gitignore
+                              :buf.lock :yaml
+                              :uv.lock :toml}})
 
 ;; Skeleton files.
 ;; :h skeleton
