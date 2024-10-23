@@ -29,8 +29,8 @@
 
 (let [opts {;; setup folding
             :foldmethod :indent
-            ;; Start with some folds closed, but not all.
-            :foldlevelstart 1
+            ;; Start with all folds open.
+            :foldlevelstart 99
             ;; on lines that will wrap, they instead 'break' and be visually indented by
             ;; the showbreak character, followed by the indent.
             :breakindentopt {:shift 2 :sbr true}
