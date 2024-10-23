@@ -207,11 +207,10 @@
   ;; https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
-                                     ;; Go has a custom setup in the LSP section that enables goimports-like functionality.
-                                     :go {:lsp_fallback :never}
+                                     :go {:lsp_format :fallback}
                                      :just [:just]
                                      :proto [:buf]}
-                  :format_on_save {:timeout_ms 5000 :lsp_format :fallback}}))
+                  :format_on_save {:timeout_ms 5000}}))
 
 (deps.add :mfussenegger/nvim-lint)
 (let [nvim-lint (require :lint)]

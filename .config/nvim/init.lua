@@ -155,7 +155,7 @@ deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
 do
   local conform = require("conform")
-  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {lsp_fallback = "never"}, just = {"just"}, proto = {"buf"}}, format_on_save = {timeout_ms = 5000, lsp_format = "fallback"}})
+  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {lsp_format = "fallback"}, just = {"just"}, proto = {"buf"}}, format_on_save = {timeout_ms = 5000}})
 end
 deps.add("mfussenegger/nvim-lint")
 do
