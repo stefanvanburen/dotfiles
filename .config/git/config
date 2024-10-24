@@ -72,8 +72,6 @@
 	gpgsign = true
 
 [diff]
-	; Remove "a/" and "b/" prefix from source and destination
-	noprefix = true
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
 
