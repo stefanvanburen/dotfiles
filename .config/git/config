@@ -113,6 +113,8 @@
 [rebase]
 	; when rebasing, automatically stash the working directory and pop it when done.
 	autoStash = true
+	; automatically update stacked branches when rebasing
+	updateRefs = true
 
 [rerere]
 	; https://git-scm.com/book/en/v2/Git-Tools-Rerere
