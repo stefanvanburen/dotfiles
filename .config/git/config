@@ -116,6 +116,10 @@
 	; when rebasing, automatically stash the working directory and pop it when done.
 	autoStash = true
 
+[rerere]
+	; https://git-scm.com/book/en/v2/Git-Tools-Rerere
+	enabled = true
+
 [sendemail]
 	smtpserver = smtp.migadu.com
 	smtpuser = stefan@vanburen.xyz
