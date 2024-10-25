@@ -288,6 +288,11 @@
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
 
+(deps.add :julienvincent/nvim-paredit)
+;; NOTE: This must be after adding treesitter.
+(let [nvim-paredit (require :nvim-paredit)]
+  (nvim-paredit.setup {}))
+
 ;; Colorschemes
 (deps.add :stefanvanburen/rams)
 (deps.add :mcchrish/zenbones.nvim)

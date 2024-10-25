@@ -195,6 +195,11 @@ do
     vim.treesitter.language.register(filetype, langs)
   end
 end
+deps.add("julienvincent/nvim-paredit")
+do
+  local nvim_paredit = require("nvim-paredit")
+  nvim_paredit.setup({})
+end
 deps.add("stefanvanburen/rams")
 deps.add("mcchrish/zenbones.nvim")
 deps.add("rose-pine/neovim")
