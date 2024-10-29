@@ -263,6 +263,7 @@
                                         :gosum
                                         :gotmpl
                                         :html
+                                        :janet_simple
                                         :java
                                         :javascript
                                         :json
