@@ -160,7 +160,7 @@ end
 deps.add("mfussenegger/nvim-lint")
 do
   local nvim_lint = require("lint")
-  nvim_lint.linters_by_ft = {proto = {"buf_lint"}, fish = {"fish"}, janet = {"janet"}, fennel = {"fennel"}}
+  nvim_lint.linters_by_ft = {fish = {"fish"}, janet = {"janet"}, fennel = {"fennel"}}
   local function _10_()
     return nvim_lint.try_lint()
   end
