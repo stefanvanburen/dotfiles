@@ -339,15 +339,12 @@ local function lsp_attach(_31_)
     vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
   else
   end
-  local function buffer_map(from, to)
-    return map("n", from, to, {buffer = buf})
-  end
-  buffer_map("gD", vim.lsp.buf.declaration)
-  buffer_map("gd", vim.lsp.buf.definition)
-  buffer_map("gi", vim.lsp.buf.implementation)
-  buffer_map("grr", vim.lsp.buf.references)
-  buffer_map("grt", vim.lsp.buf.type_definition)
-  buffer_map("grn", vim.lsp.buf.rename)
+  map("n", "gD", vim.lsp.buf.declaration, {buffer = buf})
+  map("n", "gd", vim.lsp.buf.definition, {buffer = buf})
+  map("n", "gi", vim.lsp.buf.implementation, {buffer = buf})
+  map("n", "grr", vim.lsp.buf.references, {buffer = buf})
+  map("n", "grt", vim.lsp.buf.type_definition, {buffer = buf})
+  map("n", "grn", vim.lsp.buf.rename, {buffer = buf})
   map({"n", "x"}, "gra", vim.lsp.buf.code_action, {buffer = buf})
   return map("i", "<C-s>", vim.lsp.buf.signature_help, {buffer = buf})
 end
