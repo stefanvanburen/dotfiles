@@ -209,7 +209,7 @@
                                      :fish [:fish_indent]
                                      :go {:lsp_format :fallback}
                                      :just [:just]
-                                     :proto [:buf]}
+                                     :proto {:lsp_format :fallback}}
                   :format_on_save {:timeout_ms 5000}}))
 
 (deps.add :mfussenegger/nvim-lint)
