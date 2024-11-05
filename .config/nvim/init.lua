@@ -79,6 +79,7 @@ do
     return mini_extra.pickers.lsp({scope = "references"})
   end
   map("n", "<leader>fr", _6_)
+  map("n", "<leader>fd", mini_extra.pickers.diagnostic)
 end
 do
   local mini_statusline = require("mini.statusline")

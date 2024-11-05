@@ -128,7 +128,8 @@
 
 (let [mini-extra (require :mini.extra)]
   (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
-  (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references})))
+  (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
+  (map :n :<leader>fd mini-extra.pickers.diagnostic))
 
 (let [mini-statusline (require :mini.statusline)]
   (mini-statusline.setup))
