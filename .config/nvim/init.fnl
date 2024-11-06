@@ -512,81 +512,78 @@
 (local lspconfig (require :lspconfig))
 (local schemastore (require :schemastore))
 
-(local server-settings
-       {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
-        lspconfig.gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
-                         :cmd [:gopls :-remote=auto]
-                         ;; The default, plus gohtmltmpl and gotexttmpl.
-                         :filetypes [:go
-                                     :gomod
-                                     :gowork
-                                     :gotmpl
-                                     :gohtmltmpl
-                                     :gotexttmpl]
-                         ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-                         :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
-                                            :staticcheck true
-                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#linktarget-string
-                                            :linkTarget :godocs.io
-                                            ;; See https://github.com/golang/tools/blob/master/gopls/doc/features.md#template-files
-                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#templateextensions-string
-                                            :templateExtensions [:tpl :tmpl]
-                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
-                                            ;; Most of these analyzers are enabled by default.
-                                            :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
-                                                       :unusedparams true
-                                                       ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedwrite
-                                                       :unusedwrite true
-                                                       ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#useany
-                                                       :useany true}}}}
-        ;;; https://github.com/b0o/SchemaStore.nvim#usage
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
-        lspconfig.jsonls {:settings {:json {:schemas (schemastore.json.schemas)
-                                            :validate {:enable true}}}}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
-        lspconfig.yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
-                                            :schemaStore {:enable false
-                                                          :url ""}}}}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
-        lspconfig.clojure_lsp {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
-        lspconfig.janet_lsp {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls
-        lspconfig.cssls {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff
-        lspconfig.ruff {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
-        lspconfig.ts_ls {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint
-        lspconfig.eslint {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
-        lspconfig.helm_ls {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
-        lspconfig.bashls {}
-        ;; LSP for TOML.
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#taplo
-        lspconfig.taplo {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
-        ;; NOTE: Download omnisharp with mason.
-        lspconfig.omnisharp {:cmd [:omnisharp]}
-        ;; Dockerfiles
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls
-        lspconfig.dockerls {:settings {:docker {:languageserver {:formatter {:ignoreMultilineInstructions true}}}}}
-        ;; https://sr.ht/~xerool/fennel-ls/
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
-        lspconfig.fennel_ls {:settings {:fennel-ls {:extra-globals :vim}}}
-        ;; LSP for Lua.
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
-        lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
-                                           :workspace {:checkThirdParty false
-                                                       :library vim.env.VIMRUNTIME}}}}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
-        lspconfig.rust_analyzer {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bufls
-        ;; NOTE: This hijacks the builtin `bufls` configuration for
-        ;; nvim-lspconfig in order to run the new `buf beta lsp`, which has similar options.
-        lspconfig.bufls {:cmd [:buf :beta :lsp :--log-format :json]
-                         :root_dir #(vim.fs.root 0 [:buf.yaml :.git])}})
+(local server-settings {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
+                        lspconfig.gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
+                                         :cmd [:gopls :-remote=auto]
+                                         ;; The default, plus gohtmltmpl and gotexttmpl.
+                                         :filetypes [:go
+                                                     :gomod
+                                                     :gowork
+                                                     :gotmpl
+                                                     :gohtmltmpl
+                                                     :gotexttmpl]
+                                         ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+                                         :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
+                                                            :staticcheck true
+                                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#linktarget-string
+                                                            :linkTarget :godocs.io
+                                                            ;; See https://github.com/golang/tools/blob/master/gopls/doc/features.md#template-files
+                                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#templateextensions-string
+                                                            :templateExtensions [:tpl
+                                                                                 :tmpl]
+                                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
+                                                            ;; Most of these analyzers are enabled by default.
+                                                            :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
+                                                                       :unusedparams true
+                                                                       ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedwrite
+                                                                       :unusedwrite true
+                                                                       ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#useany
+                                                                       :useany true}}}}
+                        ;;; https://github.com/b0o/SchemaStore.nvim#usage
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
+                        lspconfig.jsonls {:settings {:json {:schemas (schemastore.json.schemas)
+                                                            :validate {:enable true}}}}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
+                        lspconfig.yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
+                                                            :schemaStore {:enable false
+                                                                          :url ""}}}}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
+                        lspconfig.clojure_lsp {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
+                        lspconfig.janet_lsp {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls
+                        lspconfig.cssls {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff
+                        lspconfig.ruff {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
+                        lspconfig.ts_ls {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint
+                        lspconfig.eslint {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
+                        lspconfig.helm_ls {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
+                        lspconfig.bashls {}
+                        ;; LSP for TOML.
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#taplo
+                        lspconfig.taplo {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
+                        ;; NOTE: Download omnisharp with mason.
+                        lspconfig.omnisharp {:cmd [:omnisharp]}
+                        ;; Dockerfiles
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls
+                        lspconfig.dockerls {:settings {:docker {:languageserver {:formatter {:ignoreMultilineInstructions true}}}}}
+                        ;; https://sr.ht/~xerool/fennel-ls/
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
+                        lspconfig.fennel_ls {:settings {:fennel-ls {:extra-globals :vim}}}
+                        ;; LSP for Lua.
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
+                        lspconfig.lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
+                                                           :workspace {:checkThirdParty false
+                                                                       :library vim.env.VIMRUNTIME}}}}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
+                        lspconfig.rust_analyzer {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
+                        lspconfig.buf_ls {}})
 
 (each [server settings (pairs server-settings)]
   (server.setup settings))
