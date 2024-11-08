@@ -5,13 +5,13 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_STATE_HOME $HOME/.local/state
-# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
-set bin $HOME/.local/bin
+# Non-standard, but respected by some tools.
+set -gx XDG_BIN_HOME $HOME/.local/bin
 
 # Go environment variables
 # $ go help environment
 set -gx GOPATH $XDG_CACHE_HOME/gopath
-set -gx GOBIN $bin
+set -gx GOBIN $XDG_BIN_HOME
 set -gx GOCACHE $XDG_CACHE_HOME/gocache
 set -gx GOMODCACHE $XDG_CACHE_HOME/gomodcache
 
@@ -37,7 +37,7 @@ set -gx FZF_DEFAULT_OPTS "$fzf_colors"
 set -gx FZF_CTRL_T_OPTS "$fzf_colors"
 
 # uv tools / go
-fish_add_path $bin
+fish_add_path $XDG_BIN_HOME
 # rust
 fish_add_path ~/.cargo/bin
 
