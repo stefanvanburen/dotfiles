@@ -82,10 +82,6 @@ do
   map("n", "<leader>fd", mini_extra.pickers.diagnostic)
 end
 do
-  local mini_statusline = require("mini.statusline")
-  mini_statusline.setup()
-end
-do
   local mini_completion = require("mini.completion")
   mini_completion.setup()
 end
@@ -108,6 +104,14 @@ end
 do
   local mini_diff = require("mini.diff")
   mini_diff.setup({view = {signs = {add = "\226\148\131", change = "\226\148\131", delete = "\226\150\129"}, style = "sign"}})
+end
+do
+  local mini_git = require("mini.git")
+  mini_git.setup()
+end
+do
+  local mini_statusline = require("mini.statusline")
+  mini_statusline.setup()
 end
 do
   local mini_icons = require("mini.icons")

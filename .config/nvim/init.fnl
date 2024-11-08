@@ -131,9 +131,6 @@
   (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
   (map :n :<leader>fd mini-extra.pickers.diagnostic))
 
-(let [mini-statusline (require :mini.statusline)]
-  (mini-statusline.setup))
-
 (let [mini-completion (require :mini.completion)]
   (mini-completion.setup))
 
@@ -150,6 +147,13 @@
 (let [mini-diff (require :mini.diff)]
   (mini-diff.setup {:view {:signs {:add "┃" :change "┃" :delete "▁"}
                            :style :sign}}))
+
+(let [mini-git (require :mini.git)]
+  (mini-git.setup))
+
+;; Initialize below mini-git and mini-diff for integration.
+(let [mini-statusline (require :mini.statusline)]
+  (mini-statusline.setup))
 
 (let [mini-icons (require :mini.icons)]
   (mini-icons.setup {:style :ascii}))
