@@ -289,7 +289,7 @@
                                         :zig]}))
 
 (let [filetype-to-langs {:c_sharp [:csharp]
-                         :bash [:shellsession]
+                         :bash [:shellsession :console]
                          :proto [:protobuf]}]
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
