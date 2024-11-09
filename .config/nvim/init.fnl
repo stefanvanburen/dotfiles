@@ -529,8 +529,6 @@
                                          ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md
                                          :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-bool
                                                             :staticcheck true
-                                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#linktarget-string
-                                                            :linkTarget :godocs.io
                                                             ;; See https://github.com/golang/tools/blob/master/gopls/doc/features.md#template-files
                                                             ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#templateextensions-string
                                                             :templateExtensions [:tpl
