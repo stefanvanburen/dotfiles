@@ -533,6 +533,10 @@
                                                             ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#templateextensions-string
                                                             :templateExtensions [:tpl
                                                                                  :tmpl]
+                                                            ;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#directoryfilters-string
+                                                            ;; The default, plus anything in a vendor/ directory.
+                                                            :directoryFilters [:-**/node_modules
+                                                                               :-**/vendor]
                                                             ;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                                                             ;; Most of these analyzers are enabled by default.
                                                             :analyses {;; https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md#unusedparams
