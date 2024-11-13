@@ -13,7 +13,7 @@
 	aa = add .
 
 	; mnemonic for branches
-	b = branch --sort=-committerdate --format="%(committerdate:relative)%09%(refname:short)"
+	b = branch --format="%(committerdate:relative)%09%(refname:short)"
 
 	; mnemonic for commit
 	c = commit
@@ -64,6 +64,9 @@
 
 	; To unstage files, etc
 	unstage = restore --staged
+
+[branch]
+	sort = -committerdate
 
 [commit]
 	; At the bottom of the commit message, show a diff of the commit.
