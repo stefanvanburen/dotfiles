@@ -179,6 +179,8 @@
 (deps.add :tpope/vim-dadbod)
 ;; vim-dispatch is a dependency of vim-dadbod.
 (deps.add :tpope/vim-dispatch)
+;; Set DATABASE_URL in the environment to access the configured database via dadbod.
+(map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]}))
 
 ;; Filetype-specific plugins
 (deps.add :mattn/vim-gotmpl)
