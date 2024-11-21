@@ -99,7 +99,7 @@ do
 end
 do
   local mini_notify = require("mini.notify")
-  mini_notify.setup()
+  mini_notify.setup({lsp_progress = {enable = false}})
 end
 do
   local mini_diff = require("mini.diff")

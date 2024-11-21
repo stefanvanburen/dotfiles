@@ -142,7 +142,7 @@
   (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0) false)))
 
 (let [mini-notify (require :mini.notify)]
-  (mini-notify.setup))
+  (mini-notify.setup {:lsp_progress {:enable false}}))
 
 (let [mini-diff (require :mini.diff)]
   (mini-diff.setup {:view {:signs {:add "┃" :change "┃" :delete "▁"}
