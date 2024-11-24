@@ -321,10 +321,7 @@ local function _31_()
 end
 map("n", "[r", _31_)
 map("n", "<C-l>", ":nohlsearch<cr>")
-for sign, text in pairs({DiagnosticSignError = "\195\151", DiagnosticSignWarn = "!", DiagnosticSignInfo = "\226\156\179\239\184\142", DiagnosticSignHint = "?"}) do
-  vim.fn.sign_define(sign, {text = text, texthl = sign})
-end
-vim.diagnostic.config({virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
+vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
 local function lsp_attach(_32_)
   local buf = _32_["buf"]
   local _arg_33_ = _32_["data"]

@@ -464,13 +464,11 @@
 
 ;;; Diagnostics
 
-(each [sign text (pairs {:DiagnosticSignError "×"
-                         :DiagnosticSignWarn "!"
-                         :DiagnosticSignInfo "✳︎"
-                         :DiagnosticSignHint "?"})]
-  (vim.fn.sign_define sign {: text :texthl sign}))
-
-(vim.diagnostic.config {:virtual_text {:severity {:min vim.diagnostic.severity.WARN}}
+(vim.diagnostic.config {:signs {:text {vim.diagnostic.severity.ERROR "×"
+                                       vim.diagnostic.severity.WARN "!"
+                                       vim.diagnostic.severity.INFO "✳︎"
+                                       vim.diagnostic.severity.HINT "?"}}
+                        :virtual_text {:severity {:min vim.diagnostic.severity.WARN}}
                         :underline true
                         :float {:border :single
                                 :focusable false
