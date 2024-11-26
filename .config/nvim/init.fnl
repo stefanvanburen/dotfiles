@@ -183,7 +183,6 @@
 (map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]}))
 
 ;; Filetype-specific plugins
-(deps.add :mattn/vim-gotmpl)
 (deps.add :fladson/vim-kitty)
 (deps.add :NoahTheDuke/vim-just)
 (deps.add :janet-lang/janet.vim)
