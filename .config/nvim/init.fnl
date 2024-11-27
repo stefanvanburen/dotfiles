@@ -563,6 +563,13 @@
                         lspconfig.ruff {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
                         lspconfig.ts_ls {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylsp
+                        ;; https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
+                        ;; https://github.com/python-lsp/python-lsp-server
+                        ;; https://github.com/python-lsp/pylsp-mypy
+                        ;; uv tool install --with pylsp-mypy python-lsp-server
+                        lspconfig.pylsp {:settings {:pylsp {:plugins {:pycodestyle {:enabled false}
+                                                                      :pyflakes {:enabled false}}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint
                         lspconfig.eslint {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
