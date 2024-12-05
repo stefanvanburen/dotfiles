@@ -52,6 +52,8 @@
             :swapfile false
             ;; Enable exrc to load .nvim.lua files.
             :exrc true
+            ;; Highlight only the number column when using cursorline.
+            :cursorlineopt :number
             ;; Convenience for automatic formatting.
             ;;   t - auto-wrap text using textwidth
             ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
