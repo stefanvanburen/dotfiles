@@ -229,69 +229,88 @@ do
   end
 end
 vim.filetype.add({extension = {mdx = "markdown", star = "starlark", tpl = "gotexttmpl", gotext = "gotexttmpl"}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.lock"] = "yaml", ["uv.lock"] = "toml"}})
-for pattern, skeleton_file in pairs({["buf.yaml"] = "buf.yaml", ["buf.gen.yaml"] = "buf.gen.yaml", Makefile = "Makefile", [".nfnl.fnl"] = ".nfnl.fnl", ["*.proto"] = "proto.proto"}) do
+for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl"}) do
   vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
+local function _15_(args)
+  local fname = vim.fs.basename(args.file)
+  local ext = vim.fn.fnamemodify(args.file, ":e")
+  local ft = vim.bo[args.buf].filetype
+  local candidates = {fname, ext, ft}
+  local done_3f = false
+  for _, candidate in ipairs(candidates) do
+    if done_3f then break end
+    local tmpl = vim.fs.joinpath(vim.fn.stdpath("config"), "templates", ("%s.tmpl"):format(candidate))
+    local f = io.open(tmpl, "r")
+    if f then
+      vim.snippet.expand(f:read("*a"))
+      done_3f = true
+    else
+    end
+  end
+  return nil
+end
+vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", callback = _15_})
 map("n", ";", ":")
-local function _15_()
+local function _17_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _15_)
-local function _16_()
+map("n", "<leader>gs", _17_)
+local function _18_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _16_)
-local function _17_()
+map("n", "<leader>gw", _18_)
+local function _19_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _17_)
-local function _18_()
+map("n", "<leader>gc", _19_)
+local function _20_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _18_)
-local function _19_()
+map("n", "<leader>gp", _20_)
+local function _21_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _19_)
-local function _20_()
+map("n", "<leader>gb", _21_)
+local function _22_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _20_, {expr = true})
-local function _22_()
+map({"n", "v"}, "j", _22_, {expr = true})
+local function _24_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _22_, {expr = true})
+map({"n", "v"}, "k", _24_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
-  local function _24_()
+  local function _26_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _24_)
+  map("n", keymap, _26_)
 end
-local function _25_()
+local function _27_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _25_)
-local function _26_()
+map("n", "<leader>w", _27_)
+local function _28_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _26_)
-local function _27_()
+map("n", "<leader>cl", _28_)
+local function _29_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _27_)
-local function _28_()
+map("n", "<leader>ss", _29_)
+local function _30_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _28_)
+map("n", "<leader>vs", _30_)
 map("n", "Q", "@@")
 map("n", "0", "^")
 map("n", "^", "0")
@@ -307,24 +326,24 @@ map("x", ">", ">gv")
 map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
-local function _29_()
+local function _31_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _29_)
-local function _30_()
+map("n", "<leader>tn", _31_)
+local function _32_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _30_)
-local function _31_()
+map("n", "]r", _32_)
+local function _33_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _31_)
+map("n", "[r", _33_)
 map("n", "<C-l>", ":nohlsearch<cr>")
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_32_)
-  local buf = _32_["buf"]
-  local _arg_33_ = _32_["data"]
-  local client_id = _arg_33_["client_id"]
+local function lsp_attach(_34_)
+  local buf = _34_["buf"]
+  local _arg_35_ = _34_["data"]
+  local client_id = _arg_35_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   local function goimports()
     vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
