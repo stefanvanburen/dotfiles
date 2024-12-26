@@ -1,0 +1,4 @@
+# https://ghostty.org/docs/config
+theme = dark:zenbones_dark,light:zenbones_light
+
+config-file = ?config.local

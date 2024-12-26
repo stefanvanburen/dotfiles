@@ -8,6 +8,8 @@
 /.config/kitty/current-theme.conf
 # kitty writes this file when it modifies kitty.conf; ignore it
 /.config/kitty/kitty.conf.bak
+# local configuration for ghostty
+/.config/ghostty/config.local
 # clojure tools, not pinned / tracked
 /.config/clojure/tools
 
