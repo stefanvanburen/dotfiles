@@ -2,3 +2,5 @@
 theme = dark:zenbones_dark,light:zenbones_light
 
 config-file = ?config.local
+
+font-size = 10
