@@ -1,6 +1,19 @@
 # https://ghostty.org/docs/config
-theme = dark:zenbones_dark,light:zenbones_light
+
+theme = zenbones_light
 
 config-file = ?config.local
 
 font-size = 10
+
+cursor-color = #EE483E
+adjust-cursor-thickness = 3
+
+link-url = true
+
+keybind = ctrl+f>h=goto_split:left
+keybind = ctrl+f>j=goto_split:bottom
+keybind = ctrl+f>k=goto_split:top
+keybind = ctrl+f>l=goto_split:right
+
+keybind = ctrl+f>p=write_screen_file:open
