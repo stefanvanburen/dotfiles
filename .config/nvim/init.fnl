@@ -167,9 +167,6 @@
 (deps.add :rktjmp/paperplanes.nvim)
 (deps.add :rktjmp/lush.nvim)
 
-(deps.add :justinmk/vim-gtfo)
-(set vim.g.gtfo#terminals {:mac :kitty})
-
 (deps.add :lewis6991/fileline.nvim)
 
 (deps.add :tpope/vim-fugitive)

@@ -123,8 +123,6 @@ vim.g.matchup_matchparen_offscreen = {method = "popup"}
 deps.add("tpope/vim-abolish")
 deps.add("rktjmp/paperplanes.nvim")
 deps.add("rktjmp/lush.nvim")
-deps.add("justinmk/vim-gtfo")
-vim.g["gtfo#terminals"] = {mac = "kitty"}
 deps.add("lewis6991/fileline.nvim")
 deps.add("tpope/vim-fugitive")
 vim.g.fugitive_legacy_commands = 0
