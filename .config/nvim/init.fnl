@@ -182,7 +182,6 @@
 (map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]}))
 
 ;; Filetype-specific plugins
-(deps.add :fladson/vim-kitty)
 (deps.add :NoahTheDuke/vim-just)
 (deps.add :janet-lang/janet.vim)
 (deps.add :towolf/vim-helm)
@@ -430,7 +429,6 @@
 ;; edit config files
 (each [keymap file (pairs {:<leader>ef :$HOME/.config/fish/config.fish
                            :<leader>eg :$HOME/.config/git/config
-                           :<leader>ek :$HOME/.config/kitty/kitty.conf
                            :<leader>ev :$HOME/.config/nvim/init.fnl})]
   (map :n keymap #(vim.cmd {:cmd :edit :args [file]})))
 

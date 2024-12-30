@@ -134,7 +134,6 @@ local function _8_()
   return vim.cmd({cmd = "DB", args = {"$DATABASE_URL"}})
 end
 map("n", "<leader>db", _8_)
-deps.add("fladson/vim-kitty")
 deps.add("NoahTheDuke/vim-just")
 deps.add("janet-lang/janet.vim")
 deps.add("towolf/vim-helm")
@@ -287,7 +286,7 @@ local function _24_()
 end
 map({"n", "v"}, "k", _24_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true})
-for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
+for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>eg"] = "$HOME/.config/git/config", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
   local function _26_()
     return vim.cmd({cmd = "edit", args = {file}})
   end

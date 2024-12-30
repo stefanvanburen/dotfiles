@@ -30,7 +30,7 @@ brew "pipx"
 brew "ripgrep"
 
 # terminal
-cask "kitty"
+cask "ghostty"
 
 # fonts
 tap "homebrew/cask-fonts"

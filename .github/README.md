@@ -1,6 +1,6 @@
 # dotfiles
 
-[fish](https://fishshell.com), [neovim](https://neovim.io), [kitty](https://sw.kovidgoyal.net/kitty/), [macOS](https://www.apple.com/macos/)
+[fish](https://fishshell.com), [neovim](https://neovim.io), [ghostty](https://ghostty.org/), [macOS](https://www.apple.com/macos/)
 
 ## Setup
 
@@ -34,8 +34,6 @@ $ git config status.showUntrackedFiles no
   # See: https://github.com/fish-shell/fish-shell/issues/989
   chsh -s $(command -v fish)
   ```
-
-* Set up fonts in Kitty (see [kitty.conf](/.config/kitty/kitty.conf) for details)
 
 * Disable the annoying <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> shortcut to bring up the dictionary on macOS, so that [Dash.app](https://kapeli.com/dash) can use it:
 
