@@ -16,6 +16,9 @@ keybind = ctrl+f>j=goto_split:bottom
 keybind = ctrl+f>k=goto_split:top
 keybind = ctrl+f>l=goto_split:right
 
+keybind = ctrl+f>v=new_split:right
+keybind = ctrl+f>s=new_split:down
+
 # https://ghostty.org/docs/config/keybind/reference#toggle_split_zoom
 keybind = ctrl+f>z=toggle_split_zoom
 
