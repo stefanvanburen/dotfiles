@@ -38,6 +38,10 @@ do
   mini_pairs.setup()
 end
 do
+  local mini_ai = require("mini.ai")
+  mini_ai.setup()
+end
+do
   local mini_splitjoin = require("mini.splitjoin")
   mini_splitjoin.setup()
 end

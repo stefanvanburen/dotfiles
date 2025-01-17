@@ -94,6 +94,9 @@
 (let [mini-pairs (require :mini.pairs)]
   (mini-pairs.setup))
 
+(let [mini-ai (require :mini.ai)]
+  (mini-ai.setup))
+
 (let [mini-splitjoin (require :mini.splitjoin)]
   (mini-splitjoin.setup))
 
