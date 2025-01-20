@@ -574,6 +574,8 @@
                                                                           :url ""}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
                         lspconfig.clojure_lsp {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fish_lsp
+                        lspconfig.fish_lsp {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
                         lspconfig.janet_lsp {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls
@@ -587,8 +589,9 @@
                         ;; https://github.com/python-lsp/python-lsp-server
                         ;; https://github.com/python-lsp/pylsp-mypy
                         ;; uv tool install --with pylsp-mypy python-lsp-server
-                        lspconfig.pylsp {:settings {:pylsp {:plugins {:pycodestyle {:enabled false}
-                                                                      :pyflakes {:enabled false}}}}}
+                        lspconfig.pylsp {:cmd [:uv :run :pylsp]
+                                         :settings {:pylsp {:plugins {:pycodestyle {:enabled false}}
+                                                            :pyflakes {:enabled false}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint
                         lspconfig.eslint {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
