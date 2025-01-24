@@ -1,0 +1,62 @@
+# vim: set filetype=ghostty:
+
+# the default; some faces
+font-size = 10
+
+# https://qwerasd205.github.io/PixelCode/
+font-family = "Pixel Code"
+font-size = 8
+
+# https://berkeleygraphics.com/typefaces/berkeley-mono/
+font-family = "Berkeley Mono Variable"
+
+# https://github.com/be5invis/Iosevka
+font-family = "Iosevka Term"
+
+# https://practicaltypography.com/triplicate.html
+font-family = "Triplicate A Code"
+
+# https://go.dev/blog/go-fonts
+font-family = "Go Mono"
+
+# https://github.com/fabrizioschiavi/pragmatapro
+font-family = "PragmataPro Mono Liga"
+
+# https://github.com/eigilnikolajsen/commit-mono
+font-family = "CommitMono"
+
+# https://ia.net/topics/a-typographic-christmas
+font-family = "iA Writer Mono S"
+
+# https://input.djr.com/
+font-family = "Input Mono Compressed"
+
+# https://github.com/arrowtype/recursive
+font-family = "Rec Mono Linear"
+
+## https://github.com/githubnext/monaspace
+font-family = "Monaspace Argon Var"
+font-family = "Monaspace Krypton Var"
+font-family = "Monaspace Neon Var"
+font-family = "Monaspace Radon Var"
+font-family = "Monaspace Xeon Var Medium"
+
+# https://github.com/andirueckel/undefined-medium
+font-family = "undefined"
+
+# https://github.com/0xType/0xProto
+font-family = "0xProto"
+
+# https://github.com/mishamyrt/Lilex
+font-family = "Lilex"
+
+# https://github.com/pcaro90/hermit
+font-family = "Hermit"
+
+# https://departuremono.com/
+font-family = "Departure Mono"
+# via the README:
+# > For pixel-perfect results, set the font size to increments of 11px.
+font-size = 11
+
+font-family = "Atkinson Hyperlegible Mono"
