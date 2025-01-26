@@ -67,5 +67,6 @@ if status --is-interactive
     # https://direnv.net/docs/hook.html#fish
     command -q direnv; and direnv hook fish | source
 
-    fzf --fish | source
+    # https://github.com/junegunn/fzf?tab=readme-ov-file#setting-up-shell-integration
+    command -q fzf; and fzf --fish | source
 end
