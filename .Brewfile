@@ -4,7 +4,7 @@
 brew "atuin"
 # Maintained version of `exa`, a replacement for `ls`.
 brew "eza"
-# Find files - used by `zf` in fish.
+# Find files - used by `fzf` in fish.
 brew "fd"
 # My default shell
 brew "fish"
