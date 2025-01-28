@@ -69,4 +69,7 @@ if status --is-interactive
 
     # https://github.com/junegunn/fzf?tab=readme-ov-file#setting-up-shell-integration
     command -q fzf; and fzf --fish | source
+
+    # https://docs.atuin.sh/guide/installation/#installing-the-shell-plugin
+    command -q atuin; and atuin init fish | source
 end

@@ -1,5 +1,7 @@
 # These formula are the absolute base for my macOS environment.
 
+# Enhanced shell history.
+brew "atuin"
 # Maintained version of `exa`, a replacement for `ls`.
 brew "eza"
 # Find files - used by `zf` in fish.
