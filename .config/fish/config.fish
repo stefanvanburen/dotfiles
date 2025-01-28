@@ -43,7 +43,9 @@ fish_add_path ~/.cargo/bin
 
 # Setup homebrew environment (PATH-related variables)
 # This must be before any command checking, as it sets up the PATH.
-eval (/opt/homebrew/bin/brew shellenv)
+if test -x /opt/homebrew/bin/brew
+    eval (/opt/homebrew/bin/brew shellenv)
+end
 
 if status --is-interactive
     # `man abbr`
