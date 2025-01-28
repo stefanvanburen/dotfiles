@@ -24,12 +24,11 @@ brew "jump"
 brew "just"
 # $EDITOR
 brew "neovim"
-# install and run python applications in isolated environments
-# used to install and run beets
-# https://github.com/pypa/pipx
 brew "pipx"
 # better searching - configured in ~/.config/ripgreprc.
 brew "ripgrep"
+# install and run python tools
+brew "uv"
 
 # terminal
 cask "ghostty"
