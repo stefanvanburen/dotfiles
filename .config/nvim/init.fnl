@@ -126,7 +126,6 @@
 (let [mini-pick (require :mini.pick)]
   (mini-pick.setup)
   (map :n :<leader>ff mini-pick.builtin.files)
-  (map :n :<leader>fg #(mini-pick.builtin.files {:tool :git}))
   (map :n :<leader>fb mini-pick.builtin.buffers)
   (map :n :<leader>fl mini-pick.builtin.grep_live)
   (map :n :<leader>fh mini-pick.builtin.help))
@@ -134,7 +133,8 @@
 (let [mini-extra (require :mini.extra)]
   (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
   (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
-  (map :n :<leader>fd mini-extra.pickers.diagnostic))
+  (map :n :<leader>fd mini-extra.pickers.diagnostic)
+  (map :n :<leader>fg mini-extra.pickers.git_files))
 
 (let [mini-completion (require :mini.completion)]
   (mini-completion.setup))
@@ -185,6 +185,7 @@
 (map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]}))
 
 ;; Filetype-specific plugins
+(deps.add :fladson/vim-kitty)
 (deps.add :NoahTheDuke/vim-just)
 (deps.add :janet-lang/janet.vim)
 (deps.add :towolf/vim-helm)
@@ -432,6 +433,7 @@
 ;; edit config files
 (each [keymap file (pairs {:<leader>ef :$HOME/.config/fish/config.fish
                            :<leader>eg :$HOME/.config/git/config
+                           :<leader>ek :$HOME/.config/kitty/kitty.conf
                            :<leader>ev :$HOME/.config/nvim/init.fnl})]
   (map :n keymap #(vim.cmd {:cmd :edit :args [file]})))
 

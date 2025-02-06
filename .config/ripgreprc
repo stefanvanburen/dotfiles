@@ -2,8 +2,10 @@
 # This is really useful in the general case of doing `rg text` and wanting to match case-insensitively on "text".
 --smart-case
 
-# Add hyperlinks to matches.
---hyperlink-format=default
+# Add kitty-compatible hyperlinks to matches.
+--hyperlink-format=kitty
+# NOTE: For Ghostty: add hyperlinks to matches.
+# --hyperlink-format=default
 
 # Don't allow matches within long lines to write the entire line to the terminal.
 --max-columns=150

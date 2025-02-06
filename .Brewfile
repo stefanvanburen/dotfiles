@@ -30,8 +30,9 @@ brew "ripgrep"
 # install and run python tools
 brew "uv"
 
-# terminal
+# terminals
 cask "ghostty"
+cask "kitty"
 
 # fonts
 tap "homebrew/cask-fonts"

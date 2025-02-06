@@ -69,3 +69,19 @@
 
 # uv self-update
 /.config/uv/uv-receipt.json
+
+## Kitty-related
+# not in version control to allow for local differences
+/.config/kitty/font.conf
+/.config/kitty/themes.conf
+# written to by fish's set_kitty_theme function's invocation of `kitty +kitten themes`
+/.config/kitty/themes.conf.bak
+/.config/kitty/current-theme.conf
+# kitty theme preferences
+/.config/kitty/dark-theme.auto.conf
+/.config/kitty/light-theme.auto.conf
+/.config/kitty/no-preference-theme.auto.conf
+# kitty writes this file when it modifies kitty.conf; ignore it
+/.config/kitty/kitty.conf.bak
+# kitty uses less as a pager
+/.lesshst
