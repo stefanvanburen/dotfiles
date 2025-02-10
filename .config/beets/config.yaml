@@ -3,9 +3,8 @@
 #
 # To install `beets` on macOS:
 #
-# $ brew install pipx
-# $ pipx install beets
-# $ pipx inject beets requests # required for fetchart plugin
+# $ brew install uv
+# $ uv tool install beets --with requests --with certifi
 
 # Store music library in ~/Documents/music, which is on iCloud
 directory: ~/Documents/music
