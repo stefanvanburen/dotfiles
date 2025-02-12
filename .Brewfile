@@ -16,8 +16,6 @@ brew "gh"
 brew "git"
 # Latest version of go - for tool binaries
 brew "go"
-# Used by gh in ~/.config/gh/config.yml.
-brew "gum"
 # jumping around - bound to `z` in fish.
 brew "jump"
 # project-specific commands - abbreviated to `j` in fish.

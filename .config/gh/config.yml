@@ -4,5 +4,5 @@ aliases:
     issues: issue list
     br: browse
     view: pr view --web
-    co: '!gh pr list --limit 100 | cut -f1,2 | gum filter --limit=1 | cut -f1 | xargs gh pr checkout'
+    co: pr checkout
     clone: repo clone
