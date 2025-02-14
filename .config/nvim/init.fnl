@@ -37,7 +37,7 @@
             :showbreak "↳"
             ;; when using > and <, round the indent to a multiple of shiftwidth
             :shiftround true
-            ;; Global substitutions by defualt.
+            ;; Global substitutions by default.
             :gdefault true
             ;; Copy the indent of existing lines when autoindenting.
             :copyindent true
@@ -194,7 +194,7 @@
 
 (deps.add :Olical/conjure)
 (set vim.g.conjure#highlight#enabled true)
-(set vim.g.conjure#filetypes [:clojure :fennel :janet :rust])
+(set vim.g.conjure#filetypes [:clojure :fennel :janet :rust :python])
 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
 (set vim.g.conjure#filetype#janet :conjure.client.janet.stdio)
 (set vim.g.conjure#mapping#doc_word false)
@@ -390,26 +390,29 @@
                                              skeleton-file)}))
 
 ;; Template files.
-(vim.api.nvim_create_autocmd :BufNewFile
-                             {:pattern "*"
-                              :callback (fn [args]
-                                          (let [fname (vim.fs.basename args.file)
-                                                ext (vim.fn.fnamemodify args.file
-                                                                        ":e")
-                                                ft (. vim.bo args.buf :filetype)
-                                                candidates [fname ext ft]]
-                                            (var done? false)
-                                            (each [_ candidate (ipairs candidates)
-                                                   &until done?]
-                                              (let [tmpl (vim.fs.joinpath (vim.fn.stdpath :config)
-                                                                          :templates
-                                                                          (: "%s.tmpl"
-                                                                             :format
-                                                                             candidate))
-                                                    f (io.open tmpl :r)]
-                                                (when f
-                                                  (vim.snippet.expand (f:read :*a))
-                                                  (set done? true))))))})
+(let [autemplates (vim.api.nvim_create_augroup :templates {})]
+  (vim.api.nvim_create_autocmd :BufNewFile
+                               {:pattern "*"
+                                :group autemplates
+                                :callback (fn [args]
+                                            (let [fname (vim.fs.basename args.file)
+                                                  ext (vim.fn.fnamemodify args.file
+                                                                          ":e")
+                                                  ft (. vim.bo args.buf
+                                                        :filetype)
+                                                  candidates [fname ext ft]]
+                                              (var done? false)
+                                              (each [_ candidate (ipairs candidates)
+                                                     &until done?]
+                                                (let [tmpl (vim.fs.joinpath (vim.fn.stdpath :config)
+                                                                            :templates
+                                                                            (: "%s.tmpl"
+                                                                               :format
+                                                                               candidate))
+                                                      f (io.open tmpl :r)]
+                                                  (when f
+                                                    ;; (vim.snippet.expand (f:read :*a))
+                                                    (set done? true))))))}))
 
 ;;; Mappings
 

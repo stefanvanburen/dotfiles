@@ -142,7 +142,7 @@ deps.add("towolf/vim-helm")
 deps.add("Olical/nfnl")
 deps.add("Olical/conjure")
 vim.g["conjure#highlight#enabled"] = true
-vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "rust"}
+vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "rust", "python"}
 vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
 vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
 vim.g["conjure#mapping#doc_word"] = false
@@ -231,25 +231,27 @@ vim.filetype.add({extension = {mdx = "markdown", star = "starlark", tpl = "gotex
 for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl"}) do
   vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
-local function _14_(args)
-  local fname = vim.fs.basename(args.file)
-  local ext = vim.fn.fnamemodify(args.file, ":e")
-  local ft = vim.bo[args.buf].filetype
-  local candidates = {fname, ext, ft}
-  local done_3f = false
-  for _, candidate in ipairs(candidates) do
-    if done_3f then break end
-    local tmpl = vim.fs.joinpath(vim.fn.stdpath("config"), "templates", ("%s.tmpl"):format(candidate))
-    local f = io.open(tmpl, "r")
-    if f then
-      vim.snippet.expand(f:read("*a"))
-      done_3f = true
-    else
+do
+  local autemplates = vim.api.nvim_create_augroup("templates", {})
+  local function _14_(args)
+    local fname = vim.fs.basename(args.file)
+    local ext = vim.fn.fnamemodify(args.file, ":e")
+    local ft = vim.bo[args.buf].filetype
+    local candidates = {fname, ext, ft}
+    local done_3f = false
+    for _, candidate in ipairs(candidates) do
+      if done_3f then break end
+      local tmpl = vim.fs.joinpath(vim.fn.stdpath("config"), "templates", ("%s.tmpl"):format(candidate))
+      local f = io.open(tmpl, "r")
+      if f then
+        done_3f = true
+      else
+      end
     end
+    return nil
   end
-  return nil
+  vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", group = autemplates, callback = _14_})
 end
-vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", callback = _14_})
 map("n", ";", ":")
 local function _16_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
