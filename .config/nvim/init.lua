@@ -142,7 +142,7 @@ deps.add("towolf/vim-helm")
 deps.add("Olical/nfnl")
 deps.add("Olical/conjure")
 vim.g["conjure#highlight#enabled"] = true
-vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "python", "rust"}
+vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "rust"}
 vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
 vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
 vim.g["conjure#mapping#doc_word"] = false
@@ -167,7 +167,7 @@ end
 deps.add("mfussenegger/nvim-lint")
 do
   local nvim_lint = require("lint")
-  nvim_lint.linters_by_ft = {fish = {"fish"}, janet = {"janet"}, fennel = {"fennel"}}
+  nvim_lint.linters_by_ft = {fish = {"fish"}, janet = {"janet"}, fennel = {"fennel"}, python = {"mypy"}}
   local function _10_()
     return nvim_lint.try_lint()
   end
@@ -375,7 +375,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
-local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, filetypes = {"go", "gomod", "gowork", "gotmpl", "gohtmltmpl", "gotexttmpl"}, settings = {gopls = {staticcheck = true, templateExtensions = {"tpl", "tmpl"}, directoryFilters = {"-**/node_modules", "-**/vendor"}, analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.fish_lsp] = {}, [lspconfig.janet_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.ruff] = {}, [lspconfig.ts_ls] = {}, [lspconfig.pylsp] = {cmd = {"uv", "run", "pylsp"}, settings = {pylsp = {plugins = {pycodestyle = {enabled = false}}, pyflakes = {enabled = false}}}}, [lspconfig.eslint] = {}, [lspconfig.helm_ls] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.omnisharp] = {cmd = {"omnisharp"}}, [lspconfig.dockerls] = {settings = {docker = {languageserver = {formatter = {ignoreMultilineInstructions = true}}}}}, [lspconfig.fennel_ls] = {settings = {["fennel-ls"] = {["extra-globals"] = "vim"}}}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.env.VIMRUNTIME, checkThirdParty = false}}}}, [lspconfig.rust_analyzer] = {}, [lspconfig.buf_ls] = {}}
+local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, filetypes = {"go", "gomod", "gowork", "gotmpl", "gohtmltmpl", "gotexttmpl"}, settings = {gopls = {staticcheck = true, templateExtensions = {"tpl", "tmpl"}, directoryFilters = {"-**/node_modules", "-**/vendor"}, analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.fish_lsp] = {}, [lspconfig.janet_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.ruff] = {}, [lspconfig.ts_ls] = {}, [lspconfig.pylsp] = {cmd = {"uv", "tool", "run", "--from", "python-lsp-server", "pylsp"}, settings = {pylsp = {plugins = {pycodestyle = {enabled = false}}, pyflakes = {enabled = false}}}}, [lspconfig.eslint] = {}, [lspconfig.helm_ls] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.omnisharp] = {cmd = {"omnisharp"}}, [lspconfig.dockerls] = {settings = {docker = {languageserver = {formatter = {ignoreMultilineInstructions = true}}}}}, [lspconfig.fennel_ls] = {settings = {["fennel-ls"] = {["extra-globals"] = "vim"}}}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.env.VIMRUNTIME, checkThirdParty = false}}}}, [lspconfig.rust_analyzer] = {}, [lspconfig.buf_ls] = {}}
 for server, settings in pairs(server_settings) do
   server.setup(settings)
 end

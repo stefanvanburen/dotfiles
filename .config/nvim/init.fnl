@@ -194,7 +194,7 @@
 
 (deps.add :Olical/conjure)
 (set vim.g.conjure#highlight#enabled true)
-(set vim.g.conjure#filetypes [:clojure :fennel :janet :python :rust])
+(set vim.g.conjure#filetypes [:clojure :fennel :janet :rust])
 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
 (set vim.g.conjure#filetype#janet :conjure.client.janet.stdio)
 (set vim.g.conjure#mapping#doc_word false)
@@ -224,8 +224,10 @@
 (deps.add :mfussenegger/nvim-lint)
 (let [nvim-lint (require :lint)]
   ;; https://github.com/mfussenegger/nvim-lint#available-linters
-  (set nvim-lint.linters_by_ft
-       {:fish [:fish] :janet [:janet] :fennel [:fennel]})
+  (set nvim-lint.linters_by_ft {:fish [:fish]
+                                :janet [:janet]
+                                :fennel [:fennel]
+                                :python [:mypy]})
   (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)}))
 
 (deps.add {:source :williamboman/mason.nvim
@@ -590,9 +592,13 @@
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylsp
                         ;; https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
                         ;; https://github.com/python-lsp/python-lsp-server
-                        ;; https://github.com/python-lsp/pylsp-mypy
-                        ;; uv tool install --with pylsp-mypy python-lsp-server
-                        lspconfig.pylsp {:cmd [:uv :run :pylsp]
+                        ;; uv tool install python-lsp-server
+                        lspconfig.pylsp {:cmd [:uv
+                                               :tool
+                                               :run
+                                               :--from
+                                               :python-lsp-server
+                                               :pylsp]
                                          :settings {:pylsp {:plugins {:pycodestyle {:enabled false}}
                                                             :pyflakes {:enabled false}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint
