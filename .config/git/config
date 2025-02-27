@@ -78,6 +78,11 @@
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
 
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+
 ; 1Password commit signing
 ; See: https://developer.1password.com/docs/ssh/git-commit-signing/
 [gpg]
@@ -112,6 +117,7 @@
 	default = current
 	; assume --set-upstream on push when no upstream tracking exists for the current branch
 	autoSetupRemote = true
+	followTags = true
 
 [rebase]
 	; when rebasing, automatically stash the working directory and pop it when done.
@@ -136,3 +142,11 @@
 [status]
 	short = true
 	branch = true
+
+[tag]
+	; Sort treating tag names as versions.
+        sort = version:refname
+
+[column]
+	; Use the column UI when in the terminal.
+        ui = auto
