@@ -1,6 +1,6 @@
 # https://ghostty.org/docs/config
 
-theme = zenbones_light
+theme = light:zenbones_light,dark:zenbones_dark
 
 # typically configuring fonts - check ./config.fonts
 config-file = ?config.local
