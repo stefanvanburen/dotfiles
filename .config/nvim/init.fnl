@@ -71,7 +71,9 @@
             ;; ignore case when completing files / directories in wildmenu
             :wildignorecase true
             ;; Show partial off-screen results in a preview window.
-            :inccommand :split}]
+            :inccommand :split
+            ;; Use rounded borders for windows.
+            :winborder :rounded}]
   (each [opt val (pairs opts)]
     (case (type val)
       ;; vim.opt for table values, vim.o for everything else.
