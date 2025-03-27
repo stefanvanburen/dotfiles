@@ -212,7 +212,7 @@ deps.add("mcchrish/zenbones.nvim")
 deps.add("rose-pine/neovim")
 deps.add("lunacookies/vim-plan9")
 deps.add("miikanissi/modus-themes.nvim")
-vim.cmd.colorscheme("modus_operandi")
+vim.cmd.colorscheme("modus")
 vim.api.nvim_create_autocmd("VimResized", {command = ":wincmd ="})
 local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript = {expandtab = true, shiftwidth = 2}, javascriptreact = {expandtab = true, shiftwidth = 2}, typescript = {expandtab = true, shiftwidth = 2}, typescriptreact = {expandtab = true, shiftwidth = 2}, html = {expandtab = true, shiftwidth = 2}, css = {expandtab = true, shiftwidth = 2}, cs = {commentstring = "// %s"}, gohtmltmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotexttmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = {expandtab = true, shiftwidth = 2}, svg = {expandtab = true, shiftwidth = 2}, json = {expandtab = true, shiftwidth = 2}, bash = {expandtab = true, shiftwidth = 2}, python = {expandtab = true, shiftwidth = 4}, xml = {expandtab = true, shiftwidth = 4}, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, markdown = {spell = true, wrap = true, conceallevel = 0, shiftwidth = 2}}
 do
@@ -340,7 +340,7 @@ local function _32_()
 end
 map("n", "[r", _32_)
 map("n", "<C-l>", ":nohlsearch<cr>")
-vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
+vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, virtual_lines = true, underline = true, float = {border = "single", source = "always", focusable = false}})
 local function lsp_attach(_33_)
   local buf = _33_["buf"]
   local _arg_34_ = _33_["data"]
@@ -366,13 +366,7 @@ local function lsp_attach(_33_)
   end
   map("n", "gD", vim.lsp.buf.declaration, {buffer = buf})
   map("n", "gd", vim.lsp.buf.definition, {buffer = buf})
-  map("n", "gO", vim.lsp.buf.document_symbol, {buffer = buf})
-  map("n", "gri", vim.lsp.buf.implementation, {buffer = buf})
-  map("n", "grr", vim.lsp.buf.references, {buffer = buf})
-  map("n", "grt", vim.lsp.buf.type_definition, {buffer = buf})
-  map("n", "grn", vim.lsp.buf.rename, {buffer = buf})
-  map({"n", "x"}, "gra", vim.lsp.buf.code_action, {buffer = buf})
-  return map("i", "<C-s>", vim.lsp.buf.signature_help, {buffer = buf})
+  return map("n", "grt", vim.lsp.buf.type_definition, {buffer = buf})
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local lspconfig = require("lspconfig")
