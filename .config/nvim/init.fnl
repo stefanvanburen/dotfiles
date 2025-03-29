@@ -627,7 +627,9 @@
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
                         lspconfig.rust_analyzer {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
-                        lspconfig.buf_ls {}})
+                        lspconfig.buf_ls {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
+                        lspconfig.postgres_lsp {}})
 
 (each [server settings (pairs server-settings)]
   (server.setup settings))
