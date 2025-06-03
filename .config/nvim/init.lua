@@ -1,4 +1,4 @@
--- [nfnl] Compiled from init.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] init.fnl
 local path_package = (vim.fn.stdpath("data") .. "/site/")
 local mini_path = (path_package .. "pack/deps/start/mini.nvim")
 if not vim.loop.fs_stat(mini_path) then
@@ -369,10 +369,10 @@ local function lsp_attach(_33_)
   return map("n", "grt", vim.lsp.buf.type_definition, {buffer = buf})
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
-local lspconfig = require("lspconfig")
 local schemastore = require("schemastore")
-local server_settings = {[lspconfig.gopls] = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, templateExtensions = {"tpl", "tmpl"}, directoryFilters = {"-**/node_modules", "-**/vendor"}, analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, [lspconfig.jsonls] = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, [lspconfig.yamlls] = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, [lspconfig.clojure_lsp] = {}, [lspconfig.fish_lsp] = {}, [lspconfig.janet_lsp] = {}, [lspconfig.cssls] = {}, [lspconfig.ruff] = {}, [lspconfig.ts_ls] = {}, [lspconfig.pylsp] = {cmd = {"uv", "tool", "run", "--from", "python-lsp-server", "pylsp"}, settings = {pylsp = {plugins = {pycodestyle = {enabled = false}}, pyflakes = {enabled = false}}}}, [lspconfig.eslint] = {}, [lspconfig.helm_ls] = {}, [lspconfig.bashls] = {}, [lspconfig.taplo] = {}, [lspconfig.omnisharp] = {cmd = {"omnisharp"}}, [lspconfig.dockerls] = {settings = {docker = {languageserver = {formatter = {ignoreMultilineInstructions = true}}}}}, [lspconfig.fennel_ls] = {settings = {["fennel-ls"] = {["extra-globals"] = "vim"}}}, [lspconfig.lua_ls] = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.env.VIMRUNTIME, checkThirdParty = false}}}}, [lspconfig.rust_analyzer] = {}, [lspconfig.buf_ls] = {}, [lspconfig.postgres_lsp] = {}}
+local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {staticcheck = true, templateExtensions = {"tpl", "tmpl"}, directoryFilters = {"-**/node_modules", "-**/vendor"}, analyses = {unusedparams = true, unusedwrite = true, useany = true}}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, clojure_lsp = {}, fish_lsp = {}, janet_lsp = {}, cssls = {}, ruff = {}, ts_ls = {}, pylsp = {cmd = {"uv", "tool", "run", "--from", "python-lsp-server", "pylsp"}, settings = {pylsp = {plugins = {pycodestyle = {enabled = false}}, pyflakes = {enabled = false}}}}, eslint = {}, helm_ls = {}, bashls = {}, taplo = {}, omnisharp = {cmd = {"omnisharp"}}, dockerls = {settings = {docker = {languageserver = {formatter = {ignoreMultilineInstructions = true}}}}}, fennel_ls = {settings = {["fennel-ls"] = {["extra-globals"] = "vim"}}}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.env.VIMRUNTIME, checkThirdParty = false}}}}, rust_analyzer = {}, buf_ls = {}, postgres_lsp = {}}
 for server, settings in pairs(server_settings) do
-  server.setup(settings)
+  vim.lsp.config(server, settings)
+  vim.lsp.enable(server)
 end
 return nil
