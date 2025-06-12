@@ -146,7 +146,3 @@
 [tag]
 	; Sort treating tag names as versions.
         sort = version:refname
-
-[column]
-	; Use the column UI when in the terminal.
-        ui = auto
