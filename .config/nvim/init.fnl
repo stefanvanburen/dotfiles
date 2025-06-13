@@ -54,6 +54,7 @@
             :exrc true
             ;; Highlight only the number column when using cursorline.
             :cursorlineopt :number
+            :completeopt "fuzzy,menu,menuone,popup,noselect"
             ;; Convenience for automatic formatting.
             ;;   t - auto-wrap text using textwidth
             ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
