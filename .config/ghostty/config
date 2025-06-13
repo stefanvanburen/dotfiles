@@ -1,6 +1,7 @@
 # https://ghostty.org/docs/config
 
-theme = light:zenbones_light,dark:zenbones_dark
+theme = light:modus_operandi,dark:modus_vivendi
+# theme = light:zenbones_light,dark:zenbones_dark
 
 # typically configuring fonts - check ./config.fonts
 config-file = ?config.local
@@ -25,3 +26,6 @@ keybind = ctrl+f>z=toggle_split_zoom
 keybind = ctrl+f>p=write_scrollback_file:open
 
 macos-icon = glass
+
+# default: 10000000; bumped by an order of magnitude
+scrollback-limit = 100000000
