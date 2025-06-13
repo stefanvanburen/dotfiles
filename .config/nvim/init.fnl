@@ -498,7 +498,7 @@
                                        vim.diagnostic.severity.INFO "✳︎"
                                        vim.diagnostic.severity.HINT "?"}}
                         :virtual_text {:severity {:min vim.diagnostic.severity.WARN}}
-                        :virtual_lines true
+                        :virtual_lines {:current_line true}
                         :underline true
                         :float {:border :single
                                 :focusable false
