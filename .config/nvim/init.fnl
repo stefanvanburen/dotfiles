@@ -1,11 +1,11 @@
 (local path-package (.. (vim.fn.stdpath :data) :/site/))
 (local mini-path (.. path-package :pack/deps/start/mini.nvim))
-(when (not (vim.loop.fs_stat mini-path))
-  (vim.fn.system [:git
-                  :clone
-                  "--filter=blob:none"
-                  "https://github.com/echasnovski/mini.nvim"
-                  mini-path])
+(when (not (vim.uv.fs_stat mini-path))
+  (vim.system [:git
+               :clone
+               "--filter=blob:none"
+               "https://github.com/echasnovski/mini.nvim"
+               mini-path])
   (vim.cmd "packadd mini.nvim | helptags ALL"))
 
 (local deps (require :mini.deps))
@@ -227,10 +227,8 @@
 (deps.add :mfussenegger/nvim-lint)
 (let [nvim-lint (require :lint)]
   ;; https://github.com/mfussenegger/nvim-lint#available-linters
-  (set nvim-lint.linters_by_ft {:fish [:fish]
-                                :janet [:janet]
-                                :fennel [:fennel]
-                                :python [:mypy]})
+  (set nvim-lint.linters_by_ft
+       {:fish [:fish] :janet [:janet] :fennel [:fennel]})
   (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)}))
 
 (deps.add {:source :williamboman/mason.nvim
@@ -542,7 +540,9 @@
 
 (local server-settings {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
                         :gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
-                                :cmd [:gopls :-remote=auto]}
+                                :cmd [:gopls :-remote=auto]
+                                :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#semantictokens-bool
+                                                   :semanticTokens true}}}
                         ;;; https://github.com/b0o/SchemaStore.nvim#usage
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
                         :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
