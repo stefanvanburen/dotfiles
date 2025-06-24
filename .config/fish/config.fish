@@ -32,7 +32,7 @@ set -gx PYTHONDONTWRITEBYTECODE 1
 
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-set -l fzf_colors '--color=light'
+set -l fzf_colors --no-color
 set -gx FZF_DEFAULT_OPTS "$fzf_colors"
 set -gx FZF_CTRL_T_OPTS "$fzf_colors"
 
