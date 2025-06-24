@@ -25,7 +25,5 @@ keybind = ctrl+f>z=toggle_split_zoom
 # https://ghostty.org/docs/config/keybind/reference#write_scrollback_file
 keybind = ctrl+f>p=write_scrollback_file:open
 
-macos-icon = glass
-
 # default: 10000000; bumped by an order of magnitude
 scrollback-limit = 100000000
