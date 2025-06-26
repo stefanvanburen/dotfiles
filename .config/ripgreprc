@@ -16,7 +16,3 @@
 --hidden
 # exclude .git/*
 --glob=!.git/*
-
-# proto: shorter version of `--type protobuf`
---type-add
-proto:*.proto
