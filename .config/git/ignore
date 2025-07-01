@@ -40,3 +40,6 @@ __pycache__
 .nfnl.fnl
 .nvim.fnl
 .nvim.lua
+
+# Claude
+**/.claude/settings.local.json

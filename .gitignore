@@ -85,3 +85,6 @@
 /.config/kitty/kitty.conf.bak
 # kitty uses less as a pager
 /.lesshst
+
+/.claude
+/.claude.json
