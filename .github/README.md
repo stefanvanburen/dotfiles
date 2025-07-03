@@ -1,6 +1,6 @@
 # dotfiles
 
-[fish](https://fishshell.com), [neovim](https://neovim.io), [ghostty](https://ghostty.org/), [macOS](https://www.apple.com/macos/)
+[fish](https://fishshell.com), [neovim](https://neovim.io), [ghostty](https://ghostty.org/) (+ [kitty](https://sw.kovidgoyal.net/kitty/)!), [macOS](https://www.apple.com/macos/)
 
 ## Setup
 
