@@ -605,7 +605,9 @@
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
                         :postgres_lsp {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss
-                        :tailwindcss {}})
+                        :tailwindcss {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty
+                        :ty {}})
 
 (each [server settings (pairs server-settings)]
   (vim.lsp.config server settings)
