@@ -191,7 +191,7 @@
 (deps.add :fladson/vim-kitty)
 (deps.add :NoahTheDuke/vim-just)
 (deps.add :janet-lang/janet.vim)
-(deps.add :towolf/vim-helm)
+(deps.add :qvalentin/helm-ls.nvim)
 
 (deps.add :Olical/nfnl)
 
@@ -274,6 +274,7 @@
                                         :gomod
                                         :gosum
                                         :gotmpl
+                                        :helm
                                         :html
                                         :janet_simple
                                         :java
@@ -327,6 +328,12 @@
                           :css {:expandtab true :shiftwidth 2}
                           ;; C#
                           :cs {:commentstring "// %s"}
+                          :helm {:expandtab true
+                                 :shiftwidth 2
+                                 :commentstring "{{/* %s */}}"}
+                          :gotmpl {:expandtab true
+                                   :shiftwidth 2
+                                   :commentstring "{{/* %s */}}"}
                           :gohtmltmpl {:expandtab true
                                        :shiftwidth 2
                                        :commentstring "{{/* %s */}}"}
@@ -374,7 +381,6 @@
 
 (vim.filetype.add {:extension {:mdx :markdown
                                :star :starlark
-                               :tpl :gotexttmpl
                                :gotext :gotexttmpl}
                    :filename {:.ignore :gitignore
                               :.dockerignore :gitignore
