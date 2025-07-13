@@ -40,6 +40,8 @@ set -gx FZF_CTRL_T_OPTS "$fzf_colors"
 fish_add_path $XDG_BIN_HOME
 # rust
 fish_add_path ~/.cargo/bin
+# bun
+fish_add_path ~/.cache/.bun/bin
 
 # Setup homebrew environment (PATH-related variables)
 # This must be before any command checking, as it sets up the PATH.
