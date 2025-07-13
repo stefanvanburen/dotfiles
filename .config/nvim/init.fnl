@@ -334,12 +334,6 @@
                           :gotmpl {:expandtab true
                                    :shiftwidth 2
                                    :commentstring "{{/* %s */}}"}
-                          :gohtmltmpl {:expandtab true
-                                       :shiftwidth 2
-                                       :commentstring "{{/* %s */}}"}
-                          :gotexttmpl {:expandtab true
-                                       :shiftwidth 2
-                                       :commentstring "{{/* %s */}}"}
                           :fish {:expandtab true
                                  :shiftwidth 4
                                  :commentstring "# %s"}
@@ -381,7 +375,8 @@
 
 (vim.filetype.add {:extension {:mdx :markdown
                                :star :starlark
-                               :gotext :gotexttmpl}
+                               :gotext :gotmpl
+                               :gotmpl :gotmpl}
                    :filename {:.ignore :gitignore
                               :.dockerignore :gitignore
                               :buf.lock :yaml
