@@ -566,18 +566,6 @@
                         :ruff {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
                         :ts_ls {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylsp
-                        ;; https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-                        ;; https://github.com/python-lsp/python-lsp-server
-                        ;; uv tool install python-lsp-server
-                        :pylsp {:cmd [:uv
-                                      :tool
-                                      :run
-                                      :--from
-                                      :python-lsp-server
-                                      :pylsp]
-                                :settings {:pylsp {:plugins {:pycodestyle {:enabled false}}
-                                                   :pyflakes {:enabled false}}}}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint
                         :eslint {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
