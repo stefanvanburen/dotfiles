@@ -123,9 +123,6 @@
   (map :x :S ":<C-U>lua MiniSurround.add('visual')<CR>" {:silent true})
   (map :n :yss :ys_ {:remap true}))
 
-(let [mini-indentscope (require :mini.indentscope)]
-  (mini-indentscope.setup))
-
 (let [mini-pick (require :mini.pick)]
   (mini-pick.setup)
   (map :n :<leader>ff mini-pick.builtin.files)

@@ -58,10 +58,6 @@ do
   map("n", "yss", "ys_", {remap = true})
 end
 do
-  local mini_indentscope = require("mini.indentscope")
-  mini_indentscope.setup()
-end
-do
   local mini_pick = require("mini.pick")
   mini_pick.setup()
   map("n", "<leader>ff", mini_pick.builtin.files)
