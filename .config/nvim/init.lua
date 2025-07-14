@@ -119,6 +119,10 @@ deps.add("andymass/vim-matchup")
 vim.g.matchup_matchparen_offscreen = {method = "popup"}
 deps.add("tpope/vim-abolish")
 deps.add("rktjmp/paperplanes.nvim")
+do
+  local paperplanes = require("paperplanes")
+  paperplanes.setup({provider = "gist"})
+end
 deps.add("rktjmp/lush.nvim")
 deps.add("lewis6991/fileline.nvim")
 deps.add("tpope/vim-fugitive")
