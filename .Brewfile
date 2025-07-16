@@ -14,6 +14,9 @@ brew "gh"
 brew "git"
 # Latest version of go - for tool binaries
 brew "go"
+# JSON objects in the shell
+# https://github.com/jpmens/jo
+brew "jo"
 # jumping around - bound to `z` in fish.
 brew "jump"
 # project-specific commands - abbreviated to `j` in fish.
