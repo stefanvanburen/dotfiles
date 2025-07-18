@@ -440,7 +440,8 @@
 
 ;; edit config files
 (each [keymap file (pairs {:<leader>ef :$HOME/.config/fish/config.fish
-                           :<leader>eg :$HOME/.config/git/config
+                           :<leader>egi :$HOME/.config/git/config
+                           :<leader>ego :$HOME/.config/ghostty/config
                            :<leader>ek :$HOME/.config/kitty/kitty.conf
                            :<leader>ev :$HOME/.config/nvim/init.fnl})]
   (map :n keymap #(vim.cmd {:cmd :edit :args [file]})))
