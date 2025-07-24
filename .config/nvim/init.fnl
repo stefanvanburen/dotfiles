@@ -316,7 +316,20 @@
 (deps.add :rose-pine/neovim)
 (deps.add :lunacookies/vim-plan9)
 (deps.add :miikanissi/modus-themes.nvim)
-(vim.cmd.colorscheme :modus)
+;; Change colorscheme based on the month
+(match (vim.fn.strftime "%m")
+  :01 (vim.cmd.colorscheme :miniwinter)
+  :02 (vim.cmd.colorscheme :miniwinter)
+  :03 (vim.cmd.colorscheme :minispring)
+  :04 (vim.cmd.colorscheme :minispring)
+  :05 (vim.cmd.colorscheme :minispring)
+  :06 (vim.cmd.colorscheme :minisummer)
+  :07 (vim.cmd.colorscheme :minisummer)
+  :08 (vim.cmd.colorscheme :minisummer)
+  :09 (vim.cmd.colorscheme :miniautumn)
+  :10 (vim.cmd.colorscheme :miniautumn)
+  :11 (vim.cmd.colorscheme :miniautumn)
+  :12 (vim.cmd.colorscheme :miniwinter))
 
 ;;; Autocommands and FileType settings
 
