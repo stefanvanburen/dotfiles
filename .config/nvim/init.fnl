@@ -89,7 +89,9 @@
 
 ;; mini-basics should be first, to set up mappings like <Leader>
 (let [mini-basics (require :mini.basics)]
-  (mini-basics.setup))
+  (mini-basics.setup {;; mappings override the default g0 and <C-S> from :h lsp-defaults
+                      ;; for now, skip them.
+                      :mappings {:basic false}}))
 
 ;; <leader> mappings shouldn't be set up until now.
 (local map vim.keymap.set)
@@ -131,10 +133,11 @@
   (map :n :<leader>fh mini-pick.builtin.help))
 
 (let [mini-extra (require :mini.extra)]
-  (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol}))
-  (map :n :<leader>fr #(mini-extra.pickers.lsp {:scope :references}))
   (map :n :<leader>fd mini-extra.pickers.diagnostic)
-  (map :n :<leader>fg mini-extra.pickers.git_files))
+  (map :n :<leader>fg mini-extra.pickers.git_files)
+  (map :n :<leader>fm mini-extra.pickers.keymaps)
+  (map :n :<leader>fo mini-extra.pickers.options)
+  (map :n :<leader>fc mini-extra.pickers.colorschemes))
 
 (let [mini-completion (require :mini.completion)]
   (mini-completion.setup))
@@ -498,7 +501,6 @@
                                        vim.diagnostic.severity.INFO "✳︎"
                                        vim.diagnostic.severity.HINT "?"}}
                         :virtual_text {:severity {:min vim.diagnostic.severity.WARN}}
-                        :virtual_lines {:current_line true}
                         :underline true
                         :float {:border :single
                                 :focusable false
@@ -510,7 +512,7 @@
   (local client (vim.lsp.get_client_by_id client_id))
 
   (fn goimports []
-    ;; https://github.com/golang/tools/blob/master/gopls/doc/vim.md#imports-and-formatting
+    ;; https://github.com/golang/tools/blob/master/gopls/doc/editor/vim.md#imports-and-formatting
     (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
                               :apply true})
     (vim.lsp.buf.format))
