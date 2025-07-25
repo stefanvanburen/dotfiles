@@ -1,0 +1,5 @@
+# https://just.systems
+
+[private]
+@default:
+    just --list

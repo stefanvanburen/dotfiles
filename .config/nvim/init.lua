@@ -223,7 +223,7 @@ do
   end
 end
 vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl"}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.lock"] = "yaml", ["uv.lock"] = "toml"}})
-for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl"}) do
+for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl", justfile = "justfile"}) do
   vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
 do
