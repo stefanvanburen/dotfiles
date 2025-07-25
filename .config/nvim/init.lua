@@ -16,7 +16,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.maplocalleader = ","
 do
-  local opts = {foldmethod = "indent", foldlevelstart = 99, breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp", title = true, updatetime = 300, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
+  local opts = {foldmethod = "expr", foldlevelstart = 99, foldexpr = "vim.treesitter.foldexpr()", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp", title = true, updatetime = 300, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
   for opt, val in pairs(opts) do
     local _2_ = type(val)
     if (_2_ == "table") then
@@ -187,8 +187,6 @@ end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _10_}})
 do
   local treesitter = require("nvim-treesitter.configs")
-  vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-  vim.o.foldmethod = "expr"
   treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, incremental_selection = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "helm", "html", "janet_simple", "java", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "starlark", "textproto", "toml", "xml", "yaml", "zig"}})
 end
 do

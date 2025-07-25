@@ -27,10 +27,11 @@
 ;; LocalLeader is the comma key
 (set vim.g.maplocalleader ",")
 
-(let [opts {;; setup folding
-            :foldmethod :indent
+(let [opts {:foldmethod :expr
             ;; Start with all folds open.
             :foldlevelstart 99
+            ;; https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#folding
+            :foldexpr "vim.treesitter.foldexpr()"
             ;; on lines that will wrap, they instead 'break' and be visually indented by
             ;; the showbreak character, followed by the indent.
             :breakindentopt {:shift 2 :sbr true}
@@ -248,8 +249,6 @@
            :hooks {:post_checkout (fn [] (vim.cmd ":TSUpdate"))}})
 
 (let [treesitter (require :nvim-treesitter.configs)]
-  (set vim.o.foldexpr "nvim_treesitter#foldexpr()")
-  (set vim.o.foldmethod :expr)
   (treesitter.setup {:highlight {:enable true}
                      ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
                      :matchup {:enable true}
