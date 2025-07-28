@@ -541,9 +541,9 @@
 (local schemastore (require :schemastore))
 
 (local server-settings {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
-                        :gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
+                        :gopls {;; https://go.dev/gopls/daemon
                                 :cmd [:gopls :-remote=auto]
-                                :settings {:gopls {;; https://github.com/golang/tools/blob/master/gopls/doc/settings.md#semantictokens-bool
+                                :settings {:gopls {;; https://go.dev/gopls/settings#semantictokens-bool
                                                    :semanticTokens true}}}
                         ;;; https://github.com/b0o/SchemaStore.nvim#usage
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
