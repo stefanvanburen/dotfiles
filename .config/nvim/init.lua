@@ -131,7 +131,6 @@ local function _5_()
 end
 map("n", "<leader>db", _5_)
 deps.add("fladson/vim-kitty")
-deps.add("NoahTheDuke/vim-just")
 deps.add("janet-lang/janet.vim")
 deps.add("qvalentin/helm-ls.nvim")
 deps.add("Olical/nfnl")
@@ -157,7 +156,7 @@ deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
 do
   local conform = require("conform")
-  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {lsp_format = "fallback"}, just = {"just"}, proto = {lsp_format = "fallback"}, python = {lsp_format = "fallback"}}, format_on_save = {timeout_ms = 5000}})
+  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {lsp_format = "fallback"}, proto = {lsp_format = "fallback"}, python = {lsp_format = "fallback"}}, format_on_save = {timeout_ms = 5000}})
 end
 deps.add("mfussenegger/nvim-lint")
 do
