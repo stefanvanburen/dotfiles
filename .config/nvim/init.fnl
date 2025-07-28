@@ -222,8 +222,7 @@
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
                                      :go {:lsp_format :fallback}
-                                     :proto {:lsp_format :fallback}
-                                     :python {:lsp_format :fallback}}
+                                     :proto {:lsp_format :fallback}}
                   :format_on_save {:timeout_ms 5000}}))
 
 (deps.add :mfussenegger/nvim-lint)
@@ -509,16 +508,17 @@
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
 
-  (fn goimports []
+  (fn format-and-fix-imports []
     ;; https://github.com/golang/tools/blob/master/gopls/doc/editor/vim.md#imports-and-formatting
     (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
                               :apply true})
     (vim.lsp.buf.format))
 
-  ;; Only enable formatting for gopls.
+  ;; Only enable formatting for gopls and ruff.
   (when (and (client:supports_method :textDocument/formatting)
-             (= client.name :gopls))
-    (vim.api.nvim_create_autocmd :BufWritePre {:buffer buf :callback goimports}))
+             (or (= client.name :gopls) (= client.name :ruff)))
+    (vim.api.nvim_create_autocmd :BufWritePre
+                                 {:buffer buf :callback format-and-fix-imports}))
   (when (client:supports_method :textDocument/inlayHint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/documentHighlight)

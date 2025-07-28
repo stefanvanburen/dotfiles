@@ -156,7 +156,7 @@ deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
 do
   local conform = require("conform")
-  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {lsp_format = "fallback"}, proto = {lsp_format = "fallback"}, python = {lsp_format = "fallback"}}, format_on_save = {timeout_ms = 5000}})
+  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, go = {lsp_format = "fallback"}, proto = {lsp_format = "fallback"}}, format_on_save = {timeout_ms = 5000}})
 end
 deps.add("mfussenegger/nvim-lint")
 do
@@ -338,12 +338,12 @@ local function lsp_attach(_31_)
   local _arg_32_ = _31_["data"]
   local client_id = _arg_32_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
-  local function goimports()
+  local function format_and_fix_imports()
     vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     return vim.lsp.buf.format()
   end
-  if (client:supports_method("textDocument/formatting") and (client.name == "gopls")) then
-    vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = goimports})
+  if (client:supports_method("textDocument/formatting") and ((client.name == "gopls") or (client.name == "ruff"))) then
+    vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = format_and_fix_imports})
   else
   end
   if client:supports_method("textDocument/inlayHint") then
