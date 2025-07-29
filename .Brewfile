@@ -1,11 +1,15 @@
 # These formula are the absolute base for my macOS environment.
 
+# For fish_greeting
+brew "boxes"
 # Maintained version of `exa`, a replacement for `ls`.
 brew "eza"
 # Find files - used by `fzf` in fish.
 brew "fd"
 # My default shell
 brew "fish"
+# For fish_greeting
+brew "fortune"
 # Fuzzy finding, for fish.
 brew "fzf"
 # Interacting with GitHub via the CLI - configured in ~/.config/gh/config.yml.
