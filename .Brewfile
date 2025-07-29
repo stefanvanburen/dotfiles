@@ -27,7 +27,6 @@ brew "jump"
 brew "just"
 # $EDITOR
 brew "neovim"
-brew "pipx"
 # better searching - configured in ~/.config/ripgreprc.
 brew "ripgrep"
 # install and run python tools
