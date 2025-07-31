@@ -1,21 +1,29 @@
--- https://www.postgresql.org/docs/current/app-psql.html
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-FILES-PSQLRC
 
 -- Outline table borders and separators using Unicode characters
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMAND-PSET-LINESTYLE
 \pset linestyle unicode
 
 -- Use this character to display null results.
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMAND-PSET-NULL
 \pset null '¤'
 
 -- Always show query time
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMAND-TIMING
 \timing
 
 -- output any SQL run by psql slash commands
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-VARIABLES-ECHO-HIDDEN
 \set ECHO_HIDDEN on
 
 -- Create a prompt with host, database name, date, and time
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-PROMPTING
 \set PROMPT1 '%m@%/ %`date "+%Y-%m-%d %H:%M:%S"` $ '
 
+-- Complete keywords to UPPERCASE.
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-VARIABLES-COMP-KEYWORD-CASE
 \set COMP_KEYWORD_CASE upper
 
 -- Use expanded display automatically in small terminals.
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMAND-X
 \x auto
