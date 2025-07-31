@@ -43,3 +43,6 @@ __pycache__
 
 # Claude
 **/.claude/settings.local.json
+
+# https://github.com/charmbracelet/crush
+.crush
