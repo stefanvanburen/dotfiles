@@ -580,8 +580,8 @@
                         ;; NOTE: Download omnisharp with mason.
                         :omnisharp {:cmd [:omnisharp]}
                         ;; Dockerfiles
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls
-                        :dockerls {:settings {:docker {:languageserver {:formatter {:ignoreMultilineInstructions true}}}}}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#docker_language_server
+                        :docker_language_server {}
                         ;; https://sr.ht/~xerool/fennel-ls/
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
                         :fennel_ls {:settings {:fennel-ls {:extra-globals :vim}}}
