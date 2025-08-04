@@ -584,7 +584,8 @@
                         :docker_language_server {}
                         ;; https://sr.ht/~xerool/fennel-ls/
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
-                        :fennel_ls {:settings {:fennel-ls {:extra-globals :vim}}}
+                        ;; See ./flsproject.fnl for configuration.
+                        :fennel_ls {}
                         ;; LSP for Lua.
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
                         :lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
