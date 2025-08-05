@@ -88,3 +88,7 @@
 
 /.claude
 /.claude.json
+
+# https://git.sr.ht/~delthas/senpai
+# Contains sensitive information (passwords).
+/.config/senpai/senpai.scfg
