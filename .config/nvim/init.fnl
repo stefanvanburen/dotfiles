@@ -143,6 +143,9 @@
 (let [mini-completion (require :mini.completion)]
   (mini-completion.setup))
 
+(let [mini-colors (require :mini.colors)]
+  (mini-colors.setup))
+
 (let [mini-bracketed (require :mini.bracketed)]
   (mini-bracketed.setup))
 
