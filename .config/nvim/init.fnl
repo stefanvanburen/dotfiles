@@ -566,14 +566,8 @@
                         :fish_lsp {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
                         :janet_lsp {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls
-                        :cssls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff
                         :ruff {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
-                        :ts_ls {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint
-                        :eslint {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
                         :helm_ls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
