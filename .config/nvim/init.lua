@@ -78,6 +78,10 @@ do
   mini_completion.setup()
 end
 do
+  local mini_colors = require("mini.colors")
+  mini_colors.setup()
+end
+do
   local mini_bracketed = require("mini.bracketed")
   mini_bracketed.setup()
 end
