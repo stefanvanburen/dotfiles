@@ -548,6 +548,8 @@
                                 :cmd [:gopls :-remote=auto]
                                 :settings {:gopls {;; https://go.dev/gopls/settings#semantictokens-bool
                                                    :semanticTokens true}}}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#golangci_lint_ls
+                        :golangci_lint_ls {}
                         ;;; https://github.com/b0o/SchemaStore.nvim#usage
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
                         :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
