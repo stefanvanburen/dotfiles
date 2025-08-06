@@ -146,6 +146,9 @@
 (let [mini-colors (require :mini.colors)]
   (mini-colors.setup))
 
+(let [mini-hipatterns (require :mini.hipatterns)]
+  (mini-hipatterns.setup {:highlighters {:hex_color (mini-hipatterns.gen_highlighter.hex_color)}}))
+
 (let [mini-bracketed (require :mini.bracketed)]
   (mini-bracketed.setup))
 

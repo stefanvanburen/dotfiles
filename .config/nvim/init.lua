@@ -82,6 +82,10 @@ do
   mini_colors.setup()
 end
 do
+  local mini_hipatterns = require("mini.hipatterns")
+  mini_hipatterns.setup({highlighters = {hex_color = mini_hipatterns.gen_highlighter.hex_color()}})
+end
+do
   local mini_bracketed = require("mini.bracketed")
   mini_bracketed.setup()
 end
