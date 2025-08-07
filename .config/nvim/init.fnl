@@ -215,6 +215,11 @@
 
 (deps.add :vim-test/vim-test)
 (set vim.g.test#strategy :neovim_sticky)
+;; reopen the buffer if it's already open
+(set vim.g.test#neovim_sticky#reopen_window 1)
+;; use a little less vertical space; 30% instead of 50% is good.
+;; horizontal is easier to view than vertical.
+(set vim.g.test#neovim#term_position "horizontal 30")
 (map :n :<leader>tt #(vim.cmd {:cmd :TestNearest}))
 (map :n :<leader>tf #(vim.cmd {:cmd :TestFile}))
 

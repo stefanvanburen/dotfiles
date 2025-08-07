@@ -151,6 +151,8 @@ vim.g["conjure#mapping#doc_word"] = false
 deps.add("gpanders/nvim-parinfer")
 deps.add("vim-test/vim-test")
 vim.g["test#strategy"] = "neovim_sticky"
+vim.g["test#neovim_sticky#reopen_window"] = 1
+vim.g["test#neovim#term_position"] = "horizontal 30"
 local function _6_()
   return vim.cmd({cmd = "TestNearest"})
 end
