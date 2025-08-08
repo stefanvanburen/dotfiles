@@ -237,10 +237,16 @@
                   :format_on_save {:timeout_ms 5000}}))
 
 (deps.add :mfussenegger/nvim-lint)
-(let [nvim-lint (require :lint)]
-  ;; https://github.com/mfussenegger/nvim-lint#available-linters
-  (set nvim-lint.linters_by_ft
-       {:fish [:fish] :janet [:janet] :fennel [:fennel]})
+(let [nvim-lint (require :lint)
+      ;; https://github.com/mfussenegger/nvim-lint#available-linters
+      linters (collect [k v (pairs {:fish [:fish]
+                                    :janet [:janet]
+                                    :go [:golangcilint]
+                                    :fennel [:fennel]})]
+                (values k
+                        (icollect [_ v (ipairs v)]
+                          (if (= 1 (vim.fn.executable v)) v))))]
+  (set nvim-lint.linters_by_ft linters)
   (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)}))
 
 (deps.add {:source :williamboman/mason.nvim
@@ -556,8 +562,6 @@
                                 :cmd [:gopls :-remote=auto]
                                 :settings {:gopls {;; https://go.dev/gopls/settings#semantictokens-bool
                                                    :semanticTokens true}}}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#golangci_lint_ls
-                        :golangci_lint_ls {}
                         ;;; https://github.com/b0o/SchemaStore.nvim#usage
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
                         :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
