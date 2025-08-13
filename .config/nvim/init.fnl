@@ -255,17 +255,18 @@
   (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)}))
 
 (deps.add {:source :williamboman/mason.nvim
-           :hooks {:post_checkout (fn [] (vim.cmd ":MasonUpdate"))}})
+           :hooks {:post_checkout #(vim.cmd ":MasonUpdate")}})
 
 (let [mason (require :mason)]
   (mason.setup))
 
 (deps.add :williamboman/mason-lspconfig.nvim)
 (let [mason-lspconfig (require :mason-lspconfig)]
+  ;; NOTE: Will enable Mason-installed LSP servers by default.
   (mason-lspconfig.setup))
 
 (deps.add {:source :nvim-treesitter/nvim-treesitter
-           :hooks {:post_checkout (fn [] (vim.cmd ":TSUpdate"))}})
+           :hooks {:post_checkout #(vim.cmd ":TSUpdate")}})
 
 (let [treesitter (require :nvim-treesitter.configs)]
   (treesitter.setup {:highlight {:enable true}
