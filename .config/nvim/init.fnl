@@ -108,7 +108,7 @@
 
 (let [mini-trailspace (require :mini.trailspace)]
   (mini-trailspace.setup)
-  (map :n :<leader>sw mini-trailspace.trim))
+  (map :n :<leader>sw mini-trailspace.trim {:desc "Strip whitespace"}))
 
 (let [mini-surround (require :mini.surround)]
   ;; vim-surround mappings - :help MiniSurround-vim-surround-config
@@ -128,17 +128,18 @@
 
 (let [mini-pick (require :mini.pick)]
   (mini-pick.setup)
-  (map :n :<leader>ff mini-pick.builtin.files)
-  (map :n :<leader>fb mini-pick.builtin.buffers)
-  (map :n :<leader>fl mini-pick.builtin.grep_live)
-  (map :n :<leader>fh mini-pick.builtin.help))
+  (map :n :<leader>ff mini-pick.builtin.files {:desc "Pick files"})
+  (map :n :<leader>fb mini-pick.builtin.buffers {:desc "Pick buffers"})
+  (map :n :<leader>fl mini-pick.builtin.grep_live {:desc "Pick lines"})
+  (map :n :<leader>fh mini-pick.builtin.help {:desc "Pick help"}))
 
 (let [mini-extra (require :mini.extra)]
-  (map :n :<leader>fd mini-extra.pickers.diagnostic)
-  (map :n :<leader>fg mini-extra.pickers.git_files)
-  (map :n :<leader>fm mini-extra.pickers.keymaps)
-  (map :n :<leader>fo mini-extra.pickers.options)
-  (map :n :<leader>fc mini-extra.pickers.colorschemes))
+  (map :n :<leader>fd mini-extra.pickers.diagnostic {:desc "Pick diagnostics"})
+  (map :n :<leader>fg mini-extra.pickers.git_files {:desc "Pick git files"})
+  (map :n :<leader>fm mini-extra.pickers.keymaps {:desc "Pick keymaps"})
+  (map :n :<leader>fo mini-extra.pickers.options {:desc "Pick options"})
+  (map :n :<leader>fc mini-extra.pickers.colorschemes
+       {:desc "Pick colorschemes"}))
 
 (let [mini-completion (require :mini.completion)]
   (mini-completion.setup))
@@ -154,7 +155,9 @@
 
 (let [mini-files (require :mini.files)]
   (mini-files.setup {:mappings {:go_in_plus :<CR>}})
-  (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0) false)))
+  ;; TODO: Make this work in a new buffer.
+  (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0) false)
+       {:desc "Open the file picker from the current file"}))
 
 (let [mini-notify (require :mini.notify)]
   (mini-notify.setup {:lsp_progress {:enable false}}))
@@ -195,7 +198,8 @@
 ;; vim-dispatch is a dependency of vim-dadbod.
 (deps.add :tpope/vim-dispatch)
 ;; Set DATABASE_URL in the environment to access the configured database via dadbod.
-(map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]}))
+(map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]})
+     {:desc "Open dadbod to the current $DATABASE_URL"})
 
 ;; Filetype-specific plugins
 (deps.add :fladson/vim-kitty)
@@ -220,8 +224,9 @@
 ;; use a little less vertical space; 30% instead of 50% is good.
 ;; horizontal is easier to view than vertical.
 (set vim.g.test#neovim#term_position "horizontal 30")
-(map :n :<leader>tt #(vim.cmd {:cmd :TestNearest}))
-(map :n :<leader>tf #(vim.cmd {:cmd :TestFile}))
+(map :n :<leader>tt #(vim.cmd {:cmd :TestNearest}) {:desc "Run nearest test"})
+(map :n :<leader>tf #(vim.cmd {:cmd :TestFile})
+     {:desc "Run all tests in the file"})
 
 (deps.add :neovim/nvim-lspconfig)
 
@@ -439,11 +444,15 @@
 (map :n ";" ":")
 
 ;; Fugitive
-(map :n :<leader>gs #(vim.cmd {:cmd :Git :mods {:vertical true}}))
-(map :n :<leader>gw #(vim.cmd {:cmd :Gwrite}))
-(map :n :<leader>gc #(vim.cmd {:cmd :Git :args [:commit]}))
-(map :n :<leader>gp #(vim.cmd {:cmd :Git :args [:push]}))
-(map :n :<leader>gb #(vim.cmd {:cmd :Git :args [:blame]}))
+(map :n :<leader>gs #(vim.cmd {:cmd :Git :mods {:vertical true}})
+     {:desc "Open :Git in a vertical split"})
+
+(map :n :<leader>gw #(vim.cmd {:cmd :Gwrite}) {:desc ":Gwrite"})
+(map :n :<leader>gc #(vim.cmd {:cmd :Git :args [:commit]})
+     {:desc ":Git commit"})
+
+(map :n :<leader>gp #(vim.cmd {:cmd :Git :args [:push]}) {:desc ":Git push"})
+(map :n :<leader>gb #(vim.cmd {:cmd :Git :args [:blame]}) {:desc ":Git blame"})
 
 ;; move by visual lines instead of real lines, except when a count is provided,
 ;; which helps when targeting a specific line with `relativenumber`.
@@ -453,7 +462,8 @@
 ;; Navigate between matching brackets
 ;; These specifically `remap` because we want to be bound to whatever % is
 ;; (currently vim-matchup).
-(map [:n :v] :<tab> "%" {:remap true})
+(map [:n :v] :<tab> "%"
+     {:remap true :desc "Navigate between matching brackets"})
 
 ;; edit config files
 (each [keymap file (pairs {:<leader>ef :$HOME/.config/fish/config.fish
@@ -461,22 +471,29 @@
                            :<leader>ego :$HOME/.config/ghostty/config
                            :<leader>ek :$HOME/.config/kitty/kitty.conf
                            :<leader>ev :$HOME/.config/nvim/init.fnl})]
-  (map :n keymap #(vim.cmd {:cmd :edit :args [file]})))
+  (map :n keymap #(vim.cmd {:cmd :edit :args [file]})
+       {:desc (.. ":edit " file)}))
 
-(map :n :<leader>w #(vim.cmd {:cmd :write}))
-(map :n :<leader>cl #(vim.cmd {:cmd :close}))
-(map :n :<leader>ss #(vim.cmd {:cmd :split}))
-(map :n :<leader>vs #(vim.cmd {:cmd :vsplit}))
+(map :n :<leader>w #(vim.cmd {:cmd :write})
+     {:desc ":write the buffer to the file"})
+
+(map :n :<leader>cl #(vim.cmd {:cmd :close})
+     {:desc ":close the current window"})
+
+(map :n :<leader>ss #(vim.cmd {:cmd :split})
+     {:desc "Create a horizontal split"})
+
+(map :n :<leader>vs #(vim.cmd {:cmd :vsplit}) {:desc "Create a vertical split"})
 
 ;; Use Q to repeat last macro, rather than going into ex mode
-(map :n :Q "@@")
+(map :n :Q "@@" {:desc "Repeat last macro"})
 
 ;; Swap the behavior of the ^ and 0 operators
 ;; ^ Usually goes to the first non-whitespace character, while 0 goes to the
 ;; first column in the line. ^ is more useful, but harder to hit, so swap it
 ;; with 0
-(map :n :0 "^")
-(map :n "^" :0)
+(map :n :0 "^" {:desc "Go to first non-whitespace character"})
+(map :n "^" :0 {:desc "Go to first column in the line"})
 
 ;; always center the screen after any movement command
 (map :n :<C-d> :<C-d>zz)
@@ -502,9 +519,9 @@
 (map :t :<c-k> "<c-\\><c-n>")
 
 ;; tab commands.
-(map :n :<leader>tn #(vim.cmd {:cmd :tabnew}))
-(map :n "]r" #(vim.cmd {:cmd :tabnext}))
-(map :n "[r" #(vim.cmd {:cmd :tabprev}))
+(map :n :<leader>tn #(vim.cmd {:cmd :tabnew}) {:desc "Create a new tab"})
+(map :n "]r" #(vim.cmd {:cmd :tabnext}) {:desc "Go to next tab"})
+(map :n "[r" #(vim.cmd {:cmd :tabprev}) {:desc "Go to prev tab"})
 
 (map :n :<C-l> ":nohlsearch<cr>")
 
@@ -549,9 +566,10 @@
                                    {:group augroup-id
                                     :buffer buf
                                     :callback vim.lsp.buf.clear_references})))
-  (map :n :gD vim.lsp.buf.declaration {:buffer buf})
-  (map :n :gd vim.lsp.buf.definition {:buffer buf})
-  (map :n :grt vim.lsp.buf.type_definition {:buffer buf}))
+  (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"})
+  (map :n :gd vim.lsp.buf.definition {:buffer buf :desc "Go to definition"})
+  (map :n :grt vim.lsp.buf.type_definition
+       {:buffer buf :desc "Go to type definition"}))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})
 

@@ -48,7 +48,7 @@ end
 do
   local mini_trailspace = require("mini.trailspace")
   mini_trailspace.setup()
-  map("n", "<leader>sw", mini_trailspace.trim)
+  map("n", "<leader>sw", mini_trailspace.trim, {desc = "Strip whitespace"})
 end
 do
   local mini_surround = require("mini.surround")
@@ -60,18 +60,18 @@ end
 do
   local mini_pick = require("mini.pick")
   mini_pick.setup()
-  map("n", "<leader>ff", mini_pick.builtin.files)
-  map("n", "<leader>fb", mini_pick.builtin.buffers)
-  map("n", "<leader>fl", mini_pick.builtin.grep_live)
-  map("n", "<leader>fh", mini_pick.builtin.help)
+  map("n", "<leader>ff", mini_pick.builtin.files, {desc = "Pick files"})
+  map("n", "<leader>fb", mini_pick.builtin.buffers, {desc = "Pick buffers"})
+  map("n", "<leader>fl", mini_pick.builtin.grep_live, {desc = "Pick lines"})
+  map("n", "<leader>fh", mini_pick.builtin.help, {desc = "Pick help"})
 end
 do
   local mini_extra = require("mini.extra")
-  map("n", "<leader>fd", mini_extra.pickers.diagnostic)
-  map("n", "<leader>fg", mini_extra.pickers.git_files)
-  map("n", "<leader>fm", mini_extra.pickers.keymaps)
-  map("n", "<leader>fo", mini_extra.pickers.options)
-  map("n", "<leader>fc", mini_extra.pickers.colorschemes)
+  map("n", "<leader>fd", mini_extra.pickers.diagnostic, {desc = "Pick diagnostics"})
+  map("n", "<leader>fg", mini_extra.pickers.git_files, {desc = "Pick git files"})
+  map("n", "<leader>fm", mini_extra.pickers.keymaps, {desc = "Pick keymaps"})
+  map("n", "<leader>fo", mini_extra.pickers.options, {desc = "Pick options"})
+  map("n", "<leader>fc", mini_extra.pickers.colorschemes, {desc = "Pick colorschemes"})
 end
 do
   local mini_completion = require("mini.completion")
@@ -95,7 +95,7 @@ do
   local function _4_()
     return mini_files.open(vim.api.nvim_buf_get_name(0), false)
   end
-  map("n", "-", _4_)
+  map("n", "-", _4_, {desc = "Open the file picker from the current file"})
 end
 do
   local mini_notify = require("mini.notify")
@@ -137,7 +137,7 @@ deps.add("tpope/vim-dispatch")
 local function _5_()
   return vim.cmd({cmd = "DB", args = {"$DATABASE_URL"}})
 end
-map("n", "<leader>db", _5_)
+map("n", "<leader>db", _5_, {desc = "Open dadbod to the current $DATABASE_URL"})
 deps.add("fladson/vim-kitty")
 deps.add("janet-lang/janet.vim")
 deps.add("qvalentin/helm-ls.nvim")
@@ -156,11 +156,11 @@ vim.g["test#neovim#term_position"] = "horizontal 30"
 local function _6_()
   return vim.cmd({cmd = "TestNearest"})
 end
-map("n", "<leader>tt", _6_)
+map("n", "<leader>tt", _6_, {desc = "Run nearest test"})
 local function _7_()
   return vim.cmd({cmd = "TestFile"})
 end
-map("n", "<leader>tf", _7_)
+map("n", "<leader>tf", _7_, {desc = "Run all tests in the file"})
 deps.add("neovim/nvim-lspconfig")
 deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
@@ -289,23 +289,23 @@ map("n", ";", ":")
 local function _18_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _18_)
+map("n", "<leader>gs", _18_, {desc = "Open :Git in a vertical split"})
 local function _19_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _19_)
+map("n", "<leader>gw", _19_, {desc = ":Gwrite"})
 local function _20_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _20_)
+map("n", "<leader>gc", _20_, {desc = ":Git commit"})
 local function _21_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _21_)
+map("n", "<leader>gp", _21_, {desc = ":Git push"})
 local function _22_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _22_)
+map("n", "<leader>gb", _22_, {desc = ":Git blame"})
 local function _23_()
   if (vim.v.count ~= 0) then
     return "j"
@@ -322,32 +322,32 @@ local function _25_()
   end
 end
 map({"n", "v"}, "k", _25_, {expr = true})
-map({"n", "v"}, "<tab>", "%", {remap = true})
+map({"n", "v"}, "<tab>", "%", {remap = true, desc = "Navigate between matching brackets"})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>egi"] = "$HOME/.config/git/config", ["<leader>ego"] = "$HOME/.config/ghostty/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
   local function _27_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _27_)
+  map("n", keymap, _27_, {desc = (":edit " .. file)})
 end
 local function _28_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _28_)
+map("n", "<leader>w", _28_, {desc = ":write the buffer to the file"})
 local function _29_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _29_)
+map("n", "<leader>cl", _29_, {desc = ":close the current window"})
 local function _30_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _30_)
+map("n", "<leader>ss", _30_, {desc = "Create a horizontal split"})
 local function _31_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _31_)
-map("n", "Q", "@@")
-map("n", "0", "^")
-map("n", "^", "0")
+map("n", "<leader>vs", _31_, {desc = "Create a vertical split"})
+map("n", "Q", "@@", {desc = "Repeat last macro"})
+map("n", "0", "^", {desc = "Go to first non-whitespace character"})
+map("n", "^", "0", {desc = "Go to first column in the line"})
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-f>", "<C-f>zz")
 map("n", "<C-b>", "<C-b>zz")
@@ -363,15 +363,15 @@ map("t", "<c-k>", "<c-\\><c-n>")
 local function _32_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _32_)
+map("n", "<leader>tn", _32_, {desc = "Create a new tab"})
 local function _33_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _33_)
+map("n", "]r", _33_, {desc = "Go to next tab"})
 local function _34_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _34_)
+map("n", "[r", _34_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>")
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
 local function lsp_attach(_35_)
@@ -397,9 +397,9 @@ local function lsp_attach(_35_)
     vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
   else
   end
-  map("n", "gD", vim.lsp.buf.declaration, {buffer = buf})
-  map("n", "gd", vim.lsp.buf.definition, {buffer = buf})
-  return map("n", "grt", vim.lsp.buf.type_definition, {buffer = buf})
+  map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})
+  map("n", "gd", vim.lsp.buf.definition, {buffer = buf, desc = "Go to definition"})
+  return map("n", "grt", vim.lsp.buf.type_definition, {buffer = buf, desc = "Go to type definition"})
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local schemastore = require("schemastore")
