@@ -155,9 +155,11 @@
 
 (let [mini-files (require :mini.files)]
   (mini-files.setup {:mappings {:go_in_plus :<CR>}})
-  ;; TODO: Make this work in a new buffer.
-  (map :n "-" #(mini-files.open (vim.api.nvim_buf_get_name 0) false)
-       {:desc "Open the file picker from the current file"}))
+  (map :n "-" #(let [buf-name (vim.api.nvim_buf_get_name 0)]
+                 (if (vim.uv.fs_stat buf-name)
+                     (mini-files.open buf-name false)
+                     (mini-files.open)))
+       {:desc "Open the file picker from the current file, or in the current working directory if the file does not exist"}))
 
 (let [mini-notify (require :mini.notify)]
   (mini-notify.setup {:lsp_progress {:enable false}}))
