@@ -282,6 +282,7 @@ do
       local tmpl = vim.fs.joinpath(vim.fn.stdpath("config"), "templates", ("%s.tmpl"):format(candidate))
       local f = io.open(tmpl, "r")
       if f then
+        vim.snippet.expand(f:read("*a"))
         done_3f = true
       else
       end

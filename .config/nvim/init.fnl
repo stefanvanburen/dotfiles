@@ -438,7 +438,7 @@
                                                                                candidate))
                                                       f (io.open tmpl :r)]
                                                   (when f
-                                                    ;; (vim.snippet.expand (f:read :*a))
+                                                    (vim.snippet.expand (f:read :*a))
                                                     (set done? true))))))}))
 
 ;;; Mappings
