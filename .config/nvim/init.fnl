@@ -622,7 +622,8 @@
                         :harper_ls {:settings {:harper-ls {:userDictPath "~/.config/nvim/spell/en.utf-8.add"
                                                            ;; https://writewithharper.com/docs/integrations/neovim#Common-Config-Changes
                                                            :linters {:SentenceCapitalization false
-                                                                     :SpellCheck false}}}}
+                                                                     :SpellCheck false
+                                                                     :ToDoHyphen false}}}}
                         ;; LSP for Lua.
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
                         :lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
