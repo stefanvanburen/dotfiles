@@ -570,9 +570,7 @@
                                     :buffer buf
                                     :callback vim.lsp.buf.clear_references})))
   (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"})
-  (map :n :gd vim.lsp.buf.definition {:buffer buf :desc "Go to definition"})
-  (map :n :grt vim.lsp.buf.type_definition
-       {:buffer buf :desc "Go to type definition"}))
+  (map :n :gd vim.lsp.buf.definition {:buffer buf :desc "Go to definition"}))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})
 

@@ -400,8 +400,7 @@ local function lsp_attach(_36_)
   else
   end
   map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})
-  map("n", "gd", vim.lsp.buf.definition, {buffer = buf, desc = "Go to definition"})
-  return map("n", "grt", vim.lsp.buf.type_definition, {buffer = buf, desc = "Go to type definition"})
+  return map("n", "gd", vim.lsp.buf.definition, {buffer = buf, desc = "Go to definition"})
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local schemastore = require("schemastore")
