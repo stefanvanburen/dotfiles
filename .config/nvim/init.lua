@@ -149,7 +149,6 @@ deps.add("qvalentin/helm-ls.nvim")
 deps.add("Olical/nfnl")
 deps.add("Olical/conjure")
 vim.g["conjure#highlight#enabled"] = true
-vim.g["conjure#filetypes"] = {"clojure", "fennel", "janet", "rust", "python"}
 vim.g["conjure#client#clojure#nrepl#connection#auto_repl#hidden"] = true
 vim.g["conjure#filetype#janet"] = "conjure.client.janet.stdio"
 vim.g["conjure#mapping#doc_word"] = false
@@ -267,30 +266,27 @@ do
 end
 vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl"}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.lock"] = "yaml", ["uv.lock"] = "toml"}})
 for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl", justfile = "justfile"}) do
-  vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
+  vim.api.nvim_create_autocmd("BufNewFile", {pattern = pattern, group = vim.api.nvim_create_augroup("skeletons", {clear = true}), command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
-do
-  local autemplates = vim.api.nvim_create_augroup("templates", {})
-  local function _17_(args)
-    local fname = vim.fs.basename(args.file)
-    local ext = vim.fn.fnamemodify(args.file, ":e")
-    local ft = vim.bo[args.buf].filetype
-    local candidates = {fname, ext, ft}
-    local done_3f = false
-    for _, candidate in ipairs(candidates) do
-      if done_3f then break end
-      local tmpl = vim.fs.joinpath(vim.fn.stdpath("config"), "templates", ("%s.tmpl"):format(candidate))
-      local f = io.open(tmpl, "r")
-      if f then
-        vim.snippet.expand(f:read("*a"))
-        done_3f = true
-      else
-      end
+local function _17_(args)
+  local fname = vim.fs.basename(args.file)
+  local ext = vim.fn.fnamemodify(args.file, ":e")
+  local ft = vim.bo[args.buf].filetype
+  local candidates = {fname, ext, ft}
+  local done_3f = false
+  for _, candidate in ipairs(candidates) do
+    if done_3f then break end
+    local tmpl = vim.fs.joinpath(vim.fn.stdpath("config"), "templates", ("%s.tmpl"):format(candidate))
+    local f = io.open(tmpl, "r")
+    if f then
+      vim.snippet.expand(f:read("*a"))
+      done_3f = true
+    else
     end
-    return nil
   end
-  vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", group = autemplates, callback = _17_})
+  return nil
 end
+vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", group = vim.api.nvim_create_augroup("templates", {clear = true}), callback = _17_})
 map("n", ";", ":")
 local function _19_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
