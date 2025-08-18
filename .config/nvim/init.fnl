@@ -338,19 +338,20 @@
 (deps.add :lunacookies/vim-plan9)
 (deps.add :miikanissi/modus-themes.nvim)
 
-(let [colorscheme (case (vim.fn.strftime "%m")
+;; https://smallseasons.guide
+(let [day-of-month (tonumber (vim.fn.strftime "%d"))
+      colorscheme (case (vim.fn.strftime "%m")
                     :01 :miniwinter
-                    :02 :miniwinter
+                    :02 (if (< day-of-month 4) :miniwinter :minispring)
                     :03 :minispring
                     :04 :minispring
-                    :05 :minispring
+                    :05 (if (< day-of-month 6) :minispring :minisummer)
                     :06 :minisummer
                     :07 :minisummer
-                    :08 :minisummer
-                    :08 :minisummer
+                    :08 (if (< day-of-month 8) :minisummer :miniautumn)
                     :09 :miniautumn
                     :10 :miniautumn
-                    :11 :miniautumn
+                    :11 (if (< day-of-month 8) :miniautumn :miniwinter)
                     :12 :miniwinter)]
   (vim.cmd.colorscheme colorscheme))
 
