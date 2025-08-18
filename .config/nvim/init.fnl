@@ -337,7 +337,22 @@
 (deps.add :rose-pine/neovim)
 (deps.add :lunacookies/vim-plan9)
 (deps.add :miikanissi/modus-themes.nvim)
-(vim.cmd.colorscheme :melange)
+
+(let [colorscheme (case (vim.fn.strftime "%m")
+                    :01 :miniwinter
+                    :02 :miniwinter
+                    :03 :minispring
+                    :04 :minispring
+                    :05 :minispring
+                    :06 :minisummer
+                    :07 :minisummer
+                    :08 :minisummer
+                    :08 :minisummer
+                    :09 :miniautumn
+                    :10 :miniautumn
+                    :11 :miniautumn
+                    :12 :miniwinter)]
+  (vim.cmd.colorscheme colorscheme))
 
 ;;; Autocommands and FileType settings
 
