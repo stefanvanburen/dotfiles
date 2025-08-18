@@ -332,11 +332,12 @@
 
 ;; Colorschemes
 (deps.add :stefanvanburen/rams)
+(deps.add :savq/melange-nvim)
 (deps.add :mcchrish/zenbones.nvim)
 (deps.add :rose-pine/neovim)
 (deps.add :lunacookies/vim-plan9)
 (deps.add :miikanissi/modus-themes.nvim)
-(vim.cmd.colorscheme :modus)
+(vim.cmd.colorscheme :melange)
 
 ;;; Autocommands and FileType settings
 
