@@ -338,10 +338,11 @@ local function _23_(args)
   return nil
 end
 vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", group = vim.api.nvim_create_augroup("templates", {clear = true}), callback = _23_})
---[[ (vim.api.nvim_get_current_buf) (vim.fs.basename (vim.api.nvim_buf_get_name 0)) ]]
 local open = vim.ui.open
 vim.ui.open = function(uri)
-  if (not string.match(uri, "[a-z]*://[^ >,;]*") and string.match(uri, "[%w%p\\-]*/[%w%p\\-]*")) then
+  if (not string.match(uri, "[a-z]*://[^ >,;]*") and string.match(uri, "buf.build/[%w%p\\-]*/[%w%p\\-]*")) then
+    return open(string.format("https://%s", uri))
+  elseif (not string.match(uri, "[a-z]*://[^ >,;]*") and string.match(uri, "[%w%p\\-]*/[%w%p\\-]*")) then
     return open(string.format("https://github.com/%s", uri))
   else
     return open(uri)
