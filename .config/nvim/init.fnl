@@ -460,6 +460,18 @@
 
 ;;; Mappings
 
+(comment (vim.api.nvim_get_current_buf)
+  (vim.fs.basename (vim.api.nvim_buf_get_name 0)))
+
+;; override vim.ui.open (mapped to gx)
+(local open vim.ui.open)
+(fn vim.ui.open [uri]
+  ;; TODO: add matching on buf.build
+  (if (and (not (string.match uri "[a-z]*://[^ >,;]*"))
+           (string.match uri "[%w%p\\-]*/[%w%p\\-]*"))
+      (open (string.format "https://github.com/%s" uri))
+      (open uri)))
+
 ;; ; -> :
 (map :n ";" ":")
 
