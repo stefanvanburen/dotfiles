@@ -471,6 +471,8 @@
       (open (string.format "https://github.com/%s" uri))
       (open uri)))
 
+(map :n :<leader>du #(vim.cmd {:cmd :DepsUpdate}))
+
 ;; ; -> :
 (map :n ";" ":")
 
