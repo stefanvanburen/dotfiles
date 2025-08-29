@@ -4,7 +4,7 @@
   (vim.system [:git
                :clone
                "--filter=blob:none"
-               "https://github.com/echasnovski/mini.nvim"
+               "https://github.com/nvim-mini/mini.nvim"
                mini-path])
   (vim.cmd "packadd mini.nvim | helptags ALL"))
 
@@ -86,7 +86,7 @@
 
 ;;; Plugins
 
-(deps.add :echasnovski/mini.nvim)
+(deps.add :nvim-mini/mini.nvim)
 
 ;; mini-basics should be first, to set up mappings like <Leader>
 (let [mini-basics (require :mini.basics)]

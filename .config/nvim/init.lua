@@ -2,7 +2,7 @@
 local path_package = (vim.fn.stdpath("data") .. "/site/")
 local mini_path = (path_package .. "pack/deps/start/mini.nvim")
 if not vim.uv.fs_stat(mini_path) then
-  vim.system({"git", "clone", "--filter=blob:none", "https://github.com/echasnovski/mini.nvim", mini_path})
+  vim.system({"git", "clone", "--filter=blob:none", "https://github.com/nvim-mini/mini.nvim", mini_path})
   vim.cmd("packadd mini.nvim | helptags ALL")
 else
 end
@@ -27,7 +27,7 @@ do
     end
   end
 end
-deps.add("echasnovski/mini.nvim")
+deps.add("nvim-mini/mini.nvim")
 do
   local mini_basics = require("mini.basics")
   mini_basics.setup({mappings = {basic = false}})
