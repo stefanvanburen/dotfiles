@@ -1,0 +1,1 @@
+{:dynamic-vars {clojure.core/*warn-on-reflection* true}}
