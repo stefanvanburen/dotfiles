@@ -634,9 +634,8 @@
                         :helm_ls {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
                         :bashls {}
-                        ;; LSP for TOML.
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#taplo
-                        :taplo {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tombi
+                        :tombi {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
                         ;; NOTE: Download omnisharp with mason.
                         :omnisharp {:cmd [:omnisharp]}
