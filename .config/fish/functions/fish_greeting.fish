@@ -1,3 +1,2 @@
-function fish_greeting
-    fortune | boxes
+function fish_greeting --description 'Override the built-in fish greeting with nothing'
 end
