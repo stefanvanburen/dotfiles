@@ -1,7 +1,6 @@
 [user]
 	name = Stefan VanBuren
 	email = stefan@vanburen.xyz
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIoDixzbo12TZUrCnIXJESUjl4HaGrLKvm2kG2GCFT6q
 
 [github]
 	user = stefanvanburen
@@ -71,8 +70,6 @@
 [commit]
 	; At the bottom of the commit message, show a diff of the commit.
 	verbose = true
-	; Sign commits with my ssh key
-	gpgsign = true
 
 [diff]
 	; seemingly the best diff algorithm - extends the "patience" algorithm
@@ -82,13 +79,6 @@
         prune = true
         pruneTags = true
         all = true
-
-; 1Password commit signing
-; See: https://developer.1password.com/docs/ssh/git-commit-signing/
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
 [include]
 	# path relative to this file - so, currently:

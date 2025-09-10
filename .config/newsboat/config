@@ -1,6 +1,5 @@
 urls-source "feedbin"
 feedbin-login "stefan@vanburen.xyz"
-feedbin-passwordeval "op item get feedbin --fields password"
 
 # a simple newsbeuter color scheme.
 
