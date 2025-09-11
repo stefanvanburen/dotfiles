@@ -81,9 +81,9 @@
 	algorithm = histogram
 
 [fetch]
-        prune = true
-        pruneTags = true
-        all = true
+	prune = true
+	pruneTags = true
+	all = true
 
 [include]
 	# path relative to this file - so, currently:
