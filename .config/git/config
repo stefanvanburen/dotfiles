@@ -104,7 +104,7 @@
 	keepBackup = false
 
 [mergetool "fugitive"]
-	cmd = nvim -f -c \"Git mergetool!\"
+	cmd = nvim -f -c \"Git mergetool\"
 
 [push]
 	; push to the branch with the same name by default
