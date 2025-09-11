@@ -104,7 +104,9 @@
 	keepBackup = false
 
 [mergetool "fugitive"]
-	cmd = nvim -f -c \"Git mergetool\"
+	; https://github.com/tpope/vim-fugitive/issues/1306
+	; Also can just open nvim and use `:Git mergetool`
+	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 
 [push]
 	; push to the branch with the same name by default
