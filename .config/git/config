@@ -139,4 +139,5 @@
 
 [tag]
 	; Sort treating tag names as versions.
-        sort = version:refname
+	sort = version:refname
+	gpgSign = true
