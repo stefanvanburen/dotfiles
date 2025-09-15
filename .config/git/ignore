@@ -13,11 +13,6 @@
 # macOS
 *.DS_Store
 
-# python
-__pycache__
-.pytest_cache
-.mypy_cache
-
 # clojure
 # clojure-lsp generated files
 .lsp
@@ -36,7 +31,7 @@ __pycache__
 # Technically, .nvim.lua can be shared with other neovim users that also enable
 # `.exrc`, but there are so many other ways to share configuration
 # (.editorconfig, etc.).
-# https://github.com/olical/nfnl?tab=readme-ov-file#directory-local-neovim-configuration-in-fennel
+# Ref: https://stefan.vanburen.xyz/til/nvim-nfnl-directory-configuration/
 .nfnl.fnl
 .nvim.fnl
 .nvim.lua
