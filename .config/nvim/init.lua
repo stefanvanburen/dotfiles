@@ -302,13 +302,17 @@ do
   vim.cmd.colorscheme(colorscheme)
 end
 vim.api.nvim_create_autocmd("VimResized", {command = ":wincmd ="})
-local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript = {expandtab = true, shiftwidth = 2}, javascriptreact = {expandtab = true, shiftwidth = 2}, typescript = {expandtab = true, shiftwidth = 2}, typescriptreact = {expandtab = true, shiftwidth = 2}, html = {expandtab = true, shiftwidth = 2}, css = {expandtab = true, shiftwidth = 2}, cs = {commentstring = "// %s"}, helm = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = {expandtab = true, shiftwidth = 2}, svg = {expandtab = true, shiftwidth = 2}, json = {expandtab = true, shiftwidth = 2}, bash = {expandtab = true, shiftwidth = 2}, python = {expandtab = true, shiftwidth = 4}, xml = {expandtab = true, shiftwidth = 4}, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, markdown = {spell = true, wrap = true, conceallevel = 0, shiftwidth = 2}}
+local filetype_settings = {go = {textwidth = 100, compiler = "go", expandtab = false}, javascript = {expandtab = true, shiftwidth = 2}, javascriptreact = {expandtab = true, shiftwidth = 2}, typescript = {expandtab = true, shiftwidth = 2}, typescriptreact = {expandtab = true, shiftwidth = 2}, html = {expandtab = true, shiftwidth = 2}, css = {expandtab = true, shiftwidth = 2}, cs = {commentstring = "// %s"}, helm = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = {expandtab = true, shiftwidth = 2}, svg = {expandtab = true, shiftwidth = 2}, json = {expandtab = true, shiftwidth = 2}, bash = {expandtab = true, shiftwidth = 2}, python = {expandtab = true, shiftwidth = 4}, xml = {expandtab = true, shiftwidth = 4}, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, markdown = {spell = true, wrap = true, conceallevel = 0, shiftwidth = 2}}
 do
   local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
     local function _22_()
       for name, value in pairs(settings) do
-        vim.api.nvim_set_option_value(name, value, {scope = "local"})
+        if (name == "compiler") then
+          vim.cmd({cmd = "compiler", args = {value}})
+        else
+          vim.api.nvim_set_option_value(name, value, {scope = "local"})
+        end
       end
       return nil
     end
@@ -319,7 +323,7 @@ vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "go
 for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl", justfile = "justfile"}) do
   vim.api.nvim_create_autocmd("BufNewFile", {pattern = pattern, group = vim.api.nvim_create_augroup("skeletons", {clear = true}), command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
-local function _23_(args)
+local function _24_(args)
   local fname = vim.fs.basename(args.file)
   local ext = vim.fn.fnamemodify(args.file, ":e")
   local ft = vim.bo[args.buf].filetype
@@ -337,7 +341,7 @@ local function _23_(args)
   end
   return nil
 end
-vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", group = vim.api.nvim_create_augroup("templates", {clear = true}), callback = _23_})
+vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", group = vim.api.nvim_create_augroup("templates", {clear = true}), callback = _24_})
 local open = vim.ui.open
 vim.ui.open = function(uri)
   if (not string.match(uri, "[a-z]*://[^ >,;]*") and string.match(uri, "buf.build/[%w%p\\-]*/[%w%p\\-]*")) then
@@ -348,70 +352,70 @@ vim.ui.open = function(uri)
     return open(uri)
   end
 end
-local function _26_()
+local function _27_()
   return vim.cmd({cmd = "DepsUpdate"})
 end
-map("n", "<leader>du", _26_)
+map("n", "<leader>du", _27_)
 map("n", ";", ":")
-local function _27_()
+local function _28_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _27_, {desc = "Open :Git in a vertical split"})
-local function _28_()
+map("n", "<leader>gs", _28_, {desc = "Open :Git in a vertical split"})
+local function _29_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _28_, {desc = ":Gwrite"})
-local function _29_()
+map("n", "<leader>gw", _29_, {desc = ":Gwrite"})
+local function _30_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _29_, {desc = ":Git commit"})
-local function _30_()
+map("n", "<leader>gc", _30_, {desc = ":Git commit"})
+local function _31_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _30_, {desc = ":Git push"})
-local function _31_()
+map("n", "<leader>gp", _31_, {desc = ":Git push"})
+local function _32_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _31_, {desc = ":Git blame"})
-local function _32_()
+map("n", "<leader>gb", _32_, {desc = ":Git blame"})
+local function _33_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _32_, {expr = true})
-local function _34_()
+map({"n", "v"}, "j", _33_, {expr = true})
+local function _35_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _34_, {expr = true})
+map({"n", "v"}, "k", _35_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true, desc = "Navigate between matching brackets"})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>egi"] = "$HOME/.config/git/config", ["<leader>ego"] = "$HOME/.config/ghostty/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
-  local function _36_()
+  local function _37_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _36_, {desc = (":edit " .. file)})
+  map("n", keymap, _37_, {desc = (":edit " .. file)})
 end
-local function _37_()
+local function _38_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _37_, {desc = ":write the buffer to the file"})
-local function _38_()
+map("n", "<leader>w", _38_, {desc = ":write the buffer to the file"})
+local function _39_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _38_, {desc = ":close the current window"})
-local function _39_()
+map("n", "<leader>cl", _39_, {desc = ":close the current window"})
+local function _40_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _39_, {desc = "Create a horizontal split"})
-local function _40_()
+map("n", "<leader>ss", _40_, {desc = "Create a horizontal split"})
+local function _41_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _40_, {desc = "Create a vertical split"})
+map("n", "<leader>vs", _41_, {desc = "Create a vertical split"})
 map("n", "Q", "@@", {desc = "Repeat last macro"})
 map("n", "0", "^", {desc = "Go to first non-whitespace character"})
 map("n", "^", "0", {desc = "Go to first column in the line"})
@@ -427,24 +431,24 @@ map("x", ">", ">gv")
 map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
-local function _41_()
+local function _42_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _41_, {desc = "Create a new tab"})
-local function _42_()
+map("n", "<leader>tn", _42_, {desc = "Create a new tab"})
+local function _43_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _42_, {desc = "Go to next tab"})
-local function _43_()
+map("n", "]r", _43_, {desc = "Go to next tab"})
+local function _44_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _43_, {desc = "Go to prev tab"})
+map("n", "[r", _44_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>")
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_44_)
-  local buf = _44_["buf"]
-  local _arg_45_ = _44_["data"]
-  local client_id = _arg_45_["client_id"]
+local function lsp_attach(_45_)
+  local buf = _45_["buf"]
+  local _arg_46_ = _45_["data"]
+  local client_id = _arg_46_["client_id"]
   local client = vim.lsp.get_client_by_id(client_id)
   local function format_and_fix_imports()
     vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})

@@ -360,7 +360,7 @@
 
 (vim.api.nvim_create_autocmd :VimResized {:command ":wincmd ="})
 
-(local filetype-settings {:go {:expandtab false :textwidth 100}
+(local filetype-settings {:go {:expandtab false :textwidth 100 :compiler :go}
                           :javascript {:expandtab true :shiftwidth 2}
                           :javascriptreact {:expandtab true :shiftwidth 2}
                           :typescript {:expandtab true :shiftwidth 2}
@@ -410,9 +410,12 @@
                                  {:group aufiletypes
                                   :pattern filetype
                                   :callback #(each [name value (pairs settings)]
-                                               (vim.api.nvim_set_option_value name
-                                                                              value
-                                                                              {:scope :local}))})))
+                                               (if (= name :compiler)
+                                                   (vim.cmd {:cmd :compiler
+                                                             :args [value]})
+                                                   (vim.api.nvim_set_option_value name
+                                                                                  value
+                                                                                  {:scope :local})))})))
 
 (vim.filetype.add {:extension {:mdx :markdown
                                :star :starlark
