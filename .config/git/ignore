@@ -38,6 +38,7 @@ __pycache__
 .nfnl.fnl
 .nvim.fnl
 .nvim.lua
+flsproject.fnl
 
 # Claude
 **/.claude/settings.local.json
