@@ -198,10 +198,10 @@
 
 (deps.add :tpope/vim-dispatch)
 ;; TODO: figure out better mappings; the latter will conflict with the former.
-(map :n :<leader>m ":make")
-(map :n :<leader>M ":Make")
-;; (map :n :<leader>m! ":make!")
-;; (map :n :<leader>m! ":Make!")
+(map :n :<leader>m ":make<cr>")
+(map :n :<leader>M ":Make<cr>")
+;; (map :n :<leader>m! ":make!<cr>")
+;; (map :n :<leader>m! ":Make!<cr>")
 
 (deps.add {:source :tpope/vim-dadbod :depends [:tpope/vim-dispatch]})
 
