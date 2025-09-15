@@ -7,6 +7,9 @@
 .fdignore
 .rgignore
 
+# python writes compiled bytecode to .pyc files in __pycache__ directories
+__pycache__
+
 # ignore my own pre-commit hooks
 .pre-commit-config.yaml
 

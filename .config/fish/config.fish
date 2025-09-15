@@ -27,10 +27,6 @@ set -gx MANPAGER "nvim +Man!"
 # Light mode works better with my light background
 set -gx GLAMOUR_STYLE light
 
-# Don't write .pyc files.
-# https://docs.python.org/3/using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE
-set -gx PYTHONDONTWRITEBYTECODE 1
-
 # https://github.com/junegunn/fzf?tab=readme-ov-file#environment-variables
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
