@@ -137,8 +137,10 @@ deps.add("tpope/vim-fugitive")
 vim.g.fugitive_legacy_commands = 0
 deps.add("tpope/vim-rhubarb")
 deps.add("https://git.sr.ht/~willdurand/srht.vim")
-deps.add("tpope/vim-dadbod")
 deps.add("tpope/vim-dispatch")
+map("n", "<leader>m", ":make")
+map("n", "<leader>M", ":Make")
+deps.add({source = "tpope/vim-dadbod", depends = {"tpope/vim-dispatch"}})
 local function _6_()
   return vim.cmd({cmd = "DB", args = {"$DATABASE_URL"}})
 end

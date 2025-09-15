@@ -196,9 +196,15 @@
 (deps.add :tpope/vim-rhubarb)
 (deps.add "https://git.sr.ht/~willdurand/srht.vim")
 
-(deps.add :tpope/vim-dadbod)
-;; vim-dispatch is a dependency of vim-dadbod.
 (deps.add :tpope/vim-dispatch)
+;; TODO: figure out better mappings; the latter will conflict with the former.
+(map :n :<leader>m ":make")
+(map :n :<leader>M ":Make")
+;; (map :n :<leader>m! ":make!")
+;; (map :n :<leader>m! ":Make!")
+
+(deps.add {:source :tpope/vim-dadbod :depends [:tpope/vim-dispatch]})
+
 ;; Set DATABASE_URL in the environment to access the configured database via dadbod.
 (map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]})
      {:desc "Open dadbod to the current $DATABASE_URL"})
