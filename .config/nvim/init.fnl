@@ -55,6 +55,8 @@
             :exrc true
             ;; Highlight only the number column when using cursorline.
             :cursorlineopt :number
+            ;; Remove linematch from default diffopt
+            :diffopt "internal,filler,closeoff"
             :completeopt "fuzzy,menu,menuone,popup,noselect"
             ;; Convenience for automatic formatting.
             ;;   t - auto-wrap text using textwidth
@@ -275,8 +277,6 @@
 
 (deps.add {:source :nvim-treesitter/nvim-treesitter
            :hooks {:post_checkout #(vim.cmd ":TSUpdate")}})
-
-(deps.add :rhysd/conflict-marker.vim)
 
 (let [treesitter (require :nvim-treesitter.configs)]
   (treesitter.setup {:highlight {:enable true}
