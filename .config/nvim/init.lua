@@ -231,6 +231,7 @@ local function _15_()
   return vim.cmd(":TSUpdate")
 end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _15_}})
+deps.add("rhysd/conflict-marker.vim")
 do
   local treesitter = require("nvim-treesitter.configs")
   treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, incremental_selection = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "helm", "html", "janet_simple", "java", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "starlark", "textproto", "toml", "xml", "yaml", "zig"}})

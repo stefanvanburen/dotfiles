@@ -276,6 +276,8 @@
 (deps.add {:source :nvim-treesitter/nvim-treesitter
            :hooks {:post_checkout #(vim.cmd ":TSUpdate")}})
 
+(deps.add :rhysd/conflict-marker.vim)
+
 (let [treesitter (require :nvim-treesitter.configs)]
   (treesitter.setup {:highlight {:enable true}
                      ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
