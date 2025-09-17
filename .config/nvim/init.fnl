@@ -622,8 +622,7 @@
                 :settings {:gopls {;; https://go.dev/gopls/settings#semantictokens-bool
                                    :semanticTokens true
                                    ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-                                   :hints {:ignoredError true
-                                           :constantValues true}}}}
+                                   :hints {:constantValues true}}}}
         ;;; https://github.com/b0o/SchemaStore.nvim#usage
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
         :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
