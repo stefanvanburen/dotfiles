@@ -368,49 +368,36 @@
 
 (vim.api.nvim_create_autocmd :VimResized {:command ":wincmd ="})
 
-(local filetype-settings {:go {:expandtab false :textwidth 100}
-                          :javascript {:expandtab true :shiftwidth 2}
-                          :javascriptreact {:expandtab true :shiftwidth 2}
-                          :typescript {:expandtab true :shiftwidth 2}
-                          :typescriptreact {:expandtab true :shiftwidth 2}
-                          :html {:expandtab true :shiftwidth 2}
-                          :css {:expandtab true :shiftwidth 2}
-                          ;; C#
-                          :cs {:commentstring "// %s"}
-                          :helm {:expandtab true
-                                 :shiftwidth 2
-                                 :commentstring "{{/* %s */}}"}
-                          :gotmpl {:expandtab true
-                                   :shiftwidth 2
-                                   :commentstring "{{/* %s */}}"}
-                          :fish {:expandtab true
-                                 :shiftwidth 4
-                                 :commentstring "# %s"}
-                          :yaml {:expandtab true :shiftwidth 2}
-                          :svg {:expandtab true :shiftwidth 2}
-                          :json {:expandtab true :shiftwidth 2}
-                          :bash {:expandtab true :shiftwidth 2}
-                          :python {:expandtab true :shiftwidth 4}
-                          :xml {:expandtab true :shiftwidth 4}
-                          :starlark {:expandtab true
-                                     :shiftwidth 4
-                                     :commentstring "# %s"}
-                          :proto {:expandtab true
-                                  :shiftwidth 2
-                                  :commentstring "// %s"
-                                  :cindent true}
-                          :gitcommit {:spell true}
-                          :fennel {:commentstring ";; %s"}
-                          :sql {:wrap true
-                                :commentstring "-- %s"
-                                :expandtab true
-                                :shiftwidth 4}
-                          :clojure {:expandtab true :textwidth 80}
-                          :kotlin {:commentstring "// %s"}
-                          :markdown {:spell true
-                                     :wrap true
-                                     :conceallevel 0
-                                     :shiftwidth 2}})
+(local filetype-settings
+       {:go {:expandtab false :textwidth 100}
+        :javascript {:expandtab true :shiftwidth 2}
+        :javascriptreact {:expandtab true :shiftwidth 2}
+        :typescript {:expandtab true :shiftwidth 2}
+        :typescriptreact {:expandtab true :shiftwidth 2}
+        :html {:expandtab true :shiftwidth 2}
+        :css {:expandtab true :shiftwidth 2}
+        ;; C#
+        :cs {:commentstring "// %s"}
+        :helm {:expandtab true :shiftwidth 2 :commentstring "{{/* %s */}}"}
+        :gotmpl {:expandtab true :shiftwidth 2 :commentstring "{{/* %s */}}"}
+        :fish {:expandtab true :shiftwidth 4 :commentstring "# %s"}
+        :yaml {:expandtab true :shiftwidth 2}
+        :svg {:expandtab true :shiftwidth 2}
+        :json {:expandtab true :shiftwidth 2}
+        :bash {:expandtab true :shiftwidth 2}
+        :python {:expandtab true :shiftwidth 4}
+        :xml {:expandtab true :shiftwidth 4}
+        :starlark {:expandtab true :shiftwidth 4 :commentstring "# %s"}
+        :proto {:expandtab true
+                :shiftwidth 2
+                :commentstring "// %s"
+                :cindent true}
+        :gitcommit {:spell true}
+        :fennel {:commentstring ";; %s"}
+        :sql {:wrap true :commentstring "-- %s" :expandtab true :shiftwidth 4}
+        :clojure {:expandtab true :textwidth 80}
+        :kotlin {:commentstring "// %s"}
+        :markdown {:spell true :wrap true}})
 
 (let [aufiletypes (vim.api.nvim_create_augroup :filetypes {})]
   (each [filetype settings (pairs filetype-settings)]
