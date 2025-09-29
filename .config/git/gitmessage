@@ -8,5 +8,12 @@
 # ## sourcehut:
 # https://man.sr.ht/git.sr.ht/#referencing-tickets-in-git-commit-messages
 #
+# Add the appropriate Git trailer for the resolution.
+# Supported trailer examples:
+# * Fixes: https://todo.sr.ht/~svbn/foobar/123
+# * Implements: https://todo.sr.ht/~svbn/foobar/123
+# * References: https://todo.sr.ht/~svbn/foobar/123
+# * Closes: https://todo.sr.ht/~svbn/foobar/123
+#
 # ## Commit message thoughts
 # https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/commit-messages/
