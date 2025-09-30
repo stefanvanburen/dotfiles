@@ -92,3 +92,7 @@
 # https://git.sr.ht/~delthas/senpai
 # Contains sensitive information (passwords).
 /.config/senpai/senpai.scfg
+
+# https://aerc-mail.org/
+# Contains sensitive information (passwords).
+/.config/aerc/accounts.conf
