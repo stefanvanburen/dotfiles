@@ -577,9 +577,9 @@
                               :apply true})
     (vim.lsp.buf.format))
 
-  ;; Only enable formatting for gopls and ruff.
+  ;; Only enable formatting with import fixing for gopls.
   (when (and (client:supports_method :textDocument/formatting)
-             (or (= client.name :gopls) (= client.name :ruff)))
+             (or (= client.name :gopls)))
     (vim.api.nvim_create_autocmd :BufWritePre
                                  {:buffer buf :callback format-and-fix-imports}))
   (when (client:supports_method :textDocument/inlayHint)

@@ -452,7 +452,7 @@ local function lsp_attach(_44_)
     vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     return vim.lsp.buf.format()
   end
-  if (client:supports_method("textDocument/formatting") and ((client.name == "gopls") or (client.name == "ruff"))) then
+  if (client:supports_method("textDocument/formatting") and (client.name == "gopls")) then
     vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = format_and_fix_imports})
   else
   end
