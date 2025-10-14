@@ -31,7 +31,7 @@
             ;; Start with all folds open.
             :foldlevelstart 99
             ;; https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#folding
-            :foldexpr "vim.treesitter.foldexpr()"
+            :foldexpr "v:lua.vim.treesitter.foldexpr()"
             ;; on lines that will wrap, they instead 'break' and be visually indented by
             ;; the showbreak character, followed by the indent.
             :breakindentopt {:shift 2 :sbr true}
@@ -71,7 +71,7 @@
             ;; Set the title of the window.
             :title true
             ;; Tied to CursorHold, which makes LSP document highlighting reasonable.
-            :updatetime 300
+            :updatetime 100
             ;; ignore case when completing files / directories in wildmenu
             :wildignorecase true
             ;; Show partial off-screen results in a preview window.
