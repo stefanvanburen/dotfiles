@@ -16,7 +16,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.maplocalleader = ","
 do
-  local opts = {foldmethod = "expr", foldlevelstart = 99, foldexpr = "v:lua.vim.treesitter.foldexpr()", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp", title = true, updatetime = 100, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
+  local opts = {foldmethod = "expr", foldlevelstart = 99, foldtext = "", foldexpr = "v:lua.vim.treesitter.foldexpr()", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp1l", spelloptions = "camel", virtualedit = "block", iskeyword = "@,48-57,_,192-255,-", tabstop = 2, title = true, updatetime = 100, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
   for opt, val in pairs(opts) do
     local _2_ = type(val)
     if (_2_ == "table") then

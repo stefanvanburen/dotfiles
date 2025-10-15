@@ -30,6 +30,8 @@
 (let [opts {:foldmethod :expr
             ;; Start with all folds open.
             :foldlevelstart 99
+            ;; Show text under fold with its highlighting
+            :foldtext ""
             ;; https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#folding
             :foldexpr "v:lua.vim.treesitter.foldexpr()"
             ;; on lines that will wrap, they instead 'break' and be visually indented by
@@ -67,7 +69,17 @@
             ;;   o - auto-insert comment leading after O in normal mode
             ;;   n - recognize numbered lists in text
             ;;   p - don't break lines at single spaces that follow periods
-            :formatoptions :tcqjronp
+            ;;   1 - don't break a line after a one-letter word (break before it instead, if possible)
+            ;;   l - long lines are not broken in insert mode
+            :formatoptions :tcqjronp1l
+            ;; Treat camelCase word parts as separate words
+            :spelloptions :camel
+            ;; Allow going past the end of the line in blockwise mode
+            :virtualedit :block
+            ;; Treat dash as `word` textobject part
+            :iskeyword "@,48-57,_,192-255,-"
+            ;; Show tab as this number of spaces
+            :tabstop 2
             ;; Set the title of the window.
             :title true
             ;; Tied to CursorHold, which makes LSP document highlighting reasonable.
