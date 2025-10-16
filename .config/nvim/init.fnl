@@ -192,6 +192,10 @@
 (let [mini-icons (require :mini.icons)]
   (mini-icons.setup {:style :ascii}))
 
+(let [mini-misc (require :mini.misc)]
+  (mini-misc.setup)
+  (map :n :<leader>z mini-misc.zoom {:desc "Toggle zoom of the current buffer"}))
+
 (deps.add :tpope/vim-eunuch)
 (deps.add :andymass/vim-matchup)
 (set vim.g.matchup_matchparen_offscreen {:method :popup})
@@ -358,6 +362,7 @@
 (deps.add :rose-pine/neovim)
 (deps.add :lunacookies/vim-plan9)
 (deps.add :miikanissi/modus-themes.nvim)
+(deps.add "https://git.sr.ht/~p00f/alabaster.nvim")
 
 ;; https://smallseasons.guide
 (let [day-of-month (tonumber (vim.fn.strftime "%d"))
@@ -525,6 +530,12 @@
      {:desc "Create a horizontal split"})
 
 (map :n :<leader>vs #(vim.cmd {:cmd :vsplit}) {:desc "Create a vertical split"})
+
+(map :n :<leader>tt #(vim.cmd {:cmd :terminal :mods {:vertical true}})
+     {:desc "Create a vertical terminal"})
+
+(map :n :<leader>tT #(vim.cmd {:cmd :terminal})
+     {:desc "Create a horizontal terminal"})
 
 ;; Use Q to repeat last macro, rather than going into ex mode
 (map :n :Q "@@" {:desc "Repeat last macro"})
