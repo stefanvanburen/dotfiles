@@ -216,10 +216,10 @@
 
 (deps.add :tpope/vim-dispatch)
 ;; TODO: figure out better mappings; the latter will conflict with the former.
-(map :n :<leader>m ":make<cr>")
-(map :n :<leader>M ":Make<cr>")
-;; (map :n :<leader>m! ":make!<cr>")
-;; (map :n :<leader>m! ":Make!<cr>")
+(map :n :<leader>mm ":make<cr>")
+(map :n :<leader>MM ":Make<cr>")
+(map :n :<leader>m! ":make!<cr>")
+(map :n :<leader>M! ":Make!<cr>")
 
 (deps.add {:source :tpope/vim-dadbod :depends [:tpope/vim-dispatch]})
 
@@ -361,6 +361,7 @@
 (deps.add :mcchrish/zenbones.nvim)
 (deps.add :rose-pine/neovim)
 (deps.add :lunacookies/vim-plan9)
+(deps.add :raphael-proust/vacme)
 (deps.add :miikanissi/modus-themes.nvim)
 (deps.add "https://git.sr.ht/~p00f/alabaster.nvim")
 

@@ -18,11 +18,11 @@ vim.g.maplocalleader = ","
 do
   local opts = {foldmethod = "expr", foldlevelstart = 99, foldtext = "", foldexpr = "v:lua.vim.treesitter.foldexpr()", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp1l", spelloptions = "camel", virtualedit = "block", iskeyword = "@,48-57,_,192-255,-", tabstop = 2, title = true, updatetime = 100, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
   for opt, val in pairs(opts) do
-    local _2_ = type(val)
-    if (_2_ == "table") then
+    local case_2_ = type(val)
+    if (case_2_ == "table") then
       vim.opt[opt] = val
     else
-      local _ = _2_
+      local _ = case_2_
       vim.o[opt] = val
     end
   end
@@ -143,8 +143,10 @@ vim.g.fugitive_legacy_commands = 0
 deps.add("tpope/vim-rhubarb")
 deps.add("https://git.sr.ht/~willdurand/srht.vim")
 deps.add("tpope/vim-dispatch")
-map("n", "<leader>m", ":make<cr>")
-map("n", "<leader>M", ":Make<cr>")
+map("n", "<leader>mm", ":make<cr>")
+map("n", "<leader>MM", ":Make<cr>")
+map("n", "<leader>m!", ":make!<cr>")
+map("n", "<leader>M!", ":Make!<cr>")
 deps.add({source = "tpope/vim-dadbod", depends = {"tpope/vim-dispatch"}})
 local function _6_()
   return vim.cmd({cmd = "DB", args = {"$DATABASE_URL"}})
@@ -184,34 +186,34 @@ do
   local nvim_lint = require("lint")
   local linters
   do
-    local tbl_16_ = {}
+    local tbl_21_ = {}
     for k, v in pairs({fish = {"fish"}, janet = {"janet"}, go = {"golangcilint"}, fennel = {"fennel"}}) do
-      local k_17_, v_18_ = nil, nil
+      local k_22_, v_23_
       local function _9_(...)
-        local tbl_21_ = {}
-        local i_22_ = 0
+        local tbl_26_ = {}
+        local i_27_ = 0
         for _, v0 in ipairs(v) do
-          local val_23_
+          local val_28_
           if (1 == vim.fn.executable(v0)) then
-            val_23_ = v0
+            val_28_ = v0
           else
-            val_23_ = nil
+            val_28_ = nil
           end
-          if (nil ~= val_23_) then
-            i_22_ = (i_22_ + 1)
-            tbl_21_[i_22_] = val_23_
+          if (nil ~= val_28_) then
+            i_27_ = (i_27_ + 1)
+            tbl_26_[i_27_] = val_28_
           else
           end
         end
-        return tbl_21_
+        return tbl_26_
       end
-      k_17_, v_18_ = k, _9_(...)
-      if ((k_17_ ~= nil) and (v_18_ ~= nil)) then
-        tbl_16_[k_17_] = v_18_
+      k_22_, v_23_ = k, _9_(...)
+      if ((k_22_ ~= nil) and (v_23_ ~= nil)) then
+        tbl_21_[k_22_] = v_23_
       else
       end
     end
-    linters = tbl_16_
+    linters = tbl_21_
   end
   nvim_lint.linters_by_ft = linters
   local function _13_()
@@ -256,52 +258,53 @@ deps.add("savq/melange-nvim")
 deps.add("mcchrish/zenbones.nvim")
 deps.add("rose-pine/neovim")
 deps.add("lunacookies/vim-plan9")
+deps.add("raphael-proust/vacme")
 deps.add("miikanissi/modus-themes.nvim")
 deps.add("https://git.sr.ht/~p00f/alabaster.nvim")
 do
   local day_of_month = tonumber(vim.fn.strftime("%d"))
   local colorscheme
   do
-    local _16_ = vim.fn.strftime("%m")
-    if (_16_ == "01") then
+    local case_16_ = vim.fn.strftime("%m")
+    if (case_16_ == "01") then
       colorscheme = "miniwinter"
-    elseif (_16_ == "02") then
+    elseif (case_16_ == "02") then
       if (day_of_month < 4) then
         colorscheme = "miniwinter"
       else
         colorscheme = "minispring"
       end
-    elseif (_16_ == "03") then
+    elseif (case_16_ == "03") then
       colorscheme = "minispring"
-    elseif (_16_ == "04") then
+    elseif (case_16_ == "04") then
       colorscheme = "minispring"
-    elseif (_16_ == "05") then
+    elseif (case_16_ == "05") then
       if (day_of_month < 6) then
         colorscheme = "minispring"
       else
         colorscheme = "minisummer"
       end
-    elseif (_16_ == "06") then
+    elseif (case_16_ == "06") then
       colorscheme = "minisummer"
-    elseif (_16_ == "07") then
+    elseif (case_16_ == "07") then
       colorscheme = "minisummer"
-    elseif (_16_ == "08") then
+    elseif (case_16_ == "08") then
       if (day_of_month < 8) then
         colorscheme = "minisummer"
       else
         colorscheme = "miniautumn"
       end
-    elseif (_16_ == "09") then
+    elseif (case_16_ == "09") then
       colorscheme = "miniautumn"
-    elseif (_16_ == "10") then
+    elseif (case_16_ == "10") then
       colorscheme = "miniautumn"
-    elseif (_16_ == "11") then
+    elseif (case_16_ == "11") then
       if (day_of_month < 8) then
         colorscheme = "miniautumn"
       else
         colorscheme = "miniwinter"
       end
-    elseif (_16_ == "12") then
+    elseif (case_16_ == "12") then
       colorscheme = "miniwinter"
     else
       colorscheme = nil
@@ -458,9 +461,9 @@ map("n", "[r", _45_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>")
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
 local function lsp_attach(_46_)
-  local buf = _46_["buf"]
-  local _arg_47_ = _46_["data"]
-  local client_id = _arg_47_["client_id"]
+  local buf = _46_.buf
+  local _arg_47_ = _46_.data
+  local client_id = _arg_47_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   local function format_and_fix_imports()
     vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
