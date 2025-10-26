@@ -32,6 +32,7 @@
             :foldlevelstart 99
             ;; Show text under fold with its highlighting
             :foldtext ""
+            ;; Default to treesitter folding (overridden if LSP supports it)
             ;; https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#folding
             :foldexpr "v:lua.vim.treesitter.foldexpr()"
             ;; on lines that will wrap, they instead 'break' and be visually indented by
@@ -619,6 +620,9 @@
                                    {:group augroup-id
                                     :buffer buf
                                     :callback vim.lsp.buf.clear_references})))
+  (when (client:supports_method :textDocument/foldingRange)
+    (tset vim.wo (vim.api.nvim_get_current_win) :foldexpr
+          "v:lua.vim.lsp.foldexpr()"))
   (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"})
   (map :n :gd vim.lsp.buf.definition {:buffer buf :desc "Go to definition"}))
 

@@ -483,6 +483,10 @@ local function lsp_attach(_46_)
     vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
   else
   end
+  if client:supports_method("textDocument/foldingRange") then
+    vim.wo[vim.api.nvim_get_current_win()]["foldexpr"] = "v:lua.vim.lsp.foldexpr()"
+  else
+  end
   map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})
   return map("n", "gd", vim.lsp.buf.definition, {buffer = buf, desc = "Go to definition"})
 end
