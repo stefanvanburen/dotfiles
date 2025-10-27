@@ -155,8 +155,8 @@
   (map :n :<leader>fc mini-extra.pickers.colorschemes
        {:desc "Pick colorschemes"}))
 
-(let [mini-completion (require :mini.completion)]
-  (mini-completion.setup))
+;; (let [mini-completion (require :mini.completion)]
+;;   (mini-completion.setup))
 
 (let [mini-colors (require :mini.colors)]
   (mini-colors.setup))
@@ -232,6 +232,16 @@
 (deps.add :janet-lang/janet.vim)
 (deps.add :qvalentin/helm-ls.nvim)
 
+(deps.add :hrsh7th/nvim-cmp)
+(deps.add :hrsh7th/cmp-nvim-lsp)
+(let [cmp (require :cmp)]
+  (cmp.setup {:sources (cmp.config.sources [{:name :nvim_lsp}])})
+  (map :i :<C-n> cmp.select_next_item)
+  (map :i :<C-p> cmp.select_prev_item)
+  (map :i :<C-y>
+       #(cmp.confirm {:select true :behavior cmp.ConfirmBehavior.Replace})
+       {:desc "Complete current autocomplete"}))
+
 (deps.add :Olical/nfnl)
 
 (deps.add :Olical/conjure)
@@ -292,6 +302,7 @@
   (mason-lspconfig.setup))
 
 (deps.add {:source :nvim-treesitter/nvim-treesitter
+           :checkout :main
            :hooks {:post_checkout #(vim.cmd ":TSUpdate")}})
 
 (let [treesitter (require :nvim-treesitter.configs)]
@@ -680,7 +691,12 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
         :rust_analyzer {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
-        :buf_ls {}
+        :buf_ls {:cmd [:buf
+                       :lsp
+                       :serve
+                       :--timeout=0
+                       :--log-format=text
+                       :--debug]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
         :postgres_lsp {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss
