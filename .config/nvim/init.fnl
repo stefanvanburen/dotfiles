@@ -121,6 +121,22 @@
 (let [mini-splitjoin (require :mini.splitjoin)]
   (mini-splitjoin.setup))
 
+(let [mini-starter (require :mini.starter)]
+  (mini-starter.setup))
+
+;; Enhanced `f`/`F`/`t`/`T`
+(let [mini-jump (require :mini.jump)]
+  (mini-jump.setup))
+
+;; Use <CR> in normal mode to begin jumping.
+(let [mini-jump2d (require :mini.jump2d)]
+  (mini-jump2d.setup))
+
+(let [mini-keymap (require :mini.keymap)]
+  (mini-keymap.setup)
+  (mini-keymap.map_multistep :i :<CR> [:pmenu_accept :minipairs_cr])
+  (mini-keymap.map_multistep :i :<BS> [:minipairs_bs]))
+
 (let [mini-trailspace (require :mini.trailspace)]
   (mini-trailspace.setup)
   (map :n :<leader>sw mini-trailspace.trim {:desc "Strip whitespace"}))

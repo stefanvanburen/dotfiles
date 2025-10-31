@@ -46,6 +46,24 @@ do
   mini_splitjoin.setup()
 end
 do
+  local mini_starter = require("mini.starter")
+  mini_starter.setup()
+end
+do
+  local mini_jump = require("mini.jump")
+  mini_jump.setup()
+end
+do
+  local mini_jump2d = require("mini.jump2d")
+  mini_jump2d.setup()
+end
+do
+  local mini_keymap = require("mini.keymap")
+  mini_keymap.setup()
+  mini_keymap.map_multistep("i", "<CR>", {"pmenu_accept", "minipairs_cr"})
+  mini_keymap.map_multistep("i", "<BS>", {"minipairs_bs"})
+end
+do
   local mini_trailspace = require("mini.trailspace")
   mini_trailspace.setup()
   map("n", "<leader>sw", mini_trailspace.trim, {desc = "Strip whitespace"})
