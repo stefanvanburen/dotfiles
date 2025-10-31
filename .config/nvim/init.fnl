@@ -592,18 +592,12 @@
 
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
-
-  (fn format-and-fix-imports []
-    ;; https://github.com/golang/tools/blob/master/gopls/doc/editor/vim.md#imports-and-formatting
-    (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
-                              :apply true})
-    (vim.lsp.buf.format))
-
-  ;; Only enable formatting with import fixing for gopls.
-  (when (and (client:supports_method :textDocument/formatting)
-             (or (= client.name :gopls)))
-    (vim.api.nvim_create_autocmd :BufWritePre
-                                 {:buffer buf :callback format-and-fix-imports}))
+  (when (client:supports_method :textDocument/codeAction)
+    (vim.api.nvim_buf_create_user_command buf :OrganizeImports
+                                          #(vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
+                                                                     :apply true})
+                                          {:desc "Organize Imports"})
+    (map :n :gro #(vim.cmd {:cmd :OrganizeImports}) {:desc "Organize Imports"}))
   (when (client:supports_method :textDocument/inlayHint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/documentHighlight)
