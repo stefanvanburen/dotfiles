@@ -74,10 +74,6 @@ do
   map("n", "<leader>fc", mini_extra.pickers.colorschemes, {desc = "Pick colorschemes"})
 end
 do
-  local mini_completion = require("mini.completion")
-  mini_completion.setup()
-end
-do
   local mini_colors = require("mini.colors")
   mini_colors.setup()
 end
@@ -485,6 +481,11 @@ local function lsp_attach(_46_)
   end
   if client:supports_method("textDocument/foldingRange") then
     vim.wo[vim.api.nvim_get_current_win()]["foldexpr"] = "v:lua.vim.lsp.foldexpr()"
+  else
+  end
+  if client:supports_method("textDocument/completion") then
+    vim.lsp.completion.enable(true, client.id, buf, {autotrigger = true})
+    map("i", "<C-space>", vim.lsp.completion.get, {buffer = buf, desc = "Manually trigger completion"})
   else
   end
   map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})

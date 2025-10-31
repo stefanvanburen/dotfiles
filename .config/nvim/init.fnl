@@ -156,9 +156,6 @@
   (map :n :<leader>fc mini-extra.pickers.colorschemes
        {:desc "Pick colorschemes"}))
 
-(let [mini-completion (require :mini.completion)]
-  (mini-completion.setup))
-
 (let [mini-colors (require :mini.colors)]
   (mini-colors.setup))
 
@@ -623,6 +620,10 @@
   (when (client:supports_method :textDocument/foldingRange)
     (tset vim.wo (vim.api.nvim_get_current_win) :foldexpr
           "v:lua.vim.lsp.foldexpr()"))
+  (when (client:supports_method :textDocument/completion)
+    (vim.lsp.completion.enable true client.id buf {:autotrigger true})
+    (map :i :<C-space> vim.lsp.completion.get
+         {:buffer buf :desc "Manually trigger completion"}))
   (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"})
   (map :n :gd vim.lsp.buf.definition {:buffer buf :desc "Go to definition"}))
 
