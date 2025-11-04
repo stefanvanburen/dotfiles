@@ -437,14 +437,6 @@ local function _40_()
   return vim.cmd({cmd = "vsplit"})
 end
 map("n", "<leader>vs", _40_, {desc = "Create a vertical split"})
-local function _41_()
-  return vim.cmd({cmd = "terminal", mods = {vertical = true}})
-end
-map("n", "<leader>tt", _41_, {desc = "Create a vertical terminal"})
-local function _42_()
-  return vim.cmd({cmd = "terminal"})
-end
-map("n", "<leader>tT", _42_, {desc = "Create a horizontal terminal"})
 map("n", "Q", "@@", {desc = "Repeat last macro"})
 map("n", "0", "^", {desc = "Go to first non-whitespace character"})
 map("n", "^", "0", {desc = "Go to first column in the line"})
@@ -460,34 +452,34 @@ map("x", ">", ">gv")
 map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
-local function _43_()
+local function _41_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _43_, {desc = "Create a new tab"})
-local function _44_()
+map("n", "<leader>tn", _41_, {desc = "Create a new tab"})
+local function _42_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _44_, {desc = "Go to next tab"})
-local function _45_()
+map("n", "]r", _42_, {desc = "Go to next tab"})
+local function _43_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _45_, {desc = "Go to prev tab"})
+map("n", "[r", _43_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>")
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_46_)
-  local buf = _46_.buf
-  local _arg_47_ = _46_.data
-  local client_id = _arg_47_.client_id
+local function lsp_attach(_44_)
+  local buf = _44_.buf
+  local _arg_45_ = _44_.data
+  local client_id = _arg_45_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   if client:supports_method("textDocument/codeAction") then
-    local function _48_()
+    local function _46_()
       return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     end
-    vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", _48_, {desc = "Organize Imports"})
-    local function _49_()
+    vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", _46_, {desc = "Organize Imports"})
+    local function _47_()
       return vim.cmd({cmd = "OrganizeImports"})
     end
-    map("n", "gro", _49_, {desc = "Organize Imports"})
+    map("n", "gro", _47_, {desc = "Organize Imports"})
   else
   end
   if client:supports_method("textDocument/inlayHint") then

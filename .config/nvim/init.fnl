@@ -546,12 +546,6 @@
 
 (map :n :<leader>vs #(vim.cmd {:cmd :vsplit}) {:desc "Create a vertical split"})
 
-(map :n :<leader>tt #(vim.cmd {:cmd :terminal :mods {:vertical true}})
-     {:desc "Create a vertical terminal"})
-
-(map :n :<leader>tT #(vim.cmd {:cmd :terminal})
-     {:desc "Create a horizontal terminal"})
-
 ;; Use Q to repeat last macro, rather than going into ex mode
 (map :n :Q "@@" {:desc "Repeat last macro"})
 
