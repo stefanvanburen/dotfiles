@@ -701,7 +701,9 @@
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#starpls
                         :starpls {:filetypes [:bzl :starlark]}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zuban
-                        :zuban {}})
+                        :zuban {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cue
+                        :cue {}})
 
 (each [server settings (pairs server-settings)]
   (vim.lsp.config server settings)
