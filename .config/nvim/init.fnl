@@ -379,6 +379,7 @@
 (deps.add :raphael-proust/vacme)
 (deps.add :miikanissi/modus-themes.nvim)
 (deps.add "https://git.sr.ht/~p00f/alabaster.nvim")
+(deps.add "https://git.sr.ht/~p00f/moduster.nvim")
 
 ;; https://smallseasons.guide
 (let [day-of-month (tonumber (vim.fn.strftime "%d"))

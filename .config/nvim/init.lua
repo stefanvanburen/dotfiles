@@ -275,6 +275,7 @@ deps.add("lunacookies/vim-plan9")
 deps.add("raphael-proust/vacme")
 deps.add("miikanissi/modus-themes.nvim")
 deps.add("https://git.sr.ht/~p00f/alabaster.nvim")
+deps.add("https://git.sr.ht/~p00f/moduster.nvim")
 do
   local day_of_month = tonumber(vim.fn.strftime("%d"))
   local colorscheme
