@@ -278,7 +278,8 @@
                                      :fish [:fish_indent]
                                      :janet {:lsp_format :fallback}
                                      :go {:lsp_format :fallback}
-                                     :proto {:lsp_format :fallback}}
+                                     :proto {:lsp_format :fallback}
+                                     :python {:lsp_format :fallback}}
                   :format_on_save {:timeout_ms 5000}}))
 
 (deps.add :mfussenegger/nvim-lint)
