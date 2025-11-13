@@ -290,6 +290,7 @@
       ;; https://github.com/mfussenegger/nvim-lint#available-linters
       linters (collect [k v (pairs {:fish [:fish]
                                     :janet [:janet]
+                                    :markdown [:rumdl]
                                     :go [:golangcilint]
                                     :fennel [:fennel]})]
                 (values k

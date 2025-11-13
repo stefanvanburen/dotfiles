@@ -201,7 +201,7 @@ do
   local linters
   do
     local tbl_21_ = {}
-    for k, v in pairs({fish = {"fish"}, janet = {"janet"}, go = {"golangcilint"}, fennel = {"fennel"}}) do
+    for k, v in pairs({fish = {"fish"}, janet = {"janet"}, markdown = {"rumdl"}, go = {"golangcilint"}, fennel = {"fennel"}}) do
       local k_22_, v_23_
       local function _9_(...)
         local tbl_26_ = {}
