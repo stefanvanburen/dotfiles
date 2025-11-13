@@ -229,7 +229,6 @@
 (deps.add "https://git.sr.ht/~willdurand/srht.vim")
 
 (deps.add :tpope/vim-dispatch)
-;; TODO: figure out better mappings; the latter will conflict with the former.
 (map :n :<leader>mm ":make<cr>")
 (map :n :<leader>MM ":Make<cr>")
 (map :n :<leader>m! ":make!<cr>")
@@ -248,6 +247,10 @@
 
 (deps.add :Olical/nfnl)
 
+;; NOTE: sql in conjure defaults to postgres.
+;; for sqlite (using `sqlite3` CLI):
+;; (set vim.g.conjure#client#sql#stdio#command "sqlite3 <.db-file-path>")
+;; (set vim.g.conjure#client#sql#stdio#prompt_pattern "sqlite> ")
 (deps.add :Olical/conjure)
 (set vim.g.conjure#highlight#enabled true)
 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
@@ -704,7 +707,9 @@
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zuban
                         :zuban {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cue
-                        :cue {}})
+                        :cue {}
+                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
+                        :ts_query_ls {}})
 
 (each [server settings (pairs server-settings)]
   (vim.lsp.config server settings)
