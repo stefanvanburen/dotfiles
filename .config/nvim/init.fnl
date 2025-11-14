@@ -175,6 +175,10 @@
 (let [mini-colors (require :mini.colors)]
   (mini-colors.setup))
 
+(let [mini-misc (require :mini.misc)]
+  (mini-misc.setup)
+  (mini-misc.setup_termbg_sync))
+
 (let [mini-hipatterns (require :mini.hipatterns)]
   (mini-hipatterns.setup {:highlighters {:hex_color (mini-hipatterns.gen_highlighter.hex_color)}}))
 
@@ -463,16 +467,12 @@
                                      :justfile :justfile})]
   (vim.api.nvim_create_autocmd :BufNewFile
                                {: pattern
-                                :group (vim.api.nvim_create_augroup :skeletons
-                                                                    {:clear true})
                                 :command (.. "0r ~/.config/nvim/skeletons/"
                                              skeleton-file)}))
 
 ;; Template files.
 (vim.api.nvim_create_autocmd :BufNewFile
                              {:pattern "*"
-                              :group (vim.api.nvim_create_augroup :templates
-                                                                  {:clear true})
                               :callback (fn [args]
                                           (let [fname (vim.fs.basename args.file)
                                                 ext (vim.fn.fnamemodify args.file

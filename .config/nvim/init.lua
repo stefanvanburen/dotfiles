@@ -96,6 +96,11 @@ do
   mini_colors.setup()
 end
 do
+  local mini_misc = require("mini.misc")
+  mini_misc.setup()
+  mini_misc.setup_termbg_sync()
+end
+do
   local mini_hipatterns = require("mini.hipatterns")
   mini_hipatterns.setup({highlighters = {hex_color = mini_hipatterns.gen_highlighter.hex_color()}})
 end
@@ -343,7 +348,7 @@ do
 end
 vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl"}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.lock"] = "yaml", ["uv.lock"] = "toml"}})
 for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl", justfile = "justfile"}) do
-  vim.api.nvim_create_autocmd("BufNewFile", {pattern = pattern, group = vim.api.nvim_create_augroup("skeletons", {clear = true}), command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
+  vim.api.nvim_create_autocmd("BufNewFile", {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
 local function _23_(args)
   local fname = vim.fs.basename(args.file)
@@ -363,7 +368,7 @@ local function _23_(args)
   end
   return nil
 end
-vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", group = vim.api.nvim_create_augroup("templates", {clear = true}), callback = _23_})
+vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", callback = _23_})
 local open = vim.ui.open
 vim.ui.open = function(uri)
   if (not string.match(uri, "[a-z]*://[^ >,;]*") and string.match(uri, "buf.build/[%w%p\\-]*/[%w%p\\-]*")) then
