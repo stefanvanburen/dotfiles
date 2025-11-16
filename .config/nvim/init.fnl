@@ -330,6 +330,8 @@
   (treesitter.setup {:highlight {:enable true}
                      ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
                      :matchup {:enable true}
+                     ;; https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#incremental-selection
+                     ;; :h nvim-treesitter-incremental-selection-mod
                      :incremental_selection {:enable true}
                      :ensure_installed [:c
                                         :lua
