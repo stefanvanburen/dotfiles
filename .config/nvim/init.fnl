@@ -716,8 +716,6 @@
                         :ty {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#starpls
                         :starpls {:filetypes [:bzl :starlark]}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zuban
-                        :zuban {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cue
                         :cue {}
                         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
