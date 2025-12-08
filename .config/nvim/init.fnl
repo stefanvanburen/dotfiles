@@ -128,6 +128,9 @@
 (let [mini-jump (require :mini.jump)]
   (mini-jump.setup))
 
+(let [mini-cmdline (require :mini.cmdline)]
+  (mini-cmdline.setup))
+
 ;; Use <CR> in normal mode to begin jumping.
 (let [mini-jump2d (require :mini.jump2d)]
   (mini-jump2d.setup))

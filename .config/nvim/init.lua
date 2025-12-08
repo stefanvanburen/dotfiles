@@ -54,6 +54,10 @@ do
   mini_jump.setup()
 end
 do
+  local mini_cmdline = require("mini.cmdline")
+  mini_cmdline.setup()
+end
+do
   local mini_jump2d = require("mini.jump2d")
   mini_jump2d.setup()
 end
