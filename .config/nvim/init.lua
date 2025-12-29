@@ -481,15 +481,17 @@ local function lsp_attach(_44_)
   local _arg_45_ = _44_.data
   local client_id = _arg_45_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
-  if client:supports_method("textDocument/codeAction") then
-    local function _46_()
-      return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
+  if (client:supports_method("textDocument/codeAction") and client:supports_method("textDocument/formatting")) then
+    local function fix_imports_and_format()
+      vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
+      return vim.lsp.buf.format()
     end
-    vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", _46_, {desc = "Organize Imports"})
-    local function _47_()
+    vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", fix_imports_and_format, {desc = "Organize Imports"})
+    local function _46_()
       return vim.cmd({cmd = "OrganizeImports"})
     end
-    map("n", "gro", _47_, {desc = "Organize Imports"})
+    map("n", "gro", _46_, {desc = "Organize Imports"})
+    vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = fix_imports_and_format})
   else
   end
   if client:supports_method("textDocument/inlayHint") then

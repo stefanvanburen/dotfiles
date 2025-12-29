@@ -621,12 +621,19 @@
 
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
-  (when (client:supports_method :textDocument/codeAction)
+  (when (and (client:supports_method :textDocument/codeAction)
+             (client:supports_method :textDocument/formatting))
+    (fn fix-imports-and-format []
+      (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
+                                :apply true})
+      (vim.lsp.buf.format))
+
     (vim.api.nvim_buf_create_user_command buf :OrganizeImports
-                                          #(vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
-                                                                     :apply true})
+                                          fix-imports-and-format
                                           {:desc "Organize Imports"})
-    (map :n :gro #(vim.cmd {:cmd :OrganizeImports}) {:desc "Organize Imports"}))
+    (map :n :gro #(vim.cmd {:cmd :OrganizeImports}) {:desc "Organize Imports"})
+    (vim.api.nvim_create_autocmd :BufWritePre
+                                 {:buffer buf :callback fix-imports-and-format}))
   (when (client:supports_method :textDocument/inlayHint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/documentHighlight)
