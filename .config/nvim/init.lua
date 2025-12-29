@@ -511,8 +511,7 @@ local function lsp_attach(_44_)
     map("i", "<C-space>", vim.lsp.completion.get, {buffer = buf, desc = "Manually trigger completion"})
   else
   end
-  map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})
-  return map("n", "gd", vim.lsp.buf.definition, {buffer = buf, desc = "Go to definition"})
+  return map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local schemastore = require("schemastore")

@@ -647,8 +647,7 @@
     (vim.lsp.completion.enable true client.id buf {:autotrigger true})
     (map :i :<C-space> vim.lsp.completion.get
          {:buffer buf :desc "Manually trigger completion"}))
-  (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"})
-  (map :n :gd vim.lsp.buf.definition {:buffer buf :desc "Go to definition"}))
+  (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"}))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})
 
