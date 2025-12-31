@@ -11,8 +11,6 @@ config-file = ?config.local
 cursor-color = #EE483E
 adjust-cursor-thickness = 3
 
-link-url = true
-
 keybind = ctrl+f>h=goto_split:left
 keybind = ctrl+f>j=goto_split:bottom
 keybind = ctrl+f>k=goto_split:top
