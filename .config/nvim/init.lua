@@ -92,6 +92,7 @@ do
   map("n", "<leader>fd", mini_extra.pickers.diagnostic, {desc = "Pick diagnostics"})
   map("n", "<leader>fg", mini_extra.pickers.git_files, {desc = "Pick git files"})
   map("n", "<leader>fm", mini_extra.pickers.keymaps, {desc = "Pick keymaps"})
+  map("n", "<leader>fk", mini_extra.pickers.manpages, {desc = "Pick manpages"})
   map("n", "<leader>fo", mini_extra.pickers.options, {desc = "Pick options"})
   map("n", "<leader>fc", mini_extra.pickers.colorschemes, {desc = "Pick colorschemes"})
 end
@@ -459,27 +460,31 @@ map("n", "C", "\"_C")
 map("n", "J", "mzJ`z")
 map("x", "<", "<gv")
 map("x", ">", ">gv")
+local function _41_()
+  return vim.show_pos()
+end
+map("n", "<leader>i", _41_)
 map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
-local function _41_()
+local function _42_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _41_, {desc = "Create a new tab"})
-local function _42_()
+map("n", "<leader>tn", _42_, {desc = "Create a new tab"})
+local function _43_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _42_, {desc = "Go to next tab"})
-local function _43_()
+map("n", "]r", _43_, {desc = "Go to next tab"})
+local function _44_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _43_, {desc = "Go to prev tab"})
+map("n", "[r", _44_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>")
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_44_)
-  local buf = _44_.buf
-  local _arg_45_ = _44_.data
-  local client_id = _arg_45_.client_id
+local function lsp_attach(_45_)
+  local buf = _45_.buf
+  local _arg_46_ = _45_.data
+  local client_id = _arg_46_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   if (client:supports_method("textDocument/codeAction") and client:supports_method("textDocument/formatting")) then
     local function fix_imports_and_format()
@@ -487,10 +492,10 @@ local function lsp_attach(_44_)
       return vim.lsp.buf.format()
     end
     vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", fix_imports_and_format, {desc = "Organize Imports"})
-    local function _46_()
+    local function _47_()
       return vim.cmd({cmd = "OrganizeImports"})
     end
-    map("n", "gro", _46_, {desc = "Organize Imports"})
+    map("n", "gro", _47_, {desc = "Organize Imports"})
     vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = fix_imports_and_format})
   else
   end

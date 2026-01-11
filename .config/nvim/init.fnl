@@ -171,6 +171,7 @@
   (map :n :<leader>fd mini-extra.pickers.diagnostic {:desc "Pick diagnostics"})
   (map :n :<leader>fg mini-extra.pickers.git_files {:desc "Pick git files"})
   (map :n :<leader>fm mini-extra.pickers.keymaps {:desc "Pick keymaps"})
+  (map :n :<leader>fk mini-extra.pickers.manpages {:desc "Pick manpages"})
   (map :n :<leader>fo mini-extra.pickers.options {:desc "Pick options"})
   (map :n :<leader>fc mini-extra.pickers.colorschemes
        {:desc "Pick colorschemes"}))
@@ -592,6 +593,9 @@
 ;; maintains the currently visual selection between invocations of '<' and '>'
 (map :x "<" :<gv)
 (map :x ">" :>gv)
+
+;; inspect the current position
+(map :n :<leader>i #(vim.show_pos))
 
 ;; <c-k> escape sequences.
 (map :i :<c-k> :<esc>)
