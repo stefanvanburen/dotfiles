@@ -295,11 +295,10 @@
   ;; https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
-                                     :janet {:lsp_format :fallback}
-                                     :go {:lsp_format :fallback}
-                                     :proto {:lsp_format :fallback}
-                                     :python {:lsp_format :fallback}}
-                  :format_on_save {:timeout_ms 5000}}))
+                                     :toml {:lsp_format :never}}
+                  :format_on_save {:timeout_ms 5000}
+                  :default_format_opts {:lsp_format :fallback}})
+  (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()"))
 
 (deps.add :mfussenegger/nvim-lint)
 (let [nvim-lint (require :lint)
@@ -625,19 +624,15 @@
 
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
-  (when (and (client:supports_method :textDocument/codeAction)
-             (client:supports_method :textDocument/formatting))
-    (fn fix-imports-and-format []
+  ;; NOTE: Formatting is handled by conform.
+  (when (client:supports_method :textDocument/codeAction)
+    (fn organize-imports []
       (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
-                                :apply true})
-      (vim.lsp.buf.format))
+                                :apply true}))
 
-    (vim.api.nvim_buf_create_user_command buf :OrganizeImports
-                                          fix-imports-and-format
+    (vim.api.nvim_buf_create_user_command buf :OrganizeImports organize-imports
                                           {:desc "Organize Imports"})
-    (map :n :gro #(vim.cmd {:cmd :OrganizeImports}) {:desc "Organize Imports"})
-    (vim.api.nvim_create_autocmd :BufWritePre
-                                 {:buffer buf :callback fix-imports-and-format}))
+    (map :n :gro #(vim.cmd {:cmd :OrganizeImports}) {:desc "Organize Imports"}))
   (when (client:supports_method :textDocument/inlayHint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/documentHighlight)

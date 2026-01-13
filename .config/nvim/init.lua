@@ -203,7 +203,8 @@ deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
 do
   local conform = require("conform")
-  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, janet = {lsp_format = "fallback"}, go = {lsp_format = "fallback"}, proto = {lsp_format = "fallback"}, python = {lsp_format = "fallback"}}, format_on_save = {timeout_ms = 5000}})
+  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, toml = {lsp_format = "never"}}, format_on_save = {timeout_ms = 5000}, default_format_opts = {lsp_format = "fallback"}})
+  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 end
 deps.add("mfussenegger/nvim-lint")
 do
@@ -486,17 +487,15 @@ local function lsp_attach(_45_)
   local _arg_46_ = _45_.data
   local client_id = _arg_46_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
-  if (client:supports_method("textDocument/codeAction") and client:supports_method("textDocument/formatting")) then
-    local function fix_imports_and_format()
-      vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
-      return vim.lsp.buf.format()
+  if client:supports_method("textDocument/codeAction") then
+    local function organize_imports()
+      return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     end
-    vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", fix_imports_and_format, {desc = "Organize Imports"})
+    vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", organize_imports, {desc = "Organize Imports"})
     local function _47_()
       return vim.cmd({cmd = "OrganizeImports"})
     end
     map("n", "gro", _47_, {desc = "Organize Imports"})
-    vim.api.nvim_create_autocmd("BufWritePre", {buffer = buf, callback = fix_imports_and_format})
   else
   end
   if client:supports_method("textDocument/inlayHint") then
