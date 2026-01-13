@@ -44,6 +44,10 @@ if test -x /opt/homebrew/bin/brew
 end
 
 if status --is-interactive
+    # Use the default theme.
+    # https://fishshell.com/docs/4.3/interactive.html#syntax-highlighting
+    fish_config theme choose default
+
     ## `man abbr`
     # https://fishshell.com/docs/current/cmds/prevd.html
     abbr --add - prevd
