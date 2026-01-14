@@ -391,6 +391,11 @@
 (let [nvim-paredit (require :nvim-paredit)]
   (nvim-paredit.setup {}))
 
+(deps.add :icholy/lsplinks.nvim)
+(let [lsplinks (require :lsplinks)]
+  (lsplinks.setup {})
+  (vim.keymap.set :n :gx lsplinks.gx))
+
 ;; Colorschemes
 (deps.add :stefanvanburen/rams)
 (deps.add :savq/melange-nvim)
@@ -506,17 +511,6 @@
                                                   (set done? true))))))})
 
 ;;; Mappings
-
-;; override vim.ui.open (mapped to gx)
-(local open vim.ui.open)
-(fn vim.ui.open [uri]
-  (if (and (not (string.match uri "[a-z]*://[^ >,;]*"))
-           (string.match uri "buf.build/[%w%p\\-]*/[%w%p\\-]*"))
-      (open (string.format "https://%s" uri))
-      (and (not (string.match uri "[a-z]*://[^ >,;]*"))
-           (string.match uri "[%w%p\\-]*/[%w%p\\-]*"))
-      (open (string.format "https://github.com/%s" uri))
-      (open uri)))
 
 (map :n :<leader>du #(vim.cmd {:cmd :DepsUpdate}))
 
