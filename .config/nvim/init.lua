@@ -508,6 +508,11 @@ local function lsp_attach(_44_)
     vim.wo[vim.api.nvim_get_current_win()]["foldexpr"] = "v:lua.vim.lsp.foldexpr()"
   else
   end
+  if client:supports_method("textDocument/codeLens") then
+    local augroup_id = vim.api.nvim_create_augroup("lsp-code-lens", {clear = false})
+    vim.api.nvim_create_autocmd({"BufEnter", "CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.codelens.refresh})
+  else
+  end
   if client:supports_method("textDocument/completion") then
     vim.lsp.completion.enable(true, client.id, buf, {autotrigger = true})
     map("i", "<C-space>", vim.lsp.completion.get, {buffer = buf, desc = "Manually trigger completion"})

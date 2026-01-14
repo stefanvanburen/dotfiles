@@ -643,6 +643,12 @@
   (when (client:supports_method :textDocument/foldingRange)
     (tset vim.wo (vim.api.nvim_get_current_win) :foldexpr
           "v:lua.vim.lsp.foldexpr()"))
+  (when (client:supports_method :textDocument/codeLens)
+    (let [augroup-id (vim.api.nvim_create_augroup :lsp-code-lens {:clear false})]
+      (vim.api.nvim_create_autocmd [:BufEnter :CursorHold :InsertLeave]
+                                   {:group augroup-id
+                                    :buffer buf
+                                    :callback vim.lsp.codelens.refresh})))
   (when (client:supports_method :textDocument/completion)
     (vim.lsp.completion.enable true client.id buf {:autotrigger true})
     (map :i :<C-space> vim.lsp.completion.get
