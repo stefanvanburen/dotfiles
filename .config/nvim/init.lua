@@ -16,7 +16,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.maplocalleader = ","
 do
-  local opts = {foldmethod = "expr", foldlevelstart = 99, foldtext = "", foldexpr = "v:lua.vim.treesitter.foldexpr()", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp1l", spelloptions = "camel", virtualedit = "block", iskeyword = "@,48-57,_,192-255,-", tabstop = 2, title = true, updatetime = 100, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
+  local opts = {foldlevelstart = 99, foldtext = "", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp1l", spelloptions = "camel", virtualedit = "block", iskeyword = "@,48-57,_,192-255,-", tabstop = 2, title = true, updatetime = 100, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
   for opt, val in pairs(opts) do
     local case_2_ = type(val)
     if (case_2_ == "table") then
@@ -264,8 +264,17 @@ local function _15_()
 end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _15_}})
 do
-  local treesitter = require("nvim-treesitter.configs")
-  treesitter.setup({highlight = {enable = true}, matchup = {enable = true}, incremental_selection = {enable = true}, ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "helm", "html", "janet_simple", "java", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "starlark", "textproto", "toml", "xml", "yaml", "zig"}})
+  local treesitter = require("nvim-treesitter")
+  local treesitter_languages = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "helm", "html", "janet_simple", "java", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "starlark", "textproto", "toml", "xml", "yaml", "zig"}
+  treesitter.install(treesitter_languages)
+  local function _16_()
+    vim.treesitter.start()
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.wo.foldmethod = "expr"
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    return nil
+  end
+  vim.api.nvim_create_autocmd("FileType", {pattern = treesitter_languages, callback = _16_})
 end
 do
   local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console"}, proto = {"protobuf"}}
@@ -297,46 +306,46 @@ do
   local day_of_month = tonumber(vim.fn.strftime("%d"))
   local colorscheme
   do
-    local case_16_ = vim.fn.strftime("%m")
-    if (case_16_ == "01") then
+    local case_17_ = vim.fn.strftime("%m")
+    if (case_17_ == "01") then
       colorscheme = "miniwinter"
-    elseif (case_16_ == "02") then
+    elseif (case_17_ == "02") then
       if (day_of_month < 4) then
         colorscheme = "miniwinter"
       else
         colorscheme = "minispring"
       end
-    elseif (case_16_ == "03") then
+    elseif (case_17_ == "03") then
       colorscheme = "minispring"
-    elseif (case_16_ == "04") then
+    elseif (case_17_ == "04") then
       colorscheme = "minispring"
-    elseif (case_16_ == "05") then
+    elseif (case_17_ == "05") then
       if (day_of_month < 6) then
         colorscheme = "minispring"
       else
         colorscheme = "minisummer"
       end
-    elseif (case_16_ == "06") then
+    elseif (case_17_ == "06") then
       colorscheme = "minisummer"
-    elseif (case_16_ == "07") then
+    elseif (case_17_ == "07") then
       colorscheme = "minisummer"
-    elseif (case_16_ == "08") then
+    elseif (case_17_ == "08") then
       if (day_of_month < 8) then
         colorscheme = "minisummer"
       else
         colorscheme = "miniautumn"
       end
-    elseif (case_16_ == "09") then
+    elseif (case_17_ == "09") then
       colorscheme = "miniautumn"
-    elseif (case_16_ == "10") then
+    elseif (case_17_ == "10") then
       colorscheme = "miniautumn"
-    elseif (case_16_ == "11") then
+    elseif (case_17_ == "11") then
       if (day_of_month < 8) then
         colorscheme = "miniautumn"
       else
         colorscheme = "miniwinter"
       end
-    elseif (case_16_ == "12") then
+    elseif (case_17_ == "12") then
       colorscheme = "miniwinter"
     else
       colorscheme = nil
@@ -349,20 +358,20 @@ local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript
 do
   local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
-    local function _22_()
+    local function _23_()
       for name, value in pairs(settings) do
         vim.api.nvim_set_option_value(name, value, {scope = "local"})
       end
       return nil
     end
-    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _22_})
+    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _23_})
   end
 end
 vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl"}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.lock"] = "yaml", ["uv.lock"] = "toml"}})
 for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl", justfile = "justfile"}) do
   vim.api.nvim_create_autocmd("BufNewFile", {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
 end
-local function _23_(args)
+local function _24_(args)
   local fname = vim.fs.basename(args.file)
   local ext = vim.fn.fnamemodify(args.file, ":e")
   local ft = vim.bo[args.buf].filetype
@@ -380,71 +389,71 @@ local function _23_(args)
   end
   return nil
 end
-vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", callback = _23_})
-local function _25_()
+vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", callback = _24_})
+local function _26_()
   return vim.cmd({cmd = "DepsUpdate"})
 end
-map("n", "<leader>du", _25_)
+map("n", "<leader>du", _26_)
 map("n", ";", ":")
-local function _26_()
+local function _27_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _26_, {desc = "Open :Git in a vertical split"})
-local function _27_()
+map("n", "<leader>gs", _27_, {desc = "Open :Git in a vertical split"})
+local function _28_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _27_, {desc = ":Gwrite"})
-local function _28_()
+map("n", "<leader>gw", _28_, {desc = ":Gwrite"})
+local function _29_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _28_, {desc = ":Git commit"})
-local function _29_()
+map("n", "<leader>gc", _29_, {desc = ":Git commit"})
+local function _30_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _29_, {desc = ":Git push"})
-local function _30_()
+map("n", "<leader>gp", _30_, {desc = ":Git push"})
+local function _31_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _30_, {desc = ":Git blame"})
-local function _31_()
+map("n", "<leader>gb", _31_, {desc = ":Git blame"})
+local function _32_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _31_, {expr = true})
-local function _33_()
+map({"n", "v"}, "j", _32_, {expr = true})
+local function _34_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _33_, {expr = true})
+map({"n", "v"}, "k", _34_, {expr = true})
 map({"n", "v"}, "<tab>", "%", {remap = true, desc = "Navigate between matching brackets"})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>egi"] = "$HOME/.config/git/config", ["<leader>ego"] = "$HOME/.config/ghostty/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
-  local function _35_()
+  local function _36_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _35_, {desc = (":edit " .. file)})
+  map("n", keymap, _36_, {desc = (":edit " .. file)})
 end
-local function _36_()
+local function _37_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _36_, {desc = ":write the buffer to the file"})
-local function _37_()
+map("n", "<leader>w", _37_, {desc = ":write the buffer to the file"})
+local function _38_()
   return vim.cmd({cmd = "close"})
 end
-map("n", "<leader>cl", _37_, {desc = ":close the current window"})
-local function _38_()
+map("n", "<leader>cl", _38_, {desc = ":close the current window"})
+local function _39_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _38_, {desc = "Create a horizontal split"})
-local function _39_()
+map("n", "<leader>ss", _39_, {desc = "Create a horizontal split"})
+local function _40_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _39_, {desc = "Create a vertical split"})
+map("n", "<leader>vs", _40_, {desc = "Create a vertical split"})
 map("n", "Q", "@@", {desc = "Repeat last macro"})
 map("n", "0", "^", {desc = "Go to first non-whitespace character"})
 map("n", "^", "0", {desc = "Go to first column in the line"})
@@ -457,41 +466,41 @@ map("n", "C", "\"_C")
 map("n", "J", "mzJ`z")
 map("x", "<", "<gv")
 map("x", ">", ">gv")
-local function _40_()
+local function _41_()
   return vim.show_pos()
 end
-map("n", "<leader>i", _40_)
+map("n", "<leader>i", _41_)
 map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
-local function _41_()
+local function _42_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _41_, {desc = "Create a new tab"})
-local function _42_()
+map("n", "<leader>tn", _42_, {desc = "Create a new tab"})
+local function _43_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _42_, {desc = "Go to next tab"})
-local function _43_()
+map("n", "]r", _43_, {desc = "Go to next tab"})
+local function _44_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _43_, {desc = "Go to prev tab"})
+map("n", "[r", _44_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>")
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_44_)
-  local buf = _44_.buf
-  local _arg_45_ = _44_.data
-  local client_id = _arg_45_.client_id
+local function lsp_attach(_45_)
+  local buf = _45_.buf
+  local _arg_46_ = _45_.data
+  local client_id = _arg_46_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   if client:supports_method("textDocument/codeAction") then
     local function organize_imports()
       return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     end
     vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", organize_imports, {desc = "Organize Imports"})
-    local function _46_()
+    local function _47_()
       return vim.cmd({cmd = "OrganizeImports"})
     end
-    map("n", "gro", _46_, {desc = "Organize Imports"})
+    map("n", "gro", _47_, {desc = "Organize Imports"})
   else
   end
   if client:supports_method("textDocument/inlayHint") then

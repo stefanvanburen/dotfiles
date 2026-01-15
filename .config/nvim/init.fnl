@@ -27,14 +27,10 @@
 ;; LocalLeader is the comma key
 (set vim.g.maplocalleader ",")
 
-(let [opts {:foldmethod :expr
-            ;; Start with all folds open.
+(let [opts {;; Start with all folds open.
             :foldlevelstart 99
             ;; Show text under fold with its highlighting
             :foldtext ""
-            ;; Default to treesitter folding (overridden if LSP supports it)
-            ;; https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#folding
-            :foldexpr "v:lua.vim.treesitter.foldexpr()"
             ;; on lines that will wrap, they instead 'break' and be visually indented by
             ;; the showbreak character, followed by the indent.
             :breakindentopt {:shift 2 :sbr true}
@@ -328,57 +324,62 @@
 (deps.add {:source :nvim-treesitter/nvim-treesitter
            :hooks {:post_checkout #(vim.cmd ":TSUpdate")}})
 
-(let [treesitter (require :nvim-treesitter.configs)]
-  (treesitter.setup {:highlight {:enable true}
-                     ;; https://github.com/andymass/vim-matchup#tree-sitter-integration
-                     :matchup {:enable true}
-                     ;; https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#incremental-selection
-                     ;; :h nvim-treesitter-incremental-selection-mod
-                     :incremental_selection {:enable true}
-                     :ensure_installed [:c
-                                        :lua
-                                        :vim
-                                        :vimdoc
-                                        :query
-                                        :bash
-                                        :c_sharp
-                                        :clojure
-                                        :comment
-                                        :css
-                                        :diff
-                                        :djot
-                                        :dockerfile
-                                        :editorconfig
-                                        :fennel
-                                        :fish
-                                        :git_rebase
-                                        :gitattributes
-                                        :gitcommit
-                                        :go
-                                        :gomod
-                                        :gosum
-                                        :gotmpl
-                                        :helm
-                                        :html
-                                        :janet_simple
-                                        :java
-                                        :javascript
-                                        :json
-                                        :just
-                                        :make
-                                        :markdown
-                                        :markdown_inline
-                                        :proto
-                                        :python
-                                        :requirements
-                                        :sql
-                                        :ssh_config
-                                        :starlark
-                                        :textproto
-                                        :toml
-                                        :xml
-                                        :yaml
-                                        :zig]}))
+(let [treesitter (require :nvim-treesitter)
+      treesitter-languages [:c
+                            :lua
+                            :vim
+                            :vimdoc
+                            :query
+                            :bash
+                            :c_sharp
+                            :clojure
+                            :comment
+                            :css
+                            :diff
+                            :djot
+                            :dockerfile
+                            :editorconfig
+                            :fennel
+                            :fish
+                            :git_rebase
+                            :gitattributes
+                            :gitcommit
+                            :go
+                            :gomod
+                            :gosum
+                            :gotmpl
+                            :helm
+                            :html
+                            :janet_simple
+                            :java
+                            :javascript
+                            :json
+                            :just
+                            :make
+                            :markdown
+                            :markdown_inline
+                            :proto
+                            :python
+                            :requirements
+                            :sql
+                            :ssh_config
+                            :starlark
+                            :textproto
+                            :toml
+                            :xml
+                            :yaml
+                            :zig]]
+  (treesitter.install treesitter-languages)
+  (vim.api.nvim_create_autocmd :FileType
+                               {:pattern treesitter-languages
+                                :callback (fn []
+                                            (vim.treesitter.start)
+                                            ;; Default to treesitter folding (overridden if LSP supports it)
+                                            (set vim.wo.foldexpr
+                                                 "v:lua.vim.treesitter.foldexpr()")
+                                            (set vim.wo.foldmethod :expr)
+                                            (set vim.bo.indentexpr
+                                                 "v:lua.require'nvim-treesitter'.indentexpr()"))}))
 
 (let [filetype-to-langs {:c_sharp [:csharp]
                          :bash [:shellsession :console]
