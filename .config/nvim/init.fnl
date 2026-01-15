@@ -235,9 +235,8 @@
   (map :n :K #(hover.open) {:desc "hover.nvim (open)"})
   (map :n :gK #(hover.enter) {:desc "hover.nvim (enter)"})
   (map :n :<C-p> #(hover.switch :previous {})
-       {:desc "hover.nvim (previous source)"})
-  (map :n :<leader>hn #(hover.switch :next {})
-       {:desc "hover.nvim (next source)"}))
+       {:desc "hover.nvim (prev source)"})
+  (map :n :<C-n> #(hover.switch :next {}) {:desc "hover.nvim (next source)"}))
 
 (deps.add :tpope/vim-eunuch)
 (deps.add :andymass/vim-matchup)

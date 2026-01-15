@@ -166,11 +166,11 @@ do
   local function _8_()
     return hover.switch("previous", {})
   end
-  map("n", "<C-p>", _8_, {desc = "hover.nvim (previous source)"})
+  map("n", "<C-p>", _8_, {desc = "hover.nvim (prev source)"})
   local function _9_()
     return hover.switch("next", {})
   end
-  map("n", "<leader>hn", _9_, {desc = "hover.nvim (next source)"})
+  map("n", "<C-n>", _9_, {desc = "hover.nvim (next source)"})
 end
 deps.add("tpope/vim-eunuch")
 deps.add("andymass/vim-matchup")
