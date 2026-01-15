@@ -222,22 +222,6 @@
   (mini-misc.setup)
   (map :n :<leader>z mini-misc.zoom {:desc "Toggle zoom of the current buffer"}))
 
-(deps.add :lewis6991/hover.nvim)
-(let [hover (require :hover)]
-  (hover.config {:providers [:hover.providers.diagnostic
-                             :hover.providers.dap
-                             :hover.providers.lsp
-                             :hover.providers.gh
-                             :hover.providers.gh_user
-                             :hover.providers.dictionary
-                             :hover.providers.man
-                             :hover.providers.highlight]})
-  (map :n :K #(hover.open) {:desc "hover.nvim (open)"})
-  (map :n :gK #(hover.enter) {:desc "hover.nvim (enter)"})
-  (map :n :<C-p> #(hover.switch :previous {})
-       {:desc "hover.nvim (prev source)"})
-  (map :n :<C-n> #(hover.switch :next {}) {:desc "hover.nvim (next source)"}))
-
 (deps.add :tpope/vim-eunuch)
 (deps.add :andymass/vim-matchup)
 (set vim.g.matchup_matchparen_offscreen {:method :popup})
