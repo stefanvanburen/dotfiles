@@ -42,6 +42,8 @@ flsproject.fnl
 
 # Claude
 **/.claude/settings.local.json
+# https://code.claude.com/docs/en/memory
+CLAUDE.local.md
 
 # https://github.com/charmbracelet/crush
 .crush
