@@ -104,7 +104,7 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
     end
 
     # Display reviews
-    echo $reviews | jq -r --arg login "$viewer_login" --arg since "$timestamp_iso" '.[] | select(.author != $login) | select(. != null) |
+    echo $reviews | jq -r --arg login "$viewer_login" '.[] | select(.author != $login) | select(. != null) |
         [
             .title,
             .author,
@@ -121,7 +121,33 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
         set -l submitted_at $fields[5]
         set -l url $fields[6]
 
-        echo (__pr_reviews_bold $title)" - "(__pr_reviews_cyan $review_state)" ("(__pr_reviews_yellow $pr_state)")"
+        # Color code review state
+        set -l review_color
+        switch $review_state
+            case APPROVED
+                set review_color (__pr_reviews_green $review_state)
+            case COMMENTED
+                set review_color (__pr_reviews_cyan $review_state)
+            case CHANGES_REQUESTED
+                set review_color (__pr_reviews_red $review_state)
+            case '*'
+                set review_color $review_state
+        end
+
+        # Color code PR state
+        set -l pr_color
+        switch $pr_state
+            case MERGED
+                set pr_color (__pr_reviews_purple $pr_state)
+            case CLOSED
+                set pr_color (__pr_reviews_red $pr_state)
+            case OPEN
+                set pr_color (__pr_reviews_yellow $pr_state)
+            case '*'
+                set pr_color $pr_state
+        end
+
+        echo (__pr_reviews_bold $title)" - $review_color ($pr_color)"
         echo "  by $author - "(__pr_reviews_format_timestamp $submitted_at)
         echo "  "(__pr_reviews_blue $url)
         echo ""
@@ -133,12 +159,20 @@ function __pr_reviews_bold
     printf "\033[1m%s\033[0m" $argv[1]
 end
 
+function __pr_reviews_green
+    printf "\033[32m%s\033[0m" $argv[1]
+end
+
 function __pr_reviews_cyan
     printf "\033[36m%s\033[0m" $argv[1]
 end
 
 function __pr_reviews_yellow
     printf "\033[33m%s\033[0m" $argv[1]
+end
+
+function __pr_reviews_purple
+    printf "\033[35m%s\033[0m" $argv[1]
 end
 
 function __pr_reviews_blue
