@@ -128,7 +128,7 @@ do
 end
 do
   local mini_notify = require("mini.notify")
-  mini_notify.setup({lsp_progress = {enable = false}})
+  mini_notify.setup()
 end
 do
   local mini_diff = require("mini.diff")
@@ -150,6 +150,17 @@ do
   local mini_misc = require("mini.misc")
   mini_misc.setup()
   map("n", "<leader>z", mini_misc.zoom, {desc = "Toggle zoom of the current buffer"})
+end
+deps.add("rafamadriz/friendly-snippets")
+local snippets_dir = (vim.fn.stdpath("config") .. "/snippets")
+do
+  local mini_snippets = require("mini.snippets")
+  mini_snippets.setup({snippets = {mini_snippets.gen_loader.from_file((snippets_dir .. "/global.json")), mini_snippets.gen_loader.from_lang()}})
+end
+deps.add("chrisgrieser/nvim-scissors")
+do
+  local scissors = require("scissors")
+  scissors.setup({snippetDir = snippets_dir})
 end
 deps.add("tpope/vim-eunuch")
 deps.add("andymass/vim-matchup")
@@ -285,12 +296,12 @@ end
 deps.add("julienvincent/nvim-paredit")
 do
   local nvim_paredit = require("nvim-paredit")
-  nvim_paredit.setup({})
+  nvim_paredit.setup()
 end
 deps.add("icholy/lsplinks.nvim")
 do
   local lsplinks = require("lsplinks")
-  lsplinks.setup({})
+  lsplinks.setup()
   vim.keymap.set("n", "gx", lsplinks.gx)
 end
 deps.add("stefanvanburen/rams")

@@ -202,7 +202,7 @@
        {:desc "Open the file picker from the current file, or in the current working directory if the file does not exist"}))
 
 (let [mini-notify (require :mini.notify)]
-  (mini-notify.setup {:lsp_progress {:enable false}}))
+  (mini-notify.setup))
 
 (let [mini-diff (require :mini.diff)]
   (mini-diff.setup {:view {:signs {:add "┃" :change "┃" :delete "▁"}
@@ -221,6 +221,24 @@
 (let [mini-misc (require :mini.misc)]
   (mini-misc.setup)
   (map :n :<leader>z mini-misc.zoom {:desc "Toggle zoom of the current buffer"}))
+
+;;;; snippets
+
+(deps.add :rafamadriz/friendly-snippets)
+
+(local snippets-dir (.. (vim.fn.stdpath :config) :/snippets))
+
+(let [mini-snippets (require :mini.snippets)]
+  (mini-snippets.setup {:snippets [(mini-snippets.gen_loader.from_file (.. snippets-dir
+                                                                           :/global.json))
+                                   ;; pull in snippets matching language types, from friendly-snippets
+                                   (mini-snippets.gen_loader.from_lang)]}))
+
+(deps.add :chrisgrieser/nvim-scissors)
+(let [scissors (require :scissors)]
+  (scissors.setup {:snippetDir snippets-dir}))
+
+;;;;
 
 (deps.add :tpope/vim-eunuch)
 (deps.add :andymass/vim-matchup)
@@ -390,11 +408,11 @@
 (deps.add :julienvincent/nvim-paredit)
 ;; NOTE: This must be after adding treesitter.
 (let [nvim-paredit (require :nvim-paredit)]
-  (nvim-paredit.setup {}))
+  (nvim-paredit.setup))
 
 (deps.add :icholy/lsplinks.nvim)
 (let [lsplinks (require :lsplinks)]
-  (lsplinks.setup {})
+  (lsplinks.setup)
   (vim.keymap.set :n :gx lsplinks.gx))
 
 ;; Colorschemes
