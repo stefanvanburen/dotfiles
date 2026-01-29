@@ -87,7 +87,8 @@
 /.lesshst
 
 /.claude
-/.claude.json
+# includes .claude.json.backup.<xyz>
+/.claude.json*
 
 # https://git.sr.ht/~delthas/senpai
 # Contains sensitive information (passwords).
