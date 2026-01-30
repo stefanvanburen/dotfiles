@@ -232,8 +232,7 @@
   (mini-snippets.setup {:snippets [(mini-snippets.gen_loader.from_file (.. snippets-dir
                                                                            :/global.json))
                                    ;; pull in snippets matching language types, from friendly-snippets
-                                   (mini-snippets.gen_loader.from_lang)]})
-  (mini-snippets.start_lsp_server))
+                                   (mini-snippets.gen_loader.from_lang)]}))
 
 (deps.add :chrisgrieser/nvim-scissors)
 (let [scissors (require :scissors)]

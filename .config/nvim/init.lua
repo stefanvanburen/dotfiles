@@ -156,7 +156,6 @@ local snippets_dir = (vim.fn.stdpath("config") .. "/snippets")
 do
   local mini_snippets = require("mini.snippets")
   mini_snippets.setup({snippets = {mini_snippets.gen_loader.from_file((snippets_dir .. "/global.json")), mini_snippets.gen_loader.from_lang()}})
-  mini_snippets.start_lsp_server()
 end
 deps.add("chrisgrieser/nvim-scissors")
 do
