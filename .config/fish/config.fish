@@ -75,7 +75,4 @@ if status --is-interactive
 
     # https://github.com/junegunn/fzf?tab=readme-ov-file#setting-up-shell-integration
     command -q fzf; and fzf --fish | source
-
-    # apply LS_COLORS, for eza
-    set -gx LS_COLORS (vivid generate modus-operandi)
 end

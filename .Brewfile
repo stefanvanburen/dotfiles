@@ -24,8 +24,6 @@ brew "neovim"
 brew "ripgrep"
 # install and run python tools
 brew "uv"
-# For LS_COLORS in fish.
-brew "vivid"
 
 # terminals
 cask "ghostty"
