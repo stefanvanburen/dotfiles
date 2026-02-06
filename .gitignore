@@ -97,3 +97,6 @@
 # https://aerc-mail.org/
 # Contains sensitive information (passwords).
 /.config/aerc/accounts.conf
+
+# Contains sensitive information (password).
+/.config/newsboat/password
