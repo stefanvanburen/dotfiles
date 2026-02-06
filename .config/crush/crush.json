@@ -1,0 +1,11 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "lsp": {
+    "go": {
+      "command": "gopls"
+    },
+    "python": {
+      "command": "ty server"
+    }
+  }
+}
