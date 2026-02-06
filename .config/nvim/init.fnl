@@ -464,6 +464,7 @@
         :svg {:expandtab true :shiftwidth 2}
         :json {:expandtab true :shiftwidth 2}
         :bash {:expandtab true :shiftwidth 2}
+        :toml {:expandtab true :shiftwidth 2}
         :python {:expandtab true :shiftwidth 4}
         :xml {:expandtab true :shiftwidth 4}
         :starlark {:expandtab true :shiftwidth 4 :commentstring "# %s"}
