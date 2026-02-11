@@ -489,6 +489,8 @@
                                                                               value
                                                                               {:scope :local}))})))
 
+(local yaml-ghactions-filetype :yaml.ghactions)
+
 (vim.filetype.add {:extension {:mdx :markdown
                                :star :starlark
                                :gotext :gotmpl
@@ -496,7 +498,8 @@
                    :filename {:.ignore :gitignore
                               :.dockerignore :gitignore
                               :buf.lock :yaml
-                              :uv.lock :toml}})
+                              :uv.lock :toml}
+                   :pattern {".*/%.github/workflows/.*%.ya?ml" yaml-ghactions-filetype}})
 
 ;; Skeleton files.
 ;; :h skeleton
@@ -679,70 +682,72 @@
 
 (local schemastore (require :schemastore))
 
-(local server-settings {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
-                        :gopls {;; https://go.dev/gopls/daemon
-                                :cmd [:gopls :-remote=auto]
-                                :settings {:gopls {;; https://go.dev/gopls/settings#semantictokens-bool
-                                                   :semanticTokens true
-                                                   ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-                                                   :hints {:constantValues true}}}}
-                        ;;; https://github.com/b0o/SchemaStore.nvim#usage
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
-                        :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
-                                                   :validate {:enable true}}}}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
-                        :yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
-                                                   :schemaStore {:enable false
-                                                                 :url ""}}}}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
-                        :clojure_lsp {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome
-                        :biome {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fish_lsp
-                        :fish_lsp {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
-                        :janet_lsp {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff
-                        :ruff {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
-                        :helm_ls {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
-                        :bashls {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tombi
-                        :tombi {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
-                        ;; NOTE: Download omnisharp with mason.
-                        :omnisharp {:cmd [:omnisharp]}
-                        ;; Dockerfiles
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#docker_language_server
-                        :docker_language_server {}
-                        ;; https://sr.ht/~xerool/fennel-ls/
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
-                        ;; See ./flsproject.fnl for configuration.
-                        :fennel_ls {}
-                        ;; LSP for Lua.
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
-                        :lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
-                                                  :workspace {:checkThirdParty false
-                                                              :library vim.env.VIMRUNTIME}}}}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
-                        :rust_analyzer {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
-                        :buf_ls {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
-                        :postgres_lsp {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss
-                        :tailwindcss {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty
-                        :ty {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#starpls
-                        :starpls {:filetypes [:bzl :starlark]}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cue
-                        :cue {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
-                        :ts_query_ls {}
-                        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
-                        :just {}})
+(local server-settings
+       {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
+        :gopls {;; https://go.dev/gopls/daemon
+                :cmd [:gopls :-remote=auto]
+                :settings {:gopls {;; https://go.dev/gopls/settings#semantictokens-bool
+                                   :semanticTokens true
+                                   ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+                                   :hints {:constantValues true}}}}
+        ;;; https://github.com/b0o/SchemaStore.nvim#usage
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
+        :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
+                                   :validate {:enable true}}}}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
+        :yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
+                                   :schemaStore {:enable false :url ""}}}}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
+        :clojure_lsp {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome
+        :biome {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fish_lsp
+        :fish_lsp {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
+        :janet_lsp {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff
+        :ruff {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
+        :helm_ls {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
+        :bashls {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tombi
+        :tombi {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
+        ;; NOTE: Download omnisharp with mason.
+        :omnisharp {:cmd [:omnisharp]}
+        ;; Dockerfiles
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#docker_language_server
+        :docker_language_server {}
+        ;; https://sr.ht/~xerool/fennel-ls/
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
+        ;; See ./flsproject.fnl for configuration.
+        :fennel_ls {}
+        ;; LSP for Lua.
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
+        :lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
+                                  :workspace {:checkThirdParty false
+                                              :library vim.env.VIMRUNTIME}}}}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
+        :rust_analyzer {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
+        :buf_ls {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
+        :postgres_lsp {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss
+        :tailwindcss {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty
+        :ty {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#starpls
+        :starpls {:filetypes [:bzl :starlark]}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cue
+        :cue {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
+        :ts_query_ls {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
+        :just {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gh_actions_ls
+        :gh_actions_ls {:filetypes [yaml-ghactions-filetype]}})
 
 (each [server settings (pairs server-settings)]
   (vim.lsp.config server settings)
