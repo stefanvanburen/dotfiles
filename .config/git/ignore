@@ -47,3 +47,6 @@ CLAUDE.local.md
 
 # https://github.com/charmbracelet/crush
 .crush
+
+# https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent
+.pi
