@@ -50,3 +50,6 @@ CLAUDE.local.md
 
 # https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent
 .pi
+
+# kotlin-language-server
+kls_database.db
