@@ -405,6 +405,8 @@
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
 
+(deps.add :nvim-treesitter/nvim-treesitter-context)
+
 (deps.add :julienvincent/nvim-paredit)
 ;; NOTE: This must be after adding treesitter.
 (let [nvim-paredit (require :nvim-paredit)]
