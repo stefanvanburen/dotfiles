@@ -305,6 +305,11 @@ do
   lsplinks.setup()
   vim.keymap.set("n", "gx", lsplinks.gx)
 end
+deps.add("obsidian-nvim/obsidian.nvim")
+do
+  local obsidian = require("obsidian")
+  obsidian.setup({workspaces = {{name = "vault", path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault"}}, legacy_commands = false})
+end
 deps.add("stefanvanburen/rams")
 deps.add("savq/melange-nvim")
 deps.add("mcchrish/zenbones.nvim")

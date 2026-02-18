@@ -417,6 +417,12 @@
   (lsplinks.setup)
   (vim.keymap.set :n :gx lsplinks.gx))
 
+(deps.add :obsidian-nvim/obsidian.nvim)
+(let [obsidian (require :obsidian)]
+  (obsidian.setup {:legacy_commands false
+                   :workspaces [{:name :vault
+                                 :path "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault"}]}))
+
 ;; Colorschemes
 (deps.add :stefanvanburen/rams)
 (deps.add :savq/melange-nvim)
