@@ -214,7 +214,7 @@ deps.add("b0o/SchemaStore.nvim")
 deps.add("stevearc/conform.nvim")
 do
   local conform = require("conform")
-  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, toml = {lsp_format = "never"}}, format_on_save = {timeout_ms = 5000}, default_format_opts = {lsp_format = "fallback"}})
+  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, toml = {lsp_format = "never"}, yaml = {lsp_format = "never"}}, format_on_save = {timeout_ms = 5000}, default_format_opts = {lsp_format = "fallback"}})
   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 end
 deps.add("mfussenegger/nvim-lint")
@@ -276,7 +276,7 @@ end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _15_}})
 do
   local treesitter = require("nvim-treesitter")
-  local treesitter_languages = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "helm", "html", "janet_simple", "java", "javascript", "json", "just", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "starlark", "textproto", "toml", "xml", "yaml", "zig"}
+  local treesitter_languages = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_rebase", "gitattributes", "gitcommit", "go", "gomod", "gosum", "gotmpl", "helm", "html", "janet_simple", "java", "javascript", "json", "just", "kotlin", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "starlark", "textproto", "toml", "xml", "yaml", "zig"}
   treesitter.install(treesitter_languages)
   local function _16_()
     vim.treesitter.start()

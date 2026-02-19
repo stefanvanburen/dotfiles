@@ -309,7 +309,8 @@
   ;; https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
-                                     :toml {:lsp_format :never}}
+                                     :toml {:lsp_format :never}
+                                     :yaml {:lsp_format :never}}
                   :format_on_save {:timeout_ms 5000}
                   :default_format_opts {:lsp_format :fallback}})
   (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()"))
@@ -373,6 +374,7 @@
                             :javascript
                             :json
                             :just
+                            :kotlin
                             :make
                             :markdown
                             :markdown_inline
