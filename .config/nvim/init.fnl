@@ -419,11 +419,13 @@
   (lsplinks.setup)
   (vim.keymap.set :n :gx lsplinks.gx))
 
-(deps.add :obsidian-nvim/obsidian.nvim)
-(let [obsidian (require :obsidian)]
-  (obsidian.setup {:legacy_commands false
-                   :workspaces [{:name :vault
-                                 :path "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault"}]}))
+;; Only enable Obsidian on PC.
+(let [vault-dir "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault"]
+  (when (= (vim.fn.isdirectory vault-dir) 1)
+    (deps.add :obsidian-nvim/obsidian.nvim)
+    (let [obsidian (require :obsidian)]
+      (obsidian.setup {:legacy_commands false
+                       :workspaces [{:name :vault :path vault-dir}]}))))
 
 ;; Colorschemes
 (deps.add :stefanvanburen/rams)
