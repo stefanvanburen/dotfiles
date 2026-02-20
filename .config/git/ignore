@@ -41,7 +41,7 @@ __pycache__
 flsproject.fnl
 
 # Claude
-**/.claude/settings.local.json
+**/.claude/*
 # https://code.claude.com/docs/en/memory
 CLAUDE.local.md
 
