@@ -692,6 +692,9 @@
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})
 
+;; TODO: Remove for neovim 0.12.
+(vim.filetype.add {:extension {:cel :cel}})
+
 (local schemastore (require :schemastore))
 
 (local server-settings
@@ -759,7 +762,9 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
         :just {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gh_actions_ls
-        :gh_actions_ls {:filetypes [yaml-ghactions-filetype]}})
+        :gh_actions_ls {:filetypes [yaml-ghactions-filetype]}
+        ;; https://github.com/stefanvanburen/cells
+        :cells {:cmd [:cells :serve] :filetypes [:cel]}})
 
 (each [server settings (pairs server-settings)]
   (vim.lsp.config server settings)
