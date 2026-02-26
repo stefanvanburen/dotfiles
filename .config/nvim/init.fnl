@@ -386,6 +386,8 @@
                             :starlark
                             :textproto
                             :toml
+                            :typescript
+                            :vhs
                             :xml
                             :yaml
                             :zig]]
