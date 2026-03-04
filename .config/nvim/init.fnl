@@ -360,9 +360,11 @@
                             :editorconfig
                             :fennel
                             :fish
+                            :git_config
                             :git_rebase
                             :gitattributes
                             :gitcommit
+                            :gitignore
                             :go
                             :gomod
                             :gosum
@@ -491,6 +493,7 @@
         :sql {:wrap true :commentstring "-- %s" :expandtab true :shiftwidth 4}
         :clojure {:expandtab true :textwidth 80}
         :kotlin {:commentstring "// %s"}
+        :just {:expandtab true :shiftwidth 4}
         :markdown {:spell true :wrap true}})
 
 (let [aufiletypes (vim.api.nvim_create_augroup :filetypes {})]
