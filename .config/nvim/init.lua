@@ -276,7 +276,7 @@ end
 deps.add({source = "nvim-treesitter/nvim-treesitter", hooks = {post_checkout = _15_}})
 do
   local treesitter = require("nvim-treesitter")
-  local treesitter_languages = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "go", "gomod", "gosum", "gotmpl", "helm", "html", "janet_simple", "java", "javascript", "json", "just", "kotlin", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "starlark", "textproto", "toml", "typescript", "vhs", "xml", "yaml", "zig"}
+  local treesitter_languages = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "go", "gomod", "gosum", "gotmpl", "helm", "html", "http", "janet_simple", "java", "javascript", "json", "just", "kotlin", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "sql", "ssh_config", "starlark", "textproto", "toml", "typescript", "vhs", "xml", "yaml", "zig"}
   treesitter.install(treesitter_languages)
   local function _16_()
     vim.treesitter.start()
@@ -288,7 +288,7 @@ do
   vim.api.nvim_create_autocmd("FileType", {pattern = treesitter_languages, callback = _16_})
 end
 do
-  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console"}, proto = {"protobuf"}}
+  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console", "shell_session"}, proto = {"protobuf"}}
   for filetype, langs in pairs(filetype_to_langs) do
     vim.treesitter.language.register(filetype, langs)
   end
@@ -375,7 +375,7 @@ do
   vim.cmd.colorscheme(colorscheme)
 end
 vim.api.nvim_create_autocmd("VimResized", {command = ":wincmd ="})
-local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript = {expandtab = true, shiftwidth = 2}, javascriptreact = {expandtab = true, shiftwidth = 2}, typescript = {expandtab = true, shiftwidth = 2}, typescriptreact = {expandtab = true, shiftwidth = 2}, html = {expandtab = true, shiftwidth = 2}, css = {expandtab = true, shiftwidth = 2}, cs = {commentstring = "// %s"}, helm = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = {expandtab = true, shiftwidth = 2}, svg = {expandtab = true, shiftwidth = 2}, json = {expandtab = true, shiftwidth = 2}, bash = {expandtab = true, shiftwidth = 2}, toml = {expandtab = true, shiftwidth = 2}, python = {expandtab = true, shiftwidth = 4}, xml = {expandtab = true, shiftwidth = 4}, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, just = {expandtab = true, shiftwidth = 4}, markdown = {spell = true, wrap = true}}
+local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript = {expandtab = true, shiftwidth = 2}, javascriptreact = {expandtab = true, shiftwidth = 2}, typescript = {expandtab = true, shiftwidth = 2}, typescriptreact = {expandtab = true, shiftwidth = 2}, html = {expandtab = true, shiftwidth = 2}, css = {expandtab = true, shiftwidth = 2}, cs = {commentstring = "// %s"}, helm = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = {expandtab = true, shiftwidth = 2}, svg = {expandtab = true, shiftwidth = 2}, json = {expandtab = true, shiftwidth = 2}, bash = {expandtab = true, shiftwidth = 2}, toml = {expandtab = true, shiftwidth = 2}, python = {expandtab = true, shiftwidth = 4}, xml = {expandtab = true, shiftwidth = 4}, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, just = {expandtab = true, shiftwidth = 4}, markdown = {spell = true, wrap = true, expandtab = false}}
 do
   local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
   for filetype, settings in pairs(filetype_settings) do
@@ -465,17 +465,13 @@ local function _38_()
 end
 map("n", "<leader>w", _38_, {desc = ":write the buffer to the file"})
 local function _39_()
-  return vim.cmd({cmd = "close"})
-end
-map("n", "<leader>cl", _39_, {desc = ":close the current window"})
-local function _40_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _40_, {desc = "Create a horizontal split"})
-local function _41_()
+map("n", "<leader>ss", _39_, {desc = "Create a horizontal split"})
+local function _40_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _41_, {desc = "Create a vertical split"})
+map("n", "<leader>vs", _40_, {desc = "Create a vertical split"})
 map("n", "Q", "@@", {desc = "Repeat last macro"})
 map("n", "0", "^", {desc = "Go to first non-whitespace character"})
 map("n", "^", "0", {desc = "Go to first column in the line"})
@@ -488,41 +484,41 @@ map("n", "C", "\"_C")
 map("n", "J", "mzJ`z")
 map("x", "<", "<gv")
 map("x", ">", ">gv")
-local function _42_()
+local function _41_()
   return vim.show_pos()
 end
-map("n", "<leader>i", _42_)
+map("n", "<leader>i", _41_)
 map("i", "<c-k>", "<esc>")
 map("c", "<c-k>", "<c-c>")
 map("t", "<c-k>", "<c-\\><c-n>")
-local function _43_()
+local function _42_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _43_, {desc = "Create a new tab"})
-local function _44_()
+map("n", "<leader>tn", _42_, {desc = "Create a new tab"})
+local function _43_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _44_, {desc = "Go to next tab"})
-local function _45_()
+map("n", "]r", _43_, {desc = "Go to next tab"})
+local function _44_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _45_, {desc = "Go to prev tab"})
+map("n", "[r", _44_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>")
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_text = {severity = {min = vim.diagnostic.severity.WARN}}, underline = true, float = {border = "single", source = "always", focusable = false}})
-local function lsp_attach(_46_)
-  local buf = _46_.buf
-  local _arg_47_ = _46_.data
-  local client_id = _arg_47_.client_id
+local function lsp_attach(_45_)
+  local buf = _45_.buf
+  local _arg_46_ = _45_.data
+  local client_id = _arg_46_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   if client:supports_method("textDocument/codeAction") then
     local function organize_imports()
       return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     end
     vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", organize_imports, {desc = "Organize Imports"})
-    local function _48_()
+    local function _47_()
       return vim.cmd({cmd = "OrganizeImports"})
     end
-    map("n", "gro", _48_, {desc = "Organize Imports"})
+    map("n", "gro", _47_, {desc = "Organize Imports"})
   else
   end
   if client:supports_method("textDocument/inlayHint") then
@@ -540,6 +536,7 @@ local function lsp_attach(_46_)
   else
   end
   if client:supports_method("textDocument/codeLens") then
+    map("n", "<leader>cl", vim.lsp.codelens.run, {desc = "Run LSP Code Lens"})
     local augroup_id = vim.api.nvim_create_augroup("lsp-code-lens", {clear = false})
     vim.api.nvim_create_autocmd({"BufEnter", "CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.codelens.refresh})
   else
@@ -554,7 +551,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 vim.filetype.add({extension = {cel = "cel"}})
 local schemastore = require("schemastore")
-local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, hints = {constantValues = true}}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, clojure_lsp = {}, biome = {}, fish_lsp = {}, janet_lsp = {}, ruff = {}, helm_ls = {}, bashls = {}, tombi = {}, omnisharp = {cmd = {"omnisharp"}}, docker_language_server = {}, fennel_ls = {}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.env.VIMRUNTIME, checkThirdParty = false}}}}, rust_analyzer = {}, buf_ls = {}, postgres_lsp = {}, tailwindcss = {}, ty = {}, starpls = {filetypes = {"bzl", "starlark"}}, cue = {}, ts_query_ls = {}, just = {}, gh_actions_ls = {filetypes = {yaml_ghactions_filetype}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}}
+local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, hints = {constantValues = true}}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, clojure_lsp = {}, biome = {}, fish_lsp = {}, janet_lsp = {}, ruff = {}, helm_ls = {}, bashls = {}, tombi = {}, omnisharp = {cmd = {"omnisharp"}}, docker_language_server = {}, fennel_ls = {}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.env.VIMRUNTIME, checkThirdParty = false}}}}, rust_analyzer = {}, buf_ls = {}, postgres_lsp = {}, tailwindcss = {}, ty = {}, starpls = {filetypes = {"bzl", "starlark"}}, cue = {}, ts_query_ls = {}, just = {}, gh_actions_ls = {filetypes = {yaml_ghactions_filetype}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {cmd = {"zizmor", "--lsp"}, filetypes = {yaml_ghactions_filetype}}}
 for server, settings in pairs(server_settings) do
   vim.lsp.config(server, settings)
   vim.lsp.enable(server)

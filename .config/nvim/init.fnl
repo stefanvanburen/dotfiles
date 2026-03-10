@@ -371,6 +371,7 @@
                             :gotmpl
                             :helm
                             :html
+                            :http
                             :janet_simple
                             :java
                             :javascript
@@ -406,7 +407,7 @@
                                                  "v:lua.require'nvim-treesitter'.indentexpr()"))}))
 
 (let [filetype-to-langs {:c_sharp [:csharp]
-                         :bash [:shellsession :console]
+                         :bash [:shellsession :console :shell_session]
                          :proto [:protobuf]}]
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
@@ -494,7 +495,7 @@
         :clojure {:expandtab true :textwidth 80}
         :kotlin {:commentstring "// %s"}
         :just {:expandtab true :shiftwidth 4}
-        :markdown {:spell true :wrap true}})
+        :markdown {:spell true :wrap true :expandtab false}})
 
 (let [aufiletypes (vim.api.nvim_create_augroup :filetypes {})]
   (each [filetype settings (pairs filetype-settings)]
@@ -591,9 +592,6 @@
 (map :n :<leader>w #(vim.cmd {:cmd :write})
      {:desc ":write the buffer to the file"})
 
-(map :n :<leader>cl #(vim.cmd {:cmd :close})
-     {:desc ":close the current window"})
-
 (map :n :<leader>ss #(vim.cmd {:cmd :split})
      {:desc "Create a horizontal split"})
 
@@ -684,6 +682,7 @@
     (tset vim.wo (vim.api.nvim_get_current_win) :foldexpr
           "v:lua.vim.lsp.foldexpr()"))
   (when (client:supports_method :textDocument/codeLens)
+    (map :n :<leader>cl vim.lsp.codelens.run {:desc "Run LSP Code Lens"})
     (let [augroup-id (vim.api.nvim_create_augroup :lsp-code-lens {:clear false})]
       (vim.api.nvim_create_autocmd [:BufEnter :CursorHold :InsertLeave]
                                    {:group augroup-id
@@ -769,7 +768,9 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gh_actions_ls
         :gh_actions_ls {:filetypes [yaml-ghactions-filetype]}
         ;; https://github.com/stefanvanburen/cells
-        :cells {:cmd [:cells :serve] :filetypes [:cel]}})
+        :cells {:cmd [:cells :serve] :filetypes [:cel]}
+        ;; https://docs.zizmor.sh/integrations/#generic-lsp-integration
+        :zizmor {:cmd [:zizmor :--lsp] :filetypes [yaml-ghactions-filetype]}})
 
 (each [server settings (pairs server-settings)]
   (vim.lsp.config server settings)
