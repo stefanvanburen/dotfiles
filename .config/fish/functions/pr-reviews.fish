@@ -103,7 +103,13 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
         return 0
     end
 
-    # Display reviews
+    # Collect rows for two-pass alignment
+    set -l row_titles
+    set -l row_urls
+    set -l row_authors
+    set -l row_review_states
+    set -l row_pr_states
+    set -l row_timestamps
     echo $reviews | jq -r --arg login "$viewer_login" '.[] | select(.author != $login) | select(. != null) |
         [
             .title,
@@ -114,12 +120,33 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
             .url
         ] | @tsv' | while read -l line
         set -l fields (string split \t -- $line)
-        set -l title $fields[1]
-        set -l author $fields[2]
-        set -l review_state $fields[3]
-        set -l pr_state $fields[4]
-        set -l submitted_at $fields[5]
-        set -l url $fields[6]
+        set -a row_titles $fields[1]
+        set -a row_authors $fields[2]
+        set -a row_review_states $fields[3]
+        set -a row_pr_states $fields[4]
+        set -a row_timestamps $fields[5]
+        set -a row_urls $fields[6]
+    end
+
+    # Find max visible title width
+    set -l esc \e
+    set -l st $esc\\
+    set -l max_title_width 0
+    for title in $row_titles
+        set -l w (string length --visible $title)
+        if test $w -gt $max_title_width
+            set max_title_width $w
+        end
+    end
+
+    # Display reviews
+    for i in (seq (count $row_titles))
+        set -l title $row_titles[$i]
+        set -l url $row_urls[$i]
+        set -l author $row_authors[$i]
+        set -l review_state $row_review_states[$i]
+        set -l pr_state $row_pr_states[$i]
+        set -l submitted_at $row_timestamps[$i]
 
         # Color code review state
         set -l review_color
@@ -147,18 +174,15 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
                 set pr_color $pr_state
         end
 
-        echo (__pr_reviews_bold $title)" - $review_color ($pr_color)"
-        echo "  by $author - "(__pr_reviews_format_timestamp $submitted_at)
-        echo "  "(__pr_reviews_blue $url)
-        echo ""
+        set -l colored_title (__pr_reviews_blue $title)
+        set -l hyperlink "$esc]8;;$url$st$colored_title$esc]8;;$st"
+        set -l invis (math (string length $colored_title) - (string length --visible $colored_title))
+        set -l padded (string pad --right --width (math $max_title_width + $invis) $hyperlink)
+        echo "$padded  $review_color  ($pr_color)  $author  "(__pr_reviews_format_timestamp $submitted_at)
     end
 end
 
 # Color and formatting helper functions
-function __pr_reviews_bold
-    printf "\033[1m%s\033[0m" $argv[1]
-end
-
 function __pr_reviews_green
     printf "\033[32m%s\033[0m" $argv[1]
 end
