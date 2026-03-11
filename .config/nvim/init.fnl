@@ -772,6 +772,7 @@
         ;; https://docs.zizmor.sh/integrations/#generic-lsp-integration
         :zizmor {:cmd [:zizmor :--lsp] :filetypes [yaml-ghactions-filetype]}})
 
+(vim.lsp.config "*" {:root_markers [:.git]})
 (each [server settings (pairs server-settings)]
   (vim.lsp.config server settings)
   (vim.lsp.enable server))

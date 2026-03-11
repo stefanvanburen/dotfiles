@@ -1,0 +1,8 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        actions/*: ref-pin
+        # $WORK
+        bufbuild/*: ref-pin
+        github/*: ref-pin
