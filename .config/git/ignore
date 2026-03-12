@@ -11,6 +11,9 @@
 __pycache__
 
 # ignore my own pre-commit hooks
+# prek hooks: https://prek.j178.dev/configuration/#toml-prektoml
+prek.toml
+# legacy: pre-commit: https://prek.j178.dev/configuration/#yaml-pre-commit-configyaml-yml
 .pre-commit-config.yaml
 
 # macOS
