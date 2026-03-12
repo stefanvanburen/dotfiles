@@ -376,6 +376,8 @@
                             :java
                             :javascript
                             :json
+                            :json5
+                            :jsx
                             :just
                             :kotlin
                             :make
@@ -389,6 +391,7 @@
                             :starlark
                             :textproto
                             :toml
+                            :tsx
                             :typescript
                             :vhs
                             :xml
@@ -444,6 +447,7 @@
 (deps.add "https://git.sr.ht/~p00f/moduster.nvim")
 
 ;; https://smallseasons.guide
+;; https://stefan.vanburen.xyz/blog/small-seasons/
 (let [day-of-month (tonumber (vim.fn.strftime "%d"))
       colorscheme (case (vim.fn.strftime "%m")
                     :01 :miniwinter
