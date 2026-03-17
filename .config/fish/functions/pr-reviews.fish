@@ -107,6 +107,7 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
     set -l row_titles
     set -l row_urls
     set -l row_authors
+    set -l row_repos
     set -l row_review_states
     set -l row_pr_states
     set -l row_timestamps
@@ -117,7 +118,8 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
             .review_state,
             .state,
             .submitted_at,
-            .url
+            .url,
+            .repo
         ] | @tsv' | while read -l line
         set -l fields (string split \t -- $line)
         set -a row_titles $fields[1]
@@ -126,17 +128,28 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
         set -a row_pr_states $fields[4]
         set -a row_timestamps $fields[5]
         set -a row_urls $fields[6]
+        set -a row_repos $fields[7]
     end
 
-    # Find max visible title width
+    # Find max visible column widths
     set -l esc \e
     set -l st $esc\\
     set -l max_title_width 0
-    for title in $row_titles
-        set -l w (string length --visible $title)
-        if test $w -gt $max_title_width
-            set max_title_width $w
-        end
+    set -l max_review_state_width 0
+    set -l max_pr_state_width 0
+    set -l max_repo_width 0
+    set -l max_author_width 0
+    for i in (seq (count $row_titles))
+        set -l w (string length --visible $row_titles[$i])
+        if test $w -gt $max_title_width; set max_title_width $w; end
+        set -l w (string length --visible $row_review_states[$i])
+        if test $w -gt $max_review_state_width; set max_review_state_width $w; end
+        set -l w (string length --visible $row_pr_states[$i])
+        if test $w -gt $max_pr_state_width; set max_pr_state_width $w; end
+        set -l w (string length --visible $row_repos[$i])
+        if test $w -gt $max_repo_width; set max_repo_width $w; end
+        set -l w (string length --visible $row_authors[$i])
+        if test $w -gt $max_author_width; set max_author_width $w; end
     end
 
     # Display reviews
@@ -144,6 +157,7 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
         set -l title $row_titles[$i]
         set -l url $row_urls[$i]
         set -l author $row_authors[$i]
+        set -l repo $row_repos[$i]
         set -l review_state $row_review_states[$i]
         set -l pr_state $row_pr_states[$i]
         set -l submitted_at $row_timestamps[$i]
@@ -176,9 +190,16 @@ function pr-reviews --description 'Get GitHub PR reviews from the last N days'
 
         set -l colored_title (__pr_reviews_blue $title)
         set -l hyperlink "$esc]8;;$url$st$colored_title$esc]8;;$st"
-        set -l invis (math (string length $colored_title) - (string length --visible $colored_title))
-        set -l padded (string pad --right --width (math $max_title_width + $invis) $hyperlink)
-        echo "$padded  $review_color  ($pr_color)  $author  "(__pr_reviews_format_timestamp $submitted_at)
+        set -l title_invis (math (string length $colored_title) - (string length --visible $colored_title))
+        set -l padded_title (string pad --right --width (math $max_title_width + $title_invis) $hyperlink)
+
+        set -l padded_review (string pad --right --width $max_review_state_width $review_color)
+        set -l padded_pr (string pad --right --width $max_pr_state_width $pr_color)
+
+        set -l padded_repo (string pad --right --width $max_repo_width $repo)
+        set -l padded_author (string pad --right --width $max_author_width $author)
+
+        echo "$padded_title  $padded_review  ($padded_pr)  $padded_repo  $padded_author  "(__pr_reviews_format_timestamp $submitted_at)
     end
 end
 
