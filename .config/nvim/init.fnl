@@ -684,7 +684,8 @@
     (tset vim.wo (vim.api.nvim_get_current_win) :foldexpr
           "v:lua.vim.lsp.foldexpr()"))
   (when (client:supports_method :textDocument/codeLens)
-    (map :n :<leader>cl vim.lsp.codelens.run {:desc "Run LSP Code Lens"})
+    ;; TODO: Remove after nvim 0.12 release; added as a default.
+    (map :n :<leader>grx vim.lsp.codelens.run {:desc "Run LSP Code Lens"})
     (let [augroup-id (vim.api.nvim_create_augroup :lsp-code-lens {:clear false})]
       (vim.api.nvim_create_autocmd [:BufEnter :CursorHold :InsertLeave]
                                    {:group augroup-id

@@ -533,7 +533,7 @@ local function lsp_attach(_45_)
   else
   end
   if client:supports_method("textDocument/codeLens") then
-    map("n", "<leader>cl", vim.lsp.codelens.run, {desc = "Run LSP Code Lens"})
+    map("n", "<leader>grx", vim.lsp.codelens.run, {desc = "Run LSP Code Lens"})
     local augroup_id = vim.api.nvim_create_augroup("lsp-code-lens", {clear = false})
     vim.api.nvim_create_autocmd({"BufEnter", "CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.codelens.refresh})
   else
