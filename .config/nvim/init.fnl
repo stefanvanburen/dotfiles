@@ -177,7 +177,9 @@
 
 (let [mini-misc (require :mini.misc)]
   (mini-misc.setup)
-  (mini-misc.setup_termbg_sync))
+  (mini-misc.setup_termbg_sync)
+  (mini-misc.setup_restore_cursor)
+  (map :n :<leader>z mini-misc.zoom {:desc "Toggle zoom of the current buffer"}))
 
 (let [mini-hipatterns (require :mini.hipatterns)]
   (mini-hipatterns.setup {:highlighters {:hex_color (mini-hipatterns.gen_highlighter.hex_color)
@@ -217,10 +219,6 @@
 
 (let [mini-icons (require :mini.icons)]
   (mini-icons.setup {:style :ascii}))
-
-(let [mini-misc (require :mini.misc)]
-  (mini-misc.setup)
-  (map :n :<leader>z mini-misc.zoom {:desc "Toggle zoom of the current buffer"}))
 
 ;;;; snippets
 

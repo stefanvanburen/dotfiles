@@ -104,6 +104,8 @@ do
   local mini_misc = require("mini.misc")
   mini_misc.setup()
   mini_misc.setup_termbg_sync()
+  mini_misc.setup_restore_cursor()
+  map("n", "<leader>z", mini_misc.zoom, {desc = "Toggle zoom of the current buffer"})
 end
 do
   local mini_hipatterns = require("mini.hipatterns")
@@ -145,11 +147,6 @@ end
 do
   local mini_icons = require("mini.icons")
   mini_icons.setup({style = "ascii"})
-end
-do
-  local mini_misc = require("mini.misc")
-  mini_misc.setup()
-  map("n", "<leader>z", mini_misc.zoom, {desc = "Toggle zoom of the current buffer"})
 end
 deps.add("rafamadriz/friendly-snippets")
 local snippets_dir = (vim.fn.stdpath("config") .. "/snippets")
