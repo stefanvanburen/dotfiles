@@ -285,7 +285,7 @@ do
   vim.api.nvim_create_autocmd("FileType", {pattern = treesitter_languages, callback = _16_})
 end
 do
-  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console", "shell_session"}, proto = {"protobuf"}}
+  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console", "shell_session"}, objc = {"objectivec"}, proto = {"protobuf"}}
   for filetype, langs in pairs(filetype_to_langs) do
     vim.treesitter.language.register(filetype, langs)
   end
