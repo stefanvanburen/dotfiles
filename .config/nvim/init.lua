@@ -159,6 +159,11 @@ do
   local scissors = require("scissors")
   scissors.setup({snippetDir = snippets_dir})
 end
+deps.add("chrisgrieser/nvim-origami")
+do
+  local origami = require("origami")
+  origami.setup({autoFold = {kinds = {"imports"}}})
+end
 deps.add("tpope/vim-eunuch")
 deps.add("andymass/vim-matchup")
 vim.g.matchup_matchparen_offscreen = {method = "popup"}

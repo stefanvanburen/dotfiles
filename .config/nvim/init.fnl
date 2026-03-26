@@ -238,6 +238,11 @@
 
 ;;;;
 
+(deps.add :chrisgrieser/nvim-origami)
+(let [origami (require :origami)]
+  (origami.setup {;; drop comments from autofold kinds, which are important.
+                  :autoFold {:kinds [:imports]}}))
+
 (deps.add :tpope/vim-eunuch)
 (deps.add :andymass/vim-matchup)
 (set vim.g.matchup_matchparen_offscreen {:method :popup})
