@@ -261,6 +261,9 @@
 (deps.add :tpope/vim-rhubarb)
 (deps.add "https://git.sr.ht/~willdurand/srht.vim")
 
+(set vim.g.diffs {:integrations {:fugitive true}})
+(deps.add :barrettruth/diffs.nvim)
+
 (deps.add :tpope/vim-dispatch)
 (map :n :<leader>mm ":make<cr>")
 (map :n :<leader>MM ":Make<cr>")
