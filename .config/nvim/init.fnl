@@ -565,6 +565,7 @@
 ;;; Mappings
 
 (map :n :<leader>du #(vim.cmd {:cmd :DepsUpdate}))
+(map :n :<leader>ma #(vim.cmd {:cmd :Mason}))
 
 ;; ; -> :
 (map :n ";" ":")
