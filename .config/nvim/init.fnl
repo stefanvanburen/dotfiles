@@ -1,16 +1,3 @@
-(local path-package (.. (vim.fn.stdpath :data) :/site/))
-(local mini-path (.. path-package :pack/deps/start/mini.nvim))
-(when (not (vim.uv.fs_stat mini-path))
-  (vim.system [:git
-               :clone
-               "--filter=blob:none"
-               "https://github.com/nvim-mini/mini.nvim"
-               mini-path])
-  (vim.cmd "packadd mini.nvim | helptags ALL"))
-
-(local deps (require :mini.deps))
-(deps.setup {:path {:package path-package}})
-
 ;;; Settings
 
 ;; Don't load netrw - using mini.files instead.
@@ -97,7 +84,67 @@
 
 ;;; Plugins
 
-(deps.add :nvim-mini/mini.nvim)
+(set vim.g.diffs {:integrations {:fugitive true}})
+
+(vim.api.nvim_create_autocmd :PackChanged
+                             {:callback (fn [ev]
+                                          (let [name (ev.data.spec.name)
+                                                kind (ev.data.kind)]
+                                            (when (and (= name :nvim-treesitter)
+                                                       (= kind :update))
+                                              (when (not ev.data.active)
+                                                (vim.cmd.packadd :nvim-treesitter)
+                                                (vim.cmd {:cmd :TSUpdate})))
+                                            (when (and (= name :mason)
+                                                       (= kind :update))
+                                              (when (not ev.data.active)
+                                                (vim.cmd.packadd :mason)
+                                                (vim.cmd {:cmd :MasonUpdate})))))})
+
+(vim.pack.add ["https://github.com/nvim-mini/mini.nvim"
+               ;; snippets
+               "https://github.com/rafamadriz/friendly-snippets"
+               "https://github.com/chrisgrieser/nvim-scissors"
+               "https://github.com/chrisgrieser/nvim-origami"
+               "https://github.com/tpope/vim-eunuch"
+               "https://github.com/andymass/vim-matchup"
+               "https://github.com/tpope/vim-abolish"
+               "https://github.com/rktjmp/paperplanes.nvim"
+               "https://github.com/rktjmp/lush.nvim"
+               "https://github.com/lewis6991/fileline.nvim"
+               "https://github.com/tpope/vim-fugitive"
+               "https://github.com/tpope/vim-rhubarb"
+               "https://git.sr.ht/~willdurand/srht.vim"
+               "https://github.com/barrettruth/diffs.nvim"
+               "https://github.com/tpope/vim-dispatch"
+               ;; dispatch is a dependency of dadbod
+               "https://github.com/tpope/vim-dadbod"
+               "https://github.com/fladson/vim-kitty"
+               "https://github.com/janet-lang/janet.vim"
+               "https://github.com/qvalentin/helm-ls.nvim"
+               "https://github.com/Olical/nfnl"
+               "https://github.com/Olical/conjure"
+               "https://github.com/gpanders/nvim-parinfer"
+               "https://github.com/vim-test/vim-test"
+               "https://github.com/neovim/nvim-lspconfig"
+               "https://github.com/b0o/SchemaStore.nvim"
+               "https://github.com/stevearc/conform.nvim"
+               "https://github.com/mfussenegger/nvim-lint"
+               "https://github.com/williamboman/mason.nvim"
+               "https://github.com/williamboman/mason-lspconfig.nvim"
+               "https://github.com/nvim-treesitter/nvim-treesitter"
+               "https://github.com/nvim-treesitter/nvim-treesitter-context"
+               "https://github.com/julienvincent/nvim-paredit"
+               ;; Colorschemes
+               "https://github.com/stefanvanburen/rams"
+               "https://github.com/savq/melange-nvim"
+               "https://github.com/mcchrish/zenbones.nvim"
+               "https://github.com/rose-pine/neovim"
+               "https://github.com/lunacookies/vim-plan9"
+               "https://github.com/raphael-proust/vacme"
+               "https://github.com/miikanissi/modus-themes.nvim"
+               "https://git.sr.ht/~p00f/alabaster.nvim"
+               "https://git.sr.ht/~p00f/moduster.nvim"])
 
 ;; mini-basics should be first, to set up mappings like <Leader>
 (let [mini-basics (require :mini.basics)]
@@ -222,8 +269,6 @@
 
 ;;;; snippets
 
-(deps.add :rafamadriz/friendly-snippets)
-
 (local snippets-dir (.. (vim.fn.stdpath :config) :/snippets))
 
 (let [mini-snippets (require :mini.snippets)]
@@ -232,70 +277,43 @@
                                    ;; pull in snippets matching language types, from friendly-snippets
                                    (mini-snippets.gen_loader.from_lang)]}))
 
-(deps.add :chrisgrieser/nvim-scissors)
 (let [scissors (require :scissors)]
   (scissors.setup {:snippetDir snippets-dir}))
 
 ;;;;
 
-(deps.add :chrisgrieser/nvim-origami)
 (let [origami (require :origami)]
   (origami.setup {;; drop comments from autofold kinds, which are important.
                   :autoFold {:kinds [:imports]}}))
 
-(deps.add :tpope/vim-eunuch)
-(deps.add :andymass/vim-matchup)
 (set vim.g.matchup_matchparen_offscreen {:method :popup})
-(deps.add :tpope/vim-abolish)
-(deps.add :rktjmp/paperplanes.nvim)
 (let [paperplanes (require :paperplanes)]
   (paperplanes.setup {:provider :gist}))
 
-(deps.add :rktjmp/lush.nvim)
-
-(deps.add :lewis6991/fileline.nvim)
-
-(deps.add :tpope/vim-fugitive)
 ;; Remove legacy fugitive commands (which only result in warnings, rather than something useful)
 (set vim.g.fugitive_legacy_commands 0)
-(deps.add :tpope/vim-rhubarb)
-(deps.add "https://git.sr.ht/~willdurand/srht.vim")
 
-(set vim.g.diffs {:integrations {:fugitive true}})
-(deps.add :barrettruth/diffs.nvim)
-
-(deps.add :tpope/vim-dispatch)
+;; vim-dispatch
 (map :n :<leader>mm ":make<cr>")
 (map :n :<leader>MM ":Make<cr>")
 (map :n :<leader>m! ":make!<cr>")
 (map :n :<leader>M! ":Make!<cr>")
-
-(deps.add {:source :tpope/vim-dadbod :depends [:tpope/vim-dispatch]})
 
 ;; Set DATABASE_URL in the environment to access the configured database via dadbod.
 (map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]})
      {:desc "Open dadbod to the current $DATABASE_URL"})
 
 ;; Filetype-specific plugins
-(deps.add :fladson/vim-kitty)
-(deps.add :janet-lang/janet.vim)
-(deps.add :qvalentin/helm-ls.nvim)
-
-(deps.add :Olical/nfnl)
 
 ;; NOTE: sql in conjure defaults to postgres.
 ;; for sqlite (using `sqlite3` CLI):
 ;; (set vim.g.conjure#client#sql#stdio#command "sqlite3 <.db-file-path>")
 ;; (set vim.g.conjure#client#sql#stdio#prompt_pattern "sqlite> ")
-(deps.add :Olical/conjure)
 (set vim.g.conjure#highlight#enabled true)
 (set vim.g.conjure#client#clojure#nrepl#connection#auto_repl#hidden true)
 (set vim.g.conjure#filetype#janet :conjure.client.janet.stdio)
 (set vim.g.conjure#mapping#doc_word false)
 
-(deps.add :gpanders/nvim-parinfer)
-
-(deps.add :vim-test/vim-test)
 (set vim.g.test#strategy :neovim_sticky)
 ;; reopen the buffer if it's already open
 (set vim.g.test#neovim_sticky#reopen_window 1)
@@ -306,11 +324,6 @@
 (map :n :<leader>tf #(vim.cmd {:cmd :TestFile})
      {:desc "Run all tests in the file"})
 
-(deps.add :neovim/nvim-lspconfig)
-
-(deps.add :b0o/SchemaStore.nvim)
-
-(deps.add :stevearc/conform.nvim)
 (let [conform (require :conform)]
   ;; https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
@@ -321,33 +334,24 @@
                   :default_format_opts {:lsp_format :fallback}})
   (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()"))
 
-(deps.add :mfussenegger/nvim-lint)
 (let [nvim-lint (require :lint)
       ;; https://github.com/mfussenegger/nvim-lint#available-linters
       linters (collect [k v (pairs {:fish [:fish]
                                     :janet [:janet]
                                     :markdown [:rumdl]
-                                    :go [:golangcilint]
-                                    :fennel [:fennel]})]
+                                    :go [:golangcilint]})]
                 (values k
                         (icollect [_ v (ipairs v)]
                           (if (= 1 (vim.fn.executable v)) v))))]
   (set nvim-lint.linters_by_ft linters)
   (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)}))
 
-(deps.add {:source :williamboman/mason.nvim
-           :hooks {:post_checkout #(vim.cmd ":MasonUpdate")}})
-
 (let [mason (require :mason)]
   (mason.setup))
 
-(deps.add :williamboman/mason-lspconfig.nvim)
 (let [mason-lspconfig (require :mason-lspconfig)]
   ;; NOTE: Will enable Mason-installed LSP servers by default.
   (mason-lspconfig.setup))
-
-(deps.add {:source :nvim-treesitter/nvim-treesitter
-           :hooks {:post_checkout #(vim.cmd ":TSUpdate")}})
 
 (let [treesitter (require :nvim-treesitter)
       treesitter-languages [:c
@@ -406,7 +410,7 @@
   (treesitter.install treesitter-languages)
   (vim.api.nvim_create_autocmd :FileType
                                {:pattern treesitter-languages
-                                :callback (fn []
+                                :callback (fn [ev]
                                             (vim.treesitter.start)
                                             ;; Default to treesitter folding (overridden if LSP supports it)
                                             (set vim.wo.foldexpr
@@ -422,36 +426,17 @@
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
 
-(deps.add :nvim-treesitter/nvim-treesitter-context)
-
-(deps.add :julienvincent/nvim-paredit)
 ;; NOTE: This must be after adding treesitter.
 (let [nvim-paredit (require :nvim-paredit)]
   (nvim-paredit.setup))
 
-(deps.add :icholy/lsplinks.nvim)
-(let [lsplinks (require :lsplinks)]
-  (lsplinks.setup)
-  (vim.keymap.set :n :gx lsplinks.gx))
-
 ;; Only enable Obsidian on PC.
 (let [vault-dir "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault"]
   (when (= (vim.fn.isdirectory vault-dir) 1)
-    (deps.add :obsidian-nvim/obsidian.nvim)
+    (vim.pack.add ["https://github.com/obsidian-nvim/obsidian.nvim"])
     (let [obsidian (require :obsidian)]
       (obsidian.setup {:legacy_commands false
                        :workspaces [{:name :vault :path vault-dir}]}))))
-
-;; Colorschemes
-(deps.add :stefanvanburen/rams)
-(deps.add :savq/melange-nvim)
-(deps.add :mcchrish/zenbones.nvim)
-(deps.add :rose-pine/neovim)
-(deps.add :lunacookies/vim-plan9)
-(deps.add :raphael-proust/vacme)
-(deps.add :miikanissi/modus-themes.nvim)
-(deps.add "https://git.sr.ht/~p00f/alabaster.nvim")
-(deps.add "https://git.sr.ht/~p00f/moduster.nvim")
 
 ;; https://smallseasons.guide
 ;; https://stefan.vanburen.xyz/blog/small-seasons/
@@ -564,7 +549,7 @@
 
 ;;; Mappings
 
-(map :n :<leader>du #(vim.cmd {:cmd :DepsUpdate}))
+(map :n :<leader>du vim.pack.update)
 (map :n :<leader>ma #(vim.cmd {:cmd :Mason}))
 
 ;; ; -> :
@@ -694,8 +679,6 @@
     (tset vim.wo (vim.api.nvim_get_current_win) :foldexpr
           "v:lua.vim.lsp.foldexpr()"))
   (when (client:supports_method :textDocument/codeLens)
-    ;; TODO: Remove after nvim 0.12 release; added as a default.
-    (map :n :<leader>grx vim.lsp.codelens.run {:desc "Run LSP Code Lens"})
     (let [augroup-id (vim.api.nvim_create_augroup :lsp-code-lens {:clear false})]
       (vim.api.nvim_create_autocmd [:BufEnter :CursorHold :InsertLeave]
                                    {:group augroup-id
@@ -708,9 +691,6 @@
   (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"}))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})
-
-;; TODO: Remove for neovim 0.12.
-(vim.filetype.add {:extension {:cel :cel}})
 
 (local schemastore (require :schemastore))
 
@@ -754,7 +734,7 @@
         ;; https://sr.ht/~xerool/fennel-ls/
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
         ;; See ./flsproject.fnl for configuration.
-        :fennel_ls {}
+        ;; :fennel_ls {}
         ;; LSP for Lua.
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
         :lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}

@@ -39,6 +39,8 @@
 
 # nvim files
 /.config/nvim/spell/en.utf-8.add*
+# I don't mind if plugin versions are skewed.
+/.config/nvim/nvim-pack-lock.json
 
 # macOS trash directory
 /.Trash
