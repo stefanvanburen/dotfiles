@@ -207,7 +207,7 @@ end
 map("n", "<leader>tf", _12_, {desc = "Run all tests in the file"})
 do
   local conform = require("conform")
-  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, toml = {lsp_format = "never"}, yaml = {lsp_format = "never"}}, format_on_save = {timeout_ms = 5000}, default_format_opts = {lsp_format = "fallback"}})
+  conform.setup({formatters_by_ft = {fennel = {"fnlfmt"}, fish = {"fish_indent"}, yaml = {lsp_format = "never"}}, format_on_save = {timeout_ms = 5000}, default_format_opts = {lsp_format = "fallback"}})
   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 end
 do
