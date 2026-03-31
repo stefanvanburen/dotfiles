@@ -88,8 +88,8 @@
 
 (vim.api.nvim_create_autocmd :PackChanged
                              {:callback (fn [ev]
-                                          (let [name (ev.data.spec.name)
-                                                kind (ev.data.kind)]
+                                          (let [name ev.data.spec.name
+                                                kind ev.data.kind]
                                             (when (and (= name :nvim-treesitter)
                                                        (= kind :update))
                                               (when (not ev.data.active)

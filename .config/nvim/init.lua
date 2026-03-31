@@ -20,8 +20,8 @@ do
 end
 vim.g.diffs = {integrations = {fugitive = true}}
 local function _3_(ev)
-  local name = ev.data.spec.name()
-  local kind = ev.data.kind()
+  local name = ev.data.spec.name
+  local kind = ev.data.kind
   if ((name == "nvim-treesitter") and (kind == "update")) then
     if not ev.data.active then
       vim.cmd.packadd("nvim-treesitter")
