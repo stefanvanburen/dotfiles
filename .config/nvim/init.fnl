@@ -682,7 +682,7 @@
       (vim.api.nvim_create_autocmd [:BufEnter :CursorHold :InsertLeave]
                                    {:group augroup-id
                                     :buffer buf
-                                    :callback vim.lsp.codelens.refresh})))
+                                    :callback #(vim.lsp.codelens.enable true)})))
   (when (client:supports_method :textDocument/completion)
     (vim.lsp.completion.enable true client.id buf {:autotrigger true})
     (map :i :<C-space> vim.lsp.completion.get

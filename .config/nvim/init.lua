@@ -504,7 +504,10 @@ local function lsp_attach(_47_)
   end
   if client:supports_method("textDocument/codeLens") then
     local augroup_id = vim.api.nvim_create_augroup("lsp-code-lens", {clear = false})
-    vim.api.nvim_create_autocmd({"BufEnter", "CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.codelens.refresh})
+    local function _54_()
+      return vim.lsp.codelens.enable(true)
+    end
+    vim.api.nvim_create_autocmd({"BufEnter", "CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = _54_})
   else
   end
   if client:supports_method("textDocument/completion") then
