@@ -413,9 +413,7 @@
                                             ;; Default to treesitter folding (overridden if LSP supports it)
                                             (set vim.wo.foldexpr
                                                  "v:lua.vim.treesitter.foldexpr()")
-                                            (set vim.wo.foldmethod :expr)
-                                            (set vim.bo.indentexpr
-                                                 "v:lua.require'nvim-treesitter'.indentexpr()"))}))
+                                            (set vim.wo.foldmethod :expr))}))
 
 (let [filetype-to-langs {:c_sharp [:csharp]
                          :bash [:shellsession :console :shell_session]

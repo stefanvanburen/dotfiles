@@ -265,7 +265,6 @@ do
     vim.treesitter.start()
     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.wo.foldmethod = "expr"
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     return nil
   end
   vim.api.nvim_create_autocmd("FileType", {pattern = treesitter_languages, callback = _18_})
