@@ -110,7 +110,6 @@
                "https://github.com/andymass/vim-matchup"
                "https://github.com/tpope/vim-abolish"
                "https://github.com/rktjmp/paperplanes.nvim"
-               "https://github.com/rktjmp/lush.nvim"
                "https://github.com/lewis6991/fileline.nvim"
                "https://github.com/tpope/vim-fugitive"
                "https://github.com/tpope/vim-rhubarb"
