@@ -1,15 +1,26 @@
 # https://ghostty.org/docs/config
 
+# https://ghostty.org/docs/config/reference#theme
 theme = light:modus_operandi,dark:modus_vivendi
 # theme = light:Nvim Light,dark:Nvim Dark
 # theme = Alabaster
 # theme = light:zenbones_light,dark:zenbones_dark
 
 # typically configuring fonts - check ./config.fonts
+# https://ghostty.org/docs/config/reference#config-file
 config-file = ?config.local
 
+# https://ghostty.org/docs/config/reference#cursor-color
 cursor-color = #EE483E
+# https://ghostty.org/docs/config/reference#adjust-cursor-thickness
+# Make the cursor thicker.
 adjust-cursor-thickness = 3
+
+# default: 10000000; bumped by an order of magnitude
+# ref: `ghostty +show-config --default | rg scrollback-limit`
+scrollback-limit = 100000000
+
+# https://ghostty.org/docs/config/keybind
 
 keybind = ctrl+f>h=goto_split:left
 keybind = ctrl+f>j=goto_split:bottom
@@ -24,6 +35,3 @@ keybind = ctrl+f>z=toggle_split_zoom
 
 # https://ghostty.org/docs/config/keybind/reference#write_scrollback_file
 keybind = ctrl+f>p=write_scrollback_file:paste
-
-# default: 10000000; bumped by an order of magnitude
-scrollback-limit = 100000000
