@@ -760,7 +760,11 @@
         ;; https://github.com/stefanvanburen/cells
         :cells {:cmd [:cells :serve] :filetypes [:cel]}
         ;; https://docs.zizmor.sh/integrations/#generic-lsp-integration
-        :zizmor {:cmd [:zizmor :--lsp] :filetypes [yaml-ghactions-filetype]}})
+        :zizmor {:cmd [:zizmor :--lsp] :filetypes [yaml-ghactions-filetype]}
+        ;; https://docs.syntaqlite.com/v0.2.15/getting-started/other-editors/
+        :syntaqlite {:cmd [:syntaqlite :lsp]
+                     :filetypes [:sql]
+                     :root_markers [:syntaqlite.toml :.git]}})
 
 (vim.lsp.config "*" {:root_markers [:.git]})
 (each [server settings (pairs server-settings)]
