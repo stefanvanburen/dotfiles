@@ -283,7 +283,9 @@
 
 (let [origami (require :origami)]
   (origami.setup {;; drop comments from autofold kinds, which are important.
-                  :autoFold {:kinds [:imports]}}))
+                  :autoFold {:kinds [:imports]}
+                  ;; Disable keymaps
+                  :foldKeymaps {:setup false}}))
 
 (set vim.g.matchup_matchparen_offscreen {:method :popup})
 (let [paperplanes (require :paperplanes)]

@@ -174,7 +174,7 @@ do
 end
 do
   local origami = require("origami")
-  origami.setup({autoFold = {kinds = {"imports"}}})
+  origami.setup({autoFold = {kinds = {"imports"}}, foldKeymaps = {setup = false}})
 end
 vim.g.matchup_matchparen_offscreen = {method = "popup"}
 do
