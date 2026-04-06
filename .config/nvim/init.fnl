@@ -702,7 +702,8 @@
         ;;; https://github.com/b0o/SchemaStore.nvim#usage
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
         :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
-                                   :validate {:enable true}}}}
+                                   :validate {:enable true}}}
+                 :filetypes [:json :jsonc :json5]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
         :yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
                                    :schemaStore {:enable false :url ""}}}}
