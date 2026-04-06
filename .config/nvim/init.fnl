@@ -266,6 +266,9 @@
 (let [mini-icons (require :mini.icons)]
   (mini-icons.setup {:style :ascii}))
 
+(let [mini-completion (require :mini.completion)]
+  (mini-completion.setup {}))
+
 ;;;; snippets
 
 (local snippets-dir (.. (vim.fn.stdpath :config) :/snippets))
@@ -682,10 +685,6 @@
                                    {:group augroup-id
                                     :buffer buf
                                     :callback #(vim.lsp.codelens.enable true)})))
-  (when (client:supports_method :textDocument/completion)
-    (vim.lsp.completion.enable true client.id buf {:autotrigger true})
-    (map :i :<C-space> vim.lsp.completion.get
-         {:buffer buf :desc "Manually trigger completion"}))
   (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"}))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})

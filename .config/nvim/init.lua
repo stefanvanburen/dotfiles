@@ -163,6 +163,10 @@ do
   local mini_icons = require("mini.icons")
   mini_icons.setup({style = "ascii"})
 end
+do
+  local mini_completion = require("mini.completion")
+  mini_completion.setup({})
+end
 local snippets_dir = (vim.fn.stdpath("config") .. "/snippets")
 do
   local mini_snippets = require("mini.snippets")
@@ -507,11 +511,6 @@ local function lsp_attach(_47_)
       return vim.lsp.codelens.enable(true)
     end
     vim.api.nvim_create_autocmd({"BufEnter", "CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = _54_})
-  else
-  end
-  if client:supports_method("textDocument/completion") then
-    vim.lsp.completion.enable(true, client.id, buf, {autotrigger = true})
-    map("i", "<C-space>", vim.lsp.completion.get, {buffer = buf, desc = "Manually trigger completion"})
   else
   end
   return map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})
