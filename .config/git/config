@@ -30,6 +30,9 @@
 	; mnemonic for diff staged
 	ds = diff --cached
 
+	; mnemonic for difftool
+	dt = difftool
+
 	; oneline log
 	lg = log --oneline
 	; use Fugitive's :Git log
@@ -82,6 +85,12 @@
 [diff]
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
+
+	tool = nvim_difftool
+[difftool]
+	prompt = false
+[difftool "nvim_difftool"]
+	cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
 
 [fetch]
 	prune = true

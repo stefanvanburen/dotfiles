@@ -487,6 +487,7 @@
                 :commentstring "// %s"
                 :cindent true}
         :gitcommit {:spell true}
+        :gitconfig {:expandtab false :shiftwidth 2}
         :fennel {:commentstring ";; %s"}
         :sql {:wrap true :commentstring "-- %s" :expandtab true :shiftwidth 4}
         :clojure {:expandtab true :textwidth 80}
