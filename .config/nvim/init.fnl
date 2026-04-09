@@ -413,7 +413,7 @@
   (treesitter.install treesitter-languages)
   (vim.api.nvim_create_autocmd :FileType
                                {:pattern treesitter-languages
-                                :callback (fn [ev]
+                                :callback (fn []
                                             (vim.treesitter.start)
                                             ;; Default to treesitter folding (overridden if LSP supports it)
                                             (set vim.wo.foldexpr
