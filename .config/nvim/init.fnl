@@ -745,8 +745,6 @@
         :buf_ls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
         :postgres_lsp {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss
-        :tailwindcss {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty
         :ty {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#starpls
