@@ -22,13 +22,13 @@ brew "just"
 brew "neovim"
 # better searching - configured in ~/.config/ripgreprc.
 brew "ripgrep"
-# install and run python tools
+# install and run python tools (that aren't available in homebrew)
 brew "uv"
 
 # terminals
 cask "ghostty"
 cask "kitty"
 
-# [homebrew-bundle's README][^1] designates the example Brewfile as `ruby` in the markdown.
-# [^1]: https://github.com/Homebrew/homebrew-bundle/blob/master/README.md
+# [homebrew's bundle docs][^1] designates the example Brewfile as `ruby` in the markdown.
+# [^1]: https://github.com/Homebrew/brew/blob/544728fd33f0a22ed2b934bfd75b7f6612115e8d/docs/Brew-Bundle-and-Brewfile.md#L61
 # vim: set filetype=ruby:
