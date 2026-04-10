@@ -84,7 +84,9 @@
 
 ;;; Plugins
 
-(set vim.g.diffs {:integrations {:fugitive true}})
+(set vim.g.diffs {:integrations {:fugitive true}
+                  ;; Don't warn when hunks have too many lines to highlight.
+                  :highlights {:warn_max_lines false}})
 
 (vim.api.nvim_create_autocmd :PackChanged
                              {:callback (fn [ev]
@@ -141,9 +143,7 @@
                "https://github.com/rose-pine/neovim"
                "https://github.com/lunacookies/vim-plan9"
                "https://github.com/raphael-proust/vacme"
-               "https://github.com/miikanissi/modus-themes.nvim"
-               "https://git.sr.ht/~p00f/alabaster.nvim"
-               "https://git.sr.ht/~p00f/moduster.nvim"])
+               "https://github.com/miikanissi/modus-themes.nvim"])
 
 ;; mini-basics should be first, to set up mappings like <Leader>
 (let [mini-basics (require :mini.basics)]
@@ -267,7 +267,7 @@
   (mini-icons.setup {:style :ascii}))
 
 (let [mini-completion (require :mini.completion)]
-  (mini-completion.setup {}))
+  (mini-completion.setup {:delay {:completion 1000000}}))
 
 ;;;; snippets
 
@@ -423,7 +423,8 @@
 (let [filetype-to-langs {:c_sharp [:csharp]
                          :bash [:shellsession :console :shell_session]
                          :objc [:objectivec]
-                         :proto [:protobuf]}]
+                         :proto [:protobuf]
+                         :buf-config [:yaml]}]
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
 
@@ -513,7 +514,10 @@
                                :gotmpl :gotmpl}
                    :filename {:.ignore :gitignore
                               :.dockerignore :gitignore
-                              :buf.lock :yaml
+                              :buf.yaml :buf-config
+                              :buf.gen.yaml :buf-config
+                              :buf.policy.yaml :buf-config
+                              :buf.lock :buf-config
                               :uv.lock :toml}
                    :pattern {".*/%.github/workflows/.*%.ya?ml" yaml-ghactions-filetype}})
 

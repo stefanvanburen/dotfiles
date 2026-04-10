@@ -18,7 +18,7 @@ do
     end
   end
 end
-vim.g.diffs = {integrations = {fugitive = true}}
+vim.g.diffs = {integrations = {fugitive = true}, highlights = {warn_max_lines = false}}
 local function _3_(ev)
   local name = ev.data.spec.name
   local kind = ev.data.kind
@@ -42,7 +42,7 @@ local function _3_(ev)
   end
 end
 vim.api.nvim_create_autocmd("PackChanged", {callback = _3_})
-vim.pack.add({"https://github.com/nvim-mini/mini.nvim", "https://github.com/rafamadriz/friendly-snippets", "https://github.com/chrisgrieser/nvim-scissors", "https://github.com/chrisgrieser/nvim-origami", "https://github.com/tpope/vim-eunuch", "https://github.com/andymass/vim-matchup", "https://github.com/tpope/vim-abolish", "https://github.com/rktjmp/paperplanes.nvim", "https://github.com/lewis6991/fileline.nvim", "https://github.com/tpope/vim-fugitive", "https://github.com/tpope/vim-rhubarb", "https://git.sr.ht/~willdurand/srht.vim", "https://github.com/barrettruth/diffs.nvim", "https://github.com/tpope/vim-dispatch", "https://github.com/tpope/vim-dadbod", "https://github.com/fladson/vim-kitty", "https://github.com/janet-lang/janet.vim", "https://github.com/qvalentin/helm-ls.nvim", "https://github.com/Olical/nfnl", "https://github.com/Olical/conjure", "https://github.com/gpanders/nvim-parinfer", "https://github.com/vim-test/vim-test", "https://github.com/neovim/nvim-lspconfig", "https://github.com/b0o/SchemaStore.nvim", "https://github.com/stevearc/conform.nvim", "https://github.com/mfussenegger/nvim-lint", "https://github.com/williamboman/mason.nvim", "https://github.com/williamboman/mason-lspconfig.nvim", "https://github.com/nvim-treesitter/nvim-treesitter", "https://github.com/nvim-treesitter/nvim-treesitter-context", "https://github.com/julienvincent/nvim-paredit", "https://github.com/stefanvanburen/rams", "https://github.com/savq/melange-nvim", "https://github.com/mcchrish/zenbones.nvim", "https://github.com/rose-pine/neovim", "https://github.com/lunacookies/vim-plan9", "https://github.com/raphael-proust/vacme", "https://github.com/miikanissi/modus-themes.nvim", "https://git.sr.ht/~p00f/alabaster.nvim", "https://git.sr.ht/~p00f/moduster.nvim"})
+vim.pack.add({"https://github.com/nvim-mini/mini.nvim", "https://github.com/rafamadriz/friendly-snippets", "https://github.com/chrisgrieser/nvim-scissors", "https://github.com/chrisgrieser/nvim-origami", "https://github.com/tpope/vim-eunuch", "https://github.com/andymass/vim-matchup", "https://github.com/tpope/vim-abolish", "https://github.com/rktjmp/paperplanes.nvim", "https://github.com/lewis6991/fileline.nvim", "https://github.com/tpope/vim-fugitive", "https://github.com/tpope/vim-rhubarb", "https://git.sr.ht/~willdurand/srht.vim", "https://github.com/barrettruth/diffs.nvim", "https://github.com/tpope/vim-dispatch", "https://github.com/tpope/vim-dadbod", "https://github.com/fladson/vim-kitty", "https://github.com/janet-lang/janet.vim", "https://github.com/qvalentin/helm-ls.nvim", "https://github.com/Olical/nfnl", "https://github.com/Olical/conjure", "https://github.com/gpanders/nvim-parinfer", "https://github.com/vim-test/vim-test", "https://github.com/neovim/nvim-lspconfig", "https://github.com/b0o/SchemaStore.nvim", "https://github.com/stevearc/conform.nvim", "https://github.com/mfussenegger/nvim-lint", "https://github.com/williamboman/mason.nvim", "https://github.com/williamboman/mason-lspconfig.nvim", "https://github.com/nvim-treesitter/nvim-treesitter", "https://github.com/nvim-treesitter/nvim-treesitter-context", "https://github.com/julienvincent/nvim-paredit", "https://github.com/stefanvanburen/rams", "https://github.com/savq/melange-nvim", "https://github.com/mcchrish/zenbones.nvim", "https://github.com/rose-pine/neovim", "https://github.com/lunacookies/vim-plan9", "https://github.com/raphael-proust/vacme", "https://github.com/miikanissi/modus-themes.nvim"})
 do
   local mini_basics = require("mini.basics")
   mini_basics.setup({mappings = {basic = false}})
@@ -165,7 +165,7 @@ do
 end
 do
   local mini_completion = require("mini.completion")
-  mini_completion.setup({})
+  mini_completion.setup({delay = {completion = 1000000}})
 end
 local snippets_dir = (vim.fn.stdpath("config") .. "/snippets")
 do
@@ -517,7 +517,7 @@ local function lsp_attach(_47_)
 end
 vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
 local schemastore = require("schemastore")
-local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, hints = {constantValues = true}}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}, filetypes = {"json", "jsonc", "json5"}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, clojure_lsp = {}, biome = {}, fish_lsp = {}, janet_lsp = {}, ruff = {}, helm_ls = {}, bashls = {}, tombi = {}, omnisharp = {cmd = {"omnisharp"}}, docker_language_server = {}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.env.VIMRUNTIME, checkThirdParty = false}}}}, rust_analyzer = {}, buf_ls = {}, postgres_lsp = {}, ty = {}, starpls = {filetypes = {"bzl", "starlark"}}, cue = {}, ts_query_ls = {}, just = {}, gh_actions_ls = {filetypes = {yaml_ghactions_filetype}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {cmd = {"zizmor", "--lsp"}, filetypes = {yaml_ghactions_filetype}}, syntaqlite = {cmd = {"syntaqlite", "lsp"}, filetypes = {"sql"}, root_markers = {"syntaqlite.toml", ".git"}}}
+local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, hints = {constantValues = true}}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}, filetypes = {"json", "jsonc", "json5"}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, clojure_lsp = {}, biome = {}, fish_lsp = {}, janet_lsp = {}, ruff = {}, helm_ls = {}, bashls = {}, tombi = {}, omnisharp = {cmd = {"omnisharp"}}, docker_language_server = {}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = vim.env.VIMRUNTIME, checkThirdParty = false}}}}, rust_analyzer = {}, buf_ls = {filetypes = {"proto", "yaml"}}, postgres_lsp = {}, ty = {}, starpls = {filetypes = {"bzl", "starlark"}}, cue = {}, ts_query_ls = {}, just = {}, gh_actions_ls = {filetypes = {yaml_ghactions_filetype}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {cmd = {"zizmor", "--lsp"}, filetypes = {yaml_ghactions_filetype}}, syntaqlite = {cmd = {"syntaqlite", "lsp"}, filetypes = {"sql"}, root_markers = {"syntaqlite.toml", ".git"}}}
 vim.lsp.config("*", {root_markers = {".git"}})
 for server, settings in pairs(server_settings) do
   vim.lsp.config(server, settings)
