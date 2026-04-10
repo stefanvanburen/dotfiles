@@ -332,7 +332,8 @@
   ;; https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
   (conform.setup {:formatters_by_ft {:fennel [:fnlfmt]
                                      :fish [:fish_indent]
-                                     :yaml {:lsp_format :never}}
+                                     :yaml {:lsp_format :never}
+                                     :json5 {:lsp_format :never}}
                   :format_on_save {:timeout_ms 5000}
                   :default_format_opts {:lsp_format :fallback}})
   (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()"))
@@ -357,7 +358,8 @@
   (mason-lspconfig.setup))
 
 (let [treesitter (require :nvim-treesitter)
-      treesitter-languages [:c
+      ;; Parsers to install.
+      treesitter-parsers [:c
                             :lua
                             :vim
                             :vimdoc
@@ -409,10 +411,14 @@
                             :vhs
                             :xml
                             :yaml
-                            :zig]]
-  (treesitter.install treesitter-languages)
+                            :zig]
+      ;; Filetypes to activate treesitter for — same as parsers, plus
+      ;; custom filetypes that use an existing parser (e.g. buf-config uses yaml).
+      treesitter-filetypes (doto (vim.deepcopy treesitter-parsers)
+                             (table.insert :buf-config))]
+  (treesitter.install treesitter-parsers)
   (vim.api.nvim_create_autocmd :FileType
-                               {:pattern treesitter-languages
+                               {:pattern treesitter-filetypes
                                 :callback (fn []
                                             (vim.treesitter.start)
                                             ;; Default to treesitter folding (overridden if LSP supports it)
@@ -424,7 +430,7 @@
                          :bash [:shellsession :console :shell_session]
                          :objc [:objectivec]
                          :proto [:protobuf]
-                         :buf-config [:yaml]}]
+                         :yaml [:buf-config]}]
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
 
@@ -478,6 +484,7 @@
         :yaml {:expandtab true :shiftwidth 2}
         :svg {:expandtab true :shiftwidth 2}
         :json {:expandtab true :shiftwidth 2}
+        :json5 {:expandtab true :shiftwidth 2}
         :bash {:expandtab true :shiftwidth 2}
         :toml {:expandtab true :shiftwidth 2}
         :python {:expandtab true :shiftwidth 4}
