@@ -357,61 +357,60 @@
   ;; NOTE: Will enable Mason-installed LSP servers by default.
   (mason-lspconfig.setup))
 
-(let [treesitter (require :nvim-treesitter)
-      ;; Parsers to install.
+(let [treesitter (require :nvim-treesitter) ;; Parsers to install.
       treesitter-parsers [:c
-                            :lua
-                            :vim
-                            :vimdoc
-                            :query
-                            :bash
-                            :c_sharp
-                            :clojure
-                            :comment
-                            :css
-                            :diff
-                            :djot
-                            :dockerfile
-                            :editorconfig
-                            :fennel
-                            :fish
-                            :git_config
-                            :git_rebase
-                            :gitattributes
-                            :gitcommit
-                            :gitignore
-                            :go
-                            :gomod
-                            :gosum
-                            :gotmpl
-                            :helm
-                            :html
-                            :http
-                            :janet_simple
-                            :java
-                            :javascript
-                            :json
-                            :json5
-                            :jsx
-                            :just
-                            :kotlin
-                            :make
-                            :markdown
-                            :markdown_inline
-                            :proto
-                            :python
-                            :requirements
-                            :sql
-                            :ssh_config
-                            :starlark
-                            :textproto
-                            :toml
-                            :tsx
-                            :typescript
-                            :vhs
-                            :xml
-                            :yaml
-                            :zig]
+                          :lua
+                          :vim
+                          :vimdoc
+                          :query
+                          :bash
+                          :c_sharp
+                          :clojure
+                          :comment
+                          :css
+                          :diff
+                          :djot
+                          :dockerfile
+                          :editorconfig
+                          :fennel
+                          :fish
+                          :git_config
+                          :git_rebase
+                          :gitattributes
+                          :gitcommit
+                          :gitignore
+                          :go
+                          :gomod
+                          :gosum
+                          :gotmpl
+                          :helm
+                          :html
+                          :http
+                          :janet_simple
+                          :java
+                          :javascript
+                          :json
+                          :json5
+                          :jsx
+                          :just
+                          :kotlin
+                          :make
+                          :markdown
+                          :markdown_inline
+                          :proto
+                          :python
+                          :requirements
+                          :sql
+                          :ssh_config
+                          :starlark
+                          :textproto
+                          :toml
+                          :tsx
+                          :typescript
+                          :vhs
+                          :xml
+                          :yaml
+                          :zig]
       ;; Filetypes to activate treesitter for — same as parsers, plus
       ;; custom filetypes that use an existing parser (e.g. buf-config uses yaml).
       treesitter-filetypes (doto (vim.deepcopy treesitter-parsers)
@@ -513,8 +512,6 @@
                                                                               value
                                                                               {:scope :local}))})))
 
-(local yaml-ghactions-filetype :yaml.ghactions)
-
 (vim.filetype.add {:extension {:mdx :markdown
                                :star :starlark
                                :gotext :gotmpl
@@ -525,8 +522,7 @@
                               :buf.gen.yaml :buf-config
                               :buf.policy.yaml :buf-config
                               :buf.lock :buf-config
-                              :uv.lock :toml}
-                   :pattern {".*/%.github/workflows/.*%.ya?ml" yaml-ghactions-filetype}})
+                              :uv.lock :toml}})
 
 ;; Skeleton files.
 ;; :h skeleton
@@ -767,11 +763,11 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
         :just {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gh_actions_ls
-        :gh_actions_ls {:filetypes [yaml-ghactions-filetype]}
+        :gh_actions_ls {}
         ;; https://github.com/stefanvanburen/cells
         :cells {:cmd [:cells :serve] :filetypes [:cel]}
-        ;; https://docs.zizmor.sh/integrations/#generic-lsp-integration
-        :zizmor {:cmd [:zizmor :--lsp] :filetypes [yaml-ghactions-filetype]}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zizmor
+        :zizmor {}
         ;; https://docs.syntaqlite.com/v0.2.15/getting-started/other-editors/
         :syntaqlite {:cmd [:syntaqlite :lsp]
                      :filetypes [:sql]
