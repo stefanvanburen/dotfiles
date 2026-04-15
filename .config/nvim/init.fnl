@@ -447,7 +447,7 @@
       (obsidian.setup {:legacy_commands false
                        :workspaces [{:name :vault :path vault-dir}]}))))
 
-(vim.cmd.colorscheme :usgc-highk)
+(vim.cmd.colorscheme :modus)
 
 ;;; Autocommands and FileType settings
 
