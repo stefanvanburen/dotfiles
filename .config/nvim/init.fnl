@@ -510,7 +510,7 @@
                               :buf.lock :buf-config
                               :uv.lock :toml}
                    :pattern {".*/%.github/workflows/.*%.ya?ml" :yaml.github-actions
-                             ".*/%.github/actions/.*%.ya?ml" :yaml.github-actions}})
+                             ".*/%.github/actions/**/.*%.ya?ml" :yaml.github-actions}})
 
 ;; Skeleton files.
 ;; :h skeleton
