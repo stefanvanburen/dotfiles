@@ -446,7 +446,6 @@
       (obsidian.setup {:legacy_commands false
                        :workspaces [{:name :vault :path vault-dir}]}))))
 
-;; USGC colorscheme
 (vim.cmd.colorscheme :usgc-highk)
 
 ;;; Autocommands and FileType settings
@@ -700,7 +699,8 @@
                  :filetypes [:json :jsonc :json5]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
         :yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
-                                   :schemaStore {:enable false :url ""}}}}
+                                   :schemaStore {:enable false :url ""}
+                                   :format {:enable false}}}}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
         :clojure_lsp {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome
