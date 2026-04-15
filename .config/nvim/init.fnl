@@ -415,7 +415,8 @@
       ;; Filetypes to activate treesitter for — same as parsers, plus
       ;; custom filetypes that use an existing parser (e.g. buf-config uses yaml).
       treesitter-filetypes (doto (vim.deepcopy treesitter-parsers)
-                             (table.insert :buf-config))]
+                             (table.insert :buf-config)
+                             (table.insert :yaml.github-actions))]
   (treesitter.install treesitter-parsers)
   (vim.api.nvim_create_autocmd :FileType
                                {:pattern treesitter-filetypes
@@ -430,7 +431,7 @@
                          :bash [:shellsession :console :shell_session]
                          :objc [:objectivec]
                          :proto [:protobuf]
-                         :yaml [:buf-config]}]
+                         :yaml [:buf-config :yaml.github-actions]}]
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
 
@@ -507,7 +508,9 @@
                               :buf.gen.yaml :buf-config
                               :buf.policy.yaml :buf-config
                               :buf.lock :buf-config
-                              :uv.lock :toml}})
+                              :uv.lock :toml}
+                   :pattern {".*/%.github/workflows/.*%.ya?ml" :yaml.github-actions
+                             ".*/%.github/actions/.*%.ya?ml" :yaml.github-actions}})
 
 ;; Skeleton files.
 ;; :h skeleton
@@ -699,8 +702,7 @@
                  :filetypes [:json :jsonc :json5]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
         :yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
-                                   :schemaStore {:enable false :url ""}
-                                   :format {:enable false}}}}
+                                   :schemaStore {:enable false :url ""}}}}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
         :clojure_lsp {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome
@@ -749,11 +751,11 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
         :just {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gh_actions_ls
-        :gh_actions_ls {}
+        :gh_actions_ls {:filetypes [:yaml.github-actions]}
         ;; https://github.com/stefanvanburen/cells
         :cells {:cmd [:cells :serve] :filetypes [:cel]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zizmor
-        :zizmor {}
+        :zizmor {:filetypes [:yaml.github-actions]}
         ;; https://docs.syntaqlite.com/v0.2.15/getting-started/other-editors/
         :syntaqlite {:cmd [:syntaqlite :lsp]
                      :filetypes [:sql]
