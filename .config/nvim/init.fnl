@@ -755,7 +755,7 @@
         ;; https://github.com/stefanvanburen/cells
         :cells {:cmd [:cells :serve] :filetypes [:cel]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zizmor
-        :zizmor {:filetypes [:yaml.github-actions]}
+        :zizmor {:filetypes [:yaml :yaml.github-actions]}
         ;; https://docs.syntaqlite.com/v0.2.15/getting-started/other-editors/
         :syntaqlite {:cmd [:syntaqlite :lsp]
                      :filetypes [:sql]
