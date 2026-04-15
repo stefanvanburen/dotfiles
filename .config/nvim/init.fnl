@@ -138,6 +138,7 @@
                "https://github.com/julienvincent/nvim-paredit"
                ;; Colorschemes
                "https://github.com/stefanvanburen/rams"
+               "https://github.com/stefanvanburen/usgc-nvim"
                "https://github.com/savq/melange-nvim"
                "https://github.com/mcchrish/zenbones.nvim"
                "https://github.com/rose-pine/neovim"
@@ -445,23 +446,8 @@
       (obsidian.setup {:legacy_commands false
                        :workspaces [{:name :vault :path vault-dir}]}))))
 
-;; https://smallseasons.guide
-;; https://stefan.vanburen.xyz/blog/small-seasons/
-(let [day-of-month (tonumber (vim.fn.strftime "%d"))
-      colorscheme (case (vim.fn.strftime "%m")
-                    :01 :miniwinter
-                    :02 (if (< day-of-month 4) :miniwinter :minispring)
-                    :03 :minispring
-                    :04 :minispring
-                    :05 (if (< day-of-month 6) :minispring :minisummer)
-                    :06 :minisummer
-                    :07 :minisummer
-                    :08 (if (< day-of-month 8) :minisummer :miniautumn)
-                    :09 :miniautumn
-                    :10 :miniautumn
-                    :11 (if (< day-of-month 8) :miniautumn :miniwinter)
-                    :12 :miniwinter)]
-  (vim.cmd.colorscheme colorscheme))
+;; USGC colorscheme
+(vim.cmd.colorscheme :usgc-highk)
 
 ;;; Autocommands and FileType settings
 
