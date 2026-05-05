@@ -467,6 +467,7 @@
         :gotmpl {:expandtab true :shiftwidth 2 :commentstring "{{/* %s */}}"}
         :fish {:expandtab true :shiftwidth 4 :commentstring "# %s"}
         :yaml {:expandtab true :shiftwidth 2}
+        :buf-config {:expandtab true :shiftwidth 2}
         :svg {:expandtab true :shiftwidth 2}
         :json {:expandtab true :shiftwidth 2}
         :json5 {:expandtab true :shiftwidth 2}
