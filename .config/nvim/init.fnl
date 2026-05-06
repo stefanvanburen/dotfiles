@@ -43,7 +43,7 @@
             :cursorlineopt :number
             ;; Remove linematch from default diffopt
             :diffopt "internal,filler,closeoff"
-            :completeopt "fuzzy,menu,menuone,noselect"
+            :completeopt "fuzzy,menu,menuone,popup,noselect"
             ;; Convenience for automatic formatting.
             ;;   t - auto-wrap text using textwidth
             ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
@@ -266,9 +266,6 @@
 
 (let [mini-icons (require :mini.icons)]
   (mini-icons.setup {:style :ascii}))
-
-(let [mini-completion (require :mini.completion)]
-  (mini-completion.setup {:delay {:completion 1000000}}))
 
 ;;;; snippets
 
@@ -682,6 +679,10 @@
                                    {:group augroup-id
                                     :buffer buf
                                     :callback #(vim.lsp.codelens.enable true)})))
+  (when (client:supports_method :textDocument/completion)
+    (vim.lsp.completion.enable true client.id buf {:autotrigger true})
+    (map :i :<C-space> vim.lsp.completion.get
+         {:buffer buf :desc "Manually trigger completion"}))
   (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"}))
 
 (vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})

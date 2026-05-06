@@ -7,7 +7,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.maplocalleader = ","
 do
-  local opts = {foldlevelstart = 99, foldtext = "", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,noselect", formatoptions = "tcqjronp1l", spelloptions = "camel", virtualedit = "block", iskeyword = "@,48-57,_,192-255,-", tabstop = 2, title = true, updatetime = 100, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
+  local opts = {foldlevelstart = 99, foldtext = "", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp1l", spelloptions = "camel", virtualedit = "block", iskeyword = "@,48-57,_,192-255,-", tabstop = 2, title = true, updatetime = 100, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
   for opt, val in pairs(opts) do
     local case_1_ = type(val)
     if (case_1_ == "table") then
@@ -162,10 +162,6 @@ end
 do
   local mini_icons = require("mini.icons")
   mini_icons.setup({style = "ascii"})
-end
-do
-  local mini_completion = require("mini.completion")
-  mini_completion.setup({delay = {completion = 1000000}})
 end
 local snippets_dir = (vim.fn.stdpath("config") .. "/snippets")
 do
@@ -467,6 +463,11 @@ local function lsp_attach(_41_)
       return vim.lsp.codelens.enable(true)
     end
     vim.api.nvim_create_autocmd({"BufEnter", "CursorHold", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = _48_})
+  else
+  end
+  if client:supports_method("textDocument/completion") then
+    vim.lsp.completion.enable(true, client.id, buf, {autotrigger = true})
+    map("i", "<C-space>", vim.lsp.completion.get, {buffer = buf, desc = "Manually trigger completion"})
   else
   end
   return map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})
