@@ -43,7 +43,7 @@
             :cursorlineopt :number
             ;; Remove linematch from default diffopt
             :diffopt "internal,filler,closeoff"
-            :completeopt "fuzzy,menu,menuone,popup,noselect"
+            :completeopt "fuzzy,menu,menuone,noselect"
             ;; Convenience for automatic formatting.
             ;;   t - auto-wrap text using textwidth
             ;;   c - auto-wrap comments using textwidth, inserting the current comment leader automatically.
