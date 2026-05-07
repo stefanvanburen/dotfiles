@@ -77,7 +77,7 @@
 	; Sign commits with gpg (ssh) key
 	gpgsign = true
 	; Default `git commit` pre-filled message
-	template = ~/.config/git/gitmessage
+	template = ~/.config/git/message
 
 [gpg]
 	format = ssh
