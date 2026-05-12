@@ -22,6 +22,8 @@ brew "just"
 brew "neovim"
 # better searching - configured in ~/.config/ripgreprc.
 brew "ripgrep"
+# Needed by neovim-treesitter to install certain parsers
+brew "tree-sitter-cli"
 # install and run python tools (that aren't available in homebrew)
 brew "uv"
 
