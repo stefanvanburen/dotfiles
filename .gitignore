@@ -20,6 +20,7 @@
 /.rustup
 /.terminfo
 /.jump
+/.config/jump
 /.ssh
 /.terminfo
 /.viminfo
@@ -68,6 +69,9 @@
 /go/
 # Directory for code
 /src/
+# Directory for code - XDG
+/Projects/
+
 
 # uv self-update
 /.config/uv/uv-receipt.json
