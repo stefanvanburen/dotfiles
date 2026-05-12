@@ -143,6 +143,7 @@
                "https://github.com/rose-pine/neovim"
                "https://github.com/lunacookies/vim-plan9"
                "https://github.com/raphael-proust/vacme"
+               "https://github.com/stefanvanburen/usgc-nvim"
                "https://github.com/miikanissi/modus-themes.nvim"])
 
 ;; mini-basics should be first, to set up mappings like <Leader>
