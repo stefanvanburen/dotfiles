@@ -50,6 +50,9 @@
 	rc = rebase --continue
 	ri = rebase --interactive
 
+	; mnemonic for submodule
+	su = submodule
+
 	; status
 	st = status
 
