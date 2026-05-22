@@ -493,7 +493,7 @@
                 :shiftwidth 2
                 :commentstring "// %s"
                 :cindent true}
-        :gitcommit {:spell true}
+        :gitcommit {:spell true :commentstring "; %s"}
         :gitconfig {:expandtab false :shiftwidth 2}
         :fennel {:commentstring ";; %s"}
         :sql {:wrap true :commentstring "-- %s" :expandtab true :shiftwidth 4}
