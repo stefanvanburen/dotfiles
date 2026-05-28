@@ -27,3 +27,7 @@
 -- Use expanded display automatically in small terminals.
 -- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMAND-X
 \x auto
+
+-- Unlimited command history (default is 500; negative value disables the limit).
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-VARIABLES-HISTSIZE
+\set HISTSIZE -1
