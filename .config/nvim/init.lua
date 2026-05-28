@@ -91,8 +91,8 @@ do
   local mini_surround = require("mini.surround")
   mini_surround.setup({mappings = {add = "ys", delete = "ds", find = "", find_left = "", highlight = "", replace = "cs", update_n_lines = "", suffix_last = "", suffix_next = ""}, search_method = "cover_or_next"})
   vim.keymap.del("x", "ys")
-  map("x", "S", ":<C-U>lua MiniSurround.add('visual')<CR>", {silent = true})
-  map("n", "yss", "ys_", {remap = true})
+  map("x", "S", ":<C-U>lua MiniSurround.add('visual')<CR>", {silent = true, desc = "Add surround (visual)"})
+  map("n", "yss", "ys_", {remap = true, desc = "Surround current line"})
 end
 do
   local mini_pick = require("mini.pick")
@@ -182,10 +182,10 @@ do
   paperplanes.setup({provider = "gist"})
 end
 vim.g.fugitive_legacy_commands = 0
-map("n", "<leader>mm", ":make<cr>")
-map("n", "<leader>MM", ":Make<cr>")
-map("n", "<leader>m!", ":make!<cr>")
-map("n", "<leader>M!", ":Make!<cr>")
+map("n", "<leader>mm", ":make<cr>", {desc = ":make"})
+map("n", "<leader>MM", ":Make<cr>", {desc = ":Make (vim-dispatch async)"})
+map("n", "<leader>m!", ":make!<cr>", {desc = ":make! (no jump to first error)"})
+map("n", "<leader>M!", ":Make!<cr>", {desc = ":Make! (vim-dispatch async, no jump to first error)"})
 local function _10_()
   return vim.cmd({cmd = "DB", args = {"$DATABASE_URL"}})
 end
@@ -393,12 +393,12 @@ local function _29_(args)
   return nil
 end
 vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", callback = _29_})
-map("n", "<leader>du", vim.pack.update)
+map("n", "<leader>du", vim.pack.update, {desc = "Update plugins"})
 local function _31_()
   return vim.cmd({cmd = "Mason"})
 end
-map("n", "<leader>ma", _31_)
-map("n", ";", ":")
+map("n", "<leader>ma", _31_, {desc = ":Mason"})
+map("n", ";", ":", {desc = "Enter command mode"})
 local function _32_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
@@ -426,7 +426,7 @@ local function _37_()
     return "gj"
   end
 end
-map({"n", "v"}, "j", _37_, {expr = true})
+map({"n", "v"}, "j", _37_, {expr = true, desc = "Down by visual line (gj when no count)"})
 local function _39_()
   if (vim.v.count ~= 0) then
     return "k"
@@ -434,7 +434,7 @@ local function _39_()
     return "gk"
   end
 end
-map({"n", "v"}, "k", _39_, {expr = true})
+map({"n", "v"}, "k", _39_, {expr = true, desc = "Up by visual line (gk when no count)"})
 map({"n", "v"}, "<tab>", "%", {remap = true, desc = "Navigate between matching brackets"})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>egi"] = "$HOME/.config/git/config", ["<leader>ego"] = "$HOME/.config/ghostty/config", ["<leader>ek"] = "$HOME/.config/kitty/kitty.conf", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
   local function _41_()
@@ -457,22 +457,22 @@ map("n", "<leader>vs", _44_, {desc = "Create a vertical split"})
 map("n", "Q", "@@", {desc = "Repeat last macro"})
 map("n", "0", "^", {desc = "Go to first non-whitespace character"})
 map("n", "^", "0", {desc = "Go to first column in the line"})
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-f>", "<C-f>zz")
-map("n", "<C-b>", "<C-b>zz")
-map("n", "<C-u>", "<C-u>zz")
-map("n", "c", "\"_c")
-map("n", "C", "\"_C")
-map("n", "J", "mzJ`z")
-map("x", "<", "<gv")
-map("x", ">", ">gv")
+map("n", "<C-d>", "<C-d>zz", {desc = "Half-page down, recentered"})
+map("n", "<C-f>", "<C-f>zz", {desc = "Page down, recentered"})
+map("n", "<C-b>", "<C-b>zz", {desc = "Page up, recentered"})
+map("n", "<C-u>", "<C-u>zz", {desc = "Half-page up, recentered"})
+map("n", "c", "\"_c", {desc = "Change to black-hole register"})
+map("n", "C", "\"_C", {desc = "Change to end of line, black-hole register"})
+map("n", "J", "mzJ`z", {desc = "Join lines, keep cursor position"})
+map("x", "<", "<gv", {desc = "Indent left, keep selection"})
+map("x", ">", ">gv", {desc = "Indent right, keep selection"})
 local function _45_()
   return vim.show_pos()
 end
 map("n", "<leader>i", _45_, {desc = "Inspect position (treesitter/syntax)"})
-map("i", "<c-k>", "<esc>")
-map("c", "<c-k>", "<c-c>")
-map("t", "<c-k>", "<c-\\><c-n>")
+map("i", "<c-k>", "<esc>", {desc = "Escape insert mode"})
+map("c", "<c-k>", "<c-c>", {desc = "Cancel cmdline"})
+map("t", "<c-k>", "<c-\\><c-n>", {desc = "Exit terminal mode"})
 local function _46_()
   return vim.cmd({cmd = "tabnew"})
 end

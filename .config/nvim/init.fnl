@@ -202,8 +202,9 @@
                                    :suffix_next ""}
                         :search_method :cover_or_next})
   (vim.keymap.del :x :ys)
-  (map :x :S ":<C-U>lua MiniSurround.add('visual')<CR>" {:silent true})
-  (map :n :yss :ys_ {:remap true}))
+  (map :x :S ":<C-U>lua MiniSurround.add('visual')<CR>"
+       {:silent true :desc "Add surround (visual)"})
+  (map :n :yss :ys_ {:remap true :desc "Surround current line"}))
 
 (let [mini-pick (require :mini.pick)]
   (mini-pick.setup)
@@ -298,10 +299,11 @@
 (set vim.g.fugitive_legacy_commands 0)
 
 ;; vim-dispatch
-(map :n :<leader>mm ":make<cr>")
-(map :n :<leader>MM ":Make<cr>")
-(map :n :<leader>m! ":make!<cr>")
-(map :n :<leader>M! ":Make!<cr>")
+(map :n :<leader>mm ":make<cr>" {:desc ":make"})
+(map :n :<leader>MM ":Make<cr>" {:desc ":Make (vim-dispatch async)"})
+(map :n :<leader>m! ":make!<cr>" {:desc ":make! (no jump to first error)"})
+(map :n :<leader>M! ":Make!<cr>"
+     {:desc ":Make! (vim-dispatch async, no jump to first error)"})
 
 ;; Set DATABASE_URL in the environment to access the configured database via dadbod.
 (map :n :<leader>db #(vim.cmd {:cmd :DB :args [:$DATABASE_URL]})
@@ -585,11 +587,11 @@
 
 ;;; Mappings
 
-(map :n :<leader>du vim.pack.update)
-(map :n :<leader>ma #(vim.cmd {:cmd :Mason}))
+(map :n :<leader>du vim.pack.update {:desc "Update plugins"})
+(map :n :<leader>ma #(vim.cmd {:cmd :Mason}) {:desc ":Mason"})
 
 ;; ; -> :
-(map :n ";" ":")
+(map :n ";" ":" {:desc "Enter command mode"})
 
 ;; Fugitive
 (map :n :<leader>gs #(vim.cmd {:cmd :Git :mods {:vertical true}})
@@ -604,8 +606,11 @@
 
 ;; move by visual lines instead of real lines, except when a count is provided,
 ;; which helps when targeting a specific line with `relativenumber`.
-(map [:n :v] :j #(if (not= vim.v.count 0) :j :gj) {:expr true})
-(map [:n :v] :k #(if (not= vim.v.count 0) :k :gk) {:expr true})
+(map [:n :v] :j #(if (not= vim.v.count 0) :j :gj)
+     {:expr true :desc "Down by visual line (gj when no count)"})
+
+(map [:n :v] :k #(if (not= vim.v.count 0) :k :gk)
+     {:expr true :desc "Up by visual line (gk when no count)"})
 
 ;; Navigate between matching brackets
 ;; These specifically `remap` because we want to be bound to whatever % is
@@ -640,32 +645,29 @@
 (map :n :0 "^" {:desc "Go to first non-whitespace character"})
 (map :n "^" :0 {:desc "Go to first column in the line"})
 
-;; always center the screen after any movement command
-(map :n :<C-d> :<C-d>zz)
-(map :n :<C-f> :<C-f>zz)
-(map :n :<C-b> :<C-b>zz)
-(map :n :<C-u> :<C-u>zz)
+(map :n :<C-d> :<C-d>zz {:desc "Half-page down, recentered"})
+(map :n :<C-f> :<C-f>zz {:desc "Page down, recentered"})
+(map :n :<C-b> :<C-b>zz {:desc "Page up, recentered"})
+(map :n :<C-u> :<C-u>zz {:desc "Half-page up, recentered"})
 
-;; Redirect changes to the "black hole" register
-(map :n :c "\"_c")
-(map :n :C "\"_C")
+(map :n :c "\"_c" {:desc "Change to black-hole register"})
+(map :n :C "\"_C" {:desc "Change to end of line, black-hole register"})
 
-;; Keep the cursor in place while joining lines
-(map :n :J "mzJ`z")
+(map :n :J "mzJ`z" {:desc "Join lines, keep cursor position"})
 
 ;; similar to vmap but only for visual mode - NOT select mode
 ;; maintains the currently visual selection between invocations of '<' and '>'
-(map :x "<" :<gv)
-(map :x ">" :>gv)
+(map :x "<" :<gv {:desc "Indent left, keep selection"})
+(map :x ">" :>gv {:desc "Indent right, keep selection"})
 
 ;; inspect the current position
 (map :n :<leader>i #(vim.show_pos)
      {:desc "Inspect position (treesitter/syntax)"})
 
 ;; <c-k> escape sequences.
-(map :i :<c-k> :<esc>)
-(map :c :<c-k> :<c-c>)
-(map :t :<c-k> "<c-\\><c-n>")
+(map :i :<c-k> :<esc> {:desc "Escape insert mode"})
+(map :c :<c-k> :<c-c> {:desc "Cancel cmdline"})
+(map :t :<c-k> "<c-\\><c-n>" {:desc "Exit terminal mode"})
 
 ;; tab commands.
 (map :n :<leader>tn #(vim.cmd {:cmd :tabnew}) {:desc "Create a new tab"})
