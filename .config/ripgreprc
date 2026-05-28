@@ -15,3 +15,11 @@
 # proto: shorter version of `--type protobuf`
 --type-add
 proto:*.proto
+
+# fennel
+--type-add
+fennel:*.fnl
+
+# just (justfile + *.just modules)
+--type-add
+just:justfile,*.just
