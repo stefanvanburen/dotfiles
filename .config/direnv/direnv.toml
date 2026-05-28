@@ -1,0 +1,11 @@
+# https://direnv.net/man/direnv.toml.1.html
+
+[global]
+# Set to true to hide the diff of the environment variables when loading the .envrc.
+hide_env_diff = true
+
+# If set to true, stdin is disabled (redirected to /dev/null) during the .envrc evaluation.
+disable_stdin = true
+
+# If set to true, the .envrc will be loaded with set -euo pipefail. This option will be the default in the future.
+strict_env = true
