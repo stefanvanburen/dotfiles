@@ -95,6 +95,10 @@
 [gpg]
 	format = ssh
 
+[help]
+	; ask for confirmation before running an autocorrected command
+	autocorrect = prompt
+
 [diff]
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
@@ -153,12 +157,16 @@
 [rebase]
 	; when rebasing, automatically stash the working directory and pop it when done.
 	autoStash = true
+	; automatically reorder fixup/squash commits before their target during `rebase -i`
+	autoSquash = true
 	; automatically update stacked branches when rebasing
 	updateRefs = true
 
 [rerere]
 	; https://git-scm.com/book/en/v2/Git-Tools-Rerere
 	enabled = true
+	; automatically re-apply recorded conflict resolutions when the same conflict recurs
+	autoupdate = true
 
 [sendemail]
 	smtpserver = smtp.migadu.com
