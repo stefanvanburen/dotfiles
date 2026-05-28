@@ -588,10 +588,8 @@
 (map :n :<leader>du vim.pack.update)
 (map :n :<leader>ma #(vim.cmd {:cmd :Mason}))
 
-;; ; <-> :  (preserve both: ; is now :, and : is now the original `;` motion that
-;; repeats the last f/t/F/T search)
+;; ; -> :
 (map :n ";" ":")
-(map :n ":" ";")
 
 ;; Fugitive
 (map :n :<leader>gs #(vim.cmd {:cmd :Git :mods {:vertical true}})

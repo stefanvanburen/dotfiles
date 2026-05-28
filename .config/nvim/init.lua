@@ -399,7 +399,6 @@ local function _31_()
 end
 map("n", "<leader>ma", _31_)
 map("n", ";", ":")
-map("n", ":", ";")
 local function _32_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
