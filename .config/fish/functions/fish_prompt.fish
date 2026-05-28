@@ -20,9 +20,9 @@ function fish_prompt --description "Overridden fish_prompt function"
     set --local njobs (count (jobs -g))
     test $njobs -gt 0; and set jobs (set_color cyan)"[$njobs] "
 
-    # Last command duration if >1s
+    # Last command duration if >5s
     set --function duration
-    if test "$CMD_DURATION" -gt 1000
+    if test "$CMD_DURATION" -gt 5000
         set --local secs (math --scale=1 $CMD_DURATION/1000 % 60)
         set --local mins (math --scale=0 $CMD_DURATION/60000 % 60)
         set --local hours (math --scale=0 $CMD_DURATION/3600000)
@@ -45,7 +45,9 @@ function fish_prompt --description "Overridden fish_prompt function"
         end
     end
 
-    printf '\n%s%s%s%s %s%s\n' $host (prompt_pwd) (fish_git_prompt) $pipe $jobs $duration
+    # Quote each variable: in fish an unquoted empty variable expands to zero
+    # arguments (not one empty arg), which would misalign the format spec.
+    printf '\n%s%s%s%s %s%s\n' "$host" (prompt_pwd) (fish_git_prompt) "$pipe" "$jobs" "$duration"
 
     set --function prompt_character '$'
     if test $last_status -ne 0
