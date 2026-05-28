@@ -428,7 +428,8 @@
                          :bash [:shellsession :console :shell_session]
                          :objc [:objectivec]
                          :proto [:protobuf]
-                         :yaml [:buf-config :yaml.github-actions]}]
+                         :yaml [:buf-config :yaml.github-actions]
+                         :tiltfile [:starlark]}]
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
 
@@ -515,14 +516,33 @@
 (vim.filetype.add {:extension {:mdx :markdown
                                :star :starlark
                                :gotext :gotmpl
-                               :gotmpl :gotmpl}
+                               :gotmpl :gotmpl
+                               ;; nvim's default *.sh detector always returns
+                               ;; filetype=sh and only sets b:is_bash from the
+                               ;; shebang. That blocks bashls (filetype=bash)
+                               ;; from attaching. Promote to bash when the
+                               ;; shebang is bash; otherwise return nil so
+                               ;; default detection (incl. b:is_sh) still runs.
+                               :sh (fn [_path bufnr]
+                                     (let [first-line (. (vim.api.nvim_buf_get_lines bufnr
+                                                                                     0
+                                                                                     1
+                                                                                     false)
+                                                         1)]
+                                       (when (and first-line
+                                                  (string.match first-line
+                                                                "^#!.*[/ ]bash[%w]*%s*$"))
+                                         :bash)))}
                    :filename {:.ignore :gitignore
                               :.dockerignore :gitignore
                               :buf.yaml :buf-config
                               :buf.gen.yaml :buf-config
                               :buf.policy.yaml :buf-config
                               :buf.lock :buf-config
-                              :uv.lock :toml}
+                              :uv.lock :toml
+                              :Tiltfile :tiltfile
+                              :.envrc :bash
+                              :.envrc.local :bash}
                    :pattern {".*/%.github/workflows/.*%.ya?ml" :yaml.github-actions
                              ".*/%.github/actions/**/.*%.ya?ml" :yaml.github-actions}})
 
@@ -746,7 +766,7 @@
         ;; https://sr.ht/~xerool/fennel-ls/
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
         ;; See ./flsproject.fnl for configuration.
-        ;; :fennel_ls {}
+        :fennel_ls {}
         ;; LSP for Lua.
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
         :lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
@@ -764,6 +784,8 @@
         :starpls {:filetypes [:bzl :starlark]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cue
         :cue {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tilt_ls
+        :tilt_ls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
         :ts_query_ls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
