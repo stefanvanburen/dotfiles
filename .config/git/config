@@ -74,6 +74,16 @@
 [branch]
 	sort = -committerdate
 
+[column]
+	; multi-column output for git branch/tag/etc.
+	ui = auto
+
+[core]
+	; cache the list of untracked files so `git status` can skip unchanged dirs
+	untrackedCache = true
+	; use the built-in fsmonitor daemon (FSEvents on macOS) to skip stat'ing unchanged paths
+	fsmonitor = true
+
 [commit]
 	; At the bottom of the commit message, show a diff of the commit.
 	verbose = true
@@ -88,6 +98,12 @@
 [diff]
 	; seemingly the best diff algorithm - extends the "patience" algorithm
 	algorithm = histogram
+	; distinguish moved lines from added/removed
+	colorMoved = zebra
+	; use i/w/c prefixes instead of a/b
+	mnemonicPrefix = true
+	; also detect copies, not just renames
+	renames = copies
 
 	tool = nvim_difftool
 [difftool]
@@ -97,6 +113,7 @@
 
 [fetch]
 	prune = true
+	pruneTags = true
 	all = true
 
 [include]
@@ -121,6 +138,10 @@
 	; https://github.com/tpope/vim-fugitive/issues/1306
 	; Also can just open nvim and use `:Git mergetool`
 	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+
+[pull]
+	; fail loud rather than implicitly creating a merge commit on diverged branches
+	ff = only
 
 [push]
 	; push to the branch with the same name by default
