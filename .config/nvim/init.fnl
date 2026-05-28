@@ -37,6 +37,8 @@
             :clipboard :unnamedplus
             ;; turn off swapfiles - for now, I find these more of a headache than a benefit
             :swapfile false
+            ;; persist undo history across sessions; matters more given swapfile is off
+            :undofile true
             ;; Enable exrc to load .nvim.lua files.
             :exrc true
             ;; Highlight only the number column when using cursorline.
@@ -67,7 +69,7 @@
             ;; Set the title of the window.
             :title true
             ;; Tied to CursorHold, which makes LSP document highlighting reasonable.
-            :updatetime 100
+            :updatetime 250
             ;; ignore case when completing files / directories in wildmenu
             :wildignorecase true
             ;; Show partial off-screen results in a preview window.
@@ -352,8 +354,8 @@
   (mason.setup))
 
 (let [mason-lspconfig (require :mason-lspconfig)]
-  ;; NOTE: Will enable Mason-installed LSP servers by default.
-  (mason-lspconfig.setup))
+  ;; Disable auto-enable; servers are enabled explicitly below via vim.lsp.enable.
+  (mason-lspconfig.setup {:automatic_enable false}))
 
 (let [treesitter (require :nvim-treesitter) ;; Parsers to install.
       treesitter-parsers [:c
@@ -467,28 +469,31 @@
 
 (vim.api.nvim_create_autocmd :VimResized {:command ":wincmd ="})
 
+(local two-space {:expandtab true :shiftwidth 2})
+(local four-space {:expandtab true :shiftwidth 4})
+
 (local filetype-settings
        {:go {:expandtab false :textwidth 100}
-        :javascript {:expandtab true :shiftwidth 2}
-        :javascriptreact {:expandtab true :shiftwidth 2}
-        :typescript {:expandtab true :shiftwidth 2}
-        :typescriptreact {:expandtab true :shiftwidth 2}
-        :html {:expandtab true :shiftwidth 2}
-        :css {:expandtab true :shiftwidth 2}
+        :javascript two-space
+        :javascriptreact two-space
+        :typescript two-space
+        :typescriptreact two-space
+        :html two-space
+        :css two-space
         ;; C#
         :cs {:commentstring "// %s"}
         :helm {:expandtab true :shiftwidth 2 :commentstring "{{/* %s */}}"}
         :gotmpl {:expandtab true :shiftwidth 2 :commentstring "{{/* %s */}}"}
         :fish {:expandtab true :shiftwidth 4 :commentstring "# %s"}
-        :yaml {:expandtab true :shiftwidth 2}
-        :buf-config {:expandtab true :shiftwidth 2}
-        :svg {:expandtab true :shiftwidth 2}
-        :json {:expandtab true :shiftwidth 2}
-        :json5 {:expandtab true :shiftwidth 2}
-        :bash {:expandtab true :shiftwidth 2}
-        :toml {:expandtab true :shiftwidth 2}
-        :python {:expandtab true :shiftwidth 4}
-        :xml {:expandtab true :shiftwidth 4}
+        :yaml two-space
+        :buf-config two-space
+        :svg two-space
+        :json two-space
+        :json5 two-space
+        :bash two-space
+        :toml two-space
+        :python four-space
+        :xml four-space
         :starlark {:expandtab true :shiftwidth 4 :commentstring "# %s"}
         :proto {:expandtab true
                 :shiftwidth 2
@@ -583,8 +588,10 @@
 (map :n :<leader>du vim.pack.update)
 (map :n :<leader>ma #(vim.cmd {:cmd :Mason}))
 
-;; ; -> :
+;; ; <-> :  (preserve both: ; is now :, and : is now the original `;` motion that
+;; repeats the last f/t/F/T search)
 (map :n ";" ":")
+(map :n ":" ";")
 
 ;; Fugitive
 (map :n :<leader>gs #(vim.cmd {:cmd :Git :mods {:vertical true}})
@@ -654,7 +661,8 @@
 (map :x ">" :>gv)
 
 ;; inspect the current position
-(map :n :<leader>i #(vim.show_pos))
+(map :n :<leader>i #(vim.show_pos)
+     {:desc "Inspect position (treesitter/syntax)"})
 
 ;; <c-k> escape sequences.
 (map :i :<c-k> :<esc>)
@@ -666,7 +674,7 @@
 (map :n "]r" #(vim.cmd {:cmd :tabnext}) {:desc "Go to next tab"})
 (map :n "[r" #(vim.cmd {:cmd :tabprev}) {:desc "Go to prev tab"})
 
-(map :n :<C-l> ":nohlsearch<cr>")
+(map :n :<C-l> ":nohlsearch<cr>" {:desc "Clear search highlight"})
 
 ;;; Diagnostics
 
@@ -676,6 +684,9 @@
                                        vim.diagnostic.severity.HINT "?"}}
                         :virtual_text {:severity {:min vim.diagnostic.severity.WARN}}
                         :underline true
+                        ;; when multiple diagnostics land on a line, the highest-severity
+                        ;; sign wins instead of whichever is last in the list.
+                        :severity_sort true
                         :float {:border :single
                                 :focusable false
                                 :source :always}})
