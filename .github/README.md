@@ -35,20 +35,13 @@ $ git config status.showUntrackedFiles no
   $ chsh -s $(command -v fish)
   ```
 
-* Disable the annoying <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> shortcut to bring up the dictionary on macOS,
-  so that [Dash.app](https://kapeli.com/dash) can use it:
+* Apply macOS system preferences (see [`justfile`](/justfile) for what this does
+  — disables the <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> dictionary shortcut
+  so [Dash.app](https://kapeli.com/dash) can use it, and enables the
+  [Zoom "Peek" gesture](https://daringfireball.net/linked/2026/04/13/macos-zoom-gesture)):
 
   ```console
-  $ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 70 '<dict><key>enabled</key><false/></dict>'
-  ```
-
-* Enable the [Zoom "Peek" gesture](https://daringfireball.net/linked/2026/04/13/macos-zoom-gesture)
-  (<kbd>Ctrl</kbd>+scroll to zoom the screen, with unsmoothed images for pixel-level clarity):
-
-  ```console
-  $ defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-  $ defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
-  $ defaults write com.apple.universalaccess closeViewSmoothImages -bool false
+  $ just macos-defaults
   ```
 
 * Create an ssh key (follow the instructions in [ssh-config](../.ssh/config)),
