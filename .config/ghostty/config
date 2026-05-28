@@ -16,9 +16,15 @@ cursor-color = #EE483E
 # Make the cursor thicker.
 adjust-cursor-thickness = 3
 
-# default: 10000000; bumped by an order of magnitude
+# default: 10000000 bytes; bumped by an order of magnitude
 # ref: `ghostty +show-config --default | rg scrollback-limit`
 scrollback-limit = 100000000
+
+# Hide the mouse cursor while typing; reappears on movement.
+mouse-hide-while-typing = true
+
+# Make ⌥ behave like Alt for TUI apps (nvim, fish key bindings, etc.).
+macos-option-as-alt = true
 
 # https://ghostty.org/docs/config/keybind
 
