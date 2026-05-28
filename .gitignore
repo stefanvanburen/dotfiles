@@ -22,7 +22,6 @@
 /.jump
 /.config/jump
 /.ssh
-/.terminfo
 /.viminfo
 /.bash_history
 /.zsh_history
