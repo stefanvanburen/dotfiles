@@ -30,7 +30,7 @@
             :copyindent true
             ;; Invisible characters.
             :list true
-            :listchars {:tab "⇥ " :eol "¬" :trail "⣿"}
+            :listchars {:tab "⇥ " :eol "¬" :trail "⣿" :nbsp "␣"}
             ;; Override default grepprg to use default ripgrep settings
             :grepprg "rg --vimgrep"
             ;; always use the system clipboard for operations
