@@ -554,26 +554,28 @@
                              ".*/%.github/actions/**/.*%.ya?ml" :yaml.github-actions}})
 
 ;; Template files.
-(vim.api.nvim_create_autocmd :BufNewFile
-                             {:pattern "*"
-                              :callback (fn [args]
-                                          (let [fname (vim.fs.basename args.file)
-                                                ext (vim.fn.fnamemodify args.file
-                                                                        ":e")
-                                                ft (. vim.bo args.buf :filetype)
-                                                candidates [fname ext ft]]
-                                            (var done? false)
-                                            (each [_ candidate (ipairs candidates)
-                                                   &until done?]
-                                              (let [tmpl (vim.fs.joinpath (vim.fn.stdpath :config)
-                                                                          :templates
-                                                                          (: "%s.tmpl"
-                                                                             :format
-                                                                             candidate))
-                                                    f (io.open tmpl :r)]
-                                                (when f
-                                                  (vim.snippet.expand (f:read :*a))
-                                                  (set done? true))))))})
+(let [template-dir (vim.fs.joinpath (vim.fn.stdpath :config) :templates)]
+  (vim.api.nvim_create_autocmd :BufNewFile
+                               {:pattern "*"
+                                :callback (fn [args]
+                                            (let [fname (vim.fs.basename args.file)
+                                                  ext (vim.fn.fnamemodify args.file
+                                                                          ":e")
+                                                  ft (. vim.bo args.buf :filetype)]
+                                              (var done? false)
+                                              (each [_ candidate (ipairs [fname ext ft])
+                                                     &until done?]
+                                                (when (not= candidate "")
+                                                  (let [tmpl (vim.fs.joinpath template-dir
+                                                                              (: "%s.tmpl"
+                                                                                 :format
+                                                                                 candidate))
+                                                        f (io.open tmpl :r)]
+                                                    (when f
+                                                      (let [content (f:read :*a)]
+                                                        (f:close)
+                                                        (vim.snippet.expand content)
+                                                        (set done? true))))))))}))
 
 ;;; Mappings
 

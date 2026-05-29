@@ -371,20 +371,23 @@ local function _27_(_path, bufnr)
   end
 end
 vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl", sh = _27_}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.yaml"] = "buf-config", ["buf.gen.yaml"] = "buf-config", ["buf.policy.yaml"] = "buf-config", ["buf.lock"] = "buf-config", ["uv.lock"] = "toml", Tiltfile = "tiltfile", [".envrc"] = "bash", [".envrc.local"] = "bash"}, pattern = {[".*/%.github/workflows/.*%.ya?ml"] = "yaml.github-actions", [".*/%.github/actions/**/.*%.ya?ml"] = "yaml.github-actions"}})
+local template_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "templates")
 local function _29_(args)
   local fname = vim.fs.basename(args.file)
   local ext = vim.fn.fnamemodify(args.file, ":e")
   local ft = vim.bo[args.buf].filetype
-  local candidates = {fname, ext, ft}
   local done_3f = false
-  for _, candidate in ipairs(candidates) do
+  for _, candidate in ipairs({fname, ext, ft}) do
     if done_3f then break end
-    local tmpl = vim.fs.joinpath(vim.fn.stdpath("config"), "templates", ("%s.tmpl"):format(candidate))
-    local f = io.open(tmpl, "r")
-    if f then
-      vim.snippet.expand(f:read("*a"))
-      done_3f = true
-    else
+    if candidate ~= "" then
+      local tmpl = vim.fs.joinpath(template_dir, ("%s.tmpl"):format(candidate))
+      local f = io.open(tmpl, "r")
+      if f then
+        local content = f:read("*a")
+        f:close()
+        vim.snippet.expand(content)
+        done_3f = true
+      end
     end
   end
   return nil
