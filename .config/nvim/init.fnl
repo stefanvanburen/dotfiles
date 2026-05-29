@@ -92,18 +92,13 @@
 
 (vim.api.nvim_create_autocmd :PackChanged
                              {:callback (fn [ev]
-                                          (let [name ev.data.spec.name
-                                                kind ev.data.kind]
-                                            (when (and (= name :nvim-treesitter)
-                                                       (= kind :update))
-                                              (when (not ev.data.active)
-                                                (vim.cmd.packadd :nvim-treesitter)
-                                                (vim.cmd {:cmd :TSUpdate})))
-                                            (when (and (= name :mason)
-                                                       (= kind :update))
-                                              (when (not ev.data.active)
-                                                (vim.cmd.packadd :mason)
-                                                (vim.cmd {:cmd :MasonUpdate})))))})
+                                          (each [pkg cmd (pairs {:nvim-treesitter :TSUpdate
+                                                                 :mason :MasonUpdate})]
+                                            (when (and (= ev.data.spec.name pkg)
+                                                       (= ev.data.kind :update)
+                                                       (not ev.data.active))
+                                              (vim.cmd.packadd pkg)
+                                              (vim.cmd {:cmd cmd}))))})
 
 (vim.pack.add ["https://github.com/nvim-mini/mini.nvim"
                ;; snippets
@@ -272,11 +267,11 @@
 
 ;;;; snippets
 
-(local snippets-dir (.. (vim.fn.stdpath :config) :/snippets))
+(local snippets-dir (vim.fs.joinpath (vim.fn.stdpath :config) :snippets))
 
 (let [mini-snippets (require :mini.snippets)]
-  (mini-snippets.setup {:snippets [(mini-snippets.gen_loader.from_file (.. snippets-dir
-                                                                           :/global.json))
+  (mini-snippets.setup {:snippets [(mini-snippets.gen_loader.from_file (vim.fs.joinpath snippets-dir
+                                                                                        :global.json))
                                    ;; pull in snippets matching language types, from friendly-snippets
                                    (mini-snippets.gen_loader.from_lang)]}))
 
@@ -451,20 +446,20 @@
 
 ;; https://smallseasons.guide
 ;; https://stefan.vanburen.xyz/blog/small-seasons/
-(let [day-of-month (tonumber (vim.fn.strftime "%d"))
-      colorscheme (case (vim.fn.strftime "%m")
-                    :01 :miniwinter
-                    :02 (if (< day-of-month 4) :miniwinter :minispring)
-                    :03 :minispring
-                    :04 :minispring
-                    :05 (if (< day-of-month 6) :minispring :minisummer)
-                    :06 :minisummer
-                    :07 :minisummer
-                    :08 (if (< day-of-month 8) :minisummer :miniautumn)
-                    :09 :miniautumn
-                    :10 :miniautumn
-                    :11 (if (< day-of-month 8) :miniautumn :miniwinter)
-                    :12 :miniwinter)]
+(let [now (os.date "*t")
+      colorscheme (case now.month
+                    1 :miniwinter
+                    2 (if (< now.day 4) :miniwinter :minispring)
+                    3 :minispring
+                    4 :minispring
+                    5 (if (< now.day 6) :minispring :minisummer)
+                    6 :minisummer
+                    7 :minisummer
+                    8 (if (< now.day 8) :minisummer :miniautumn)
+                    9 :miniautumn
+                    10 :miniautumn
+                    11 (if (< now.day 8) :miniautumn :miniwinter)
+                    12 :miniwinter)]
   (vim.cmd.colorscheme colorscheme))
 
 ;;; Autocommands and FileType settings
@@ -510,15 +505,22 @@
         :just {:expandtab true :shiftwidth 4}
         :markdown {:spell true :wrap true :expandtab false}})
 
-(let [aufiletypes (vim.api.nvim_create_augroup :filetypes {})]
-  (each [filetype settings (pairs filetype-settings)]
-    (vim.api.nvim_create_autocmd :FileType
-                                 {:group aufiletypes
-                                  :pattern filetype
-                                  :callback #(each [name value (pairs settings)]
-                                               (vim.api.nvim_set_option_value name
-                                                                              value
-                                                                              {:scope :local}))})))
+(vim.api.nvim_create_autocmd :FileType
+                             {:group (vim.api.nvim_create_augroup :filetypes {})
+                              :pattern (vim.tbl_keys filetype-settings)
+                              :callback (fn [args]
+                                          ;; args.match is the actual filetype, which for compound
+                                          ;; filetypes like "yaml.github-actions" won't be a literal
+                                          ;; key; fall back to the leading component.
+                                          (let [ft args.match
+                                                settings (or (. filetype-settings ft)
+                                                             (. filetype-settings
+                                                                (string.match ft
+                                                                              "^([^.]+)")))]
+                                            (when settings
+                                              (each [name value (pairs settings)]
+                                                (vim.api.nvim_set_option_value name value
+                                                                               {:scope :local})))))})
 
 (vim.filetype.add {:extension {:mdx :markdown
                                :star :starlark

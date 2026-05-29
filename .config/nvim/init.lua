@@ -20,25 +20,11 @@ do
 end
 vim.g.diffs = {integrations = {fugitive = true}, highlights = {warn_max_lines = false}}
 local function _3_(ev)
-  local name = ev.data.spec.name
-  local kind = ev.data.kind
-  if ((name == "nvim-treesitter") and (kind == "update")) then
-    if not ev.data.active then
-      vim.cmd.packadd("nvim-treesitter")
-      vim.cmd({cmd = "TSUpdate"})
-    else
+  for pkg, cmd in pairs({["nvim-treesitter"] = "TSUpdate", mason = "MasonUpdate"}) do
+    if ((ev.data.spec.name == pkg) and (ev.data.kind == "update") and not ev.data.active) then
+      vim.cmd.packadd(pkg)
+      vim.cmd({cmd = cmd})
     end
-  else
-  end
-  if ((name == "mason") and (kind == "update")) then
-    if not ev.data.active then
-      vim.cmd.packadd("mason")
-      return vim.cmd({cmd = "MasonUpdate"})
-    else
-      return nil
-    end
-  else
-    return nil
   end
 end
 vim.api.nvim_create_autocmd("PackChanged", {callback = _3_})
@@ -163,10 +149,10 @@ do
   local mini_icons = require("mini.icons")
   mini_icons.setup({style = "ascii"})
 end
-local snippets_dir = (vim.fn.stdpath("config") .. "/snippets")
+local snippets_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "snippets")
 do
   local mini_snippets = require("mini.snippets")
-  mini_snippets.setup({snippets = {mini_snippets.gen_loader.from_file((snippets_dir .. "/global.json")), mini_snippets.gen_loader.from_lang()}})
+  mini_snippets.setup({snippets = {mini_snippets.gen_loader.from_file(vim.fs.joinpath(snippets_dir, "global.json")), mini_snippets.gen_loader.from_lang()}})
 end
 do
   local scissors = require("scissors")
@@ -296,49 +282,49 @@ do
   end
 end
 do
-  local day_of_month = tonumber(vim.fn.strftime("%d"))
+  local now = os.date("*t")
   local colorscheme
   do
-    local case_20_ = vim.fn.strftime("%m")
-    if (case_20_ == "01") then
+    local case_20_ = now.month
+    if (case_20_ == 1) then
       colorscheme = "miniwinter"
-    elseif (case_20_ == "02") then
-      if (day_of_month < 4) then
+    elseif (case_20_ == 2) then
+      if (now.day < 4) then
         colorscheme = "miniwinter"
       else
         colorscheme = "minispring"
       end
-    elseif (case_20_ == "03") then
+    elseif (case_20_ == 3) then
       colorscheme = "minispring"
-    elseif (case_20_ == "04") then
+    elseif (case_20_ == 4) then
       colorscheme = "minispring"
-    elseif (case_20_ == "05") then
-      if (day_of_month < 6) then
+    elseif (case_20_ == 5) then
+      if (now.day < 6) then
         colorscheme = "minispring"
       else
         colorscheme = "minisummer"
       end
-    elseif (case_20_ == "06") then
+    elseif (case_20_ == 6) then
       colorscheme = "minisummer"
-    elseif (case_20_ == "07") then
+    elseif (case_20_ == 7) then
       colorscheme = "minisummer"
-    elseif (case_20_ == "08") then
-      if (day_of_month < 8) then
+    elseif (case_20_ == 8) then
+      if (now.day < 8) then
         colorscheme = "minisummer"
       else
         colorscheme = "miniautumn"
       end
-    elseif (case_20_ == "09") then
+    elseif (case_20_ == 9) then
       colorscheme = "miniautumn"
-    elseif (case_20_ == "10") then
+    elseif (case_20_ == 10) then
       colorscheme = "miniautumn"
-    elseif (case_20_ == "11") then
-      if (day_of_month < 8) then
+    elseif (case_20_ == 11) then
+      if (now.day < 8) then
         colorscheme = "miniautumn"
       else
         colorscheme = "miniwinter"
       end
-    elseif (case_20_ == "12") then
+    elseif (case_20_ == 12) then
       colorscheme = "miniwinter"
     else
       colorscheme = nil
@@ -350,18 +336,19 @@ vim.api.nvim_create_autocmd("VimResized", {command = ":wincmd ="})
 local two_space = {expandtab = true, shiftwidth = 2}
 local four_space = {expandtab = true, shiftwidth = 4}
 local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript = two_space, javascriptreact = two_space, typescript = two_space, typescriptreact = two_space, html = two_space, css = two_space, cs = {commentstring = "// %s"}, helm = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = two_space, ["buf-config"] = two_space, svg = two_space, json = two_space, json5 = two_space, bash = two_space, toml = two_space, python = four_space, xml = four_space, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, gitconfig = {shiftwidth = 2, expandtab = false}, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, just = {expandtab = true, shiftwidth = 4}, markdown = {spell = true, wrap = true, expandtab = false}}
-do
-  local aufiletypes = vim.api.nvim_create_augroup("filetypes", {})
-  for filetype, settings in pairs(filetype_settings) do
-    local function _26_()
-      for name, value in pairs(settings) do
-        vim.api.nvim_set_option_value(name, value, {scope = "local"})
-      end
-      return nil
+local function _26_(args)
+  local ft = args.match
+  local settings = (filetype_settings[ft] or filetype_settings[string.match(ft, "^([^.]+)")])
+  if settings then
+    for name, value in pairs(settings) do
+      vim.api.nvim_set_option_value(name, value, {scope = "local"})
     end
-    vim.api.nvim_create_autocmd("FileType", {group = aufiletypes, pattern = filetype, callback = _26_})
+    return nil
+  else
+    return nil
   end
 end
+vim.api.nvim_create_autocmd("FileType", {group = vim.api.nvim_create_augroup("filetypes", {}), pattern = vim.tbl_keys(filetype_settings), callback = _26_})
 local function _27_(_path, bufnr)
   local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]
   if (first_line and string.match(first_line, "^#!.*[/ ]bash[%w]*%s*$")) then
