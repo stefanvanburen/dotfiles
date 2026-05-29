@@ -98,7 +98,7 @@
                                                        (= ev.data.kind :update)
                                                        (not ev.data.active))
                                               (vim.cmd.packadd pkg)
-                                              (vim.cmd {:cmd cmd}))))})
+                                              (vim.cmd {: cmd}))))})
 
 (vim.pack.add ["https://github.com/nvim-mini/mini.nvim"
                ;; snippets
@@ -436,17 +436,9 @@
 (let [nvim-paredit (require :nvim-paredit)]
   (nvim-paredit.setup))
 
-;; Only enable Obsidian on PC.
-(let [vault-dir "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault"]
-  (when (= (vim.fn.isdirectory vault-dir) 1)
-    (vim.pack.add ["https://github.com/obsidian-nvim/obsidian.nvim"])
-    (let [obsidian (require :obsidian)]
-      (obsidian.setup {:legacy_commands false
-                       :workspaces [{:name :vault :path vault-dir}]}))))
-
 ;; https://smallseasons.guide
 ;; https://stefan.vanburen.xyz/blog/small-seasons/
-(let [now (os.date "*t")
+(let [now (os.date :*t)
       colorscheme (case now.month
                     1 :miniwinter
                     2 (if (< now.day 4) :miniwinter :minispring)
@@ -513,13 +505,15 @@
                                           ;; filetypes like "yaml.github-actions" won't be a literal
                                           ;; key; fall back to the leading component.
                                           (let [ft args.match
-                                                settings (or (. filetype-settings ft)
+                                                settings (or (. filetype-settings
+                                                                ft)
                                                              (. filetype-settings
                                                                 (string.match ft
                                                                               "^([^.]+)")))]
                                             (when settings
                                               (each [name value (pairs settings)]
-                                                (vim.api.nvim_set_option_value name value
+                                                (vim.api.nvim_set_option_value name
+                                                                               value
                                                                                {:scope :local})))))})
 
 (vim.filetype.add {:extension {:mdx :markdown
@@ -563,9 +557,12 @@
                                             (let [fname (vim.fs.basename args.file)
                                                   ext (vim.fn.fnamemodify args.file
                                                                           ":e")
-                                                  ft (. vim.bo args.buf :filetype)]
+                                                  ft (. vim.bo args.buf
+                                                        :filetype)]
                                               (var done? false)
-                                              (each [_ candidate (ipairs [fname ext ft])
+                                              (each [_ candidate (ipairs [fname
+                                                                          ext
+                                                                          ft])
                                                      &until done?]
                                                 (when (not= candidate "")
                                                   (let [tmpl (vim.fs.joinpath template-dir
