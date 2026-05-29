@@ -371,9 +371,6 @@ local function _27_(_path, bufnr)
   end
 end
 vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl", sh = _27_}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.yaml"] = "buf-config", ["buf.gen.yaml"] = "buf-config", ["buf.policy.yaml"] = "buf-config", ["buf.lock"] = "buf-config", ["uv.lock"] = "toml", Tiltfile = "tiltfile", [".envrc"] = "bash", [".envrc.local"] = "bash"}, pattern = {[".*/%.github/workflows/.*%.ya?ml"] = "yaml.github-actions", [".*/%.github/actions/**/.*%.ya?ml"] = "yaml.github-actions"}})
-for pattern, skeleton_file in pairs({["buf.gen.yaml"] = "buf.gen.yaml", [".nfnl.fnl"] = ".nfnl.fnl", justfile = "justfile"}) do
-  vim.api.nvim_create_autocmd("BufNewFile", {pattern = pattern, command = ("0r ~/.config/nvim/skeletons/" .. skeleton_file)})
-end
 local function _29_(args)
   local fname = vim.fs.basename(args.file)
   local ext = vim.fn.fnamemodify(args.file, ":e")

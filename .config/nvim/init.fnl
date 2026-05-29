@@ -553,16 +553,6 @@
                    :pattern {".*/%.github/workflows/.*%.ya?ml" :yaml.github-actions
                              ".*/%.github/actions/**/.*%.ya?ml" :yaml.github-actions}})
 
-;; Skeleton files.
-;; :h skeleton
-(each [pattern skeleton-file (pairs {:buf.gen.yaml :buf.gen.yaml
-                                     :.nfnl.fnl :.nfnl.fnl
-                                     :justfile :justfile})]
-  (vim.api.nvim_create_autocmd :BufNewFile
-                               {: pattern
-                                :command (.. "0r ~/.config/nvim/skeletons/"
-                                             skeleton-file)}))
-
 ;; Template files.
 (vim.api.nvim_create_autocmd :BufNewFile
                              {:pattern "*"

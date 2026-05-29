@@ -51,8 +51,6 @@ if status --is-interactive
     abbr --add v vim
     # ../git/config
     abbr --add g git
-    # https://buf.build/docs/cli/
-    abbr --add b buf
     # https://makefiletutorial.com
     abbr --add m make
     # https://just.systems
