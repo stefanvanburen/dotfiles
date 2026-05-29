@@ -22,3 +22,9 @@ macos-defaults-zoom-peek:
     defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
     defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
     defaults write com.apple.universalaccess closeViewSmoothImages -bool false
+
+# https://dev.fennel-lang.org/wiki/LanguageServer
+# https://git.sr.ht/~micampe/fennel-ls-nvim-docs
+# Install the nvim Lua API docset for fennel-ls.
+fennel-ls-nvim-docs:
+    curl --create-dirs -o $XDG_DATA_HOME/fennel-ls/docsets/nvim.lua https://git.sr.ht/~micampe/fennel-ls-nvim-docs/blob/main/nvim.lua
