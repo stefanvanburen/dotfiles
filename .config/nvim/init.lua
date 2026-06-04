@@ -151,6 +151,10 @@ do
   local mini_icons = require("mini.icons")
   mini_icons.setup({style = "ascii"})
 end
+do
+  local mini_input = require("mini.input")
+  mini_input.setup()
+end
 local snippets_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "snippets")
 do
   local mini_snippets = require("mini.snippets")

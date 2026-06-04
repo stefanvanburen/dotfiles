@@ -264,6 +264,9 @@
 (let [mini-icons (require :mini.icons)]
   (mini-icons.setup {:style :ascii}))
 
+(let [mini-input (require :mini.input)]
+  (mini-input.setup))
+
 ;;;; snippets
 
 (local snippets-dir (vim.fs.joinpath (vim.fn.stdpath :config) :snippets))
