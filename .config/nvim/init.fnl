@@ -109,7 +109,6 @@
                "https://github.com/andymass/vim-matchup"
                "https://github.com/tpope/vim-abolish"
                "https://github.com/rktjmp/paperplanes.nvim"
-               "https://github.com/lewis6991/fileline.nvim"
                "https://github.com/tpope/vim-fugitive"
                "https://github.com/tpope/vim-rhubarb"
                "https://git.sr.ht/~willdurand/srht.vim"
@@ -457,6 +456,51 @@
 ;;; Autocommands and FileType settings
 
 (vim.api.nvim_create_autocmd :VimResized {:command ":wincmd ="})
+
+;; Inlined replacement for lewis6991/fileline.nvim. Jumps to the right line
+;; (and column) when a file is opened with a trailing location spec, e.g.
+;; `nvim foo.go:42:7`. Adds GitHub `#Lnnn` fragments on top of upstream's
+;; colon/paren formats.
+(local fileline-patterns
+       ;; More-specific first so e.g. "foo:10:5" isn't truncated by the
+       ;; line-only pattern.
+       ["^(.+):(%d+):(%d+):?$"
+        "^(.+):(%d+):?$"
+        "^(.+)%((%d+):(%d+)%)$"
+        "^(.+)%((%d+)%)$"
+        "^(.+)#L(%d+)$"])
+
+(fn parse-fileline [name]
+  (var result nil)
+  (each [_ pat (ipairs fileline-patterns) &until result]
+    (let [(file line col) (string.match name pat)]
+      (when file
+        (set result {: file :line (tonumber line) :col (tonumber col)}))))
+  result)
+
+(fn fileline-jump [args]
+  (let [parsed (when (= (. vim.bo args.buf :buftype) "")
+                 (parse-fileline args.file))]
+    (when (and parsed (= 1 (vim.fn.filereadable parsed.file)))
+      (let [orphan args.buf]
+        (vim.cmd.edit {:args [(vim.fn.fnameescape parsed.file)]
+                       :mods {:keepalt true}})
+        (vim.schedule #(when (vim.api.nvim_buf_is_valid orphan)
+                         (vim.api.nvim_buf_delete orphan {})))
+        (let [lnum (math.max 1
+                             (math.min parsed.line
+                                       (vim.api.nvim_buf_line_count 0)))
+              ccol (if parsed.col (math.max 0 (- parsed.col 1)) 0)]
+          (vim.api.nvim_win_set_cursor 0 [lnum ccol]))
+        (when (> (vim.fn.foldlevel (vim.fn.line ".")) 0)
+          (vim.cmd.normal {:args [:zv] :bang true}))
+        (vim.cmd.normal {:args [:zz] :bang true})
+        (vim.cmd.filetype :detect)))))
+
+(vim.api.nvim_create_autocmd :BufNewFile
+                             {:group (vim.api.nvim_create_augroup :fileline {})
+                              :nested true
+                              :callback fileline-jump})
 
 (local two-space {:expandtab true :shiftwidth 2})
 (local four-space {:expandtab true :shiftwidth 4})
