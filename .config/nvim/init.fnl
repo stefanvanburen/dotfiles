@@ -498,10 +498,7 @@
                                        (vim.api.nvim_buf_line_count 0)))
               ccol (if parsed.col (math.max 0 (- parsed.col 1)) 0)]
           (vim.api.nvim_win_set_cursor 0 [lnum ccol]))
-        (when (> (vim.fn.foldlevel (vim.fn.line ".")) 0)
-          (vim.cmd.normal {:args [:zv] :bang true}))
-        (vim.cmd.normal {:args [:zz] :bang true})
-        (vim.cmd.filetype :detect)))))
+        (vim.cmd.normal {:args [:zvzz] :bang true})))))
 
 (vim.api.nvim_create_autocmd :BufNewFile
                              {:group (vim.api.nvim_create_augroup :fileline {})
