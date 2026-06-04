@@ -473,31 +473,53 @@
         "^(.+)%((%d+)%)$"
         "^(.+)#L(%d+)$"])
 
+;; GitHub/sr.ht line range, e.g. `foo.ts#L25-28` or `foo.ts#L25-L28`. Lives
+;; outside `fileline-patterns` because its third capture is the end line, not
+;; a column, so it doesn't fit the shared (file line col) destructure.
+(local fileline-range-pattern "^(.+)#L(%d+)-L?(%d+)$")
+
 (fn parse-fileline [name]
-  (var result nil)
-  (each [_ pat (ipairs fileline-patterns) &until result]
-    (let [(file line col) (string.match name pat)]
-      (when file
-        (set result {: file :line (tonumber line) :col (tonumber col)}))))
-  result)
+  (let [(rfile rstart rend) (string.match name fileline-range-pattern)]
+    (if rfile
+        {:file rfile :line (tonumber rstart) :end-line (tonumber rend)}
+        (do
+          (var result nil)
+          (each [_ pat (ipairs fileline-patterns) &until result]
+            (let [(file line col) (string.match name pat)]
+              (when file
+                (set result {: file :line (tonumber line) :col (tonumber col)}))))
+          result))))
 
 (fn fileline-jump [args]
   (let [parsed (when (= (. vim.bo args.buf :buftype) "")
                  (parse-fileline args.file))]
     (when (and parsed (= 1 (vim.fn.filereadable parsed.file)))
-      (let [orphan args.buf]
+      (let [orphan args.buf
+            last-line-after-edit (fn [] (vim.api.nvim_buf_line_count 0))]
         (vim.cmd.edit {:args [(vim.fn.fnameescape parsed.file)]
                        :mods {:keepalt true}})
         (vim.schedule #(when (vim.api.nvim_buf_is_valid orphan)
                          (vim.api.nvim_buf_delete orphan {})))
-        (let [lnum (math.max 1
-                             (math.min parsed.line
-                                       (vim.api.nvim_buf_line_count 0)))
-              ccol (if parsed.col (math.max 0 (- parsed.col 1)) 0)]
-          (vim.api.nvim_win_set_cursor 0 [lnum ccol]))
-        (when (> (vim.fn.foldlevel (vim.fn.line ".")) 0)
-          (vim.cmd.normal {:args [:zv] :bang true}))
-        (vim.cmd.normal {:args [:zz] :bang true})
+        (if parsed.end-line
+            ;; Range: visual-line select start..end, cursor at start. Use
+            ;; feedkeys (not `:normal!`) so the visual selection actually
+            ;; persists after the autocmd returns — `:normal!` exits visual
+            ;; at end-of-command and the user wouldn't see the selection.
+            ;; Skip `zz` so the selection start stays in view for big ranges.
+            (let [last (last-line-after-edit)
+                  start (math.max 1 (math.min parsed.line last))
+                  stop (math.max start (math.min parsed.end-line last))]
+              (vim.api.nvim_feedkeys (.. stop :GV start :G) :n false)
+              (when (> (vim.fn.foldlevel start) 0)
+                (vim.api.nvim_feedkeys :zv :n false)))
+            (do
+              (let [lnum (math.max 1
+                                   (math.min parsed.line (last-line-after-edit)))
+                    ccol (if parsed.col (math.max 0 (- parsed.col 1)) 0)]
+                (vim.api.nvim_win_set_cursor 0 [lnum ccol]))
+              (when (> (vim.fn.foldlevel (vim.fn.line ".")) 0)
+                (vim.cmd.normal {:args [:zv] :bang true}))
+              (vim.cmd.normal {:args [:zz] :bang true})))
         (vim.cmd.filetype :detect)))))
 
 (vim.api.nvim_create_autocmd :BufNewFile
