@@ -116,7 +116,6 @@
                "https://github.com/tpope/vim-dispatch"
                ;; dispatch is a dependency of dadbod
                "https://github.com/tpope/vim-dadbod"
-               "https://github.com/fladson/vim-kitty"
                "https://github.com/janet-lang/janet.vim"
                "https://github.com/qvalentin/helm-ls.nvim"
                "https://github.com/Olical/nfnl"
@@ -660,7 +659,6 @@
 (each [keymap file (pairs {:<leader>ef :$HOME/.config/fish/config.fish
                            :<leader>egi :$HOME/.config/git/config
                            :<leader>ego :$HOME/.config/ghostty/config
-                           :<leader>ek :$HOME/.config/kitty/kitty.conf
                            :<leader>ev :$HOME/.config/nvim/init.fnl})]
   (map :n keymap #(vim.cmd {:cmd :edit :args [file]})
        {:desc (.. ":edit " file)}))
