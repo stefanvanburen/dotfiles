@@ -16,4 +16,15 @@ directory: ~/Documents/music
 # https://beets.readthedocs.io/en/stable/plugins/fish.html
 # https://beets.readthedocs.io/en/stable/plugins/info.html
 # https://beets.readthedocs.io/en/stable/plugins/musicbrainz.html
-plugins: embedart fetchart fish info musicbrainz
+# https://beets.readthedocs.io/en/stable/plugins/convert.html
+plugins: convert embedart fetchart fish info musicbrainz
+
+# Keep the library playable in Music.app: transcode lossless imports
+# (e.g. FLAC) to ALAC, leaving already-lossy files untouched.
+convert:
+    auto: yes
+    format: alac
+    never_convert_lossy_files: yes
+    # `beet convert -k` swaps converted files into the library and moves
+    # the originals here.
+    dest: ~/Music/flac-originals
