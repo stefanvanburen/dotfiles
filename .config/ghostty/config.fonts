@@ -42,8 +42,11 @@ font-family = "Monaspace Neon Var"
 font-family = "Monaspace Radon Var"
 font-family = "Monaspace Xeon Var Medium"
 
-# https://github.com/andirueckel/undefined-medium
+# https://undefined-medium.com/
 font-family = "undefined"
+# undefined-medium has a very tall intrinsic line height; pull it in.
+# https://ghostty.org/docs/config/reference#adjust-cell-height
+adjust-cell-height = -20%
 
 # https://github.com/0xType/0xProto
 font-family = "0xProto"
