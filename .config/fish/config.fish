@@ -25,22 +25,17 @@ set -gx MANPAGER "nvim +Man!"
 
 # https://github.com/junegunn/fzf?tab=readme-ov-file#environment-variables
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
-set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-set -l fzf_colors --no-color
-set -gx FZF_DEFAULT_OPTS "$fzf_colors"
-set -gx FZF_CTRL_T_OPTS "$fzf_colors"
+set -gx FZF_DEFAULT_OPTS '--no-color'
 
 # uv tools / go
 fish_add_path $XDG_BIN_HOME
 # rust
 fish_add_path ~/.cargo/bin
-# bun
-fish_add_path ~/.cache/.bun/bin
 
 # Setup homebrew environment (PATH-related variables)
 # This must be before any command checking, as it sets up the PATH.
 if test -x /opt/homebrew/bin/brew
-    eval (/opt/homebrew/bin/brew shellenv)
+    /opt/homebrew/bin/brew shellenv | source
 end
 
 if status --is-interactive
