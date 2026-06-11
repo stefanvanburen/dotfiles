@@ -91,7 +91,9 @@
 # kitty uses less as a pager
 /.lesshst
 
-/.claude
+# ignore .claude contents (history, sessions, transcripts, caches) but track shared settings
+/.claude/*
+!/.claude/settings.json
 # includes .claude.json.backup.<xyz>
 /.claude.json*
 
