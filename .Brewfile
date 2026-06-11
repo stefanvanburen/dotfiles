@@ -27,9 +27,8 @@ brew "tree-sitter-cli"
 # install and run python tools (that aren't available in homebrew)
 brew "uv"
 
-# terminals
+# terminal
 cask "ghostty"
-cask "kitty"
 
 # [homebrew's bundle docs][^1] designates the example Brewfile as `ruby` in the markdown.
 # [^1]: https://github.com/Homebrew/brew/blob/544728fd33f0a22ed2b934bfd75b7f6612115e8d/docs/Brew-Bundle-and-Brewfile.md#L61
