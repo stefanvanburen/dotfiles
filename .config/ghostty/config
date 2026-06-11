@@ -1,7 +1,7 @@
 # https://ghostty.org/docs/config
 
 # https://ghostty.org/docs/config/reference#theme
-theme = light:modus_operandi,dark:modus_vivendi
+theme = light:Modus Operandi,dark:Modus Vivendi
 # theme = light:Nvim Light,dark:Nvim Dark
 # theme = Alabaster
 # theme = light:zenbones_light,dark:zenbones_dark
