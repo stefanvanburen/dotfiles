@@ -437,6 +437,13 @@
 (let [nvim-paredit (require :nvim-paredit)]
   (nvim-paredit.setup))
 
+;; Non-lazy plugin loaders must call setup() explicitly; without it only the
+;; ftdetect/ftplugin runtime files load (filetype detection + matchparen), and
+;; the conceal/indent-hint/action-highlight features stay off. Needs the helm
+;; treesitter parser, hence after treesitter.
+(let [helm-ls (require :helm-ls)]
+  (helm-ls.setup))
+
 ;; https://smallseasons.guide
 ;; https://stefan.vanburen.xyz/blog/small-seasons/
 (let [now (os.date :*t)
@@ -804,9 +811,6 @@
         :bashls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tombi
         :tombi {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
-        ;; NOTE: Download omnisharp with mason.
-        :omnisharp {:cmd [:omnisharp]}
         ;; Dockerfiles
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#docker_language_server
         :docker_language_server {}
@@ -827,10 +831,6 @@
         :postgres_lsp {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty
         :ty {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#starpls
-        :starpls {:filetypes [:bzl :starlark]}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cue
-        :cue {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tilt_ls
         :tilt_ls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
