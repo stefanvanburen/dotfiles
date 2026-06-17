@@ -2,9 +2,6 @@
 
 # https://ghostty.org/docs/config/reference#theme
 theme = light:Modus Operandi,dark:Modus Vivendi
-# theme = light:Nvim Light,dark:Nvim Dark
-# theme = Alabaster
-# theme = light:zenbones_light,dark:zenbones_dark
 
 # typically configuring fonts - check ./config.fonts
 # https://ghostty.org/docs/config/reference#config-file
