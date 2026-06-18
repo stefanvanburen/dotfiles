@@ -107,5 +107,8 @@
 
 # Contains sensitive information (password).
 /.config/newsboat/password
+
+# https://beets.io/
+# ignore library database and other runtime files, track only config
 /.config/beets/*
 !/.config/beets/config.yaml
