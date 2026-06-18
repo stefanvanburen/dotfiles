@@ -28,3 +28,5 @@ convert:
     # `beet convert -k` swaps converted files into the library and moves
     # the originals here.
     dest: ~/Music/flac-originals
+    # For lossy formats (e.g. opus from YouTube) that Music.app can't play,
+    # use: beet convert -f aac -k <query>  (uses beets' built-in aac preset)

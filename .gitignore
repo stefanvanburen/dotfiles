@@ -107,3 +107,5 @@
 
 # Contains sensitive information (password).
 /.config/newsboat/password
+/.config/beets/*
+!/.config/beets/config.yaml
