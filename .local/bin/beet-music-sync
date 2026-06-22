@@ -47,12 +47,12 @@ def sync_to_music(tracks):
                 f'    set matchTracks to (every file track of lib whose album is "{esc(album)}" and track number is {tracknum} and (album artist is "{esc(albumartist)}" or album artist is ""))'
             )
             lines.append("    repeat with aTrack in matchTracks")
-            lines += [
+            lines.extend([
                 f'        set name of aTrack to "{esc(item.title)}"',
                 f'        set artist of aTrack to "{esc(item.artist)}"',
                 f'        set album artist of aTrack to "{esc(albumartist)}"',
                 f'        set album of aTrack to "{esc(album)}"',
-            ]
+            ])
             if item.year:
                 lines.append(f"        set year of aTrack to {int(item.year)}")
             if genre := item.get("genre"):
@@ -61,8 +61,8 @@ def sync_to_music(tracks):
                 lines.append(f'        set composer of aTrack to "{esc(composer)}"')
             if discnum:
                 lines.append(f"        set disc number of aTrack to {discnum}")
-            lines += ["        set updated to updated + 1", "    end repeat"]
-        lines += ["    return updated", "end tell"]
+            lines.extend(["        set updated to updated + 1", "    end repeat"])
+        lines.extend(["    return updated", "end tell"])
 
         result = subprocess.run(
             ["osascript", "-e", "\n".join(lines)], capture_output=True, text=True
@@ -91,8 +91,7 @@ def sync_to_music(tracks):
 if __name__ == "__main__":
     config.read()
     lib = Library(config["library"].as_filename())
-    query_args = sys.argv[1:]
-    query, sort = parse_query_parts(query_args, Item) if query_args else (None, None)
-    tracks = list(lib.items(query, sort) if query else lib.items())
+    query, sort = parse_query_parts(sys.argv[1:], Item)
+    tracks = list(lib.items(query, sort))
     print(f"Found {len(tracks)} track(s). Syncing to Music.app...")
     sync_to_music(tracks)
