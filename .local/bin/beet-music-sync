@@ -1,51 +1,24 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.12"
+# dependencies = ["beets"]
+# ///
 """Sync beets metadata to Music.app for tracks matching a beets query.
 
 Usage:
     beet-music-sync [beets query...]
 
 Examples:
-    beet-music-sync                       # sync everything
-    beet-music-sync albumartist:Akusmi
-    beet-music-sync albumartist:"Moon Mullins"
-    beet-music-sync mb_albumid::^.+
+    beet-music-sync                    # sync everything
+    beet-music-sync albumartist:C418
+    beet-music-sync album:TUNIC
 """
 
-import glob
-import os
 import subprocess
 import sys
 
-# Locate beets when installed as a uv tool
-try:
-    import beets
-except ImportError:
-    candidates = sorted(glob.glob(
-        os.path.expanduser("~/.local/share/uv/tools/beets/lib/python*/site-packages")
-    ))
-    if not candidates:
-        sys.exit("Error: beets not found. Install with: uv tool install beets")
-    sys.path.insert(0, candidates[-1])
-    import beets
-
-from beets import config, plugins
+from beets import config
 from beets.library import Item, Library, parse_query_parts
-
-
-def open_library():
-    config.read()
-    try:
-        plugins.load_plugins(config["plugins"].as_str_seq())
-    except Exception:
-        pass  # plugin load errors don't affect basic field queries
-    return Library(config["library"].as_filename())
-
-
-def get_tracks(lib, query_args):
-    if query_args:
-        query, sort = parse_query_parts(query_args, Item)
-        return lib.items(query, sort)
-    return lib.items()
 
 
 def esc(s):
@@ -53,83 +26,58 @@ def esc(s):
 
 
 def sync_to_music(tracks):
-    # Group by (album, albumartist) to prevent false matches across albums with
-    # the same title but different artists (e.g. multiple "Greatest Hits" albums).
     by_album = {}
     for item in tracks:
         if item.album:
-            key = (item.album, item.albumartist or "")
-            by_album.setdefault(key, []).append(item)
+            by_album.setdefault((item.album, item.albumartist or ""), []).append(item)
 
-    total_updated = 0
-    total_not_found = 0
+    total_updated = total_not_found = 0
 
     for (album, albumartist), album_tracks in sorted(by_album.items()):
-        lines = [
-            'tell application "Music"',
-            "    set lib to library playlist 1",
-            "    set updated to 0",
-        ]
-
+        lines = ['tell application "Music"', "    set lib to library playlist 1", "    set updated to 0"]
         for item in album_tracks:
             tracknum = int(item.track or 0)
             discnum = int(item.disc or 0)
-
-            # Match by album + track number + album artist. The "album artist is """
-            # arm catches tracks not yet synced (empty albumartist in Music.app),
-            # while the explicit albumartist arm prevents cross-album contamination.
-            lines.append(
-                f'    set matchTracks to (every file track of lib whose album is "{esc(album)}"'
-                f' and track number is {tracknum}'
-                f' and (album artist is "{esc(albumartist)}" or album artist is ""))'
-            )
+            # OR on album artist catches tracks not yet synced (empty in Music.app)
+            lines.append(f'    set matchTracks to (every file track of lib whose album is "{esc(album)}" and track number is {tracknum} and (album artist is "{esc(albumartist)}" or album artist is ""))')
             lines.append("    repeat with aTrack in matchTracks")
-            lines.append(f'        set name of aTrack to "{esc(item.title)}"')
-            lines.append(f'        set artist of aTrack to "{esc(item.artist)}"')
-            lines.append(f'        set album artist of aTrack to "{esc(albumartist)}"')
-            lines.append(f'        set album of aTrack to "{esc(album)}"')
+            lines += [
+                f'        set name of aTrack to "{esc(item.title)}"',
+                f'        set artist of aTrack to "{esc(item.artist)}"',
+                f'        set album artist of aTrack to "{esc(albumartist)}"',
+                f'        set album of aTrack to "{esc(album)}"',
+            ]
             if item.year:
                 lines.append(f"        set year of aTrack to {int(item.year)}")
-            genre = item.get("genre")
-            composer = item.get("composer")
-            if genre:
+            if genre := item.get("genre"):
                 lines.append(f'        set genre of aTrack to "{esc(genre)}"')
-            if composer:
+            if composer := item.get("composer"):
                 lines.append(f'        set composer of aTrack to "{esc(composer)}"')
             if discnum:
                 lines.append(f"        set disc number of aTrack to {discnum}")
-            lines.append("        set updated to updated + 1")
-            lines.append("    end repeat")
+            lines += ["        set updated to updated + 1", "    end repeat"]
+        lines += ["    return updated", "end tell"]
 
-        lines.append("    return updated")
-        lines.append("end tell")
-
-        result = subprocess.run(
-            ["osascript", "-e", "\n".join(lines)], capture_output=True, text=True
-        )
+        result = subprocess.run(["osascript", "-e", "\n".join(lines)], capture_output=True, text=True)
         label = f"{albumartist} - {album}" if albumartist else album
         if result.returncode != 0:
             print(f"  ERROR '{label}': {result.stderr.strip()}", file=sys.stderr)
             total_not_found += len(album_tracks)
         else:
-            try:
-                updated = int(result.stdout.strip())
-            except ValueError:
-                updated = 0
+            updated = int(result.stdout.strip()) if result.stdout.strip().isdigit() else 0
             not_found = max(0, len(album_tracks) - updated)
             total_updated += updated
             total_not_found += not_found
-            status = f"{updated} updated"
-            if not_found:
-                status += f", {not_found} not in Music.app"
+            status = f"{updated} updated" + (f", {not_found} not in Music.app" if not_found else "")
             print(f"  {label}: {status}")
 
     print(f"\n{total_updated} track(s) synced, {total_not_found} not found in Music.app.")
 
 
-if __name__ == "__main__":
-    lib = open_library()
-    query_args = sys.argv[1:]
-    tracks = list(get_tracks(lib, query_args))
-    print(f"Found {len(tracks)} track(s). Syncing to Music.app...")
-    sync_to_music(tracks)
+config.read()
+lib = Library(config["library"].as_filename())
+query_args = sys.argv[1:]
+query, sort = parse_query_parts(query_args, Item) if query_args else (None, None)
+tracks = list(lib.items(query, sort) if query else lib.items())
+print(f"Found {len(tracks)} track(s). Syncing to Music.app...")
+sync_to_music(tracks)
