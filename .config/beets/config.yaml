@@ -4,20 +4,22 @@
 # To install `beets` on macOS:
 #
 # $ brew install uv
-# $ uv tool install beets --with requests --with certifi
+# $ uv tool install beets --with requests --with certifi --with bs4
 
 # Store music library in ~/Documents/music, which is on iCloud
 directory: ~/Documents/music
 
 # https://beets.readthedocs.io/en/stable/plugins/index.html
 #
+# https://beets.readthedocs.io/en/stable/plugins/convert.html
 # https://beets.readthedocs.io/en/stable/plugins/embedart.html
 # https://beets.readthedocs.io/en/stable/plugins/fetchart.html
 # https://beets.readthedocs.io/en/stable/plugins/fish.html
 # https://beets.readthedocs.io/en/stable/plugins/info.html
+# https://beets.readthedocs.io/en/stable/plugins/lyrics.html
+# https://beets.readthedocs.io/en/stable/plugins/mbsync.html
 # https://beets.readthedocs.io/en/stable/plugins/musicbrainz.html
-# https://beets.readthedocs.io/en/stable/plugins/convert.html
-plugins: convert embedart fetchart fish info musicbrainz
+plugins: convert embedart fetchart fish info lyrics mbsync musicbrainz
 
 # Keep the library playable in Music.app: transcode lossless imports
 # (e.g. FLAC) to ALAC, leaving already-lossy files untouched.
@@ -30,3 +32,7 @@ convert:
     dest: ~/Music/flac-originals
     # For lossy formats (e.g. opus from YouTube) that Music.app can't play,
     # use: beet convert -f aac -k <query>  (uses beets' built-in aac preset)
+
+# LRClib is free and open; add a genius_api_key to re-enable Genius.
+lyrics:
+    sources: [lrclib]
