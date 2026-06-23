@@ -17,6 +17,7 @@
 !/.local/bin/
 /.local/bin/*
 !/.local/bin/beet-music-sync
+!/.local/bin/beet-lyrics-parallel
 /.npm
 /.docker
 /.cargo

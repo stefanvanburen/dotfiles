@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""Fetch lyrics for non-instrumental tracks in parallel, one worker per artist.
+
+Usage:
+    beet-lyrics-parallel [-f] [beets query...]
+
+Examples:
+    beet-lyrics-parallel                    # fetch for everything (skips tracks with lyrics)
+    beet-lyrics-parallel -f                 # refetch even if lyrics already exist
+    beet-lyrics-parallel albumartist:Burial # fetch for a specific artist
+"""
+
+import argparse
+import subprocess
+import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+WORKERS = 32
+
+
+def beet(*args: str) -> str:
+    return subprocess.run(["beet", *args], capture_output=True, text=True, check=True).stdout
+
+
+def get_artists(force: bool, query_args: list[str]) -> list[str]:
+    # When not forcing, skip artists where every track already has lyrics
+    lyrics_filter = [] if force else ["^lyrics::."]
+    output = beet("list", "-f", "$albumartist", "^instrumental:true", *lyrics_filter, *query_args)
+    return sorted({line.strip() for line in output.splitlines() if line.strip()})
+
+
+ARTIST_TIMEOUT = 120  # seconds; prevents a single stalled API call from blocking a worker
+
+
+def fetch_for_artist(artist: str, force: bool) -> tuple[str, str, str]:
+    cmd = ["beet", "lyrics"]
+    if force:
+        cmd.append("-f")
+    cmd.extend(["^instrumental:true", f"albumartist:{artist}"])
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=ARTIST_TIMEOUT)
+    except subprocess.TimeoutExpired:
+        return artist, "", f"timed out after {ARTIST_TIMEOUT}s"
+    return artist, result.stdout.strip(), result.stderr.strip()
+
+
+def tag_lrclib_instrumentals() -> int:
+    # lrclib marks tracks as instrumental by storing "[Instrumental]" as lyrics;
+    # tag those with instrumental=true so future runs skip them entirely
+    result = subprocess.run(
+        ["beet", "modify", "-y", "lyrics::\\[Instrumental\\]", "instrumental=true"],
+        capture_output=True,
+        text=True,
+    )
+    for line in result.stdout.splitlines():
+        if line.startswith("Modifying"):
+            return int(line.split()[1])
+    return 0
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("-f", "--force", action="store_true", help="refetch lyrics even if already present")
+    args, query_args = parser.parse_known_args()
+
+    artists = get_artists(args.force, query_args)
+    total = len(artists)
+    print(f"Fetching lyrics for {total} artists ({WORKERS} in parallel)...")
+
+    done = 0
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        futures = {pool.submit(fetch_for_artist, artist, args.force): artist for artist in artists}
+        for future in as_completed(futures):
+            artist, stdout, stderr = future.result()
+            done += 1
+            print(f"[{done}/{total}] {artist}", flush=True)
+            for line in stdout.splitlines():
+                print(f"  {line}")
+            if stderr:
+                print(f"  ERROR: {stderr}", file=sys.stderr)
+
+    tagged = tag_lrclib_instrumentals()
+    if tagged:
+        print(f"\nTagged {tagged} lrclib-instrumental track(s) as instrumental=true.")
