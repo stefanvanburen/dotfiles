@@ -36,3 +36,4 @@ convert:
 # LRClib is free and open; add a genius_api_key to re-enable Genius.
 lyrics:
     sources: [lrclib]
+    auto_ignore: instrumental:true
