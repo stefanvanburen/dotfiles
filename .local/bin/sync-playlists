@@ -1,0 +1,394 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.14"
+# dependencies = ["beets"]
+# ///
+"""Sync Music.app playlists with M3U files in ~/Documents/music/Playlists/.
+
+Track identity is matched by (artist, title) so beets paths and iTunes paths
+referring to the same song are treated as the same track.
+
+Usage:
+    sync-playlists --merge [PLAYLIST...]       # add to each what the other has (default)
+    sync-playlists --to-m3u [PLAYLIST...]      # iTunes → M3U (iTunes authoritative)
+    sync-playlists --to-itunes [PLAYLIST...]   # M3U → iTunes (M3U authoritative)
+    sync-playlists --dry-run --merge           # preview changes
+
+With --to-m3u or --to-itunes, pass --remove to also remove tracks missing from
+the authoritative source (default: only add, never remove).
+"""
+
+import argparse
+import os
+import re
+import subprocess
+import sys
+
+from beets import config
+from beets.library import Item, Library
+
+PLAYLISTS_DIR = os.path.expanduser("~/Documents/music/Playlists")
+
+
+def esc(s: str) -> str:
+    return str(s or "").replace("\\", "\\\\").replace('"', '\\"')
+
+
+def osascript(script: str) -> str:
+    r = subprocess.run(["osascript", "-e", script], capture_output=True, text=True)
+    if r.returncode != 0:
+        raise RuntimeError(f"AppleScript error: {r.stderr.strip()}")
+    return r.stdout.strip()
+
+
+_RE_FEAT_SUFFIX = re.compile(r"\s*(feat\.|ft\.|featuring|vs\.?).*$", re.IGNORECASE)
+_RE_FEAT_PARENS = re.compile(r"\s*\(feat\..*?\)", re.IGNORECASE)
+_RE_COLLAB = re.compile(r"\s*[&×x]\s+.*$", re.IGNORECASE)
+_RE_CHAR_SUBS = re.compile(r"[/_:]")
+_RE_WHITESPACE = re.compile(r"\s+")
+_RE_TRACK_NUM = re.compile(r"^\d+-?\d+\s+")
+
+
+def primary_artist(artist: str) -> str:
+    """Strip featured/collaborating artists — 'Drake feat. Rihanna' → 'drake'."""
+    artist = _RE_FEAT_SUFFIX.sub("", artist)
+    artist = _RE_FEAT_PARENS.sub("", artist)
+    artist = _RE_COLLAB.sub("", artist)
+    return artist.casefold().strip()
+
+
+def normalize_title(title: str) -> str:
+    # macOS can't use '/', ':' in filenames and swaps them for '_'; treat as equivalent
+    title = _RE_CHAR_SUBS.sub(" ", title)
+    return _RE_WHITESPACE.sub(" ", title).casefold().strip()
+
+
+def track_key(artist: str, title: str) -> tuple[str, str]:
+    return (primary_artist(artist), normalize_title(title))
+
+
+# --- M3U ---
+
+
+def m3u_path(playlist_name: str) -> str:
+    return os.path.join(PLAYLISTS_DIR, playlist_name + ".m3u")
+
+
+def read_m3u(playlist_name: str) -> list[str]:
+    p = m3u_path(playlist_name)
+    if not os.path.exists(p):
+        return []
+    with open(p) as f:
+        return [l.strip() for l in f if l.strip() and not l.startswith("#")]
+
+
+def write_m3u(playlist_name: str, paths: list[str], dry_run: bool = False):
+    p = m3u_path(playlist_name)
+    if dry_run:
+        print(f"    [dry-run] write {len(paths)} tracks → {p}")
+        return
+    with open(p, "w") as f:
+        f.write("#EXTM3U\n")
+        for track_path in paths:
+            f.write(track_path + "\n")
+
+
+# --- iTunes / Music.app ---
+
+
+def get_itunes_tracks(playlist_name: str) -> list[dict]:
+    """Returns [{path, artist, title}, ...] for tracks in a Music.app playlist."""
+    script = f"""
+tell application "Music"
+    if not (exists playlist "{esc(playlist_name)}") then return ""
+    set output to ""
+    tell playlist "{esc(playlist_name)}"
+        repeat with t in every track
+            try
+                set loc to POSIX path of (location of t)
+            on error
+                set loc to ""
+            end try
+            set output to output & "T\t" & loc & "\\t" & (artist of t) & "\\t" & (name of t) & "\\n"
+        end repeat
+    end tell
+    return output
+end tell"""
+    result = osascript(script)
+    tracks = []
+    for line in result.splitlines():
+        if not line.startswith("T\t"):
+            continue
+        parts = line[2:].split("\t", 2)  # strip "T\t" prefix
+        if len(parts) == 3:
+            tracks.append({"path": parts[0], "artist": parts[1], "title": parts[2]})
+    return tracks
+
+
+def ensure_itunes_playlist(playlist_name: str):
+    osascript(f"""
+tell application "Music"
+    if not (exists playlist "{esc(playlist_name)}") then
+        make new playlist with properties {{name: "{esc(playlist_name)}"}}
+    end if
+end tell""")
+
+
+def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: bool = False):
+    if not file_paths:
+        return
+    if dry_run:
+        for p in file_paths:
+            print(f"    [dry-run] add to iTunes '{playlist_name}': {os.path.basename(p)}")
+        return
+
+    ensure_itunes_playlist(playlist_name)
+    # Batch to avoid AppleScript size limits
+    for i in range(0, len(file_paths), 20):
+        batch = file_paths[i : i + 20]
+        lines = [
+            'tell application "Music"',
+            "    set lib to library playlist 1",
+            f'    set pl to playlist "{esc(playlist_name)}"',
+        ]
+        for fp in batch:
+            lines += [
+                f'    try',
+                f'        set f to (POSIX file "{esc(fp)}") as alias',
+                f'        set matches to (every file track of lib whose location is f)',
+                f'        if (count of matches) > 0 then',
+                f'            set theTrack to item 1 of matches',
+                f'        else',
+                f'            set theTrack to (add f)',
+                f'        end if',
+                f'        duplicate theTrack to pl',
+                f'    end try',
+            ]
+        lines.append("end tell")
+        r = subprocess.run(
+            ["osascript", "-e", "\n".join(lines)], capture_output=True, text=True
+        )
+        if r.returncode != 0:
+            print(f"  warning (iTunes add): {r.stderr.strip()}", file=sys.stderr)
+
+
+def remove_from_itunes_playlist(
+    playlist_name: str,
+    keys: set[tuple],
+    itunes_tracks: list[dict],
+    dry_run: bool = False,
+):
+    to_remove = [t for t in itunes_tracks if track_key(t["artist"], t["title"]) in keys]
+    if not to_remove:
+        return
+    for t in to_remove:
+        if dry_run:
+            print(f"    [dry-run] remove from iTunes '{playlist_name}': {t['artist']} - {t['title']}")
+            continue
+        osascript(f"""
+tell application "Music"
+    tell playlist "{esc(playlist_name)}"
+        set matches to (every track whose artist is "{esc(t['artist'])}" and name is "{esc(t['title'])}")
+        repeat with tr in matches
+            delete tr
+        end repeat
+    end tell
+end tell""")
+
+
+# --- Beets ---
+
+# Path indices built once per run
+_path_index: dict[str, Item] = {}      # full path string → Item
+_relpath_index: dict[str, Item] = {}   # relative path from any known base → Item
+
+_KNOWN_BASES = [
+    os.path.expanduser("~/Documents/music/"),
+    os.path.expanduser("~/Music/"),
+]
+
+
+_QUOTE_MAP = str.maketrans(
+    "\u201c\u201d\u2018\u2019",  # curly L/R double+single quotes
+    "\"\"''",              # ASCII equivalents
+)
+
+
+def _norm_quotes(s: str) -> str:
+    """Normalize curly/typographic quotes to ASCII equivalents."""
+    return s.translate(_QUOTE_MAP)
+
+
+def _decode_path(p: bytes | str) -> str:
+    return p.decode("utf-8", errors="replace") if isinstance(p, bytes) else p
+
+
+def build_path_index(lib: Library) -> None:
+    for item in lib.items():
+        path_str = _decode_path(item.path)
+        _path_index[path_str] = item
+        _path_index[_norm_quotes(path_str)] = item
+        for base in _KNOWN_BASES:
+            if path_str.startswith(base):
+                rel = path_str[len(base):]
+                _relpath_index[rel] = item
+                _relpath_index[_norm_quotes(rel)] = item
+                break
+
+
+def beets_lookup_by_path(path: str) -> Item | None:
+    for key in (path, _norm_quotes(path)):
+        if key in _path_index:
+            return _path_index[key]
+        for base in _KNOWN_BASES:
+            if key.startswith(base):
+                item = _relpath_index.get(key[len(base):])
+                if item:
+                    return item
+    return None
+
+
+def beets_lookup_by_key(lib: Library, artist: str, title: str) -> Item | None:
+    items = list(lib.items(f'artist:"{esc(artist)}" title:"{esc(title)}"'))
+    return items[0] if items else None
+
+
+def beets_path_for_itunes_track(lib: Library, t: dict) -> str | None:
+    """Find the beets path for an iTunes track, falling back to iTunes path."""
+    item = beets_lookup_by_key(lib, t["artist"], t["title"])
+    if item:
+        return _decode_path(item.path)
+    return t["path"] or None
+
+
+def m3u_key(lib: Library, file_path: str) -> tuple[str, str]:
+    item = beets_lookup_by_path(file_path)
+    if item:
+        return track_key(str(item.artist or ""), str(item.title or ""))
+    # Fallback: parse artist+title from path
+    parts = file_path.split(os.sep)
+    title = os.path.splitext(parts[-1])[0]
+    title = _RE_TRACK_NUM.sub("", title)
+    # Non-Album/ArtistDir/Track.mp3 — artist is the direct parent, not grandparent
+    if len(parts) >= 3 and parts[-3] in ("Non-Album", "_Playlists"):
+        artist = parts[-2]
+    elif len(parts) >= 3:
+        artist = parts[-3]
+    else:
+        artist = ""
+    return track_key(artist, title)
+
+
+# --- Sync logic ---
+
+
+def sync_playlist(
+    lib: Library,
+    playlist_name: str,
+    direction: str,
+    remove: bool,
+    dry_run: bool,
+):
+    print(f"\n{playlist_name}")
+
+    m3u_paths = read_m3u(playlist_name)
+    itunes_tracks = get_itunes_tracks(playlist_name)
+
+    # Build keyed maps preserving order
+    m3u_by_key: dict[tuple, str] = {}
+    for p in m3u_paths:
+        k = m3u_key(lib, p)
+        m3u_by_key.setdefault(k, p)
+
+    itunes_by_key: dict[tuple, dict] = {}
+    for t in itunes_tracks:
+        k = track_key(t["artist"], t["title"])
+        itunes_by_key.setdefault(k, t)
+
+    only_in_m3u = set(m3u_by_key) - set(itunes_by_key)
+    only_in_itunes = set(itunes_by_key) - set(m3u_by_key)
+
+    if not only_in_m3u and not only_in_itunes:
+        print(f"  already in sync ({len(m3u_by_key)} tracks)")
+        return
+
+    if only_in_m3u:
+        print(f"  {len(only_in_m3u)} track(s) only in M3U")
+    if only_in_itunes:
+        print(f"  {len(only_in_itunes)} track(s) only in iTunes")
+
+    if direction in ("to-itunes", "merge"):
+        if only_in_m3u:
+            paths_to_add = [m3u_by_key[k] for k in only_in_m3u]
+            for p in paths_to_add:
+                print(f"    + iTunes ← {os.path.basename(p)}")
+            add_to_itunes_playlist(playlist_name, paths_to_add, dry_run)
+        if remove and direction == "to-itunes" and only_in_itunes:
+            for k in only_in_itunes:
+                t = itunes_by_key[k]
+                print(f"    - iTunes: {t['artist']} - {t['title']}")
+            remove_from_itunes_playlist(playlist_name, only_in_itunes, itunes_tracks, dry_run)
+
+    if direction in ("to-m3u", "merge"):
+        if only_in_itunes:
+            new_paths = list(m3u_paths)
+            for k in only_in_itunes:
+                t = itunes_by_key[k]
+                p = beets_path_for_itunes_track(lib, t)
+                if p:
+                    print(f"    + M3U ← {t['artist']} - {t['title']}")
+                    new_paths.append(p)
+                else:
+                    print(f"    ! skipped (no file): {t['artist']} - {t['title']}")
+            write_m3u(playlist_name, new_paths, dry_run)
+        if remove and direction == "to-m3u" and only_in_m3u:
+            # Rebuild M3U with only tracks that are in iTunes, in iTunes order
+            new_paths = []
+            for t in itunes_tracks:
+                k = track_key(t["artist"], t["title"])
+                if k in m3u_by_key:
+                    new_paths.append(m3u_by_key[k])
+                else:
+                    p = beets_path_for_itunes_track(lib, t)
+                    if p:
+                        new_paths.append(p)
+            for k in only_in_m3u:
+                print(f"    - M3U: {m3u_by_key[k]}")
+            write_m3u(playlist_name, new_paths, dry_run)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--merge", action="store_true", help="add to each what the other has (default)")
+    group.add_argument("--to-m3u", action="store_true", help="iTunes → M3U")
+    group.add_argument("--to-itunes", action="store_true", help="M3U → iTunes")
+    parser.add_argument("--remove", action="store_true", help="also remove tracks missing from the authoritative source")
+    parser.add_argument("--dry-run", action="store_true", help="show changes without applying them")
+    parser.add_argument("playlists", nargs="*", metavar="PLAYLIST", help="playlist names (default: all M3U files)")
+    args = parser.parse_args()
+
+    direction = "to-m3u" if args.to_m3u else "to-itunes" if args.to_itunes else "merge"
+
+    config.read()
+    lib = Library(config["library"].as_filename())
+    build_path_index(lib)
+
+    if args.playlists:
+        names = args.playlists
+    else:
+        names = [
+            os.path.splitext(f)[0]
+            for f in sorted(f for f in os.listdir(PLAYLISTS_DIR) if f.endswith(".m3u"))
+        ]
+
+    print(f"Direction: {direction}" + (" (dry-run)" if args.dry_run else ""))
+
+    for name in names:
+        sync_playlist(lib, name, direction, args.remove, args.dry_run)
+
+    print()
+
+
+if __name__ == "__main__":
+    main()
