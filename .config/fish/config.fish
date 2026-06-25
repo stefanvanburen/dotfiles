@@ -25,6 +25,7 @@ set -gx MANPAGER "nvim +Man!"
 
 # https://github.com/junegunn/fzf?tab=readme-ov-file#environment-variables
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
+set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_DEFAULT_OPTS '--no-color'
 
 # uv tools / go
