@@ -3,12 +3,6 @@
     "commit": "",
     "pr": ""
   },
-  "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true
-  },
-  "theme": "auto",
-  "editorMode": "vim",
-  "skipAutoPermissionPrompt": true,
   "permissions": {
     "allow": [
       "Read(**)",
@@ -78,5 +72,12 @@
       "Bash(md5sum:*)",
       "WebSearch"
     ]
-  }
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "theme": "auto",
+  "editorMode": "vim",
+  "skipAutoPermissionPrompt": true,
+  "tui": "fullscreen"
 }
