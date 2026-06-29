@@ -3,7 +3,9 @@
 # requires-python = ">=3.14"
 # dependencies = ["beets"]
 # ///
-"""Sync beets metadata to Music.app for tracks matching a beets query.
+"""Sync beets library to Music.app for tracks matching a beets query.
+
+Adds tracks not yet in Music.app, then syncs metadata for all matched tracks.
 
 Usage:
     beet-music-sync [beets query...]
@@ -15,6 +17,7 @@ Examples:
 """
 
 import itertools
+import os
 import subprocess
 import sys
 
@@ -26,77 +29,112 @@ def esc(s):
     return str(s or "").replace("\\", "\\\\").replace('"', '\\"')
 
 
+def _run_applescript(script, label, phase):
+    result = subprocess.run(
+        ["osascript", "-e", script], capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        print(f"  ERROR ({phase}) '{label}': {result.stderr.strip()}", file=sys.stderr)
+        return None
+    return result.stdout.strip()
+
+
 def sync_to_music(tracks):
     by_album = {}
     for item in tracks:
         if item.album:
             by_album.setdefault((item.album, item.albumartist or ""), []).append(item)
 
-    total_updated = total_not_found = 0
+    total_added = total_updated = 0
 
     for (album, albumartist), album_tracks in sorted(by_album.items()):
         label = f"{albumartist} - {album}" if albumartist else album
-        album_updated = album_not_found = 0
+        album_added = album_updated = 0
+
+        # Phase 1: add files that aren't in Music.app yet, one at a time.
+        # Batching multiple add calls in one AppleScript triggers a Music.app
+        # internal queuing race (-1700 "Can't make some data into the expected
+        # type"), so each file gets its own osascript call.
+        for item in album_tracks:
+            title_esc = esc(item.title)
+            path = os.fsdecode(item.path) if isinstance(item.path, bytes) else item.path
+            script = "\n".join([
+                'tell application "Music"',
+                "    set lib to library playlist 1",
+                f'    if (count of (every file track of lib whose album is "{esc(album)}" and name is "{title_esc}")) = 0 then',
+                f'        add (POSIX file "{esc(path)}")',
+                '        return "added"',
+                "    end if",
+                '    return "exists"',
+                "end tell",
+            ])
+            out = _run_applescript(script, label, f"add '{item.title}'")
+            if out == "added":
+                album_added += 1
 
         # Process in batches of 50 to avoid AppleScript size limits
         for batch in itertools.batched(album_tracks, 50):
-            lines = [
+
+            # Phase 2: sync metadata for all tracks (including just-added ones).
+            sync_lines = [
                 'tell application "Music"',
                 "    set lib to library playlist 1",
-                "    set updated to 0",
+                "    set updatedCount to 0",
             ]
             for item in batch:
                 discnum = int(item.disc or 0)
                 title_esc = esc(item.title)
                 # Match by title+album — avoids per-disc vs absolute track number mismatch
-                lines.append(
+                sync_lines.append(
                     f'    set matchTracks to (every file track of lib whose album is "{esc(album)}" and name is "{title_esc}")'
                 )
-                lines.append("    repeat with aTrack in matchTracks")
-                lines.extend([
+                sync_lines.append("    repeat with aTrack in matchTracks")
+                sync_lines.extend([
                     f'        set name of aTrack to "{title_esc}"',
                     f'        set artist of aTrack to "{esc(item.artist)}"',
                     f'        set album artist of aTrack to "{esc(albumartist)}"',
                     f'        set album of aTrack to "{esc(album)}"',
                 ])
                 if item.year:
-                    lines.append(f"        set year of aTrack to {int(item.year)}")
+                    sync_lines.append(f"        set year of aTrack to {int(item.year)}")
                 if genre := item.get("genre"):
-                    lines.append(f'        set genre of aTrack to "{esc(genre)}"')
+                    sync_lines.append(f'        set genre of aTrack to "{esc(genre)}"')
                 if composer := item.get("composer"):
-                    lines.append(f'        set composer of aTrack to "{esc(composer)}"')
+                    sync_lines.append(f'        set composer of aTrack to "{esc(composer)}"')
                 if discnum:
-                    lines.append(f"        set disc number of aTrack to {discnum}")
-                lines.extend(["        set updated to updated + 1", "    end repeat"])
-            lines.extend(["    return updated", "end tell"])
+                    sync_lines.append(f"        set disc number of aTrack to {discnum}")
+                sync_lines.extend(["        set updatedCount to updatedCount + 1", "    end repeat"])
+            sync_lines.extend(["    return updatedCount as string", "end tell"])
 
-            result = subprocess.run(
-                ["osascript", "-e", "\n".join(lines)], capture_output=True, text=True
-            )
-            if result.returncode != 0:
-                print(f"  ERROR '{label}': {result.stderr.strip()}", file=sys.stderr)
-                album_not_found += len(batch)
-            else:
-                out = result.stdout.strip()
-                batch_updated = int(out) if out.isdigit() else 0
-                album_updated += batch_updated
-                album_not_found += max(0, len(batch) - batch_updated)
+            out = _run_applescript("\n".join(sync_lines), label, "sync")
+            if out is not None:
+                album_updated += int(out) if out.isdigit() else 0
 
+        total_added += album_added
         total_updated += album_updated
-        total_not_found += album_not_found
-        status = f"{album_updated} updated" + (
-            f", {album_not_found} not in Music.app" if album_not_found else ""
-        )
-        print(f"  {label}: {status}")
+        parts = []
+        if album_added:
+            parts.append(f"{album_added} added")
+        synced = album_updated - album_added
+        if synced > 0:
+            parts.append(f"{synced} synced")
+        print(f"  {label}: {', '.join(parts) or 'no changes'}")
 
-    print(
-        f"\n{total_updated} track(s) synced, {total_not_found} not found in Music.app."
-    )
+    summary = []
+    if total_added:
+        summary.append(f"{total_added} added")
+    synced = total_updated - total_added
+    if synced > 0:
+        summary.append(f"{synced} synced")
+    print(f"\n{', '.join(summary) or 'nothing to do'}.")
 
 
 if __name__ == "__main__":
     config.read()
-    lib = Library(config["library"].as_filename())
+    lib = Library(
+        config["library"].as_filename(),
+        directory=config["directory"].as_filename(),
+    )
     query, sort = parse_query_parts(sys.argv[1:], Item)
     tracks = list(lib.items(query, sort))
     print(f"Found {len(tracks)} track(s). Syncing to Music.app...")
