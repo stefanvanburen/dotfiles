@@ -31,3 +31,23 @@
 -- Unlimited command history (default is 500; negative value disables the limit).
 -- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-VARIABLES-HISTSIZE
 \set HISTSIZE -1
+
+-- Skip consecutive duplicate entries in the command history.
+-- https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-VARIABLES-HISTCONTROL
+\set HISTCONTROL ignoredups
+
+-- Saved admin queries, invoked as `:name` at the prompt.
+-- These read only standard pg_stat* / pg_catalog views, so they work on any database.
+-- (\set values must be a single line, so the SQL can't be wrapped.)
+
+-- :long_running — active queries running longer than 5 minutes, longest first (excludes this session).
+\set long_running 'SELECT pid, now() - query_start AS duration, query, state FROM pg_stat_activity WHERE state = ''active'' AND pid <> pg_backend_pid() AND (now() - query_start) > interval ''5 minutes'' ORDER BY 2 DESC;'
+
+-- :cache_hit — index and table cache hit ratios (aim for ~0.99).
+\set cache_hit 'SELECT ''index hit rate'' AS name, round(sum(idx_blks_hit) / nullif(sum(idx_blks_hit + idx_blks_read), 0), 4) AS ratio FROM pg_statio_user_indexes UNION ALL SELECT ''table hit rate'' AS name, round(sum(heap_blks_hit) / nullif(sum(heap_blks_hit) + sum(heap_blks_read), 0), 4) AS ratio FROM pg_statio_user_tables;'
+
+-- :unused_indexes — non-unique indexes with few scans but meaningful storage (drop candidates).
+\set unused_indexes 'SELECT schemaname || ''.'' || relname AS table, indexrelname AS index, pg_size_pretty(pg_relation_size(i.indexrelid)) AS index_size, idx_scan AS index_scans FROM pg_stat_user_indexes ui JOIN pg_index i ON ui.indexrelid = i.indexrelid WHERE NOT indisunique AND idx_scan < 50 AND pg_relation_size(relid) > 5 * 8192 ORDER BY pg_relation_size(i.indexrelid) / nullif(idx_scan, 0) DESC NULLS FIRST, pg_relation_size(i.indexrelid) DESC;'
+
+-- :table_sizes — user tables by total on-disk size (heap + indexes + TOAST), largest first.
+\set table_sizes 'SELECT c.relname AS name, pg_size_pretty(pg_table_size(c.oid)) AS heap, pg_size_pretty(pg_total_relation_size(c.oid)) AS total FROM pg_class c LEFT JOIN pg_namespace n ON (n.oid = c.relnamespace) WHERE n.nspname NOT IN (''pg_catalog'', ''information_schema'') AND n.nspname !~ ''^pg_toast'' AND c.relkind = ''r'' ORDER BY pg_total_relation_size(c.oid) DESC;'
