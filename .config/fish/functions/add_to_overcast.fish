@@ -62,3 +62,6 @@ function add_to_overcast --description 'Uploads audio files to Overcast.'
     rm -f $cookies
     return $status_code
 end
+
+# Prefer .mp3 files, but still allow completing to any file.
+complete -c add_to_overcast -k -a '(__fish_complete_suffix .mp3)'
