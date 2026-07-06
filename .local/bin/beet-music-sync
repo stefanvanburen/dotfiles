@@ -5,15 +5,23 @@
 # ///
 """Sync beets library to Music.app for tracks matching a beets query.
 
-Adds tracks not yet in Music.app, then syncs metadata for all matched tracks.
+Adds tracks not yet in Music.app, then syncs metadata for all matched tracks,
+including the `favorited` flexible field (additive: sync never un-favorites
+in Music.app, so favorites made there since the last pull survive).
+
+With --pull-favorites, runs in reverse instead: reads favorited (starred)
+tracks from Music.app and sets `favorited=1` on matching beets items.
+Query favorites with `beet ls favorited:1`.
 
 Usage:
     beet-music-sync [beets query...]
+    beet-music-sync --pull-favorites [--dry-run]
 
 Examples:
     beet-music-sync                    # sync everything
     beet-music-sync albumartist:C418
     beet-music-sync album:TUNIC
+    beet-music-sync --pull-favorites   # Music.app favorites -> beets
 """
 
 import itertools
@@ -37,6 +45,67 @@ def _run_applescript(script, label, phase):
         print(f"  ERROR ({phase}) '{label}': {result.stderr.strip()}", file=sys.stderr)
         return None
     return result.stdout.strip()
+
+
+FETCH_FAVORITES_SCRIPT = """
+tell application "Music"
+    set trackNames to name of every file track of library playlist 1 whose favorited is true
+    set trackAlbums to album of every file track of library playlist 1 whose favorited is true
+    set trackArtists to artist of every file track of library playlist 1 whose favorited is true
+end tell
+set out to ""
+repeat with i from 1 to count of trackNames
+    set out to out & (item i of trackNames) & tab & (item i of trackAlbums) & tab & (item i of trackArtists) & linefeed
+end repeat
+return out
+"""
+
+
+def pull_favorites(lib, dry_run):
+    out = _run_applescript(FETCH_FAVORITES_SCRIPT, "Music.app", "fetch favorites")
+    if out is None:
+        sys.exit(1)
+    favorites = []
+    for line in out.strip("\n").split("\n"):
+        if line:
+            title, album, artist = line.split("\t", 2)
+            favorites.append((title, album, artist))
+    print(f"Found {len(favorites)} favorited track(s) in Music.app.")
+
+    by_album = {}
+    by_artist = {}
+    for item in lib.items(*parse_query_parts([], Item)):
+        by_album.setdefault((item.title.lower(), item.album.lower()), []).append(item)
+        by_artist.setdefault((item.title.lower(), item.artist.lower()), []).append(item)
+
+    matched = already = 0
+    unmatched = []
+    for title, album, artist in favorites:
+        items = by_album.get((title.lower(), album.lower()))
+        if not items:
+            # Album names drift between Music.app and beets; fall back to
+            # title+artist when that identifies exactly one track.
+            fallback = by_artist.get((title.lower(), artist.lower()), [])
+            items = fallback if len(fallback) == 1 else None
+        if not items:
+            unmatched.append((title, album, artist))
+            continue
+        for item in items:
+            if item.get("favorited"):
+                already += 1
+                continue
+            matched += 1
+            print(f"  + {item.artist} - {item.album} - {item.title}")
+            if not dry_run:
+                item["favorited"] = 1
+                item.store()
+
+    verb = "would set" if dry_run else "set"
+    print(f"\n{verb} favorited=1 on {matched} item(s); {already} already set.")
+    if unmatched:
+        print(f"\n{len(unmatched)} not found in beets:")
+        for title, album, artist in unmatched:
+            print(f"  ? {artist} - {album} - {title}")
 
 
 def sync_to_music(tracks):
@@ -103,6 +172,10 @@ def sync_to_music(tracks):
                     sync_lines.append(f'        set composer of aTrack to "{esc(composer)}"')
                 if discnum:
                     sync_lines.append(f"        set disc number of aTrack to {discnum}")
+                # Additive on purpose: favorites made in Music.app since the
+                # last --pull-favorites run must survive a sync.
+                if item.get("favorited"):
+                    sync_lines.append("        set favorited of aTrack to true")
                 sync_lines.extend(["        set updatedCount to updatedCount + 1", "    end repeat"])
             sync_lines.extend(["    return updatedCount as string", "end tell"])
 
@@ -130,12 +203,25 @@ def sync_to_music(tracks):
 
 
 if __name__ == "__main__":
+    args = sys.argv[1:]
+    pull = "--pull-favorites" in args
+    dry_run = "--dry-run" in args
+    args = [a for a in args if a not in ("--pull-favorites", "--dry-run")]
+    if pull and args:
+        sys.exit("--pull-favorites does not take a query")
+    if dry_run and not pull:
+        sys.exit("--dry-run only applies to --pull-favorites")
+
     config.read()
     lib = Library(
         config["library"].as_filename(),
         directory=config["directory"].as_filename(),
     )
-    query, sort = parse_query_parts(sys.argv[1:], Item)
-    tracks = list(lib.items(query, sort))
-    print(f"Found {len(tracks)} track(s). Syncing to Music.app...")
-    sync_to_music(tracks)
+
+    if pull:
+        pull_favorites(lib, dry_run)
+    else:
+        query, sort = parse_query_parts(args, Item)
+        tracks = list(lib.items(query, sort))
+        print(f"Found {len(tracks)} track(s). Syncing to Music.app...")
+        sync_to_music(tracks)
