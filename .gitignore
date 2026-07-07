@@ -101,6 +101,11 @@
 # ignore .claude contents (history, sessions, transcripts, caches) but track shared settings
 /.claude/*
 !/.claude/settings.json
+# track authored skills, but not auto-installed ones (e.g. gh, which has github-repo metadata)
+!/.claude/skills/
+/.claude/skills/*
+!/.claude/skills/explain-diff-html/
+!/.claude/skills/explain-diff-notion/
 # includes .claude.json.backup.<xyz>
 /.claude.json*
 
