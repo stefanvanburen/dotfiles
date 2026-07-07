@@ -779,6 +779,15 @@
 
 (local schemastore (require :schemastore))
 
+;; Returns an LSP cmd function that runs `<name> server` from the workspace's
+;; .venv when the tool is installed there (e.g. as a pinned dev dependency, so
+;; diagnostics match CI), falling back to the global binary otherwise.
+(fn venv-cmd [name]
+  (fn [dispatchers config]
+    (let [venv-bin (and config.root_dir (.. config.root_dir "/.venv/bin/" name))
+          bin (if (and venv-bin (vim.uv.fs_stat venv-bin)) venv-bin name)]
+      (vim.lsp.rpc.start [bin :server] dispatchers))))
+
 (local server-settings
        {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
         :gopls {;; https://go.dev/gopls/daemon
@@ -804,7 +813,7 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
         :janet_lsp {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff
-        :ruff {}
+        :ruff {:cmd (venv-cmd :ruff)}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
         :helm_ls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
@@ -830,7 +839,7 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
         :postgres_lsp {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty
-        :ty {}
+        :ty {:cmd (venv-cmd :ty)}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tilt_ls
         :tilt_ls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
