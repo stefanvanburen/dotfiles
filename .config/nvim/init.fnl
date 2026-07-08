@@ -783,7 +783,7 @@
 ;; diagnostics match CI), falling back to the global binary otherwise.
 (fn venv-cmd [name]
   (fn [dispatchers config]
-    (let [venv-bin (and config.root_dir (.. config.root_dir "/.venv/bin/" name))
+    (let [venv-bin (and config.root_dir (.. config.root_dir :/.venv/bin/ name))
           bin (if (and venv-bin (vim.uv.fs_stat venv-bin)) venv-bin name)]
       (vim.lsp.rpc.start [bin :server] dispatchers))))
 
