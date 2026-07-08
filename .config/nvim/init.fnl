@@ -413,9 +413,7 @@
       ;; custom filetypes that use an existing parser (e.g. buf-config uses yaml).
       treesitter-filetypes (doto (vim.deepcopy treesitter-parsers)
                              (table.insert :buf-config)
-                             (table.insert :yaml.github-actions)
-                             (table.insert :yaml.dependabot)
-                             (table.insert :yaml.github-action-metadata))]
+                             (table.insert :yaml.github-actions))]
   (treesitter.install treesitter-parsers)
   (vim.api.nvim_create_autocmd :FileType
                                {:pattern treesitter-filetypes
@@ -430,10 +428,7 @@
                          :bash [:shellsession :console :shell_session]
                          :objc [:objectivec]
                          :proto [:protobuf]
-                         :yaml [:buf-config
-                                :yaml.github-actions
-                                :yaml.dependabot
-                                :yaml.github-action-metadata]
+                         :yaml [:buf-config :yaml.github-actions]
                          :tiltfile [:starlark]}]
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
@@ -604,9 +599,7 @@
                               :Tiltfile :tiltfile
                               :.envrc :bash
                               :.envrc.local :bash}
-                   :pattern {".*/%.github/workflows/.*%.ya?ml" :yaml.github-actions
-                             ".*/%.github/actions/.*/action%.ya?ml" :yaml.github-action-metadata
-                             ".*/%.github/dependabot%.ya?ml" :yaml.dependabot}})
+                   :pattern {".*/%.github/workflows/.*%.ya?ml" :yaml.github-actions}})
 
 ;; Template files.
 (let [template-dir (vim.fs.joinpath (vim.fn.stdpath :config) :templates)]
@@ -808,20 +801,7 @@
                                    :validate {:enable true}}}
                  :filetypes [:json :jsonc :json5]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
-        ;; Mirror upstream's default filetypes (see lsp/yamlls.lua) plus the
-        ;; dedicated `yaml.dependabot` and `yaml.github-action-metadata`
-        ;; filetypes (mapped by the :pattern rules above), so schema validation
-        ;; still runs on .github/dependabot.yml and composite action.yml files
-        ;; even though they no longer use the plain `yaml` filetype. LSP filetype
-        ;; matching is exact, so a compound filetype must be listed explicitly.
-        ;; (gh_actions_ls only serves .github/workflows, not composite actions.)
-        :yamlls {:filetypes [:yaml
-                             :yaml.docker-compose
-                             :yaml.gitlab
-                             :yaml.helm-values
-                             :yaml.dependabot
-                             :yaml.github-action-metadata]
-                 :settings {:yaml {:schemas (schemastore.yaml.schemas)
+        :yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
                                    :schemaStore {:enable false :url ""}}}}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
         :clojure_lsp {}
@@ -870,9 +850,7 @@
         ;; https://github.com/stefanvanburen/cells
         :cells {:cmd [:cells :serve] :filetypes [:cel]}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zizmor
-        :zizmor {:filetypes [:yaml.github-actions
-                             :yaml.github-action-metadata
-                             :yaml.dependabot]}
+        :zizmor {:filetypes [:yaml :yaml.github-actions]}
         ;; https://docs.syntaqlite.com/v0.2.15/getting-started/other-editors/
         :syntaqlite {:cmd [:syntaqlite :lsp]
                      :filetypes [:sql]
