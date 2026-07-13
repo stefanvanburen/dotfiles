@@ -4,6 +4,7 @@
     "pr": ""
   },
   "permissions": {
+    "defaultMode": "auto",
     "allow": [
       "Read(**)",
       "Bash(ls:*)",
