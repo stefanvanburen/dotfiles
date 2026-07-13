@@ -1,6 +1,6 @@
-function ls --wraps=eza --description 'Use eza (with hyperlinks) when available, otherwise builtin ls'
+function ls --wraps=eza --description 'Use eza when available, otherwise builtin ls'
     if command -q eza
-        eza --hyperlink $argv
+        eza $argv
     else
         command ls $argv
     end
