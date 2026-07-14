@@ -97,23 +97,32 @@ def write_m3u(playlist_name: str, paths: list[str], dry_run: bool = False):
 
 
 def get_itunes_tracks(playlist_name: str) -> list[dict]:
-    """Returns [{path, artist, title}, ...] for tracks in a Music.app playlist."""
+    """Returns [{path, artist, title}, ...] for tracks in a Music.app playlist.
+
+    Fetches each property for all tracks in one bulk Apple event rather than
+    three round-trips per track.
+    """
     script = f"""
 tell application "Music"
     if not (exists playlist "{esc(playlist_name)}") then return ""
-    set output to ""
     tell playlist "{esc(playlist_name)}"
-        repeat with t in every track
-            try
-                set loc to POSIX path of (location of t)
-            on error
-                set loc to ""
-            end try
-            set output to output & "T\t" & loc & "\\t" & (artist of t) & "\\t" & (name of t) & "\\n"
-        end repeat
+        set artistList to artist of every track
+        set nameList to name of every track
+        set locList to location of every track
     end tell
-    return output
-end tell"""
+end tell
+set out to {{}}
+repeat with i from 1 to count of nameList
+    set loc to item i of locList
+    if loc is missing value then
+        set p to ""
+    else
+        set p to POSIX path of loc
+    end if
+    set end of out to "T" & tab & p & tab & (item i of artistList) & tab & (item i of nameList)
+end repeat
+set AppleScript's text item delimiters to linefeed
+return out as text"""
     result = osascript(script)
     tracks = []
     for line in result.splitlines():
@@ -134,6 +143,53 @@ tell application "Music"
 end tell""")
 
 
+_itunes_track_ids: dict[str, int] | None = None  # POSIX path → Music.app track id
+_itunes_key_ids: dict[tuple, int] | None = None  # track key → Music.app track id
+
+
+def build_itunes_track_index() -> tuple[dict[str, int], dict[tuple, int]]:
+    """Fetch {file path: track id} and {track key: track id} for the whole
+    library in one bulk query.
+
+    A `whose location is f` filter resolves the location of every library
+    track per lookup; fetching all locations once and matching in Python
+    turns N library scans into one. The key index lets tracks whose M3U
+    path is stale reuse the existing library entry instead of failing.
+    """
+    global _itunes_track_ids, _itunes_key_ids
+    if _itunes_track_ids is None:
+        script = """
+tell application "Music"
+    set idList to id of every file track of library playlist 1
+    set locList to location of every file track of library playlist 1
+    set artistList to artist of every file track of library playlist 1
+    set nameList to name of every file track of library playlist 1
+end tell
+set out to {}
+repeat with i from 1 to count of idList
+    set loc to item i of locList
+    if loc is missing value then
+        set p to ""
+    else
+        set p to POSIX path of loc
+    end if
+    set end of out to ((item i of idList) as text) & tab & p & tab & (item i of artistList) & tab & (item i of nameList)
+end repeat
+set AppleScript's text item delimiters to linefeed
+return out as text"""
+        _itunes_track_ids = {}
+        _itunes_key_ids = {}
+        for line in osascript(script).splitlines():
+            parts = line.split("\t", 3)
+            if len(parts) != 4:
+                continue
+            track_id, path, artist, name = parts
+            if path:
+                _itunes_track_ids[path] = int(track_id)
+            _itunes_key_ids.setdefault(track_key(artist, name), int(track_id))
+    return _itunes_track_ids, _itunes_key_ids
+
+
 def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: bool = False):
     if not file_paths:
         return
@@ -143,27 +199,32 @@ def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: b
         return
 
     ensure_itunes_playlist(playlist_name)
+    track_ids, key_ids = build_itunes_track_index()
     # Batch to avoid AppleScript size limits
-    for i in range(0, len(file_paths), 20):
-        batch = file_paths[i : i + 20]
+    for i in range(0, len(file_paths), 50):
+        batch = file_paths[i : i + 50]
         lines = [
             'tell application "Music"',
-            "    set lib to library playlist 1",
             f'    set pl to playlist "{esc(playlist_name)}"',
         ]
         for fp in batch:
-            lines += [
-                f'    try',
-                f'        set f to (POSIX file "{esc(fp)}") as alias',
-                f'        set matches to (every file track of lib whose location is f)',
-                f'        if (count of matches) > 0 then',
-                f'            set theTrack to item 1 of matches',
-                f'        else',
-                f'            set theTrack to (add f)',
-                f'        end if',
-                f'        duplicate theTrack to pl',
-                f'    end try',
-            ]
+            # Prefer an existing library entry (by path, then by artist/title
+            # key) over importing the file again
+            track_id = track_ids.get(fp)
+            if track_id is None:
+                track_id = key_ids.get(m3u_key(None, fp))
+            if track_id is not None:
+                lines.append(
+                    f"    duplicate (file track id {track_id} of library playlist 1) to pl"
+                )
+            elif not os.path.exists(fp):
+                print(f"  warning (iTunes add): no file at {fp}", file=sys.stderr)
+            else:
+                lines += [
+                    "    try",
+                    f'        add (POSIX file "{esc(fp)}") to pl',
+                    "    end try",
+                ]
         lines.append("end tell")
         r = subprocess.run(
             ["osascript", "-e", "\n".join(lines)], capture_output=True, text=True
@@ -181,19 +242,20 @@ def remove_from_itunes_playlist(
     to_remove = [t for t in itunes_tracks if track_key(t["artist"], t["title"]) in keys]
     if not to_remove:
         return
-    for t in to_remove:
-        if dry_run:
+    if dry_run:
+        for t in to_remove:
             print(f"    [dry-run] remove from iTunes '{playlist_name}': {t['artist']} - {t['title']}")
-            continue
-        osascript(f"""
-tell application "Music"
-    tell playlist "{esc(playlist_name)}"
-        set matches to (every track whose artist is "{esc(t['artist'])}" and name is "{esc(t['title'])}")
-        repeat with tr in matches
-            delete tr
-        end repeat
-    end tell
-end tell""")
+        return
+    lines = ['tell application "Music"', f'    tell playlist "{esc(playlist_name)}"']
+    for t in to_remove:
+        lines += [
+            f'        set matches to (every track whose artist is "{esc(t["artist"])}" and name is "{esc(t["title"])}")',
+            "        repeat with tr in matches",
+            "            delete tr",
+            "        end repeat",
+        ]
+    lines += ["    end tell", "end tell"]
+    osascript("\n".join(lines))
 
 
 # --- Beets ---
@@ -250,7 +312,13 @@ def beets_lookup_by_path(path: str) -> Item | None:
 
 def beets_lookup_by_key(lib: Library, artist: str, title: str) -> Item | None:
     items = list(lib.items(f'artist:"{esc(artist)}" title:"{esc(title)}"'))
-    return items[0] if items else None
+    # beets queries are substring matches ("Eve" also matches "Here Is to
+    # Forever"), so only accept an item whose track key actually matches
+    key = track_key(artist, title)
+    for item in items:
+        if track_key(str(item.artist or ""), str(item.title or "")) == key:
+            return item
+    return None
 
 
 def beets_path_for_itunes_track(lib: Library, t: dict) -> str | None:
@@ -368,10 +436,18 @@ def main():
     parser.add_argument("playlists", nargs="*", metavar="PLAYLIST", help="playlist names (default: all M3U files)")
     args = parser.parse_args()
 
+    sys.stdout.reconfigure(line_buffering=True)
+
     direction = "to-m3u" if args.to_m3u else "to-itunes" if args.to_itunes else "merge"
 
     config.read()
-    lib = Library(config["library"].as_filename())
+    # The directory argument is required: the library stores relative paths,
+    # and Library() alone resolves them against beets' ~/Music default
+    # instead of the configured directory
+    lib = Library(
+        config["library"].as_filename(),
+        config["directory"].as_filename(),
+    )
     build_path_index(lib)
 
     if args.playlists:
