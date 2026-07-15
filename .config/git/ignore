@@ -10,10 +10,6 @@
 # python writes compiled bytecode to .pyc files in __pycache__ directories
 __pycache__
 
-# ignore my own pre-commit hooks
-# prek hooks: https://prek.j178.dev/configuration/#toml-prektoml
-prek.toml
-
 # macOS
 *.DS_Store
 
