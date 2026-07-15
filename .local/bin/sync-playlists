@@ -212,7 +212,7 @@ def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: b
             # key) over importing the file again
             track_id = track_ids.get(fp)
             if track_id is None:
-                track_id = key_ids.get(m3u_key(None, fp))
+                track_id = key_ids.get(m3u_key(fp))
             if track_id is not None:
                 lines.append(
                     f"    duplicate (file track id {track_id} of library playlist 1) to pl"
@@ -339,7 +339,7 @@ def beets_path_for_itunes_track(lib: Library, t: dict) -> str | None:
     return t["path"] or None
 
 
-def m3u_key(lib: Library, file_path: str) -> tuple[str, str]:
+def m3u_key(file_path: str) -> tuple[str, str]:
     item = beets_lookup_by_path(file_path)
     if item:
         return track_key(str(item.artist or ""), str(item.title or ""))
@@ -375,7 +375,7 @@ def sync_playlist(
     # Build keyed maps preserving order
     m3u_by_key: dict[tuple, str] = {}
     for p in m3u_paths:
-        k = m3u_key(lib, p)
+        k = m3u_key(p)
         m3u_by_key.setdefault(k, p)
 
     itunes_by_key: dict[tuple, dict] = {}
