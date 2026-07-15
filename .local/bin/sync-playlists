@@ -248,14 +248,24 @@ def remove_from_itunes_playlist(
         return
     lines = ['tell application "Music"', f'    tell playlist "{esc(playlist_name)}"']
     for t in to_remove:
-        lines += [
-            f'        set matches to (every track whose artist is "{esc(t["artist"])}" and name is "{esc(t["title"])}")',
-            "        repeat with tr in matches",
-            "            delete tr",
-            "        end repeat",
-        ]
+        # Delete as one whose-clause: iterating a reference list and deleting
+        # per-track shifts the remaining positional references, silently
+        # skipping tracks
+        lines.append(
+            f'        delete (every track whose artist is "{esc(t["artist"])}" and name is "{esc(t["title"])}")'
+        )
     lines += ["    end tell", "end tell"]
     osascript("\n".join(lines))
+    # Music.app drops delete commands without erroring when a modal dialog is
+    # pending; re-fetch and surface anything that survived
+    remaining = {
+        track_key(t["artist"], t["title"]) for t in get_itunes_tracks(playlist_name)
+    } & keys
+    for k in sorted(remaining):
+        print(
+            f"  warning (iTunes remove): still in playlist: {k[0]} - {k[1]}",
+            file=sys.stderr,
+        )
 
 
 # --- Beets ---
