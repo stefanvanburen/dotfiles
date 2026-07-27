@@ -5,7 +5,7 @@
 #
 # Password is stored in the macOS login keychain. To set it up once:
 #   security add-generic-password -a stefan@vanburen.xyz -s overcast.fm -w 'YOUR_PASSWORD'
-function add_to_overcast --description 'Uploads audio files to Overcast.'
+function overcast_add --description 'Uploads audio files to Overcast.'
     set --local user stefan@vanburen.xyz
     set --local pass (security find-generic-password -s overcast.fm -w)
     set --local cookies (mktemp)
@@ -27,7 +27,7 @@ function add_to_overcast --description 'Uploads audio files to Overcast.'
     set --local key_prefix (string match --regex --groups-only 'data-key-prefix="([^"]+)' -- $page)
 
     if test -z "$policy" -o -z "$signature" -o -z "$access_key" -o -z "$key_prefix"
-        echo "add_to_overcast: login failed or the upload form changed" >&2
+        echo "overcast_add: login failed or the upload form changed" >&2
         rm -f $cookies
         return 1
     end
@@ -64,4 +64,4 @@ function add_to_overcast --description 'Uploads audio files to Overcast.'
 end
 
 # Prefer .mp3 files, but still allow completing to any file.
-complete -c add_to_overcast -k -a '(__fish_complete_suffix .mp3)'
+complete -c overcast_add -k -a '(__fish_complete_suffix .mp3)'
