@@ -14,8 +14,10 @@ brew "gh"
 brew "git"
 # Latest version of go - for tool binaries
 brew "go"
-# JSON from the command line - used by add_to_feedbin.
+# JSON from the command line - used by feedbin_add.
 brew "jo"
+# JSON on the command line - used by feedbin_mute.
+brew "jq"
 # jumping around - bound to `z` in fish.
 brew "jump"
 # project-specific commands - abbreviated to `j` in fish.
