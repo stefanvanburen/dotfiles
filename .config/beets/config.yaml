@@ -27,13 +27,29 @@ convert:
     auto: yes
     format: alac
     never_convert_lossy_files: yes
-    # `beet convert -k` swaps converted files into the library and moves
-    # the originals here.
+    # `dest` means two opposite things depending on `-k`/`--keep-new`:
+    #
+    #   beet convert -k <query>   originals move HERE, transcodes go to the library
+    #   beet convert <query>      transcodes go HERE, originals stay in the library
+    #
+    # So only ever convert into this directory with `-k`. Without it, a plain
+    # `beet convert` writes .m4a transcodes into what is meant to be an archive
+    # of untouched originals.
+    #
+    # `auto: yes` above is unaffected either way — it transcodes via a temp file
+    # and repoints the library entry at it, never reading `dest`.
     dest: ~/Music/flac-originals
     # For lossy formats (e.g. opus from YouTube) that Music.app can't play,
     # use: beet convert -f aac -k <query>  (uses beets' built-in aac preset)
 
+# Fetch cover art even for as-is imports, which otherwise get none (beets 2.13).
+fetchart:
+    fetch_for_asis: yes
+
 # LRClib is free and open; add a genius_api_key to re-enable Genius.
 lyrics:
     sources: [lrclib]
-    auto_ignore: instrumental:true
+    # `instrumental` is hand-maintained; `lyrics_instrumental` is set by beets
+    # itself whenever a backend returns "[Instrumental]" (2.13). Match either,
+    # since the latter keeps accruing new items on its own.
+    auto_ignore: "instrumental:true , lyrics_instrumental:true"
