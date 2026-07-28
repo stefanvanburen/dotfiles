@@ -4,7 +4,10 @@
 # To install `beets` on macOS:
 #
 # $ brew install uv
-# $ uv tool install beets --with requests --with certifi --with bs4
+# $ uv tool install beets --with requests --with certifi --with bs4 --with pylast --with pillow
+#
+# `pylast` is what lastgenre talks to Last.fm with. `pillow` is what resizes
+# cover art — without a local backend, embedart silently drops `maxwidth`.
 
 # Store music library in ~/Documents/music, which is on iCloud
 directory: ~/Documents/music
@@ -12,14 +15,16 @@ directory: ~/Documents/music
 # https://beets.readthedocs.io/en/stable/plugins/index.html
 #
 # https://beets.readthedocs.io/en/stable/plugins/convert.html
+# https://beets.readthedocs.io/en/stable/plugins/duplicates.html
 # https://beets.readthedocs.io/en/stable/plugins/embedart.html
 # https://beets.readthedocs.io/en/stable/plugins/fetchart.html
 # https://beets.readthedocs.io/en/stable/plugins/fish.html
 # https://beets.readthedocs.io/en/stable/plugins/info.html
+# https://beets.readthedocs.io/en/stable/plugins/lastgenre.html
 # https://beets.readthedocs.io/en/stable/plugins/lyrics.html
 # https://beets.readthedocs.io/en/stable/plugins/mbsync.html
 # https://beets.readthedocs.io/en/stable/plugins/musicbrainz.html
-plugins: convert embedart fetchart fish info lyrics mbsync musicbrainz
+plugins: convert duplicates embedart fetchart fish info lastgenre lyrics mbsync musicbrainz
 
 # Keep the library playable in Music.app: transcode lossless imports
 # (e.g. FLAC) to ALAC, leaving already-lossy files untouched.
@@ -45,6 +50,33 @@ convert:
 # Fetch cover art even for as-is imports, which otherwise get none (beets 2.13).
 fetchart:
     fetch_for_asis: yes
+
+# Every track carries its own copy of the album cover, so an uncapped image is
+# paid for once per track — the Zelda: TotK soundtrack alone spent 1.4 GiB on
+# 344 copies of one 4 MiB image. `maxwidth` bounds the longest side, resizing
+# with Lanczos to a temp file, so the full-resolution cover.jpg on disk is left
+# alone and only the embedded copy shrinks. Shrink-only: smaller art is
+# untouched. `quality` would otherwise fall back to PIL's default of 75.
+#
+# Needs a resize backend (see pillow, above). ImageMagick takes precedence over
+# PIL if it's ever installed, and caps width rather than longest side.
+embedart:
+    maxwidth: 1000
+    quality: 85
+
+# Default keys are mb_trackid + mb_albumid, but non-strict mode *drops* keys that
+# are empty — so every track missing an mb_trackid collides with its albummates
+# on mb_albumid alone. That reported all the alternate takes on the deluxe
+# `A Charlie Brown Christmas` as duplicates of each other. `strict` requires
+# every key to be present instead, which skips those rather than mismatching them.
+duplicates:
+    strict: yes
+
+# Fills in genres from Last.fm. `force` defaults to no, so this only fills gaps
+# and won't overwrite genres already on a track. `aliases` (on by default as of
+# 2.13) folds spelling variants together, e.g. hip hop / hip-hop / Hip Hop.
+lastgenre:
+    auto: yes
 
 # LRClib is free and open; add a genius_api_key to re-enable Genius.
 lyrics:
