@@ -40,7 +40,9 @@ function overcast_add --description 'Uploads audio files to Overcast.'
             set mime audio/mp4
         end
         echo "Uploading $file"
-        curl --fail --location --compressed \
+        # curl hides its progress meter when the response body goes to the
+        # terminal, so send S3's (empty, 204) response to /dev/null to get it.
+        curl --fail --location --compressed --progress-bar --output /dev/null \
             --form bucket=uploads-overcast \
             --form key=$key \
             --form AWSAccessKeyId=$access_key \
