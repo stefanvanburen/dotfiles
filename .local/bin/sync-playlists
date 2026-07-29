@@ -5,8 +5,10 @@
 # ///
 """Sync Music.app playlists with M3U files in ~/Documents/music/Playlists/.
 
-Track identity is matched by (artist, title) so beets paths and iTunes paths
-referring to the same song are treated as the same track.
+Track identity is matched by (artist, title, album) so beets paths and iTunes
+paths referring to the same song are treated as the same track, while distinct
+recordings of the same work stay distinct. Leftovers whose albums disagree
+across the two sides fall back to matching on (artist, title) alone.
 
 Usage:
     sync-playlists --merge [PLAYLIST...]       # add to each what the other has (default)
@@ -47,6 +49,10 @@ _RE_COLLAB = re.compile(r"\s*[&×x]\s+.*$", re.IGNORECASE)
 _RE_CHAR_SUBS = re.compile(r"[/_:]")
 _RE_WHITESPACE = re.compile(r"\s+")
 _RE_TRACK_NUM = re.compile(r"^\d+-?\d+\s+")
+# Album strings disagree between beets and Music.app far more than titles do —
+# en-dash vs hyphen ("Minecraft – Volume Alpha"), spacing around slashes
+# ("Reich/Richter" vs "Reich / Richter"). Fold all of it away.
+_RE_ALBUM_SUBS = re.compile(r"[/_:\-‐-―]")
 
 
 def primary_artist(artist: str) -> str:
@@ -63,8 +69,21 @@ def normalize_title(title: str) -> str:
     return _RE_WHITESPACE.sub(" ", title).casefold().strip()
 
 
+def normalize_album(album: str) -> str:
+    album = _RE_ALBUM_SUBS.sub(" ", album)
+    return _RE_WHITESPACE.sub(" ", album).casefold().strip()
+
+
 def track_key(artist: str, title: str) -> tuple[str, str]:
+    """Loose identity — used as a fallback when albums disagree."""
     return (primary_artist(artist), normalize_title(title))
+
+
+def full_key(artist: str, title: str, album: str) -> tuple[str, str, str]:
+    """Identity including album, so distinct recordings of the same work stay
+    distinct (three Goldberg Variations readings, Glass played by Glass vs
+    Brubaker vs Hoch). Without this they collapse onto one track."""
+    return track_key(artist, title) + (normalize_album(album),)
 
 
 # --- M3U ---
@@ -97,16 +116,19 @@ def write_m3u(playlist_name: str, paths: list[str], dry_run: bool = False):
 
 
 def get_itunes_tracks(playlist_name: str) -> list[dict]:
-    """Returns [{path, artist, title}, ...] for tracks in a Music.app playlist.
+    """Returns [{path, artist, album, title}, ...] for tracks in a Music.app
+    playlist.
 
     Fetches each property for all tracks in one bulk Apple event rather than
-    three round-trips per track.
+    four round-trips per track. Title goes last so a stray tab in it lands in
+    the final split field instead of shifting every column.
     """
     script = f"""
 tell application "Music"
     if not (exists playlist "{esc(playlist_name)}") then return ""
     tell playlist "{esc(playlist_name)}"
         set artistList to artist of every track
+        set albumList to album of every track
         set nameList to name of every track
         set locList to location of every track
     end tell
@@ -119,7 +141,7 @@ repeat with i from 1 to count of nameList
     else
         set p to POSIX path of loc
     end if
-    set end of out to "T" & tab & p & tab & (item i of artistList) & tab & (item i of nameList)
+    set end of out to "T" & tab & p & tab & (item i of artistList) & tab & (item i of albumList) & tab & (item i of nameList)
 end repeat
 set AppleScript's text item delimiters to linefeed
 return out as text"""
@@ -128,9 +150,16 @@ return out as text"""
     for line in result.splitlines():
         if not line.startswith("T\t"):
             continue
-        parts = line[2:].split("\t", 2)  # strip "T\t" prefix
-        if len(parts) == 3:
-            tracks.append({"path": parts[0], "artist": parts[1], "title": parts[2]})
+        parts = line[2:].split("\t", 3)  # strip "T\t" prefix
+        if len(parts) == 4:
+            tracks.append(
+                {
+                    "path": parts[0],
+                    "artist": parts[1],
+                    "album": parts[2],
+                    "title": parts[3],
+                }
+            )
     return tracks
 
 
@@ -144,25 +173,27 @@ end tell""")
 
 
 _itunes_track_ids: dict[str, int] | None = None  # POSIX path → Music.app track id
-_itunes_key_ids: dict[tuple, int] | None = None  # track key → Music.app track id
+_itunes_key_ids: dict[tuple, int] | None = None  # full key → Music.app track id
+_itunes_loose_ids: dict[tuple, int] | None = None  # (artist, title) → track id
 
 
-def build_itunes_track_index() -> tuple[dict[str, int], dict[tuple, int]]:
-    """Fetch {file path: track id} and {track key: track id} for the whole
-    library in one bulk query.
+def build_itunes_track_index() -> tuple[dict[str, int], dict[tuple, int], dict[tuple, int]]:
+    """Fetch {file path: track id}, {full key: track id} and {loose key: track
+    id} for the whole library in one bulk query.
 
     A `whose location is f` filter resolves the location of every library
     track per lookup; fetching all locations once and matching in Python
     turns N library scans into one. The key index lets tracks whose M3U
     path is stale reuse the existing library entry instead of failing.
     """
-    global _itunes_track_ids, _itunes_key_ids
+    global _itunes_track_ids, _itunes_key_ids, _itunes_loose_ids
     if _itunes_track_ids is None:
         script = """
 tell application "Music"
     set idList to id of every file track of library playlist 1
     set locList to location of every file track of library playlist 1
     set artistList to artist of every file track of library playlist 1
+    set albumList to album of every file track of library playlist 1
     set nameList to name of every file track of library playlist 1
 end tell
 set out to {}
@@ -173,21 +204,23 @@ repeat with i from 1 to count of idList
     else
         set p to POSIX path of loc
     end if
-    set end of out to ((item i of idList) as text) & tab & p & tab & (item i of artistList) & tab & (item i of nameList)
+    set end of out to ((item i of idList) as text) & tab & p & tab & (item i of artistList) & tab & (item i of albumList) & tab & (item i of nameList)
 end repeat
 set AppleScript's text item delimiters to linefeed
 return out as text"""
         _itunes_track_ids = {}
         _itunes_key_ids = {}
+        _itunes_loose_ids = {}
         for line in osascript(script).splitlines():
-            parts = line.split("\t", 3)
-            if len(parts) != 4:
+            parts = line.split("\t", 4)
+            if len(parts) != 5:
                 continue
-            track_id, path, artist, name = parts
+            track_id, path, artist, album, name = parts
             if path:
                 _itunes_track_ids[path] = int(track_id)
-            _itunes_key_ids.setdefault(track_key(artist, name), int(track_id))
-    return _itunes_track_ids, _itunes_key_ids
+            _itunes_key_ids.setdefault(full_key(artist, name, album), int(track_id))
+            _itunes_loose_ids.setdefault(track_key(artist, name), int(track_id))
+    return _itunes_track_ids, _itunes_key_ids, _itunes_loose_ids
 
 
 def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: bool = False):
@@ -199,7 +232,7 @@ def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: b
         return
 
     ensure_itunes_playlist(playlist_name)
-    track_ids, key_ids = build_itunes_track_index()
+    track_ids, key_ids, loose_ids = build_itunes_track_index()
     # Batch to avoid AppleScript size limits
     for i in range(0, len(file_paths), 50):
         batch = file_paths[i : i + 50]
@@ -208,11 +241,13 @@ def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: b
             f'    set pl to playlist "{esc(playlist_name)}"',
         ]
         for fp in batch:
-            # Prefer an existing library entry (by path, then by artist/title
-            # key) over importing the file again
+            # Prefer an existing library entry (by path, then by full key, then
+            # by artist/title alone) over importing the file again
             track_id = track_ids.get(fp)
             if track_id is None:
-                track_id = key_ids.get(m3u_key(fp))
+                track_id = key_ids.get(m3u_full_key(fp))
+            if track_id is None:
+                track_id = loose_ids.get(m3u_key(fp))
             if track_id is not None:
                 lines.append(
                     f"    duplicate (file track id {track_id} of library playlist 1) to pl"
@@ -239,7 +274,11 @@ def remove_from_itunes_playlist(
     itunes_tracks: list[dict],
     dry_run: bool = False,
 ):
-    to_remove = [t for t in itunes_tracks if track_key(t["artist"], t["title"]) in keys]
+    to_remove = [
+        t
+        for t in itunes_tracks
+        if full_key(t["artist"], t["title"], t["album"]) in keys
+    ]
     if not to_remove:
         return
     if dry_run:
@@ -250,16 +289,20 @@ def remove_from_itunes_playlist(
     for t in to_remove:
         # Delete as one whose-clause: iterating a reference list and deleting
         # per-track shifts the remaining positional references, silently
-        # skipping tracks
+        # skipping tracks. Album is part of the clause so deleting one
+        # recording of a work doesn't take the other readings with it.
         lines.append(
-            f'        delete (every track whose artist is "{esc(t["artist"])}" and name is "{esc(t["title"])}")'
+            f'        delete (every track whose artist is "{esc(t["artist"])}"'
+            f' and album is "{esc(t["album"])}"'
+            f' and name is "{esc(t["title"])}")'
         )
     lines += ["    end tell", "end tell"]
     osascript("\n".join(lines))
     # Music.app drops delete commands without erroring when a modal dialog is
     # pending; re-fetch and surface anything that survived
     remaining = {
-        track_key(t["artist"], t["title"]) for t in get_itunes_tracks(playlist_name)
+        full_key(t["artist"], t["title"], t["album"])
+        for t in get_itunes_tracks(playlist_name)
     } & keys
     for k in sorted(remaining):
         print(
@@ -320,20 +363,33 @@ def beets_lookup_by_path(path: str) -> Item | None:
     return None
 
 
-def beets_lookup_by_key(lib: Library, artist: str, title: str) -> Item | None:
+def beets_lookup_by_key(
+    lib: Library, artist: str, title: str, album: str = ""
+) -> Item | None:
     items = list(lib.items(f'artist:"{esc(artist)}" title:"{esc(title)}"'))
     # beets queries are substring matches ("Eve" also matches "Here Is to
     # Forever"), so only accept an item whose track key actually matches
     key = track_key(artist, title)
-    for item in items:
-        if track_key(str(item.artist or ""), str(item.title or "")) == key:
-            return item
-    return None
+    matches = [
+        item
+        for item in items
+        if track_key(str(item.artist or ""), str(item.title or "")) == key
+    ]
+    if not matches:
+        return None
+    # Several recordings of the same work share artist+title; pick the one on
+    # the same album before falling back to whichever came first
+    if album:
+        want = normalize_album(album)
+        for item in matches:
+            if normalize_album(str(item.album or "")) == want:
+                return item
+    return matches[0]
 
 
 def beets_path_for_itunes_track(lib: Library, t: dict) -> str | None:
     """Find the beets path for an iTunes track, falling back to iTunes path."""
-    item = beets_lookup_by_key(lib, t["artist"], t["title"])
+    item = beets_lookup_by_key(lib, t["artist"], t["title"], t.get("album", ""))
     if item:
         return _decode_path(item.path)
     return t["path"] or None
@@ -357,6 +413,23 @@ def m3u_key(file_path: str) -> tuple[str, str]:
     return track_key(artist, title)
 
 
+def m3u_full_key(file_path: str) -> tuple[str, str, str]:
+    item = beets_lookup_by_path(file_path)
+    if item:
+        return full_key(
+            str(item.artist or ""), str(item.title or ""), str(item.album or "")
+        )
+    # Fallback: the album is the parent directory, except under Non-Album/
+    parts = file_path.split(os.sep)
+    if len(parts) >= 3 and parts[-3] in ("Non-Album", "_Playlists"):
+        album = ""
+    elif len(parts) >= 2:
+        album = parts[-2]
+    else:
+        album = ""
+    return m3u_key(file_path) + (normalize_album(album),)
+
+
 # --- Sync logic ---
 
 
@@ -375,16 +448,30 @@ def sync_playlist(
     # Build keyed maps preserving order
     m3u_by_key: dict[tuple, str] = {}
     for p in m3u_paths:
-        k = m3u_key(p)
+        k = m3u_full_key(p)
         m3u_by_key.setdefault(k, p)
 
     itunes_by_key: dict[tuple, dict] = {}
     for t in itunes_tracks:
-        k = track_key(t["artist"], t["title"])
+        k = full_key(t["artist"], t["title"], t["album"])
         itunes_by_key.setdefault(k, t)
 
     only_in_m3u = set(m3u_by_key) - set(itunes_by_key)
     only_in_itunes = set(itunes_by_key) - set(m3u_by_key)
+
+    # Albums disagree between beets and Music.app more often than titles do —
+    # different editions ("BRAT" vs the deluxe), singles with no album tag in
+    # beets but one in Music.app. Pair off leftovers on artist+title alone
+    # before calling either side a mismatch, so those don't churn every run.
+    if only_in_m3u and only_in_itunes:
+        loose_itunes: dict[tuple, list[tuple]] = {}
+        for k in only_in_itunes:
+            loose_itunes.setdefault(k[:2], []).append(k)
+        for k in sorted(only_in_m3u):
+            bucket = loose_itunes.get(k[:2])
+            if bucket:
+                only_in_itunes.discard(bucket.pop())
+                only_in_m3u.discard(k)
 
     if not only_in_m3u and not only_in_itunes:
         print(f"  already in sync ({len(m3u_by_key)} tracks)")
@@ -410,26 +497,46 @@ def sync_playlist(
     if direction in ("to-m3u", "merge"):
         if only_in_itunes:
             new_paths = list(m3u_paths)
+            have = set(m3u_paths)
             for k in only_in_itunes:
                 t = itunes_by_key[k]
                 p = beets_path_for_itunes_track(lib, t)
-                if p:
+                if p and p in have:
+                    # beets only has one edition of a track Music.app has two
+                    # of, so the lookup resolved to a path already listed —
+                    # appending it would duplicate the entry
+                    print(f"    ! skipped (already listed): {t['artist']} - {t['title']}")
+                elif p:
                     print(f"    + M3U ← {t['artist']} - {t['title']}")
                     new_paths.append(p)
+                    have.add(p)
                 else:
                     print(f"    ! skipped (no file): {t['artist']} - {t['title']}")
             write_m3u(playlist_name, new_paths, dry_run)
         if remove and direction == "to-m3u" and only_in_m3u:
-            # Rebuild M3U with only tracks that are in iTunes, in iTunes order
+            # Rebuild M3U with only tracks that are in iTunes, in iTunes order.
+            # Keys must carry the album here: on artist+title alone, every
+            # recording of a work past the first resolves to the same path and
+            # the rest are silently dropped from the M3U.
+            m3u_loose: dict[tuple, list[str]] = {}
+            for fk, p in m3u_by_key.items():
+                m3u_loose.setdefault(fk[:2], []).append(p)
             new_paths = []
+            used: set[str] = set()
             for t in itunes_tracks:
-                k = track_key(t["artist"], t["title"])
-                if k in m3u_by_key:
-                    new_paths.append(m3u_by_key[k])
-                else:
+                k = full_key(t["artist"], t["title"], t["album"])
+                p = m3u_by_key.get(k)
+                if p is None:
+                    # Album disagrees across the two sides — take an unclaimed
+                    # artist+title match rather than dropping the track
+                    p = next(
+                        (c for c in m3u_loose.get(k[:2], []) if c not in used), None
+                    )
+                if p is None:
                     p = beets_path_for_itunes_track(lib, t)
-                    if p:
-                        new_paths.append(p)
+                if p:
+                    new_paths.append(p)
+                    used.add(p)
             for k in only_in_m3u:
                 print(f"    - M3U: {m3u_by_key[k]}")
             write_m3u(playlist_name, new_paths, dry_run)
