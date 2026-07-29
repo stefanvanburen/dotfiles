@@ -567,7 +567,12 @@
 
 (vim.api.nvim_create_autocmd :FileType
                              {:group (vim.api.nvim_create_augroup :filetypes {})
-                              :pattern (vim.tbl_keys filetype-settings)
+                              ;; A FileType autocmd pattern only matches the filetype string
+                              ;; exactly, so compound filetypes like "yaml.github-actions" (set
+                              ;; via vim.filetype.add below) must be listed explicitly here, in
+                              ;; addition to their leading "yaml" component.
+                              :pattern (doto (vim.tbl_keys filetype-settings)
+                                        (table.insert :yaml.github-actions))
                               :callback (fn [args]
                                           ;; args.match is the actual filetype, which for compound
                                           ;; filetypes like "yaml.github-actions" won't be a literal
