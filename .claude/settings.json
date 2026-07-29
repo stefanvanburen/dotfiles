@@ -1,10 +1,14 @@
 {
   "attribution": {
     "commit": "",
-    "pr": ""
+    "pr": "",
+    "sessionUrl": false
+  },
+  "editorMode": "vim",
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true
   },
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Read(**)",
       "Bash(ls:*)",
@@ -72,13 +76,10 @@
       "Bash(md5:*)",
       "Bash(md5sum:*)",
       "WebSearch"
-    ]
+    ],
+    "defaultMode": "auto"
   },
-  "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true
-  },
-  "theme": "auto",
-  "editorMode": "vim",
   "skipAutoPermissionPrompt": true,
+  "theme": "auto",
   "tui": "fullscreen"
 }

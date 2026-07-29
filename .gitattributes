@@ -5,3 +5,8 @@
 /.config/git/message linguist-language=commit
 /.config/git/ignore linguist-language=gitignore
 /.ssh/config linguist-language=SSH-Config
+
+# Sort keys on the way into git so Claude Code's settings rewrites only show
+# up as diffs when the content actually changed. Filter defined in
+# /.config/git/config.
+/.claude/settings.json filter=jsonsort

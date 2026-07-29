@@ -120,6 +120,14 @@
 	pruneTags = true
 	all = true
 
+[filter "jsonsort"]
+	; Canonicalize JSON key order on the way into git. Claude Code rewrites
+	; ~/.claude/settings.json by reserializing its whole config object, which
+	; shuffles key order on every /model, /config or permission change. Sorting
+	; in the clean filter means only real content changes produce a diff.
+	; Applied via .gitattributes; smudge is left as identity.
+	clean = jq -S .
+
 [include]
 	# path relative to this file - so, currently:
 	# ~/.config/git/local_config
