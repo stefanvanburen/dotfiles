@@ -429,7 +429,11 @@
                          :objc [:objectivec]
                          :proto [:protobuf]
                          :yaml [:buf-config :yaml.github-actions]
-                         :tiltfile [:starlark]}]
+                         ;; Tiltfiles use Starlark syntax, so the "tiltfile"
+                         ;; filetype should be highlighted with the "starlark"
+                         ;; parser (register's args are (lang, filetype), not
+                         ;; the other way around).
+                         :starlark [:tiltfile]}]
   (each [filetype langs (pairs filetype-to-langs)]
     (vim.treesitter.language.register filetype langs)))
 

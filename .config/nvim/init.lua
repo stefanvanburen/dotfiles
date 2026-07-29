@@ -272,7 +272,7 @@ do
   vim.api.nvim_create_autocmd("FileType", {pattern = treesitter_filetypes, callback = _16_})
 end
 do
-  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console", "shell_session"}, objc = {"objectivec"}, proto = {"protobuf"}, yaml = {"buf-config", "yaml.github-actions"}, tiltfile = {"starlark"}}
+  local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console", "shell_session"}, objc = {"objectivec"}, proto = {"protobuf"}, yaml = {"buf-config", "yaml.github-actions"}, starlark = {"tiltfile"}}
   for filetype, langs in pairs(filetype_to_langs) do
     vim.treesitter.language.register(filetype, langs)
   end
