@@ -446,21 +446,32 @@
 
 ;; https://smallseasons.guide
 ;; https://stefan.vanburen.xyz/blog/small-seasons/
-(let [now (os.date :*t)
-      colorscheme (case now.month
-                    1 :miniwinter
-                    2 (if (< now.day 4) :miniwinter :minispring)
-                    3 :minispring
-                    4 :minispring
-                    5 (if (< now.day 6) :minispring :minisummer)
-                    6 :minisummer
-                    7 :minisummer
-                    8 (if (< now.day 8) :minisummer :miniautumn)
-                    9 :miniautumn
-                    10 :miniautumn
-                    11 (if (< now.day 8) :miniautumn :miniwinter)
-                    12 :miniwinter)]
-  (vim.cmd.colorscheme colorscheme))
+(fn seasonal-colorscheme []
+  (let [now (os.date :*t)]
+    (case now.month
+      1 :miniwinter
+      2 (if (< now.day 4) :miniwinter :minispring)
+      3 :minispring
+      4 :minispring
+      5 (if (< now.day 6) :minispring :minisummer)
+      6 :minisummer
+      7 :minisummer
+      8 (if (< now.day 8) :minisummer :miniautumn)
+      9 :miniautumn
+      10 :miniautumn
+      11 (if (< now.day 8) :miniautumn :miniwinter)
+      12 :miniwinter)))
+
+(vim.cmd.colorscheme (seasonal-colorscheme))
+
+;; The mini.hues colorschemes read 'background' once, when their colors file is
+;; sourced, so they don't follow a later flip on their own. Nvim does update
+;; 'background' by itself when the terminal sends a theme update notification
+;; (DEC mode 2031, which Ghostty supports), so re-sourcing on that change is
+;; what makes an OS light/dark switch reach an already-running instance.
+(vim.api.nvim_create_autocmd :OptionSet
+                             {:pattern :background
+                              :callback #(vim.cmd.colorscheme (seasonal-colorscheme))})
 
 ;;; Autocommands and FileType settings
 
