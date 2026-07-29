@@ -95,9 +95,9 @@
                                           (each [pkg cmd (pairs {:nvim-treesitter :TSUpdate
                                                                  :mason :MasonUpdate})]
                                             (when (and (= ev.data.spec.name pkg)
-                                                       (= ev.data.kind :update)
-                                                       (not ev.data.active))
-                                              (vim.cmd.packadd pkg)
+                                                       (= ev.data.kind :update))
+                                              (when (not ev.data.active)
+                                                (vim.cmd.packadd pkg))
                                               (vim.cmd {: cmd}))))})
 
 (vim.pack.add ["https://github.com/nvim-mini/mini.nvim"
