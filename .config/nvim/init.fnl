@@ -758,9 +758,7 @@
                         ;; when multiple diagnostics land on a line, the highest-severity
                         ;; sign wins instead of whichever is last in the list.
                         :severity_sort true
-                        :float {:border :single
-                                :focusable false
-                                :source :always}})
+                        :float {:border :single :focusable false :source true}})
 
 ;;; LSP
 
@@ -864,7 +862,7 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
         :lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
                                   :workspace {:checkThirdParty false
-                                              :library vim.env.VIMRUNTIME}}}}
+                                              :library [vim.env.VIMRUNTIME]}}}}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
         :rust_analyzer {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
