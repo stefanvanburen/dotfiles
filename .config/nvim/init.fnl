@@ -783,12 +783,14 @@
   (when (client:supports_method :textDocument/foldingRange)
     (tset vim.wo (vim.api.nvim_get_current_win) :foldexpr
           "v:lua.vim.lsp.foldexpr()"))
+  ;; codelens.enable attaches its own on_lines/on_reload refresh to the buffer,
+  ;; so this only needs to be turned on once per client/buffer — the autocmd
+  ;; that used to wrap it was the pre-0.12 codelens.refresh() pattern.
+  ;; Filter on :bufnr only — passing :client_id too would set the marker on the
+  ;; client instead of the buffer, and buffers default to disabled, so the
+  ;; codelens would never actually turn on.
   (when (client:supports_method :textDocument/codeLens)
-    (let [augroup-id (vim.api.nvim_create_augroup :lsp-code-lens {:clear false})]
-      (vim.api.nvim_create_autocmd [:BufEnter :CursorHold :InsertLeave]
-                                   {:group augroup-id
-                                    :buffer buf
-                                    :callback #(vim.lsp.codelens.enable true)})))
+    (vim.lsp.codelens.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/completion)
     (vim.lsp.completion.enable true client.id buf {:autotrigger true})
     (map :i :<C-space> vim.lsp.completion.get
