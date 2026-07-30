@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "diagnostics.disable": [
+    "need-check-nil",
+    "unused-local",
+    "unused-vararg"
+  ]
+}
