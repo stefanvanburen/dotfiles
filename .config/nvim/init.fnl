@@ -408,21 +408,22 @@
                           :vhs
                           :xml
                           :yaml
-                          :zig]
-      ;; Filetypes to activate treesitter for — same as parsers, plus
-      ;; custom filetypes that use an existing parser (e.g. buf-config uses yaml).
-      treesitter-filetypes (doto (vim.deepcopy treesitter-parsers)
-                             (table.insert :buf-config)
-                             (table.insert :yaml.github-actions))]
+                          :zig]]
   (treesitter.install treesitter-parsers)
+  ;; Deliberately no :pattern. A FileType pattern only matches the filetype
+  ;; string exactly, and filetype names frequently differ from the parser name
+  ;; (cs/c_sharp, sh/bash, typescriptreact/tsx, gitconfig/git_config), so a
+  ;; pattern derived from the parser list silently skips those filetypes.
+  ;; `start` errors when no parser is available for the buffer, which is the
+  ;; same test without a second list to keep in sync.
   (vim.api.nvim_create_autocmd :FileType
-                               {:pattern treesitter-filetypes
-                                :callback (fn []
-                                            (vim.treesitter.start)
-                                            ;; Default to treesitter folding (overridden if LSP supports it)
-                                            (set vim.wo.foldexpr
-                                                 "v:lua.vim.treesitter.foldexpr()")
-                                            (set vim.wo.foldmethod :expr))}))
+                               {:callback (fn [args]
+                                            (when (pcall vim.treesitter.start
+                                                         args.buf)
+                                              ;; Default to treesitter folding (overridden if LSP supports it)
+                                              (set vim.wo.foldexpr
+                                                   "v:lua.vim.treesitter.foldexpr()")
+                                              (set vim.wo.foldmethod :expr)))}))
 
 (let [filetype-to-langs {:c_sharp [:csharp]
                          :bash [:shellsession :console :shell_session]
@@ -572,7 +573,7 @@
                               ;; via vim.filetype.add below) must be listed explicitly here, in
                               ;; addition to their leading "yaml" component.
                               :pattern (doto (vim.tbl_keys filetype-settings)
-                                        (table.insert :yaml.github-actions))
+                                         (table.insert :yaml.github-actions))
                               :callback (fn [args]
                                           ;; args.match is the actual filetype, which for compound
                                           ;; filetypes like "yaml.github-actions" won't be a literal
