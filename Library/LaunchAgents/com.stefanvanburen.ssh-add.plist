@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.stefanvanburen.ssh-add</string>
+	<!-- launchd's ssh-agent job starts empty at every login, so anything that
+	     speaks only to the agent socket (OrbStack Linux machines, forwarded
+	     agents, `docker build --ssh`) fails until a key is loaded. Load the
+	     default ~/.ssh identities at login, taking passphrases from the
+	     keychain where they exist. -->
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/bin/ssh-add</string>
+		<string>--apple-load-keychain</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+</dict>
+</plist>

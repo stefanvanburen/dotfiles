@@ -55,7 +55,12 @@
 /Desktop/
 /Documents/
 /Downloads/
-/Library/
+/Library/*
+# Loads ~/.ssh keys into the launchd ssh-agent at login, which otherwise starts
+# empty and breaks anything that only talks to the agent socket.
+!/Library/LaunchAgents/
+/Library/LaunchAgents/*
+!/Library/LaunchAgents/com.stefanvanburen.ssh-add.plist
 /Movies/
 /Music/
 /Pictures/
