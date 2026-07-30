@@ -410,20 +410,15 @@
                           :yaml
                           :zig]]
   (treesitter.install treesitter-parsers)
-  ;; Deliberately no :pattern. A FileType pattern only matches the filetype
-  ;; string exactly, and filetype names frequently differ from the parser name
-  ;; (cs/c_sharp, sh/bash, typescriptreact/tsx, gitconfig/git_config), so a
-  ;; pattern derived from the parser list silently skips those filetypes.
-  ;; `start` errors when no parser is available for the buffer, which is the
-  ;; same test without a second list to keep in sync.
+  ;; No :pattern — a FileType pattern matches the filetype string exactly, and
+  ;; filetype names often differ from parser names (cs/c_sharp, sh/bash,
+  ;; typescriptreact/tsx). `start` failing is the test for "no parser".
   (vim.api.nvim_create_autocmd :FileType
                                {:callback (fn [args]
                                             (when (pcall vim.treesitter.start
                                                          args.buf)
                                               ;; Default to treesitter folding (overridden if LSP supports it).
-                                              ;; The [0] indexes the buffer-local value of these
-                                              ;; window options, so they don't follow the window
-                                              ;; onto buffers that have no parser.
+                                              ;; [0] scopes these window options to the buffer.
                                               (tset vim.wo 0 0 :foldexpr
                                                     "v:lua.vim.treesitter.foldexpr()")
                                               (tset vim.wo 0 0 :foldmethod
@@ -611,10 +606,8 @@
                                                                                      false)
                                                          1)]
                                        (when (and first-line
-                                                  ;; %f matches a frontier rather than a
-                                                  ;; character, so this anchors on "bash" as a
-                                                  ;; whole word and still matches shebangs that
-                                                  ;; pass arguments (`#!/bin/bash -e`).
+                                                  ;; %f matches a frontier, anchoring
+                                                  ;; "bash" as a whole word.
                                                   (string.match first-line
                                                                 "^#!.*%f[%w]bash%f[%W]"))
                                          :bash)))}
@@ -787,17 +780,11 @@
                                     :buffer buf
                                     :callback vim.lsp.buf.clear_references})))
   (when (client:supports_method :textDocument/foldingRange)
-    ;; The [0] indexes the buffer-local value of this window option; without it
-    ;; the LSP foldexpr sticks to the window and applies to every buffer later
-    ;; opened in it, including ones with no LSP client attached.
+    ;; [0] scopes this window option to the buffer.
     (tset vim.wo (vim.api.nvim_get_current_win) 0 :foldexpr
           "v:lua.vim.lsp.foldexpr()"))
-  ;; codelens.enable attaches its own on_lines/on_reload refresh to the buffer,
-  ;; so this only needs to be turned on once per client/buffer — the autocmd
-  ;; that used to wrap it was the pre-0.12 codelens.refresh() pattern.
-  ;; Filter on :bufnr only — passing :client_id too would set the marker on the
-  ;; client instead of the buffer, and buffers default to disabled, so the
-  ;; codelens would never actually turn on.
+  ;; :bufnr only — also passing :client_id sets the marker on the client rather
+  ;; than the buffer, and buffers default to disabled, so nothing turns on.
   (when (client:supports_method :textDocument/codeLens)
     (vim.lsp.codelens.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/completion)
