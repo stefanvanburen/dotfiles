@@ -607,8 +607,12 @@
                                                                                      false)
                                                          1)]
                                        (when (and first-line
+                                                  ;; %f matches a frontier rather than a
+                                                  ;; character, so this anchors on "bash" as a
+                                                  ;; whole word and still matches shebangs that
+                                                  ;; pass arguments (`#!/bin/bash -e`).
                                                   (string.match first-line
-                                                                "^#!.*[/ ]bash[%w]*%s*$"))
+                                                                "^#!.*%f[%w]bash%f[%W]"))
                                          :bash)))}
                    :filename {:.ignore :gitignore
                               :.dockerignore :gitignore

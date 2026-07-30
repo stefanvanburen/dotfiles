@@ -405,7 +405,7 @@ end
 vim.api.nvim_create_autocmd("FileType", {group = vim.api.nvim_create_augroup("filetypes", {}), pattern = _31_, callback = _32_})
 local function _34_(_path, bufnr)
   local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]
-  if (first_line and string.match(first_line, "^#!.*[/ ]bash[%w]*%s*$")) then
+  if (first_line and string.match(first_line, "^#!.*%f[%w]bash%f[%W]")) then
     return "bash"
   else
     return nil
