@@ -258,8 +258,8 @@ do
   treesitter.install(treesitter_parsers)
   local function _16_(args)
     if pcall(vim.treesitter.start, args.buf) then
-      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      vim.wo.foldmethod = "expr"
+      vim.wo[0][0]["foldexpr"] = "v:lua.vim.treesitter.foldexpr()"
+      vim.wo[0][0]["foldmethod"] = "expr"
       return nil
     else
       return nil
@@ -559,7 +559,7 @@ local function lsp_attach(_57_)
   else
   end
   if client:supports_method("textDocument/foldingRange") then
-    vim.wo[vim.api.nvim_get_current_win()]["foldexpr"] = "v:lua.vim.lsp.foldexpr()"
+    vim.wo[vim.api.nvim_get_current_win()][0]["foldexpr"] = "v:lua.vim.lsp.foldexpr()"
   else
   end
   if client:supports_method("textDocument/codeLens") then

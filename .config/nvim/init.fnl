@@ -420,10 +420,14 @@
                                {:callback (fn [args]
                                             (when (pcall vim.treesitter.start
                                                          args.buf)
-                                              ;; Default to treesitter folding (overridden if LSP supports it)
-                                              (set vim.wo.foldexpr
-                                                   "v:lua.vim.treesitter.foldexpr()")
-                                              (set vim.wo.foldmethod :expr)))}))
+                                              ;; Default to treesitter folding (overridden if LSP supports it).
+                                              ;; The [0] indexes the buffer-local value of these
+                                              ;; window options, so they don't follow the window
+                                              ;; onto buffers that have no parser.
+                                              (tset vim.wo 0 0 :foldexpr
+                                                    "v:lua.vim.treesitter.foldexpr()")
+                                              (tset vim.wo 0 0 :foldmethod
+                                                    :expr)))}))
 
 (let [filetype-to-langs {:c_sharp [:csharp]
                          :bash [:shellsession :console :shell_session]
@@ -785,7 +789,10 @@
                                     :buffer buf
                                     :callback vim.lsp.buf.clear_references})))
   (when (client:supports_method :textDocument/foldingRange)
-    (tset vim.wo (vim.api.nvim_get_current_win) :foldexpr
+    ;; The [0] indexes the buffer-local value of this window option; without it
+    ;; the LSP foldexpr sticks to the window and applies to every buffer later
+    ;; opened in it, including ones with no LSP client attached.
+    (tset vim.wo (vim.api.nvim_get_current_win) 0 :foldexpr
           "v:lua.vim.lsp.foldexpr()"))
   ;; codelens.enable attaches its own on_lines/on_reload refresh to the buffer,
   ;; so this only needs to be turned on once per client/buffer — the autocmd
