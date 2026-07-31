@@ -1,8 +1,6 @@
 # https://just.systems
 
-[private]
-@default:
-    just --list
+set default-list
 
 # Apply macOS system preferences (run once per new machine).
 [macos]
