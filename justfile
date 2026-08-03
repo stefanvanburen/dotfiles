@@ -26,3 +26,23 @@ macos-defaults-zoom-peek:
 # Install the nvim Lua API docset for fennel-ls.
 fennel-ls-nvim-docs:
     curl --create-dirs -o $XDG_DATA_HOME/fennel-ls/docsets/nvim.lua https://git.sr.ht/~micampe/fennel-ls-nvim-docs/blob/main/nvim.lua
+
+# Run the lightweight nvim treesitter injections smoke test (used by prek).
+test-injections:
+    nvim --headless --noplugin -u NONE -c "packadd nvim-treesitter" -l .config/nvim/test/injections_spec.lua
+
+# Check .fnl formatting (used by prek).
+fnlfmt-check:
+    fnlfmt --check $(git ls-files '*.fnl')
+
+# Syntax-check all tracked fish scripts (used by prek).
+fish-syntax-check:
+    for f in $(git ls-files '*.fish'); do fish -n "$f" || exit 1; done
+
+# Check all tracked fish scripts are fish_indent-formatted (used by prek).
+fish-format-check:
+    for f in $(git ls-files '*.fish'); do fish_indent --check "$f" || exit 1; done
+
+# Run all git hooks against every file.
+lint:
+    prek run --all-files

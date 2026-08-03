@@ -1,0 +1,55 @@
+# Configuration file for `prek`, a git hook framework written in Rust.
+# See https://prek.j178.dev for more information.
+#:schema https://www.schemastore.org/prek.json
+
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "mixed-line-ending" },
+  { id = "check-added-large-files" },
+  { id = "check-merge-conflict" },
+  { id = "check-case-conflict" },
+  { id = "check-toml" },
+  { id = "check-json" },
+  { id = "check-yaml" },
+  { id = "detect-private-key" },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  {
+    id = "nvim-treesitter-injections",
+    name = "nvim treesitter injections smoke test",
+    entry = "just test-injections",
+    language = "system",
+    files = "^\\.config/nvim/(after/queries/.*\\.scm|test/injections_spec\\.lua)$",
+    pass_filenames = false,
+  },
+  {
+    id = "fnlfmt-check",
+    name = "fnlfmt",
+    entry = "just fnlfmt-check",
+    language = "system",
+    files = "\\.fnl$",
+    pass_filenames = false,
+  },
+  {
+    id = "fish-syntax-check",
+    name = "fish -n",
+    entry = "just fish-syntax-check",
+    language = "system",
+    files = "\\.fish$",
+    pass_filenames = false,
+  },
+  {
+    id = "fish-format-check",
+    name = "fish_indent --check",
+    entry = "just fish-format-check",
+    language = "system",
+    files = "\\.fish$",
+    pass_filenames = false,
+  },
+]
