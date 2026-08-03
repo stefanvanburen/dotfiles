@@ -30,7 +30,7 @@ It should have these sections:
   2. Question
      ...
   ```
-  
+
 Format:
 
 - Use the Notion MCP tools to create a new page and return the URL of the new page.
