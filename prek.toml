@@ -34,7 +34,6 @@ hooks = [
     entry = "just fnlfmt-check",
     language = "system",
     files = "\\.fnl$",
-    pass_filenames = false,
   },
   {
     id = "fish-syntax-check",
@@ -42,7 +41,6 @@ hooks = [
     entry = "just fish-syntax-check",
     language = "system",
     files = "\\.fish$",
-    pass_filenames = false,
   },
   {
     id = "fish-format-check",
@@ -50,6 +48,5 @@ hooks = [
     entry = "just fish-format-check",
     language = "system",
     files = "\\.fish$",
-    pass_filenames = false,
   },
 ]

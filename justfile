@@ -31,17 +31,17 @@ fennel-ls-nvim-docs:
 test-injections:
     nvim --headless --noplugin -u NONE -c "packadd nvim-treesitter" -l .config/nvim/test/injections_spec.lua
 
-# Check .fnl formatting (used by prek).
-fnlfmt-check:
-    fnlfmt --check $(git ls-files '*.fnl')
+# Check the given files' .fnl formatting (used by prek).
+fnlfmt-check *files:
+    fnlfmt --check {{ files }}
 
-# Syntax-check all tracked fish scripts (used by prek).
-fish-syntax-check:
-    for f in $(git ls-files '*.fish'); do fish -n "$f" || exit 1; done
+# Syntax-check the given fish scripts (used by prek).
+fish-syntax-check *files:
+    for f in {{ files }}; do fish -n "$f" || exit 1; done
 
-# Check all tracked fish scripts are fish_indent-formatted (used by prek).
-fish-format-check:
-    for f in $(git ls-files '*.fish'); do fish_indent --check "$f" || exit 1; done
+# Check the given fish scripts are fish_indent-formatted (used by prek).
+fish-format-check *files:
+    for f in {{ files }}; do fish_indent --check "$f" || exit 1; done
 
 # Run all git hooks against every file.
 lint:
