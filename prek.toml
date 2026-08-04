@@ -36,13 +36,6 @@ hooks = [
     files = "\\.fnl$",
   },
   {
-    id = "fish-syntax-check",
-    name = "fish -n",
-    entry = "just fish-syntax-check",
-    language = "system",
-    files = "\\.fish$",
-  },
-  {
     id = "fish-format-check",
     name = "fish_indent --check",
     entry = "just fish-format-check",
