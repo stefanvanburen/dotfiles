@@ -69,7 +69,8 @@
 
 	; To unstage files, etc
 	unstage = restore --staged
-	trim = "!f() { git fetch --prune; gone=$(git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\" | cut -d\" \" -f1); if [ -n \"$gone\" ]; then echo \"$gone\" | xargs git branch -D; else echo \"No branches to trim.\"; fi; }; f"
+	; trim (delete gone branches + their worktrees) is an external command:
+	; ~/.local/bin/git-trim
 
 [branch]
 	sort = -committerdate

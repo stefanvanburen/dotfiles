@@ -1,0 +1,32 @@
+#!/usr/bin/env fish
+# git-trim: delete local branches whose upstream is gone.
+#
+# If a gone branch is checked out in a linked worktree, remove the worktree
+# first (never with --force: a worktree with uncommitted changes is reported
+# and its branch kept).
+
+git fetch --prune; or exit
+git worktree prune
+
+set -l trimmed 0
+set -l kept 0
+for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstream:track)')
+    set -l parts (string split \t -- $line)
+    test "$parts[3]" = "[gone]"; or continue
+    set -l branch $parts[1]
+    set -l worktree $parts[2]
+    if test -n "$worktree"
+        if not git worktree remove -- $worktree
+            echo "git-trim: keeping $branch (worktree not removable, see above)" >&2
+            set kept (math $kept + 1)
+            continue
+        end
+    end
+    git branch -D -- $branch
+    set trimmed (math $trimmed + 1)
+end
+
+if test $trimmed -eq 0; and test $kept -eq 0
+    echo "No branches to trim."
+end
+test $kept -eq 0
