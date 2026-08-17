@@ -180,6 +180,29 @@
   (mini-keymap.map_multistep :i :<CR> [:pmenu_accept :minipairs_cr])
   (mini-keymap.map_multistep :i :<BS> [:minipairs_bs]))
 
+;; vim-matchup and vim-dispatch set no `desc` on their mappings, so the clue
+;; window would show them blank. gen_clues.g and gen_clues.square_brackets
+;; already describe the Normal-mode [%, ]%, and g%, leaving these.
+(local matchup-clues
+       ;; Wording matches the Normal-mode entries in gen_clues, so the same key
+       ;; reads the same in both modes.
+       [{:mode :x :keys "[%" :desc "Go to previous unmatched group"}
+        {:mode :x :keys "]%" :desc "Go to next unmatched group"}
+        {:mode :x :keys "g%" :desc "Cycle through matching groups"}
+        {:mode :n :keys "z%" :desc "Go inside nearest block"}
+        {:mode :x :keys "z%" :desc "Go inside nearest block"}])
+
+;; `g'` and the identical `g`` alias, per :help dispatch.
+(local dispatch-clues
+       [{:mode :n :keys "g'<CR>" :desc ":Spawn"}
+        {:mode :n :keys "g'<Space>" :desc ":Spawn (prompts for command)"}
+        {:mode :n :keys "g'!" :desc ":Spawn!"}
+        {:mode :n :keys "g'?" :desc "Show 'shell'"}
+        {:mode :n :keys "g`<CR>" :desc ":Spawn"}
+        {:mode :n :keys "g`<Space>" :desc ":Spawn (prompts for command)"}
+        {:mode :n :keys "g`!" :desc ":Spawn!"}
+        {:mode :n :keys "g`?" :desc "Show 'shell'"}])
+
 ;; Clue windows for the prefixes that have enough behind them to be worth
 ;; annotating. Individual mappings supply their own :desc, so the :clues here
 ;; only need to name the <Leader> groups (and only the pure prefixes — keys like
@@ -216,7 +239,9 @@
                             {:mode :n :keys :<Leader>g :desc :+git}
                             {:mode :n :keys :<Leader>s :desc :+split/strip}
                             {:mode :n :keys :<Leader>t :desc :+test/tab}
-                            {:mode :n :keys :<Leader>v :desc "+vertical split"}]
+                            {:mode :n :keys :<Leader>v :desc "+vertical split"}
+                            matchup-clues
+                            dispatch-clues]
                     ;; The window defaults to 30 columns and never wraps, which
                     ;; truncates the longer descriptions.
                     :window {:config {:width 50}}}))
