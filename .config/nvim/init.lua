@@ -332,7 +332,7 @@ vim.cmd.colorscheme(seasonal_colorscheme())
 local function _24_()
   return vim.cmd.colorscheme(seasonal_colorscheme())
 end
-vim.api.nvim_create_autocmd("OptionSet", {pattern = "background", callback = _24_})
+vim.api.nvim_create_autocmd("OptionSet", {nested = true, pattern = "background", callback = _24_})
 vim.api.nvim_create_autocmd("VimResized", {command = ":wincmd ="})
 local fileline_patterns = {"^(.+):(%d+):(%d+):?$", "^(.+):(%d+):?$", "^(.+)%((%d+):(%d+)%)$", "^(.+)%((%d+)%)$", "^(.+)#L(%d+)-L?%d+$", "^(.+)#L(%d+)$"}
 local function parse_fileline(name)

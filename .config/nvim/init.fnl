@@ -473,8 +473,12 @@
 ;; 'background' by itself when the terminal sends a theme update notification
 ;; (DEC mode 2031, which Ghostty supports), so re-sourcing on that change is
 ;; what makes an OS light/dark switch reach an already-running instance.
+;; `nested` matters: without it the re-source clears every highlight group
+;; without firing ColorScheme, so anything deriving colors on that event
+;; (diffs.nvim, for one) never re-runs and is left cleared.
 (vim.api.nvim_create_autocmd :OptionSet
-                             {:pattern :background
+                             {:nested true
+                              :pattern :background
                               :callback #(vim.cmd.colorscheme (seasonal-colorscheme))})
 
 ;;; Autocommands and FileType settings
