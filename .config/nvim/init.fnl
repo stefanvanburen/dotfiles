@@ -161,8 +161,18 @@
 (let [mini-splitjoin (require :mini.splitjoin)]
   (mini-splitjoin.setup))
 
+;; Alt+hjkl moves the current line, or the selection in Visual mode.
+(let [mini-move (require :mini.move)]
+  (mini-move.setup))
+
 (let [mini-starter (require :mini.starter)]
   (mini-starter.setup))
+
+;; Defaults autowrite the current session on exit but never autoread one, so
+;; sessions are opt-in via this mapping.
+(let [mini-sessions (require :mini.sessions)]
+  (mini-sessions.setup)
+  (map :n :<leader>S mini-sessions.select {:desc "Select session"}))
 
 ;; Enhanced `f`/`F`/`t`/`T`
 (let [mini-jump (require :mini.jump)]
@@ -322,6 +332,28 @@
                                          :note {:pattern :NOTE
                                                 :group :MiniHipatternsNote}}}))
 
+(let [mini-indentscope (require :mini.indentscope)]
+  (mini-indentscope.setup))
+
+;; Scope lines are noise in buffers that aren't source code, and upstream
+;; deliberately leaves the choice of where to disable to the user.
+(vim.api.nvim_create_autocmd :FileType
+                             {:group (vim.api.nvim_create_augroup :indentscope-disable
+                                                                  {})
+                              :pattern [:checkhealth
+                                        :diff
+                                        :fugitive
+                                        :git
+                                        :gitcommit
+                                        :help
+                                        :man
+                                        :minifiles
+                                        :qf
+                                        :starter]
+                              :callback (fn [args]
+                                          (tset (. vim.b args.buf)
+                                                :miniindentscope_disable true))})
+
 (let [mini-bracketed (require :mini.bracketed)]
   (mini-bracketed.setup))
 
@@ -343,6 +375,13 @@
   ;; gh/gH/]h/[h/]H/[H come from the default mappings; the overlay doesn't.
   (map :n :<leader>go mini-diff.toggle_overlay {:desc "Toggle diff overlay"}))
 
+;; Initialize below mini-diff so the diff integration can mark hunks.
+(let [mini-map (require :mini.map)]
+  (mini-map.setup {:integrations [(mini-map.gen_integration.builtin_search)
+                                  (mini-map.gen_integration.diff)
+                                  (mini-map.gen_integration.diagnostic)]})
+  (map :n :<leader>o mini-map.toggle {:desc "Toggle minimap (overview)"}))
+
 (let [mini-git (require :mini.git)]
   (mini-git.setup)
   ;; Dispatches on context: a commit hash under the cursor shows that commit, a
@@ -360,8 +399,18 @@
   ;; the LSP config below pulls in regardless.
   (mini-icons.tweak_lsp_kind))
 
+;; Initialize below mini-icons, whose :ascii style it uses for the buffer icons.
+;; Sets 'showtabline' to 2 itself.
+(let [mini-tabline (require :mini.tabline)]
+  (mini-tabline.setup))
+
 (let [mini-input (require :mini.input)]
   (mini-input.setup))
+
+;; Cursor, scroll, and resize only: animating float open/close makes the
+;; mini.pick, mini.clue, and mini.notify windows feel laggy to summon.
+(let [mini-animate (require :mini.animate)]
+  (mini-animate.setup {:open {:enable false} :close {:enable false}}))
 
 ;;;; snippets
 
