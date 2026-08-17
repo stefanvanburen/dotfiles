@@ -375,13 +375,6 @@
   ;; gh/gH/]h/[h/]H/[H come from the default mappings; the overlay doesn't.
   (map :n :<leader>go mini-diff.toggle_overlay {:desc "Toggle diff overlay"}))
 
-;; Initialize below mini-diff so the diff integration can mark hunks.
-(let [mini-map (require :mini.map)]
-  (mini-map.setup {:integrations [(mini-map.gen_integration.builtin_search)
-                                  (mini-map.gen_integration.diff)
-                                  (mini-map.gen_integration.diagnostic)]})
-  (map :n :<leader>o mini-map.toggle {:desc "Toggle minimap (overview)"}))
-
 (let [mini-git (require :mini.git)]
   (mini-git.setup)
   ;; Dispatches on context: a commit hash under the cursor shows that commit, a

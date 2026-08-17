@@ -194,11 +194,6 @@ do
   map("n", "<leader>go", mini_diff.toggle_overlay, {desc = "Toggle diff overlay"})
 end
 do
-  local mini_map = require("mini.map")
-  mini_map.setup({integrations = {mini_map.gen_integration.builtin_search(), mini_map.gen_integration.diff(), mini_map.gen_integration.diagnostic()}})
-  map("n", "<leader>o", mini_map.toggle, {desc = "Toggle minimap (overview)"})
-end
-do
   local mini_git = require("mini.git")
   mini_git.setup()
   map({"n", "x"}, "<leader>gi", mini_git.show_at_cursor, {desc = "Git info at cursor"})
