@@ -115,6 +115,7 @@ do
   mini_misc.setup()
   mini_misc.setup_termbg_sync()
   mini_misc.setup_restore_cursor()
+  mini_misc.setup_auto_root()
   map("n", "<leader>z", mini_misc.zoom, {desc = "Toggle zoom of the current buffer"})
 end
 do
@@ -141,14 +142,17 @@ end
 do
   local mini_notify = require("mini.notify")
   mini_notify.setup()
+  map("n", "<leader>fn", mini_notify.show_history, {desc = "Pick notifications"})
 end
 do
   local mini_diff = require("mini.diff")
   mini_diff.setup({view = {signs = {add = "\226\148\131", change = "\226\148\131", delete = "\226\150\129"}, style = "sign"}})
+  map("n", "<leader>go", mini_diff.toggle_overlay, {desc = "Toggle diff overlay"})
 end
 do
   local mini_git = require("mini.git")
   mini_git.setup()
+  map({"n", "x"}, "<leader>gi", mini_git.show_at_cursor, {desc = "Git info at cursor"})
 end
 do
   local mini_statusline = require("mini.statusline")
@@ -157,6 +161,7 @@ end
 do
   local mini_icons = require("mini.icons")
   mini_icons.setup({style = "ascii"})
+  mini_icons.tweak_lsp_kind()
 end
 do
   local mini_input = require("mini.input")
@@ -387,7 +392,8 @@ end
 vim.api.nvim_create_autocmd("BufNewFile", {group = vim.api.nvim_create_augroup("fileline", {}), nested = true, callback = fileline_jump})
 local two_space = {expandtab = true, shiftwidth = 2}
 local four_space = {expandtab = true, shiftwidth = 4}
-local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript = two_space, javascriptreact = two_space, typescript = two_space, typescriptreact = two_space, html = two_space, css = two_space, cs = {commentstring = "// %s"}, helm = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = two_space, ["buf-config"] = two_space, svg = two_space, json = two_space, json5 = two_space, bash = two_space, toml = two_space, python = four_space, xml = four_space, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, gitconfig = {shiftwidth = 2, expandtab = false}, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, just = {expandtab = true, shiftwidth = 4}, markdown = {spell = true, wrap = true, expandtab = false}}
+local git_folds = {foldmethod = "expr", foldexpr = "v:lua.MiniGit.diff_foldexpr()"}
+local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript = two_space, javascriptreact = two_space, typescript = two_space, typescriptreact = two_space, html = two_space, css = two_space, cs = {commentstring = "// %s"}, helm = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, gotmpl = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s */}}"}, fish = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, yaml = two_space, ["buf-config"] = two_space, svg = two_space, json = two_space, json5 = two_space, bash = two_space, toml = two_space, python = four_space, xml = four_space, starlark = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, gitconfig = {shiftwidth = 2, expandtab = false}, git = git_folds, diff = git_folds, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, just = {expandtab = true, shiftwidth = 4}, markdown = {spell = true, wrap = true, expandtab = false}}
 local _31_
 do
   local tmp_9_ = vim.tbl_keys(filetype_settings)

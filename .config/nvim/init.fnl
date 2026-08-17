@@ -262,6 +262,9 @@
   (mini-misc.setup)
   (mini-misc.setup_termbg_sync)
   (mini-misc.setup_restore_cursor)
+  ;; Defaults to the nearest `.git` or `Makefile`, so cwd follows the repo (or
+  ;; worktree — .git is a file there, which vim.fs.find still matches).
+  (mini-misc.setup_auto_root)
   (map :n :<leader>z mini-misc.zoom {:desc "Toggle zoom of the current buffer"}))
 
 (let [mini-hipatterns (require :mini.hipatterns)]
@@ -287,21 +290,31 @@
        {:desc "Open the file picker from the current file, or in the current working directory if the file does not exist"}))
 
 (let [mini-notify (require :mini.notify)]
-  (mini-notify.setup))
+  (mini-notify.setup)
+  (map :n :<leader>fn mini-notify.show_history {:desc "Pick notifications"}))
 
 (let [mini-diff (require :mini.diff)]
   (mini-diff.setup {:view {:signs {:add "┃" :change "┃" :delete "▁"}
-                           :style :sign}}))
+                           :style :sign}})
+  ;; gh/gH/]h/[h/]H/[H come from the default mappings; the overlay doesn't.
+  (map :n :<leader>go mini-diff.toggle_overlay {:desc "Toggle diff overlay"}))
 
 (let [mini-git (require :mini.git)]
-  (mini-git.setup))
+  (mini-git.setup)
+  ;; Dispatches on context: a commit hash under the cursor shows that commit, a
+  ;; line in diff output shows its source, and anything else shows the range
+  ;; history — which is what makes the Visual-mode mapping worthwhile.
+  (map [:n :x] :<leader>gi mini-git.show_at_cursor {:desc "Git info at cursor"}))
 
 ;; Initialize below mini-git and mini-diff for integration.
 (let [mini-statusline (require :mini.statusline)]
   (mini-statusline.setup))
 
 (let [mini-icons (require :mini.icons)]
-  (mini-icons.setup {:style :ascii}))
+  (mini-icons.setup {:style :ascii})
+  ;; Prepends an icon to every LSP completion kind. Loads all of vim.lsp, which
+  ;; the LSP config below pulls in regardless.
+  (mini-icons.tweak_lsp_kind))
 
 (let [mini-input (require :mini.input)]
   (mini-input.setup))
@@ -581,6 +594,8 @@
 (local two-space {:expandtab true :shiftwidth 2})
 (local four-space {:expandtab true :shiftwidth 4})
 
+(local git-folds {:foldmethod :expr :foldexpr "v:lua.MiniGit.diff_foldexpr()"})
+
 (local filetype-settings
        {:go {:expandtab false :textwidth 100}
         :javascript two-space
@@ -610,6 +625,11 @@
                 :cindent true}
         :gitcommit {:spell true}
         :gitconfig {:expandtab false :shiftwidth 2}
+        ;; Fold mini.git and plain diff output by file entry and hunk. This
+        ;; autocmd is registered after the treesitter one, so it wins for these
+        ;; two filetypes.
+        :git git-folds
+        :diff git-folds
         :fennel {:commentstring ";; %s"}
         :sql {:wrap true :commentstring "-- %s" :expandtab true :shiftwidth 4}
         :clojure {:expandtab true :textwidth 80}
