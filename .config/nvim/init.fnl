@@ -246,8 +246,9 @@
   (mini-pick.setup)
   (map :n :<leader>ff mini-pick.builtin.files {:desc "Pick files"})
   (map :n :<leader>fb mini-pick.builtin.buffers {:desc "Pick buffers"})
-  (map :n :<leader>fl mini-pick.builtin.grep_live {:desc "Pick lines"})
-  (map :n :<leader>fh mini-pick.builtin.help {:desc "Pick help"}))
+  (map :n :<leader>fl mini-pick.builtin.grep_live {:desc "Pick grep (live)"})
+  (map :n :<leader>fh mini-pick.builtin.help {:desc "Pick help"})
+  (map :n :<leader>fR mini-pick.builtin.resume {:desc "Resume last picker"}))
 
 (let [mini-extra (require :mini.extra)]
   (map :n :<leader>fd mini-extra.pickers.diagnostic {:desc "Pick diagnostics"})
@@ -256,7 +257,22 @@
   (map :n :<leader>fk mini-extra.pickers.manpages {:desc "Pick manpages"})
   (map :n :<leader>fo mini-extra.pickers.options {:desc "Pick options"})
   (map :n :<leader>fc mini-extra.pickers.colorschemes
-       {:desc "Pick colorschemes"}))
+       {:desc "Pick colorschemes"})
+  (map :n :<leader>fr mini-extra.pickers.oldfiles {:desc "Pick recent files"})
+  (map :n :<leader>fH mini-extra.pickers.git_hunks {:desc "Pick git hunks"})
+  (map :n :<leader>ft mini-extra.pickers.treesitter
+       {:desc "Pick treesitter nodes"})
+  (map :n :<leader>f/ #(mini-extra.pickers.buf_lines {:scope :current})
+       {:desc "Pick lines in buffer"})
+  ;; `gO` lists document symbols but isn't fuzzy-searchable.
+  (map :n :<leader>fs #(mini-extra.pickers.lsp {:scope :document_symbol})
+       {:desc "Pick document symbols"})
+  (map :n :<leader>fS #(mini-extra.pickers.lsp {:scope :workspace_symbol_live})
+       {:desc "Pick workspace symbols (live)"})
+  (map :n :<leader>fq #(mini-extra.pickers.list {:scope :quickfix})
+       {:desc "Pick quickfix list"})
+  (map :n :<leader>fj #(mini-extra.pickers.list {:scope :jump})
+       {:desc "Pick jumplist"}))
 
 (let [mini-colors (require :mini.colors)]
   (mini-colors.setup))
