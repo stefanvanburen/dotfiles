@@ -180,6 +180,44 @@
   (mini-keymap.map_multistep :i :<CR> [:pmenu_accept :minipairs_cr])
   (mini-keymap.map_multistep :i :<BS> [:minipairs_bs]))
 
+;; Clue windows for the prefixes that have enough behind them to be worth
+;; annotating. Individual mappings supply their own :desc, so the :clues here
+;; only need to name the <Leader> groups (and only the pure prefixes — keys like
+;; <Leader>m are mappings in their own right and keep their own description).
+(let [mini-clue (require :mini.clue)]
+  (mini-clue.setup {:triggers [{:mode :n :keys :<Leader>}
+                               {:mode :x :keys :<Leader>}
+                               {:mode :n :keys :<LocalLeader>}
+                               {:mode :x :keys :<LocalLeader>}
+                               {:mode :n :keys :g}
+                               {:mode :x :keys :g}
+                               {:mode :n :keys :z}
+                               {:mode :x :keys :z}
+                               {:mode :n :keys "'"}
+                               {:mode :n :keys "`"}
+                               {:mode :n :keys "\""}
+                               {:mode :x :keys "\""}
+                               {:mode :i :keys :<C-r>}
+                               {:mode :c :keys :<C-r>}
+                               {:mode :n :keys :<C-w>}
+                               ;; mini.bracketed and mini.diff put a lot here.
+                               {:mode :n :keys "["}
+                               {:mode :n :keys "]"}]
+                    :clues [(mini-clue.gen_clues.builtin_completion)
+                            (mini-clue.gen_clues.g)
+                            (mini-clue.gen_clues.marks)
+                            (mini-clue.gen_clues.registers)
+                            (mini-clue.gen_clues.square_brackets)
+                            (mini-clue.gen_clues.windows)
+                            (mini-clue.gen_clues.z)
+                            {:mode :n :keys :<Leader>d :desc :+deps/db}
+                            {:mode :n :keys :<Leader>e :desc "+edit config"}
+                            {:mode :n :keys :<Leader>f :desc :+find}
+                            {:mode :n :keys :<Leader>g :desc :+git}
+                            {:mode :n :keys :<Leader>s :desc :+split/strip}
+                            {:mode :n :keys :<Leader>t :desc :+test/tab}
+                            {:mode :n :keys :<Leader>v :desc "+vertical split"}]}))
+
 (let [mini-trailspace (require :mini.trailspace)]
   (mini-trailspace.setup)
   (map :n :<leader>sw mini-trailspace.trim {:desc "Strip whitespace"}))

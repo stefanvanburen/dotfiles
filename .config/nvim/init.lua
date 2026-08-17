@@ -74,6 +74,10 @@ do
   mini_keymap.map_multistep("i", "<BS>", {"minipairs_bs"})
 end
 do
+  local mini_clue = require("mini.clue")
+  mini_clue.setup({triggers = {{mode = "n", keys = "<Leader>"}, {mode = "x", keys = "<Leader>"}, {mode = "n", keys = "<LocalLeader>"}, {mode = "x", keys = "<LocalLeader>"}, {mode = "n", keys = "g"}, {mode = "x", keys = "g"}, {mode = "n", keys = "z"}, {mode = "x", keys = "z"}, {mode = "n", keys = "'"}, {mode = "n", keys = "`"}, {mode = "n", keys = "\""}, {mode = "x", keys = "\""}, {mode = "i", keys = "<C-r>"}, {mode = "c", keys = "<C-r>"}, {mode = "n", keys = "<C-w>"}, {mode = "n", keys = "["}, {mode = "n", keys = "]"}}, clues = {mini_clue.gen_clues.builtin_completion(), mini_clue.gen_clues.g(), mini_clue.gen_clues.marks(), mini_clue.gen_clues.registers(), mini_clue.gen_clues.square_brackets(), mini_clue.gen_clues.windows(), mini_clue.gen_clues.z(), {mode = "n", keys = "<Leader>d", desc = "+deps/db"}, {mode = "n", keys = "<Leader>e", desc = "+edit config"}, {mode = "n", keys = "<Leader>f", desc = "+find"}, {mode = "n", keys = "<Leader>g", desc = "+git"}, {mode = "n", keys = "<Leader>s", desc = "+split/strip"}, {mode = "n", keys = "<Leader>t", desc = "+test/tab"}, {mode = "n", keys = "<Leader>v", desc = "+vertical split"}}})
+end
+do
   local mini_trailspace = require("mini.trailspace")
   mini_trailspace.setup()
   map("n", "<leader>sw", mini_trailspace.trim, {desc = "Strip whitespace"})
