@@ -106,6 +106,7 @@
 # ignore .claude contents (history, sessions, transcripts, caches) but track shared settings
 /.claude/*
 !/.claude/settings.json
+!/.claude/CLAUDE.md
 # includes .claude.json.backup.<xyz>
 /.claude.json*
 
