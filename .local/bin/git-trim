@@ -8,7 +8,9 @@
 git fetch --prune; or exit
 git worktree prune
 
-set -l trimmed 0
+# Deleting refs one at a time rewrites packed-refs per deletion, so collect
+# the gone branches and delete them in a single `git branch -D`.
+set -l gone
 set -l kept 0
 for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstream:track)')
     set -l parts (string split \t -- $line)
@@ -22,11 +24,12 @@ for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstrea
             continue
         end
     end
-    git branch -D -- $branch
-    set trimmed (math $trimmed + 1)
+    set -a gone $branch
 end
 
-if test $trimmed -eq 0; and test $kept -eq 0
+if set -q gone[1]
+    git branch -D -- $gone
+else if test $kept -eq 0
     echo "No branches to trim."
 end
 test $kept -eq 0
