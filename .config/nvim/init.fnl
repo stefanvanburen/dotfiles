@@ -91,7 +91,9 @@
                   :highlights {:warn_max_lines false}})
 
 (vim.api.nvim_create_autocmd :PackChanged
-                             {:callback (fn [ev]
+                             {:group (vim.api.nvim_create_augroup :pack-changed
+                                                                  {})
+                              :callback (fn [ev]
                                           (each [pkg cmd (pairs {:nvim-treesitter :TSUpdate
                                                                  :mason :MasonUpdate})]
                                             (when (and (= ev.data.spec.name pkg)
@@ -346,7 +348,9 @@
                         (icollect [_ v (ipairs v)]
                           (if (= 1 (vim.fn.executable v)) v))))]
   (set nvim-lint.linters_by_ft linters)
-  (vim.api.nvim_create_autocmd :BufWritePost {:callback #(nvim-lint.try_lint)}))
+  (vim.api.nvim_create_autocmd :BufWritePost
+                               {:group (vim.api.nvim_create_augroup :lint {})
+                                :callback #(nvim-lint.try_lint)}))
 
 (let [mason (require :mason)]
   (mason.setup))
@@ -414,7 +418,9 @@
   ;; filetype names often differ from parser names (cs/c_sharp, sh/bash,
   ;; typescriptreact/tsx). `start` failing is the test for "no parser".
   (vim.api.nvim_create_autocmd :FileType
-                               {:callback (fn [args]
+                               {:group (vim.api.nvim_create_augroup :treesitter
+                                                                    {})
+                                :callback (fn [args]
                                             (when (pcall vim.treesitter.start
                                                          args.buf)
                                               ;; Default to treesitter folding (overridden if LSP supports it).
@@ -477,13 +483,17 @@
 ;; without firing ColorScheme, so anything deriving colors on that event
 ;; (diffs.nvim, for one) never re-runs and is left cleared.
 (vim.api.nvim_create_autocmd :OptionSet
-                             {:nested true
+                             {:group (vim.api.nvim_create_augroup :background
+                                                                  {})
+                              :nested true
                               :pattern :background
                               :callback #(vim.cmd.colorscheme (seasonal-colorscheme))})
 
 ;;; Autocommands and FileType settings
 
-(vim.api.nvim_create_autocmd :VimResized {:command ":wincmd ="})
+(vim.api.nvim_create_autocmd :VimResized
+                             {:group (vim.api.nvim_create_augroup :resize {})
+                              :command ":wincmd ="})
 
 ;; Inlined replacement for lewis6991/fileline.nvim. Jumps to the right line
 ;; (and column) when a file is opened with a trailing location spec, e.g.
@@ -630,7 +640,9 @@
 ;; Template files.
 (let [template-dir (vim.fs.joinpath (vim.fn.stdpath :config) :templates)]
   (vim.api.nvim_create_autocmd :BufNewFile
-                               {:pattern "*"
+                               {:group (vim.api.nvim_create_augroup :templates
+                                                                    {})
+                                :pattern "*"
                                 :callback (fn [args]
                                             (let [fname (vim.fs.basename args.file)
                                                   ext (vim.fn.fnamemodify args.file
@@ -797,7 +809,10 @@
          {:buffer buf :desc "Manually trigger completion"}))
   (map :n :gD vim.lsp.buf.declaration {:buffer buf :desc "Go to declaration"}))
 
-(vim.api.nvim_create_autocmd :LspAttach {:callback lsp-attach})
+(vim.api.nvim_create_autocmd :LspAttach
+                             {:group (vim.api.nvim_create_augroup :lsp-attach
+                                                                  {})
+                              :callback lsp-attach})
 
 (local schemastore (require :schemastore))
 

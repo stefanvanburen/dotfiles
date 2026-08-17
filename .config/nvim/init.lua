@@ -32,7 +32,7 @@ local function _3_(ev)
   end
   return nil
 end
-vim.api.nvim_create_autocmd("PackChanged", {callback = _3_})
+vim.api.nvim_create_autocmd("PackChanged", {group = vim.api.nvim_create_augroup("pack-changed", {}), callback = _3_})
 vim.pack.add({"https://github.com/nvim-mini/mini.nvim", "https://github.com/rafamadriz/friendly-snippets", "https://github.com/chrisgrieser/nvim-scissors", "https://github.com/chrisgrieser/nvim-origami", "https://github.com/tpope/vim-eunuch", "https://github.com/andymass/vim-matchup", "https://github.com/tpope/vim-abolish", "https://github.com/rktjmp/paperplanes.nvim", "https://github.com/tpope/vim-fugitive", "https://github.com/tpope/vim-rhubarb", "https://git.sr.ht/~willdurand/srht.vim", "https://github.com/barrettruth/diffs.nvim", "https://github.com/tpope/vim-dispatch", "https://github.com/tpope/vim-dadbod", "https://github.com/janet-lang/janet.vim", "https://github.com/qvalentin/helm-ls.nvim", "https://github.com/Olical/nfnl", "https://github.com/Olical/conjure", "https://github.com/gpanders/nvim-parinfer", "https://github.com/vim-test/vim-test", "https://github.com/neovim/nvim-lspconfig", "https://github.com/b0o/SchemaStore.nvim", "https://github.com/stevearc/conform.nvim", "https://github.com/mfussenegger/nvim-lint", "https://github.com/williamboman/mason.nvim", "https://github.com/williamboman/mason-lspconfig.nvim", "https://github.com/nvim-treesitter/nvim-treesitter", "https://github.com/nvim-treesitter/nvim-treesitter-context", "https://github.com/julienvincent/nvim-paredit", "https://github.com/stefanvanburen/rams", "https://github.com/savq/melange-nvim", "https://github.com/mcchrish/zenbones.nvim", "https://github.com/rose-pine/neovim", "https://github.com/lunacookies/vim-plan9", "https://github.com/raphael-proust/vacme", "https://github.com/stefanvanburen/usgc-nvim", "https://github.com/miikanissi/modus-themes.nvim"})
 do
   local mini_basics = require("mini.basics")
@@ -242,7 +242,7 @@ do
   local function _15_()
     return nvim_lint.try_lint()
   end
-  vim.api.nvim_create_autocmd("BufWritePost", {callback = _15_})
+  vim.api.nvim_create_autocmd("BufWritePost", {group = vim.api.nvim_create_augroup("lint", {}), callback = _15_})
 end
 do
   local mason = require("mason")
@@ -265,7 +265,7 @@ do
       return nil
     end
   end
-  vim.api.nvim_create_autocmd("FileType", {callback = _16_})
+  vim.api.nvim_create_autocmd("FileType", {group = vim.api.nvim_create_augroup("treesitter", {}), callback = _16_})
 end
 do
   local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console", "shell_session"}, objc = {"objectivec"}, proto = {"protobuf"}, yaml = {"buf-config", "yaml.github-actions"}, starlark = {"tiltfile"}}
@@ -332,8 +332,8 @@ vim.cmd.colorscheme(seasonal_colorscheme())
 local function _24_()
   return vim.cmd.colorscheme(seasonal_colorscheme())
 end
-vim.api.nvim_create_autocmd("OptionSet", {nested = true, pattern = "background", callback = _24_})
-vim.api.nvim_create_autocmd("VimResized", {command = ":wincmd ="})
+vim.api.nvim_create_autocmd("OptionSet", {group = vim.api.nvim_create_augroup("background", {}), nested = true, pattern = "background", callback = _24_})
+vim.api.nvim_create_autocmd("VimResized", {group = vim.api.nvim_create_augroup("resize", {}), command = ":wincmd ="})
 local fileline_patterns = {"^(.+):(%d+):(%d+):?$", "^(.+):(%d+):?$", "^(.+)%((%d+):(%d+)%)$", "^(.+)%((%d+)%)$", "^(.+)#L(%d+)-L?%d+$", "^(.+)#L(%d+)$"}
 local function parse_fileline(name)
   local result = nil
@@ -436,7 +436,7 @@ do
     end
     return nil
   end
-  vim.api.nvim_create_autocmd("BufNewFile", {pattern = "*", callback = _36_})
+  vim.api.nvim_create_autocmd("BufNewFile", {group = vim.api.nvim_create_augroup("templates", {}), pattern = "*", callback = _36_})
 end
 map("n", "<leader>du", vim.pack.update, {desc = "Update plugins"})
 local function _39_()
@@ -573,7 +573,7 @@ local function lsp_attach(_57_)
   end
   return map("n", "gD", vim.lsp.buf.declaration, {buffer = buf, desc = "Go to declaration"})
 end
-vim.api.nvim_create_autocmd("LspAttach", {callback = lsp_attach})
+vim.api.nvim_create_autocmd("LspAttach", {group = vim.api.nvim_create_augroup("lsp-attach", {}), callback = lsp_attach})
 local schemastore = require("schemastore")
 local function venv_cmd(name)
   local function _66_(dispatchers, config)
