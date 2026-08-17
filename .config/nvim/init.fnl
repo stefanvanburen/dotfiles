@@ -407,11 +407,6 @@
 (let [mini-input (require :mini.input)]
   (mini-input.setup))
 
-;; Cursor, scroll, and resize only: animating float open/close makes the
-;; mini.pick, mini.clue, and mini.notify windows feel laggy to summon.
-(let [mini-animate (require :mini.animate)]
-  (mini-animate.setup {:open {:enable false} :close {:enable false}}))
-
 ;;;; snippets
 
 (local snippets-dir (vim.fs.joinpath (vim.fn.stdpath :config) :snippets))

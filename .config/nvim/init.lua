@@ -220,10 +220,6 @@ do
   local mini_input = require("mini.input")
   mini_input.setup()
 end
-do
-  local mini_animate = require("mini.animate")
-  mini_animate.setup({open = {enable = false}, close = {enable = false}})
-end
 local snippets_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "snippets")
 do
   local mini_snippets = require("mini.snippets")
