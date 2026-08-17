@@ -216,7 +216,10 @@
                             {:mode :n :keys :<Leader>g :desc :+git}
                             {:mode :n :keys :<Leader>s :desc :+split/strip}
                             {:mode :n :keys :<Leader>t :desc :+test/tab}
-                            {:mode :n :keys :<Leader>v :desc "+vertical split"}]}))
+                            {:mode :n :keys :<Leader>v :desc "+vertical split"}]
+                    ;; The window defaults to 30 columns and never wraps, which
+                    ;; truncates the longer descriptions.
+                    :window {:config {:width 50}}}))
 
 (let [mini-trailspace (require :mini.trailspace)]
   (mini-trailspace.setup)
