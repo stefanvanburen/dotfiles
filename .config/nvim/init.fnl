@@ -986,7 +986,10 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome
         :biome {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fish_lsp
-        :fish_lsp {}
+        ;; Hover for builtins shells out to `__fish_print_help`, which runs
+        ;; `man` -- and `man` honors MANPAGER even when writing to a pipe, so the
+        ;; inherited `nvim +Man!` would block the request forever.
+        :fish_lsp {:cmd_env {:MANPAGER :cat}}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
         :janet_lsp {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff
