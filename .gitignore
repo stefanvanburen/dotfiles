@@ -10,6 +10,9 @@
 # npm configuration - can contain sensitive information
 # See https://docs.npmjs.com/cli/v10/configuring-npm/npmrc#auth-related-configuration
 /.npmrc
+# Claude Code auto mode writes machine/repo-specific learned context
+# (private repo names, infra details) into this file; manage per-machine.
+/.claude/settings.json
 
 # data files for various programs
 /.cache
