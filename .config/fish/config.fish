@@ -19,9 +19,14 @@ set -gx GOMODCACHE $XDG_CACHE_HOME/gomodcache
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgreprc
 
 # https://wiki.archlinux.org/title/Environment_variables#Default_programs
-set -gx EDITOR nvim
+set -q EDITOR
+or set -gx EDITOR nvim
 # neovim's man plugin - see :h ft-man-plugin
-set -gx MANPAGER "nvim +Man!"
+# Only a default: `man` honors MANPAGER even when writing to a pipe, so callers
+# that need a non-blocking pager (fish-lsp's hover shells out to
+# `__fish_print_help`, which runs `man`) can pass their own value in.
+set -q MANPAGER
+or set -gx MANPAGER "nvim +Man!"
 
 # https://github.com/junegunn/fzf?tab=readme-ov-file#environment-variables
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
