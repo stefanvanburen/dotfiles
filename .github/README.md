@@ -21,28 +21,29 @@ $ git config status.showUntrackedFiles no
   $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ```
 
-* Install the base dependencies in the [Brewfile](/.Brewfile):
+* Install [`just`](https://just.systems), which drives the rest of the setup
+  (`just bootstrap` installs it from the [Brewfile](/.Brewfile) too, but it has
+  to exist before it can run):
 
   ```console
-  $ brew bundle install --global
+  $ brew install just
   ```
 
-* [Set the default shell for the user to `fish`](https://fishshell.com/docs/current/index.html#default-shell):
+* Run the bootstrap — installs the [Brewfile](/.Brewfile) dependencies, sets
+  `fish` as the login shell (registering it in `/etc/shells` first), and applies
+  macOS system preferences. Safe to re-run on an existing machine to check for
+  drift:
 
   ```console
-  $ # NOTE: Should ensure that "$(command -v fish)" is in /etc/shells
-  $ # See: https://github.com/fish-shell/fish-shell/issues/989
-  $ chsh -s $(command -v fish)
+  $ just bootstrap
   ```
 
-* Apply macOS system preferences (see [`justfile`](/justfile) for what this does
-  — disables the <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> dictionary shortcut
-  so [Dash.app](https://kapeli.com/dash) can use it, and enables the
-  [Zoom "Peek" gesture](https://daringfireball.net/linked/2026/04/13/macos-zoom-gesture)):
-
-  ```console
-  $ just macos-defaults
-  ```
+  The macOS preferences it applies (see the [`justfile`](/justfile)) disable the
+  <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> dictionary shortcut so
+  [Dash.app](https://kapeli.com/dash) can use it, and enable the
+  [Zoom "Peek" gesture](https://daringfireball.net/linked/2026/04/13/macos-zoom-gesture).
+  The latter needs Full Disk Access for the invoking terminal: System Settings
+  -> Privacy & Security -> Full Disk Access.
 
 * Create an ssh key (follow the instructions in [ssh-config](../.ssh/config)),
   and add it to [GitHub](https://github.com/settings/keys)

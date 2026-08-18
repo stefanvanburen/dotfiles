@@ -2,6 +2,29 @@
 
 set default-list
 
+# Set up a new machine (or check an existing one for drift). Safe to re-run.
+[macos]
+bootstrap: brew-bundle default-shell macos-defaults
+
+# Install the base dependencies from ~/.Brewfile.
+brew-bundle:
+    brew bundle check --global >/dev/null 2>&1 || brew bundle install --global
+
+# Set fish as the login shell, registering it in /etc/shells first if needed.
+[macos]
+default-shell:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    fish="$(command -v fish)"
+    # chsh refuses a shell that isn't listed in /etc/shells.
+    # https://github.com/fish-shell/fish-shell/issues/989
+    if ! grep -qxF "$fish" /etc/shells; then
+        echo "$fish" | sudo tee -a /etc/shells >/dev/null
+    fi
+    if [ "$(dscl . -read "$HOME" UserShell | awk '{print $2}')" != "$fish" ]; then
+        chsh -s "$fish"
+    fi
+
 # Apply macOS system preferences (run once per new machine).
 [macos]
 macos-defaults: macos-defaults-dictionary macos-defaults-zoom-peek
