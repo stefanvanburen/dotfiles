@@ -901,7 +901,8 @@
                                        vim.diagnostic.severity.WARN "!"
                                        vim.diagnostic.severity.INFO "✳︎"
                                        vim.diagnostic.severity.HINT "?"}}
-                        :virtual_text {:severity {:min vim.diagnostic.severity.WARN}}
+                        :virtual_lines true
+                        :virtual_text false
                         :underline true
                         ;; when multiple diagnostics land on a line, the highest-severity
                         ;; sign wins instead of whichever is last in the list.
