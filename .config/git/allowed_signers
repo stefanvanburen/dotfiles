@@ -1,0 +1,18 @@
+# Public keys allowed to sign my commits, so `git log --show-signature` and
+# %G? can verify them instead of reporting "No principal matched".
+#
+# Keys are from github.com/stefanvanburen.keys; principals are the committer
+# emails each key has signed under. namespaces="git" keeps them usable for
+# commits and tags only, not for SSH auth or arbitrary `ssh-keygen -Y`.
+#
+# Principals are labels, not a constraint: git verifies by looking the key up in
+# this file and reports whichever principal it is listed under, so it checks
+# "one of my keys signed this", not "this identity signed this". Commits made
+# under a work identity verify from these entries too -- no extra principals,
+# and no work addresses in a public repo.
+
+svanburen@buf.build namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgvzP0zUQ879g6eh6PA2nUfmpUnmDESA2Mb17U334c9
+svanburen@buf.build,stefan@vanburen.xyz namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBHdE+XVkcO0vUUADL+tNHM2LLqu5JwvTX+3EbzfDK6b
+stefan@vanburen.xyz namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIoDixzbo12TZUrCnIXJESUjl4HaGrLKvm2kG2GCFT6q
+stefan@vanburen.xyz namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDkNUJw99hBN9bvXsm/5W8IJQ2CaJv6dzzSMObkwrAbV
+stefan@vanburen.xyz namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZO8dnGywQM9kuUvKyHc8TooK7fazRVFZ020jlikETk

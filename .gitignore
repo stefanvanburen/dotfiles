@@ -1,7 +1,5 @@
 # local configuration for git, referenced in .config/git/config
 /.config/git/local_config
-# per-machine signing keys, referenced in .config/git/local_config
-/.config/git/allowed_signers
 # local configuration for ghostty
 /.config/ghostty/config.local
 # clojure tools, not pinned / tracked
@@ -108,9 +106,8 @@
 # kitty uses less as a pager
 /.lesshst
 
-# ignore .claude contents (history, sessions, transcripts, caches) but track shared settings
+# ignore .claude contents (history, sessions, transcripts, caches) but track CLAUDE.md
 /.claude/*
-!/.claude/settings.json
 !/.claude/CLAUDE.md
 # includes .claude.json.backup.<xyz>
 /.claude.json*

@@ -96,6 +96,12 @@
 [gpg]
 	format = ssh
 
+[gpg "ssh"]
+	; Public keys trusted to verify my own signatures. Same on every
+	; machine, unlike user.signingkey, so it lives here rather than in
+	; local_config.
+	allowedSignersFile = ~/.config/git/allowed_signers
+
 [help]
 	; ask for confirmation before running an autocorrected command
 	autocorrect = prompt
