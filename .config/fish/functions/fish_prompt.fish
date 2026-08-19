@@ -19,9 +19,11 @@ function fish_prompt --description "Overridden fish_prompt function"
     set --local njobs (count (jobs -g))
     test $njobs -gt 0; and set jobs (set_color cyan)"[$njobs] "
 
-    # Quote each variable: in fish an unquoted empty variable expands to zero
-    # arguments (not one empty arg), which would misalign the format spec.
-    printf '\n%s%s%s %s\n' "$host" (prompt_pwd) (fish_git_prompt) "$jobs"
+    # Quote every expansion: an empty variable or command substitution expands
+    # to zero arguments in fish (not one empty arg), which would shift the
+    # remaining ones into the wrong format specifier. fish_git_prompt outputs
+    # nothing outside a repository.
+    printf '\n%s%s%s %s\n' "$host" "$(prompt_pwd)" "$(fish_git_prompt)" "$jobs"
 
     set --function prompt_character '$'
     if test $last_status -ne 0
