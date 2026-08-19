@@ -41,10 +41,14 @@ if test -x /opt/homebrew/bin/brew
     /opt/homebrew/bin/brew shellenv | source
 end
 
+# --global keeps these in this file: the default writes the universal
+# fish_user_paths, which would hold on to a directory after its line is deleted
+# here. --move re-prepends a directory already inherited from a parent shell,
+# so nesting shells doesn't reorder PATH.
 # uv tools / go
-fish_add_path $XDG_BIN_HOME
+fish_add_path --global --move $XDG_BIN_HOME
 # rust
-fish_add_path ~/.cargo/bin
+fish_add_path --global --move ~/.cargo/bin
 
 if status --is-interactive
     ## `man abbr`
