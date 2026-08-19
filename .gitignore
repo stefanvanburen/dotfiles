@@ -7,6 +7,8 @@
 
 # contains sensitive information
 /.netrc
+# GPG keyrings and trust database
+/.gnupg
 # npm configuration - can contain sensitive information
 # See https://docs.npmjs.com/cli/v10/configuring-npm/npmrc#auth-related-configuration
 /.npmrc
@@ -31,6 +33,8 @@
 /.config/jump
 /.ssh
 /.viminfo
+# empty, and fish is the login shell, so nothing reads it
+/.bash_profile
 /.bash_history
 /.zsh_history
 /.clojure_history
