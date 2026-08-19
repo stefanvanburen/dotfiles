@@ -135,11 +135,8 @@
                "https://github.com/julienvincent/nvim-paredit"
                ;; Colorschemes
                "https://github.com/stefanvanburen/rams"
-               "https://github.com/savq/melange-nvim"
                "https://github.com/mcchrish/zenbones.nvim"
                "https://github.com/rose-pine/neovim"
-               "https://github.com/lunacookies/vim-plan9"
-               "https://github.com/raphael-proust/vacme"
                "https://github.com/stefanvanburen/usgc-nvim"
                "https://github.com/miikanissi/modus-themes.nvim"])
 
