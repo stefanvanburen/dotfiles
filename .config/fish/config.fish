@@ -51,6 +51,9 @@ fish_add_path --global --move $XDG_BIN_HOME
 fish_add_path --global --move ~/.cargo/bin
 
 if status --is-interactive
+    # Silence the greeting: fish only checks that the value is empty.
+    set -g fish_greeting
+
     ## `man abbr`
     # https://fishshell.com/docs/current/cmds/prevd.html
     abbr --add - prevd
