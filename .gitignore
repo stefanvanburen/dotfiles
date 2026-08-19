@@ -81,6 +81,9 @@
 # https://github.com/homebrew/homebrew-bundle#versions-and-lockfiles
 /.Brewfile.lock.json
 
+# records the taps `brew trust` has approved, so it tracks which third-party
+# formulae this machine happens to have installed
+/.config/homebrew/trust.json
 /.config/homebrew/trust.json.lock
 
 # Default go directory, for installed binaries and pkg downloads
