@@ -66,6 +66,11 @@ if status --is-interactive
     # https://just.systems
     abbr --add j just
 
+    # `..` -> `cd ../`, `...` -> `cd ../../`, and so on.
+    abbr --add dotdot --regex '^\.\.+$' --function multicd
+    # bash's `!!`, except the expansion is visible and editable before running.
+    abbr --add !! --position anywhere --function last_history_item
+
     # Set up vi key bindings
     # https://fishshell.com/docs/current/interactive.html#vi-mode-commands
     set -g fish_key_bindings fish_vi_key_bindings
