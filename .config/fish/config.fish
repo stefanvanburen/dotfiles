@@ -33,16 +33,18 @@ set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_DEFAULT_OPTS --no-color
 
+# Setup homebrew environment (PATH-related variables)
+# This must be before any command checking, as it sets up the PATH, and before
+# the fish_add_path calls below: `brew shellenv` prepends, so anything added
+# after it takes priority over a brew-installed program of the same name.
+if test -x /opt/homebrew/bin/brew
+    /opt/homebrew/bin/brew shellenv | source
+end
+
 # uv tools / go
 fish_add_path $XDG_BIN_HOME
 # rust
 fish_add_path ~/.cargo/bin
-
-# Setup homebrew environment (PATH-related variables)
-# This must be before any command checking, as it sets up the PATH.
-if test -x /opt/homebrew/bin/brew
-    /opt/homebrew/bin/brew shellenv | source
-end
 
 if status --is-interactive
     ## `man abbr`
