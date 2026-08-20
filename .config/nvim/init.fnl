@@ -115,6 +115,8 @@
                "https://github.com/tpope/vim-rhubarb"
                "https://git.sr.ht/~willdurand/srht.vim"
                "https://github.com/barrettruth/diffs.nvim"
+               "https://github.com/barrettruth/ci.nvim"
+               "https://github.com/barrettruth/forge.nvim"
                "https://github.com/tpope/vim-dispatch"
                ;; dispatch is a dependency of dadbod
                "https://github.com/tpope/vim-dadbod"
@@ -820,6 +822,12 @@
 
 (map :n :<leader>gp #(vim.cmd {:cmd :Git :args [:push]}) {:desc ":Git push"})
 (map :n :<leader>gb #(vim.cmd {:cmd :Git :args [:blame]}) {:desc ":Git blame"})
+
+;; forge.nvim / ci.nvim
+;; gp/gc/gb are taken above by push/commit/blame.
+(map :n :<leader>gP #(vim.cmd {:cmd :PR}) {:desc ":PR"})
+(map :n :<leader>gi #(vim.cmd {:cmd :Issue}) {:desc ":Issue"})
+(map :n :<leader>gA #(vim.cmd {:cmd :CI}) {:desc ":CI"})
 
 ;; move by visual lines instead of real lines, except when a count is provided,
 ;; which helps when targeting a specific line with `relativenumber`.
