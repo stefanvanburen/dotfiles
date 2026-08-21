@@ -8,12 +8,20 @@
 #
 # `pylast` is what lastgenre talks to Last.fm with. `pillow` is what resizes
 # cover art — without a local backend, embedart silently drops `maxwidth`.
+#
+# The badfiles plugin shells out to external binaries, not python modules:
+#
+# $ brew install mp3val
+#
+# Without mp3val, `beet bad` reports "command not found" per mp3 and checks
+# nothing. ffmpeg is already installed for convert.
 
 # Store music library in ~/Documents/music, which is on iCloud
 directory: ~/Documents/music
 
 # https://beets.readthedocs.io/en/stable/plugins/index.html
 #
+# https://beets.readthedocs.io/en/stable/plugins/badfiles.html
 # https://beets.readthedocs.io/en/stable/plugins/convert.html
 # https://beets.readthedocs.io/en/stable/plugins/duplicates.html
 # https://beets.readthedocs.io/en/stable/plugins/embedart.html
@@ -24,7 +32,20 @@ directory: ~/Documents/music
 # https://beets.readthedocs.io/en/stable/plugins/lyrics.html
 # https://beets.readthedocs.io/en/stable/plugins/mbsync.html
 # https://beets.readthedocs.io/en/stable/plugins/musicbrainz.html
-plugins: convert duplicates embedart fetchart fish info lastgenre lyrics mbsync musicbrainz
+plugins: badfiles convert duplicates embedart fetchart fish info lastgenre lyrics mbsync musicbrainz
+
+# Corruption scan for the library: `beet bad`. Shells out to external checkers
+# (`mp3val` for mp3, `flac -wst` for flac); there is no checker for alac/aac, so
+# the ~790 m4a tracks report "no supported tags" and go unverified.
+#
+# Deliberately no `check_on_import` — it ignores `--quiet`, so it turns an
+# unattended import into one that stops and waits on every warning.
+# Do NOT add `commands: {mp3: mp3val}` here. It looks like a no-op restatement
+# of the default, but it swaps the built-in `check_mp3val` for `check_custom`,
+# which only reports a problem when the checker *exits* nonzero. mp3val exits 0
+# on warnings, so the override silently reports a perfectly clean library.
+# `check_mp3val` greps the output for WARNING: lines instead (badfiles.py:67).
+badfiles: {}
 
 # Keep the library playable in Music.app: transcode lossless imports
 # (e.g. FLAC) to ALAC, leaving already-lossy files untouched.
@@ -77,6 +98,19 @@ duplicates:
 # 2.13) folds spelling variants together, e.g. hip hop / hip-hop / Hip Hop.
 lastgenre:
     auto: yes
+
+# Last.fm has no tags for a lot of small-label and Bandcamp releases, so
+# `lastgenre` leaves them blank; MusicBrainz carries curated genres for some of
+# the same albums. `genres` is off by default, which is why those never arrived.
+# `genres_tag` defaults to `genre` (MB's *curated* genre list) rather than `tag`
+# (raw user folksonomy) — keep it that way. Genres from the release and its
+# release group are merged and sorted by vote count, most-voted first.
+#
+# This only populates during a match, so backfilling existing albums needs
+# `beet mbsync`. Preview with `-p` first: mbsync refreshes every field from MB,
+# not just genre.
+musicbrainz:
+    genres: yes
 
 # LRClib is free and open; add a genius_api_key to re-enable Genius.
 lyrics:
