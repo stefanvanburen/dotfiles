@@ -4,7 +4,7 @@ set default-list
 
 # Set up a new machine (or check an existing one for drift). Safe to re-run.
 [macos]
-bootstrap: brew-bundle default-shell macos-defaults
+bootstrap: brew-bundle default-shell macos-defaults macos-default-apps
 
 # Install the base dependencies from ~/.Brewfile.
 brew-bundle:
@@ -43,6 +43,22 @@ macos-defaults-zoom-peek:
     defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
     defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
     defaults write com.apple.universalaccess closeViewSmoothImages -bool false
+
+# Set default apps for file types and URL schemes with duti.
+[macos]
+macos-default-apps:
+    duti -s com.ranchero.NetNewsWire-Evergreen feed
+    duti -s com.ranchero.NetNewsWire-Evergreen feeds
+    # `.opml` resolves to public.opml here, but Bike only declares org.opml.opml,
+    # so bind both or double-clicking still lands in TextEdit.
+    duti -s com.hogbaysoftware.Bike public.opml all
+    duti -s com.hogbaysoftware.Bike org.opml.opml all
+    # Cog claims `fish` as a tracker-module extension and outranks every editor.
+    duti -s com.barebones.bbedit com.fishshell.script all
+    duti -s com.barebones.bbedit public.xml all
+    duti -s com.barebones.bbedit com.apple.property-list all
+    duti -s com.barebones.bbedit public.toml all
+    duti -s com.barebones.bbedit org.lua all
 
 # https://dev.fennel-lang.org/wiki/LanguageServer
 # https://git.sr.ht/~micampe/fennel-ls-nvim-docs
