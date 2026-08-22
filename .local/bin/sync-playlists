@@ -25,6 +25,7 @@ import os
 import re
 import subprocess
 import sys
+import unicodedata
 
 from beets import config
 from beets.library import Item, Library
@@ -34,6 +35,13 @@ PLAYLISTS_DIR = os.path.expanduser("~/Documents/music/Playlists")
 
 def esc(s: str) -> str:
     return str(s or "").replace("\\", "\\\\").replace('"', '\\"')
+
+
+def _nfc(s: str) -> str:
+    """Music.app returns POSIX paths in NFD ("De" + combining acute); beets and
+    the M3U files use NFC ("é"). The two compare unequal as Python strings, so
+    every path crossing that boundary gets folded to NFC first."""
+    return unicodedata.normalize("NFC", s)
 
 
 def osascript(script: str) -> str:
@@ -154,7 +162,7 @@ return out as text"""
         if len(parts) == 4:
             tracks.append(
                 {
-                    "path": parts[0],
+                    "path": _nfc(parts[0]),
                     "artist": parts[1],
                     "album": parts[2],
                     "title": parts[3],
@@ -217,7 +225,7 @@ return out as text"""
                 continue
             track_id, path, artist, album, name = parts
             if path:
-                _itunes_track_ids[path] = int(track_id)
+                _itunes_track_ids[_nfc(path)] = int(track_id)
             _itunes_key_ids.setdefault(full_key(artist, name, album), int(track_id))
             _itunes_loose_ids.setdefault(track_key(artist, name), int(track_id))
     return _itunes_track_ids, _itunes_key_ids, _itunes_loose_ids
@@ -243,7 +251,7 @@ def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: b
         for fp in batch:
             # Prefer an existing library entry (by path, then by full key, then
             # by artist/title alone) over importing the file again
-            track_id = track_ids.get(fp)
+            track_id = track_ids.get(_nfc(fp))
             if track_id is None:
                 track_id = key_ids.get(m3u_full_key(fp))
             if track_id is None:
