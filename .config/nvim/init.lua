@@ -148,7 +148,6 @@ end
 do
   local mini_misc = require("mini.misc")
   mini_misc.setup()
-  mini_misc.setup_termbg_sync()
   mini_misc.setup_restore_cursor()
   mini_misc.setup_auto_root()
   map("n", "<leader>z", mini_misc.zoom, {desc = "Toggle zoom of the current buffer"})

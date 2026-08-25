@@ -313,7 +313,11 @@
 
 (let [mini-misc (require :mini.misc)]
   (mini-misc.setup)
-  (mini-misc.setup_termbg_sync)
+  ;; No `setup_termbg_sync`: it sets the terminal's background to Normal's
+  ;; guibg via OSC 11, which is also how Nvim *asks* the terminal whether it
+  ;; is light or dark. The query then just returns the color we set, so
+  ;; 'background' never flips and an OS theme switch can't reach a running
+  ;; instance. Matching Ghostty's padding isn't worth losing that.
   (mini-misc.setup_restore_cursor)
   ;; Defaults to the nearest `.git` or `Makefile`, so cwd follows the repo (or
   ;; worktree — .git is a file there, which vim.fs.find still matches).
