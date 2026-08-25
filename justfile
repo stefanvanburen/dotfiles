@@ -27,7 +27,7 @@ default-shell:
 
 # Apply macOS system preferences (run once per new machine).
 [macos]
-macos-defaults: macos-defaults-dictionary macos-defaults-zoom-peek
+macos-defaults: macos-defaults-dictionary macos-defaults-zoom-peek macos-defaults-key-repeat
 
 # Disable the Cmd+Ctrl+D dictionary shortcut so Dash.app can use it.
 [macos]
@@ -43,6 +43,18 @@ macos-defaults-zoom-peek:
     defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
     defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
     defaults write com.apple.universalaccess closeViewSmoothImages -bool false
+
+# https://unsung.aresluna.org/testing-tip-make-your-keyboard-fast/
+# Repeat rates are in 1/60s ticks, and these go below what the Settings slider
+# allows (its floor is KeyRepeat 2 / InitialKeyRepeat 15). Takes effect at the
+# next login; apps read it once at launch.
+# Make the keyboard repeat as fast as macOS will go.
+[macos]
+macos-defaults-key-repeat:
+    defaults write -g KeyRepeat -int 1
+    defaults write -g InitialKeyRepeat -int 10
+    # Otherwise holding a key opens the accent picker instead of repeating.
+    defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Set default apps for file types and URL schemes with duti.
 [macos]
