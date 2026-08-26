@@ -32,7 +32,8 @@ directory: ~/Documents/music
 # https://beets.readthedocs.io/en/stable/plugins/lyrics.html
 # https://beets.readthedocs.io/en/stable/plugins/mbsync.html
 # https://beets.readthedocs.io/en/stable/plugins/musicbrainz.html
-plugins: badfiles convert duplicates embedart fetchart fish info lastgenre lyrics mbsync musicbrainz
+# https://beets.readthedocs.io/en/stable/plugins/play.html
+plugins: badfiles convert duplicates embedart fetchart fish info lastgenre lyrics mbsync musicbrainz play
 
 # Corruption scan for the library: `beet bad`. Shells out to external checkers
 # (`mp3val` for mp3, `flac -wst` for flac); there is no checker for alac/aac, so
@@ -119,3 +120,27 @@ lyrics:
     # itself whenever a backend returns "[Instrumental]" (2.13). Match either,
     # since the latter keeps accruing new items on its own.
     auto_ignore: "instrumental:true , lyrics_instrumental:true"
+
+# `beet play <query>` writes the matched tracks to a temp .m3u and hands it to
+# `command`. Without `command` it falls back to plain `open`, i.e. whatever
+# LaunchServices has registered for .m3u — Music.app here, and importing into
+# Music.app is exactly what this library avoids. Naming Cog pins it.
+#
+# `-a Cog` (not `-a Cog.app`) so this keeps working if the app is ever moved;
+# `open -a` resolves by name through LaunchServices.
+#
+# Cog is sandboxed (com.apple.security.app-sandbox; the Homebrew cask ships the
+# developer's own Developer ID-signed app, so this is not a Homebrew artifact).
+# The first `beet play` therefore raises an "Open to grant access to container
+# folder" dialog: Cog can read the playlist file it was handed, but not the
+# tracks the playlist points at. Granting it stores a persistent security-scoped
+# bookmark — they live in ZSANDBOXTOKEN in
+# ~/Library/Containers/org.cogx.cog/Data/Library/Application Support/Cog/
+# DataModel.sqlite — so the dialog appears once, not once per play.
+#
+# `raw: yes` would pass the individual track paths instead of the playlist file,
+# which also works and skips that first dialog. Not used, because the .m3u keeps
+# playlist order explicit and stays a single argument however large the query is.
+play:
+    command: open -a Cog
+    warning_threshold: 100
