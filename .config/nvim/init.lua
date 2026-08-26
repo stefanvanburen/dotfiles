@@ -60,11 +60,6 @@ do
   mini_starter.setup()
 end
 do
-  local mini_sessions = require("mini.sessions")
-  mini_sessions.setup()
-  map("n", "<leader>S", mini_sessions.select, {desc = "Select session"})
-end
-do
   local mini_jump = require("mini.jump")
   mini_jump.setup()
 end

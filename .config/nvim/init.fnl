@@ -167,12 +167,6 @@
 (let [mini-starter (require :mini.starter)]
   (mini-starter.setup))
 
-;; Defaults autowrite the current session on exit but never autoread one, so
-;; sessions are opt-in via this mapping.
-(let [mini-sessions (require :mini.sessions)]
-  (mini-sessions.setup)
-  (map :n :<leader>S mini-sessions.select {:desc "Select session"}))
-
 ;; Enhanced `f`/`F`/`t`/`T`
 (let [mini-jump (require :mini.jump)]
   (mini-jump.setup))
