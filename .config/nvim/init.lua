@@ -209,6 +209,10 @@ do
   local mini_input = require("mini.input")
   mini_input.setup()
 end
+do
+  local mini_statuscolumn = require("mini.statuscolumn")
+  mini_statuscolumn.setup()
+end
 local snippets_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "snippets")
 do
   local mini_snippets = require("mini.snippets")

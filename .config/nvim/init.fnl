@@ -397,6 +397,9 @@
 (let [mini-input (require :mini.input)]
   (mini-input.setup))
 
+(let [mini-statuscolumn (require :mini.statuscolumn)]
+  (mini-statuscolumn.setup))
+
 ;;;; snippets
 
 (local snippets-dir (vim.fs.joinpath (vim.fn.stdpath :config) :snippets))
