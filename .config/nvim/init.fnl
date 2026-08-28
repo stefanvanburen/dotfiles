@@ -1028,6 +1028,8 @@
         :ty {:cmd (venv-cmd :ty)}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tilt_ls
         :tilt_ls {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc
+        :tsc {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
         :ts_query_ls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
