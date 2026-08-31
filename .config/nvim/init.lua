@@ -656,7 +656,22 @@ local function venv_cmd(name)
   end
   return _75_
 end
-local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, hints = {constantValues = true}}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}, filetypes = {"json", "jsonc", "json5"}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, clojure_lsp = {}, biome = {}, fish_lsp = {cmd_env = {MANPAGER = "cat"}}, janet_lsp = {}, ruff = {cmd = venv_cmd("ruff")}, helm_ls = {}, bashls = {}, tombi = {}, docker_language_server = {}, fennel_ls = {}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = {vim.env.VIMRUNTIME}, checkThirdParty = false}}}}, rust_analyzer = {}, buf_ls = {}, postgres_lsp = {}, ty = {cmd = venv_cmd("ty")}, tilt_ls = {}, tsc = {}, ts_query_ls = {}, just = {}, gh_actions_ls = {filetypes = {"yaml.github-actions"}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {filetypes = {"yaml", "yaml.github-actions"}}, syntaqlite = {cmd = {"syntaqlite", "lsp"}, filetypes = {"sql"}, root_markers = {"syntaqlite.toml", ".git"}}}
+local function tsqueryrc_settings()
+  local path = nil
+  for _, pack in ipairs(vim.pack.get()) do
+    if path then break end
+    if (pack.spec.name == "nvim-treesitter") then
+      path = (pack.path .. "/.tsqueryrc.json")
+    else
+    end
+  end
+  if (path and vim.uv.fs_stat(path)) then
+    return vim.json.decode(table.concat(vim.fn.readfile(path), "\n"))
+  else
+    return {}
+  end
+end
+local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, hints = {constantValues = true}}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}, filetypes = {"json", "jsonc", "json5"}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, clojure_lsp = {}, biome = {}, fish_lsp = {cmd_env = {MANPAGER = "cat"}}, janet_lsp = {}, ruff = {cmd = venv_cmd("ruff")}, helm_ls = {}, bashls = {}, tombi = {}, docker_language_server = {}, fennel_ls = {}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = {vim.env.VIMRUNTIME}, checkThirdParty = false}}}}, rust_analyzer = {}, buf_ls = {}, postgres_lsp = {}, ty = {cmd = venv_cmd("ty")}, tilt_ls = {}, tsc = {}, ts_query_ls = {settings = tsqueryrc_settings()}, just = {}, gh_actions_ls = {filetypes = {"yaml.github-actions"}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {filetypes = {"yaml", "yaml.github-actions"}}, syntaqlite = {cmd = {"syntaqlite", "lsp"}, filetypes = {"sql"}, root_markers = {"syntaqlite.toml", ".git"}}}
 vim.lsp.config("*", {root_markers = {".git"}})
 for server, settings in pairs(server_settings) do
   vim.lsp.config(server, settings)

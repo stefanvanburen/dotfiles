@@ -971,6 +971,23 @@
           bin (if (and venv-bin (vim.uv.fs_stat venv-bin)) venv-bin name)]
       (vim.lsp.rpc.start [bin :server] dispatchers))))
 
+;; ts_query_ls validates node names against the installed parser on its own,
+;; but capture, predicate and directive names come from its configuration --
+;; with none, a typo'd `@injection.contnet` or `#nonsense?` passes silently.
+;; nvim-treesitter ships the canonical Neovim set in its own .tsqueryrc.json,
+;; so read that at startup rather than keeping a copy here to drift from it.
+;;
+;; Found via vim.pack.get rather than nvim_get_runtime_file, which returns
+;; nvim-treesitter-context's .tsqueryrc.json first.
+(fn tsqueryrc-settings []
+  (var path nil)
+  (each [_ pack (ipairs (vim.pack.get)) &until path]
+    (when (= pack.spec.name :nvim-treesitter)
+      (set path (.. pack.path :/.tsqueryrc.json))))
+  (if (and path (vim.uv.fs_stat path))
+      (vim.json.decode (table.concat (vim.fn.readfile path) "\n"))
+      {}))
+
 (local server-settings
        {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
         :gopls {;; https://go.dev/gopls/daemon
@@ -1031,7 +1048,7 @@
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc
         :tsc {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
-        :ts_query_ls {}
+        :ts_query_ls {:settings (tsqueryrc-settings)}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
         :just {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gh_actions_ls
