@@ -1,3 +1,5 @@
+Words and code are a maintenance burden, ensure we weigh that accordingly.
+
 # Response style
 
 - Lead with the answer. The command, path, diff, or finding goes first. No
