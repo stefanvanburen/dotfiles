@@ -23,7 +23,7 @@
 ; a "command" key, which upstream's list of run-ish keys doesn't include.
 ; Scoped to "steps" because a bare "command" elsewhere in YAML is just as
 ; often an argv list (Kubernetes, Docker) as it is a script.
-; Ref: https://tangled.org/@tangled.org/core/blob/master/docs/spindle.md
+; Ref: https://docs.tangled.org/spindles.html#pipelines
 (block_mapping_pair
   key: (flow_node) @_steps
   (#eq? @_steps "steps")
