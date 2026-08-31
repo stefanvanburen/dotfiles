@@ -4,5 +4,5 @@ aliases:
   issues: issue list
   br: browse
   view: pr view --web
-  co: pr checkout
+  co: '!if [ $# -eq 0 ]; then gh pr list --limit 100 | cut -f1,2 | fzf --delimiter="\t" --ansi --preview "GH_FORCE_TTY=\$FZF_PREVIEW_COLUMNS gh pr view {1}" | cut -f1 | xargs gh pr checkout; else gh pr checkout "$@"; fi'
   clone: repo clone
