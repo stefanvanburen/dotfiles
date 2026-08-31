@@ -499,74 +499,78 @@ local function _45_()
   return vim.cmd({cmd = "Mason"})
 end
 map("n", "<leader>ma", _45_, {desc = ":Mason"})
-map("n", ";", ":", {desc = "Enter command mode"})
 local function _46_()
+  return vim.cmd({cmd = "checkhealth"})
+end
+map("n", "<leader>ch", _46_, {desc = ":checkhealth"})
+map("n", ";", ":", {desc = "Enter command mode"})
+local function _47_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _46_, {desc = "Open :Git in a vertical split"})
-local function _47_()
+map("n", "<leader>gs", _47_, {desc = "Open :Git in a vertical split"})
+local function _48_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _47_, {desc = ":Gwrite"})
-local function _48_()
+map("n", "<leader>gw", _48_, {desc = ":Gwrite"})
+local function _49_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _48_, {desc = ":Git commit"})
-local function _49_()
+map("n", "<leader>gc", _49_, {desc = ":Git commit"})
+local function _50_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _49_, {desc = ":Git push"})
-local function _50_()
+map("n", "<leader>gp", _50_, {desc = ":Git push"})
+local function _51_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _50_, {desc = ":Git blame"})
-local function _51_()
+map("n", "<leader>gb", _51_, {desc = ":Git blame"})
+local function _52_()
   return vim.cmd({cmd = "PR"})
 end
-map("n", "<leader>gP", _51_, {desc = ":PR"})
-local function _52_()
+map("n", "<leader>gP", _52_, {desc = ":PR"})
+local function _53_()
   return vim.cmd({cmd = "Issue"})
 end
-map("n", "<leader>gi", _52_, {desc = ":Issue"})
-local function _53_()
+map("n", "<leader>gi", _53_, {desc = ":Issue"})
+local function _54_()
   return vim.cmd({cmd = "CI"})
 end
-map("n", "<leader>gA", _53_, {desc = ":CI"})
-local function _54_()
+map("n", "<leader>gA", _54_, {desc = ":CI"})
+local function _55_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _54_, {expr = true, desc = "Down by visual line (gj when no count)"})
-local function _56_()
+map({"n", "v"}, "j", _55_, {expr = true, desc = "Down by visual line (gj when no count)"})
+local function _57_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _56_, {expr = true, desc = "Up by visual line (gk when no count)"})
+map({"n", "v"}, "k", _57_, {expr = true, desc = "Up by visual line (gk when no count)"})
 map({"n", "v"}, "<tab>", "%", {remap = true, desc = "Navigate between matching brackets"})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>egi"] = "$HOME/.config/git/config", ["<leader>ego"] = "$HOME/.config/ghostty/config", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
-  local function _58_()
+  local function _59_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _58_, {desc = (":edit " .. file)})
+  map("n", keymap, _59_, {desc = (":edit " .. file)})
 end
-local function _59_()
+local function _60_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _59_, {desc = ":write the buffer to the file"})
-local function _60_()
+map("n", "<leader>w", _60_, {desc = ":write the buffer to the file"})
+local function _61_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _60_, {desc = "Create a horizontal split"})
-local function _61_()
+map("n", "<leader>ss", _61_, {desc = "Create a horizontal split"})
+local function _62_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _61_, {desc = "Create a vertical split"})
+map("n", "<leader>vs", _62_, {desc = "Create a vertical split"})
 map("n", "Q", "@@", {desc = "Repeat last macro"})
 map("n", "0", "^", {desc = "Go to first non-whitespace character"})
 map("n", "^", "0", {desc = "Go to first column in the line"})
@@ -579,41 +583,41 @@ map("n", "C", "\"_C", {desc = "Change to end of line, black-hole register"})
 map("n", "J", "mzJ`z", {desc = "Join lines, keep cursor position"})
 map("x", "<", "<gv", {desc = "Indent left, keep selection"})
 map("x", ">", ">gv", {desc = "Indent right, keep selection"})
-local function _62_()
+local function _63_()
   return vim.show_pos()
 end
-map("n", "<leader>i", _62_, {desc = "Inspect position (treesitter/syntax)"})
+map("n", "<leader>i", _63_, {desc = "Inspect position (treesitter/syntax)"})
 map("i", "<c-k>", "<esc>", {desc = "Escape insert mode"})
 map("c", "<c-k>", "<c-c>", {desc = "Cancel cmdline"})
 map("t", "<c-k>", "<c-\\><c-n>", {desc = "Exit terminal mode"})
-local function _63_()
+local function _64_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _63_, {desc = "Create a new tab"})
-local function _64_()
+map("n", "<leader>tn", _64_, {desc = "Create a new tab"})
+local function _65_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _64_, {desc = "Go to next tab"})
-local function _65_()
+map("n", "]r", _65_, {desc = "Go to next tab"})
+local function _66_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _65_, {desc = "Go to prev tab"})
+map("n", "[r", _66_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>", {desc = "Clear search highlight"})
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_lines = true, underline = true, severity_sort = true, float = {border = "single", source = true, focusable = false}, virtual_text = false})
-local function lsp_attach(_66_)
-  local buf = _66_.buf
-  local _arg_67_ = _66_.data
-  local client_id = _arg_67_.client_id
+local function lsp_attach(_67_)
+  local buf = _67_.buf
+  local _arg_68_ = _67_.data
+  local client_id = _arg_68_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   if client:supports_method("textDocument/codeAction") then
     local function organize_imports()
       return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     end
     vim.api.nvim_buf_create_user_command(buf, "OrganizeImports", organize_imports, {desc = "Organize Imports"})
-    local function _68_()
+    local function _69_()
       return vim.cmd({cmd = "OrganizeImports"})
     end
-    map("n", "gro", _68_, {desc = "Organize Imports"})
+    map("n", "gro", _69_, {desc = "Organize Imports"})
   else
   end
   if client:supports_method("textDocument/inlayHint") then
@@ -644,7 +648,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {group = vim.api.nvim_create_augroup("lsp-attach", {}), callback = lsp_attach})
 local schemastore = require("schemastore")
 local function venv_cmd(name)
-  local function _75_(dispatchers, config)
+  local function _76_(dispatchers, config)
     local venv_bin = (config.root_dir and (config.root_dir .. "/.venv/bin/" .. name))
     local bin
     if (venv_bin and vim.uv.fs_stat(venv_bin)) then
@@ -654,7 +658,7 @@ local function venv_cmd(name)
     end
     return vim.lsp.rpc.start({bin, "server"}, dispatchers)
   end
-  return _75_
+  return _76_
 end
 local function tsqueryrc_settings()
   local path = nil

@@ -809,6 +809,7 @@
 
 (map :n :<leader>du vim.pack.update {:desc "Update plugins"})
 (map :n :<leader>ma #(vim.cmd {:cmd :Mason}) {:desc ":Mason"})
+(map :n :<leader>ch #(vim.cmd {:cmd :checkhealth}) {:desc ":checkhealth"})
 
 ;; ; -> :
 (map :n ";" ":" {:desc "Enter command mode"})
@@ -935,11 +936,11 @@
                                                   {:clear false})]
       (vim.api.nvim_create_autocmd [:CursorHold :CursorHoldI :InsertLeave]
                                    {:group augroup-id
-                                    :buf buf
+                                    : buf
                                     :callback vim.lsp.buf.document_highlight})
       (vim.api.nvim_create_autocmd [:CursorMoved :InsertEnter]
                                    {:group augroup-id
-                                    :buf buf
+                                    : buf
                                     :callback vim.lsp.buf.clear_references})))
   (when (client:supports_method :textDocument/foldingRange)
     ;; [0] scopes this window option to the buffer.
