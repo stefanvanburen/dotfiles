@@ -935,11 +935,11 @@
                                                   {:clear false})]
       (vim.api.nvim_create_autocmd [:CursorHold :CursorHoldI :InsertLeave]
                                    {:group augroup-id
-                                    :buffer buf
+                                    :buf buf
                                     :callback vim.lsp.buf.document_highlight})
       (vim.api.nvim_create_autocmd [:CursorMoved :InsertEnter]
                                    {:group augroup-id
-                                    :buffer buf
+                                    :buf buf
                                     :callback vim.lsp.buf.clear_references})))
   (when (client:supports_method :textDocument/foldingRange)
     ;; [0] scopes this window option to the buffer.

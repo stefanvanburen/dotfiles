@@ -622,8 +622,8 @@ local function lsp_attach(_66_)
   end
   if client:supports_method("textDocument/documentHighlight") then
     local augroup_id = vim.api.nvim_create_augroup("lsp-document-highlight", {clear = false})
-    vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI", "InsertLeave"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.document_highlight})
-    vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buffer = buf, callback = vim.lsp.buf.clear_references})
+    vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI", "InsertLeave"}, {group = augroup_id, buf = buf, callback = vim.lsp.buf.document_highlight})
+    vim.api.nvim_create_autocmd({"CursorMoved", "InsertEnter"}, {group = augroup_id, buf = buf, callback = vim.lsp.buf.clear_references})
   else
   end
   if client:supports_method("textDocument/foldingRange") then
