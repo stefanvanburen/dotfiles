@@ -97,7 +97,15 @@ _default-files files pattern:
 fnlfmt-check *files:
     #!/usr/bin/env bash
     set -eu
-    fnlfmt --check $(just _default-files "{{ files }}" '*.fnl')
+    # `fnlfmt --check` reports unformatted files but always exits 0, so failure
+    # has to be detected from its output.
+    # `|| true` keeps a nonzero exit (e.g. a missing file) from aborting before
+    # the message below is printed.
+    output=$(fnlfmt --check $(just _default-files "{{ files }}" '*.fnl') 2>&1) || true
+    if [ -n "$output" ]; then
+        printf '%s\n' "$output" >&2
+        exit 1
+    fi
 
 # Check the given (default: all tracked) fish scripts are fish_indent-formatted (used by prek).
 fish-format-check *files:
