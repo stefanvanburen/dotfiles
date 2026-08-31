@@ -29,7 +29,15 @@ set -q MANPAGER
 or set -gx MANPAGER "nvim +Man!"
 
 # https://github.com/junegunn/fzf?tab=readme-ov-file#environment-variables
-set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow --hidden --exclude .git'
+#
+# Inside a repo, ask git: this is the only way to get exactly the tracked (plus
+# untracked-but-not-ignored) files. fd applies .gitignore unconditionally,
+# whereas git ignores those rules for files it already tracks -- in ~, that
+# difference hides .ssh/config, .local/bin/git-trim, and the nvim fennel files.
+# Outside a repo git fails, and fd handles it.
+#
+# Kept POSIX-compatible (`||`, `2>`): fzf runs this through a child shell.
+set -gx FZF_DEFAULT_COMMAND 'git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type file --follow --hidden --exclude .git'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_DEFAULT_OPTS --no-color
 
