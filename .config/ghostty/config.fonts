@@ -63,4 +63,5 @@ font-family = "Departure Mono"
 # > For pixel-perfect results, set the font size to increments of 11px.
 font-size = 11
 
+# https://www.brailleinstitute.org/freefont/
 font-family = "Atkinson Hyperlegible Mono"
