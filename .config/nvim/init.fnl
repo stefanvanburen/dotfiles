@@ -586,40 +586,13 @@
 (let [helm-ls (require :helm-ls)]
   (helm-ls.setup))
 
-;; https://smallseasons.guide
-;; https://stefan.vanburen.xyz/blog/small-seasons/
-(fn seasonal-colorscheme []
-  (let [now (os.date :*t)]
-    (case now.month
-      1 :miniwinter
-      2 (if (< now.day 4) :miniwinter :minispring)
-      3 :minispring
-      4 :minispring
-      5 (if (< now.day 6) :minispring :minisummer)
-      6 :minisummer
-      7 :minisummer
-      8 (if (< now.day 8) :minisummer :miniautumn)
-      9 :miniautumn
-      10 :miniautumn
-      11 (if (< now.day 8) :miniautumn :miniwinter)
-      12 :miniwinter)))
-
-(vim.cmd.colorscheme (seasonal-colorscheme))
-
-;; The mini.hues colorschemes read 'background' once, when their colors file is
-;; sourced, so they don't follow a later flip on their own. Nvim does update
-;; 'background' by itself when the terminal sends a theme update notification
-;; (DEC mode 2031, which Ghostty supports), so re-sourcing on that change is
-;; what makes an OS light/dark switch reach an already-running instance.
-;; `nested` matters: without it the re-source clears every highlight group
-;; without firing ColorScheme, so anything deriving colors on that event
-;; (diffs.nvim, for one) never re-runs and is left cleared.
-(vim.api.nvim_create_autocmd :OptionSet
-                             {:group (vim.api.nvim_create_augroup :background
-                                                                  {})
-                              :nested true
-                              :pattern :background
-                              :callback #(vim.cmd.colorscheme (seasonal-colorscheme))})
+;; usgc picks a variant to match 'background' and reclaims g:colors_name, so
+;; Nvim re-sources it -- firing ColorScheme, which diffs.nvim and friends
+;; derive colors on -- when 'background' flips. Nvim updates 'background'
+;; itself when the terminal sends a theme update notification (DEC mode 2031,
+;; which Ghostty supports), so an OS light/dark switch reaches an already
+;; running instance without an OptionSet autocmd of our own.
+(vim.cmd.colorscheme :usgc)
 
 ;;; Autocommands and FileType settings
 
