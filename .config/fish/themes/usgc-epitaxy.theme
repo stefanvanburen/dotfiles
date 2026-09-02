@@ -1,0 +1,39 @@
+# name: 'usgc-epitaxy'
+# preferred_background: 000000
+#
+# Generated from stefanvanburen/usgc-nvim. Do not edit by hand: change the
+# colorscheme there and regenerate.
+
+fish_color_normal FF00FF
+fish_color_command FF00FF --bold
+fish_color_keyword FF00FF --bold
+fish_color_param FF00FF
+fish_color_option 00FFFF
+fish_color_quote FF00FF
+fish_color_escape 00FFFF
+fish_color_operator FF00FF
+fish_color_redirection FF00FF
+fish_color_end FF00FF
+fish_color_comment 999999
+fish_color_autosuggestion 999999
+fish_color_error FF0000
+fish_color_status FF0000
+fish_color_cancel FF0000
+fish_color_valid_path --underline
+fish_color_cwd 00FFFF
+fish_color_cwd_root FF0000
+fish_color_user 00FFFF
+fish_color_host FF00FF
+fish_color_host_remote 00FFFF
+fish_color_selection FFFF00 --background=000066
+fish_color_search_match FFFF00 --bold --background=000066
+fish_color_history_current FF00FF --bold
+fish_pager_color_background --background=660066
+fish_pager_color_completion FF00FF --background=660066
+fish_pager_color_description 999999
+fish_pager_color_prefix 00FFFF
+fish_pager_color_progress FF00FF --bold
+fish_pager_color_selected_background --background=0000FF
+fish_pager_color_selected_completion FFFFFF --bold --background=0000FF
+fish_pager_color_selected_description FFFFFF --bold --background=0000FF
+fish_pager_color_selected_prefix FFFFFF --bold --background=0000FF

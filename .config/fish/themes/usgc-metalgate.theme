@@ -1,0 +1,39 @@
+# name: 'usgc-metalgate'
+# preferred_background: 000000
+#
+# Generated from stefanvanburen/usgc-nvim. Do not edit by hand: change the
+# colorscheme there and regenerate.
+
+fish_color_normal 00FFFF
+fish_color_command 00FFFF --bold
+fish_color_keyword 00FFFF --bold
+fish_color_param 00FFFF
+fish_color_option FFFF00
+fish_color_quote 00FFFF
+fish_color_escape FFFF00
+fish_color_operator 00FFFF
+fish_color_redirection 00FFFF
+fish_color_end 00FFFF
+fish_color_comment 999999
+fish_color_autosuggestion 999999
+fish_color_error FF0000
+fish_color_status FF0000
+fish_color_cancel FF0000
+fish_color_valid_path --underline
+fish_color_cwd FFFF00
+fish_color_cwd_root FF0000
+fish_color_user FFFF00
+fish_color_host 00FFFF
+fish_color_host_remote FFFF00
+fish_color_selection FFFF00 --background=666600
+fish_color_search_match FFFF00 --bold --background=666600
+fish_color_history_current 00FFFF --bold
+fish_pager_color_background --background=006666
+fish_pager_color_completion 00FFFF --background=006666
+fish_pager_color_description 999999
+fish_pager_color_prefix FFFF00
+fish_pager_color_progress 00FFFF --bold
+fish_pager_color_selected_background --background=FFFF00
+fish_pager_color_selected_completion 000000 --bold --background=FFFF00
+fish_pager_color_selected_description 000000 --bold --background=FFFF00
+fish_pager_color_selected_prefix 000000 --bold --background=FFFF00
