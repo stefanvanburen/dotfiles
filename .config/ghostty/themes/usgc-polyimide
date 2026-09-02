@@ -1,0 +1,26 @@
+# usgc-polyimide -- generated from stefanvanburen/usgc-nvim.
+# Do not edit by hand: change the colorscheme there and regenerate.
+
+palette = 0=#000000
+palette = 1=#FF0000
+palette = 2=#00A645
+palette = 3=#FFBF00
+palette = 4=#723DF9
+palette = 5=#FF00FF
+palette = 6=#00FFFF
+palette = 7=#999999
+palette = 8=#999999
+palette = 9=#FF0000
+palette = 10=#00FF00
+palette = 11=#FFFF00
+palette = 12=#00FFFF
+palette = 13=#FF00FF
+palette = 14=#00FFFF
+palette = 15=#FFFFFF
+
+background = #000000
+foreground = #FFBF00
+cursor-color = #00A645
+cursor-text = #000000
+selection-background = #000066
+selection-foreground = #00FFFF

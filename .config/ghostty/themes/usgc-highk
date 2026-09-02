@@ -1,0 +1,26 @@
+# usgc-highk -- generated from stefanvanburen/usgc-nvim.
+# Do not edit by hand: change the colorscheme there and regenerate.
+
+palette = 0=#000000
+palette = 1=#660000
+palette = 2=#00A645
+palette = 3=#666600
+palette = 4=#000066
+palette = 5=#660066
+palette = 6=#006666
+palette = 7=#999999
+palette = 8=#999999
+palette = 9=#FF0000
+palette = 10=#00A645
+palette = 11=#666600
+palette = 12=#0000FF
+palette = 13=#FF00FF
+palette = 14=#006666
+palette = 15=#000000
+
+background = #FFFFFF
+foreground = #000000
+cursor-color = #0000FF
+cursor-text = #FFFFFF
+selection-background = #00FF00
+selection-foreground = #000000

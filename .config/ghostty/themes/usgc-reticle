@@ -1,0 +1,26 @@
+# usgc-reticle -- generated from stefanvanburen/usgc-nvim.
+# Do not edit by hand: change the colorscheme there and regenerate.
+
+palette = 0=#262626
+palette = 1=#E00000
+palette = 2=#FFC200
+palette = 3=#FFC200
+palette = 4=#723DF9
+palette = 5=#FF208F
+palette = 6=#0079FF
+palette = 7=#FFFFFF
+palette = 8=#494747
+palette = 9=#E00000
+palette = 10=#F4BA00
+palette = 11=#FFC200
+palette = 12=#FF7321
+palette = 13=#FF208F
+palette = 14=#0078FF
+palette = 15=#FEFEFF
+
+background = #000000
+foreground = #00A645
+cursor-color = #FFFFFF
+cursor-text = #000000
+selection-background = #FFFFFF
+selection-foreground = #0000FF

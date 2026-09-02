@@ -1,14 +1,15 @@
 # https://ghostty.org/docs/config
 
 # https://ghostty.org/docs/config/reference#theme
-theme = light:Modus Operandi,dark:Modus Vivendi
+theme = light:usgc-highk,dark:usgc-polyimide
 
 # typically configuring fonts - check ./config.fonts
 # https://ghostty.org/docs/config/reference#config-file
 config-file = ?config.local
 
+# cursor-color is set by the USGC themes; an explicit value here would
+# override them, since it is parsed after the theme line above.
 # https://ghostty.org/docs/config/reference#cursor-color
-cursor-color = #EE483E
 # https://ghostty.org/docs/config/reference#adjust-cursor-thickness
 # Make the cursor thicker.
 adjust-cursor-thickness = 3
