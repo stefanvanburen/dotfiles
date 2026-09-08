@@ -120,6 +120,34 @@ lyrics:
     # itself whenever a backend returns "[Instrumental]" (2.13). Match either,
     # since the latter keeps accruing new items on its own.
     auto_ignore: "instrumental:true , lyrics_instrumental:true"
+    # Deliberately NOT enabling `synced`. LRClib serves timestamped (LRC)
+    # lyrics, but beets writes the canonical LRC text *including* timestamps
+    # into the ordinary `lyrics` field — USLT on mp3, `©lyr` on m4a — and only
+    # passes the parsed timing to SYLT on top (lyrics.py:1278-1294). SYLT is an
+    # mp3-only MediaField (mediafile/__init__.py:507), so m4a would get the
+    # timestamps and nothing else.
+    #
+    # No player here reads SYLT. Cog's only lyrics symbols are `unsyncedlyrics`
+    # and `setUnsyncedlyrics:` — SYLT appears in the bundle solely inside its
+    # TagLib and minimp3 plugins, not in Cog's own binary. Swinsian stores a
+    # single plain `lyrics TEXT` column, and Music.app hands back the raw
+    # timestamped string. VLC and IINA have no lyrics UI at all. Enabling it
+    # just puts "[00:20.53] " in front of every line in all three panes.
+    #
+    # Worse, enabling it is close to a one-way door. beets writes SYLT but
+    # cannot remove it: mutagen stores the frame under the HashKey "SYLT::XXX",
+    # while MP3StorageStyle.delete does `del mutagen_file["SYLT"]`, which never
+    # matches (store() gets it right, using delall). So `update({synced_lyrics:
+    # None})` and delattr both leave the frame in place — verified on a copy.
+    # Turning `synced` back off restores USLT but strands a stale SYLT frame in
+    # every mp3 it ever touched; clearing those needs mutagen's delall directly.
+    # Filed upstream as beetbox/mediafile#112.
+    #
+    # If a SYLT-aware player ever replaces Cog, flip BOTH of these: with
+    # `keep_synced` on, lyrics.py:1248 skips any track that already has synced
+    # lyrics even under `-f`, so one flag alone cannot walk the library back.
+    synced: no
+    keep_synced: no
 
 # `beet play <query>` writes the matched tracks to a temp .m3u and hands it to
 # `command`. Without `command` it falls back to plain `open`, i.e. whatever
