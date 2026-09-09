@@ -1,3 +1,11 @@
+# curl's --form parser reads an unquoted "," in a file name as a separator
+# between several files (making it fail to open any of them, error 26) and cuts
+# an unquoted value short at a ";". Video titles contain both, so quote every
+# name and value, escaping "\\" and '"' for curl's own parser.
+function __overcast_add_quote
+    printf '"%s"\n' (string replace --all '\\' '\\\\' -- $argv[1] | string replace --all '"' '\\"')
+end
+
 # Uploads audio files to Overcast (https://overcast.fm/uploads, requires Premium).
 # Works by scraping the presigned S3 form from the uploads page, posting the
 # file to S3, then notifying Overcast. Based on
@@ -78,22 +86,24 @@ function overcast_add --description 'Uploads audio files to Overcast.'
         if contains -- (path extension $file | string lower) .m4a .mp4
             set mime audio/mp4
         end
+        set --local key_form (__overcast_add_quote $key)
+        set --local file_form (__overcast_add_quote $file)
         echo "Uploading $file"
         # curl hides its progress meter when the response body goes to the
         # terminal, so send S3's (empty, 204) response to /dev/null to get it.
         curl --fail --location --compressed --progress-bar --output /dev/null \
             --form bucket=uploads-overcast \
-            --form key=$key \
+            --form key=$key_form \
             --form AWSAccessKeyId=$access_key \
             --form acl=authenticated-read \
             --form policy=$policy \
             --form signature=$signature \
             --form Content-Type=$mime \
-            --form file=@$file \
+            --form file=@$file_form \
             --cookie $cookies \
             https://uploads-overcast.s3.amazonaws.com/
         and curl --fail --silent --show-error --location --compressed \
-            --form key=$key \
+            --form key=$key_form \
             --cookie $cookies \
             https://overcast.fm/podcasts/upload_succeeded >/dev/null
         and echo "Uploaded $file"
