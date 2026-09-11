@@ -474,15 +474,31 @@
       ;; https://github.com/mfussenegger/nvim-lint#available-linters
       linters (collect [k v (pairs {:fish [:fish]
                                     :janet [:janet]
-                                    :markdown [:rumdl]
-                                    :go [:golangcilint]})]
+                                    :markdown [:rumdl]})]
                 (values k
                         (icollect [_ v (ipairs v)]
-                          (if (= 1 (vim.fn.executable v)) v))))]
+                          (if (= 1 (vim.fn.executable v)) v))))
+      ;; https://golangci-lint.run/docs/configuration/file/
+      golangci-configs [:.golangci.yml
+                        :.golangci.yaml
+                        :.golangci.toml
+                        :.golangci.json]
+      ;; golangci-lint is resolved per buffer rather than at startup: projects
+      ;; pin their own version via direnv, so it may only be on $PATH once a
+      ;; project's env is loaded. It runs only in projects that configure it,
+      ;; from the directory holding that config.
+      lint-go (fn [buf]
+                (let [root (vim.fs.root buf golangci-configs)]
+                  (when (and root (= 1 (vim.fn.executable :golangci-lint)))
+                    (nvim-lint.try_lint :golangcilint {:cwd root}))))]
   (set nvim-lint.linters_by_ft linters)
   (vim.api.nvim_create_autocmd :BufWritePost
                                {:group (vim.api.nvim_create_augroup :lint {})
-                                :callback #(nvim-lint.try_lint)}))
+                                :callback (fn [ev]
+                                            (if (= :go
+                                                   (. vim.bo ev.buf :filetype))
+                                                (lint-go ev.buf)
+                                                (nvim-lint.try_lint)))}))
 
 (let [mason (require :mason)]
   (mason.setup))
