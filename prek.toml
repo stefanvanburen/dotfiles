@@ -42,4 +42,13 @@ hooks = [
     language = "system",
     files = "\\.fish$",
   },
+  # Without --quiet the failure output is the whole formatted file, not a delta.
+  {
+    id = "just-format-check",
+    name = "just --fmt --check (fix with `just --fmt`)",
+    entry = "just --fmt --check --quiet",
+    language = "system",
+    files = "^justfile$",
+    pass_filenames = false,
+  },
 ]
