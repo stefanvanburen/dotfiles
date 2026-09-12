@@ -25,9 +25,10 @@ default-shell:
         chsh -s "$fish"
     fi
 
+# https://macos-defaults.com is the reference for the keys below.
 # Apply macOS system preferences (run once per new machine).
 [macos]
-macos-defaults: macos-defaults-dictionary macos-defaults-zoom-peek macos-defaults-key-repeat
+macos-defaults: macos-defaults-dictionary macos-defaults-zoom-peek macos-defaults-key-repeat macos-defaults-finder macos-defaults-dock macos-defaults-typing macos-defaults-pointer macos-defaults-menu-bar macos-defaults-dialogs macos-defaults-safari
 
 # Disable the Cmd+Ctrl+D dictionary shortcut so Dash.app can use it.
 [macos]
@@ -55,6 +56,76 @@ macos-defaults-key-repeat:
     defaults write -g InitialKeyRepeat -int 10
     # Otherwise holding a key opens the accent picker instead of repeating.
     defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Show every file, in list view, and open new windows at $HOME rather than Recents.
+[macos]
+macos-defaults-finder:
+    defaults write com.apple.finder AppleShowAllFiles -bool true
+    defaults write com.apple.finder FXPreferredViewStyle -string Nlsv
+    defaults write com.apple.finder NewWindowTarget -string PfHm
+    defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/"
+    # Mounted volumes on the Desktop; internal disks and servers are off by default.
+    defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+    defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+    defaults write com.apple.finder ShowRecentTags -bool false
+    # Cmd-F searches the folder you're in, not every volume on the machine.
+    defaults write com.apple.finder FXDefaultSearchScope -string SCcf
+    # Extensions are always visible here, so renaming one isn't an accident.
+    defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+    defaults write -g AppleShowAllExtensions -bool true
+    killall Finder
+
+# Small Dock on the right edge, out of the way, with no Recents section.
+[macos]
+macos-defaults-dock:
+    defaults write com.apple.dock autohide -bool true
+    defaults write com.apple.dock orientation -string right
+    defaults write com.apple.dock tilesize -int 64
+    defaults write com.apple.dock show-recents -bool false
+    # With autohide on, the default 0.5s reveal delay is the whole cost of it.
+    defaults write com.apple.dock autohide-delay -float 0
+    # Keep Spaces in the order they were created, not most-recently-used.
+    defaults write com.apple.dock mru-spaces -bool false
+    killall Dock
+
+# Smart quotes, en dashes, and the double-space period all corrupt code and
+# commit messages.
+# Stop macOS rewriting what gets typed.
+[macos]
+macos-defaults-typing:
+    defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
+    defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
+    defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
+    # Don't restore an app's windows when it's relaunched.
+    defaults write -g NSQuitAlwaysKeepsWindows -bool false
+
+# Pointer tracking, and Force Touch off (it fires on ordinary firm clicks).
+[macos]
+macos-defaults-pointer:
+    defaults write -g com.apple.mouse.scaling -float 1
+    defaults write -g com.apple.trackpad.scaling -float 3
+    defaults write -g com.apple.trackpad.forceClick -bool false
+
+# Seconds in the menu bar clock, no date (the date is a click away in Calendar).
+[macos]
+macos-defaults-menu-bar:
+    defaults write com.apple.menuextra.clock ShowSeconds -bool true
+    defaults write com.apple.menuextra.clock ShowDate -int 2
+    # The clock lives in ControlCenter now, not SystemUIServer.
+    killall ControlCenter
+
+# Tab reaches every control in a dialog, not just text fields and lists.
+# Make dialogs fully keyboard-navigable.
+[macos]
+macos-defaults-dialogs:
+    defaults write -g AppleKeyboardUIMode -int 3
+
+# Safari is sandboxed, so this needs the same Full Disk Access as the Zoom
+# recipe above, and Safari must be closed when it runs.
+# Show the whole URL in Safari's address bar, not just the domain.
+[macos]
+macos-defaults-safari:
+    defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
 # Set default apps for file types and URL schemes with duti.
 [macos]
