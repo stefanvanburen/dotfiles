@@ -118,3 +118,6 @@
 # ignore library database and other runtime files, track only config
 /.config/beets/*
 !/.config/beets/config.yaml
+
+# Dictionary bundles: track only our own stylesheet, not the 27MB of entry data
+Library/Dictionaries/
