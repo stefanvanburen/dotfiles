@@ -4,7 +4,7 @@ set default-list
 
 # Set up a new machine (or check an existing one for drift). Safe to re-run.
 [macos]
-bootstrap: brew-bundle default-shell macos-defaults macos-default-apps
+bootstrap: brew-bundle default-shell macos-defaults macos-default-apps go-tools
 
 # Install the base dependencies from ~/.Brewfile.
 brew-bundle:
@@ -142,6 +142,10 @@ macos-default-apps:
     duti -s com.barebones.bbedit com.apple.property-list all
     duti -s com.barebones.bbedit public.toml all
     duti -s com.barebones.bbedit org.lua all
+
+# Install my Go tools to $GOBIN (~/.local/bin, on PATH); tracks main, so re-run to update.
+go-tools:
+    go install -ldflags='-s -w' go.vanburen.xyz/cells/cmd/cells@main
 
 # https://dev.fennel-lang.org/wiki/LanguageServer
 # https://git.sr.ht/~micampe/fennel-ls-nvim-docs
