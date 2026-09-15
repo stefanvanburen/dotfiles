@@ -57,6 +57,8 @@ end
 fish_add_path --global --move $XDG_BIN_HOME
 # rust
 fish_add_path --global --move ~/.cargo/bin
+# language servers (installed via nvim Mason)
+fish_add_path --global --move $XDG_DATA_HOME/nvim/mason/bin
 
 if status --is-interactive
     # Silence the greeting: fish only checks that the value is empty.
