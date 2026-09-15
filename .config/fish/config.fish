@@ -36,9 +36,8 @@ or set -gx MANPAGER "nvim +Man!"
 # difference hides .ssh/config, .local/bin/git-trim, and the nvim fennel files.
 # Outside a repo git fails, and fd handles it.
 #
-# Kept POSIX-compatible (`||`, `2>`): fzf runs this through a child shell.
-set -gx FZF_DEFAULT_COMMAND 'git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type file --follow --hidden --exclude .git'
-set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+# fish syntax: fzf's CTRL-T widget evals this in fish, not a child sh.
+set -gx FZF_CTRL_T_COMMAND 'begin; git ls-files --cached --others --exclude-standard 2>/dev/null; or fd --type file --follow --hidden --exclude .git; end'
 set -gx FZF_DEFAULT_OPTS --no-color
 
 # Setup homebrew environment (PATH-related variables)
