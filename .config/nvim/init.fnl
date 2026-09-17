@@ -801,8 +801,18 @@
                               :uv.lock :toml
                               :Tiltfile :tiltfile
                               :.envrc :bash
-                              :.envrc.local :bash}
-                   :pattern {".*/%.github/workflows/.*%.ya?ml" :yaml.github-actions}})
+                              :.envrc.local :bash
+                              :.helmignore :gitignore
+                              :Chart.lock :yaml
+                              ;; flox
+                              :manifest.lock :json}
+                   :pattern {".*/%.github/workflows/.*%.ya?ml" :yaml.github-actions
+                             ;; Go text/template sources for generated Go.
+                             ".*%.go%.tpl" :gotmpl
+                             ".*%.go%.tmpl" :gotmpl
+                             ;; Helm-templated yaml outside templates/. Scoped
+                             ;; to charts because Terraform also uses *.yaml.tpl.
+                             ".*/charts/.*%.ya?ml%.tpl" :helm}})
 
 ;; Template files.
 (let [template-dir (vim.fs.joinpath (vim.fn.stdpath :config) :templates)]

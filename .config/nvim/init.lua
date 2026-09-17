@@ -488,7 +488,7 @@ local function _44_(_path, bufnr)
     return nil
   end
 end
-vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl", theme = "fish", sh = _44_}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.yaml"] = "buf-config", ["buf.gen.yaml"] = "buf-config", ["buf.policy.yaml"] = "buf-config", ["buf.lock"] = "buf-config", ["uv.lock"] = "toml", Tiltfile = "tiltfile", [".envrc"] = "bash", [".envrc.local"] = "bash"}, pattern = {[".*/%.github/workflows/.*%.ya?ml"] = "yaml.github-actions"}})
+vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl", theme = "fish", sh = _44_}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.yaml"] = "buf-config", ["buf.gen.yaml"] = "buf-config", ["buf.policy.yaml"] = "buf-config", ["buf.lock"] = "buf-config", ["uv.lock"] = "toml", Tiltfile = "tiltfile", [".envrc"] = "bash", [".envrc.local"] = "bash", [".helmignore"] = "gitignore", ["Chart.lock"] = "yaml", ["manifest.lock"] = "json"}, pattern = {[".*/%.github/workflows/.*%.ya?ml"] = "yaml.github-actions", [".*%.go%.tpl"] = "gotmpl", [".*%.go%.tmpl"] = "gotmpl", [".*/charts/.*%.ya?ml%.tpl"] = "helm"}})
 do
   local template_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "templates")
   local function _46_(args)
