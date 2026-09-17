@@ -560,6 +560,7 @@
                           :proto
                           :python
                           :requirements
+                          :ruby
                           :sql
                           :ssh_config
                           :starlark
@@ -772,6 +773,7 @@
                                :star :starlark
                                :gotext :gotmpl
                                :gotmpl :gotmpl
+                               :theme :fish
                                ;; nvim's default *.sh detector always returns
                                ;; filetype=sh and only sets b:is_bash from the
                                ;; shebang. That blocks bashls (filetype=bash)
