@@ -100,7 +100,16 @@
                                                        (= ev.data.kind :update))
                                               (when (not ev.data.active)
                                                 (vim.cmd.packadd pkg))
-                                              (vim.cmd {: cmd}))))})
+                                              (vim.cmd {: cmd})))
+                                          (when (= ev.data.spec.name
+                                                   :tree-sitter-ghostty)
+                                            (let [pkg-dir (.. (vim.fn.stdpath :data)
+                                                              :/site/pack/core/opt/tree-sitter-ghostty)
+                                                  proc (vim.system [:make
+                                                                    :-C
+                                                                    pkg-dir
+                                                                    :nvim_install])]
+                                              (proc:wait))))})
 
 (vim.pack.add ["https://github.com/nvim-mini/mini.nvim"
                ;; snippets
@@ -134,6 +143,7 @@
                "https://github.com/williamboman/mason-lspconfig.nvim"
                "https://github.com/nvim-treesitter/nvim-treesitter"
                "https://github.com/nvim-treesitter/nvim-treesitter-context"
+               "https://github.com/bezhermoso/tree-sitter-ghostty"
                "https://github.com/julienvincent/nvim-paredit"
                ;; Colorschemes
                "https://github.com/stefanvanburen/rams"
