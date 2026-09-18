@@ -1086,6 +1086,8 @@
         :tilt_ls {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc
         :tsc {}
+        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#csskit
+        :csskit {}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
         :ts_query_ls {:settings (tsqueryrc-settings)}
         ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
