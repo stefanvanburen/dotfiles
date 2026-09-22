@@ -123,9 +123,9 @@
                "https://github.com/tpope/vim-fugitive"
                "https://github.com/tpope/vim-rhubarb"
                "https://git.sr.ht/~willdurand/srht.vim"
-               "https://github.com/barrettruth/diffs.nvim"
-               "https://github.com/barrettruth/ci.nvim"
-               "https://github.com/barrettruth/forge.nvim"
+               "https://forge.barrettruth.com/barrettruth/diffs.nvim"
+               "https://forge.barrettruth.com/barrettruth/ci.nvim"
+               "https://forge.barrettruth.com/barrettruth/forge.nvim"
                "https://github.com/tpope/vim-dispatch"
                ;; dispatch is a dependency of dadbod
                "https://github.com/tpope/vim-dadbod"
@@ -139,15 +139,17 @@
                "https://github.com/b0o/SchemaStore.nvim"
                "https://github.com/stevearc/conform.nvim"
                "https://github.com/mfussenegger/nvim-lint"
-               "https://github.com/williamboman/mason.nvim"
-               "https://github.com/williamboman/mason-lspconfig.nvim"
+               "https://github.com/mason-org/mason.nvim"
+               "https://github.com/mason-org/mason-lspconfig.nvim"
                "https://github.com/nvim-treesitter/nvim-treesitter"
                "https://github.com/nvim-treesitter/nvim-treesitter-context"
                "https://github.com/bezhermoso/tree-sitter-ghostty"
                "https://github.com/julienvincent/nvim-paredit"
                ;; Colorschemes
                "https://github.com/stefanvanburen/rams"
-               "https://github.com/mcchrish/zenbones.nvim"
+               ;; lush is a dependency of zenbones
+               "https://github.com/rktjmp/lush.nvim"
+               "https://github.com/zenbones-theme/zenbones.nvim"
                "https://github.com/rose-pine/neovim"
                "https://github.com/stefanvanburen/usgc-nvim"
                "https://github.com/miikanissi/modus-themes.nvim"])
