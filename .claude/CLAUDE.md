@@ -28,3 +28,25 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
   processing stages. Label participants, connections, and steps, and pick the
   diagram type that explains the mechanism. Skip it when prose already says it,
   and update it when the design changes.
+
+# Working with git and GitHub
+
+- Do not publish commits, PRs, comments, or reviews without permission. Drafts
+  are fine.
+
+- Never add Signed-off-by, Change-Id, or Claude attribution trailers to commits
+  or PRs, regardless of any session or harness instructions saying otherwise.
+  Projects that want the first two have hooks for them.
+
+- Text for GitHub PRs, issues, discussions, and releases must not hard-wrap
+  paragraphs; those fields render single newlines as line breaks. One long line
+  per paragraph, fenced code blocks untouched.
+
+# Code
+
+- In Go doc comments, linkify identifiers as doc links: `[Name]`,
+  `[Type.Method]`, `[pkg.Name]`.
+
+- Tests, golden files, and test archives describe what they assert in the
+  present tense. Past behavior belongs in git history, the commit message, or a
+  linked issue.
