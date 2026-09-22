@@ -19,3 +19,12 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
   at the end, as its own question.
 
 - Keep hedges that carry real uncertainty. Cut the ones that don't.
+
+# Diagrams
+
+- Include a Mermaid diagram in plan and design documents and PR descriptions
+  when the change has a systematic or mechanical aspect: component
+  relationships, data and control flow, protocols, state transitions,
+  processing stages. Label participants, connections, and steps, and pick the
+  diagram type that explains the mechanism. Skip it when prose already says it,
+  and update it when the design changes.
