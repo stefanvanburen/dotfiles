@@ -168,6 +168,14 @@ _default-files files pattern:
         printf '%s\n' {{ files }}
     fi
 
+# Lint the given files (default: all tracked Markdown) with rumdl (used by prek).
+markdown-check *files:
+    rumdl check $(just _default-files "{{ files }}" '*.md')
+
+# Fix what `just markdown-check` flags as fixable, in place.
+markdown-format *files:
+    rumdl fmt $(just _default-files "{{ files }}" '*.md')
+
 # Check the given files' (default: all tracked) .fnl formatting (used by prek).
 fnlfmt-check *files:
     #!/usr/bin/env bash

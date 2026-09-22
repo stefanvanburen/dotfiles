@@ -25,6 +25,8 @@
 !/.local/bin/beet-lyrics-parallel
 !/.local/bin/sync-playlists
 /.npm
+# rumdl's lint cache
+/.rumdl_cache
 /.docker
 /.cargo
 /.rustup

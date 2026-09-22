@@ -42,6 +42,13 @@ hooks = [
     language = "system",
     files = "\\.fish$",
   },
+  {
+    id = "rumdl",
+    name = "rumdl (fix with `just markdown-format`)",
+    entry = "just markdown-check",
+    language = "system",
+    files = "\\.md$",
+  },
   # Without --quiet the failure output is the whole formatted file, not a delta.
   {
     id = "just-format-check",

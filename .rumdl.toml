@@ -1,0 +1,21 @@
+# Configuration file for `rumdl`, a Markdown linter and formatter written in Rust.
+# See https://rumdl.rvben.dev for more information.
+#:schema https://www.schemastore.org/rumdl.json
+
+[global]
+# The `console` code blocks in the README use `$` to mark the command lines,
+# which is what that lexer wants; MD014 reads it as a stray prompt.
+disable = ["MD014"]
+
+[MD033]
+# `<kbd>` has no Markdown spelling, and the README needs it for key names.
+allowed-elements = ["kbd"]
+
+[MD035]
+# `---` is ambiguous with frontmatter and setext headings.
+style = "* * *"
+
+[per-file-ignores]
+# Instructions for Claude Code, not a document: no title, and its sections are
+# all top level.
+".claude/CLAUDE.md" = ["MD025", "MD041"]
