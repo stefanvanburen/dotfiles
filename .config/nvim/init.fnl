@@ -123,6 +123,7 @@
                "https://github.com/tpope/vim-fugitive"
                "https://github.com/tpope/vim-rhubarb"
                "https://git.sr.ht/~willdurand/srht.vim"
+               "https://git.sr.ht/~mellow/supplement.nvim"
                "https://forge.barrettruth.com/barrettruth/diffs.nvim"
                "https://forge.barrettruth.com/barrettruth/ci.nvim"
                "https://forge.barrettruth.com/barrettruth/forge.nvim"
