@@ -1,7 +1,5 @@
 # These formula are the absolute base for my macOS environment.
 
-# Maintained version of `exa`, a replacement for `ls`.
-brew "eza"
 # Set default apps for URL schemes and file types - used by `just macos-default-apps`.
 brew "duti"
 # Find files - used by `fzf` in fish.
