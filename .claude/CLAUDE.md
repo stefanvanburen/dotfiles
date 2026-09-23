@@ -42,10 +42,36 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
   paragraphs; those fields render single newlines as line breaks. One long line
   per paragraph, fenced code blocks untouched.
 
+- In repos that merge through PRs, commit on `svanburen/<kebab-name>`, never on
+  `main`, and start a fresh branch for work unrelated to the current one.
+
+- Commit messages: a title of at most 72 characters (measure it), a body
+  wrapped at 72 columns, backticks around code, and full URLs for PRs, issues,
+  CI runs, and commits.
+
+- PR bodies are short flowing paragraphs with no headings or per-commit
+  sections. Leave out what CI already checks ("lint passes") and anything
+  already in the commit message.
+
+- Once a PR is out of draft and has reviews, add new commits and merge `main`
+  in; don't amend, rebase, or force-push. Check `isDraft` in its own call
+  before any amend.
+
+- Never disable commit signing.
+
+# Shell
+
+- Use `jq`/`yq` for JSON and YAML, not `python3 -c`.
+
+- Watch CI with Monitor, emitting one line per job as it reaches any terminal
+  state, keyed on the commit SHA. A background poll loop stays silent until the
+  end.
+
 # Code
 
-- In Go doc comments, linkify identifiers as doc links: `[Name]`,
-  `[Type.Method]`, `[pkg.Name]`.
+- Go doc comments follow <https://go.dev/doc/comment>: a summary sentence that
+  starts with the symbol's name, a blank `//` line before the body, and
+  identifiers linkified as doc links (`[Name]`, `[Type.Method]`, `[pkg.Name]`).
 
 - Tests, golden files, and test archives describe what they assert in the
   present tense. Past behavior belongs in git history, the commit message, or a
