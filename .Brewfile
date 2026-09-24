@@ -1,9 +1,15 @@
 # These formula are the absolute base for my macOS environment.
 
+# Per-directory environments - hooked in fish, configured in ~/.config/direnv/direnv.toml.
+brew "direnv"
 # Set default apps for URL schemes and file types - used by `just macos-default-apps`.
 brew "duti"
 # Find files - used by `fzf` in fish.
 brew "fd"
+# Audio extraction for yt-dlp - used by overcast_add.
+brew "ffmpeg"
+# Check .fnl formatting - used by prek (`just fnlfmt-check`).
+brew "fnlfmt"
 # My default shell
 brew "fish"
 # Fuzzy finding, for fish.
@@ -24,12 +30,20 @@ brew "jump"
 brew "just"
 # $EDITOR
 brew "neovim"
+# RSS reader - configured in ~/.config/newsboat/config.
+brew "newsboat"
+# Git hook runner - configured in ~/prek.toml.
+brew "prek"
 # better searching - configured in ~/.config/ripgreprc.
 brew "ripgrep"
+# Markdown linter - used by prek (`just markdown-check`), configured in ~/.rumdl.toml.
+brew "rumdl"
 # Needed by neovim-treesitter to install certain parsers
 brew "tree-sitter-cli"
 # install and run python tools (that aren't available in homebrew)
 brew "uv"
+# Download podcasts/videos - used by overcast_add.
+brew "yt-dlp"
 
 # terminal
 cask "ghostty"
