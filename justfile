@@ -149,9 +149,16 @@ go-tools:
 
 # https://dev.fennel-lang.org/wiki/LanguageServer
 # https://git.sr.ht/~micampe/fennel-ls-nvim-docs
-# Install the nvim Lua API docset for fennel-ls.
+# Build and install the nvim Lua API docset for fennel-ls. Built from
+# source because the prebuilt nvim.lua in the repo lags behind Neovim
+# release-branch backports.
 fennel-ls-nvim-docs:
-    curl --create-dirs -o $XDG_DATA_HOME/fennel-ls/docsets/nvim.lua https://git.sr.ht/~micampe/fennel-ls-nvim-docs/blob/main/nvim.lua
+    #!/usr/bin/env bash
+    set -euo pipefail
+    dir="$(mktemp -d)"
+    trap 'rm -rf "$dir"' EXIT
+    git clone --quiet --depth 1 https://git.sr.ht/~micampe/fennel-ls-nvim-docs "$dir"
+    make -C "$dir" --silent install
 
 # Run the lightweight nvim treesitter injections smoke test (used by prek).
 test-injections:
