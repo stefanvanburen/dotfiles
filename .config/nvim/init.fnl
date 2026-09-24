@@ -167,6 +167,14 @@
 (let [mini-pairs (require :mini.pairs)]
   (mini-pairs.setup))
 
+;; mini.ai claims `an` / `in`, shadowing Neovim's treesitter parent/child
+;; selection, so rebind that here.
+(map :x "+" #(vim.treesitter.select :parent vim.v.count1)
+     {:desc "Select parent node"})
+
+(map :x "-" #(vim.treesitter.select :child vim.v.count1)
+     {:desc "Select child node"})
+
 (let [mini-ai (require :mini.ai)]
   (mini-ai.setup))
 
