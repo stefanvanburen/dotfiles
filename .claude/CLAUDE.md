@@ -48,8 +48,15 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
 - Commit messages: a title of at most 72 characters (measure it) so GitHub
   shows it whole; a body wrapped the way Neovim wraps a `gitcommit` buffer
   (`textwidth=72` from its runtime ftplugin, with hanging indents on numbered
-  lists); backticks around code; and full URLs for PRs, issues, CI runs, and
-  commits.
+  lists); and backticks around code.
+
+- In repos hosted on GitHub, references in commit messages use its
+  autolink shorthands: `#8` for an issue or PR in the same repo,
+  `owner/repo#8` in another repo, a 12-character SHA for a commit in the
+  same repo, and `owner/repo@<sha>` in another. Use full URLs where no
+  shorthand exists (CI runs, PR comments, review threads) and in repos
+  hosted elsewhere. Write "Fixes #8" only to close the issue when the
+  commit lands on the default branch.
 
 - PR bodies are short flowing paragraphs with no headings or per-commit
   sections. Leave out what CI already checks ("lint passes") and anything
