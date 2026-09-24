@@ -45,9 +45,11 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
 - In repos that merge through PRs, commit on `svanburen/<kebab-name>`, never on
   `main`, and start a fresh branch for work unrelated to the current one.
 
-- Commit messages: a title of at most 72 characters (measure it), a body
-  wrapped at 72 columns, backticks around code, and full URLs for PRs, issues,
-  CI runs, and commits.
+- Commit messages: a title of at most 72 characters (measure it) so GitHub
+  shows it whole; a body wrapped the way Neovim wraps a `gitcommit` buffer
+  (`textwidth=72` from its runtime ftplugin, with hanging indents on numbered
+  lists); backticks around code; and full URLs for PRs, issues, CI runs, and
+  commits.
 
 - PR bodies are short flowing paragraphs with no headings or per-commit
   sections. Leave out what CI already checks ("lint passes") and anything
