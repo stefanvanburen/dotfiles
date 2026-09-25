@@ -78,6 +78,10 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
 
 # Code
 
+- Comments describe the code as it is, not how it got there or why it changed.
+  A reader without the diff should find nothing to puzzle over; the history
+  belongs in the commit message, where `git blame` leads.
+
 - Go doc comments follow <https://go.dev/doc/comment>: a summary sentence that
   starts with the symbol's name, a blank `//` line before the body, and
   identifiers linkified as doc links (`[Name]`, `[Type.Method]`, `[pkg.Name]`).
