@@ -40,7 +40,10 @@ for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstrea
     if test "$parts[5]" != "[gone]"
         test -n "$use_gh"; or continue
         test "$parts[3]" = "$base[1]" -a "$parts[4]" = "refs/heads/$branch"; and continue
-        set -l prs (gh pr list --state merged --search $parts[6] --json number --jq '.[].number')
+        # The search also matches a PR by its merge commit, which is where a
+        # new branch cut from the default branch sits, so require the tip to
+        # be one of the PR's own commits.
+        set -l prs (gh pr list --state merged --search $parts[6] --json number,mergeCommit --jq ".[] | select(.mergeCommit.oid != \"$parts[6]\") | .number")
         if test $status -ne 0
             echo "git-trim: skipping merged-PR checks (gh failed, see above)" >&2
             set use_gh
