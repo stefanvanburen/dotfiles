@@ -1,22 +1,39 @@
 #!/usr/bin/env fish
-# git-trim: delete local branches whose upstream is gone.
+# git-trim: delete local branches that have landed.
 #
-# If a gone branch is checked out in a linked worktree, remove the worktree
+# A branch has landed when its upstream is gone, or, for a branch with no
+# remote-tracking upstream (a fork checked out by URL, a fetched pull ref),
+# when GitHub finds a merged PR containing its tip commit. Squash merges
+# leave the tip unreachable from the default branch, so ancestry can't tell.
+#
+# If a landed branch is checked out in a linked worktree, remove the worktree
 # first (never with --force: a worktree with uncommitted changes is reported
 # and its branch kept).
 
 git fetch --prune; or exit
 git worktree prune
 
+set -l use_gh (command -q gh; and echo 1)
+
 # Deleting refs one at a time rewrites packed-refs per deletion, so collect
-# the gone branches and delete them in a single `git branch -D`.
-set -l gone
+# the landed branches and delete them in a single `git branch -D`.
+set -l landed
 set -l kept 0
-for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstream:track)')
+for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstream)%09%(upstream:track)%09%(objectname)')
     set -l parts (string split \t -- $line)
-    test "$parts[3]" = "[gone]"; or continue
     set -l branch $parts[1]
     set -l worktree $parts[2]
+    if test "$parts[4]" != "[gone]"
+        test -z "$parts[3]" -a -n "$use_gh"; or continue
+        set -l prs (gh pr list --state merged --search $parts[5] --json number --jq '.[].number')
+        if test $status -ne 0
+            echo "git-trim: skipping merged-PR checks (gh failed, see above)" >&2
+            set use_gh
+            continue
+        end
+        set -q prs[1]; or continue
+        echo "git-trim: $branch landed in #"(string join ', #' -- $prs)
+    end
     if test -n "$worktree"
         if not git worktree remove -- $worktree
             echo "git-trim: keeping $branch (worktree not removable, see above)" >&2
@@ -24,11 +41,11 @@ for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstrea
             continue
         end
     end
-    set -a gone $branch
+    set -a landed $branch
 end
 
-if set -q gone[1]
-    git branch -D -- $gone
+if set -q landed[1]
+    git branch -D -- $landed
 else if test $kept -eq 0
     echo "No branches to trim."
 end
