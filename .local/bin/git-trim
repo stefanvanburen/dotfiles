@@ -1,31 +1,46 @@
 #!/usr/bin/env fish
 # git-trim: delete local branches that have landed.
 #
-# A branch has landed when its upstream is gone, or, for a branch with no
-# remote-tracking upstream (a fork checked out by URL, a fetched pull ref),
-# when GitHub finds a merged PR containing its tip commit. Squash merges
+# A branch has landed when its upstream is gone, or when GitHub finds a
+# merged PR containing its tip commit. The PR check covers branches whose
+# upstream outlives the merge: a fork's head branch, a branch tracking the
+# default branch, a fetched pull ref with no upstream at all. Squash merges
 # leave the tip unreachable from the default branch, so ancestry can't tell.
+# A branch tracking its own name on the base remote (the default branch, a
+# release branch) is never PR-checked, and neither is any branch when the
+# base remote isn't on GitHub.
 #
 # If a landed branch is checked out in a linked worktree, remove the worktree
 # first (never with --force: a worktree with uncommitted changes is reported
 # and its branch kept).
 
-git fetch --prune; or exit
+git fetch --all --prune; or exit
 git worktree prune
 
-set -l use_gh (command -q gh; and echo 1)
+# The base remote is the one `gh` resolves PRs against: the remote marked by
+# `gh repo set-default`, else the first of upstream, github, origin.
+set -l remotes (git remote)
+set -l base (git config --get-regexp '^remote\..*\.gh-resolved$' '^base$' | string replace -r '^remote\.(.*)\.gh-resolved .*' '$1')
+for r in upstream github origin
+    contains -- $r $remotes; and set -a base $r
+end
+set -l use_gh
+if set -q base[1]; and command -q gh
+    git remote get-url -- $base[1] | string match -qr 'github\.com[:/]'; and set use_gh 1
+end
 
 # Deleting refs one at a time rewrites packed-refs per deletion, so collect
 # the landed branches and delete them in a single `git branch -D`.
 set -l landed
 set -l kept 0
-for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstream)%09%(upstream:track)%09%(objectname)')
+for line in (git branch --format='%(refname:short)%09%(worktreepath)%09%(upstream:remotename)%09%(upstream:remoteref)%09%(upstream:track)%09%(objectname)')
     set -l parts (string split \t -- $line)
     set -l branch $parts[1]
     set -l worktree $parts[2]
-    if test "$parts[4]" != "[gone]"
-        test -z "$parts[3]" -a -n "$use_gh"; or continue
-        set -l prs (gh pr list --state merged --search $parts[5] --json number --jq '.[].number')
+    if test "$parts[5]" != "[gone]"
+        test -n "$use_gh"; or continue
+        test "$parts[3]" = "$base[1]" -a "$parts[4]" = "refs/heads/$branch"; and continue
+        set -l prs (gh pr list --state merged --search $parts[6] --json number --jq '.[].number')
         if test $status -ne 0
             echo "git-trim: skipping merged-PR checks (gh failed, see above)" >&2
             set use_gh
