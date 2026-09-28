@@ -29,15 +29,16 @@ body {
 }
 
 body, .block {
-  font-family: ui-serif, "New York", Georgia, serif;
+  font-family: "Valkyrie OT A", ui-serif, "New York", Georgia, serif;
 }
 
 div {
   display: inline;
 }
 
-/* Etymons are polytonic Greek (U+1F00 block). Neither New York nor Georgia
-   has those glyphs; Times does. Without this the etymology falls back mid-word. */
+/* Etymons are polytonic Greek (U+1F00 block). Valkyrie, New York and Georgia
+   all lack those glyphs; Times has them. Without this the etymology falls
+   back mid-word. */
 .grk {
   font-family: Times, "Times New Roman", serif;
 }
