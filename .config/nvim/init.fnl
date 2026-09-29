@@ -77,12 +77,7 @@
             ;; Use rounded borders for windows.
             :winborder :rounded}]
   (each [opt val (pairs opts)]
-    (case (type val)
-      ;; vim.opt for table values, vim.o for everything else.
-      :table
-      (tset vim.opt opt val)
-      _
-      (tset vim.o opt val))))
+    (tset vim.opt opt val)))
 
 ;;; Plugins
 
@@ -164,8 +159,22 @@
 ;; <leader> mappings shouldn't be set up until now.
 (local map vim.keymap.set)
 
-(let [mini-pairs (require :mini.pairs)]
-  (mini-pairs.setup))
+;; mini modules that need nothing beyond the default setup.
+(each [_ module (ipairs [:pairs
+                         :ai
+                         :splitjoin
+                         ;; Alt+hjkl moves the current line, or the selection in Visual mode.
+                         :move
+                         :starter
+                         ;; Enhanced `f`/`F`/`t`/`T`
+                         :jump
+                         :cmdline
+                         ;; Use <CR> in normal mode to begin jumping.
+                         :jump2d
+                         :colors
+                         :indentscope
+                         :bracketed])]
+  ((. (require (.. :mini. module)) :setup)))
 
 ;; mini.ai claims `an` / `in`, shadowing Neovim's treesitter parent/child
 ;; selection, so rebind that here.
@@ -174,30 +183,6 @@
 
 (map :x "-" #(vim.treesitter.select :child vim.v.count1)
      {:desc "Select child node"})
-
-(let [mini-ai (require :mini.ai)]
-  (mini-ai.setup))
-
-(let [mini-splitjoin (require :mini.splitjoin)]
-  (mini-splitjoin.setup))
-
-;; Alt+hjkl moves the current line, or the selection in Visual mode.
-(let [mini-move (require :mini.move)]
-  (mini-move.setup))
-
-(let [mini-starter (require :mini.starter)]
-  (mini-starter.setup))
-
-;; Enhanced `f`/`F`/`t`/`T`
-(let [mini-jump (require :mini.jump)]
-  (mini-jump.setup))
-
-(let [mini-cmdline (require :mini.cmdline)]
-  (mini-cmdline.setup))
-
-;; Use <CR> in normal mode to begin jumping.
-(let [mini-jump2d (require :mini.jump2d)]
-  (mini-jump2d.setup))
 
 (let [mini-keymap (require :mini.keymap)]
   (mini-keymap.setup)
@@ -323,9 +308,6 @@
   (map :n :<leader>fj #(mini-extra.pickers.list {:scope :jump})
        {:desc "Pick jumplist"}))
 
-(let [mini-colors (require :mini.colors)]
-  (mini-colors.setup))
-
 (let [mini-misc (require :mini.misc)]
   (mini-misc.setup)
   ;; No `setup_termbg_sync`: it sets the terminal's background to Normal's
@@ -350,9 +332,6 @@
                                          :note {:pattern :NOTE
                                                 :group :MiniHipatternsNote}}}))
 
-(let [mini-indentscope (require :mini.indentscope)]
-  (mini-indentscope.setup))
-
 ;; Scope lines are noise in buffers that aren't source code, and upstream
 ;; deliberately leaves the choice of where to disable to the user.
 (vim.api.nvim_create_autocmd :FileType
@@ -371,9 +350,6 @@
                               :callback (fn [args]
                                           (tset (. vim.b args.buf)
                                                 :miniindentscope_disable true))})
-
-(let [mini-bracketed (require :mini.bracketed)]
-  (mini-bracketed.setup))
 
 (let [mini-files (require :mini.files)]
   (mini-files.setup {:mappings {:go_in_plus :<CR>}})
@@ -400,26 +376,20 @@
   ;; history — which is what makes the Visual-mode mapping worthwhile.
   (map [:n :x] :<leader>gi mini-git.show_at_cursor {:desc "Git info at cursor"}))
 
-;; Initialize below mini-git and mini-diff for integration.
-(let [mini-statusline (require :mini.statusline)]
-  (mini-statusline.setup))
-
 (let [mini-icons (require :mini.icons)]
   (mini-icons.setup {:style :ascii})
   ;; Prepends an icon to every LSP completion kind. Loads all of vim.lsp, which
   ;; the LSP config below pulls in regardless.
   (mini-icons.tweak_lsp_kind))
 
-;; Initialize below mini-icons, whose :ascii style it uses for the buffer icons.
-;; Sets 'showtabline' to 2 itself.
-(let [mini-tabline (require :mini.tabline)]
-  (mini-tabline.setup))
-
-(let [mini-input (require :mini.input)]
-  (mini-input.setup))
-
-(let [mini-statuscolumn (require :mini.statuscolumn)]
-  (mini-statuscolumn.setup))
+(each [_ module (ipairs [;; Initialize below mini-git and mini-diff for integration.
+                         :statusline
+                         ;; Initialize below mini-icons, whose :ascii style it uses
+                         ;; for the buffer icons. Sets 'showtabline' to 2 itself.
+                         :tabline
+                         :input
+                         :statuscolumn])]
+  ((. (require (.. :mini. module)) :setup)))
 
 ;;;; snippets
 
@@ -712,6 +682,11 @@
 
 (local two-space {:expandtab true :shiftwidth 2})
 (local four-space {:expandtab true :shiftwidth 4})
+(local go-template {:expandtab true
+                    :shiftwidth 2
+                    :commentstring "{{/* %s */}}"})
+
+(local four-space-hash {:expandtab true :shiftwidth 4 :commentstring "# %s"})
 
 (local git-folds {:foldmethod :expr :foldexpr "v:lua.MiniGit.diff_foldexpr()"})
 
@@ -725,9 +700,9 @@
         :css two-space
         ;; C#
         :cs {:commentstring "// %s"}
-        :helm {:expandtab true :shiftwidth 2 :commentstring "{{/* %s */}}"}
-        :gotmpl {:expandtab true :shiftwidth 2 :commentstring "{{/* %s */}}"}
-        :fish {:expandtab true :shiftwidth 4 :commentstring "# %s"}
+        :helm go-template
+        :gotmpl go-template
+        :fish four-space-hash
         :yaml two-space
         :buf-config two-space
         :svg two-space
@@ -737,7 +712,7 @@
         :toml two-space
         :python four-space
         :xml four-space
-        :starlark {:expandtab true :shiftwidth 4 :commentstring "# %s"}
+        :starlark four-space-hash
         :proto {:expandtab true
                 :shiftwidth 2
                 :commentstring "// %s"
@@ -875,9 +850,9 @@
 (map :n :<leader>gb #(vim.cmd {:cmd :Git :args [:blame]}) {:desc ":Git blame"})
 
 ;; forge.nvim / ci.nvim
-;; gp/gc/gb are taken above by push/commit/blame.
+;; gp/gc/gb/gi are taken above by push/commit/blame/info.
 (map :n :<leader>gP #(vim.cmd {:cmd :PR}) {:desc ":PR"})
-(map :n :<leader>gi #(vim.cmd {:cmd :Issue}) {:desc ":Issue"})
+(map :n :<leader>gI #(vim.cmd {:cmd :Issue}) {:desc ":Issue"})
 (map :n :<leader>gA #(vim.cmd {:cmd :CI}) {:desc ":CI"})
 
 ;; move by visual lines instead of real lines, except when a count is provided,
@@ -971,13 +946,9 @@
   (local client (vim.lsp.get_client_by_id client_id))
   ;; NOTE: Formatting is handled by conform.
   (when (client:supports_method :textDocument/codeAction)
-    (fn organize-imports []
-      (vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
-                                :apply true}))
-
-    (vim.api.nvim_buf_create_user_command buf :OrganizeImports organize-imports
-                                          {:desc "Organize Imports"})
-    (map :n :gro #(vim.cmd {:cmd :OrganizeImports}) {:desc "Organize Imports"}))
+    (map :n :gro #(vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
+                                            :apply true})
+         {:buffer buf :desc "Organize Imports"}))
   (when (client:supports_method :textDocument/inlayHint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/documentHighlight)
@@ -1035,79 +1006,54 @@
     (when (= pack.spec.name :nvim-treesitter)
       (set path (.. pack.path :/.tsqueryrc.json))))
   (if (and path (vim.uv.fs_stat path))
-      (vim.json.decode (table.concat (vim.fn.readfile path) "\n"))
+      (vim.fn.json_decode (vim.fn.readfile path))
       {}))
 
+;; Servers are configured by nvim-lspconfig; see
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#<name>.
+;; fennel_ls reads ./flsproject.fnl.
+(local default-servers [:bashls
+                        :biome
+                        :buf_ls
+                        :clojure_lsp
+                        :csskit
+                        :docker_language_server
+                        :fennel_ls
+                        :helm_ls
+                        :janet_lsp
+                        :just
+                        :postgres_lsp
+                        :rust_analyzer
+                        :tilt_ls
+                        :tombi
+                        :tsc])
+
 (local server-settings
-       {;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
-        :gopls {;; https://go.dev/gopls/daemon
+       {:gopls {;; https://go.dev/gopls/daemon
                 :cmd [:gopls :-remote=auto]
                 :settings {:gopls {;; https://go.dev/gopls/settings#semantictokens-bool
                                    :semanticTokens true
                                    ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
                                    :hints {:constantValues true}}}}
         ;;; https://github.com/b0o/SchemaStore.nvim#usage
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls
         :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
                                    :validate {:enable true}}}
                  :filetypes [:json :jsonc :json5]}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls
         :yamlls {:settings {:yaml {:schemas (schemastore.yaml.schemas)
                                    :schemaStore {:enable false :url ""}}}}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp
-        :clojure_lsp {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome
-        :biome {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fish_lsp
         ;; Hover for builtins shells out to `__fish_print_help`, which runs
         ;; `man` -- and `man` honors MANPAGER even when writing to a pipe, so the
         ;; inherited `nvim +Man!` would block the request forever.
         :fish_lsp {:cmd_env {:MANPAGER :cat}}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp
-        :janet_lsp {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff
         :ruff {:cmd (venv-cmd :ruff)}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls
-        :helm_ls {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
-        :bashls {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tombi
-        :tombi {}
-        ;; Dockerfiles
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#docker_language_server
-        :docker_language_server {}
-        ;; https://sr.ht/~xerool/fennel-ls/
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_ls
-        ;; See ./flsproject.fnl for configuration.
-        :fennel_ls {}
-        ;; LSP for Lua.
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
         :lua_ls {:settings {:Lua {:runtime {:version :LuaJIT}
                                   :workspace {:checkThirdParty false
                                               :library [vim.env.VIMRUNTIME]}}}}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
-        :rust_analyzer {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
-        :buf_ls {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
-        :postgres_lsp {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty
         :ty {:cmd (venv-cmd :ty)}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tilt_ls
-        :tilt_ls {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc
-        :tsc {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#csskit
-        :csskit {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls
         :ts_query_ls {:settings (tsqueryrc-settings)}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just
-        :just {}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gh_actions_ls
         :gh_actions_ls {:filetypes [:yaml.github-actions]}
         ;; https://github.com/stefanvanburen/cells
         :cells {:cmd [:cells :serve] :filetypes [:cel]}
-        ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zizmor
         :zizmor {:filetypes [:yaml :yaml.github-actions]}
         ;; https://docs.syntaqlite.com/v0.2.15/getting-started/other-editors/
         :syntaqlite {:cmd [:syntaqlite :lsp]
@@ -1116,5 +1062,6 @@
 
 (vim.lsp.config "*" {:root_markers [:.git]})
 (each [server settings (pairs server-settings)]
-  (vim.lsp.config server settings)
-  (vim.lsp.enable server))
+  (vim.lsp.config server settings))
+
+(vim.lsp.enable (vim.list_extend (vim.tbl_keys server-settings) default-servers))
