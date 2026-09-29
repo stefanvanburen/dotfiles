@@ -29,6 +29,9 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
   diagram type that explains the mechanism. Skip it when prose already says it,
   and update it when the design changes.
 
+- In terminal replies, render Mermaid with `termaid` (file or stdin) and show
+  its output, not the raw source. Files and PR bodies keep the Mermaid source.
+
 # Working with git and GitHub
 
 - Do not publish commits, PRs, comments, or reviews without permission. Drafts

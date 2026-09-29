@@ -38,6 +38,8 @@ brew "prek"
 brew "ripgrep"
 # Markdown linter - used by prek (`just markdown-check`), configured in ~/.rumdl.toml.
 brew "rumdl"
+# Render Mermaid diagrams in the terminal - used by Claude Code (~/.claude/CLAUDE.md).
+brew "termaid"
 # Needed by neovim-treesitter to install certain parsers
 brew "tree-sitter-cli"
 # install and run python tools (that aren't available in homebrew)
