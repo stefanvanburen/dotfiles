@@ -760,6 +760,7 @@
                                :gotext :gotmpl
                                :gotmpl :gotmpl
                                :theme :fish
+                               :code-workspace :jsonc
                                ;; nvim's default *.sh detector always returns
                                ;; filetype=sh and only sets b:is_bash from the
                                ;; shebang. That blocks bashls (filetype=bash)
