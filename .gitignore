@@ -24,6 +24,7 @@
 !/.local/bin/beet-music-sync
 !/.local/bin/beet-lyrics-parallel
 !/.local/bin/sync-playlists
+!/.local/bin/git-trim
 /.npm
 # rumdl's lint cache
 /.rumdl_cache
@@ -33,7 +34,8 @@
 /.terminfo
 /.jump
 /.config/jump
-/.ssh
+/.ssh/*
+!/.ssh/config
 /.viminfo
 # empty, and fish is the login shell, so nothing reads it
 /.bash_profile
@@ -52,6 +54,10 @@
 /.config/fish/completions
 
 # nvim files
+# Tracked here despite the global ignores in ~/.config/git/ignore.
+!/.config/nvim/.ignore
+!/.config/nvim/.nfnl.fnl
+!/.config/nvim/flsproject.fnl
 /.config/nvim/spell/en.utf-8.add*
 # I don't mind if plugin versions are skewed.
 /.config/nvim/nvim-pack-lock.json
@@ -122,4 +128,7 @@
 !/.config/beets/config.yaml
 
 # Dictionary bundles: track only our own stylesheet, not the 27MB of entry data
-Library/Dictionaries/
+!/Library/Dictionaries/
+/Library/Dictionaries/**
+!/Library/Dictionaries/**/
+!/Library/Dictionaries/websters-1913.dictionary/Contents/Resources/DefaultStyle.css

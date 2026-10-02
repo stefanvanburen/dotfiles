@@ -38,12 +38,10 @@ $ git config status.showUntrackedFiles no
   $ just bootstrap
   ```
 
-  The macOS preferences it applies (see the [`justfile`](/justfile)) disable the
-  <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> dictionary shortcut so
-  [Dash.app](https://kapeli.com/dash) can use it, and enable the
-  [Zoom "Peek" gesture](https://daringfireball.net/linked/2026/04/13/macos-zoom-gesture).
-  The latter needs Full Disk Access for the invoking terminal: System Settings
-  -> Privacy & Security -> Full Disk Access.
+  The preferences are the `macos-defaults-*` recipes in the
+  [`justfile`](/justfile). The Zoom and Safari ones need Full Disk Access for
+  the invoking terminal (System Settings -> Privacy & Security -> Full Disk
+  Access), and Safari must be closed while its recipe runs.
 
 * Create an ssh key (follow the instructions in [ssh-config](../.ssh/config)),
   and add it to [GitHub](https://github.com/settings/keys)
