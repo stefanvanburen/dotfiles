@@ -1,0 +1,280 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.14"
+# dependencies = []
+# ///
+"""Check Standard Ebooks titles in a calibre library for upstream revisions.
+
+Standard Ebooks periodically revises already-published titles (typo fixes,
+markup cleanup, etc.) with no notification mechanism of their own beyond each
+book's public revision-history page. This compares the `dcterms:modified`
+timestamp baked into each local epub's content.opf against the live
+`schema:dateModified` on the book's standardebooks.org page, and flags any
+that are behind.
+
+Identifies Standard Ebooks titles via calibre's `url` identifier scheme
+(`https://standardebooks.org/ebooks/...`), read directly from metadata.db
+read-only -- calibredb itself refuses to run while calibre-server or the GUI
+holds the library open, so this bypasses it entirely.
+
+Usage:
+    se-check-updates [--library PATH] [--apply]
+
+With --apply, downloads the plain .epub for each stale title and replaces
+its format in calibre via `calibredb add_format` (same book record, tags,
+and metadata -- just swaps the file). Requires the calibre GUI and
+calibre-server to be closed, same as any other calibredb use.
+"""
+
+import argparse
+import re
+import sqlite3
+import subprocess
+import sys
+import tempfile
+import time
+import urllib.request
+import zipfile
+from pathlib import Path
+
+DEFAULT_LIBRARY = Path("~/Documents/app_libraries/calibre").expanduser()
+USER_AGENT = "se-check-updates (personal calibre library sync script)"
+
+
+def find_se_books(library: Path):
+    db_uri = f"file:{library / 'metadata.db'}?mode=ro"
+    con = sqlite3.connect(db_uri, uri=True)
+    rows = con.execute(
+        """
+        SELECT books.id, books.title, books.path, identifiers.val
+        FROM books
+        JOIN identifiers ON identifiers.book = books.id
+        WHERE identifiers.type = 'url'
+          AND identifiers.val LIKE 'https://standardebooks.org/ebooks/%'
+        ORDER BY books.sort
+        """
+    ).fetchall()
+    con.close()
+    return rows
+
+
+# Sentinel for a book with no usable Standard Ebooks epub (none at all, a
+# corrupt one, or one converted by calibre without SE's metadata). It sorts
+# before any real date, so the book is always stale and --apply fetches it.
+MISSING_LOCAL = "0000-00-00"
+
+
+def local_modified_date(library: Path, book_path: str):
+    """Return the epub's `dcterms:modified` date, or MISSING_LOCAL and why."""
+    book_dir = library / book_path
+    epubs = list(book_dir.glob("*.epub"))
+    if not epubs:
+        return MISSING_LOCAL, "no epub"
+
+    try:
+        with zipfile.ZipFile(epubs[0]) as zf:
+            opf_names = [n for n in zf.namelist() if n.endswith(".opf")]
+            if not opf_names:
+                return MISSING_LOCAL, "no .opf in epub"
+            opf_text = zf.read(opf_names[0]).decode("utf-8", errors="replace")
+    except zipfile.BadZipFile:
+        return MISSING_LOCAL, "corrupt epub"
+
+    m = re.search(r'dcterms:modified">([^<]+)<', opf_text)
+    if not m:
+        return MISSING_LOCAL, "not an SE epub"
+    return m.group(1)[:10], None
+
+
+def remote_modified_date(url: str):
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        html = resp.read().decode("utf-8", errors="replace")
+
+    m = re.search(r'property="schema:dateModified"\s+content="([^"]+)"', html)
+    if not m:
+        return None, None, None, "no schema:dateModified found on page"
+    date = m.group(1)[:10]
+
+    # Most-recent commit message in the "A brief history of this ebook"
+    # section -- lets the caller distinguish real content fixes from
+    # metadata-only/site-wide bumps (e.g. "Update metadata to use
+    # schema.org vocabulary" landed identically across most titles on
+    # 2026-06-30 and isn't worth re-downloading for).
+    section = re.search(r'<section id="history">(.*?)</section>', html, re.DOTALL)
+    commit_msg = None
+    if section:
+        cm = re.search(r'/commit/[0-9a-f]+">([^<]+)</a>', section.group(1))
+        if cm:
+            commit_msg = cm.group(1)
+
+    # Plain (non-kepub, non-advanced) epub download link, relative to the
+    # book's own page -- e.g. "/ebooks/bram-stoker/dracula/downloads/
+    # bram-stoker_dracula.epub". Advanced/kepub variants sort first in the
+    # page's download list but aren't what a vanilla epub reader wants.
+    download_path = None
+    for href in re.findall(r'href="(/ebooks/[^"]+\.epub)"', html):
+        if "kepub" not in href and "_advanced" not in href:
+            download_path = href
+            break
+
+    return date, commit_msg, download_path, None
+
+
+def apply_update(
+    book_id: int, title: str, se_url: str, download_path: str, library: Path
+):
+    if not download_path:
+        return False, "no plain .epub download link found on page"
+
+    # Standard Ebooks serves an HTML "Your Download Has Started!" interstitial
+    # (not the actual file) unless ?source=download is present on the URL.
+    download_url = "https://standardebooks.org" + download_path + "?source=download"
+    req = urllib.request.Request(download_url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = resp.read()
+    except OSError as e:
+        return False, f"download failed: {e}"
+
+    # Guard against ever again writing a non-epub response (e.g. an
+    # interstitial or error page) over a real library file: a zip file
+    # must start with the "PK" signature.
+    if not data.startswith(b"PK"):
+        return (
+            False,
+            f"response doesn't look like a valid epub/zip ({len(data)} bytes) -- not applying",
+        )
+
+    with tempfile.NamedTemporaryFile(suffix=".epub", delete=False) as tmp:
+        tmp.write(data)
+        tmp_path = tmp.name
+
+    try:
+        result = subprocess.run(
+            [
+                "calibredb",
+                "add_format",
+                "--library-path",
+                str(library),
+                str(book_id),
+                tmp_path,
+            ],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    finally:
+        Path(tmp_path).unlink(missing_ok=True)
+
+    if result.returncode != 0:
+        return False, result.stderr.strip()
+    return True, None
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    parser.add_argument(
+        "--library", type=Path, default=DEFAULT_LIBRARY, help="Path to calibre library"
+    )
+    parser.add_argument(
+        "--apply",
+        action="store_true",
+        help="Download and replace the epub format for stale titles via calibredb add_format",
+    )
+    args = parser.parse_args()
+
+    books = find_se_books(args.library)
+    if not books:
+        print(
+            "No Standard Ebooks titles found (looked for a 'url' identifier "
+            "pointing at standardebooks.org).",
+            file=sys.stderr,
+        )
+        return
+
+    print(f"Checking {len(books)} Standard Ebooks title(s)...\n", file=sys.stderr)
+
+    stale = []
+    for i, (book_id, title, book_path, se_url) in enumerate(books):
+        if i > 0:
+            time.sleep(1)  # be polite to standardebooks.org
+
+        local_date, local_problem = local_modified_date(args.library, book_path)
+
+        try:
+            remote_date, commit_msg, download_path, remote_err = remote_modified_date(
+                se_url
+            )
+        except OSError as e:
+            print(f"  ! {title}: failed to fetch {se_url}: {e}", file=sys.stderr)
+            continue
+        if remote_err:
+            print(f"  ! {title}: {remote_err}", file=sys.stderr)
+            continue
+
+        marker = "STALE" if remote_date > local_date else "ok"
+        local_display = local_problem or local_date
+        print(
+            f"  [{marker:5s}] {title}: local={local_display} remote={remote_date}"
+            f" ({commit_msg})",
+            file=sys.stderr,
+        )
+        if remote_date > local_date:
+            stale.append(
+                (
+                    book_id,
+                    title,
+                    local_date,
+                    remote_date,
+                    commit_msg,
+                    se_url,
+                    download_path,
+                )
+            )
+
+    if not stale:
+        print("\nAll Standard Ebooks titles are up to date.")
+        return
+
+    print(f"\n{len(stale)} title(s) have upstream revisions:\n")
+    for (
+        book_id,
+        title,
+        local_date,
+        remote_date,
+        commit_msg,
+        se_url,
+        download_path,
+    ) in stale:
+        print(f"  {title}")
+        print(f"    local:  {local_date}")
+        print(f"    remote: {remote_date}  ({commit_msg})")
+        print(f"    {se_url}")
+
+    if not args.apply:
+        print("\nRe-run with --apply to download and replace these in calibre.")
+        return
+
+    print(f"\nApplying {len(stale)} update(s)...\n")
+    ok_count = 0
+    for (
+        book_id,
+        title,
+        local_date,
+        remote_date,
+        commit_msg,
+        se_url,
+        download_path,
+    ) in stale:
+        success, err = apply_update(book_id, title, se_url, download_path, args.library)
+        if success:
+            ok_count += 1
+            print(f"  [done] {title}")
+        else:
+            print(f"  [FAIL] {title}: {err}")
+    print(f"\nApplied {ok_count} of {len(stale)} update(s).")
+
+
+if __name__ == "__main__":
+    main()
