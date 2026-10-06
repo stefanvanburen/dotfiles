@@ -498,6 +498,18 @@
   ;; Disable auto-enable; servers are enabled explicitly below via vim.lsp.enable.
   (mason-lspconfig.setup {:automatic_enable false}))
 
+;; My fork of tree-sitter-go parses Go 1.26 `new(expr)`, Go 1.27 generic
+;; methods, and shadowed `make`/`new`, all of which upstream misparses.
+;; Bump the revision and run `:TSUpdate go` to pick up new commits.
+(vim.api.nvim_create_autocmd :User
+                             {:group (vim.api.nvim_create_augroup :treesitter-go-fork
+                                                                  {})
+                              :pattern :TSUpdate
+                              :callback #(tset (require :nvim-treesitter.parsers)
+                                               :go :install_info
+                                               {:url "https://github.com/stefanvanburen/tree-sitter-go"
+                                                :revision :03134c6db568ad1c59b94ceaf383fb68ee5750eb})})
+
 (let [treesitter (require :nvim-treesitter) ;; Parsers to install.
       treesitter-parsers [:c
                           :lua
