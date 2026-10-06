@@ -624,6 +624,22 @@
       11 (if (< now.day 8) :miniautumn :miniwinter)
       12 :miniwinter)))
 
+;; gopls marks Go constants as readonly variables, and mini.hues leaves that
+;; modifier unlinked, so the variable color would cover tree-sitter's
+;; @constant. Scoped to Go because TypeScript servers mark every `const`
+;; binding readonly, whether or not its value is constant. `iota` is also
+;; readonly, so the more specific defaultLibrary link keeps it a builtin.
+(vim.api.nvim_create_autocmd :ColorScheme
+                             {:group (vim.api.nvim_create_augroup :lsp-go-constants
+                                                                  {})
+                              :callback (fn []
+                                          (vim.api.nvim_set_hl 0
+                                                               "@lsp.mod.readonly.go"
+                                                               {:link "@constant"})
+                                          (vim.api.nvim_set_hl 0
+                                                               "@lsp.typemod.variable.defaultLibrary.go"
+                                                               {:link "@constant.builtin"}))})
+
 (vim.cmd.colorscheme (seasonal-colorscheme))
 
 ;; The mini.hues colorschemes read 'background' once, when their colors file is
