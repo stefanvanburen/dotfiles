@@ -510,6 +510,20 @@
                                                {:url "https://github.com/stefanvanburen/tree-sitter-go"
                                                 :revision :03134c6db568ad1c59b94ceaf383fb68ee5750eb})})
 
+;; nvim-treesitter doesn't ship CEL, so register my fork of tree-sitter-cel,
+;; which parses the optional syntax and backtick-escaped field names. Its
+;; queries are written for the tree-sitter CLI, where the first matching
+;; pattern wins, so the Neovim versions live in queries/cel/ instead.
+;; Bump the revision and run `:TSUpdate cel` to pick up new commits.
+(vim.api.nvim_create_autocmd :User
+                             {:group (vim.api.nvim_create_augroup :treesitter-cel-fork
+                                                                  {})
+                              :pattern :TSUpdate
+                              :callback #(tset (require :nvim-treesitter.parsers)
+                                               :cel
+                                               {:install_info {:url "https://github.com/stefanvanburen/tree-sitter-cel"
+                                                               :revision :fcfb876675863476f74a6f2a6671e0f170168b0d}})})
+
 (let [treesitter (require :nvim-treesitter) ;; Parsers to install.
       treesitter-parsers [:c
                           :lua
@@ -518,6 +532,7 @@
                           :query
                           :bash
                           :c_sharp
+                          :cel
                           :clojure
                           :comment
                           :css
