@@ -585,16 +585,46 @@ end
 map("n", "[r", _72_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>", {desc = "Clear search highlight"})
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_lines = true, underline = true, severity_sort = true, float = {border = "single", source = true, focusable = false}, virtual_text = false})
-local function lsp_attach(_73_)
-  local buf = _73_.buf
-  local _arg_74_ = _73_.data
-  local client_id = _arg_74_.client_id
+local function organize_go_imports(client, buf)
+  local params = vim.lsp.util.make_range_params(0, client.offset_encoding)
+  params.context = {only = {"source.organizeImports"}}
+  local res = client:request_sync("textDocument/codeAction", params, 3000, buf)
+  local _74_
+  do
+    local t_73_ = res
+    if (nil ~= t_73_) then
+      t_73_ = t_73_.result
+    else
+    end
+    _74_ = t_73_
+  end
+  for _, action in ipairs((_74_ or {})) do
+    if action.edit then
+      vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+    else
+    end
+  end
+  return nil
+end
+local function lsp_attach(_77_)
+  local buf = _77_.buf
+  local _arg_78_ = _77_.data
+  local client_id = _arg_78_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   if client:supports_method("textDocument/codeAction") then
-    local function _75_()
+    local function _79_()
       return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     end
-    map("n", "gro", _75_, {buffer = buf, desc = "Organize Imports"})
+    map("n", "gro", _79_, {buffer = buf, desc = "Organize Imports"})
+  else
+  end
+  if (client.name == "gopls") then
+    local group = vim.api.nvim_create_augroup("gopls-organize-imports", {clear = false})
+    vim.api.nvim_clear_autocmds({group = group, buffer = buf})
+    local function _81_()
+      return organize_go_imports(client, buf)
+    end
+    vim.api.nvim_create_autocmd("BufWritePre", {group = group, buffer = buf, callback = _81_})
   else
   end
   if client:supports_method("textDocument/inlayHint") then
@@ -625,7 +655,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {group = vim.api.nvim_create_augroup("lsp-attach", {}), callback = lsp_attach})
 local schemastore = require("schemastore")
 local function venv_cmd(name)
-  local function _82_(dispatchers, config)
+  local function _88_(dispatchers, config)
     local venv_bin = (config.root_dir and (config.root_dir .. "/.venv/bin/" .. name))
     local bin
     if (venv_bin and vim.uv.fs_stat(venv_bin)) then
@@ -635,7 +665,7 @@ local function venv_cmd(name)
     end
     return vim.lsp.rpc.start({bin, "server"}, dispatchers)
   end
-  return _82_
+  return _88_
 end
 local function tsqueryrc_settings()
   local path = nil
@@ -653,7 +683,7 @@ local function tsqueryrc_settings()
   end
 end
 local default_servers = {"bashls", "biome", "buf_ls", "clojure_lsp", "csskit", "docker_language_server", "fennel_ls", "helm_ls", "janet_lsp", "just", "postgres_lsp", "rust_analyzer", "tilt_ls", "tombi", "tsc"}
-local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, semanticTokenTypes = {keyword = false, string = false}, hints = {constantValues = true}}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}, filetypes = {"json", "jsonc", "json5"}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, fish_lsp = {cmd_env = {MANPAGER = "cat"}}, ruff = {cmd = venv_cmd("ruff")}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = {vim.env.VIMRUNTIME}, checkThirdParty = false}}}}, ty = {cmd = venv_cmd("ty")}, ts_query_ls = {settings = tsqueryrc_settings()}, gh_actions_ls = {filetypes = {"yaml.github-actions"}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {filetypes = {"yaml", "yaml.github-actions"}}, syntaqlite = {cmd = {"syntaqlite", "lsp"}, filetypes = {"sql"}, root_markers = {"syntaqlite.toml", ".git"}}}
+local server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, semanticTokenTypes = {keyword = false, string = false}, hints = {constantValues = true, ignoredError = true}, vulncheck = "Imports"}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}, filetypes = {"json", "jsonc", "json5"}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, fish_lsp = {cmd_env = {MANPAGER = "cat"}}, ruff = {cmd = venv_cmd("ruff")}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = {vim.env.VIMRUNTIME}, checkThirdParty = false}}}}, ty = {cmd = venv_cmd("ty")}, ts_query_ls = {settings = tsqueryrc_settings()}, gh_actions_ls = {filetypes = {"yaml.github-actions"}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {filetypes = {"yaml", "yaml.github-actions"}}, syntaqlite = {cmd = {"syntaqlite", "lsp"}, filetypes = {"sql"}, root_markers = {"syntaqlite.toml", ".git"}}}
 vim.lsp.config("*", {root_markers = {".git"}})
 for server, settings in pairs(server_settings) do
   vim.lsp.config(server, settings)

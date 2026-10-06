@@ -971,6 +971,18 @@
 
 ;;; LSP
 
+;; gopls's formatting, which conform runs on save, only sorts existing imports;
+;; its organizeImports action also adds missing ones and drops unused ones.
+;; Requested synchronously so the edit lands before the write.
+;; https://go.dev/gopls/editor/vim#neovim-imports
+(fn organize-go-imports [client buf]
+  (let [params (vim.lsp.util.make_range_params 0 client.offset_encoding)]
+    (set params.context {:only [:source.organizeImports]})
+    (let [res (client:request_sync :textDocument/codeAction params 3000 buf)]
+      (each [_ action (ipairs (or (?. res :result) []))]
+        (when action.edit
+          (vim.lsp.util.apply_workspace_edit action.edit client.offset_encoding))))))
+
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
   ;; NOTE: Formatting is handled by conform.
@@ -978,6 +990,14 @@
     (map :n :gro #(vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
                                             :apply true})
          {:buffer buf :desc "Organize Imports"}))
+  (when (= client.name :gopls)
+    (let [group (vim.api.nvim_create_augroup :gopls-organize-imports
+                                             {:clear false})]
+      (vim.api.nvim_clear_autocmds {: group :buffer buf})
+      (vim.api.nvim_create_autocmd :BufWritePre
+                                   {: group
+                                    :buffer buf
+                                    :callback #(organize-go-imports client buf)})))
   (when (client:supports_method :textDocument/inlayHint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/documentHighlight)
@@ -1070,7 +1090,10 @@
                                    :semanticTokenTypes {:keyword false
                                                         :string false}
                                    ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-                                   :hints {:constantValues true}}}}
+                                   :hints {:constantValues true
+                                           :ignoredError true}
+                                   ;; https://go.dev/gopls/settings#vulncheck-enum
+                                   :vulncheck :Imports}}}
         ;;; https://github.com/b0o/SchemaStore.nvim#usage
         :jsonls {:settings {:json {:schemas (schemastore.json.schemas)
                                    :validate {:enable true}}}
