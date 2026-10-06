@@ -39,7 +39,7 @@ def esc(s):
 
 def _run_applescript(script, label, phase):
     result = subprocess.run(
-        ["osascript", "-e", script], capture_output=True, text=True
+        ["osascript", "-e", script], capture_output=True, text=True, check=False
     )
     if result.returncode != 0:
         print(f"  ERROR ({phase}) '{label}': {result.stderr.strip()}", file=sys.stderr)
@@ -127,23 +127,24 @@ def sync_to_music(tracks):
         for item in album_tracks:
             title_esc = esc(item.title)
             path = os.fsdecode(item.path) if isinstance(item.path, bytes) else item.path
-            script = "\n".join([
-                'tell application "Music"',
-                "    set lib to library playlist 1",
-                f'    if (count of (every file track of lib whose album is "{esc(album)}" and name is "{title_esc}")) = 0 then',
-                f'        add (POSIX file "{esc(path)}")',
-                '        return "added"',
-                "    end if",
-                '    return "exists"',
-                "end tell",
-            ])
+            script = "\n".join(
+                [
+                    'tell application "Music"',
+                    "    set lib to library playlist 1",
+                    f'    if (count of (every file track of lib whose album is "{esc(album)}" and name is "{title_esc}")) = 0 then',
+                    f'        add (POSIX file "{esc(path)}")',
+                    '        return "added"',
+                    "    end if",
+                    '    return "exists"',
+                    "end tell",
+                ]
+            )
             out = _run_applescript(script, label, f"add '{item.title}'")
             if out == "added":
                 album_added += 1
 
         # Process in batches of 50 to avoid AppleScript size limits
         for batch in itertools.batched(album_tracks, 50):
-
             # Phase 2: sync metadata for all tracks (including just-added ones).
             sync_lines = [
                 'tell application "Music"',
@@ -158,25 +159,31 @@ def sync_to_music(tracks):
                     f'    set matchTracks to (every file track of lib whose album is "{esc(album)}" and name is "{title_esc}")'
                 )
                 sync_lines.append("    repeat with aTrack in matchTracks")
-                sync_lines.extend([
-                    f'        set name of aTrack to "{title_esc}"',
-                    f'        set artist of aTrack to "{esc(item.artist)}"',
-                    f'        set album artist of aTrack to "{esc(albumartist)}"',
-                    f'        set album of aTrack to "{esc(album)}"',
-                ])
+                sync_lines.extend(
+                    [
+                        f'        set name of aTrack to "{title_esc}"',
+                        f'        set artist of aTrack to "{esc(item.artist)}"',
+                        f'        set album artist of aTrack to "{esc(albumartist)}"',
+                        f'        set album of aTrack to "{esc(album)}"',
+                    ]
+                )
                 if item.year:
                     sync_lines.append(f"        set year of aTrack to {int(item.year)}")
                 if genre := item.get("genre"):
                     sync_lines.append(f'        set genre of aTrack to "{esc(genre)}"')
                 if composer := item.get("composer"):
-                    sync_lines.append(f'        set composer of aTrack to "{esc(composer)}"')
+                    sync_lines.append(
+                        f'        set composer of aTrack to "{esc(composer)}"'
+                    )
                 if discnum:
                     sync_lines.append(f"        set disc number of aTrack to {discnum}")
                 # Additive on purpose: favorites made in Music.app since the
                 # last --pull-favorites run must survive a sync.
                 if item.get("favorited"):
                     sync_lines.append("        set favorited of aTrack to true")
-                sync_lines.extend(["        set updatedCount to updatedCount + 1", "    end repeat"])
+                sync_lines.extend(
+                    ["        set updatedCount to updatedCount + 1", "    end repeat"]
+                )
             sync_lines.extend(["    return updatedCount as string", "end tell"])
 
             out = _run_applescript("\n".join(sync_lines), label, "sync")

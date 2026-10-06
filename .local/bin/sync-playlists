@@ -21,6 +21,8 @@ the authoritative source (default: only add, never remove).
 """
 
 import argparse
+import functools
+import io
 import os
 import re
 import subprocess
@@ -45,7 +47,9 @@ def _nfc(s: str) -> str:
 
 
 def osascript(script: str) -> str:
-    r = subprocess.run(["osascript", "-e", script], capture_output=True, text=True)
+    r = subprocess.run(
+        ["osascript", "-e", script], capture_output=True, text=True, check=False
+    )
     if r.returncode != 0:
         raise RuntimeError(f"AppleScript error: {r.stderr.strip()}")
     return r.stdout.strip()
@@ -116,8 +120,7 @@ def write_m3u(playlist_name: str, paths: list[str], dry_run: bool = False):
         return
     with open(p, "w") as f:
         f.write("#EXTM3U\n")
-        for track_path in paths:
-            f.write(track_path + "\n")
+        f.writelines(f"{track_path}\n" for track_path in paths)
 
 
 # --- iTunes / Music.app ---
@@ -180,12 +183,10 @@ tell application "Music"
 end tell""")
 
 
-_itunes_track_ids: dict[str, int] | None = None  # POSIX path → Music.app track id
-_itunes_key_ids: dict[tuple, int] | None = None  # full key → Music.app track id
-_itunes_loose_ids: dict[tuple, int] | None = None  # (artist, title) → track id
-
-
-def build_itunes_track_index() -> tuple[dict[str, int], dict[tuple, int], dict[tuple, int]]:
+@functools.cache
+def build_itunes_track_index() -> tuple[
+    dict[str, int], dict[tuple, int], dict[tuple, int]
+]:
     """Fetch {file path: track id}, {full key: track id} and {loose key: track
     id} for the whole library in one bulk query.
 
@@ -194,9 +195,7 @@ def build_itunes_track_index() -> tuple[dict[str, int], dict[tuple, int], dict[t
     turns N library scans into one. The key index lets tracks whose M3U
     path is stale reuse the existing library entry instead of failing.
     """
-    global _itunes_track_ids, _itunes_key_ids, _itunes_loose_ids
-    if _itunes_track_ids is None:
-        script = """
+    script = """
 tell application "Music"
     set idList to id of every file track of library playlist 1
     set locList to location of every file track of library playlist 1
@@ -216,27 +215,31 @@ repeat with i from 1 to count of idList
 end repeat
 set AppleScript's text item delimiters to linefeed
 return out as text"""
-        _itunes_track_ids = {}
-        _itunes_key_ids = {}
-        _itunes_loose_ids = {}
-        for line in osascript(script).splitlines():
-            parts = line.split("\t", 4)
-            if len(parts) != 5:
-                continue
-            track_id, path, artist, album, name = parts
-            if path:
-                _itunes_track_ids[_nfc(path)] = int(track_id)
-            _itunes_key_ids.setdefault(full_key(artist, name, album), int(track_id))
-            _itunes_loose_ids.setdefault(track_key(artist, name), int(track_id))
-    return _itunes_track_ids, _itunes_key_ids, _itunes_loose_ids
+    track_ids: dict[str, int] = {}  # POSIX path → Music.app track id
+    key_ids: dict[tuple, int] = {}  # full key → Music.app track id
+    loose_ids: dict[tuple, int] = {}  # (artist, title) → track id
+    for line in osascript(script).splitlines():
+        parts = line.split("\t", 4)
+        if len(parts) != 5:
+            continue
+        track_id, path, artist, album, name = parts
+        if path:
+            track_ids[_nfc(path)] = int(track_id)
+        key_ids.setdefault(full_key(artist, name, album), int(track_id))
+        loose_ids.setdefault(track_key(artist, name), int(track_id))
+    return track_ids, key_ids, loose_ids
 
 
-def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: bool = False):
+def add_to_itunes_playlist(
+    playlist_name: str, file_paths: list[str], dry_run: bool = False
+):
     if not file_paths:
         return
     if dry_run:
         for p in file_paths:
-            print(f"    [dry-run] add to iTunes '{playlist_name}': {os.path.basename(p)}")
+            print(
+                f"    [dry-run] add to iTunes '{playlist_name}': {os.path.basename(p)}"
+            )
         return
 
     ensure_itunes_playlist(playlist_name)
@@ -270,7 +273,10 @@ def add_to_itunes_playlist(playlist_name: str, file_paths: list[str], dry_run: b
                 ]
         lines.append("end tell")
         r = subprocess.run(
-            ["osascript", "-e", "\n".join(lines)], capture_output=True, text=True
+            ["osascript", "-e", "\n".join(lines)],
+            capture_output=True,
+            text=True,
+            check=False,
         )
         if r.returncode != 0:
             print(f"  warning (iTunes add): {r.stderr.strip()}", file=sys.stderr)
@@ -291,7 +297,9 @@ def remove_from_itunes_playlist(
         return
     if dry_run:
         for t in to_remove:
-            print(f"    [dry-run] remove from iTunes '{playlist_name}': {t['artist']} - {t['title']}")
+            print(
+                f"    [dry-run] remove from iTunes '{playlist_name}': {t['artist']} - {t['title']}"
+            )
         return
     lines = ['tell application "Music"', f'    tell playlist "{esc(playlist_name)}"']
     for t in to_remove:
@@ -322,8 +330,8 @@ def remove_from_itunes_playlist(
 # --- Beets ---
 
 # Path indices built once per run
-_path_index: dict[str, Item] = {}      # full path string → Item
-_relpath_index: dict[str, Item] = {}   # relative path from any known base → Item
+_path_index: dict[str, Item] = {}  # full path string → Item
+_relpath_index: dict[str, Item] = {}  # relative path from any known base → Item
 
 _KNOWN_BASES = [
     os.path.expanduser("~/Documents/music/"),
@@ -333,7 +341,7 @@ _KNOWN_BASES = [
 
 _QUOTE_MAP = str.maketrans(
     "\u201c\u201d\u2018\u2019",  # curly L/R double+single quotes
-    "\"\"''",              # ASCII equivalents
+    "\"\"''",  # ASCII equivalents
 )
 
 
@@ -353,7 +361,7 @@ def build_path_index(lib: Library) -> None:
         _path_index[_norm_quotes(path_str)] = item
         for base in _KNOWN_BASES:
             if path_str.startswith(base):
-                rel = path_str[len(base):]
+                rel = path_str[len(base) :]
                 _relpath_index[rel] = item
                 _relpath_index[_norm_quotes(rel)] = item
                 break
@@ -365,7 +373,7 @@ def beets_lookup_by_path(path: str) -> Item | None:
             return _path_index[key]
         for base in _KNOWN_BASES:
             if key.startswith(base):
-                item = _relpath_index.get(key[len(base):])
+                item = _relpath_index.get(key[len(base) :])
                 if item:
                     return item
     return None
@@ -500,7 +508,9 @@ def sync_playlist(
             for k in only_in_itunes:
                 t = itunes_by_key[k]
                 print(f"    - iTunes: {t['artist']} - {t['title']}")
-            remove_from_itunes_playlist(playlist_name, only_in_itunes, itunes_tracks, dry_run)
+            remove_from_itunes_playlist(
+                playlist_name, only_in_itunes, itunes_tracks, dry_run
+            )
 
     if direction in ("to-m3u", "merge"):
         if only_in_itunes:
@@ -513,7 +523,9 @@ def sync_playlist(
                     # beets only has one edition of a track Music.app has two
                     # of, so the lookup resolved to a path already listed —
                     # appending it would duplicate the entry
-                    print(f"    ! skipped (already listed): {t['artist']} - {t['title']}")
+                    print(
+                        f"    ! skipped (already listed): {t['artist']} - {t['title']}"
+                    )
                 elif p:
                     print(f"    + M3U ← {t['artist']} - {t['title']}")
                     new_paths.append(p)
@@ -551,17 +563,33 @@ def sync_playlist(
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     group = parser.add_mutually_exclusive_group()
-    group.add_argument("--merge", action="store_true", help="add to each what the other has (default)")
+    group.add_argument(
+        "--merge", action="store_true", help="add to each what the other has (default)"
+    )
     group.add_argument("--to-m3u", action="store_true", help="iTunes → M3U")
     group.add_argument("--to-itunes", action="store_true", help="M3U → iTunes")
-    parser.add_argument("--remove", action="store_true", help="also remove tracks missing from the authoritative source")
-    parser.add_argument("--dry-run", action="store_true", help="show changes without applying them")
-    parser.add_argument("playlists", nargs="*", metavar="PLAYLIST", help="playlist names (default: all M3U files)")
+    parser.add_argument(
+        "--remove",
+        action="store_true",
+        help="also remove tracks missing from the authoritative source",
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="show changes without applying them"
+    )
+    parser.add_argument(
+        "playlists",
+        nargs="*",
+        metavar="PLAYLIST",
+        help="playlist names (default: all M3U files)",
+    )
     args = parser.parse_args()
 
-    sys.stdout.reconfigure(line_buffering=True)
+    if isinstance(sys.stdout, io.TextIOWrapper):
+        sys.stdout.reconfigure(line_buffering=True)
 
     direction = "to-m3u" if args.to_m3u else "to-itunes" if args.to_itunes else "merge"
 

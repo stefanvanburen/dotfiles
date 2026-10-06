@@ -203,6 +203,44 @@ fish-format-check *files:
     set -eu
     fish_indent --check $(just _default-files "{{ files }}" '*.fish')
 
+# Print the Python files among `files` (default: all tracked): `*.py`, or a
+# python or `uv run` shebang.
+[private]
+_python-files files:
+    #!/usr/bin/env bash
+    set -eu
+    just _default-files "{{ files }}" '*' | while read -r f; do
+        case "$f" in
+            *.py) echo "$f" ;;
+            *) if [ -f "$f" ] && head -n1 "$f" | grep -qE '^#!.*(python|uv run)'; then echo "$f"; fi ;;
+        esac
+    done
+
+# Lint and format-check the given (default: all tracked) Python files with ruff (used by prek).
+python-lint *files:
+    #!/usr/bin/env bash
+    set -eu
+    files=$(just _python-files "{{ files }}")
+    [ -n "$files" ] || exit 0
+    ruff check $files
+    ruff format --check $files
+
+# Type-check the given (default: all tracked) Python files with ty (used by prek).
+python-typecheck *files:
+    #!/usr/bin/env bash
+    set -eu
+    status=0
+    for f in $(just _python-files "{{ files }}"); do
+        # ty can't read PEP 723 metadata, so point it at the uv script environment.
+        python=()
+        if grep -qx '# /// script' "$f"; then
+            uv sync --quiet --script "$f"
+            python=(--python "$(uv python find --script "$f")")
+        fi
+        ty check "${python[@]}" "$f" || status=1
+    done
+    exit "$status"
+
 # Run all git hooks against every file.
 lint:
     prek run --all-files

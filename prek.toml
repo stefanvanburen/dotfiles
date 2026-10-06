@@ -49,6 +49,22 @@ hooks = [
     language = "system",
     files = "\\.md$",
   },
+  # Python scripts in `.local/bin` have no extension, so the recipes pick
+  # files by shebang instead of prek's `types`.
+  {
+    id = "python-lint",
+    name = "ruff (fix with `ruff check --fix` / `ruff format`)",
+    entry = "just python-lint",
+    language = "system",
+    types = ["text"],
+  },
+  {
+    id = "python-typecheck",
+    name = "ty",
+    entry = "just python-typecheck",
+    language = "system",
+    types = ["text"],
+  },
   # Without --quiet the failure output is the whole formatted file, not a delta.
   {
     id = "just-format-check",
