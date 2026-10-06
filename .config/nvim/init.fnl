@@ -971,17 +971,36 @@
 
 ;;; LSP
 
-;; gopls's formatting, which conform runs on save, only sorts existing imports;
-;; its organizeImports action also adds missing ones and drops unused ones.
+;; Servers whose organizeImports code action runs on save, alongside conform's
+;; formatting. gopls's action adds missing imports and drops unused ones,
+;; buf_ls's and tsc's drop unused ones, and ruff's and biome's only sort.
+(local organize-imports-on-save {:gopls true
+                                 :buf_ls true
+                                 :tsc true
+                                 :ruff true
+                                 :biome true})
+
 ;; Requested synchronously so the edit lands before the write.
 ;; https://go.dev/gopls/editor/vim#neovim-imports
-(fn organize-go-imports [client buf]
-  (let [params (vim.lsp.util.make_range_params 0 client.offset_encoding)]
-    (set params.context {:only [:source.organizeImports]})
-    (let [res (client:request_sync :textDocument/codeAction params 3000 buf)]
-      (each [_ action (ipairs (or (?. res :result) []))]
-        (when action.edit
-          (vim.lsp.util.apply_workspace_edit action.edit client.offset_encoding))))))
+(fn organize-imports [client buf]
+  ;; biome and tsc sort imports differently, and biome flags any other order,
+  ;; so biome's wins where both are attached.
+  (when (not (and (= client.name :tsc)
+                  (next (vim.lsp.get_clients {:bufnr buf :name :biome}))))
+    (let [params (vim.lsp.util.make_range_params 0 client.offset_encoding)]
+      (set params.context {:only [:source.organizeImports] :diagnostics []})
+      (let [res (client:request_sync :textDocument/codeAction params 3000 buf)]
+        (each [_ action (ipairs (or (?. res :result) []))]
+          ;; ruff and biome leave the edit out until the action is resolved.
+          (let [action (if (and (not action.edit)
+                                (client:supports_method :codeAction/resolve))
+                           (?. (client:request_sync :codeAction/resolve action
+                                                    3000 buf)
+                               :result)
+                           action)]
+            (when (?. action :edit)
+              (vim.lsp.util.apply_workspace_edit action.edit
+                                                 client.offset_encoding))))))))
 
 (fn lsp-attach [{: buf :data {: client_id}}]
   (local client (vim.lsp.get_client_by_id client_id))
@@ -990,14 +1009,14 @@
     (map :n :gro #(vim.lsp.buf.code_action {:context {:only [:source.organizeImports]}
                                             :apply true})
          {:buffer buf :desc "Organize Imports"}))
-  (when (= client.name :gopls)
-    (let [group (vim.api.nvim_create_augroup :gopls-organize-imports
+  (when (. organize-imports-on-save client.name)
+    (let [group (vim.api.nvim_create_augroup (.. :organize-imports- client.name)
                                              {:clear false})]
       (vim.api.nvim_clear_autocmds {: group :buffer buf})
       (vim.api.nvim_create_autocmd :BufWritePre
                                    {: group
                                     :buffer buf
-                                    :callback #(organize-go-imports client buf)})))
+                                    :callback #(organize-imports client buf)})))
   (when (client:supports_method :textDocument/inlayHint)
     (vim.lsp.inlay_hint.enable true {:bufnr buf}))
   (when (client:supports_method :textDocument/documentHighlight)

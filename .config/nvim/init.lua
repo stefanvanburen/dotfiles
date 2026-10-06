@@ -585,46 +585,71 @@ end
 map("n", "[r", _72_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>", {desc = "Clear search highlight"})
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_lines = true, underline = true, severity_sort = true, float = {border = "single", source = true, focusable = false}, virtual_text = false})
-local function organize_go_imports(client, buf)
-  local params = vim.lsp.util.make_range_params(0, client.offset_encoding)
-  params.context = {only = {"source.organizeImports"}}
-  local res = client:request_sync("textDocument/codeAction", params, 3000, buf)
-  local _74_
-  do
-    local t_73_ = res
-    if (nil ~= t_73_) then
-      t_73_ = t_73_.result
-    else
+local organize_imports_on_save = {gopls = true, buf_ls = true, tsc = true, ruff = true, biome = true}
+local function organize_imports(client, buf)
+  if not ((client.name == "tsc") and next(vim.lsp.get_clients({bufnr = buf, name = "biome"}))) then
+    local params = vim.lsp.util.make_range_params(0, client.offset_encoding)
+    params.context = {only = {"source.organizeImports"}, diagnostics = {}}
+    local res = client:request_sync("textDocument/codeAction", params, 3000, buf)
+    local _74_
+    do
+      local t_73_ = res
+      if (nil ~= t_73_) then
+        t_73_ = t_73_.result
+      else
+      end
+      _74_ = t_73_
     end
-    _74_ = t_73_
-  end
-  for _, action in ipairs((_74_ or {})) do
-    if action.edit then
-      vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
-    else
+    for _, action in ipairs((_74_ or {})) do
+      local action0
+      if (not action.edit and client:supports_method("codeAction/resolve")) then
+        local t_76_ = client:request_sync("codeAction/resolve", action, 3000, buf)
+        if (nil ~= t_76_) then
+          t_76_ = t_76_.result
+        else
+        end
+        action0 = t_76_
+      else
+        action0 = action
+      end
+      local _80_
+      do
+        local t_79_ = action0
+        if (nil ~= t_79_) then
+          t_79_ = t_79_.edit
+        else
+        end
+        _80_ = t_79_
+      end
+      if _80_ then
+        vim.lsp.util.apply_workspace_edit(action0.edit, client.offset_encoding)
+      else
+      end
     end
+    return nil
+  else
+    return nil
   end
-  return nil
 end
-local function lsp_attach(_77_)
-  local buf = _77_.buf
-  local _arg_78_ = _77_.data
-  local client_id = _arg_78_.client_id
+local function lsp_attach(_84_)
+  local buf = _84_.buf
+  local _arg_85_ = _84_.data
+  local client_id = _arg_85_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   if client:supports_method("textDocument/codeAction") then
-    local function _79_()
+    local function _86_()
       return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     end
-    map("n", "gro", _79_, {buffer = buf, desc = "Organize Imports"})
+    map("n", "gro", _86_, {buffer = buf, desc = "Organize Imports"})
   else
   end
-  if (client.name == "gopls") then
-    local group = vim.api.nvim_create_augroup("gopls-organize-imports", {clear = false})
+  if organize_imports_on_save[client.name] then
+    local group = vim.api.nvim_create_augroup(("organize-imports-" .. client.name), {clear = false})
     vim.api.nvim_clear_autocmds({group = group, buffer = buf})
-    local function _81_()
-      return organize_go_imports(client, buf)
+    local function _88_()
+      return organize_imports(client, buf)
     end
-    vim.api.nvim_create_autocmd("BufWritePre", {group = group, buffer = buf, callback = _81_})
+    vim.api.nvim_create_autocmd("BufWritePre", {group = group, buffer = buf, callback = _88_})
   else
   end
   if client:supports_method("textDocument/inlayHint") then
@@ -655,7 +680,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {group = vim.api.nvim_create_augroup("lsp-attach", {}), callback = lsp_attach})
 local schemastore = require("schemastore")
 local function venv_cmd(name)
-  local function _88_(dispatchers, config)
+  local function _95_(dispatchers, config)
     local venv_bin = (config.root_dir and (config.root_dir .. "/.venv/bin/" .. name))
     local bin
     if (venv_bin and vim.uv.fs_stat(venv_bin)) then
@@ -665,7 +690,7 @@ local function venv_cmd(name)
     end
     return vim.lsp.rpc.start({bin, "server"}, dispatchers)
   end
-  return _88_
+  return _95_
 end
 local function tsqueryrc_settings()
   local path = nil
