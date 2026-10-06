@@ -1093,8 +1093,7 @@
                         :postgres_lsp
                         :rust_analyzer
                         :tilt_ls
-                        :tombi
-                        :tsc])
+                        :tombi])
 
 (local server-settings
        {:gopls {;; https://go.dev/gopls/daemon
@@ -1128,6 +1127,14 @@
                                   :workspace {:checkThirdParty false
                                               :library [vim.env.VIMRUNTIME]}}}}
         :ty {:cmd (venv-cmd :ty)}
+        ;; tsc's formatter applies a style no project chose; TypeScript projects
+        ;; pick their own, and biome's server formats wherever a project is
+        ;; configured for it.
+        :tsc {:on_init (fn [client]
+                         (set client.server_capabilities.documentFormattingProvider
+                              false)
+                         (set client.server_capabilities.documentRangeFormattingProvider
+                              false))}
         :ts_query_ls {:settings (tsqueryrc-settings)}
         :gh_actions_ls {:filetypes [:yaml.github-actions]}
         ;; https://github.com/stefanvanburen/cells
