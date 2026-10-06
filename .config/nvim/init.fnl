@@ -1062,6 +1062,13 @@
                 :cmd [:gopls :-remote=auto]
                 :settings {:gopls {;; https://go.dev/gopls/settings#semantictokens-bool
                                    :semanticTokens true
+                                   ;; Tree-sitter tells keywords apart (`return`,
+                                   ;; `import`, `map`) and highlights escapes within
+                                   ;; strings; gopls's tokens for both are coarser
+                                   ;; and would cover that.
+                                   ;; https://go.dev/gopls/settings#semantictokentypes-mapstringbool
+                                   :semanticTokenTypes {:keyword false
+                                                        :string false}
                                    ;; https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
                                    :hints {:constantValues true}}}}
         ;;; https://github.com/b0o/SchemaStore.nvim#usage
