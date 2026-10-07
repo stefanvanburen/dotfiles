@@ -40,6 +40,12 @@ def beet(*args: str) -> str:
     ).stdout
 
 
+def osc_progress(state: int, percent: int = 0) -> None:
+    # OSC 9;4: 0 clears, 1 is normal, 2 is error; percent runs 0 to 100.
+    if sys.stdout.isatty():
+        print(f"\033]9;4;{state};{percent}\033\\", end="", flush=True)
+
+
 def get_artists(force: bool, query: list[str]) -> list[str]:
     # When not forcing, skip artists where every track already has lyrics
     lyrics_filter = [] if force else ["^lyrics::."]
@@ -49,18 +55,26 @@ def get_artists(force: bool, query: list[str]) -> list[str]:
 
 def fetch_for_artist(
     artist: str, force: bool, query: list[str]
-) -> tuple[str, str, str]:
+) -> tuple[str, str, str | None]:
+    # beets writes its log, "Lyrics not found" included, to stderr, so the
+    # exit status alone decides whether the run failed.
     cmd = ["beet", "lyrics"]
     if force:
         cmd.append("-f")
     cmd.extend([*query, f"albumartist:{artist}"])
     try:
         result = subprocess.run(
-            cmd, capture_output=True, text=True, timeout=ARTIST_TIMEOUT, check=False
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            timeout=ARTIST_TIMEOUT,
+            check=False,
         )
     except subprocess.TimeoutExpired:
         return artist, "", f"timed out after {ARTIST_TIMEOUT}s"
-    return artist, result.stdout.strip(), result.stderr.strip()
+    error = f"exited {result.returncode}" if result.returncode else None
+    return artist, result.stdout.strip(), error
 
 
 if __name__ == "__main__":
@@ -87,16 +101,22 @@ if __name__ == "__main__":
     print(f"Fetching lyrics for {total} artists ({WORKERS} in parallel)...")
 
     done = 0
-    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        futures = {
-            pool.submit(fetch_for_artist, artist, args.force, query): artist
-            for artist in artists
-        }
-        for future in as_completed(futures):
-            artist, stdout, stderr = future.result()
-            done += 1
-            print(f"[{done}/{total}] {artist}", flush=True)
-            for line in stdout.splitlines():
-                print(f"  {line}")
-            if stderr:
-                print(f"  ERROR: {stderr}", file=sys.stderr)
+    failed = False
+    try:
+        with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+            futures = {
+                pool.submit(fetch_for_artist, artist, args.force, query): artist
+                for artist in artists
+            }
+            for future in as_completed(futures):
+                artist, output, error = future.result()
+                done += 1
+                failed = failed or error is not None
+                osc_progress(2 if failed else 1, done * 100 // total)
+                print(f"[{done}/{total}] {artist}", flush=True)
+                for line in output.splitlines():
+                    print(f"  {line}")
+                if error:
+                    print(f"  ERROR: {error}", file=sys.stderr)
+    finally:
+        osc_progress(0)
