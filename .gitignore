@@ -22,7 +22,7 @@
 !/.local/bin/
 /.local/bin/*
 !/.local/bin/beet-music-sync
-!/.local/bin/beet-lyrics-parallel
+!/.local/bin/beet-lyrics
 !/.local/bin/sync-playlists
 !/.local/bin/git-trim
 /.npm

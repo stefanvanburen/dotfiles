@@ -3,15 +3,21 @@
 # requires-python = ">=3.14"
 # dependencies = []
 # ///
-"""Fetch lyrics for non-instrumental tracks in parallel, one worker per artist.
+"""Fetch lyrics with beets, one worker per album artist, skipping instrumentals.
+
+Tracks flagged instrumental through either the hand-maintained `instrumental`
+field or the `lyrics_instrumental` field that beets sets are excluded. The
+lyrics plugin skips a track only when its `lyrics` field is non-empty, and
+`lyrics.auto_ignore` applies only on import, so without the exclusion every
+run queries LRClib again for every instrumental track.
 
 Usage:
-    beet-lyrics-parallel [-f] [beets query...]
+    beet-lyrics [-f] [-a] [beets query...]
 
 Examples:
-    beet-lyrics-parallel                    # fetch for everything (skips tracks with lyrics)
-    beet-lyrics-parallel -f                 # refetch even if lyrics already exist
-    beet-lyrics-parallel albumartist:Burial # fetch for a specific artist
+    beet-lyrics                     # fetch for everything (skips tracks with lyrics)
+    beet-lyrics -f                  # refetch even if lyrics already exist
+    beet-lyrics albumartist:Burial  # fetch for a specific artist
 """
 
 import argparse
@@ -21,6 +27,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 WORKERS = 32
 
+ARTIST_TIMEOUT = (
+    120  # seconds; prevents a single stalled API call from blocking a worker
+)
+
+EXCLUDE_INSTRUMENTALS = ["^instrumental:true", "^lyrics_instrumental:true"]
+
 
 def beet(*args: str) -> str:
     return subprocess.run(
@@ -28,25 +40,20 @@ def beet(*args: str) -> str:
     ).stdout
 
 
-def get_artists(force: bool, query_args: list[str]) -> list[str]:
+def get_artists(force: bool, query: list[str]) -> list[str]:
     # When not forcing, skip artists where every track already has lyrics
     lyrics_filter = [] if force else ["^lyrics::."]
-    output = beet(
-        "list", "-f", "$albumartist", "^instrumental:true", *lyrics_filter, *query_args
-    )
+    output = beet("list", "-f", "$albumartist", *lyrics_filter, *query)
     return sorted({line.strip() for line in output.splitlines() if line.strip()})
 
 
-ARTIST_TIMEOUT = (
-    120  # seconds; prevents a single stalled API call from blocking a worker
-)
-
-
-def fetch_for_artist(artist: str, force: bool) -> tuple[str, str, str]:
+def fetch_for_artist(
+    artist: str, force: bool, query: list[str]
+) -> tuple[str, str, str]:
     cmd = ["beet", "lyrics"]
     if force:
         cmd.append("-f")
-    cmd.extend(["^instrumental:true", f"albumartist:{artist}"])
+    cmd.extend([*query, f"albumartist:{artist}"])
     try:
         result = subprocess.run(
             cmd, capture_output=True, text=True, timeout=ARTIST_TIMEOUT, check=False
@@ -54,21 +61,6 @@ def fetch_for_artist(artist: str, force: bool) -> tuple[str, str, str]:
     except subprocess.TimeoutExpired:
         return artist, "", f"timed out after {ARTIST_TIMEOUT}s"
     return artist, result.stdout.strip(), result.stderr.strip()
-
-
-def tag_lrclib_instrumentals() -> int:
-    # lrclib marks tracks as instrumental by storing "[Instrumental]" as lyrics;
-    # tag those with instrumental=true so future runs skip them entirely
-    result = subprocess.run(
-        ["beet", "modify", "-y", "lyrics::\\[Instrumental\\]", "instrumental=true"],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    for line in result.stdout.splitlines():
-        if line.startswith("Modifying"):
-            return int(line.split()[1])
-    return 0
 
 
 if __name__ == "__main__":
@@ -81,16 +73,23 @@ if __name__ == "__main__":
         action="store_true",
         help="refetch lyrics even if already present",
     )
+    parser.add_argument(
+        "-a",
+        "--all",
+        action="store_true",
+        help="don't exclude tracks flagged instrumental",
+    )
     args, query_args = parser.parse_known_args()
+    query = query_args if args.all else [*EXCLUDE_INSTRUMENTALS, *query_args]
 
-    artists = get_artists(args.force, query_args)
+    artists = get_artists(args.force, query)
     total = len(artists)
     print(f"Fetching lyrics for {total} artists ({WORKERS} in parallel)...")
 
     done = 0
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         futures = {
-            pool.submit(fetch_for_artist, artist, args.force): artist
+            pool.submit(fetch_for_artist, artist, args.force, query): artist
             for artist in artists
         }
         for future in as_completed(futures):
@@ -101,7 +100,3 @@ if __name__ == "__main__":
                 print(f"  {line}")
             if stderr:
                 print(f"  ERROR: {stderr}", file=sys.stderr)
-
-    tagged = tag_lrclib_instrumentals()
-    if tagged:
-        print(f"\nTagged {tagged} lrclib-instrumental track(s) as instrumental=true.")
