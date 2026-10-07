@@ -1,0 +1,3 @@
+;; cider is required for Conjure
+;; See https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
+{:middleware [cider.nrepl/cider-middleware]}

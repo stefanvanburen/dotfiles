@@ -4,6 +4,10 @@
 /.config/ghostty/config.local
 # clojure tools, not pinned / tracked
 /.config/clojure/tools
+# clojure-cli.repl state: input history, classpath cache, downloaded docs
+/.config/clojure/.cljconf/org.clojure/clojure-cli.repl/history
+/.config/clojure/.cljconf/org.clojure/clojure-cli.repl/.cpcache
+/.config/clojure/.cljconf/org.clojure/clojure-cli.repl/clojuredocs-export.json
 
 # contains sensitive information
 /.netrc

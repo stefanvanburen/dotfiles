@@ -1,0 +1,2 @@
+#_:clj-kondo/ignore
+{:aliases {:clojure-cli.repl/server {:extra-deps {cider/cider-nrepl {:mvn/version "RELEASE"}}}}}
