@@ -321,8 +321,83 @@
   (mini-misc.setup_auto_root)
   (map :n :<leader>z mini-misc.zoom {:desc "Toggle zoom of the current buffer"}))
 
+;; References GitHub autolinks in commit messages: `#8`, `GH-8`, and
+;; `owner/repo#8` for issues and pull requests; a SHA, `user@SHA`, and
+;; `owner/repo@SHA` for commits.
+;; https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls
+(local github-reference-patterns
+       (let [sha "[%da-f][%da-f][%da-f][%da-f][%da-f][%da-f][%da-f]+"
+             owner "%f[%w_.%-/][%w%-]+"
+             repo "/[%w_.%-]+"
+             word-end "%f[^%w_]"]
+         (icollect [_ pattern (ipairs ["%f[#%w_]#%d+"
+                                       "%f[%w_]GH%-%d+"
+                                       (.. owner repo "#%d+")
+                                       (.. "%f[%w_@]" sha)
+                                       (.. owner "@" sha)
+                                       (.. owner repo "@" sha)])]
+           #(when (= (. vim.bo $1 :filetype) :gitcommit)
+              (.. pattern word-end)))))
+
+(local github-reference-nodes
+       {:subject true :message_line true :trailer true :breaking_change true})
+
+;; Skips references outside the commit message (comments, the verbose diff)
+;; and SHA matches that are all digits or longer than a full SHA.
+(fn github-reference-group [buf text data]
+  (let [sha (or (text:match "@(%x+)$") (text:match "^%x+$"))
+        plausible-sha? (or (= nil sha)
+                           (and (<= (length sha) 40) (sha:find "%a")))]
+    (var node
+         (vim.treesitter.get_node {:bufnr buf
+                                   :pos [(- data.line 1) (- data.from_col 1)]}))
+    (while (and node (not (. github-reference-nodes (node:type))))
+      (set node (node:parent)))
+    (when (and node plausible-sha?)
+      "@markup.link")))
+
+;; The `owner/repo` of the GitHub `origin` remote for the repository `buf`
+;; lives in, cached in `b:github_repo` (`false` when there isn't one).
+(fn github-repo [buf]
+  (when (= nil (. vim.b buf :github_repo))
+    (let [dir (vim.fs.dirname (vim.api.nvim_buf_get_name buf))
+          result (: (vim.system [:git :-C dir :remote :get-url :origin]
+                                {:text true}) :wait)
+          remote (if (= result.code 0) (vim.trim result.stdout) "")]
+      (set (. vim.b buf :github_repo)
+           (or (: (remote:gsub "%.git$" "") :match
+                  "github%.com[:/]([^/]+/[^/]+)$") false))))
+  (or (. vim.b buf :github_repo) nil))
+
+;; The github.com path a reference matched by
+;; `github-reference-patterns` points to, resolving references without an
+;; `owner/repo` against `here`.
+(fn github-reference-path [text here]
+  (let [(repo issue) (text:match "^(.+/.+)#(%d+)$")
+        local-issue (or (text:match "^#(%d+)$") (text:match "^GH%-(%d+)$"))
+        (repo-commit repo-sha) (text:match "^(.+/.+)@(%x+)$")
+        (user user-sha) (text:match "^([^/]+)@(%x+)$")
+        sha (text:match "^%x+$")]
+    (if repo (.. repo :/issues/ issue)
+        (and local-issue here) (.. here :/issues/ local-issue)
+        repo-commit (.. repo-commit :/commit/ repo-sha)
+        (and user here) (.. user "/" (here:match "[^/]+$") :/commit/ user-sha)
+        (and sha here) (.. here :/commit/ sha))))
+
+;; Attaches the reference's URL to its highlight, which |gx| opens.
+(fn github-reference-extmark [buf text data]
+  (let [path (github-reference-path text (github-repo buf))]
+    {:hl_group data.hl_group
+     :end_row (- data.line 1)
+     :end_col data.to_col
+     :priority 200
+     :url (when path (.. "https://github.com/" path))}))
+
 (let [mini-hipatterns (require :mini.hipatterns)]
-  (mini-hipatterns.setup {:highlighters {:hex_color (mini-hipatterns.gen_highlighter.hex_color)
+  (mini-hipatterns.setup {:highlighters {:github_reference {:pattern github-reference-patterns
+                                                            :group github-reference-group
+                                                            :extmark_opts github-reference-extmark}
+                                         :hex_color (mini-hipatterns.gen_highlighter.hex_color)
                                          :fixme {:pattern :FIXME
                                                  :group :MiniHipatternsFixme}
                                          :hack {:pattern :HACK
