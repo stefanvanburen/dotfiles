@@ -79,6 +79,13 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
   state, keyed on the commit SHA. A background poll loop stays silent until the
   end.
 
+- Go tests should not run on the 10-minute default timeout. settings.json,
+  which the dotfiles do not track, sets `GOFLAGS=-timeout=120s` where it is
+  configured; if `go env GOFLAGS` has no timeout, pass `-timeout` explicitly.
+  Raise it on the command line for a known-slow package, lower it (e.g. `30s`)
+  when probing a suspected hang, and never set `GOFLAGS` in a command without
+  keeping a timeout in it.
+
 # Code
 
 - Comments describe the code as it is, not how it got there or why it changed.
