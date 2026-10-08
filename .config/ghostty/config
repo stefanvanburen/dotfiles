@@ -8,7 +8,7 @@ theme = light:Modus Operandi,dark:Modus Vivendi
 config-file = ?config.local
 
 # https://ghostty.org/docs/config/reference#cursor-color
-cursor-color = #EE483E
+cursor-color = #E8201A
 # https://ghostty.org/docs/config/reference#adjust-cursor-thickness
 # Make the cursor thicker.
 adjust-cursor-thickness = 3
