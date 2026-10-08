@@ -83,6 +83,11 @@ if status --is-interactive
     # Set up vi key bindings
     # https://fishshell.com/docs/current/interactive.html#vi-mode-commands
     set -g fish_key_bindings fish_vi_key_bindings
+    # Blinking cursor shapes per vi mode.
+    set -g fish_cursor_default block blink
+    set -g fish_cursor_insert line blink
+    set -g fish_cursor_replace_one underscore blink
+    set -g fish_cursor_visual block blink
 
     # jump is bound to `z`
     # https://github.com/gsamokovarov/jump#fish
