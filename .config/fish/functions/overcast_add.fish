@@ -86,7 +86,7 @@ function overcast_add --description 'Uploads audio files to Overcast.'
         set --local quoted (string replace --all '\\' '\\\\' -- $file | string replace --all '"' '\\"')
         echo "Uploading $file"
         # curl hides its progress meter when the response body goes to the
-        # terminal, so send S3's (empty, 204) response to /dev/null to get it.
+        # terminal, so send S3's (201, XML) response to /dev/null to get it.
         curl --fail --location --compressed --progress-bar --output /dev/null \
             --form-string bucket=uploads-overcast \
             --form-string key=$key \
@@ -94,6 +94,7 @@ function overcast_add --description 'Uploads audio files to Overcast.'
             --form-string acl=authenticated-read \
             --form-string policy=$policy \
             --form-string signature=$signature \
+            --form-string success_action_status=201 \
             --form-string Content-Type=$mime \
             --form "file=@\"$quoted\"" \
             --cookie $cookies \
