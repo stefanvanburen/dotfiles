@@ -1,7 +1,9 @@
 # https://ghostty.org/docs/config
 
 # https://ghostty.org/docs/config/reference#theme
-theme = light:Modus Operandi,dark:Modus Vivendi
+# Generated from mini.hues by ./mini-hues.lua; switch with the season to match
+# Nvim (smallseasons.guide boundaries: Feb 4, May 6, Aug 8, Nov 8).
+theme = light:miniautumn-light,dark:miniautumn-dark
 
 # typically configuring fonts - check ./config.fonts
 # https://ghostty.org/docs/config/reference#config-file
