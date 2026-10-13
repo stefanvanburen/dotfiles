@@ -362,7 +362,7 @@ do
   mason_lspconfig.setup({automatic_enable = false})
 end
 local function _35_()
-  require("nvim-treesitter.parsers")["go"]["install_info"] = {url = "https://github.com/stefanvanburen/tree-sitter-go", revision = "03134c6db568ad1c59b94ceaf383fb68ee5750eb"}
+  require("nvim-treesitter.parsers")["go"]["install_info"] = {url = "https://github.com/stefanvanburen/tree-sitter-go", revision = "30a4ee798e60df4400c156286e71a7449f1252f5"}
   return nil
 end
 vim.api.nvim_create_autocmd("User", {group = vim.api.nvim_create_augroup("treesitter-go-fork", {}), pattern = "TSUpdate", callback = _35_})

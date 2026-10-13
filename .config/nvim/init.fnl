@@ -577,7 +577,8 @@
   (mason-lspconfig.setup {:automatic_enable false}))
 
 ;; My fork of tree-sitter-go parses Go 1.26 `new(expr)`, Go 1.27 generic
-;; methods, and shadowed `make`/`new`, all of which upstream misparses.
+;; methods, Go 1.28 composite literals with inferred types, and shadowed
+;; `make`/`new`, all of which upstream misparses.
 ;; Bump the revision and run `:TSUpdate go` to pick up new commits.
 (vim.api.nvim_create_autocmd :User
                              {:group (vim.api.nvim_create_augroup :treesitter-go-fork
@@ -586,7 +587,7 @@
                               :callback #(tset (require :nvim-treesitter.parsers)
                                                :go :install_info
                                                {:url "https://github.com/stefanvanburen/tree-sitter-go"
-                                                :revision :03134c6db568ad1c59b94ceaf383fb68ee5750eb})})
+                                                :revision :30a4ee798e60df4400c156286e71a7449f1252f5})})
 
 ;; nvim-treesitter doesn't ship CEL, so register my fork of tree-sitter-cel,
 ;; which parses the optional syntax and backtick-escaped field names. Its
