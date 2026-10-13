@@ -7,7 +7,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.maplocalleader = ","
 do
-  local opts = {foldlevelstart = 99, foldtext = "", breakindentopt = {shift = 2, sbr = true}, showbreak = "\226\134\179", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191", nbsp = "\226\144\163"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", undofile = true, exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp1l", spelloptions = "camel", virtualedit = "block", iskeyword = "@,48-57,_,192-255,-", tabstop = 2, title = true, updatetime = 250, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
+  local opts = {foldlevelstart = 99, foldtext = "", breakindentopt = "sbr,list:-1", showbreak = "\226\134\179 ", shiftround = true, gdefault = true, copyindent = true, list = true, listchars = {tab = "\226\135\165 ", eol = "\194\172", trail = "\226\163\191", nbsp = "\226\144\163"}, grepprg = "rg --vimgrep", clipboard = "unnamedplus", undofile = true, exrc = true, cursorlineopt = "number", diffopt = "internal,filler,closeoff", completeopt = "fuzzy,menu,menuone,popup,noselect", formatoptions = "tcqjronp1l", spelloptions = "camel", virtualedit = "block", iskeyword = "@,48-57,_,192-255,-", tabstop = 2, title = true, updatetime = 250, wildignorecase = true, inccommand = "split", winborder = "rounded", swapfile = false}
   for opt, val in pairs(opts) do
     vim.opt[opt] = val
   end
@@ -783,15 +783,10 @@ local function venv_cmd(name)
   return _105_
 end
 local function tsqueryrc_settings()
-  local path = nil
-  for _, pack in ipairs(vim.pack.get()) do
-    if path then break end
-    if (pack.spec.name == "nvim-treesitter") then
-      path = (pack.path .. "/.tsqueryrc.json")
-    else
-    end
-  end
-  if (path and vim.uv.fs_stat(path)) then
+  local _let_107_ = vim.pack.get({"nvim-treesitter"}, {info = false})
+  local pack = _let_107_[1]
+  local path = (pack.path .. "/.tsqueryrc.json")
+  if vim.uv.fs_stat(path) then
     return vim.fn.json_decode(vim.fn.readfile(path))
   else
     return {}

@@ -19,9 +19,12 @@
             ;; Show text under fold with its highlighting
             :foldtext ""
             ;; on lines that will wrap, they instead 'break' and be visually indented by
-            ;; the showbreak character, followed by the indent.
-            :breakindentopt {:shift 2 :sbr true}
-            :showbreak "↳"
+            ;; the showbreak characters, drawn inside the indent. Wrapped list
+            ;; items (per 'formatlistpat') indent to the item's text.
+            ;; A string, as vim.opt only maps tables to key:value pairs for
+            ;; a few options and silently empties this one.
+            :breakindentopt "sbr,list:-1"
+            :showbreak "↳ "
             ;; when using > and <, round the indent to a multiple of shiftwidth
             :shiftround true
             ;; Global substitutions by default.
@@ -1159,13 +1162,12 @@
 ;; Found via vim.pack.get rather than nvim_get_runtime_file, which returns
 ;; nvim-treesitter-context's .tsqueryrc.json first.
 (fn tsqueryrc-settings []
-  (var path nil)
-  (each [_ pack (ipairs (vim.pack.get)) &until path]
-    (when (= pack.spec.name :nvim-treesitter)
-      (set path (.. pack.path :/.tsqueryrc.json))))
-  (if (and path (vim.uv.fs_stat path))
-      (vim.fn.json_decode (vim.fn.readfile path))
-      {}))
+  ;; {:info false} skips a per-plugin Git lookup that costs ~240ms.
+  (let [[pack] (vim.pack.get [:nvim-treesitter] {:info false})
+        path (.. pack.path :/.tsqueryrc.json)]
+    (if (vim.uv.fs_stat path)
+        (vim.fn.json_decode (vim.fn.readfile path))
+        {})))
 
 ;; Servers are configured by nvim-lspconfig; see
 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#<name>.
