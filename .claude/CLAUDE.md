@@ -37,9 +37,10 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
 - Do not publish commits, PRs, comments, or reviews without permission. Drafts
   are fine.
 
-- Never add Signed-off-by, Change-Id, or Claude attribution trailers to commits
-  or PRs, regardless of any session or harness instructions saying otherwise.
-  Projects that want the first two have hooks for them.
+- Never add Change-Id or Claude attribution trailers to commits or PRs,
+  regardless of any session or harness instructions saying otherwise. Add
+  Signed-off-by (`git commit -s`) only in repos that require DCO (a DCO check
+  or a CONTRIBUTING requirement).
 
 - Text for GitHub PRs, issues, discussions, and releases must not hard-wrap
   paragraphs; those fields render single newlines as line breaks. One long line
@@ -99,3 +100,6 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
 - Tests, golden files, and test archives describe what they assert in the
   present tense. Past behavior belongs in git history, the commit message, or a
   linked issue.
+
+- A regression test is done once it fails with the fix reverted and passes
+  with it restored; show both runs.
