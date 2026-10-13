@@ -76,6 +76,8 @@ def primary_artist(artist: str) -> str:
 
 
 def normalize_title(title: str) -> str:
+    # Music.app keeps only the first 255 code points of a track name
+    title = title[:255]
     # macOS can't use '/', ':' in filenames and swaps them for '_'; treat as equivalent
     title = _RE_CHAR_SUBS.sub(" ", title)
     return _RE_WHITESPACE.sub(" ", title).casefold().strip()
