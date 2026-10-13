@@ -194,3 +194,8 @@
 	; Sort treating tag names as versions.
 	sort = version:refname
 	gpgSign = true
+
+[http]
+	; Gerrit credentials for go.googlesource.com, kept out of this repo by
+	; ~/.gitignore.
+	cookiefile = ~/.gitcookies

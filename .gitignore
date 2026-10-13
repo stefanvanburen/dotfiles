@@ -11,6 +11,8 @@
 
 # contains sensitive information
 /.netrc
+# Gerrit credentials for Go contributions, from https://go.googlesource.com/new-password
+/.gitcookies
 # GPG keyrings and trust database
 /.gnupg
 # npm configuration - can contain sensitive information
