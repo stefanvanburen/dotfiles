@@ -373,7 +373,7 @@ end
 vim.api.nvim_create_autocmd("User", {group = vim.api.nvim_create_augroup("treesitter-cel-fork", {}), pattern = "TSUpdate", callback = _36_})
 do
   local treesitter = require("nvim-treesitter")
-  local treesitter_parsers = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "cel", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "go", "gomod", "gosum", "gotmpl", "helm", "html", "http", "janet_simple", "java", "javascript", "json", "json5", "jsx", "just", "kotlin", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "ruby", "sql", "ssh_config", "starlark", "textproto", "toml", "tsx", "typescript", "vhs", "xml", "yaml", "zig"}
+  local treesitter_parsers = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "cel", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "go", "gomod", "gosum", "gotmpl", "helm", "html", "http", "janet_simple", "java", "javascript", "json", "json5", "jsx", "just", "kotlin", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "ruby", "rust", "sql", "ssh_config", "starlark", "textproto", "toml", "tsx", "typescript", "vhs", "xml", "yaml", "zig"}
   treesitter.install(treesitter_parsers)
   local function _37_(args)
     if pcall(vim.treesitter.start, args.buf) then
@@ -447,11 +447,14 @@ local function seasonal_colorscheme()
     return nil
   end
 end
+local constant_highlights = {["@lsp.mod.readonly.go"] = {link = "@constant"}, ["@lsp.typemod.variable.defaultLibrary.go"] = {link = "@constant.builtin"}, ["@lsp.typemod.variable.static.go"] = {}, ["@lsp.mod.readonly.python"] = {link = "@constant"}}
 local function _45_()
-  vim.api.nvim_set_hl(0, "@lsp.mod.readonly.go", {link = "@constant"})
-  return vim.api.nvim_set_hl(0, "@lsp.typemod.variable.defaultLibrary.go", {link = "@constant.builtin"})
+  for group, hl in pairs(constant_highlights) do
+    vim.api.nvim_set_hl(0, group, hl)
+  end
+  return nil
 end
-vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("lsp-go-constants", {}), callback = _45_})
+vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("lsp-constants", {}), callback = _45_})
 vim.cmd.colorscheme(seasonal_colorscheme())
 local function _46_()
   return vim.cmd.colorscheme(seasonal_colorscheme())

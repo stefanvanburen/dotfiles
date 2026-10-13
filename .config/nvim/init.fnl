@@ -647,6 +647,7 @@
                           :python
                           :requirements
                           :ruby
+                          :rust
                           :sql
                           :ssh_config
                           :starlark
@@ -717,21 +718,27 @@
       11 (if (< now.day 8) :miniautumn :miniwinter)
       12 :miniwinter)))
 
-;; gopls marks Go constants as readonly variables, and mini.hues leaves that
-;; modifier unlinked, so the variable color would cover tree-sitter's
-;; @constant. Scoped to Go because TypeScript servers mark every `const`
-;; binding readonly, whether or not its value is constant. `iota` is also
-;; readonly, so the more specific defaultLibrary link keeps it a builtin.
+;; Semantic-token highlights that colorschemes get wrong for constants. Each
+;; is scoped to one language because the same token means different things
+;; per server: TypeScript servers mark every `const` binding readonly,
+;; whether or not its value is constant.
+(local constant-highlights
+       {;; gopls marks constants readonly. mini.hues leaves the modifier
+        ;; unlinked, so the variable color covers tree-sitter's @constant.
+        "@lsp.mod.readonly.go" {:link "@constant"}
+        ;; `iota` is readonly too; this more specific group keeps it a builtin.
+        "@lsp.typemod.variable.defaultLibrary.go" {:link "@constant.builtin"}
+        ;; gopls marks package-level `var`s static, which modus links to
+        ;; @constant. Cleared, tree-sitter's @variable shows through.
+        "@lsp.typemod.variable.static.go" {}
+        ;; ty marks ALL_CAPS names readonly, matching tree-sitter's @constant.
+        "@lsp.mod.readonly.python" {:link "@constant"}})
+
 (vim.api.nvim_create_autocmd :ColorScheme
-                             {:group (vim.api.nvim_create_augroup :lsp-go-constants
+                             {:group (vim.api.nvim_create_augroup :lsp-constants
                                                                   {})
-                              :callback (fn []
-                                          (vim.api.nvim_set_hl 0
-                                                               "@lsp.mod.readonly.go"
-                                                               {:link "@constant"})
-                                          (vim.api.nvim_set_hl 0
-                                                               "@lsp.typemod.variable.defaultLibrary.go"
-                                                               {:link "@constant.builtin"}))})
+                              :callback #(each [group hl (pairs constant-highlights)]
+                                           (vim.api.nvim_set_hl 0 group hl))})
 
 (vim.cmd.colorscheme (seasonal-colorscheme))
 
