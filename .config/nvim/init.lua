@@ -361,21 +361,35 @@ do
   local mason_lspconfig = require("mason-lspconfig")
   mason_lspconfig.setup({automatic_enable = false})
 end
-local function _35_()
-  require("nvim-treesitter.parsers")["go"]["install_info"] = {url = "https://github.com/stefanvanburen/tree-sitter-go", revision = "30a4ee798e60df4400c156286e71a7449f1252f5"}
+local function parser_fork(url, branch)
+  local head
+  if (vim.v.vim_did_enter == 1) then
+    local result = vim.system({"git", "ls-remote", url, ("refs/heads/" .. branch)}, {text = true, timeout = 10000}):wait()
+    if (result.code == 0) then
+      head = result.stdout:match("^%x+")
+    else
+      head = nil
+    end
+  else
+    head = nil
+  end
+  return {url = url, branch = branch, revision = head}
+end
+local function _37_()
+  require("nvim-treesitter.parsers")["go"]["install_info"] = parser_fork("https://github.com/stefanvanburen/tree-sitter-go", "master")
   return nil
 end
-vim.api.nvim_create_autocmd("User", {group = vim.api.nvim_create_augroup("treesitter-go-fork", {}), pattern = "TSUpdate", callback = _35_})
-local function _36_()
-  require("nvim-treesitter.parsers")["cel"] = {install_info = {url = "https://github.com/stefanvanburen/tree-sitter-cel", revision = "fcfb876675863476f74a6f2a6671e0f170168b0d"}}
+vim.api.nvim_create_autocmd("User", {group = vim.api.nvim_create_augroup("treesitter-go-fork", {}), pattern = "TSUpdate", callback = _37_})
+local function _38_()
+  require("nvim-treesitter.parsers")["cel"] = {install_info = parser_fork("https://github.com/stefanvanburen/tree-sitter-cel", "main")}
   return nil
 end
-vim.api.nvim_create_autocmd("User", {group = vim.api.nvim_create_augroup("treesitter-cel-fork", {}), pattern = "TSUpdate", callback = _36_})
+vim.api.nvim_create_autocmd("User", {group = vim.api.nvim_create_augroup("treesitter-cel-fork", {}), pattern = "TSUpdate", callback = _38_})
 do
   local treesitter = require("nvim-treesitter")
   local treesitter_parsers = {"c", "lua", "vim", "vimdoc", "query", "bash", "c_sharp", "cel", "clojure", "comment", "css", "diff", "djot", "dockerfile", "editorconfig", "fennel", "fish", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "go", "gomod", "gosum", "gotmpl", "helm", "html", "http", "janet_simple", "java", "javascript", "json", "json5", "jsx", "just", "kotlin", "make", "markdown", "markdown_inline", "proto", "python", "requirements", "ruby", "rust", "sql", "ssh_config", "starlark", "textproto", "toml", "tsx", "typescript", "vhs", "xml", "yaml", "zig"}
   treesitter.install(treesitter_parsers)
-  local function _37_(args)
+  local function _39_(args)
     if pcall(vim.treesitter.start, args.buf) then
       vim.wo[0][0]["foldexpr"] = "v:lua.vim.treesitter.foldexpr()"
       vim.wo[0][0]["foldmethod"] = "expr"
@@ -384,7 +398,7 @@ do
       return nil
     end
   end
-  vim.api.nvim_create_autocmd("FileType", {group = vim.api.nvim_create_augroup("treesitter", {}), callback = _37_})
+  vim.api.nvim_create_autocmd("FileType", {group = vim.api.nvim_create_augroup("treesitter", {}), callback = _39_})
 end
 do
   local filetype_to_langs = {c_sharp = {"csharp"}, bash = {"shellsession", "console", "shell_session"}, objc = {"objectivec"}, proto = {"protobuf"}, yaml = {"buf-config", "yaml.github-actions"}, starlark = {"tiltfile"}}
@@ -402,64 +416,64 @@ do
 end
 local function seasonal_colorscheme()
   local now = os.date("*t")
-  local case_39_ = now.month
-  if (case_39_ == 1) then
+  local case_41_ = now.month
+  if (case_41_ == 1) then
     return "miniwinter"
-  elseif (case_39_ == 2) then
+  elseif (case_41_ == 2) then
     if (now.day < 4) then
       return "miniwinter"
     else
       return "minispring"
     end
-  elseif (case_39_ == 3) then
+  elseif (case_41_ == 3) then
     return "minispring"
-  elseif (case_39_ == 4) then
+  elseif (case_41_ == 4) then
     return "minispring"
-  elseif (case_39_ == 5) then
+  elseif (case_41_ == 5) then
     if (now.day < 6) then
       return "minispring"
     else
       return "minisummer"
     end
-  elseif (case_39_ == 6) then
+  elseif (case_41_ == 6) then
     return "minisummer"
-  elseif (case_39_ == 7) then
+  elseif (case_41_ == 7) then
     return "minisummer"
-  elseif (case_39_ == 8) then
+  elseif (case_41_ == 8) then
     if (now.day < 8) then
       return "minisummer"
     else
       return "miniautumn"
     end
-  elseif (case_39_ == 9) then
+  elseif (case_41_ == 9) then
     return "miniautumn"
-  elseif (case_39_ == 10) then
+  elseif (case_41_ == 10) then
     return "miniautumn"
-  elseif (case_39_ == 11) then
+  elseif (case_41_ == 11) then
     if (now.day < 8) then
       return "miniautumn"
     else
       return "miniwinter"
     end
-  elseif (case_39_ == 12) then
+  elseif (case_41_ == 12) then
     return "miniwinter"
   else
     return nil
   end
 end
 local constant_highlights = {["@lsp.mod.readonly.go"] = {link = "@constant"}, ["@lsp.typemod.variable.defaultLibrary.go"] = {link = "@constant.builtin"}, ["@lsp.typemod.variable.static.go"] = {}, ["@lsp.mod.readonly.python"] = {link = "@constant"}}
-local function _45_()
+local function _47_()
   for group, hl in pairs(constant_highlights) do
     vim.api.nvim_set_hl(0, group, hl)
   end
   return nil
 end
-vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("lsp-constants", {}), callback = _45_})
+vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("lsp-constants", {}), callback = _47_})
 vim.cmd.colorscheme(seasonal_colorscheme())
-local function _46_()
+local function _48_()
   return vim.cmd.colorscheme(seasonal_colorscheme())
 end
-vim.api.nvim_create_autocmd("OptionSet", {group = vim.api.nvim_create_augroup("background", {}), nested = true, pattern = "background", callback = _46_})
+vim.api.nvim_create_autocmd("OptionSet", {group = vim.api.nvim_create_augroup("background", {}), nested = true, pattern = "background", callback = _48_})
 vim.api.nvim_create_autocmd("VimResized", {group = vim.api.nvim_create_augroup("resize", {}), command = ":wincmd ="})
 local fileline_patterns = {"^(.+):(%d+):(%d+):?$", "^(.+):(%d+):?$", "^(.+)%((%d+):(%d+)%)$", "^(.+)%((%d+)%)$", "^(.+)#L(%d+)-L?%d+$", "^(.+)#L(%d+)$"}
 local function parse_fileline(name)
@@ -484,14 +498,14 @@ local function fileline_jump(args)
   if (parsed and (1 == vim.fn.filereadable(parsed.file))) then
     local orphan = args.buf
     vim.cmd.edit({args = {vim.fn.fnameescape(parsed.file)}, mods = {keepalt = true}})
-    local function _49_()
+    local function _51_()
       if vim.api.nvim_buf_is_valid(orphan) then
         return vim.api.nvim_buf_delete(orphan, {})
       else
         return nil
       end
     end
-    vim.schedule(_49_)
+    vim.schedule(_51_)
     do
       local lnum = math.max(1, math.min(parsed.line, vim.api.nvim_buf_line_count(0)))
       local ccol
@@ -514,13 +528,13 @@ local go_template = {expandtab = true, shiftwidth = 2, commentstring = "{{/* %s 
 local four_space_hash = {expandtab = true, shiftwidth = 4, commentstring = "# %s"}
 local git_folds = {foldmethod = "expr", foldexpr = "v:lua.MiniGit.diff_foldexpr()"}
 local filetype_settings = {go = {textwidth = 100, expandtab = false}, javascript = two_space, javascriptreact = two_space, typescript = two_space, typescriptreact = two_space, html = two_space, css = two_space, cs = {commentstring = "// %s"}, helm = go_template, gotmpl = go_template, fish = four_space_hash, yaml = two_space, ["buf-config"] = two_space, svg = two_space, json = two_space, json5 = two_space, bash = two_space, toml = two_space, python = four_space, xml = four_space, starlark = four_space_hash, proto = {expandtab = true, shiftwidth = 2, commentstring = "// %s", cindent = true}, gitcommit = {spell = true}, gitconfig = {shiftwidth = 2, expandtab = false}, git = git_folds, diff = git_folds, fennel = {commentstring = ";; %s"}, sql = {wrap = true, commentstring = "-- %s", expandtab = true, shiftwidth = 4}, clojure = {expandtab = true, textwidth = 80}, kotlin = {commentstring = "// %s"}, just = {expandtab = true, shiftwidth = 4}, markdown = {spell = true, wrap = true, expandtab = false}}
-local _53_
+local _55_
 do
   local tmp_9_ = vim.tbl_keys(filetype_settings)
   table.insert(tmp_9_, "yaml.github-actions")
-  _53_ = tmp_9_
+  _55_ = tmp_9_
 end
-local function _54_(args)
+local function _56_(args)
   local ft = args.match
   local settings = (filetype_settings[ft] or filetype_settings[string.match(ft, "^([^.]+)")])
   if settings then
@@ -532,8 +546,8 @@ local function _54_(args)
     return nil
   end
 end
-vim.api.nvim_create_autocmd("FileType", {group = vim.api.nvim_create_augroup("filetypes", {}), pattern = _53_, callback = _54_})
-local function _56_(_path, bufnr)
+vim.api.nvim_create_autocmd("FileType", {group = vim.api.nvim_create_augroup("filetypes", {}), pattern = _55_, callback = _56_})
+local function _58_(_path, bufnr)
   local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1]
   if (first_line and string.match(first_line, "^#!.*%f[%w]bash%f[%W]")) then
     return "bash"
@@ -541,10 +555,10 @@ local function _56_(_path, bufnr)
     return nil
   end
 end
-vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl", theme = "fish", ["code-workspace"] = "jsonc", sh = _56_}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.yaml"] = "buf-config", ["buf.gen.yaml"] = "buf-config", ["buf.policy.yaml"] = "buf-config", ["buf.lock"] = "buf-config", ["uv.lock"] = "toml", Tiltfile = "tiltfile", [".envrc"] = "bash", [".envrc.local"] = "bash", [".helmignore"] = "gitignore", ["Chart.lock"] = "yaml", ["manifest.lock"] = "json"}, pattern = {[".*/%.github/workflows/.*%.ya?ml"] = "yaml.github-actions", [".*%.go%.tpl"] = "gotmpl", [".*%.go%.tmpl"] = "gotmpl", [".*/charts/.*%.ya?ml%.tpl"] = "helm"}})
+vim.filetype.add({extension = {mdx = "markdown", star = "starlark", gotext = "gotmpl", gotmpl = "gotmpl", theme = "fish", ["code-workspace"] = "jsonc", sh = _58_}, filename = {[".ignore"] = "gitignore", [".dockerignore"] = "gitignore", ["buf.yaml"] = "buf-config", ["buf.gen.yaml"] = "buf-config", ["buf.policy.yaml"] = "buf-config", ["buf.lock"] = "buf-config", ["uv.lock"] = "toml", Tiltfile = "tiltfile", [".envrc"] = "bash", [".envrc.local"] = "bash", [".helmignore"] = "gitignore", ["Chart.lock"] = "yaml", ["manifest.lock"] = "json"}, pattern = {[".*/%.github/workflows/.*%.ya?ml"] = "yaml.github-actions", [".*%.go%.tpl"] = "gotmpl", [".*%.go%.tmpl"] = "gotmpl", [".*/charts/.*%.ya?ml%.tpl"] = "helm"}})
 do
   local template_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "templates")
-  local function _58_(args)
+  local function _60_(args)
     local fname = vim.fs.basename(args.file)
     local ext = vim.fn.fnamemodify(args.file, ":e")
     local ft = vim.bo[args.buf].filetype
@@ -566,85 +580,85 @@ do
     end
     return nil
   end
-  vim.api.nvim_create_autocmd("BufNewFile", {group = vim.api.nvim_create_augroup("templates", {}), pattern = "*", callback = _58_})
+  vim.api.nvim_create_autocmd("BufNewFile", {group = vim.api.nvim_create_augroup("templates", {}), pattern = "*", callback = _60_})
 end
 map("n", "<leader>du", vim.pack.update, {desc = "Update plugins"})
-local function _61_()
+local function _63_()
   return vim.cmd({cmd = "Mason"})
 end
-map("n", "<leader>ma", _61_, {desc = ":Mason"})
-local function _62_()
+map("n", "<leader>ma", _63_, {desc = ":Mason"})
+local function _64_()
   return vim.cmd({cmd = "checkhealth"})
 end
-map("n", "<leader>ch", _62_, {desc = ":checkhealth"})
+map("n", "<leader>ch", _64_, {desc = ":checkhealth"})
 map("n", ";", ":", {desc = "Enter command mode"})
-local function _63_()
+local function _65_()
   return vim.cmd({cmd = "Git", mods = {vertical = true}})
 end
-map("n", "<leader>gs", _63_, {desc = "Open :Git in a vertical split"})
-local function _64_()
+map("n", "<leader>gs", _65_, {desc = "Open :Git in a vertical split"})
+local function _66_()
   return vim.cmd({cmd = "Gwrite"})
 end
-map("n", "<leader>gw", _64_, {desc = ":Gwrite"})
-local function _65_()
+map("n", "<leader>gw", _66_, {desc = ":Gwrite"})
+local function _67_()
   return vim.cmd({cmd = "Git", args = {"commit"}})
 end
-map("n", "<leader>gc", _65_, {desc = ":Git commit"})
-local function _66_()
+map("n", "<leader>gc", _67_, {desc = ":Git commit"})
+local function _68_()
   return vim.cmd({cmd = "Git", args = {"push"}})
 end
-map("n", "<leader>gp", _66_, {desc = ":Git push"})
-local function _67_()
+map("n", "<leader>gp", _68_, {desc = ":Git push"})
+local function _69_()
   return vim.cmd({cmd = "Git", args = {"blame"}})
 end
-map("n", "<leader>gb", _67_, {desc = ":Git blame"})
-local function _68_()
+map("n", "<leader>gb", _69_, {desc = ":Git blame"})
+local function _70_()
   return vim.cmd({cmd = "PR"})
 end
-map("n", "<leader>gP", _68_, {desc = ":PR"})
-local function _69_()
+map("n", "<leader>gP", _70_, {desc = ":PR"})
+local function _71_()
   return vim.cmd({cmd = "Issue"})
 end
-map("n", "<leader>gI", _69_, {desc = ":Issue"})
-local function _70_()
+map("n", "<leader>gI", _71_, {desc = ":Issue"})
+local function _72_()
   return vim.cmd({cmd = "CI"})
 end
-map("n", "<leader>gA", _70_, {desc = ":CI"})
-local function _71_()
+map("n", "<leader>gA", _72_, {desc = ":CI"})
+local function _73_()
   if (vim.v.count ~= 0) then
     return "j"
   else
     return "gj"
   end
 end
-map({"n", "v"}, "j", _71_, {expr = true, desc = "Down by visual line (gj when no count)"})
-local function _73_()
+map({"n", "v"}, "j", _73_, {expr = true, desc = "Down by visual line (gj when no count)"})
+local function _75_()
   if (vim.v.count ~= 0) then
     return "k"
   else
     return "gk"
   end
 end
-map({"n", "v"}, "k", _73_, {expr = true, desc = "Up by visual line (gk when no count)"})
+map({"n", "v"}, "k", _75_, {expr = true, desc = "Up by visual line (gk when no count)"})
 map({"n", "v"}, "<tab>", "%", {remap = true, desc = "Navigate between matching brackets"})
 for keymap, file in pairs({["<leader>ef"] = "$HOME/.config/fish/config.fish", ["<leader>egi"] = "$HOME/.config/git/config", ["<leader>ego"] = "$HOME/.config/ghostty/config", ["<leader>ev"] = "$HOME/.config/nvim/init.fnl"}) do
-  local function _75_()
+  local function _77_()
     return vim.cmd({cmd = "edit", args = {file}})
   end
-  map("n", keymap, _75_, {desc = (":edit " .. file)})
+  map("n", keymap, _77_, {desc = (":edit " .. file)})
 end
-local function _76_()
+local function _78_()
   return vim.cmd({cmd = "write"})
 end
-map("n", "<leader>w", _76_, {desc = ":write the buffer to the file"})
-local function _77_()
+map("n", "<leader>w", _78_, {desc = ":write the buffer to the file"})
+local function _79_()
   return vim.cmd({cmd = "split"})
 end
-map("n", "<leader>ss", _77_, {desc = "Create a horizontal split"})
-local function _78_()
+map("n", "<leader>ss", _79_, {desc = "Create a horizontal split"})
+local function _80_()
   return vim.cmd({cmd = "vsplit"})
 end
-map("n", "<leader>vs", _78_, {desc = "Create a vertical split"})
+map("n", "<leader>vs", _80_, {desc = "Create a vertical split"})
 map("n", "Q", "@@", {desc = "Repeat last macro"})
 map("n", "0", "^", {desc = "Go to first non-whitespace character"})
 map("n", "^", "0", {desc = "Go to first column in the line"})
@@ -657,25 +671,25 @@ map("n", "C", "\"_C", {desc = "Change to end of line, black-hole register"})
 map("n", "J", "mzJ`z", {desc = "Join lines, keep cursor position"})
 map("x", "<", "<gv", {desc = "Indent left, keep selection"})
 map("x", ">", ">gv", {desc = "Indent right, keep selection"})
-local function _79_()
+local function _81_()
   return vim.show_pos()
 end
-map("n", "<leader>i", _79_, {desc = "Inspect position (treesitter/syntax)"})
+map("n", "<leader>i", _81_, {desc = "Inspect position (treesitter/syntax)"})
 map("i", "<c-k>", "<esc>", {desc = "Escape insert mode"})
 map("c", "<c-k>", "<c-c>", {desc = "Cancel cmdline"})
 map("t", "<c-k>", "<c-\\><c-n>", {desc = "Exit terminal mode"})
-local function _80_()
+local function _82_()
   return vim.cmd({cmd = "tabnew"})
 end
-map("n", "<leader>tn", _80_, {desc = "Create a new tab"})
-local function _81_()
+map("n", "<leader>tn", _82_, {desc = "Create a new tab"})
+local function _83_()
   return vim.cmd({cmd = "tabnext"})
 end
-map("n", "]r", _81_, {desc = "Go to next tab"})
-local function _82_()
+map("n", "]r", _83_, {desc = "Go to next tab"})
+local function _84_()
   return vim.cmd({cmd = "tabprev"})
 end
-map("n", "[r", _82_, {desc = "Go to prev tab"})
+map("n", "[r", _84_, {desc = "Go to prev tab"})
 map("n", "<C-l>", ":nohlsearch<cr>", {desc = "Clear search highlight"})
 vim.diagnostic.config({signs = {text = {[vim.diagnostic.severity.ERROR] = "\195\151", [vim.diagnostic.severity.WARN] = "!", [vim.diagnostic.severity.INFO] = "\226\156\179\239\184\142", [vim.diagnostic.severity.HINT] = "?"}}, virtual_lines = true, underline = true, severity_sort = true, float = {border = "single", source = true, focusable = false}, virtual_text = false})
 local organize_imports_on_save = {gopls = true, buf_ls = true, tsc = true, ruff = true, biome = true}
@@ -684,37 +698,37 @@ local function organize_imports(client, buf)
     local params = vim.lsp.util.make_range_params(0, client.offset_encoding)
     params.context = {only = {"source.organizeImports"}, diagnostics = {}}
     local res = client:request_sync("textDocument/codeAction", params, 3000, buf)
-    local _84_
+    local _86_
     do
-      local t_83_ = res
-      if (nil ~= t_83_) then
-        t_83_ = t_83_.result
+      local t_85_ = res
+      if (nil ~= t_85_) then
+        t_85_ = t_85_.result
       else
       end
-      _84_ = t_83_
+      _86_ = t_85_
     end
-    for _, action in ipairs((_84_ or {})) do
+    for _, action in ipairs((_86_ or {})) do
       local action0
       if (not action.edit and client:supports_method("codeAction/resolve")) then
-        local t_86_ = client:request_sync("codeAction/resolve", action, 3000, buf)
-        if (nil ~= t_86_) then
-          t_86_ = t_86_.result
+        local t_88_ = client:request_sync("codeAction/resolve", action, 3000, buf)
+        if (nil ~= t_88_) then
+          t_88_ = t_88_.result
         else
         end
-        action0 = t_86_
+        action0 = t_88_
       else
         action0 = action
       end
-      local _90_
+      local _92_
       do
-        local t_89_ = action0
-        if (nil ~= t_89_) then
-          t_89_ = t_89_.edit
+        local t_91_ = action0
+        if (nil ~= t_91_) then
+          t_91_ = t_91_.edit
         else
         end
-        _90_ = t_89_
+        _92_ = t_91_
       end
-      if _90_ then
+      if _92_ then
         vim.lsp.util.apply_workspace_edit(action0.edit, client.offset_encoding)
       else
       end
@@ -724,25 +738,25 @@ local function organize_imports(client, buf)
     return nil
   end
 end
-local function lsp_attach(_94_)
-  local buf = _94_.buf
-  local _arg_95_ = _94_.data
-  local client_id = _arg_95_.client_id
+local function lsp_attach(_96_)
+  local buf = _96_.buf
+  local _arg_97_ = _96_.data
+  local client_id = _arg_97_.client_id
   local client = vim.lsp.get_client_by_id(client_id)
   if client:supports_method("textDocument/codeAction") then
-    local function _96_()
+    local function _98_()
       return vim.lsp.buf.code_action({context = {only = {"source.organizeImports"}}, apply = true})
     end
-    map("n", "gro", _96_, {buffer = buf, desc = "Organize Imports"})
+    map("n", "gro", _98_, {buffer = buf, desc = "Organize Imports"})
   else
   end
   if organize_imports_on_save[client.name] then
     local group = vim.api.nvim_create_augroup(("organize-imports-" .. client.name), {clear = false})
     vim.api.nvim_clear_autocmds({group = group, buffer = buf})
-    local function _98_()
+    local function _100_()
       return organize_imports(client, buf)
     end
-    vim.api.nvim_create_autocmd("BufWritePre", {group = group, buffer = buf, callback = _98_})
+    vim.api.nvim_create_autocmd("BufWritePre", {group = group, buffer = buf, callback = _100_})
   else
   end
   if client:supports_method("textDocument/inlayHint") then
@@ -773,7 +787,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {group = vim.api.nvim_create_augroup("lsp-attach", {}), callback = lsp_attach})
 local schemastore = require("schemastore")
 local function venv_cmd(name)
-  local function _105_(dispatchers, config)
+  local function _107_(dispatchers, config)
     local venv_bin = (config.root_dir and (config.root_dir .. "/.venv/bin/" .. name))
     local bin
     if (venv_bin and vim.uv.fs_stat(venv_bin)) then
@@ -783,11 +797,11 @@ local function venv_cmd(name)
     end
     return vim.lsp.rpc.start({bin, "server"}, dispatchers)
   end
-  return _105_
+  return _107_
 end
 local function tsqueryrc_settings()
-  local _let_107_ = vim.pack.get({"nvim-treesitter"}, {info = false})
-  local pack = _let_107_[1]
+  local _let_109_ = vim.pack.get({"nvim-treesitter"}, {info = false})
+  local pack = _let_109_[1]
   local path = (pack.path .. "/.tsqueryrc.json")
   if vim.uv.fs_stat(path) then
     return vim.fn.json_decode(vim.fn.readfile(path))
@@ -797,12 +811,12 @@ local function tsqueryrc_settings()
 end
 local default_servers = {"bashls", "biome", "buf_ls", "clojure_lsp", "csskit", "docker_language_server", "fennel_ls", "helm_ls", "janet_lsp", "just", "postgres_lsp", "rust_analyzer", "tilt_ls", "tombi"}
 local server_settings
-local function _109_(client)
+local function _111_(client)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
   return nil
 end
-server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, semanticTokenTypes = {keyword = false, string = false}, hints = {constantValues = true, ignoredError = true}, vulncheck = "Imports"}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}, filetypes = {"json", "jsonc", "json5"}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, fish_lsp = {cmd_env = {MANPAGER = "cat"}}, ruff = {cmd = venv_cmd("ruff")}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = {vim.env.VIMRUNTIME}, checkThirdParty = false}}}}, ty = {cmd = venv_cmd("ty")}, tsc = {on_init = _109_}, ts_query_ls = {settings = tsqueryrc_settings()}, gh_actions_ls = {filetypes = {"yaml.github-actions"}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {filetypes = {"yaml", "yaml.github-actions"}}, syntaqlite = {cmd = {"syntaqlite", "lsp"}, filetypes = {"sql"}, root_markers = {"syntaqlite.toml", ".git"}}}
+server_settings = {gopls = {cmd = {"gopls", "-remote=auto"}, settings = {gopls = {semanticTokens = true, semanticTokenTypes = {keyword = false, string = false}, hints = {constantValues = true, ignoredError = true}, vulncheck = "Imports"}}}, jsonls = {settings = {json = {schemas = schemastore.json.schemas(), validate = {enable = true}}}, filetypes = {"json", "jsonc", "json5"}}, yamlls = {settings = {yaml = {schemas = schemastore.yaml.schemas(), schemaStore = {url = "", enable = false}}}}, fish_lsp = {cmd_env = {MANPAGER = "cat"}}, ruff = {cmd = venv_cmd("ruff")}, lua_ls = {settings = {Lua = {runtime = {version = "LuaJIT"}, workspace = {library = {vim.env.VIMRUNTIME}, checkThirdParty = false}}}}, ty = {cmd = venv_cmd("ty")}, tsc = {on_init = _111_}, ts_query_ls = {settings = tsqueryrc_settings()}, gh_actions_ls = {filetypes = {"yaml.github-actions"}}, cells = {cmd = {"cells", "serve"}, filetypes = {"cel"}}, zizmor = {filetypes = {"yaml", "yaml.github-actions"}}, syntaqlite = {cmd = {"syntaqlite", "lsp"}, filetypes = {"sql"}, root_markers = {"syntaqlite.toml", ".git"}}}
 vim.lsp.config("*", {root_markers = {".git"}})
 for server, settings in pairs(server_settings) do
   vim.lsp.config(server, settings)

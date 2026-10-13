@@ -576,32 +576,48 @@
   ;; Disable auto-enable; servers are enabled explicitly below via vim.lsp.enable.
   (mason-lspconfig.setup {:automatic_enable false}))
 
+;; Install info for one of my parser forks, tracking the head of `branch`.
+;; nvim-treesitter only reinstalls a parser when its revision changes, so the
+;; revision is the branch's current commit. Looking it up needs the network,
+;; and the `TSUpdate` event also fires during startup, so the lookup waits
+;; until Neovim has started; before that the revision is left out, which still
+;; installs a missing parser from the branch.
+(fn parser-fork [url branch]
+  (let [head (when (= vim.v.vim_did_enter 1)
+               (let [result (: (vim.system [:git
+                                            :ls-remote
+                                            url
+                                            (.. :refs/heads/ branch)]
+                                           {:text true :timeout 10000})
+                               :wait)]
+                 (when (= result.code 0)
+                   (result.stdout:match "^%x+"))))]
+    {: url : branch :revision head}))
+
 ;; My fork of tree-sitter-go parses Go 1.26 `new(expr)`, Go 1.27 generic
 ;; methods, Go 1.28 composite literals with inferred types, and shadowed
 ;; `make`/`new`, all of which upstream misparses.
-;; Bump the revision and run `:TSUpdate go` to pick up new commits.
 (vim.api.nvim_create_autocmd :User
                              {:group (vim.api.nvim_create_augroup :treesitter-go-fork
                                                                   {})
                               :pattern :TSUpdate
                               :callback #(tset (require :nvim-treesitter.parsers)
                                                :go :install_info
-                                               {:url "https://github.com/stefanvanburen/tree-sitter-go"
-                                                :revision :30a4ee798e60df4400c156286e71a7449f1252f5})})
+                                               (parser-fork "https://github.com/stefanvanburen/tree-sitter-go"
+                                                            :master))})
 
 ;; nvim-treesitter doesn't ship CEL, so register my fork of tree-sitter-cel,
 ;; which parses the optional syntax and backtick-escaped field names. Its
 ;; queries are written for the tree-sitter CLI, where the first matching
 ;; pattern wins, so the Neovim versions live in queries/cel/ instead.
-;; Bump the revision and run `:TSUpdate cel` to pick up new commits.
 (vim.api.nvim_create_autocmd :User
                              {:group (vim.api.nvim_create_augroup :treesitter-cel-fork
                                                                   {})
                               :pattern :TSUpdate
                               :callback #(tset (require :nvim-treesitter.parsers)
                                                :cel
-                                               {:install_info {:url "https://github.com/stefanvanburen/tree-sitter-cel"
-                                                               :revision :fcfb876675863476f74a6f2a6671e0f170168b0d}})})
+                                               {:install_info (parser-fork "https://github.com/stefanvanburen/tree-sitter-cel"
+                                                                           :main)})})
 
 (let [treesitter (require :nvim-treesitter) ;; Parsers to install.
       treesitter-parsers [:c
