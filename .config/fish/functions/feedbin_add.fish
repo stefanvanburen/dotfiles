@@ -7,6 +7,6 @@ function feedbin_add --description 'Adds URLs to Feedbin. URLs can be either the
     set --local pass (security find-generic-password -s feedbin-api -w)
     set --local feedbin_url https://api.feedbin.com/v2/subscriptions.json
     for url in $argv
-        curl --user "$user:$pass" --json (jo feed_url=$url) $feedbin_url
+        curl --silent --show-error --user "$user:$pass" --json (jo feed_url=$url) $feedbin_url
     end
 end
