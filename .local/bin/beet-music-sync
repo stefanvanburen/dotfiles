@@ -5,14 +5,15 @@
 # ///
 """Sync beets library to Music.app for tracks matching a beets query.
 
-Adds tracks whose files are not yet in Music.app, then syncs metadata for all
-matched tracks, identifying each Music.app track by its file location,
-including the `favorited` flexible field (additive: sync never un-favorites
-in Music.app, so favorites made there since the last pull survive).
+Adds tracks whose files are not yet in Music.app, then writes whichever
+metadata differs from beets, identifying each Music.app track by its file
+location. Synced metadata includes the `favorited` flexible field
+(additive: sync never un-favorites in Music.app, so favorites made there
+since the last pull survive).
 
 With --pull-favorites, runs in reverse instead: reads favorited (starred)
-tracks from Music.app and sets `favorited=1` on matching beets items.
-Query favorites with `beet ls favorited:1`.
+tracks from Music.app and sets `favorited=1` on the beets items at the same
+paths. Query favorites with `beet ls favorited:1`.
 
 Usage:
     beet-music-sync [beets query...]
@@ -49,34 +50,34 @@ def _run_applescript(script, label, phase):
     return result.stdout.strip()
 
 
-FETCH_FAVORITES_SCRIPT = """
+# Each `{...} of every file track` property fetch is one Apple event for the
+# whole library. The columns are joined with ASCII unit/record separators in a
+# single coercion: building the output string track by track is quadratic and
+# takes ~25 s on a ~9k-track library, where this takes ~5 s.
+FETCH_LIBRARY_SCRIPT = """
 tell application "Music"
-    set trackNames to name of every file track of library playlist 1 whose favorited is true
-    set trackAlbums to album of every file track of library playlist 1 whose favorited is true
-    set trackArtists to artist of every file track of library playlist 1 whose favorited is true
+    set cols to {persistent ID, name, artist, album artist, album, year, composer, disc number, favorited, location} of every file track of library playlist 1
 end tell
-set out to ""
-repeat with i from 1 to count of trackNames
-    set out to out & (item i of trackNames) & tab & (item i of trackAlbums) & tab & (item i of trackArtists) & linefeed
+set AppleScript's text item delimiters to character id 31
+set out to {path to startup disk as text}
+repeat with col in cols
+    set end of out to (contents of col) as text
 end repeat
-return out
+set AppleScript's text item delimiters to character id 30
+return out as text
 """
 
-
-FETCH_LOCATIONS_SCRIPT = """
-tell application "Music"
-    set lib to library playlist 1
-    set pids to persistent ID of every file track of lib
-    set locs to location of every file track of lib
-end tell
-set out to ""
-repeat with i from 1 to count of pids
-    try
-        set out to out & (item i of pids) & tab & POSIX path of (item i of locs) & linefeed
-    end try
-end repeat
-return out
-"""
+FIELDS = (
+    "pid",
+    "name",
+    "artist",
+    "album artist",
+    "album",
+    "year",
+    "composer",
+    "disc number",
+    "favorited",
+)
 
 
 def path_key(path):
@@ -85,63 +86,110 @@ def path_key(path):
     return unicodedata.normalize("NFC", path).casefold()
 
 
-def fetch_locations():
-    out = _run_applescript(FETCH_LOCATIONS_SCRIPT, "Music.app", "fetch locations")
+def hfs_to_posix(hfs, startup_disk):
+    # HFS paths separate components with ':' and allow '/' in names; POSIX
+    # paths are the other way round.
+    if hfs.startswith(startup_disk):
+        rest, prefix = hfs[len(startup_disk) :], "/"
+    else:
+        volume, _, rest = hfs.partition(":")
+        prefix = f"/Volumes/{volume}/"
+    return prefix + rest.translate(str.maketrans(":/", "/:"))
+
+
+def fetch_library():
+    """Fetch the synced properties of every Music.app file track, keyed by
+    [path_key] of its location."""
+    out = _run_applescript(FETCH_LIBRARY_SCRIPT, "Music.app", "fetch library")
     if out is None:
         sys.exit(1)
-    locations = {}
-    for line in out.split("\n"):
-        if line:
-            pid, path = line.split("\t", 1)
-            locations[path_key(path)] = pid
-    return locations
+    startup_disk, *cols = out.split("\x1e")
+    cols = [col.split("\x1f") for col in cols]
+    *props, locations = cols
+    library = {}
+    for values in zip(*props, locations, strict=True):
+        *values, location = values
+        if location != "missing value":
+            path = hfs_to_posix(location, startup_disk)
+            library[path_key(path)] = dict(zip(FIELDS, values, strict=True))
+    return library
+
+
+def item_path(item):
+    return os.fsdecode(item.path) if isinstance(item.path, bytes) else item.path
 
 
 def pull_favorites(lib, dry_run):
-    out = _run_applescript(FETCH_FAVORITES_SCRIPT, "Music.app", "fetch favorites")
-    if out is None:
-        sys.exit(1)
-    favorites = []
-    for line in out.strip("\n").split("\n"):
-        if line:
-            title, album, artist = line.split("\t", 2)
-            favorites.append((title, album, artist))
+    favorites = {
+        key: track
+        for key, track in fetch_library().items()
+        if track["favorited"] == "true"
+    }
     print(f"Found {len(favorites)} favorited track(s) in Music.app.")
 
-    by_album = {}
-    by_artist = {}
-    for item in lib.items(*parse_query_parts([], Item)):
-        by_album.setdefault((item.title.lower(), item.album.lower()), []).append(item)
-        by_artist.setdefault((item.title.lower(), item.artist.lower()), []).append(item)
-
     matched = already = 0
-    unmatched = []
-    for title, album, artist in favorites:
-        items = by_album.get((title.lower(), album.lower()))
-        if not items:
-            # Album names drift between Music.app and beets; fall back to
-            # title+artist when that identifies exactly one track.
-            fallback = by_artist.get((title.lower(), artist.lower()), [])
-            items = fallback if len(fallback) == 1 else None
-        if not items:
-            unmatched.append((title, album, artist))
+    for item in lib.items():
+        if path_key(item_path(item)) not in favorites:
             continue
-        for item in items:
-            if item.get("favorited"):
-                already += 1
-                continue
-            matched += 1
-            print(f"  + {item.artist} - {item.album} - {item.title}")
-            if not dry_run:
-                item["favorited"] = 1
-                item.store()
+        del favorites[path_key(item_path(item))]
+        if item.get("favorited"):
+            already += 1
+            continue
+        matched += 1
+        print(f"  + {item.artist} - {item.album} - {item.title}")
+        if not dry_run:
+            item["favorited"] = 1
+            item.store()
 
     verb = "would set" if dry_run else "set"
     print(f"\n{verb} favorited=1 on {matched} item(s); {already} already set.")
-    if unmatched:
-        print(f"\n{len(unmatched)} not found in beets:")
-        for title, album, artist in unmatched:
-            print(f"  ? {artist} - {album} - {title}")
+    if favorites:
+        print(f"\n{len(favorites)} not found in beets:")
+        for track in favorites.values():
+            print(f"  ? {track['artist']} - {track['album']} - {track['name']}")
+
+
+def wanted_properties(item):
+    """Return the Music.app properties beets sets for item, as AppleScript
+    literals keyed by property name."""
+    props = {
+        # Music.app keeps only the first 255 code points of a track name.
+        "name": f'"{esc(item.title[:255])}"',
+        "artist": f'"{esc(item.artist)}"',
+        "album artist": f'"{esc(item.albumartist)}"',
+        "album": f'"{esc(item.album)}"',
+    }
+    if item.year:
+        props["year"] = str(int(item.year))
+    if composer := item.get("composer"):
+        props["composer"] = f'"{esc(composer)}"'
+    if discnum := int(item.disc or 0):
+        props["disc number"] = str(discnum)
+    # Additive on purpose: favorites made in Music.app since the last
+    # --pull-favorites run must survive a sync.
+    if item.get("favorited"):
+        props["favorited"] = "true"
+    return props
+
+
+def as_literal(prop, value):
+    if prop in ("year", "disc number", "favorited"):
+        return value
+    nfc = unicodedata.normalize("NFC", value)
+    return f'"{esc(nfc)}"'
+
+
+def changed_properties(item, current):
+    """Return the properties of item that differ from current, the track's
+    Music.app properties (None for a track added this run)."""
+    wanted = wanted_properties(item)
+    if current is None:
+        return wanted
+    return {
+        prop: value
+        for prop, value in wanted.items()
+        if unicodedata.normalize("NFC", value) != as_literal(prop, current[prop])
+    }
 
 
 def sync_to_music(tracks):
@@ -150,98 +198,74 @@ def sync_to_music(tracks):
         if item.album:
             by_album.setdefault((item.album, item.albumartist or ""), []).append(item)
 
-    locations = fetch_locations()
-    total_added = total_updated = 0
+    library = fetch_library()
+    updates = []  # (label, persistent ID, {property: literal})
+    added = {}  # label -> count
 
     for (album, albumartist), album_tracks in sorted(by_album.items()):
         label = f"{albumartist} - {album}" if albumartist else album
-        album_added = album_updated = 0
+        added[label] = 0
 
-        # Phase 1: add files that aren't in Music.app yet, one at a time.
-        # Batching multiple add calls in one AppleScript triggers a Music.app
-        # internal queuing race (-1700 "Can't make some data into the expected
-        # type"), so each file gets its own osascript call.
-        pids = {}
+        # Add files that aren't in Music.app yet, one at a time. Batching
+        # multiple add calls in one AppleScript triggers a Music.app internal
+        # queuing race (-1700 "Can't make some data into the expected type"),
+        # so each file gets its own osascript call.
         for item in album_tracks:
-            path = os.fsdecode(item.path) if isinstance(item.path, bytes) else item.path
-            if pid := locations.get(path_key(path)):
-                pids[item.id] = pid
-                continue
-            script = "\n".join(
-                [
-                    'tell application "Music"',
-                    f'    set newTrack to add (POSIX file "{esc(path)}")',
-                    "    return persistent ID of newTrack",
-                    "end tell",
-                ]
-            )
-            if pid := _run_applescript(script, label, f"add '{item.title}'"):
-                pids[item.id] = pid
-                locations[path_key(path)] = pid
-                album_added += 1
-
-        # Process in batches of 50 to avoid AppleScript size limits
-        synced_tracks = [item for item in album_tracks if item.id in pids]
-        for batch in itertools.batched(synced_tracks, 50):
-            # Phase 2: sync metadata for all tracks (including just-added ones).
-            sync_lines = [
-                'tell application "Music"',
-                "    set lib to library playlist 1",
-                "    set updatedCount to 0",
-            ]
-            for item in batch:
-                discnum = int(item.disc or 0)
-                title_esc = esc(item.title)
-                sync_lines.append(
-                    f'    repeat with aTrack in (every file track of lib whose persistent ID is "{pids[item.id]}")'
-                )
-                sync_lines.extend(
+            path = item_path(item)
+            current = library.get(path_key(path))
+            if current is not None:
+                pid = current["pid"]
+            else:
+                script = "\n".join(
                     [
-                        f'        set name of aTrack to "{title_esc}"',
-                        f'        set artist of aTrack to "{esc(item.artist)}"',
-                        f'        set album artist of aTrack to "{esc(albumartist)}"',
-                        f'        set album of aTrack to "{esc(album)}"',
+                        'tell application "Music"',
+                        f'    set newTrack to add (POSIX file "{esc(path)}")',
+                        "    return persistent ID of newTrack",
+                        "end tell",
                     ]
                 )
-                if item.year:
-                    sync_lines.append(f"        set year of aTrack to {int(item.year)}")
-                if genre := item.get("genre"):
-                    sync_lines.append(f'        set genre of aTrack to "{esc(genre)}"')
-                if composer := item.get("composer"):
-                    sync_lines.append(
-                        f'        set composer of aTrack to "{esc(composer)}"'
-                    )
-                if discnum:
-                    sync_lines.append(f"        set disc number of aTrack to {discnum}")
-                # Additive on purpose: favorites made in Music.app since the
-                # last --pull-favorites run must survive a sync.
-                if item.get("favorited"):
-                    sync_lines.append("        set favorited of aTrack to true")
-                sync_lines.extend(
-                    ["        set updatedCount to updatedCount + 1", "    end repeat"]
-                )
-            sync_lines.extend(["    return updatedCount as string", "end tell"])
+                pid = _run_applescript(script, label, f"add '{item.title}'")
+                if not pid:
+                    continue
+                added[label] += 1
+            if props := changed_properties(item, current):
+                updates.append((label, pid, props))
 
-            out = _run_applescript("\n".join(sync_lines), label, "sync")
-            if out is not None:
-                album_updated += int(out) if out.isdigit() else 0
+    updated = dict.fromkeys(added, 0)
+    # Batches of 50 tracks stay under AppleScript's script size limits.
+    for batch in itertools.batched(updates, 50):
+        lines = ['tell application "Music"', "    set lib to library playlist 1"]
+        for _, pid, props in batch:
+            lines.append(
+                f'    repeat with aTrack in (every file track of lib whose persistent ID is "{pid}")'
+            )
+            lines.extend(
+                f"        set {prop} of aTrack to {value}"
+                for prop, value in props.items()
+            )
+            lines.append("    end repeat")
+        lines.append("end tell")
+        labels = sorted({label for label, _, _ in batch})
+        if _run_applescript("\n".join(lines), ", ".join(labels), "sync") is not None:
+            for label, _, _ in batch:
+                updated[label] += 1
 
-        total_added += album_added
-        total_updated += album_updated
+    for label, count in added.items():
         parts = []
-        if album_added:
-            parts.append(f"{album_added} added")
-        synced = album_updated - album_added
-        if synced > 0:
-            parts.append(f"{synced} synced")
-        print(f"  {label}: {', '.join(parts) or 'no changes'}")
+        if count:
+            parts.append(f"{count} added")
+        if synced := updated[label] - count:
+            parts.append(f"{synced} updated")
+        if parts:
+            print(f"  {label}: {', '.join(parts)}")
 
+    total_added = sum(added.values())
+    total_synced = sum(updated.values()) - total_added
     summary = []
     if total_added:
         summary.append(f"{total_added} added")
-    synced = total_updated - total_added
-    if synced > 0:
-        summary.append(f"{synced} synced")
+    if total_synced:
+        summary.append(f"{total_synced} updated")
     print(f"\n{', '.join(summary) or 'nothing to do'}.")
 
 
