@@ -5,7 +5,8 @@
 # ///
 """Sync beets library to Music.app for tracks matching a beets query.
 
-Adds tracks not yet in Music.app, then syncs metadata for all matched tracks,
+Adds tracks whose files are not yet in Music.app, then syncs metadata for all
+matched tracks, identifying each Music.app track by its file location,
 including the `favorited` flexible field (additive: sync never un-favorites
 in Music.app, so favorites made there since the last pull survive).
 
@@ -28,6 +29,7 @@ import itertools
 import os
 import subprocess
 import sys
+import unicodedata
 
 from beets import config
 from beets.library import Item, Library, parse_query_parts
@@ -59,6 +61,40 @@ repeat with i from 1 to count of trackNames
 end repeat
 return out
 """
+
+
+FETCH_LOCATIONS_SCRIPT = """
+tell application "Music"
+    set lib to library playlist 1
+    set pids to persistent ID of every file track of lib
+    set locs to location of every file track of lib
+end tell
+set out to ""
+repeat with i from 1 to count of pids
+    try
+        set out to out & (item i of pids) & tab & POSIX path of (item i of locs) & linefeed
+    end try
+end repeat
+return out
+"""
+
+
+def path_key(path):
+    # Music.app and beets disagree on Unicode normalization, and APFS is
+    # case-insensitive, so a renamed directory can differ only in case.
+    return unicodedata.normalize("NFC", path).casefold()
+
+
+def fetch_locations():
+    out = _run_applescript(FETCH_LOCATIONS_SCRIPT, "Music.app", "fetch locations")
+    if out is None:
+        sys.exit(1)
+    locations = {}
+    for line in out.split("\n"):
+        if line:
+            pid, path = line.split("\t", 1)
+            locations[path_key(path)] = pid
+    return locations
 
 
 def pull_favorites(lib, dry_run):
@@ -114,6 +150,7 @@ def sync_to_music(tracks):
         if item.album:
             by_album.setdefault((item.album, item.albumartist or ""), []).append(item)
 
+    locations = fetch_locations()
     total_added = total_updated = 0
 
     for (album, albumartist), album_tracks in sorted(by_album.items()):
@@ -124,27 +161,28 @@ def sync_to_music(tracks):
         # Batching multiple add calls in one AppleScript triggers a Music.app
         # internal queuing race (-1700 "Can't make some data into the expected
         # type"), so each file gets its own osascript call.
+        pids = {}
         for item in album_tracks:
-            title_esc = esc(item.title)
             path = os.fsdecode(item.path) if isinstance(item.path, bytes) else item.path
+            if pid := locations.get(path_key(path)):
+                pids[item.id] = pid
+                continue
             script = "\n".join(
                 [
                     'tell application "Music"',
-                    "    set lib to library playlist 1",
-                    f'    if (count of (every file track of lib whose album is "{esc(album)}" and name is "{title_esc}")) = 0 then',
-                    f'        add (POSIX file "{esc(path)}")',
-                    '        return "added"',
-                    "    end if",
-                    '    return "exists"',
+                    f'    set newTrack to add (POSIX file "{esc(path)}")',
+                    "    return persistent ID of newTrack",
                     "end tell",
                 ]
             )
-            out = _run_applescript(script, label, f"add '{item.title}'")
-            if out == "added":
+            if pid := _run_applescript(script, label, f"add '{item.title}'"):
+                pids[item.id] = pid
+                locations[path_key(path)] = pid
                 album_added += 1
 
         # Process in batches of 50 to avoid AppleScript size limits
-        for batch in itertools.batched(album_tracks, 50):
+        synced_tracks = [item for item in album_tracks if item.id in pids]
+        for batch in itertools.batched(synced_tracks, 50):
             # Phase 2: sync metadata for all tracks (including just-added ones).
             sync_lines = [
                 'tell application "Music"',
@@ -154,11 +192,9 @@ def sync_to_music(tracks):
             for item in batch:
                 discnum = int(item.disc or 0)
                 title_esc = esc(item.title)
-                # Match by title+album — avoids per-disc vs absolute track number mismatch
                 sync_lines.append(
-                    f'    set matchTracks to (every file track of lib whose album is "{esc(album)}" and name is "{title_esc}")'
+                    f'    repeat with aTrack in (every file track of lib whose persistent ID is "{pids[item.id]}")'
                 )
-                sync_lines.append("    repeat with aTrack in matchTracks")
                 sync_lines.extend(
                     [
                         f'        set name of aTrack to "{title_esc}"',
