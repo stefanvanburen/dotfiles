@@ -40,71 +40,75 @@ function overcast_add --description 'Uploads audio files to Overcast.'
     end
 
     set --local status_code 0
-    for file in $argv
+    for arg in $argv
         set --local tmp_dir ''
-        if string match --quiet --regex '^https?://' -- $file
+        set --local files $arg
+        if string match --quiet --regex '^https?://' -- $arg
             if not command --query yt-dlp
-                echo "overcast_add: yt-dlp not found, can't download $file" >&2
+                echo "overcast_add: yt-dlp not found, can't download $arg" >&2
                 set status_code 1
                 continue
             end
 
             set tmp_dir (mktemp -d)
-            echo "Downloading $file"
+            echo "Downloading $arg"
             yt-dlp --no-warnings --no-playlist \
                 -x --audio-format mp3 --audio-quality 0 \
                 --embed-metadata --embed-chapters --embed-thumbnail \
                 -o "$tmp_dir/%(title)s.%(ext)s" \
-                -- $file
+                -- $arg
             or begin
-                echo "overcast_add: yt-dlp failed for $file" >&2
+                echo "overcast_add: yt-dlp failed for $arg" >&2
                 rm -rf $tmp_dir
                 set status_code 1
                 continue
             end
 
-            set --local downloaded $tmp_dir/*
-            if test (count $downloaded) -ne 1
-                echo "overcast_add: expected exactly one file from yt-dlp for $file" >&2
+            # One URL can yield several files, such as an X post with more
+            # than one video, so upload each of them.
+            set files $tmp_dir/*
+            if test (count $files) -eq 0
+                echo "overcast_add: yt-dlp produced no files for $arg" >&2
                 rm -rf $tmp_dir
                 set status_code 1
                 continue
             end
-            set file $downloaded[1]
         end
 
-        set --local key $key_prefix(path basename $file)
-        set --local mime audio/mpeg
-        if contains -- (path extension $file | string lower) .m4a .mp4
-            set mime audio/mp4
+        for file in $files
+            set --local key $key_prefix(path basename $file)
+            set --local mime audio/mpeg
+            if contains -- (path extension $file | string lower) .m4a .mp4
+                set mime audio/mp4
+            end
+            # curl reads an unquoted "," in a --form file name as a separator
+            # between several files, then fails to open any of them (error
+            # 26), so quote the path; inside the quotes a backslash escapes the
+            # next character. Every other field goes through --form-string,
+            # which takes its value literally and so needs no quoting.
+            set --local quoted (string replace --all '\\' '\\\\' -- $file | string replace --all '"' '\\"')
+            echo "Uploading $file"
+            # curl hides its progress meter when the response body goes to the
+            # terminal, so send S3's (201, XML) response to /dev/null to get it.
+            curl --fail --location --compressed --progress-bar --output /dev/null \
+                --form-string bucket=uploads-overcast \
+                --form-string key=$key \
+                --form-string AWSAccessKeyId=$access_key \
+                --form-string acl=authenticated-read \
+                --form-string policy=$policy \
+                --form-string signature=$signature \
+                --form-string success_action_status=201 \
+                --form-string Content-Type=$mime \
+                --form "file=@\"$quoted\"" \
+                --cookie $cookies \
+                https://uploads-overcast.s3.amazonaws.com/
+            and curl --fail --silent --show-error --location --compressed \
+                --form-string key=$key \
+                --cookie $cookies \
+                https://overcast.fm/podcasts/upload_succeeded >/dev/null
+            and echo "Uploaded $file"
+            or set status_code 1
         end
-        # curl reads an unquoted "," in a --form file name as a separator
-        # between several files, then fails to open any of them (error 26), so
-        # quote the path; inside the quotes a backslash escapes the next
-        # character. Every other field goes through --form-string, which takes
-        # its value literally and so needs no quoting.
-        set --local quoted (string replace --all '\\' '\\\\' -- $file | string replace --all '"' '\\"')
-        echo "Uploading $file"
-        # curl hides its progress meter when the response body goes to the
-        # terminal, so send S3's (201, XML) response to /dev/null to get it.
-        curl --fail --location --compressed --progress-bar --output /dev/null \
-            --form-string bucket=uploads-overcast \
-            --form-string key=$key \
-            --form-string AWSAccessKeyId=$access_key \
-            --form-string acl=authenticated-read \
-            --form-string policy=$policy \
-            --form-string signature=$signature \
-            --form-string success_action_status=201 \
-            --form-string Content-Type=$mime \
-            --form "file=@\"$quoted\"" \
-            --cookie $cookies \
-            https://uploads-overcast.s3.amazonaws.com/
-        and curl --fail --silent --show-error --location --compressed \
-            --form-string key=$key \
-            --cookie $cookies \
-            https://overcast.fm/podcasts/upload_succeeded >/dev/null
-        and echo "Uploaded $file"
-        or set status_code 1
 
         if test -n "$tmp_dir"
             rm -rf $tmp_dir
