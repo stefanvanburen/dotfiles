@@ -84,8 +84,8 @@ FIELDS = (
 )
 
 # Above this many tracks without a usable stored persistent ID, one location
-# fetch is cheaper than resolving each track with its own `add` call.
-LOCATION_FETCH_THRESHOLD = 50
+# fetch (5-15 s) is cheaper than resolving them through `add` (~40 ms each).
+LOCATION_FETCH_THRESHOLD = 100
 
 
 def path_key(path):
@@ -185,28 +185,74 @@ def resolve_pids(lib, tracks, library, verify):
                 remaining.append(item)
         unresolved = remaining
 
-    # `add` of a file already in the library returns its existing track, so it
-    # resolves and adds in one step. Batching multiple add calls in one
-    # AppleScript triggers a Music.app internal queuing race (-1700 "Can't make
-    # some data into the expected type"), so each file gets its own call.
     added = {}
-    for item in unresolved:
-        label = album_label(item)
-        script = "\n".join(
-            [
-                'tell application "Music"',
-                f'    set newTrack to add (POSIX file "{esc(item_path(item))}")',
-                "    return persistent ID of newTrack",
-                "end tell",
-            ]
-        )
-        if pid := _run_applescript(script, label, f"add '{item.title}'"):
-            pids[item.id] = pid
-            if pid not in library:
-                added[label] = added.get(label, 0) + 1
+    for item, pid in add_files(unresolved):
+        pids[item.id] = pid
+        if pid not in library:
+            label = album_label(item)
+            added[label] = added.get(label, 0) + 1
 
     store_pids(lib, [(item, pids[item.id]) for item in tracks if item.id in pids])
     return pids, added
+
+
+ADD_SCRIPT = """
+tell application "Music"
+    set newTracks to add {%s}
+    -- A single file comes back as a track, not a list of one.
+    if class of newTracks is not list then set newTracks to {newTracks}
+    set out to {path to startup disk as text}
+    repeat with t in newTracks
+        set end of out to (persistent ID of t) & tab & (location of t as text)
+    end repeat
+end tell
+set AppleScript's text item delimiters to linefeed
+return out as text
+"""
+
+
+def add_files(items):
+    """Add the files of items to Music.app, yielding (item, persistent ID)
+    for each one that is now in the library.
+
+    `add` of a file already in the library returns its existing track, so
+    this also resolves files Music.app already has. One `add` of a list costs
+    ~40 ms per file against ~300 ms for a call per file, but fails as a whole
+    (-1700 "Can't make some data into the expected type") if any file can't
+    be added, so a failed batch is retried one file at a time.
+    """
+    present = []
+    for item in items:
+        if os.path.exists(item_path(item)):
+            present.append(item)
+        else:
+            print(f"  ERROR (add) no file at {item_path(item)}", file=sys.stderr)
+
+    def add(batch, label):
+        files = ", ".join(f'POSIX file "{esc(item_path(item))}"' for item in batch)
+        out = _run_applescript(ADD_SCRIPT % files, label, "add")
+        if out is None:
+            return None
+        startup_disk, *lines = out.split("\n")
+        returned = {}
+        for line in lines:
+            pid, location = line.split("\t", 1)
+            returned[path_key(hfs_to_posix(location, startup_disk))] = pid
+        return returned
+
+    for batch in itertools.batched(present, 50):
+        labels = ", ".join(sorted({album_label(item) for item in batch}))
+        returned = add(batch, labels) if len(batch) > 1 else None
+        for item in batch:
+            if returned is None:
+                single = add([item], album_label(item))
+                pid = single and single.get(path_key(item_path(item)))
+            else:
+                pid = returned.get(path_key(item_path(item)))
+            if pid:
+                yield item, pid
+            else:
+                print(f"  ERROR (add) not added: {item_path(item)}", file=sys.stderr)
 
 
 def album_label(item):
