@@ -256,6 +256,8 @@ def add_files(items):
 
 
 def album_label(item):
+    if not item.album:
+        return f"{item.artist} - {item.title} (single)"
     return f"{item.albumartist} - {item.album}" if item.albumartist else item.album
 
 
@@ -340,7 +342,6 @@ def changed_properties(item, current):
 
 
 def sync_to_music(lib, tracks, verify):
-    tracks = [item for item in tracks if item.album]
     library = fetch_library()
     pids, added = resolve_pids(lib, tracks, library, verify)
 
