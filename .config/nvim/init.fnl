@@ -757,6 +757,20 @@
                               :callback #(each [group hl (pairs constant-highlights)]
                                            (vim.api.nvim_set_hl 0 group hl))})
 
+;; mini.hues links LspReferenceWrite to LspReferenceText, and modus gives the
+;; two the same colors, as both do LspReferenceRead, so a write looks the same
+;; as a read. Underlining it on the same background tells them apart.
+(vim.api.nvim_create_autocmd :ColorScheme
+                             {:group (vim.api.nvim_create_augroup :lsp-reference-write
+                                                                  {})
+                              :callback #(vim.api.nvim_set_hl 0
+                                                              :LspReferenceWrite
+                                                              (doto (vim.api.nvim_get_hl 0
+                                                                                         {:name :LspReferenceText
+                                                                                          :link false})
+                                                                (tset :underline
+                                                                      true)))})
+
 (vim.cmd.colorscheme (seasonal-colorscheme))
 
 ;; The mini.hues colorschemes read 'background' once, when their colors file is
