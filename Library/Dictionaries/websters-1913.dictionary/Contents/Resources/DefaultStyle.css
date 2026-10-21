@@ -17,11 +17,15 @@
   }
 }
 
+:root {
+  font-size: 17px;
+}
+
 body {
   line-height: 1.5;
   /* ~68 characters at 17px; 42em/14px gave ~89, well past comfortable */
   max-width: 36em;
-  font-size: 17px;
+  font-size: 1rem;
   color: var(--ink, inherit);
   padding-top: 2em;
   padding-bottom: 3em;
@@ -46,11 +50,35 @@ div {
 .hw {
   font-size: 1.5em;
   font-weight: bold;
-  margin-top: 2em;
-  margin-bottom: 10px;
   display: inline;
   line-height: 1;
-  margin-left: -1em;
+}
+
+/* Variant headwords come wrapped as "{ hw, hw, }". font-size: 0 drops the
+   braces and commas, which are bare text; the separators are regenerated. */
+.mhw {
+  font-size: 0;
+}
+
+.mhw .hw {
+  font-size: 1.5rem;
+}
+
+.mhw .hw + .hw::before {
+  content: ", ";
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.mhw::after {
+  content: ", ";
+  font-size: 1rem;
+}
+
+/* Every headword is <h2 d:priority="2">, which the Look Up panel removes
+   from the DOM, leaving only the braces and commas around it ("{ , , }"). */
+.mhw:not(:has(.hw)) {
+  display: none;
 }
 
 /* Derived forms are mini-headwords and were rendering as plain body text. */
@@ -72,18 +100,14 @@ div {
 }
 
 .col {
-  font-size: 1em;
   font-weight: 600;
-  display: block;
-  clear: both;
-  margin-top: 2em;
 }
 
-.cd {
-  font-size: 1em;
-  display: block;
-  margin-left: 3em;
-  margin-right: 3em;
+/* Collocations run "phrase, definition – phrase, definition"; give each its
+   own paragraph so the comma and dash between them stay attached. */
+.cs > .col::before, .cs > .mcol::before {
+  content: "\A\A";
+  white-space: pre;
 }
 
 .rj {
@@ -110,7 +134,7 @@ div {
   line-height: 0;
 }
 
-.sn:before, .sd:before, .note:before, .def + .cs:before {
+.sn:before, .sd:before, .note:before {
   content: "\A";
   white-space:pre;
 }
