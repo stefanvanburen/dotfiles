@@ -1,5 +1,7 @@
 urls-source "feedbin"
 feedbin-login "stefan@vanburen.xyz"
+feedbin-passwordeval "security find-generic-password -s feedbin-api -w"
+max-items 20
 
 # a simple newsbeuter color scheme.
 
