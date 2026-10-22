@@ -103,3 +103,8 @@ Words and code are a maintenance burden, ensure we weigh that accordingly.
 
 - A regression test is done once it fails with the fix reverted and passes
   with it restored; show both runs.
+
+- Add cases to an existing test before writing a new test function or fixture,
+  especially when the test is table-driven. If the new cases need an assertion
+  the others don't, give the table an optional field for it rather than a test
+  of their own.
