@@ -1269,6 +1269,10 @@
         :gh_actions_ls {:filetypes [:yaml.github-actions]}
         ;; https://github.com/stefanvanburen/cells
         :cells {:cmd [:cells :serve] :filetypes [:cel]}
+        ;; https://ewhauser.github.io/shuck/docs/editors/
+        :shuck {:cmd [:shuck :server]
+                :filetypes [:sh :bash :zsh]
+                :root_markers [".shuck.toml" "shuck.toml" ".git"]}
         :zizmor {:filetypes [:yaml :yaml.github-actions]}
         ;; https://docs.syntaqlite.com/v0.2.15/getting-started/other-editors/
         :syntaqlite {:cmd [:syntaqlite :lsp]
