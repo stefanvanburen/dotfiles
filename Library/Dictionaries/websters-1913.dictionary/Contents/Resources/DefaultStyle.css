@@ -9,15 +9,6 @@
   --accent: -apple-system-blue;
 }
 
-/* Most cross-references sit in the etymology, faded to 0.8, which leaves
-   system blue too pale on white. Look Up reports light even when dark,
-   so scope this to the window (the only place headwords survive). */
-@media (prefers-color-scheme: light) {
-  body:has(.hw) {
-    --accent: oklch(from -apple-system-blue calc(l - 0.15) c h);
-  }
-}
-
 :root {
   font-size: 17px;
 }
@@ -194,8 +185,16 @@ body > * > div:not(:has(.hw))::first-letter {
 
 /* Etymology + pronunciation are reference apparatus; let definitions come
    forward. 0.8 not 0.65 — on a dark ground the steeper fade loses too much
-   contrast, and etymology is half the reason to reach for Webster's 1913. */
-.ety, .pr {
+   contrast, and etymology is half the reason to reach for Webster's 1913.
+   Etymology fades through its text colour, so the cross-references in it
+   keep their full accent. Pronunciation cannot: Look Up reports light
+   even when dark, so currentColor resolves to dark ink there. Look Up
+   drops etymologies, so only .pr needs opacity. */
+.ety {
+  color: oklch(from currentColor l c h / 0.8);
+}
+
+.pr {
   opacity: 0.8;
 }
 
