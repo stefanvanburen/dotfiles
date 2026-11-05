@@ -60,7 +60,17 @@ div {
   font-size: 1.5rem;
 }
 
-.mhw .hw + .hw::before {
+/* Pronunciations, parts of speech and the like sit between the
+   headwords; restore what font-size: 0 hid. */
+.mhw > :not(.hw) {
+  font-size: 1rem;
+}
+
+/* Outranks *+.hw:before below, which would break each headword onto
+   its own paragraph. */
+.mhw * + .hw::before {
+  white-space: normal;
+  line-height: inherit;
   content: ", ";
   font-size: 1rem;
   font-weight: normal;
