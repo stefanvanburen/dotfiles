@@ -6,15 +6,7 @@
    matched nothing have been removed. */
 
 :root {
-  --ink: #333;
-  --accent: #03739c;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #e8e8e8;
-    --accent: #7fbcd8;
-  }
+  --accent: -apple-system-blue;
 }
 
 :root {
@@ -26,7 +18,6 @@ body {
   /* ~68 characters at 17px; 42em/14px gave ~89, well past comfortable */
   max-width: 36em;
   font-size: 1rem;
-  color: var(--ink, inherit);
   padding-top: 2em;
   padding-bottom: 3em;
   padding-left: 1em;
