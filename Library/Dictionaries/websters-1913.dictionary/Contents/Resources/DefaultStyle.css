@@ -66,8 +66,12 @@ div {
   font-weight: normal;
 }
 
+/* Not a comma: a third of variant groups are already followed by a bare
+   ", " or ". ", which CSS cannot see, so adding one doubles it. A
+   no-break space, since an ordinary one collapses into the zero-size
+   space after the closing brace. */
 .mhw::after {
-  content: ", ";
+  content: "\a0";
   font-size: 1rem;
 }
 
