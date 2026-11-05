@@ -14,7 +14,7 @@
    so scope this to the window (the only place headwords survive). */
 @media (prefers-color-scheme: light) {
   body:has(.hw) {
-    --accent: #0a58a8;
+    --accent: oklch(from -apple-system-blue calc(l - 0.15) c h);
   }
 }
 
