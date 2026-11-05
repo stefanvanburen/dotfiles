@@ -9,6 +9,15 @@
   --accent: -apple-system-blue;
 }
 
+/* Most cross-references sit in the etymology, faded to 0.8, which leaves
+   system blue too pale on white. Look Up reports light even when dark,
+   so scope this to the window (the only place headwords survive). */
+@media (prefers-color-scheme: light) {
+  body:has(.hw) {
+    --accent: #0a58a8;
+  }
+}
+
 :root {
   font-size: 17px;
 }
