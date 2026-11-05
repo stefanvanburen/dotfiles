@@ -18,6 +18,11 @@ body {
   /* ~68 characters at 17px; 42em/14px gave ~89, well past comfortable */
   max-width: 36em;
   font-size: 1rem;
+}
+
+/* Look Up removes every headword (see .mhw below), so a body without one
+   is the popover, which pads each entry itself. */
+body:has(.hw) {
   padding-top: 2em;
   padding-bottom: 3em;
   padding-left: 1em;
@@ -70,6 +75,21 @@ div {
    from the DOM, leaving only the braces and commas around it ("{ , , }"). */
 .mhw:not(:has(.hw)) {
   display: none;
+}
+
+/* <d:entry> parses as an un-namespaced element here, hence body > *. What
+   preceded the headword (a stray <br>) and the bare comma that followed it
+   (", noun …") remain at the start. */
+body > * > div:not(:has(.hw)) {
+  display: block;
+}
+
+body > * > div:not(:has(.hw)) > br:first-child {
+  display: none;
+}
+
+body > * > div:not(:has(.hw))::first-letter {
+  font-size: 0;
 }
 
 /* Derived forms are mini-headwords and were rendering as plain body text. */
