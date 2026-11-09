@@ -142,6 +142,14 @@ macos-default-apps:
     duti -s com.barebones.bbedit com.apple.property-list all
     duti -s com.barebones.bbedit public.toml all
     duti -s com.barebones.bbedit org.lua all
+    # IINA owns video formats.
+    duti -s com.colliderli.iina public.movie all
+    duti -s com.colliderli.iina public.mpeg-4 all
+    duti -s com.colliderli.iina com.apple.m4v-video all
+    duti -s com.colliderli.iina com.apple.quicktime-movie all
+    duti -s com.colliderli.iina org.matroska.mkv all
+    duti -s com.colliderli.iina public.avi all
+    duti -s com.colliderli.iina org.webmproject.webm all
 
 # Install my Go tools to $GOBIN (~/.local/bin, on PATH); tracks main, so re-run to update.
 go-tools:
