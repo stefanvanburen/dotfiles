@@ -733,12 +733,14 @@
       11 (if (< now.day 8) :miniautumn :miniwinter)
       12 :miniwinter)))
 
-;; Semantic-token highlights that colorschemes get wrong for constants. Each
-;; is scoped to one language because the same token means different things
-;; per server: TypeScript servers mark every `const` binding readonly,
-;; whether or not its value is constant.
-(local constant-highlights
-       {;; gopls marks constants readonly. mini.hues leaves the modifier
+;; Semantic-token highlights that colorschemes leave out or get wrong for
+;; constants. Each is scoped to one language because the same token means
+;; different things per server: TypeScript servers mark every `const`
+;; binding readonly, whether or not its value is constant.
+(local semantic-highlights
+       {;; https://go.dev/gopls/editor/vim#semantic-tokens-shadowing
+        "@lsp.mod.shadowing.go" {:bold true :underline true}
+        ;; gopls marks constants readonly. mini.hues leaves the modifier
         ;; unlinked, so the variable color covers tree-sitter's @constant.
         "@lsp.mod.readonly.go" {:link "@constant"}
         ;; `iota` is readonly too; this more specific group keeps it a builtin.
@@ -750,9 +752,9 @@
         "@lsp.mod.readonly.python" {:link "@constant"}})
 
 (vim.api.nvim_create_autocmd :ColorScheme
-                             {:group (vim.api.nvim_create_augroup :lsp-constants
+                             {:group (vim.api.nvim_create_augroup :lsp-semantic-highlights
                                                                   {})
-                              :callback #(each [group hl (pairs constant-highlights)]
+                              :callback #(each [group hl (pairs semantic-highlights)]
                                            (vim.api.nvim_set_hl 0 group hl))})
 
 ;; mini.hues links LspReferenceWrite to LspReferenceText, and modus gives the

@@ -461,14 +461,14 @@ local function seasonal_colorscheme()
     return nil
   end
 end
-local constant_highlights = {["@lsp.mod.readonly.go"] = {link = "@constant"}, ["@lsp.typemod.variable.defaultLibrary.go"] = {link = "@constant.builtin"}, ["@lsp.typemod.variable.static.go"] = {}, ["@lsp.mod.readonly.python"] = {link = "@constant"}}
+local semantic_highlights = {["@lsp.mod.shadowing.go"] = {bold = true, underline = true}, ["@lsp.mod.readonly.go"] = {link = "@constant"}, ["@lsp.typemod.variable.defaultLibrary.go"] = {link = "@constant.builtin"}, ["@lsp.typemod.variable.static.go"] = {}, ["@lsp.mod.readonly.python"] = {link = "@constant"}}
 local function _47_()
-  for group, hl in pairs(constant_highlights) do
+  for group, hl in pairs(semantic_highlights) do
     vim.api.nvim_set_hl(0, group, hl)
   end
   return nil
 end
-vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("lsp-constants", {}), callback = _47_})
+vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("lsp-semantic-highlights", {}), callback = _47_})
 local function _48_()
   local function _49_()
     local tmp_9_ = vim.api.nvim_get_hl(0, {name = "LspReferenceText", link = false})
