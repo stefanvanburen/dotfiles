@@ -199,3 +199,16 @@
 	; Gerrit credentials for go.googlesource.com, kept out of this repo by
 	; ~/.gitignore.
 	cookiefile = ~/.gitcookies
+
+; Authenticate HTTPS remotes on GitHub with the gh CLI's OAuth token, which
+; orgs enforcing SAML SSO accept where an unauthorized SSH key is refused.
+; The empty helper drops inherited helpers (Homebrew's gitconfig sets
+; osxkeychain) so a stale Keychain entry is never offered first. The path is
+; Homebrew's gh rather than whichever gh is on PATH, because a project's
+; Flox environment can put a short-lived gh first.
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
