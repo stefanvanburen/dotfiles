@@ -13,17 +13,18 @@
 	     --apple-load-keychain only loads keys whose passphrase is ALREADY in
 	     the login keychain; plain `ssh-add` never puts one there, only
 	     `ssh-add --apple-use-keychain <key>` does. Without that entry this
-	     job exits 1 at every login, which is why it is worth logging. -->
+	     job exits 1 at every login, which is why it is worth logging.
+
+	     launchd takes StandardOutPath literally, with no $HOME or ~
+	     expansion, so the shell redirects the log to keep this file
+	     portable across machines with different usernames. -->
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/bin/ssh-add</string>
-		<string>--apple-load-keychain</string>
+		<string>/bin/sh</string>
+		<string>-c</string>
+		<string>exec /usr/bin/ssh-add --apple-load-keychain &gt;&gt;"$HOME/Library/Logs/ssh-add-login.log" 2&gt;&amp;1</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
-	<key>StandardOutPath</key>
-	<string>/Users/svbn/Library/Logs/ssh-add-login.log</string>
-	<key>StandardErrorPath</key>
-	<string>/Users/svbn/Library/Logs/ssh-add-login.log</string>
 </dict>
 </plist>
