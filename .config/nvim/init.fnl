@@ -693,6 +693,8 @@
 
 (let [filetype-to-langs {:c_sharp [:csharp]
                          :bash [:shellsession :console :shell_session]
+                         ;; Markdown fences tagged "patch".
+                         :diff [:patch]
                          :objc [:objectivec]
                          :proto [:protobuf]
                          :yaml [:buf-config :yaml.github-actions]
